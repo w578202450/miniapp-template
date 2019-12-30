@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "mp-icon": "../../weui/widget/icon/icon",
+    "mp-cell": "../../weui/widget/cell/cell",
+    "mp-cells": "../../weui/widget/cells/cells",
+    "mp-checkbox-group": "../../weui/widget/checkbox-group/checkbox-group",
+    "mp-checkbox": "../../weui/widget/checkbox/checkbox"
+  },
+  "navigationBarTitleText": "健康信息"
+}

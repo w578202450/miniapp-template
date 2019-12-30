@@ -1,7 +1,12 @@
 {
   "pages": [
     "pages/online-inquiry/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/personal-center/personal-center",       
+    "pages/personal-center/health-information/health-information",
+    "pages/personal-center/drug-orders/drug-orders",
+    "pages/personal-center/prescription/prescription",
+    "pages/personal-center/delivery-address/delivery-address"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,7 +25,7 @@
         "text": "在线问诊"
       },
       {
-        "pagePath": "pages/online-inquiry/index",
+        "pagePath": "pages/personal-center/personal-center",
         "text": "个人中心"
       }
     ]

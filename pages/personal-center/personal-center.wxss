@@ -1,0 +1,45 @@
+
+.header-containner{
+  width: 100%;
+  height: 400rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-cover{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.userinfo-body{
+  position: absolute;
+  bottom: 88rpx;
+  left: 48rpx;
+  right: 48rpx;
+  height: 112rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.userinfo-avatar{
+  height: 100%;
+  width: 112rpx;
+}
+
+.userinfo-nikename{
+  margin-left: 32rpx;
+  height: 100%;
+  color: white;
+  font-size: 32rpx;
+}
+.weui-cell__bd{
+  font-size: 32rpx;
+}
+
+.weui-cell{
+  height: 88rpx;
+}

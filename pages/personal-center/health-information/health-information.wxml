@@ -1,0 +1,91 @@
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">身高</view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请填写身高"/>
+        </view>
+        <view class="weui-cell__ft">cm</view>
+    </view>
+
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">体重</view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请填写体重"/>
+        </view>
+        <view class="weui-cell__ft">kg</view>
+    </view>
+
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">现病史</view>
+        </view>
+        <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="描述现病史"/>
+        </view>
+        <mp-icon class="addIcon" icon="add2" color="#438BEF"></mp-icon>
+    </view>
+
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">吸烟史</view>
+        </view>
+        <mp-checkbox class="mp-checkbox" wx:for="{{smokingHistoryItmes}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+        </mp-checkbox>
+        <view class="weui-cell__bd">
+            <input class="weui-input" placeholder="请输入烟龄"/>
+        </view>
+        <view class="weui-cell__ft">年</view>
+    </view>
+
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">饮酒史</view>
+        </view>
+        <mp-checkbox class="mp-checkbox" wx:for="{{drinkHistoryItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+        </mp-checkbox>
+    </view>
+
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">既往病史</view>
+        </view>
+        <mp-checkbox class="mp-checkbox" wx:for="{{previousHistoryItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+        </mp-checkbox>
+    </view>
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">过敏史</view>
+        </view>
+        <mp-checkbox class="mp-checkbox" wx:for="{{previousHistoryItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+        </mp-checkbox>
+    </view>
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">肝功能</view>
+        </view>
+        <mp-checkbox class="mp-checkbox" wx:for="{{liverItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+        </mp-checkbox>
+    </view>
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">肾功能</view>
+        </view>
+        <mp-checkbox class="mp-checkbox" wx:for="{{renalItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+        </mp-checkbox>
+    </view>
+    <view class="weui-cell ">
+        <view class="weui-cell__hd">
+            <view class="weui-label">妊娠哺乳</view>
+        </view>
+        <mp-checkbox class="mp-checkbox" wx:for="{{gestationItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+        </mp-checkbox>
+    </view>
+    <view class="btn-cell">
+        <button class="saveBtn">保存</button>
+    </view>
+
+</view>

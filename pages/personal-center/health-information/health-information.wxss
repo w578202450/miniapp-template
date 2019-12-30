@@ -1,0 +1,43 @@
+.weui-cells{
+  margin-top: 20rpx;
+}
+
+.weui-cell{
+  height: 60rpx;
+}
+
+.weui-label{
+  width: 120rpx;
+  font-size: 28rpx;
+}
+
+.addIcon{
+  size: 30rpx;
+}
+
+.mp-checkbox{
+  font-size: 28rpx;
+}
+
+.weui-input{
+  font-size: 28rpx;
+}
+
+.weui-cell__ft{
+  font-size: 28rpx;
+  width: 60rpx;
+}
+
+.btn-cell{
+  width: 100%;
+  height: 288rpx;
+}
+
+.saveBtn{
+  width: 80%;
+  top: 96rpx;
+  height: 80rpx;
+  background-color:#3B8CED;
+  color: white;
+  border-radius: 80rpx; 
+}
