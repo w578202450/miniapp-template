@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/online-inquiry/index",
+    "pages/online-inquiry/online-inquiry",
     "pages/logs/logs",
     "pages/personal-center/personal-center",       
     "pages/personal-center/health-information/health-information",
@@ -21,7 +21,7 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/online-inquiry/index",
+        "pagePath": "pages/online-inquiry/online-inquiry",
         "text": "在线问诊"
       },
       {

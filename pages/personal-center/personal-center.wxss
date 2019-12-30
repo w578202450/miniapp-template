@@ -41,5 +41,5 @@
 }
 
 .weui-cell{
-  height: 88rpx;
+  height: 60rpx;
 }
