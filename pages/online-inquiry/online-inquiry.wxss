@@ -1,21 +1,131 @@
 /**index.wxss**/
-.userinfo {
+
+.room_header{
+  width: 100%;
+  height: 346rpx;
+  background-color: #629FF4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.room_header .room_info{
+  display: flex;
+  flex-direction: column;
+  line-height: 2em;
+}
+.room_info .roomname{
+  font-size:36rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:68rpx;
+}
+
+.room_info .roomdes{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height:36rpx;
+}
+.room_header .room_avatar{
+  height: 202rpx;
+  width: 206rpx;
+  margin: 0rpx 0rpx 0rpx 40rpx;
+}
+.room_body{
+  margin: -32rpx 32rpx 46rpx 32rpx;
+}
+.room_body .room_middle_one{
+  background-color: white;
+  border-radius: 10rpx;
+  height: 140rpx;
+  box-shadow: 0rpx 2rpx 8rpx 0rpx rgba(0,0,0,0.1);
+}
+
+.room_body .room_middle_two{
+  margin-top: 32rpx;
+} 
+
+.room_body .room_middle_two .titleLabel{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
+
+.room_body .room_middle_two .detailLabel{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(199,131,48,1);
+  line-height:28rpx;
+  float: right;
+}
+
+.room_body .room_middle_three{
+  margin-top: 32rpx;
+  display: flex;
+  justify-content: space-between;  
+  flex-wrap:wrap;
+  box-sizing: content-box;
+}
+
+.room_middle_three .doctor_card{
+  width: 48%;
+  background-color:white;
+  overflow: hidden;
+  border-radius:10rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.room_middle_three .doctor_avatar{
+  margin-top: 28rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 80rpx;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.room_middle_three .authenticated_icon{
+  margin-top: -16rpx;
+  width: 96rpx;
+  height: 32rpx;
 }
 
-.usermotto {
-  margin-top: 200px;
+.room_middle_three .cardInfo_one{
+  margin-top: 30rpx;
+  margin-left: 24rpx;
+  margin-right: 24rpx;
 }
+
+.room_middle_three .cardInfo_two{
+  margin-left: 24rpx;
+  margin-right: 24rpx;
+}
+
+.doctorname{
+  font-size: 28rpx;
+  font-weight: 500;
+  color:rgba(0,0,0,0.85)
+}
+
+.position,.department{
+  margin-left: 16rpx;
+}
+
+.position,.hospital,.department,.expertise{
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(0,0,0,0.65)
+}
+
+.expertise{
+  margin: 24rpx;
+}
+
+
