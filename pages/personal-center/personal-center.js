@@ -7,19 +7,19 @@ Page({
     nikename: "付志敏",
     list: [
       {
-        url: '../health-information/health-information',
+        url: 'health-information/health-information',
         title: '我的健康信息'
       },
       {
-        url: '../drug-orders/drug-orders',
+        url: 'drug-orders/drug-orders',
         title: '药品订单'
       },
       {
-        url: '../prescription/prescription',
+        url: 'prescription/prescription',
         title: '我的处方'
       },
       {
-        url: '../delivery-address/delivery-address',
+        url: 'delivery-address/delivery-address',
         title: '收货地址'
       }
 
