@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="header">
+    <text class="header-title">电子处方</text>
+    <view class="header-personinfo">
+      <text class="personinfo-details">姓名：吕梁</text>
+      <text class="personinfo-details">性别：男</text>
+      <text class="personinfo-details">年龄：25</text>
+    </view>
+    <view class="header-symptom-box">
+      <text class="header-symptom">症状描述：体寒多病</text>
+    </view>
+    <view class="header-diagnosis-box">
+      <text class="header-diagnosis">诊断：体虚湿热</text>
+    </view>
+  </view>
+
+  <view class="middle">
+  </view>
+
+  <view class="bottom">
+  </view>
+</view>

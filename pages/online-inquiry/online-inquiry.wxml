@@ -68,9 +68,11 @@
         </view>
       </view>
 
-
+      
       <view class="bottom">
-        <image src="../../images/home/home_inquiry.png"></image>
+        <navigator url="/pages/personal-center/prescription-details/prescription-details">
+          <image src="../../images/home/home_inquiry.png"></image>
+        </navigator>
       </view>
 
     </view>

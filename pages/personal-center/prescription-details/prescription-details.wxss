@@ -1,0 +1,45 @@
+.page{
+  width: 100%;
+  margin-top: 20rpx;
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column;
+  background-color: white;
+  padding: 64rpx 32rpx 48rpx 32rpx;
+}
+
+.header-title{
+  font-size:32rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.85);
+  line-height:32rpx;
+}
+
+.header-personinfo{
+  margin-top: 48rpx; 
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-symptom-box,.header-diagnosis-box{
+  margin-top: 48rpx;
+}
+
+.header-symptom-box{
+  /* display: flex;
+  justify-content:flex-start; */
+}
+
+.header-symptom, .header-diagnosis{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
