@@ -10,21 +10,38 @@
     </view>
     <view class="room_body">
       <view class="room_middle_one">
-          
+          <view class="room_middle_one_box">
+            <image class="box_icon" src="../../images/home/home_serverNums.png"></image>
+            <view class="box_info">
+             <text class="infoOne">200人</text>
+             <text class="infoTwo">服务人次</text>
+            </view>
+          </view>
+
+          <view class="lineView"></view>
+
+          <view class="room_middle_one_box">
+            <image class="box_icon" src="../../images/home/home_commentNums.png"></image>
+            <view class="box_info">
+             <text class="infoOne">100%</text>
+             <text class="infoTwo">好评率</text>
+            </view>
+          </view>
+
       </view>
+
+      
 
       <view class="room_middle_two">
-        <view>
-          <text class="titleLabel">医生资格证书编码</text>
-          <text class="detailLabel">{{qualificationDes}}</text>
-        </view>
-          <text class="titleLabel">医疗机构执业许可证</text>
-          <text class="detailLabel">{{licensingDes}}</text>
-        <view>
-        </view>
+        <text class="titleLabel">医生资格证书编码</text>
+        <view class="detailLabel">{{qualificationDes}}</view>
+      </view>
+      <view class="room_middle_three">
+        <text class="titleLabel">医疗机构执业许可证</text>
+        <view class="detailLabel">{{licensingDes}}</view>
       </view>
 
-      <view class="room_middle_three">
+      <view class="room_middle_four">
         <view class="doctor_card">
           <image class="doctor_avatar" src="../../images/home/home_doctor.png"></image>
           <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
@@ -55,7 +72,7 @@
       </view>
 
       <view class="room_bottom">
-      
+        <image class="room_bottom_bg" src="../../images/home/home_bottom.png"></image>
       </view>
 
     </view>
