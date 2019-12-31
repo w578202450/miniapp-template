@@ -1,6 +1,6 @@
 /**index.wxss**/
 
-.room_header{
+.header{
   width: 100%;
   height:346rpx;
   background:#629ff4;
@@ -11,20 +11,20 @@
   flex-direction: row;
 }
 
-.room_header .room_info{
+.header .header-info{
   margin-bottom: 68rpx;
   display: flex;
   flex-direction: column;
   line-height: 2em;
 }
 
-.room_header .room_avatar{
+.header image{
   height: 188rpx;
   width: 184rpx;
   margin: 0rpx 0rpx 0rpx 40rpx;
 }
 
-.room_info .roomname{
+.header-info .room_name{
   height:68rpx;
   font-size:36rpx;
   font-family:PingFangSC-Medium,PingFang SC;
@@ -33,7 +33,7 @@
   line-height:68rpx;
 }
 
-.room_info .roomdes{
+.header-info .room_des{
   height:36rpx;
   font-size:28rpx;
   font-family:PingFangSC-Regular,PingFang SC;
@@ -42,12 +42,12 @@
   line-height:36rpx;
 }
 
-.room_body{
+.middle-container{
   position:absolute;
   margin: -32rpx 32rpx 24rpx 32rpx;
   z-index:1;
 }
-.room_body .room_middle_one{
+.middle-one{
   height:140rpx;
   background:rgba(255,255,255,1);
   box-shadow:0rpx 2rpx 8rpx 0px rgba(0,0,0,0.1);
@@ -58,7 +58,7 @@
   align-items: center;
 }
 
-.room_middle_one .room_middle_one_box{
+.middleOne-box{
   width: 48%;
   height: 140rpx;
   display: flex;
@@ -66,18 +66,18 @@
   justify-content: center;
 }
 
-.room_middle_one_box .box_icon{
+.middleOne-box image{
   height: 85rpx;
   width: 80rpx;
 }
 
-.room_middle_one_box .box_info{
+.middleOne-box .info-box{
   display: flex;
   flex-direction: column;
   margin-left: 30rpx;
 }
 
-.box_info .infoOne{
+.middleOne-box .info-box .info_one{
   font-size:32rpx;
   font-family:PingFangSC-Medium,PingFang SC;
   font-weight:500;
@@ -85,7 +85,7 @@
   line-height:32rpx;
 }
 
-.box_info .infoTwo{
+.middleOne-box .info-box .info_two{
   margin-top: 16rpx;
   font-size:28rpx;
   font-family:PingFangSC-Regular,PingFang SC;
@@ -94,7 +94,7 @@
   line-height:28rpx;
 }
 
-.room_middle_one .lineView{
+.middle-one .lineView{
   width:2rpx;
   height:92rpx;
   background:rgba(232,232,232,1);
@@ -103,7 +103,7 @@
 
 
 
-.room_body .room_middle_two {
+.middle-two {
   margin-top: 48rpx;
   display: flex;
   box-sizing: border-box;
@@ -131,7 +131,7 @@
   line-height:28rpx;
 }
 
-.room_body .room_middle_three {
+.middle-three {
   margin-top: 36rpx;
   display: flex;
   box-sizing: border-box;
@@ -141,7 +141,7 @@
   align-items: center;
 }
 
-.room_body .room_middle_four{
+.middle-four{
   margin-top: 32rpx;
   display: flex;
   justify-content: space-between;  
@@ -149,7 +149,7 @@
   box-sizing: content-box;
 }
 
-.room_middle_four .doctor_card{
+.middle-four .doctor-card{
   width: 48%;
   background-color:white;
   overflow: hidden;
@@ -159,27 +159,27 @@
   align-items: center;
 }
 
-.room_middle_four .doctor_avatar{
+.middle-four .doctor_avatar{
   margin-top: 28rpx;
   width: 80rpx;
   height: 80rpx;
   border-radius: 80rpx;
 }
 
-.room_middle_four .authenticated_icon{
+.middle-four .authenticated_icon{
   margin-top: -16rpx;
   width: 96rpx;
   height: 32rpx;
 }
 
-.room_middle_four .cardInfo_one{
+.middle-four .cardInfo_one{
   margin-top: 20rpx;
   margin-left: 24rpx;
   margin-right: 24rpx;
   line-height:36rpx;
 }
 
-.room_middle_four .cardInfo_two{
+.middle-four .cardInfo_two{
   margin-left: 8rpx;
   margin-right: 24rpx;
   line-height:36rpx;
@@ -213,11 +213,11 @@
   margin-bottom: 44rpx;
 }
 
-.room_bottom{
+.bottom{
   margin-top: 28rpx;
 }
 
-.room_bottom_bg{
+.bottom image{
   width: 100%;
   height: 236rpx;
 }
