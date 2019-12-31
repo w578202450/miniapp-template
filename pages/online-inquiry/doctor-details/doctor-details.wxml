@@ -1,0 +1,81 @@
+<view class="page">
+  <view class="header">
+    <view class="header-box">
+      <image src="../../../images/home/home_doctor.png"></image>
+      <view class="doctor-info">
+          <view class="info-one">
+            <text class="doctorname">李荣豪</text>
+            <text class="position">主治医师</text>
+          </view>
+          <view class="info-two">
+            <text class="hospital">太原候丽萍骨科医院</text>
+            <text class="department">骨科</text>
+          </view>
+          <view class="info-three">
+            <view>
+              <text class="info-three-title">服务人次：</text>
+              <text class="info-three-details">200人</text>
+            </view>
+            <view class="rightView">
+              <text class="info-three-title">好评率：</text>
+              <text class="info-three-details">100%</text>
+            </view>
+          </view>
+        </view>
+    </view>
+  </view>
+
+  <view class="middle">
+    <view class="middle-header">
+      <view class="middle-lineView"></view>
+      <view class="middle-title">专治疾病</view>
+    </view>
+    <view class="middle-cotent-box">
+        <text class="middle-cotent">这是专治疾病</text>
+      </view>
+    <view class="middle-bottomLine"></view>
+  </view>
+
+  <view class="middle">
+    <view class="middle-header">
+      <view class="middle-lineView"></view>
+      <view class="middle-title">擅长</view>
+    </view>
+    <view class="middle-cotent-box">
+      <text class="middle-cotent">这是医生擅长</text>
+    </view>
+    <view class="middle-bottomLine"></view>
+  </view>
+
+  <view class="middle">
+    <view class="middle-header">
+      <view class="middle-lineView"></view>
+      <view class="middle-title">医生简介</view>
+    </view>
+    <view class="middle-cotent-box">
+      <text class="middle-cotent">这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述</text>
+    </view>
+    <view class="middle-bottomLine"></view>
+  </view>
+
+  <view class="comment">
+    <view class="middle-header">
+      <view class="middle-lineView"></view>
+      <view class="middle-title">患者评价</view>
+    </view>
+
+    <view class="weui-cells">
+      <block wx:for="{{list}}" wx:for-item="item" wx:key="*this">
+        <view class="comment-header">
+          <view class="comment-name">{{item.name}}</view>
+          <image src="../../../images/public/public_level.png"></image>
+        </view>
+      
+        <view class="comment-content-box">
+          <text class="comment-content">{{item.content}}</text>
+        </view>
+        <view class="comment-lineView"></view>
+      </block>
+  </view>
+  </view>
+</view>

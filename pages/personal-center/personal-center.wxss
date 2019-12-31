@@ -26,18 +26,26 @@
 }
 
 .userinfo-avatar{
-  height: 100%;
-  width: 112rpx;
+  width:112rpx;
+  height:112rpx;
+  opacity:0.5;
+  border:2rpx solid rgba(255,255,255,1)
 }
 
 .userinfo-nikename{
   margin-left: 32rpx;
-  height: 100%;
-  color: white;
-  font-size: 32rpx;
+  font-size:32rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:32rpx;
 }
 .weui-cell__bd{
-  font-size: 32rpx;
+  font-size:32rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:32rpx;
 }
 
 .weui-cell{

@@ -159,27 +159,27 @@
   align-items: center;
 }
 
-.middle-four .doctor_avatar{
+.doctor-card .doctor_avatar{
   margin-top: 28rpx;
   width: 80rpx;
   height: 80rpx;
   border-radius: 80rpx;
 }
 
-.middle-four .authenticated_icon{
+.doctor-card .authenticated_icon{
   margin-top: -16rpx;
   width: 96rpx;
   height: 32rpx;
 }
 
-.middle-four .cardInfo_one{
+.doctor-card .cardInfo_one{
   margin-top: 20rpx;
   margin-left: 24rpx;
   margin-right: 24rpx;
   line-height:36rpx;
 }
 
-.middle-four .cardInfo_two{
+.doctor-card .cardInfo_two{
   margin-left: 8rpx;
   margin-right: 24rpx;
   line-height:36rpx;

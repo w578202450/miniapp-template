@@ -11,5 +11,13 @@ Page({
   },
   onLoad: function () {
 
+  },
+  doctorDetailTap:function(){
+    wx.navigateTo({
+      url: '/pages/online-inquiry/doctor-details/doctor-details',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
   }
 })

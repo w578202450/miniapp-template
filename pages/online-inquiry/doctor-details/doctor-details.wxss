@@ -1,0 +1,173 @@
+.page{
+  background-color: white;
+  width: 100%;
+}
+.header{
+  width: 100%;
+  background-color: white;
+  margin-top: 1rpx;
+}
+.header-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 48rpx 32rpx 10rpx 32rpx;
+}
+
+.header image{
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.doctorname{
+  height:32rpx;
+  font-size:32rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:32rpx;
+}
+
+.info-one,.info-two,.info-three{
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+
+
+.info-three{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0rpx;
+}
+
+.rightView{
+  margin-left: 48rpx;
+}
+.info-three-title{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:24rpx;
+}
+
+.info-three-details{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
+
+.position,.hospital,.department{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:24rpx;
+}
+
+.position,.department{
+  margin-left: 32rpx;
+}
+
+.middle{
+  margin-top: 50rpx;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+}
+
+.middle-header{
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row;
+  align-items: center;
+}
+
+.middle-lineView{
+  width:4rpx;
+  height:28rpx;
+  background:rgba(67,139,239,1);
+  border-radius:2rpx;
+}
+
+.middle-title{
+  margin-left: 6rpx;
+  height:28rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
+.middle-cotent-box{
+  margin-top: 32rpx;
+  margin-right: 32rpx;
+}
+.middle-cotent{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:28rpx;
+}
+
+.middle-bottomLine{
+  height:2rpx;
+  background:rgba(238,238,238,1);
+  margin-top: 32rpx;
+  margin-bottom: 0rpx;
+}
+
+.comment{
+  margin-top: 50rpx;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+}
+
+.comment-header{
+  margin-top: 36rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row;
+}
+
+.comment-header image{
+  margin-left: 32rpx;
+  height: 34rpx;
+  width: 192rpx;
+}
+
+.comment-content-box{
+  margin-top: 28rpx;
+}
+
+.comment-name{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:28rpx;
+}
+
+.comment-content{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
+
+.comment-lineView{
+  height:2rpx;
+  background:rgba(238,238,238,1);
+  margin-top: 32rpx;
+  margin-bottom: 0rpx; 
+}

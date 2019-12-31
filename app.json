@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/online-inquiry/online-inquiry",
+    "pages/online-inquiry/doctor-details/doctor-details",
     "pages/logs/logs",
     "pages/personal-center/personal-center",       
     "pages/personal-center/health-information/health-information",
@@ -10,7 +11,7 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#438BEF",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
   },
