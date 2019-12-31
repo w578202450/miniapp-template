@@ -1,0 +1,24 @@
+.item-box{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 32rpx;
+  margin-top: 20rpx;
+}
+
+.content{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
+
+.date{
+  margin-top: 32rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:24rpx;
+}
