@@ -44,39 +44,18 @@ App({
       }
     });
 
-    WXAPI.login_wx(res.code).then(function (res) {
-      if (res.code == 10000) {
-        // 去注册
-        //_this.register(page)
-        return;
-      }
-      if (res.code != 0) {
-        // 登录错误
+    // 登录
+    wx.login({
+      success: res => {
         wx.showModal({
-          title: '无法登录',
-          content: res.msg,
+          title: '无法登录1',
+          content: res.code,
           showCancel: false
         })
-        return;
-      }
-      wx.setStorageSync('token', res.data.token)
-      wx.setStorageSync('uid', res.data.uid)
-      if (page) {
-        page.onShow()
       }
     })
-    // 登录
-    // wx.login({
-    //   success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // 登录错误
-        // wx.showModal({
-        //   title: '无法登录1',
-        //   content: res.code,
-        //   showCancel: false
-        // })
-    //   }
-    // })
+  },
+    
     // 获取用户信息
     
   /**
