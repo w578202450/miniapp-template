@@ -37,6 +37,14 @@ Page({
       }
     ]
   },
+  payAction:function(){
+    wx.navigateTo({
+      url: '/pages/address/address-submit/address-submit',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
   onLoad: function () {
 
   }

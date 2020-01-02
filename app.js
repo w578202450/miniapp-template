@@ -17,7 +17,48 @@ App({
     // 登录
     wx.login({
       success: res => {
+        console.log("===data===" + res.code);
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        wx.request({
+          url: 'http://10.0.0.23:6203/wx/getWXAuth',
+          method:'POST',
+          header: {
+            'content-type': 'application/json'
+          },
+          dataType: 'json',
+          data:{
+            'code':res.code
+          },
+          success: function (res){
+            // console.log("===success===" + res.data.data.openid)
+            wx.request({
+              url: 'http://10.0.0.23:6112/api/tmc/patient/getPatientInfoByOpenID',
+              method: 'GET',
+              header: {
+                'content-type': 'application/json'
+              },
+              dataType: 'json',
+              data: {
+                'openID': res.data.data.openid
+              },
+              success: function (res) {
+                console.log("===success===" + JSON.stringify(res.data));
+              },
+              fail: function (res) {
+                console.log("===fail===" + res)
+              },
+              complete: function (res) {
+                console.log("===complete===" + res)
+              },
+            })
+          },
+          fail:function(res){
+            console.log("===fail===" + res)
+          },
+          complete:function(res){
+            console.log("===complete===" + res)
+          },
+        })
       }
     })
     // // 获取用户信息

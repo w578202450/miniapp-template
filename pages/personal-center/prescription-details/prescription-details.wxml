@@ -60,6 +60,6 @@
       <image src="../../../images/profile/profile_company_seal.png"></image>
       <text>咨询医生</text>
     </view>
-    <button>立即支付（实付：¥120）</button>
+    <button bindtap="payAction">立即支付（实付：¥120）</button>
   </view>
 </view>
