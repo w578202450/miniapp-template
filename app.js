@@ -1,39 +1,96 @@
 //app.js
+
+const WXAPI = require('apifm-wxapi')
+const AUTH = require('utils/auth')
+
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo
-
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
-            }
+    /**
+     * 初次加载判断网络情况
+     * 无网络状态下根据实际情况进行调整
+     */
+    wx.getNetworkType({
+      success: function(res) {
+        const networkType = res.networkType
+        if (networkType == 'none'){
+          this.globalData.isConnected = false;
+          wx.showToast({
+            title: '当前无网络',
+            icon:'loading',
+            duration:2000
           })
         }
+      },
+    })
+
+    /**
+     * 监听网络状态变化
+     * 可根据业务需求进行调整
+     */
+    wx.onNetworkStatusChange(function (res) {
+      if (!res.isConnected) {
+        that.globalData.isConnected = false
+        wx.showToast({
+          title: '网络已断开',
+          icon: 'loading',
+          duration: 2000,
+          complete: function () {
+            this.goStartIndexPage()
+          }
+        })
+      } else {
+        this.globalData.isConnected = true
+        wx.hideToast()
+      }
+    });
+
+    WXAPI.login_wx(res.code).then(function (res) {
+      if (res.code == 10000) {
+        // 去注册
+        //_this.register(page)
+        return;
+      }
+      if (res.code != 0) {
+        // 登录错误
+        wx.showModal({
+          title: '无法登录',
+          content: res.msg,
+          showCancel: false
+        })
+        return;
+      }
+      wx.setStorageSync('token', res.data.token)
+      wx.setStorageSync('uid', res.data.uid)
+      if (page) {
+        page.onShow()
       }
     })
-  },
+    // 登录
+    // wx.login({
+    //   success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        // 登录错误
+        // wx.showModal({
+        //   title: '无法登录1',
+        //   content: res.code,
+        //   showCancel: false
+        // })
+    //   }
+    // })
+    // 获取用户信息
+    
+  /**
+   * 自动登录
+   */
+  // onShow(e) {
+    // AUTH.checkHasLogined().then(isLogined => {
+    //   if (!isLogined) {
+    //     AUTH.login()
+    //   }
+    // })
+  // },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    isConnected: true
   }
 })
