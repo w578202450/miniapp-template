@@ -2,6 +2,7 @@ const app = getApp()
 
 Page({
   data: {
+    tipShow:true,
     list: [
       {
         name: '舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸',
