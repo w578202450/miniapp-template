@@ -4,6 +4,19 @@
 }
 
 .header{
+  width: 100%;
+  z-index: 1;
+}
+
+.header image{
+  position: absolute;
+  width: 118rpx;
+  height: 118rpx;
+  top: 48rpx;
+  right: 32rpx;
+}
+
+.header-content{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,19 +40,130 @@
   justify-content: space-between;
 }
 
-.header-symptom-box,.header-diagnosis-box{
-  margin-top: 48rpx;
+.personinfo-other-box{
+  margin-top: 36rpx;
+  width: 100%;
+  padding: 0;
 }
 
-.header-symptom-box{
-  /* display: flex;
-  justify-content:flex-start; */
-}
-
-.header-symptom, .header-diagnosis{
+.personinfo-other{
   font-size:28rpx;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(0,0,0,0.85);
   line-height:28rpx;
+}
+
+.middle{
+  margin-top: 2rpx;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  background-color: white;
+  padding: 64rpx 32rpx 48rpx 32rpx;
+}
+
+.middle-rp{
+  font-size:36rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(42,44,48,1);
+  line-height:36rpx;
+}
+
+.rp-info-box{
+  margin-top: 32rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rp-info-subviewBox{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.rp-name,.rp-advice,.bottom-doctor-name{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:40rpx;
+}
+
+.rp-unit,.rp-num,.rp-methods{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:24rpx;
+}
+
+.rp-num{
+  width: 100rpx;
+  margin-left: 16rpx;
+  text-align: right;
+}
+
+.rp-unit{
+  margin-left: 16rpx;
+}
+
+.rp-lineView{
+  margin-top: 32rpx;
+  height:2rpx;
+  background:rgba(238,238,238,1);
+}
+
+.rp-advice{
+  margin-top: 36rpx;
+}
+
+.bottom{
+  margin-top: 2rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  background-color: white;
+  padding: 64rpx 32rpx 48rpx 32rpx;
+}
+
+.bottom-doctor-left{
+  display: flex;
+  flex-flow: column;
+  width: 48%;
+}
+
+.bottom-doctor-right{
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 48%;
+}
+
+.bottom-seal-box{
+  margin-top: 24rpx;
+  height: 104rpx;
+  width: 184rpx;
+}
+
+.bottom-seal-box image{
+  position: absolute;
+  height: 104rpx;
+  width: 184rpx;
+  z-index: 1;
+} 
+
+.bottom-doctor-sealname{
+  position: absolute;
+  margin-top: 18rpx;
+  font-size: 24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(254,88,83,1);
+  line-height:24rpx;
+  width: 184rpx;
+  text-align: center;
 }
