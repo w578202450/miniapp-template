@@ -3,12 +3,13 @@
     "pages/online-inquiry/online-inquiry",
     "pages/online-inquiry/doctor-details/doctor-details",
     "pages/logs/logs",
-    "pages/personal-center/personal-center",       
+    "pages/personal-center/personal-center",
     "pages/personal-center/health-information/health-information",
     "pages/personal-center/drug-orders/drug-orders",
     "pages/personal-center/prescription/prescription",
     "pages/personal-center/delivery-address/delivery-address",
-    "pages/personal-center/prescription-details/prescription-details"
+    "pages/personal-center/prescription-details/prescription-details",
+    "pages/online-inquiry/inquiry/chat/chat"
   ],
   "window": {
     "backgroundTextStyle": "light",

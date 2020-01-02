@@ -4,14 +4,12 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
-		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
-		"nodeModules": false,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -22,11 +20,12 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"nodeModules": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.9.4",
-	"appid": "wx8b0b2a110c3a8287",
+	"appid": "wxf971e7b97dbe46cc",
 	"projectname": "TMC%E5%B0%8F%E7%A8%8B%E5%BA%8F",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -90,6 +89,13 @@
 					"id": -1,
 					"name": "处方详情",
 					"pathName": "pages/personal-center/prescription-details/prescription-details",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/online-inquiry/inquiry/chat/chat",
+					"pathName": "pages/online-inquiry/inquiry/chat/chat",
 					"scene": null
 				}
 			]

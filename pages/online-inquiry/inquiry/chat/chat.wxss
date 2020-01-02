@@ -1,0 +1,54 @@
+.middle-one{
+  height:140rpx;
+  background:rgba(255,255,255,1);
+  box-shadow:0rpx 2rpx 8rpx 0px rgba(0,0,0,0.1);
+  border-radius:10rpx;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.middleOne-box{
+  width: 48%;
+  height: 140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.middleOne-box image{
+  height: 85rpx;
+  width: 80rpx;
+}
+
+.middleOne-box .info-box{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30rpx;
+}
+
+.middleOne-box .info-box .info_one{
+  font-size:32rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.85);
+  line-height:32rpx;
+}
+
+.middleOne-box .info-box .info_two{
+  margin-top: 16rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:28rpx;
+}
+
+.middle-one .lineView{
+  width:2rpx;
+  height:92rpx;
+  background:rgba(232,232,232,1);
+  border-radius:10rpx;
+}

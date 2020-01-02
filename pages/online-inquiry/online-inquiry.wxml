@@ -70,7 +70,7 @@
 
       
       <view class="bottom">
-        <navigator url="/pages/personal-center/prescription-details/prescription-details">
+        <navigator url="/pages/online-inquiry/inquiry/chat/chat">
           <image src="../../images/home/home_inquiry.png"></image>
         </navigator>
       </view>

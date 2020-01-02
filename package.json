@@ -1,21 +1,13 @@
 {
-  "name": "wxpro.tmc",
+  "name": "tmc",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "http://git.100cbc.com:3000/peach/wxpro.tmc.git"
-  },
-  "keywords": [
-    "fuzhimin"
-  ],
-  "author": "fuzhimin",
-  "license": "ISC",
+  "private": true,
+  "description": "TMC小程序",
+  "scripts": {},
+  "author": "",
+  "license": "MIT",
   "dependencies": {
-    "apifm-wxapi": "^2.5.0"
+    "cos-wx-sdk-v5": "^0.7.3",
+    "tim-wx-sdk": "^2.3.1"
   }
 }
