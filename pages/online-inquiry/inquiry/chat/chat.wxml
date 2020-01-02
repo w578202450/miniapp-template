@@ -2,7 +2,7 @@
 
   <view class="middle-one">
     <view class="middleOne-box">
-      <image src="../../../../images/home/home_serverNums.png"></image>
+      <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
         <text class="info_one">李荣豪</text>
         <text class="info_two">副主任医师</text>
@@ -10,7 +10,7 @@
     </view>
     <view class="lineView"></view>
     <view class="middleOne-box">
-      <image src="../../../../images/home/home_commentNums.png"></image>
+      <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
         <text class="info_one">周雅</text>
         <text class="info_two">助理医师</text>
