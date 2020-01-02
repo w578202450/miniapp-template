@@ -2,6 +2,8 @@ const app = getApp()
 
 Page({
   data: {
+    tipShow:true,//是否展示tip提示
+    payShow:true,//是否展示支付界面
     list: [
       {
         name: '舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸舒筋健腰丸',

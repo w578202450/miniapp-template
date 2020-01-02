@@ -1,5 +1,7 @@
 <view class="page">
-  
+  <view class="{{tipShow ? 'tip-show' : ''}}">
+    <text class="tip">过期失效的处方不能支付，有效期3天</text>
+  </view>
   <view class="header">
     <image src="../../../images/profile/profile_company_seal.png"></image>
     <view class="header-content">
@@ -51,5 +53,13 @@
         <image src="../../../images/profile/profile_doctor_seal.png"></image>
       </view>
     </view>
+  </view>
+
+  <view class="{{payShow ? 'pay-show' : ''}}">
+    <view class="pay-left">
+      <image src="../../../images/profile/profile_company_seal.png"></image>
+      <text>咨询医生</text>
+    </view>
+    <button>立即支付（实付：¥120）</button>
   </view>
 </view>
