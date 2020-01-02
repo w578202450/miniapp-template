@@ -7,6 +7,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "apifm-wxapi": "^2.5.0",
     "cos-wx-sdk-v5": "^0.7.3",
     "tim-wx-sdk": "^2.3.1"
   }
