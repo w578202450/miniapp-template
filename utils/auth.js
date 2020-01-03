@@ -1,71 +1,64 @@
 
-async function checkSession() {
-  return new Promise((resolve, reject) => {
-    wx.checkSession({
-      success() {
-        return resolve(true)
-      },
-      fail() {
-        return resolve(false)
-      }
-    })
-  })
-}
+var HTTP = require('http-util.js'); 
 
-/**
- * 检查登录状态 返回true或者false
- */
-async function checkHasLogined() {
-  const token = wx.getStorageSync('token')
-  if (!token) {
-    return false
-  }
-  const loggined = await checkSession()
-  if (!loggined) {
-    wx.removeStorageSync('token')
-    return false
-  }
-  const checkTokenRes = await WXAPI.checkToken(token)
-  if (checkTokenRes.code != 0) {
-    wx.removeStorageSync('token')
-    return false
-  }
-  return true
-}
-
-/**
- * 授权登录
- */
-async function login(page) {
-  const _this = this
+async function wxlogin() {
   wx.login({
     success: function (res) {
-      WXAPI.login_wx(res.code).then(function (res) {
-        if (res.code == 10000) {
-          // 去注册
-          //_this.register(page)
-          return;
-        }
-        if (res.code != 0) {
-          // 登录错误
-          wx.showModal({
-            title: '无法登录',
-            content: res.msg,
-            showCancel: false
-          })
-          return;
-        }
-        wx.setStorageSync('token', res.data.token)
-        wx.setStorageSync('uid', res.data.uid)
-        if (page) {
-          page.onShow()
-        }
+      console.log("===success--code===" + JSON.stringify(res.code));
+      getopenid(res.code);
+    },
+    fail: function (res) {
+      wx.showModal({
+        title: '获取临时code失败',
+        content: res.msg,
+        showCancel: false
       })
-    }
+    },
   })
+}
+
+async function getopenid(code) {
+  var prams = {
+    code: code
+  }
+  HTTP.postRequest("http://10.0.0.23:6203/wx/getWXAuth", prams,
+    function (res) {
+      console.log("===success--open===" + JSON.stringify(res.data));
+      getbaseinfo(res.data.openid);
+    },
+    function (err) {
+      wx.showModal({
+        title: '获取openid失败',
+        content: res.msg,
+        showCancel: false
+      })
+    })
+}
+
+async function getbaseinfo(openID) {
+  var prams = {
+    openID: openID
+  }
+  HTTP.getRequest("http://10.0.0.23:6112/api/tmc/patient/getPatientInfoByOpenID", prams,
+    function (res) {
+      if (res.code == 0) {
+        console.log("===success--base===" + JSON.stringify(res.data));
+      } else {
+        wx.showToast({
+          title: res.message,
+          duration: 2000
+        })
+      }
+      
+    },
+    function (err) {
+      wx.showToast({
+        title: '获取基础信息失败',
+        duration: 2000
+      })
+    })
 }
 
 module.exports = {
-  checkHasLogined: checkHasLogined,
-  login: login
+  wxlogin: wxlogin
 }
