@@ -22,7 +22,7 @@
   <textarea  placeholder="请填写街道、楼牌号等" style="height: 3.3em"></textarea>
   </view>
   <view class="delete">删除地址</view>
-  <view class="addBtnView">
+  <view class="btnView">
     <button bindtap="addAction">保存</button>
   </view>
 </view>

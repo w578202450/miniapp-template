@@ -74,13 +74,13 @@
   background-color: white;
 }
 
-.addBtnView{
+.btnView{
   position: absolute;
   width: 100%;
   bottom: 36rpx;
 }
 
-.addBtnView button{
+.btnView button{
   height:80rpx;
   background:linear-gradient(270deg,rgba(59,140,237,1) 0%,rgba(93,180,242,1) 100%);
   font-size:32rpx;

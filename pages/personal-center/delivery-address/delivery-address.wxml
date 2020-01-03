@@ -28,7 +28,7 @@
       
     </view>
   </view>
-  <view class="addBtnView">
+  <view class="btnView">
     <button bindtap="addAction">+ 新增地址</button>
   </view>
   
