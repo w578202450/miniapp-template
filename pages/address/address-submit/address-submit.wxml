@@ -20,6 +20,22 @@
       <image src="../../../images/address/address_paySuccess.png"></image>
       <text >订单支付成功，请完善订单信息~</text>
   </view>
-  
+
+  <view class="container">
+  <view class="weui-cells weui-cells_after-title">
+    <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">收货地址</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access">请添加收货地址</view>
+    </navigator>
+  </view>
+  <view class="textarea weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="给商家留言（选填）" style="height: 3.3em" />
+                </view>
+            </view>
+        </view>
+  <button bindtap="payAction">立即支付（实付：¥120）</button>
+  </view>
 </view>
 

@@ -2,6 +2,7 @@
 import TIM from 'tim-wx-sdk'
 import COS from "cos-wx-sdk-v5"
 import { SDKAPPID } from './utils/GenerateTestUserSig'
+const AUTH = require('utils/auth')
 const tim = TIM.create({
   SDKAppID: SDKAPPID
 })
@@ -9,58 +10,62 @@ tim.setLogLevel(1)
 tim.registerPlugin({ 'cos-wx-sdk': COS })
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+
+    // 自动登录
+    // AUTH.checkHasLogined().then(isLogined => {
+    //   if (!isLogined) {
+    //     AUTH.login()
+    //   }
+    // })
 
     // 登录
-    wx.login({
-      success: res => {
-        console.log("===data===" + res.code);
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        wx.request({
-          url: 'http://10.0.0.23:6203/wx/getWXAuth',
-          method:'POST',
-          header: {
-            'content-type': 'application/json'
-          },
-          dataType: 'json',
-          data:{
-            'code':res.code
-          },
-          success: function (res){
+    // wx.login({
+    //   success: res => {
+    //     console.log("===data===" + res.code);
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //     wx.request({
+    //       url: 'http://10.0.0.23:6203/wx/getWXAuth',
+    //       method:'POST',
+    //       header: {
+    //         'content-type': 'application/json'
+    //       },
+    //       dataType: 'json',
+    //       data:{
+    //         'code':res.code
+    //       },
+    //       success: function (res){
+    //         console.log("===success===" + JSON.stringify(res.data));
             // console.log("===success===" + res.data.data.openid)
-            wx.request({
-              url: 'http://10.0.0.23:6112/api/tmc/patient/getPatientInfoByOpenID',
-              method: 'GET',
-              header: {
-                'content-type': 'application/json'
-              },
-              dataType: 'json',
-              data: {
-                'openID': res.data.data.openid
-              },
-              success: function (res) {
-                console.log("===success===" + JSON.stringify(res.data));
-              },
-              fail: function (res) {
-                console.log("===fail===" + res)
-              },
-              complete: function (res) {
-                console.log("===complete===" + res)
-              },
-            })
-          },
-          fail:function(res){
-            console.log("===fail===" + res)
-          },
-          complete:function(res){
-            console.log("===complete===" + res)
-          },
-        })
-      }
-    })
+            // wx.request({
+            //   url: 'http://10.0.0.23:6112/api/tmc/patient/getPatientInfoByOpenID',
+            //   method: 'GET',
+            //   header: {
+            //     'content-type': 'application/json'
+            //   },
+            //   dataType: 'json',
+            //   data: {
+            //     'openID': res.data.data.openid
+            //   },
+            //   success: function (res) {
+            //     console.log("===success===" + JSON.stringify(res.data));
+            //   },
+            //   fail: function (res) {
+            //     console.log("===fail===" + res)
+            //   },
+            //   complete: function (res) {
+            //     console.log("===complete===" + res)
+            //   },
+            // })
+          // },
+    //       fail:function(res){
+    //         console.log("===fail===" + res)
+    //       },
+    //       complete:function(res){
+    //         console.log("===complete===" + res)
+    //       },
+    //     })
+    //   }
+    // })
     // // 获取用户信息
     // wx.getSetting({
     //   success: res => {

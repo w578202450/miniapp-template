@@ -1,6 +1,4 @@
 
-const WXAPI = require('apifm-wxapi')
-
 async function checkSession() {
   return new Promise((resolve, reject) => {
     wx.checkSession({
