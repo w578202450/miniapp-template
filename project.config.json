@@ -104,6 +104,20 @@
 					"id": -1,
 					"name": "提交收货地址",
 					"pathName": "pages/address/address-submit/address-submit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收货地址",
+					"pathName": "pages/personal-center/delivery-address/delivery-address",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "添加地址",
+					"pathName": "pages/address/address-add/address-add",
 					"scene": null
 				}
 			]

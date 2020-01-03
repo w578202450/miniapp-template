@@ -10,7 +10,8 @@
     "pages/personal-center/delivery-address/delivery-address",
     "pages/personal-center/prescription-details/prescription-details",
     "pages/online-inquiry/inquiry/chat/chat",
-    "pages/address/address-submit/address-submit"
+    "pages/address/address-submit/address-submit",
+    "pages/address/address-add/address-add"
   ],
   "window": {
     "backgroundTextStyle": "light",

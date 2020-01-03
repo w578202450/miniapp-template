@@ -4,16 +4,47 @@ Page({
   data: {
     list: [
       {
-        date: '2019-12-22',
-        content: '体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。'
+        name: '王重阳',
+        phone: '138****9988',
+        address: '四川省成都市黄龙大道290号',
+        selected: true
       },
       {
-        date: '2019-12-22',
-        content: '体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。'
+        name: '王重阳',
+        phone: '138****9988',
+        address: '四川省成都市黄龙大道290号',
+        selected: false
+      },
+      {
+        name: '王重阳',
+        phone: '138****9988',
+        address: '四川省成都市黄龙大道290号',
+        selected: false
+      },
+      {
+        name: '王重阳',
+        phone: '138****9988',
+        address: '四川省成都市黄龙大道290号',
+        selected: true
+      },
+      {
+        name: '王重阳',
+        phone: '138****9988',
+        address: '四川省成都市黄龙大道290号',
+        selected: true
       },
     ]
   },
   onLoad: function () {
 
+  },
+
+  addAction: function(){
+    wx.navigateTo({
+      url: '/pages/address/address-add/address-add',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
   }
 })
