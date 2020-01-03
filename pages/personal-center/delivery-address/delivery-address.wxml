@@ -1,0 +1,10 @@
+<view class="page">
+  <navigator wx:for="{{list}}" wx:for-item="item" url="/pages/personal-center/prescription-details/prescription-details">
+    <view class="item-box">
+      <view>
+        <text class="content">症状：{{item.content}}</text>
+      </view>
+      <text class="date">开放日期：{{item.date}}</text>
+    </view>
+  </navigator>
+</view>
