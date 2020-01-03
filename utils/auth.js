@@ -1,8 +1,7 @@
-
-var HTTP = require('http-util.js'); 
 /**
  * 登录
  */
+var HTTP = require('http-util.js');
 async function wxlogin() {
   wx.login({
     success: function (res) {
@@ -55,7 +54,7 @@ async function getbaseinfo(openID) {
           duration: 2000
         })
       }
-      
+
     },
     function (err) {
       wx.showToast({
