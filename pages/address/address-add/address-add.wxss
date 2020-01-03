@@ -2,15 +2,33 @@
   height: 100%;
   width: 100%;
 }
-.weui-cells{
+.address{
   margin-top: 20rpx;
+  background-color: white;
 }
-.weui-cells,.address-detail{
+
+.cell{
+  padding: 32rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.cell-title{
+  width: 112rpx;
   font-size:28rpx;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(0,0,0,0.85);
   line-height:28rpx;
+}
+.cell-detail{
+  margin-left: 66rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx
 }
 
 .address-selected-details{
@@ -28,13 +46,7 @@
   padding: 36rpx;
 }
 
-.address-detail{
-  padding: 32rpx;
-  line-height:40rpx;
-  background-color: white;
-}
-
-.separator{
+.cell-separator{
   margin-left: 32rpx;
   height:2rpx;
   background:rgba(238,238,238,1);
@@ -50,6 +62,16 @@
   font-weight:400;
   color:rgba(254,88,83,1);
   line-height:28rpx;
+}
+
+.address-detail{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+  padding: 36rpx;
+  background-color: white;
 }
 
 .addBtnView{

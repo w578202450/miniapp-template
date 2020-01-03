@@ -118,6 +118,13 @@
 					"id": -1,
 					"name": "添加地址",
 					"pathName": "pages/address/address-add/address-add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/address/address-add/address-add",
+					"pathName": "pages/address/address-add/address-add",
 					"scene": null
 				}
 			]
