@@ -1,6 +1,8 @@
 
 var HTTP = require('http-util.js'); 
-
+/**
+ * 登录
+ */
 async function wxlogin() {
   wx.login({
     success: function (res) {
@@ -16,7 +18,9 @@ async function wxlogin() {
     },
   })
 }
-
+/**
+ * 获取openid
+ */
 async function getopenid(code) {
   var prams = {
     code: code
@@ -34,7 +38,9 @@ async function getopenid(code) {
       })
     })
 }
-
+/**
+ * 获取基础数据
+ */
 async function getbaseinfo(openID) {
   var prams = {
     openID: openID
