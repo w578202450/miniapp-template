@@ -11,7 +11,7 @@ tim.setLogLevel(1)
 // tim.registerPlugin({ 'cos-wx-sdk': COS })
 App({
   onLaunch: function () {
-    AUTH.wxlogin();
+    // AUTH.wxlogin();
   },
 
   globalData: {

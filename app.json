@@ -5,13 +5,13 @@
     "pages/logs/logs",
     "pages/personal-center/personal-center",
     "pages/personal-center/health-information/health-information",
-    "pages/personal-center/drug-orders/drug-orders",
     "pages/personal-center/prescription/prescription",
-    "pages/personal-center/delivery-address/delivery-address",
     "pages/personal-center/prescription-details/prescription-details",
     "pages/online-inquiry/inquiry/chat/chat",
     "pages/address/address-submit/address-submit",
-    "pages/address/address-add/address-add"
+    "pages/address/address-add/address-add",
+    "pages/address/address-list/address-list",
+    "pages/drug-orders/drug-orders"
   ],
   "window": {
     "backgroundTextStyle": "light",

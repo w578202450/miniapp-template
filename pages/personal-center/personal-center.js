@@ -11,7 +11,7 @@ Page({
         title: '我的健康信息'
       },
       {
-        url: 'drug-orders/drug-orders',
+        url: '/pages/drug-orders/drug-orders',
         title: '药品订单'
       },
       {
@@ -19,7 +19,7 @@ Page({
         title: '我的处方'
       },
       {
-        url: 'delivery-address/delivery-address',
+        url: '/pages/address/address-list/address-list',
         title: '收货地址'
       }
 
