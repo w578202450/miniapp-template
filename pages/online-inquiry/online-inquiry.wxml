@@ -70,8 +70,8 @@
 
       
       <view class="bottom">
-        <!-- <navigator url="/pages/online-inquiry/inquiry/chat/chat"> -->
-         <navigator url="/pages/online-inquiry/inquiry/index/index">
+        <navigator url="/pages/online-inquiry/inquiry/chat/chat">
+         <!-- <navigator url="/pages/online-inquiry/inquiry/index/index"> -->
           <image src="../../images/home/home_inquiry.png"></image>
         </navigator>
       </view>
