@@ -110,6 +110,7 @@ Page({
       contactList: contactList
     })
   },
+  
   /**
    * go chat.wxml
    */
