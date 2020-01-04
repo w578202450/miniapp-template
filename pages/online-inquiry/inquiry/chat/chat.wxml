@@ -1,10 +1,13 @@
 <view class="page">
-
+<!-- 顶部 -->
   <view class="middle-one">
-    <view class="middleOne-box">
+    <view class="middleOne-box middleOne-box-one">
       <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
-        <text class="info_one">李荣豪</text>
+        <view class="flexRowStartCenter">
+          <text class="info_one">李荣豪</text>
+          <text class="info_one_one">医生</text>
+        </view>
         <text class="info_two">副主任医师</text>
       </view>
     </view>
@@ -12,29 +15,46 @@
     <view class="middleOne-box">
       <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
-        <text class="info_one">周雅</text>
+        <view class="flexRowStartCenter">
+          <text class="info_one">周雅啊</text>
+          <text class="info_one_one">医助</text>
+        </view>
         <text class="info_two">助理医师</text>
       </view>
     </view>
   </view>
-
-  <scroll-view scroll-into-view="{{toView}}" style="height: {{scroll_height}}px;" upper-threshold="100" scroll-y="true" enable-back-to-top="true" class="message-list">
-    <!-- 每一行 -->
-    <view class="row" wx:for="{{messages}}" wx:key="" id="row_{{index}}">
+<!-- 消息列表 -->
+  <scroll-view scroll-into-view="{{toView}}" style="height: {{scroll_height ? scroll_height + 'px': 'auto'}};margin: 140rpx 0 0 0;" upper-threshold="100" scroll-y="true" enable-back-to-top="true" class="message-list">
+    <view class="row" wx:for="{{currentMessageList}}" wx:key="item.keyID" id="item.keyID">
       <!-- 日期 -->
-      <view class="datetime" wx:if="{{item.msgTime != ''}}">{{item.msgTime}}</view>
+      <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 头像与内容文本 -->
-      <view class="body" style="flex-flow: {{item.myself == 0 ? 'row' : 'row-reverse'}}">
+      <view class="body" style="flex-flow: {{item.personID == talkInfo.patientInfo.keyID ? 'row-reverse': 'row'}}">
         <view class="avatar-container">
-          <image class="avatar" src="{{item.avatarUrl}}" />
+          <image class="avatar" src="{{item.faceImage}}" class="{{item.personID == talkInfo.patientInfo.keyID ? 'avatarTwo': 'avatarOne'}}"/>
         </view>
         <!-- 画对话框 -->
-        <view class="triangle" style="{{item.myself == 1 ? 'right: 140rpx; background: #7ECB4B' : 'left: 140rpx;'}}"></view>
-        <view class="content" style="{{item.myself == 1 ? 'background: #7ECB4B' : ''}}">
-          <view>{{item.msgText}}</view>
+        <view>
+          <!-- <view class="triangle" style="{{item.personID == talkInfo.patientInfo.keyID ? 'right: 140rpx; background: #7ECB4B' : 'left: 140rpx;'}}">{{item.personName}}</view> -->
+          <view wx:if="{{item.personID != talkInfo.patientInfo.keyID}}" class="personNameTxt">
+            {{item.personName}}
+            <text wx:if="{{item.personID == talkInfo.assistantInfo.keyID}}">-助理医师</text>
+            <text wx:if="{{item.personID == talkInfo.doctorInfo.keyID}}">-医生</text>
+          </view>
+          <!-- type: =>文本:TIM.TYPES.MSG_TEXT，图片：TIM.TYPES.MSG_IMAGE，音频：TIM.TYPES.MSG_AUDIO -->
+          <!-- 文本消息 -->
+          <view class="content" style="{{item.personID == talkInfo.patientInfo.keyID ? 'background: #B6D1F9' : ''}}">
+            <view wx:if="{{item.type == 'TIM.TYPES.MSG_TEXT'}}">{{item.msgText}}</view>
+            <image wx:elif="{{item.type == 'TIM.TYPES.MSG_IMAGE'}}" class="picture" src="{{item.imgInfo.imgUrl}}" style="width: 160rpx;height: 160rpx;"/>
+            <view wx:elif="{{item.type == 'TIM.TYPES.MSG_AUDIO'}}" class="flexRowStartCenter">
+              <image src="../../../../images/chat/audio.png" style="height:20px;width:14px" class="payloadImage"></image>
+              <view style="padding-left: 10px" class="_div data-v-71681a0a">{{item.payload.second}}s</view>
+            </view>
+          </view>
         </view>
       </view>
     </view>
+    <view style="height: 55px;"></view>
   </scroll-view>
   <view class="reply">
     <view class="opration-area">

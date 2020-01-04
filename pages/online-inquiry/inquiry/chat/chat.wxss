@@ -1,32 +1,48 @@
+.flexRowStartCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .middle-one{
   height:140rpx;
-  background:rgba(255,255,255,1);
-  box-shadow:0rpx 2rpx 8rpx 0px rgba(0,0,0,0.1);
-  border-radius:10rpx;
+  background:#fff;
+  box-shadow:0 0 8rpx 0 rgba(0,0,0,0.1);
   display: flex;
-  box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100
 }
 
 .middleOne-box{
-  width: 48%;
-  height: 140rpx;
+  width: 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 20rpx;
+  /* border: 1px solid red; */
 }
 
+.middleOne-box-one {
+  border-right: 1rpx solid #DBDEE3;
+}
 
 .middleOne-box image{
-  height: 85rpx;
+  height: 80rpx;
   width: 80rpx;
+  border-radius: 80rpx;
+  background-color: rgb(248,248,248);
 }
 
 .middleOne-box .info-box{
   display: flex;
   flex-direction: column;
-  margin-left: 30rpx;
+  margin-left: 20rpx;
 }
 
 .middleOne-box .info-box .info_one{
@@ -35,6 +51,14 @@
   font-weight:500;
   color:rgba(0,0,0,0.85);
   line-height:32rpx;
+}
+.middleOne-box .info-box .info_one_one {
+  margin-left: 10rpx;
+  border-radius: 30rpx;
+  border: 1px solid #438BEF;
+  padding: 0 15rpx;
+  font-size: 28rpx;
+  color: #438BEF;
 }
 
 .middleOne-box .info-box .info_two{
@@ -47,16 +71,14 @@
 }
 
 .middle-one .lineView{
-  width:2rpx;
-  height:92rpx;
+  width:1rpx;
+  height:80rpx;
   background:rgba(232,232,232,1);
-  border-radius:10rpx;
 }
 
 /*聊天记录*/
 .message-list {
-  /*margin-bottom: 54px;*/
-  background: rgb(235, 235, 235);
+  background-color: #F6F6F6;
 }
 
 /*单元行*/
@@ -68,12 +90,13 @@
 
 /*日期*/
 .datetime {
-  font-size: 10px;
-  padding: 10px 0;
+  font-size: 28rpx;
+  padding: 20rpx 0 0 0;
   color: #999;
   text-align: center;
 }
 
+/*发送*/
 .send {
   font-size: 15px;
   padding-right: 10px;
@@ -98,21 +121,36 @@
 }
 
 /*头像*/
-.body .avatar {
+.body .avatarOne {
   width: 80rpx;
   height: 80rpx;
   border-radius: 50%;
-  margin: 0 20rpx;
+  background-color: #fff;
+  margin-right: 20rpx;
+}
+
+.body .avatarTwo {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-left: 20rpx;
+}
+
+/*人名*/
+.personNameTxt {
+  font-size: 30rpx;
+  color: #86888B;
 }
 
 /*文本消息*/
 .body .content {
-  font-size: 16px;
+  font-size: 32rpx;
   background: #fff;
-  border-radius: 5px;
-  padding: 10px;
-  line-height: 22px;
-  margin-bottom: 10px;
+  border-radius: 20rpx;
+  padding: 15rpx;
+  /* line-height: 22rpx; */
+  margin-bottom: 20rpx;
 }
 
 /* 三角箭头 */
@@ -127,7 +165,7 @@
 
 /*图片消息*/
 .picture {
-  width: 160px;
+
 }
 
 /*回复框*/
