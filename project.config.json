@@ -141,6 +141,12 @@
 					"pathName": "pages/order/drug-orders/drug-orders",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "导航组件",
+					"pathName": "components/tmc-navbar/tmc-navbar",
+					"scene": null
 				}
 			]
 		}
