@@ -51,3 +51,10 @@
 .weui-cell{
   height: 60rpx;
 }
+
+.weui-cells{
+  margin-top: -15rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius: 15rpx;
+  overflow: hidden;
+}

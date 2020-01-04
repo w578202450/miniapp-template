@@ -1,9 +1,8 @@
-
 var sysinfo = wx.getSystemInfoSync();
 
 Page({
   data: {
-    statusBarHeight: sysinfo.statusBarHeight
+    statusBarHeight: sysinfo.statusBarHeight,
   },
   onLoad: function () {
   }
@@ -21,7 +20,7 @@ Component({
     },
     titleText: {
       type: String,
-      value: '确认收货地址'
+      value: '订单详情'
     },
     titleImg: {
       type: String,
@@ -50,7 +49,22 @@ Component({
     that.setStyle();
   },
   data: {
-    
+    list: [
+      {
+        avatar: '../../../images/public/public_avatar.png',
+        name: '舒筋健腰丸',
+        unit: '250ml*10支/盒',
+        price: '¥50.00',
+        num: 'x3'
+      },
+      {
+        avatar: '../../../images/public/public_avatar.png',
+        name: '舒筋健腰丸',
+        unit: '250ml*10支/盒',
+        price: '¥50.00',
+        num: 'x3'
+      }
+    ]
   },
   methods: {
     // 通过获取系统信息计算导航栏高度        
@@ -108,6 +122,11 @@ Component({
         success: function (res) { },
         fail: function (res) { },
         complete: function (res) { },
+      })
+    },
+    previewPrescriptionAction: function(){
+      wx.navigateTo({
+        url: '/pages/personal-center/prescription-details/prescription-details',
       })
     }
   }

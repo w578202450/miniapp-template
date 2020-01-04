@@ -122,9 +122,24 @@
 					"scene": null
 				},
 				{
+					"id": 9,
+					"name": "我的订单",
+					"pathName": "pages/order/drug-orders/drug-orders",
+					"query": "",
+					"scene": null
+				},
+				{
 					"id": -1,
-					"name": "pages/address/address-add/address-add",
-					"pathName": "pages/address/address-add/address-add",
+					"name": "订单详情",
+					"pathName": "pages/order/order-details/order-details",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/drug-orders/drug-orders",
+					"pathName": "pages/order/drug-orders/drug-orders",
+					"query": "",
 					"scene": null
 				}
 			]

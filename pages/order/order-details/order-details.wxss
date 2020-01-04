@@ -1,0 +1,286 @@
+.header{
+ width: 100%;
+ height:386rpx;
+}
+
+.header-bgImage{
+  position: absolute;
+  z-index: -1;
+}
+
+.paySuccess{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48rpx;
+  width: 100%;
+}
+
+.paySuccess image{
+  width:58rpx;
+  height:58rpx;
+}
+
+.paySuccess text{
+  font-size:32rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height:32rpx;
+  margin-top: 34rpx;
+}
+.header-bgImage{
+ width: 100%;
+ height:386rpx;
+}
+
+.navbar{
+  position: relative;
+}
+.back-icon{
+  width:20rpx;
+  height:36rpx;  
+  position: absolute;    
+  transform: translateY(-50%);    
+  top: 50%;    
+  display: flex;
+}
+.back-icon{    
+  left: 16px;
+}
+.back-icon image{    
+  width:20rpx;
+  height:36rpx;   
+  margin: auto;
+}
+.nav-title{    
+  position: absolute;    
+  transform: translate(-50%, -50%);    
+  left: 50%;    
+  top: 50%;    
+  font-size:36rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(255,255,255,1);
+  line-height:50rpx;
+}
+
+.content{
+  margin-top: -15rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius: 15rpx;
+  overflow: hidden;
+  background-color: white;
+}
+
+.person-info{
+  font-size:28rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+  padding: 32rpx;
+}
+
+.person-info-address{
+  margin-top: 32rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:28rpx;
+}
+.person-info-separator{
+  height:2rpx;
+  background:rgba(238,238,238,1);
+}
+
+.drugs-list{
+  padding-top: 48rpx;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+}
+
+.drugs-list-header{
+  display: flex;
+  flex-direction: row;
+}
+
+.drugs-list-lineView{
+  width:4rpx;
+  height:28rpx;
+  background:rgba(67,139,239,1);
+  border-radius:2rpx;
+}
+
+.drugs-list-source{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+  margin-left: 4rpx;
+}
+
+.drugs-cell{
+  display: flex;
+  flex-direction: column;
+}
+
+.drugs-cell-content{
+  display: flex;
+  flex-direction: row;
+  padding-top: 32rpx;
+  flex-shrink: 0;
+  justify-content: space-between;
+}
+
+.drugs-cell image{
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.drugs-cell-middle{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+  margin-left: 32rpx;
+  flex-grow: 1;
+}
+
+.drugs-cell-name{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:40rpx;
+}
+
+.drugs-cell-unit,.drugs-cell-num{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:24rpx;
+}
+
+.drugs-cell-right{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+  margin-left: 32rpx;
+  text-align: right;
+}
+
+.drugs-cell-price{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(254,88,83,1);
+  line-height:40rpx;
+}
+
+.cell-info-separator{
+  margin-top: 32rpx;
+  height:2rpx;
+  background:rgba(238,238,238,1);
+}
+
+.prescription-header{
+  display: flex;
+  flex-direction: row;
+  padding: 32rpx;
+  align-items: center;
+}
+.prescription-header-lineView{
+  width:4rpx;
+  height:28rpx;
+  background:rgba(67,139,239,1);
+  border-radius:2rpx;
+}
+
+.prescription-header-title{
+  font-size:28rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(42,44,48,1);
+  line-height:28rpx;
+  margin-left: 4rpx;
+}
+
+.prescription-image{
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 32rpx;
+}
+
+.prescription-delivery{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 32rpx;
+}
+
+.prescription-text{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
+
+.other-text{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:24px
+}
+
+.separator{
+  height:2rpx;
+  background:rgba(238,238,238,1);
+}
+
+/* .optionView{
+  width:200rpx;
+  height:60rpx;
+  background:rgba(255,255,255,1);
+  border-radius:40rpx;
+  border:1px solid rgba(0,0,0,0.25);
+  text-align: center;
+  align-content: center;
+}
+
+.optionView text{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:28rpx;
+} */
+
+.options-view{
+  height:60rpx;
+  border-radius:30rpx;
+  border:1px solid rgba(0,0,0,0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.options-view text{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:28rpx;
+}

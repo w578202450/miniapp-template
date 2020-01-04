@@ -4,23 +4,21 @@
 
   <view class="header">
     <image class="header-bgImage" src="../../../images/public/public_order_bg.png"></image>
-  </view>
-
-  <view class='nav' style='height: {{status + navHeight}}px'>    
-    <view class='status' style='height: {{status}}px;{{containerStyle}}'></view>  
-    <view class='navbar' style='height:{{navHeight}}px;{{containerStyle}}'>
-      <view class='back-icon' wx:if="{{backIcon}}" bindtap='back'>
-        <image src='{{backIcon}}'></image>       
-      </view>  
-      <view class='nav-title' wx:if="{{titleText && !titleImg}}">
-          <text style='{{textStyle}}'>{{titleText}}</text>
+    <view class='nav' style='height: {{status + navHeight}}px'>    
+      <view class='status' style='height: {{status}}px;{{containerStyle}}'></view>  
+      <view class='navbar' style='height:{{navHeight}}px;{{containerStyle}}'>
+        <view class='back-icon' wx:if="{{backIcon}}" bindtap='back'>
+          <image src='{{backIcon}}'></image>       
+        </view>  
+        <view class='nav-title' wx:if="{{titleText && !titleImg}}">
+            <text style='{{textStyle}}'>{{titleText}}</text>
+        </view>
       </view>
     </view>
-  </view>
-
-  <view class="paySuccess">
+    <view class="paySuccess">
       <image src="../../../images/address/address_paySuccess.png"></image>
       <text >订单支付成功，请完善订单信息~</text>
+    </view>
   </view>
 
   <view class="detail">
