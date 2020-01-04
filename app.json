@@ -9,7 +9,9 @@
     "pages/personal-center/prescription-details/prescription-details",
     "pages/online-inquiry/inquiry/chat/chat",
     "pages/online-inquiry/inquiry/index/index",
-    "pages/address/address-submit/address-submit"
+    "pages/address/address-submit/address-submit",
+    "pages/order/order-details/order-details",
+    "pages/order/drug-orders/drug-orders"
   ],
   "window": {
     "backgroundTextStyle": "light",
