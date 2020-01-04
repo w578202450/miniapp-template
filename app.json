@@ -8,11 +8,8 @@
     "pages/personal-center/prescription/prescription",
     "pages/personal-center/prescription-details/prescription-details",
     "pages/online-inquiry/inquiry/chat/chat",
-    "pages/address/address-submit/address-submit",
-    "pages/address/address-add/address-add",
-    "pages/address/address-list/address-list",
-    "pages/order/drug-orders/drug-orders",
-    "pages/order/order-details/order-details"
+    "pages/online-inquiry/inquiry/index/index",
+    "pages/address/address-submit/address-submit"
   ],
   "window": {
     "backgroundTextStyle": "light",
