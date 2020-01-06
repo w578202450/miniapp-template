@@ -11,7 +11,7 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
-		"nodeModules": true,
+		"nodeModules": false,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -123,8 +123,20 @@
 				},
 				{
 					"id": -1,
+<<<<<<< HEAD
 					"name": "健康信息",
 					"pathName": "pages/personal-center/health-information/health-information",
+=======
+					"name": "导航组件",
+					"pathName": "components/tmc-navbar/tmc-navbar",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 10,
+					"name": "聊天页",
+					"pathName": "pages/online-inquiry/inquiry/chat/chat",
+>>>>>>> 6a0a42607b4777683ff03084057173446c165ce2
 					"query": "",
 					"scene": null
 				},
