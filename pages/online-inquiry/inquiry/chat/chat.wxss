@@ -169,8 +169,6 @@
   align-items: center;
   position: fixed;
   bottom: 0;
-  /* height: 54px; */
-  border-top: 1px solid rgb(215, 215, 215);
   background: #fff;
 }
 
@@ -181,19 +179,18 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  position: relative;
 }
 
 /*语音图标*/
 .reply .opration-area .voiceIcon {
-  width: 60rpx;
-  height: 60rpx;
+  width: 55rpx;
+  height: 55rpx;
 }
 
 /*回复文本框*/
 .reply .opration-area .msgInput {
   margin: 20rpx 20rpx;
-  width: 500rpx;
+  width: 445rpx;
   padding: 0rpx 25rpx 0 15rpx !important;
   border: none;
   border-radius: 6px;
@@ -205,8 +202,6 @@
 .reply .opration-area .inputIcon {
   width: 55rpx;
   height: 55rpx;
-  position: absolute;
-  right: 35rpx;
 }
 
 /*发送*/
@@ -222,8 +217,8 @@
 
 /*菜单按钮*/
 .reply .menusIcon {
- width: 60rpx;
- height: 60rpx;
+ width: 55rpx;
+ height: 55rpx;
 }
 
 /*选取图片*/

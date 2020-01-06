@@ -1,5 +1,5 @@
 <view class="page">
-<!-- 顶部 -->
+  <!-- 顶部 -->
   <view class="middle-one">
     <view class="middleOne-box middleOne-box-one">
       <image src="../../../../images/home/home_doctor.png"></image>
@@ -23,15 +23,15 @@
       </view>
     </view>
   </view>
-<!-- 消息列表 -->
+  <!-- 消息列表 -->
   <scroll-view scroll-into-view="{{toView}}" style="height: {{scroll_height ? scroll_height + 'px': 'auto'}};margin: 140rpx 0 0 0;" upper-threshold="100" scroll-y="true" enable-back-to-top="true" class="message-list">
-    <view class="row" wx:for="{{currentMessageList}}" wx:key="item.keyID" id="item.keyID">
+    <view class="row" wx:for="{{currentMessageList}}" wx:key="{{item.keyID}}" bindtap="">
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 头像与内容文本 -->
       <view class="body" style="flex-flow: {{item.personID == talkInfo.patientInfo.keyID ? 'row-reverse': 'row'}}">
         <view class="avatar-container">
-          <image class="avatar" src="{{item.faceImage}}" class="{{item.personID == talkInfo.patientInfo.keyID ? 'avatarTwo': 'avatarOne'}}"/>
+          <image class="avatar" src="{{item.faceImage}}" class="{{item.personID == talkInfo.patientInfo.keyID ? 'avatarTwo': 'avatarOne'}}" />
         </view>
         <!-- 画对话框 -->
         <view>
@@ -45,7 +45,7 @@
           <!-- 文本消息 -->
           <view class="content" style="{{item.personID == talkInfo.patientInfo.keyID ? 'background: #B6D1F9' : ''}}">
             <view wx:if="{{item.type == 'TIM.TYPES.MSG_TEXT'}}">{{item.msgText}}</view>
-            <image wx:elif="{{item.type == 'TIM.TYPES.MSG_IMAGE'}}" class="picture" src="{{item.imgInfo.imgUrl}}" style="width: 160rpx;height: 160rpx;"/>
+            <image wx:elif="{{item.type == 'TIM.TYPES.MSG_IMAGE'}}" class="picture" src="{{item.imgInfo.imgUrl}}" style="width: 160rpx;height: 160rpx;" />
             <view wx:elif="{{item.type == 'TIM.TYPES.MSG_AUDIO'}}" class="flexRowStartCenter">
               <image src="../../../../images/chat/audio.png" style="height:20px;width:14px" class="payloadImage"></image>
               <view style="padding-left: 10px" class="_div data-v-71681a0a">{{item.payload.second}}s</view>
@@ -54,24 +54,19 @@
         </view>
       </view>
     </view>
-    <view style="height: 10rpx;"></view>
+    <view style="height: 130rpx;"></view>
   </scroll-view>
+  <!-- 底部菜单栏 -->
   <view class="reply">
-    <view class="opration-area">
-      <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" />
-      <input class="msgInput" type="textarea" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange"/>
-      <image src="../../../../images/chat/inputIcon.png" class="inputIcon" />
+      <view class="opration-area">
+        <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" />
+        <input class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" />
+        <image src="../../../../images/chat/inputIcon.png" class="inputIcon" />
+      </view>
+      <view class="send">
+        <view wx:if="{{maySendContent.length > 0}}">发送</view>
+        <!-- <button wx:if="{{maySendContent.length == 0}}" form-type="reset" style="width: 60rpx;color: #FFF;font-size: 20rpx;">发送</button> -->
+        <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" />
+      </view>
     </view>
-    <view class="send">
-      <view wx:if="{{maySendContent.length > 0}}">发送</view>
-      <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" />
-    </view>
-  </view>
-
-
-
-
-
-
-
 </view>
