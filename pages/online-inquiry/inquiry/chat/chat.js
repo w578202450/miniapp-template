@@ -1,4 +1,7 @@
-// pages/online-inquiry/inquiry/chat/chat.js
+const app = getApp()
+const tim = app.tim
+const TIM = app.TIM
+
 Page({
 
   /**
