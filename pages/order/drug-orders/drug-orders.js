@@ -9,7 +9,8 @@ Page({
         details: '症状：体弱多病',
         date: '开方日期：2019-10-22',
         status:'待支付',
-        button: 1
+        button: 1,
+        id:0
       },
       {
         avatar: '../../../images/public/public_avatar.png',
@@ -17,7 +18,8 @@ Page({
         details: '症状：体弱多病，四肢酸软，腰痛1年多。',
         date: '开方日期：2019-10-22',
         status: '已支付',
-        button: 2
+        button: 2,
+        id: 1
       },
       {
         avatar: '../../../images/public/public_avatar.png',
@@ -25,7 +27,8 @@ Page({
         details: '症状：体弱多病，四肢酸软，腰痛1年多。',
         date: '开方日期：2019-10-22',
         status: '待支付',
-        button: 3
+        button: 3,
+        id: 2
       },
       {
         avatar: '../../../images/public/public_avatar.png',
@@ -33,7 +36,8 @@ Page({
         details: '症状：体弱多病，四肢酸软，腰痛1年多。',
         date: '开方日期：2019-10-22',
         status: '待支付',
-        button: 2
+        button: 2,
+        id: 3
       },
       {
         avatar: '../../../images/public/public_avatar.png',
@@ -41,7 +45,8 @@ Page({
         details: '症状：体弱多病，四肢酸软，腰痛1年多。',
         date: '开方日期：2019-10-22',
         status: '待支付',
-        button: 3
+        button: 3,
+        id: 4
       },
     ]
   },

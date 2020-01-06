@@ -1,31 +1,26 @@
-<view class="page">
-  <view class="cells">
-    <view wx:for="{{list}}" wx:for-item="item">
-      <view class="cell" bindtap="orderDetailsAction">
-        <image src="{{item.avatar}}"></image>
-        <view class="content-box">
-          <text class="content-title">{{item.title}}</text>
-          <text class="content-details">{{item.details}}</text>
-          <text class="content-date">{{item.date}}</text>
-        </view>
-        <view class="right-box">
-          <text class="right-status">{{item.status}}</text>
-          
-          <view wx:if="{{item.button==1}}" style="border:1px solid rgba(254,88,83,1)" class="option-view">
-            <text style="color:rgba(254,88,83,1)">立即支付</text>
-          </view>
-      
-          <view wx:elif="{{item.button==2}}" style="border:1px solid rgba(0,0,0,0.25)" class="option-view" bindtap="addressAction">
-            <text>填写地址</text>
-          </view>
+<view wx:for="{{list}}" wx:key="id" wx:for-item="item">
+    <view class="cell" bindtap="orderDetailsAction">
+      <image src="{{item.avatar}}"></image>
+      <view class="content-box">
+        <text class="content-title">{{item.title}}</text>
+        <text class="content-details">{{item.details}}</text>
+        <text class="content-date">{{item.date}}</text>
+      </view>
+      <view class="right-box">
+        <text class="right-status">{{item.status}}</text>
 
-          <view wx:else="{{item.button==3}}" style="border:1px solid rgba(0,0,0,0.25)" class="option-view">
-            <text>申请退款</text>
-          </view>
-          
+        <view wx:if="{{item.button==1}}" style="border:1px solid rgba(254,88,83,1)" class="option-view">
+          <text style="color:rgba(254,88,83,1)">立即支付</text>
         </view>
+
+        <view wx:elif="{{item.button==2}}" style="border:1px solid rgba(0,0,0,0.25)" class="option-view" bindtap="addressAction">
+          <text>填写地址</text>
+        </view>
+
+        <view wx:else="{{item.button==3}}" style="border:1px solid rgba(0,0,0,0.25)" class="option-view">
+          <text>申请退款</text>
+        </view>
+
       </view>
     </view>
   </view>
-  
-</view>

@@ -1,91 +1,87 @@
-<view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">身高</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请填写身高"/>
-        </view>
-        <view class="weui-cell__ft">cm</view>
-    </view>
+<import src = "../../../template/template.wxml"/>
 
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">体重</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请填写体重"/>
-        </view>
-        <view class="weui-cell__ft">kg</view>
-    </view>
+<view class="page-container">
+  <view class="box-flex-row">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">身高</text>
+    <input class="font-one" placeholder="请填写身高" type="digit" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">cm</text>
+  </view>
 
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">现病史</view>
-        </view>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="描述现病史"/>
-        </view>
-        <mp-icon class="addIcon" icon="add2" color="#438BEF"></mp-icon>
-    </view>
+  <template is="tmc-separator"></template>
 
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">吸烟史</view>
-        </view>
-        <mp-checkbox class="mp-checkbox" wx:for="{{smokingHistoryItmes}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
-        </mp-checkbox>
-        <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="请输入烟龄"/>
-        </view>
-        <view class="weui-cell__ft">年</view>
-    </view>
+  <view class="box-flex-row">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">体重</text>
+    <input class="font-one" placeholder="请填写体重" type="digit" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">kg</text>
+  </view>
 
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">饮酒史</view>
-        </view>
-        <mp-checkbox class="mp-checkbox" wx:for="{{drinkHistoryItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
-        </mp-checkbox>
-    </view>
+  <template is="tmc-separator"></template>
 
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">既往病史</view>
-        </view>
-        <mp-checkbox class="mp-checkbox" wx:for="{{previousHistoryItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
-        </mp-checkbox>
-    </view>
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">过敏史</view>
-        </view>
-        <mp-checkbox class="mp-checkbox" wx:for="{{previousHistoryItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
-        </mp-checkbox>
-    </view>
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">肝功能</view>
-        </view>
-        <mp-checkbox class="mp-checkbox" wx:for="{{liverItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
-        </mp-checkbox>
-    </view>
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">肾功能</view>
-        </view>
-        <mp-checkbox class="mp-checkbox" wx:for="{{renalItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
-        </mp-checkbox>
-    </view>
-    <view class="weui-cell ">
-        <view class="weui-cell__hd">
-            <view class="weui-label">妊娠哺乳</view>
-        </view>
-        <mp-checkbox class="mp-checkbox" wx:for="{{gestationItems}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
-        </mp-checkbox>
-    </view>
-    <view class="btn-cell">
-        <button class="saveBtn">保存</button>
-    </view>
+  <view class="box-flex-row">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">现病史</text>
+    <input class="font-one" placeholder="描述现病史" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <image src="../../../images/public/public_circle_add.png" style="height:30rpx;width:30rpx;flex-shrink: 0;margin-left: 16rpx"></image>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <view class="box-flex-row">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">吸烟史</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" bind:radioChange="smokingAction"></tmcRadioView>
+    <input class="font-one" placeholder="请填写烟龄" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <view class="box-flex-row" style="justify-content: flex-start">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">饮酒史</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{drinkingItems}}" bind:radioChange="drinkingAction"></tmcRadioView>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <view class="box-flex-row">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">既往病史</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{medicalItems}}" bind:radioChange="medicalAction"></tmcRadioView>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <tmcGridView style="margin-left: 16rpx;flex-shrink: 0" gridsList="{{medicalList}}" bind:gridsChange="medicalAction" bind:addItemAction="addMedical"></tmcGridView>
+
+  <view class="box-flex-row" style="padding-top: 0;">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">过敏史</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{allergyItems}}" bind:radioChange="allergyAction"></tmcRadioView>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <tmcGridView style="margin-left: 16rpx;flex-shrink: 0" gridsList="{{allergyList}}" bind:gridsChange="allergyAction" bind:addItemAction="addAllergy"></tmcGridView>
+
+  <view class="box-flex-row" style="padding-top: 0;">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">肝功能</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{liverItems}}" bind:radioChange="liverAction"></tmcRadioView>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <view class="box-flex-row">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">肾功能</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{kidneyItems}}" bind:radioChange="kidneyAction"></tmcRadioView>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <view class="box-flex-row">
+    <text class="font-one" style="flex-shrink: 0;width: 120rpx">妊娠哺乳</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{gestationItems}}" bind:radioChange="gestationAction"></tmcRadioView>
+  </view>
+
+  <template is="tmc-separator"></template>
+
+  <view class="button-view">
+    <button class="button-theme" bindtap="submitAction" style="margin-top:96rpx;width:80%">保存</button>
+  </view>
 
 </view>

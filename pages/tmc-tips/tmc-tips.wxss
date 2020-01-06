@@ -1,0 +1,50 @@
+page{
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+image{
+  margin-top: 200rpx;
+  width: 80%;
+}
+
+.btnView{
+  margin-top: 80rpx;
+  width: 100%;
+  bottom: 80rpx;
+}
+
+.btnView button{
+  height:80rpx;
+  background:linear-gradient(270deg,rgba(59,140,237,1) 0%,rgba(93,180,242,1) 100%);
+  font-size:32rpx;
+  font-family:PpackageingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  width: 200rpx;
+  border-radius:80rpx;
+  border-style: solid;
+  border-width: 0rpx;
+  box-shadow:0px 2px 4px 0px rgba(93,180,242,1);
+  -webkit-box-shadow:0px 2px 4px 0px rgba(93,180,242,1);
+}
+
+.message{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:28rpx;
+  margin-top: 48rpx;
+}
+
+.tips-title{
+  font-size:32rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.85);
+  line-height:32rpx;
+  margin-top: 126rpx;
+}

@@ -1,9 +1,13 @@
-.item-box{
+
+page{
+  padding-top: 20rpx;
+}
+.cell{
   display: flex;
   flex-direction: column;
   background-color: white;
   padding: 32rpx;
-  margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 .content{

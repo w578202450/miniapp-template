@@ -5,8 +5,7 @@ const app = getApp()
 Page({
   data: {
     nikename: "付志敏",
-    list: [
-      {
+    list: [{
         url: 'health-information/health-information',
         title: '我的健康信息'
       },
@@ -25,7 +24,17 @@ Page({
 
     ]
   },
-  onLoad: function () {
+  onLoad: function() {
 
+  },
+
+  fetchAuthAction:function(){
+    wx.navigateTo({
+      // url: '/pages/tmc-tips/tmc-tips',
+      url: "/pages/cheshi/cheshi",
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
   }
 })

@@ -1,0 +1,3 @@
+<template name="tmc-separator">
+  <view class="separator_style"></view>
+</template>

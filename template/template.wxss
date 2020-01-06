@@ -1,0 +1,4 @@
+.separator_style{
+  height:2rpx;
+  background:rgba(238,238,238,1);
+}

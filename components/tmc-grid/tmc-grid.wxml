@@ -1,0 +1,13 @@
+<view class="medical-box">
+  <view wx:for="{{gridsList}}" wx:key="id" wx:for-item="item" checked="{{item.checked}}" id="{{item.name}}" bindtap="gridsChange" data-name="{{item.name}}">
+    <view class="button-hollowOut selected-view" wx:if="{{item.checked}}">
+      <text class="selected-text">{{item.name}}</text>
+    </view>
+    <view class="button-hollowOut normal-view" wx:else>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+  <view class="button-hollowOut normal-view" style="width:80rpx" bindtap="addItemAction">
+    <text style="font-size:28rpx">+</text>
+  </view>
+</view>

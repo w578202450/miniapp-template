@@ -9,10 +9,10 @@ Page({
     qualificationDes: "12313456DFGHJJJKN",
     licensingDes: "12313456DFGHJJJKN",
   },
-  onLoad: function () {
+  onLoad: function() {
 
   },
-  doctorDetailTap:function(){
+  doctorDetailTap: function() {
     wx.navigateTo({
       url: '/pages/online-inquiry/doctor-details/doctor-details',
       success: function(res) {},

@@ -60,22 +60,50 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "个人中心",
-					"pathName": "pages/personal-center/personal-center",
+					"name": "添加地址",
+					"pathName": "pages/address/address-add/address-add",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "我的健康信息",
+					"name": "健康信息",
 					"pathName": "pages/personal-center/health-information/health-information",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "医生详情",
-					"pathName": "pages/online-inquiry/doctor-details/doctor-details",
+					"name": "pages/personal-center/personal-center",
+					"pathName": "pages/personal-center/personal-center",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/components/tmc-tips/tmc-tips",
+					"pathName": "pages/components/tmc-tips/tmc-tips",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tmc-tips/tmc-tips",
+					"pathName": "pages/tmc-tips/tmc-tips",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "药品订单",
+					"pathName": "pages/order/drug-orders/drug-orders",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收货地址",
+					"pathName": "pages/address/address-list/address-list",
 					"query": "",
 					"scene": null
 				},
@@ -88,64 +116,15 @@
 				},
 				{
 					"id": -1,
-					"name": "处方详情",
-					"pathName": "pages/personal-center/prescription-details/prescription-details",
+					"name": "测试",
+					"pathName": "pages/cheshi/cheshi",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/online-inquiry/inquiry/chat/chat",
-					"pathName": "pages/online-inquiry/inquiry/chat/chat",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "提交收货地址",
-					"pathName": "pages/address/address-submit/address-submit",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "收货地址",
-					"pathName": "pages/personal-center/delivery-address/delivery-address",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "添加地址",
-					"pathName": "pages/address/address-add/address-add",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 9,
-					"name": "我的订单",
-					"pathName": "pages/order/drug-orders/drug-orders",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "订单详情",
-					"pathName": "pages/order/order-details/order-details",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/order/drug-orders/drug-orders",
-					"pathName": "pages/order/drug-orders/drug-orders",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "导航组件",
-					"pathName": "components/tmc-navbar/tmc-navbar",
+					"name": "健康信息",
+					"pathName": "pages/personal-center/health-information/health-information",
 					"scene": null
 				}
 			]

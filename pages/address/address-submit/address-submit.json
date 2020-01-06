@@ -1,5 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationStyle": "custom",
-  "component": true
+  "usingComponents": {
+    "tmcnavbar":"/components/tmc-navbar/tmc-navbar"
+  },
+  "navigationStyle": "custom"
 }

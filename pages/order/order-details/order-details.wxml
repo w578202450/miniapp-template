@@ -1,11 +1,10 @@
-
 <view class="page">
   <view class="header">
     <image class="header-bgImage" src="../../../images/public/public_order_bg.png"></image>
     <tmcnavbar titleText="订单详情"></tmcnavbar>
     <view class="paySuccess" style="margin-top: 50rpx">
       <image style="width:58rpx;height:58rpx" src="../../../images/order/order_wait.png"></image>
-      <text >订单已支付，等待商家发货</text>
+      <text>订单已支付，等待商家发货</text>
     </view>
   </view>
 
@@ -24,7 +23,7 @@
         <view class="drugs-list-source">药品由太原侯丽萍风湿骨科医院为你提供</view>
       </view>
       <view class="drugs-cell" wx:for="{{list}}" wx:for-item="item">
-        <view class="drugs-cell-content"> 
+        <view class="drugs-cell-content">
           <image src="{{item.avatar}}"></image>
           <view class="drugs-cell-middle">
             <text class="drugs-cell-name">{{item.name}}</text>
@@ -35,11 +34,11 @@
             <text class="drugs-cell-num">{{item.num}}</text>
           </view>
         </view>
-        <view class="cell-info-separator"></view> 
+        <view class="cell-info-separator"></view>
       </view>
     </view>
 
-    <view class="separator" style="height:24rpx"></view> 
+    <view class="separator" style="height:24rpx"></view>
 
     <view class="prescription-container">
       <view class="prescription-header">
@@ -47,12 +46,12 @@
         <view class="prescription-header-title">处方签</view>
       </view>
       <image class="prescription-image" src="../../../images/order/order_prescription.png" bindtap="previewPrescriptionAction"></image>
-      <view class="separator" style="margin-top: 25rpx"></view> 
+      <view class="separator" style="margin-top: 25rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>配送方式：</text>
         <text>物流配送</text>
       </view>
-      <view class="separator" style="margin-left: 32rpx;margin-right: 32rpx"></view> 
+      <view class="separator" style="margin-left: 32rpx;margin-right: 32rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>药品金额：</text>
         <text>¥300.00</text>
@@ -65,15 +64,15 @@
         <text>定金金额：</text>
         <text style="color:rgba(254,88,83,1)">¥120.00</text>
       </view>
-      <view class="separator"></view> 
+      <view class="separator"></view>
       <view style="display: flex;flex-direction: row;padding:32rpx;align-items: center">
         <text class="prescription-text" style="flex-shrink: 0">备注</text>
         <text class="prescription-text" style="margin-left:32rpx;line-height:40rpx">肝功不好肝功不好肝功不好肝功不好肝功不好肝功不好肝功不好肝功不好肝功不好肝功不好</text>
       </view>
     </view>
 
-    <view class="separator" style="height:24rpx"></view> 
-    
+    <view class="separator" style="height:24rpx"></view>
+
     <view style="display: flex;flex-direction: column;padding:32rpx">
       <text class="other-text">订单编号：3456475869708</text>
       <text class="other-text">创建时间：2019-12-20 11:1</text>
@@ -81,7 +80,7 @@
       <text class="other-text">发货时间：2019-12-20 11:1</text>
     </view>
 
-    <view class="separator" style="height:24rpx"></view> 
+    <view class="separator" style="height:24rpx"></view>
 
     <view style="display: flex;flex-direction: row;justify-content: space-between;padding:32rpx">
       <view class="options-view" style="width:176px">
@@ -97,4 +96,3 @@
 
   </view>
 </view>
-

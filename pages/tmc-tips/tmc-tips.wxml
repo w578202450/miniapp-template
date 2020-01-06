@@ -1,0 +1,6 @@
+<image src="../../images/public/public_no_internet.png" mode="widthFix"></image>
+  <text class="tips-title">网络连接异常</text>
+  <text class="message">网络不太好，刷新一下吧～</text>
+  <view class="btnView">
+    <button bindtap="addAction">刷新</button>
+</view>
