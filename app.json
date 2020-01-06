@@ -12,8 +12,7 @@
     "pages/address/address-submit/address-submit",
     "pages/order/order-details/order-details",
     "pages/order/drug-orders/drug-orders",
-    "pages/tmc-tips/tmc-tips",
-    "pages/cheshi/cheshi"
+    "pages/tmc-tips/tmc-tips"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -30,8 +30,7 @@ Page({
 
   fetchAuthAction:function(){
     wx.navigateTo({
-      // url: '/pages/tmc-tips/tmc-tips',
-      url: "/pages/cheshi/cheshi",
+      url: '/pages/tmc-tips/tmc-tips',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
