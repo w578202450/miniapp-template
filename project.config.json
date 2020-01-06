@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 10,
 			"list": [
 				{
 					"id": -1,
@@ -125,7 +125,13 @@
 					"id": -1,
 					"name": "健康信息",
 					"pathName": "pages/personal-center/health-information/health-information",
+					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "聊天页",
+					"pathName": "pages/online-inquiry/inquiry/chat/chat"
 				}
 			]
 		}

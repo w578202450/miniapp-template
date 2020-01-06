@@ -96,14 +96,6 @@
   text-align: center;
 }
 
-/*发送*/
-.send {
-  font-size: 15px;
-  padding-right: 10px;
-  color: #999;
-  text-align: center;
-}
-
 /*主体*/
 .body {
   display: flex;
@@ -170,37 +162,68 @@
 
 /*回复框*/
 .reply {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   bottom: 0;
-  width: 100%;
-  height: 54px;
+  /* height: 54px; */
   border-top: 1px solid rgb(215, 215, 215);
-  background: rgb(245, 245, 245);
-}
-
-.reply .voice-image {
-  width: 25px;
-  height: 25px;
-  margin-left: 3%;
+  background: #fff;
 }
 
 /*文本输入或语音录入*/
 .reply .opration-area {
-  flex: 1;
-  padding: 8px;
+  margin: 0 0 0 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+/*语音图标*/
+.reply .opration-area .voiceIcon {
+  width: 60rpx;
+  height: 60rpx;
 }
 
 /*回复文本框*/
-.reply input {
-  background: rgb(252, 252, 252);
-  height: 36px;
-  border: 1px solid rgb(221, 221, 221);
+.reply .opration-area .msgInput {
+  margin: 20rpx 20rpx;
+  width: 500rpx;
+  padding: 0rpx 25rpx 0 15rpx !important;
+  border: none;
   border-radius: 6px;
-  padding-left: 3px;
+  height: 75rpx;
+  background: #F6F6F6;
+}
+
+/*恢复文本框图标*/
+.reply .opration-area .inputIcon {
+  width: 55rpx;
+  height: 55rpx;
+  position: absolute;
+  right: 35rpx;
+}
+
+/*发送*/
+.reply .send {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rpx;
+  font-size: 34rpx;
+  color: #999;
+  text-align: center;
+}
+
+/*菜单按钮*/
+.reply .menusIcon {
+ width: 60rpx;
+ height: 60rpx;
 }
 
 /*选取图片*/
