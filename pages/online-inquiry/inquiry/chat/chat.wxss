@@ -5,10 +5,10 @@
   align-items: center;
 }
 
-.middle-one{
-  height:140rpx;
-  background:#fff;
-  box-shadow:0 0 8rpx 0 rgba(0,0,0,0.1);
+.middle-one {
+  height: 140rpx;
+  background: #fff;
+  box-shadow: 0 0 8rpx 0 rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,10 +16,10 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100
+  z-index: 10;
 }
 
-.middleOne-box{
+.middleOne-box {
   width: 50%;
   display: flex;
   align-items: center;
@@ -29,59 +29,79 @@
 }
 
 .middleOne-box-one {
-  border-right: 1rpx solid #DBDEE3;
+  border-right: 1rpx solid #dbdee3;
 }
 
-.middleOne-box image{
+.middleOne-box image {
   height: 80rpx;
   width: 80rpx;
   border-radius: 80rpx;
-  background-color: rgb(248,248,248);
+  background-color: rgb(248, 248, 248);
 }
 
-.middleOne-box .info-box{
+.middleOne-box .info-box {
   display: flex;
   flex-direction: column;
   margin-left: 20rpx;
 }
 
-.middleOne-box .info-box .info_one{
-  font-size:32rpx;
-  font-family:PingFangSC-Medium,PingFang SC;
-  font-weight:500;
-  color:rgba(0,0,0,0.85);
-  line-height:32rpx;
+.middleOne-box .info-box .info_one {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 32rpx;
 }
+
 .middleOne-box .info-box .info_one_one {
   margin-left: 10rpx;
   border-radius: 30rpx;
-  border: 1px solid #438BEF;
+  border: 1px solid #438bef;
   padding: 0 15rpx;
   font-size: 28rpx;
-  color: #438BEF;
+  color: #438bef;
 }
 
-.middleOne-box .info-box .info_two{
+.middleOne-box .info-box .info_two {
   margin-top: 16rpx;
-  font-size:28rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(0,0,0,0.65);
-  line-height:28rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 28rpx;
 }
 
-.middle-one .lineView{
-  width:1rpx;
-  height:80rpx;
-  background:rgba(232,232,232,1);
+.middle-one .lineView {
+  width: 1rpx;
+  height: 80rpx;
+  background: rgba(232, 232, 232, 1);
 }
 
 /*聊天记录*/
+
 .message-list {
-  background-color: #F6F6F6;
+  height: 100vh;
+  background-color: #f6f6f6;
+}
+
+/*空置盒子1*/
+
+.marginBoxOne {
+  height: 140rpx;
+}
+
+/*空置盒子2*/
+
+.marginBoxTwo {
+  height: 120rpx;
+}
+
+.marginBoxTwoSecond {
+  height: 362rpx;
 }
 
 /*单元行*/
+
 .row {
   display: flex;
   flex-direction: column;
@@ -89,6 +109,7 @@
 }
 
 /*日期*/
+
 .datetime {
   font-size: 28rpx;
   padding: 20rpx 0 0 0;
@@ -97,6 +118,7 @@
 }
 
 /*主体*/
+
 .body {
   display: flex;
   flex-direction: row;
@@ -106,13 +128,14 @@
   margin-top: 10px;
 }
 
-
 /*头像容器*/
+
 .body.avatar-container {
   width: 20%;
 }
 
 /*头像*/
+
 .body .avatarOne {
   width: 80rpx;
   height: 80rpx;
@@ -130,12 +153,14 @@
 }
 
 /*人名*/
+
 .personNameTxt {
   font-size: 30rpx;
-  color: #86888B;
+  color: #86888b;
 }
 
 /*文本消息*/
+
 .body .content {
   font-size: 32rpx;
   background: #fff;
@@ -146,6 +171,7 @@
 }
 
 /* 三角箭头 */
+
 .body .triangle {
   background: white;
   width: 20rpx;
@@ -156,23 +182,34 @@
 }
 
 /*图片消息*/
-.picture {
 
+.picture {
+}
+
+/*底部工具栏*/
+
+.bottomMenus {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 10;
+  background: #f6f6f6;
+  transition: all 1s linear;
 }
 
 /*回复框*/
+
 .reply {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  bottom: 0;
   background: #fff;
 }
 
 /*文本输入或语音录入*/
+
 .reply .opration-area {
   margin: 0 0 0 20rpx;
   display: flex;
@@ -182,12 +219,14 @@
 }
 
 /*语音图标*/
+
 .reply .opration-area .voiceIcon {
   width: 55rpx;
   height: 55rpx;
 }
 
 /*回复文本框*/
+
 .reply .opration-area .msgInput {
   margin: 20rpx 20rpx;
   width: 445rpx;
@@ -195,16 +234,18 @@
   border: none;
   border-radius: 6px;
   height: 75rpx;
-  background: #F6F6F6;
+  background: #f6f6f6;
 }
 
 /*恢复文本框图标*/
+
 .reply .opration-area .inputIcon {
   width: 55rpx;
   height: 55rpx;
 }
 
 /*发送*/
+
 .reply .send {
   display: flex;
   justify-content: center;
@@ -216,19 +257,63 @@
 }
 
 /*菜单按钮*/
+
 .reply .menusIcon {
- width: 55rpx;
- height: 55rpx;
+  width: 55rpx;
+  height: 55rpx;
+}
+
+/*工具箱*/
+
+.toolbarBox {
+  width: 100%;
+  padding: 20rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  transition: all 1s linear;
+}
+
+/*单个功能*/
+
+.toolbarBox .toolbarDiv {
+  margin: 0 20rpx 20rpx 0;
+}
+
+/*一行末尾的单个功能*/
+.toolbarBox .toolbarDivFifth {
+  margin: 0 0 20rpx 0;
+}
+
+/*功能按钮图标*/
+
+.toolbarBox .toolbarIcon {
+  border-radius: 10rpx;
+  width: 126rpx;
+  height: 126rpx;
+  background: #fff;
+}
+
+/*功能按钮标题*/
+
+.toolbarBox .toolbarTitile {
+  width: 126rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #999;
 }
 
 /*选取图片*/
-.reply .choose-image {
+
+.choose-image {
   width: 25px;
   height: 25px;
   margin-right: 3%;
 }
 
 /*按住说话button*/
+
 .voice-button {
   height: 36px;
   color: #818181;
@@ -237,6 +322,7 @@
 }
 
 /*悬浮提示框*/
+
 .hud-container {
   position: fixed;
   width: 150px;
@@ -248,17 +334,19 @@
 }
 
 /*背景层*/
+
 .hud-background {
   position: absolute;
   width: 100%;
   height: 100%;
   background: #999;
-  opacity: .8;
+  opacity: 0.8;
   z-index: 11;
   border-radius: 10px;
 }
 
 /*悬浮框主体*/
+
 .hud-body {
   position: relative;
   width: 100%;
@@ -271,6 +359,7 @@
 }
 
 /*图标*/
+
 .hud-body image {
   margin-top: 20px;
   width: 80px;
@@ -278,6 +367,7 @@
 }
 
 /*文字*/
+
 .hud-body .tip {
   color: #fff;
   text-align: center;
@@ -289,10 +379,6 @@
 }
 
 .hud-body .warning {
-  background: #cc3333;
+  background: #c33;
   border-radius: 5px;
 }
-
-
-
-

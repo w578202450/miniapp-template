@@ -104,9 +104,18 @@ Page({
         }
       }
     ],
-    // 输入的聊天内容
-    maySendContent: "",
-    httpLoading: false
+    httpLoading: false,
+    pageInfo: {
+      pageIndex: 1,
+      pageSize: 10
+    },
+    maySendContent: "", // 输入的聊天内容
+    isOpenBottomBoolbar: false, // 是否打开工具栏
+    toolbarMenus: [
+      { title: "图片", iconUrl: "../../../../images/chat/m-image.png", isFifth: false },
+      { title: "拍照", iconUrl: "../../../../images/chat/m-camera.png", isFifth: false },
+      { title: "视频问诊", iconUrl: "../../../../images/chat/m-video.png", isFifth: false }
+    ]
   },
 
   upper(e) {
@@ -147,26 +156,47 @@ Page({
 
   /*查询：列表聊天历史信息 */
   getMsgListFun: function() {
-    let params = {
-      patientID: this.data.userInfo.keyID,
-      orgID: this.data.userInfo.orgID
-    };
-    wx.request({
-      url: "",
-      data: params,
-      success(res) {
-        console.log(res.data);
-        that.setData({
-          currentMessageList: res.data,
-          maySendContent: ""
-        });
-      }
-    })
+    if (this.data.pageInfo.pageIndex == 1) {
+      this.setData({
+        toView: `item${this.data.currentMessageList.length - 1}`
+      });
+    }
+    console.log(this.data.toView);
+    // let that = this;
+    // let params = {
+    //   patientID: that.data.userInfo.keyID,
+    //   orgID: that.data.userInfo.orgID
+    // };
+    // wx.request({
+    //   url: "",
+    //   data: params,
+    //   success(res) {
+    //     console.log(res.data);
+    //     that.setData({
+    //       currentMessageList: res.data,
+    //       // pageInfo: res.pageInfo,
+    //       maySendContent: ""
+    //     });
+    //     if (that.data.pageInfo.pageIndex == 1) {
+    //       that.setData({
+    //         toView: `item${that.data.currentMessageList.length}`
+    //       });
+    //     }
+    //   }
+    // })
+  },
+
+  /*输入框聚焦，关闭工具栏 */
+  closeBottomBoolbarFun() {
+    // 有问题，需要修改
+    // this.setData({
+    //   isOpenBottomBoolbar: false
+    // });
   },
 
   /*操作：输入预发送信息 */
   adInputChange: function(e) {
-    that.setData({
+    this.setData({
       maySendContent: e.detail.value,
     })
   },
@@ -214,13 +244,21 @@ Page({
     //     that.getMsgListFun();
     //   }
     // })
+    that.getMsgListFun();
   },
+  /*打开、关闭 底部工具栏 */
+  isOpenBottomBoolbarFun() {
+    this.setData({
+      isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar
+    });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     // 查询：聊天列表信息
-    // this.getMsgListFun();
+    this.getMsgListFun();
   },
 
   /**
