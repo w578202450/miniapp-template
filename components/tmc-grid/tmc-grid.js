@@ -1,3 +1,6 @@
+
+
+
 Page({
   data: {
 
@@ -11,6 +14,9 @@ Component({
   properties: {
     gridsList: {
       type: Array
+    },
+    hidden: {
+      type: Boolean
     }
   },
   data: {
@@ -19,21 +25,18 @@ Component({
   methods: {
     // 返回事件   
     gridsChange: function (e) {
-      this.triggerEvent('gridsChange', e.currentTarget.dataset.name)
-      var checked = e.currentTarget.dataset.name
-      var changed = {}
-      for (var i = 0; i < this.data.gridsList.length; i++) {
-        if (checked == this.data.gridsList[i].name) {
-          changed['gridsList[' + i + '].checked'] = true
-        } else {
-          changed['gridsList[' + i + '].checked'] = false
-        }
-      }
-      this.setData(changed)
-      
+
+      var index = e.currentTarget.dataset.index;
+      var item = this.data.gridsList[index];
+      item.checked = !item.checked
+      this.setData({
+        gridsList: this.data.gridsList
+      });
+
+      this.triggerEvent('gridsChange', index)
     },
 
-    addItemAction:function(){
+    addItemAction: function () {
       this.triggerEvent('addItemAction')
     }
   }
