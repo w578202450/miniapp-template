@@ -28,8 +28,7 @@ Page({
       }
     },
     // 聊天列表信息
-    currentMessageList: [
-      {
+    currentMessageList: [{
         keyID: "1",
         type: "TIM.TYPES.MSG_TEXT",
         personID: "111",
@@ -100,7 +99,7 @@ Page({
     toolbarMenus: [{
         title: "图片",
         iconUrl: "../../../../images/chat/m-image.png",
-      clickFun: "chooseWxImage",
+        clickFun: "chooseWxImage",
         isFifth: false
       },
       {
@@ -121,7 +120,18 @@ Page({
     imageData: [] // 所选上传的图片数据
   },
 
-  //
+  // 点击医生查看详情
+  doctorDetailTap: function() {
+    wx.navigateTo({
+      url: '/pages/online-inquiry/doctor-details/doctor-details',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+
+  //创建问诊
+
 
   /*查询：列表聊天历史信息 */
   getMsgListFun: function() {
@@ -152,7 +162,7 @@ Page({
   },
 
   /*操作：点击工具栏某功能 */
-  toolbarMenusFun:function(e) {
+  toolbarMenusFun: function(e) {
     let fun = e.currentTarget.dataset.clickfun;
     if (fun == "chooseWxImage") {
       this.chooseWxImage();
@@ -163,13 +173,13 @@ Page({
     }
   },
   /*打开相册*/
-  chooseWxImage: function () {
+  chooseWxImage: function() {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["album"],
-      success: function (res) {
+      success: function(res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res.tempFilePaths
@@ -181,13 +191,13 @@ Page({
   },
 
   /*打开相机 */
-  cameraWxFun: function () {
+  cameraWxFun: function() {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["camera"],
-      success: function (res) {
+      success: function(res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res.tempFilePaths
@@ -198,21 +208,25 @@ Page({
     })
   },
 
- //------------------------------发送图片消息------------------------------
-  sendImageMsg: function () {
+  //------------------------------发送图片消息------------------------------
+  sendImageMsg: function() {
     // 1. 创建消息实例
     let message = tim.createImageMessage({
       to: 'user1',
       conversationType: TIM.TYPES.CONV_C2C,
-      payload: { file: that.data.aimgurl[0] },
-      onProgress: function (event) { console.log('file uploading:', event) }
+      payload: {
+        file: that.data.aimgurl[0]
+      },
+      onProgress: function(event) {
+        console.log('file uploading:', event)
+      }
     });
     // 2. 发送图片
     let promise = tim.sendMessage(message);
-    promise.then(function (imResponse) {
+    promise.then(function(imResponse) {
       // 发送成功
       console.log("===发送图片成功===" + imResponse);
-    }).catch(function (imError) {
+    }).catch(function(imError) {
       // 发送失败
       // console.warn('sendMessage error:', imError);
     });
@@ -253,9 +267,9 @@ Page({
       // 发送失败
       // console.warn("===发送失败===" + 'sendMessage error:', imError);
     });
-   //------------------------------发送文本消息------------------------------
+    //------------------------------发送文本消息------------------------------
 
-  //------------------------------发送语音消息------------------------------
+    //------------------------------发送语音消息------------------------------
     // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
     // 1. 获取全局唯一的录音管理器 RecorderManager
     const recorderManager = wx.getRecorderManager();
@@ -270,11 +284,11 @@ Page({
     };
 
     // 2.1 监听录音错误事件
-    recorderManager.onError(function (errMsg) {
+    recorderManager.onError(function(errMsg) {
       console.warn('recorder error:', errMsg);
     });
     // 2.2 监听录音结束事件，录音结束后，调用 createAudioMessage 创建音频消息实例
-    recorderManager.onStop(function (res) {
+    recorderManager.onStop(function(res) {
       console.log('recorder stop', res);
 
       // 4. 创建消息实例，接口返回的实例可以上屏
@@ -288,10 +302,10 @@ Page({
 
       // 5. 发送消息
       let promise = tim.sendMessage(message);
-      promise.then(function (imResponse) {
+      promise.then(function(imResponse) {
         // 发送成功
         console.log(imResponse);
-      }).catch(function (imError) {
+      }).catch(function(imError) {
         // 发送失败
         console.warn('sendMessage error:', imError);
       });
@@ -299,7 +313,7 @@ Page({
 
     // 3. 开始录音
     recorderManager.start(recordOptions);
-  //------------------------------发送语音消息------------------------------
+    //------------------------------发送语音消息------------------------------
   },
 
   /*操作：视频通话 */
