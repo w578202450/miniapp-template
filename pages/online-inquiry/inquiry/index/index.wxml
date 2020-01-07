@@ -1,3 +1,4 @@
 <view>
-  <view style="width: 100px;height:50px;background: yellow;" bindtap='browse'>图片</view>
+  <button style="width: 100px;height: 40px;background: #438BEF;color: #fff;" bindtap='chooseWxImage'>图片</button>
+  <button style="width: 100px;height: 40px;background: #438BEF;color: #fff;" bindtap='cameraWxFun'>拍照</button>
 </view>

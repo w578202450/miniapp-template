@@ -1,7 +1,7 @@
 <view class="page">
   <!-- 顶部 -->
   <view class="middle-one">
-    <view class="middleOne-box middleOne-box-one">
+    <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap">
       <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
         <view class="flexRowStartCenter">
@@ -11,7 +11,7 @@
         <text class="info_two">副主任医师</text>
       </view>
     </view>
-    <view class="middleOne-box">
+    <view class="middleOne-box" bindtap="doctorDetailTap">
       <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
         <view class="flexRowStartCenter">
@@ -23,7 +23,7 @@
     </view>
   </view>
   <!-- 消息列表 -->
-  <scroll-view class="message-list" scroll-into-view="{{toView}}" scroll-with-animation="true" upper-threshold="100" scroll-y="true" enable-back-to-top="true">
+  <scroll-view class="{{isOpenBottomBoolbar ? 'message-list-two': 'message-list'}}" scroll-into-view="{{toView}}" scroll-with-animation="true" upper-threshold="100" scroll-y="true" enable-back-to-top="true" bindtap="clickScrollViewFun">
   <!-- 空置盒子1 -->
     <view class="marginBoxOne"></view>
     <view class="row" wx:for="{{currentMessageList}}" wx:key="{{item.keyID}}" id="item{{index}}">
@@ -73,7 +73,7 @@
       </view>
     </view>
     <view wx:if="{{isOpenBottomBoolbar}}" class="toolbarBox">
-      <view wx:for="{{toolbarMenus}}" wx:key="{{item.keyID}}" class="{{item.isFifth ? 'toolbarDivFifth' : 'toolbarDiv'}}">
+      <view wx:for="{{toolbarMenus}}" wx:key="{{item.keyID}}" class="{{item.isFifth ? 'toolbarDivFifth' : 'toolbarDiv'}}" bindtap="toolbarMenusFun" data-clickFun="{{item.clickFun}}">
         <image src="{{item.iconUrl}}" class="toolbarIcon" />
         <view class="toolbarTitile">{{item.title}}</view>
       </view>

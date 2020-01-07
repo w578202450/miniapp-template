@@ -10,7 +10,7 @@ Page({
     let that = this;
     wx.showActionSheet({
       itemList: ['从相册中选择', '拍照'],
-      itemColor: "#CED63A",
+      itemColor: "#438BEF",
       success: function(res) {
         // console.log(res)
         if (!res.cancel) {
@@ -24,14 +24,30 @@ Page({
     })
   },
 
-  /*打开相册、相机 */
-  chooseWxImage: function(type) {
+  /*打开相册*/
+  chooseWxImage: function() {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
-      sourceType: [type],
+      sourceType: ["album"],
       success: function(res) {
+        // 选择图片完成后的确认操作
+        that.setData({
+          aimgurl: res.tempFilePaths
+        });
+      }
+    })
+  },
+
+  /*打开相机 */
+  cameraWxFun: function() {
+    let that = this;
+    wx.chooseImage({
+      count: that.data.countIndex,
+      sizeType: ['original', 'compressed'],
+      sourceType: ["camera"],
+      success: function (res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res.tempFilePaths
