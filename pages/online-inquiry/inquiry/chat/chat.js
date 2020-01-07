@@ -115,9 +115,8 @@ Page({
         isFifth: false
       }
     ],
-    aimgurl: "", // //临时图片的路径
-    countIndex: 1, // 可选图片剩余的数量
-    imageData: [] // 所选上传的图片数据
+    aimgurl: {}, // //临时图片的信息
+    countIndex: 1 // 可选图片剩余的数量
   },
 
   // 点击医生查看详情
@@ -182,7 +181,7 @@ Page({
       success: function(res) {
         // 选择图片完成后的确认操作
         that.setData({
-          aimgurl: res.tempFilePaths
+          aimgurl: res
         });
         // 发送图片消息
         that.sendImageMsg();
@@ -200,7 +199,7 @@ Page({
       success: function(res) {
         // 选择图片完成后的确认操作
         that.setData({
-          aimgurl: res.tempFilePaths
+          aimgurl: res
         });
         // 发送图片消息
         that.sendImageMsg();
@@ -210,17 +209,19 @@ Page({
 
   //------------------------------发送图片消息------------------------------
   sendImageMsg: function() {
+    let that = this;
     // 1. 创建消息实例
     let message = tim.createImageMessage({
       to: 'user1',
       conversationType: TIM.TYPES.CONV_C2C,
       payload: {
-        file: that.data.aimgurl[0]
+        file: that.data.aimgurl
       },
       onProgress: function(event) {
         console.log('file uploading:', event)
       }
     });
+    console.log(message);
     // 2. 发送图片
     let promise = tim.sendMessage(message);
     promise.then(function(imResponse) {
@@ -228,7 +229,7 @@ Page({
       console.log("===发送图片成功===" + imResponse);
     }).catch(function(imError) {
       // 发送失败
-      // console.warn('sendMessage error:', imError);
+      console.warn('sendMessage error:', imError);
     });
   },
   //------------------------------发送图片消息------------------------------
@@ -328,7 +329,7 @@ Page({
       toView: `item${this.data.currentMessageList.length - 1}`
     });
   },
-  
+
   /*操作：打开、关闭 底部工具栏 */
   isOpenBottomBoolbarFun() {
     this.setData({
