@@ -28,7 +28,7 @@
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">吸烟史</text>
     <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" bind:radioChange="smokingAction"></tmcRadioView>
-    <input class="font-one" placeholder="请填写烟龄" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <input class="font-one" placeholder="请填写烟龄" type="number" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
   </view>
 

@@ -267,6 +267,7 @@ Page({
     if (!value) {
       wx.showToast({
         title: '增值不能为空',
+        icon: "none"
       })
       return;
     }

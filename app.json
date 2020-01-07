@@ -10,6 +10,7 @@
     "pages/online-inquiry/inquiry/chat/chat",
     "pages/online-inquiry/inquiry/index/index",
     "pages/address/address-submit/address-submit",
+    "pages/address/address-list/address-list",
     "pages/order/order-details/order-details",
     "pages/order/drug-orders/drug-orders",
     "pages/tmc-tips/tmc-tips"
