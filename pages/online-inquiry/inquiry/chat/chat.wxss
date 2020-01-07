@@ -84,6 +84,12 @@
   background-color: #f6f6f6;
 }
 
+.message-list-two {
+  height: calc(100vh - 362rpx);
+  background-color: #f6f6f6;
+  background: red;
+}
+
 /*空置盒子1*/
 
 .marginBoxOne {
