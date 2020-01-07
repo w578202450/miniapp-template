@@ -59,13 +59,12 @@ module.exports = {
   getPatientInfo: function getPatientInfo(parmas){
     return request('api/tmc/patient/getPatientInfoByOpenID', true, 'get', parmas);
   },
-<<<<<<< HEAD
 /*
   *查询患者处方列表
   */
   getRpListByPerson: function getRpListByPerson(parmas){
     return request('api/tmc/rp/getRpListByPerson', true, 'get', parmas);
-=======
+  },
   /*
   *查询患者的多方对话
   */
@@ -77,7 +76,6 @@ module.exports = {
   */
   createInquiry: function createInquiry(parmas){
     return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
->>>>>>> 0a47f89d32abdfb2f03ee8d65b4246591d99848a
   }
 
 }

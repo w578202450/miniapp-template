@@ -9,7 +9,9 @@ Page({
    */
   data: {
     toView: '',
-    peerID: "user1",
+    groupID: "20010720253396104153012001",
+    orgID: "19122116554357936820511001",
+    patientID: "20010620211271745513006001",
     // 用户信息
     userInfo: {
       keyID: "111",
@@ -24,6 +26,8 @@ Page({
     },
     // 聊天列表信息
     currentMessageList: [{
+      
+
         keyID: "4",
         type: "TIM.TYPES.MSG_TEXT",
         personID: "111",
@@ -87,6 +91,22 @@ Page({
     countIndex: 1 // 可选图片剩余的数量
   },
 
+  // 从storage中获取患者信息
+  getPersonInfo: function () {
+    let that = this;
+    wx.getStorage({
+      key: 'personInfo',
+      success: function (res) {
+        console.log("===患者信息===" + "orgID:" + res.data.orgID + ",patientID:" + res.data.keyID);
+        that.setData({
+          orgID: res.data.orgID,
+          patientID: res.data.keyID
+        })
+        getPatientMultiTalk();
+      }
+    })
+  },
+
   // 点击医生查看详情
   doctorDetailTap: function() {
     wx.navigateTo({
@@ -98,11 +118,13 @@ Page({
   },
 
   // 查询患者的多方对话
-  getPatientMultiTalk() {
+  getPatientMultiTalk: function() {
     let that = this;
     let prams = {
       orgID: "19122116554357936820511001",
       patientID: "20010620211271745513006001",
+      // orgID: that.data.orgID,
+      // patientID: that.data.patientID,
       doctorStaffID: "20010614315987359400514001",
       assistantStaffID: "20010614411088137430514001"
     };
@@ -117,14 +139,31 @@ Page({
         that.data.talkInfo.patientInfo = res.data.patient;
         // 创建问诊
         that.createInquiry();
+
       } else {
         console.log("===请求失败||查询患者的多方对话===");
       }
     })
   },
 
+  // 创建群
+  // creatGroup: function() {
+  //   let that = this;
+  //   // 创建私有群
+  //   let promise = tim.createGroup({
+  //     type: TIM.TYPES.GRP_PRIVATE,
+  //     name: 'WebSDK',
+  //     memberList: [{ userID: '20010614315987342600531001' }, { userID: '20010614411089625710531001' }] // 如果填写了 memberList，则必须填写 userID
+  //   });
+  //   promise.then(function (imResponse) { // 创建成功
+  //     console.log("===创建群成功===" + imResponse.data.group); // 创建的群的资料
+  //   }).catch(function (imError) {
+  //     console.warn("===创建群失败===" + 'createGroup error:', imError); // 创建群组失败的相关信息
+  //   });
+  // },
+
   // 创建问诊
-  createInquiry() {
+  createInquiry: function() {
     let prams = {
       orgID: "19122116554357936820511001",
       patientID: "20010620211271745513006001",
@@ -228,8 +267,8 @@ Page({
     let that = this;
     // 1. 创建消息实例
     let message = tim.createImageMessage({
-      to: that.data.peerID,
-      conversationType: TIM.TYPES.CONV_C2C,
+      to: that.data.groupID, // 群ID
+      conversationType: TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         file: that.data.aimgurl
       },
@@ -260,9 +299,10 @@ Page({
     that.httpLoading = true;
     //------------------------------发送文本消息------------------------------
     // 1. 创建消息实例，接口返回的实例可以上屏
+    console.log("-------GROUPID-----------" + that.data.groupID)
     let message = tim.createTextMessage({
-      to: that.data.peerID,
-      conversationType: TIM.TYPES.CONV_C2C,
+      to: that.data.groupID, // 群ID
+      conversationType: TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         text: that.data.maySendContent
       }
@@ -287,49 +327,49 @@ Page({
     //------------------------------发送文本消息------------------------------
 
     //------------------------------发送语音消息------------------------------
-    // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
-    // 1. 获取全局唯一的录音管理器 RecorderManager
-    const recorderManager = wx.getRecorderManager();
+    // // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
+    // // 1. 获取全局唯一的录音管理器 RecorderManager
+    // const recorderManager = wx.getRecorderManager();
 
-    // 录音部分参数
-    const recordOptions = {
-      duration: 60000, // 录音的时长，单位 ms，最大值 600000（10 分钟）
-      sampleRate: 44100, // 采样率
-      numberOfChannels: 1, // 录音通道数
-      encodeBitRate: 192000, // 编码码率
-      format: 'aac' // 音频格式，选择此格式创建的音频消息，可以在即时通信 IM 全平台（Android、iOS、微信小程序和 Web）互通
-    };
+    // // 录音部分参数
+    // const recordOptions = {
+    //   duration: 60000, // 录音的时长，单位 ms，最大值 600000（10 分钟）
+    //   sampleRate: 44100, // 采样率
+    //   numberOfChannels: 1, // 录音通道数
+    //   encodeBitRate: 192000, // 编码码率
+    //   format: 'aac' // 音频格式，选择此格式创建的音频消息，可以在即时通信 IM 全平台（Android、iOS、微信小程序和 Web）互通
+    // };
 
-    // 2.1 监听录音错误事件
-    recorderManager.onError(function(errMsg) {
-      console.warn('recorder error:', errMsg);
-    });
-    // 2.2 监听录音结束事件，录音结束后，调用 createAudioMessage 创建音频消息实例
-    recorderManager.onStop(function(res) {
-      console.log('recorder stop', res);
+    // // 2.1 监听录音错误事件
+    // recorderManager.onError(function(errMsg) {
+    //   console.warn('recorder error:', errMsg);
+    // });
+    // // 2.2 监听录音结束事件，录音结束后，调用 createAudioMessage 创建音频消息实例
+    // recorderManager.onStop(function(res) {
+    //   console.log('recorder stop', res);
 
-      // 4. 创建消息实例，接口返回的实例可以上屏
-      const message = tim.createAudioMessage({
-        to: that.data.peerID,
-        conversationType: TIM.TYPES.CONV_C2C,
-        payload: {
-          file: res
-        }
-      });
+    //   // 4. 创建消息实例，接口返回的实例可以上屏
+    //   const message = tim.createAudioMessage({
+    //     to: that.data.peerID,
+    //     conversationType: TIM.TYPES.CONV_C2C,
+    //     payload: {
+    //       file: res
+    //     }
+    //   });
 
-      // 5. 发送消息
-      let promise = tim.sendMessage(message);
-      promise.then(function(imResponse) {
-        // 发送成功
-        console.log(imResponse);
-      }).catch(function(imError) {
-        // 发送失败
-        console.warn('sendMessage error:', imError);
-      });
-    });
+    //   // 5. 发送消息
+    //   let promise = tim.sendMessage(message);
+    //   promise.then(function(imResponse) {
+    //     // 发送成功
+    //     console.log(imResponse);
+    //   }).catch(function(imError) {
+    //     // 发送失败
+    //     console.warn('sendMessage error:', imError);
+    //   });
+    // });
 
-    // 3. 开始录音
-    recorderManager.start(recordOptions);
+    // // 3. 开始录音
+    // recorderManager.start(recordOptions);
     //------------------------------发送语音消息------------------------------
   },
 
@@ -358,8 +398,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getPersonInfo();
     // 查询患者的多方对话
     this.getPatientMultiTalk();
+    // 创建群
+    // this.creatGroup();
     // 查询：聊天列表信息
     this.getMsgListFun();
   },

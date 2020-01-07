@@ -26,7 +26,8 @@ async function getopenid(code) {
   
   HTTP.getWXAuth(prams).then(res => {
     if (res.code == 0){
-      getPatientInfo(res.data.openid);
+      // getPatientInfo(res.data.openid);
+      getPatientInfo("o6_DFuMBBkTTwYnKrXsGnrXFoaNE");
     }
   })
 }

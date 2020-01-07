@@ -117,8 +117,8 @@ App({
 
     // IM登录
     let promise = tim.login({
-      userID: 'baohexin',
-      userSig: genTestUserSig('baohexin').userSig
+      userID: '20010620211271745513006001',
+      userSig: genTestUserSig('20010620211271745513006001').userSig
     });
     promise.then(function(imResponse) {
       console.log("===登录成功===" + imResponse.data); // 登录成功
