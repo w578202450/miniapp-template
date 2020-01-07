@@ -1,6 +1,7 @@
 /**index.wxss**/
 
 .header {
+  position: relative;
   width: 100%;
   height: 346rpx;
   background: #629ff4;
@@ -9,6 +10,7 @@
   justify-content: center;
   align-items: flex-end;
   flex-direction: row;
+  z-index: -1;
 }
 
 .header .header-info {
@@ -42,12 +44,6 @@
   line-height: 36rpx;
 }
 
-.middle-container {
-  position: absolute;
-  margin: -32rpx 32rpx 24rpx 32rpx;
-  z-index: 1;
-}
-
 .middle-one {
   height: 140rpx;
   background: rgba(255, 255, 255, 1);
@@ -57,6 +53,9 @@
   box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  margin-top: -20rpx;
 }
 
 .middleOne-box {
@@ -105,11 +104,11 @@
 .middle-two {
   margin-top: 48rpx;
   display: flex;
-  box-sizing: border-box;
-  width: 100%;
   height: 28rpx;
   justify-content: space-between;
   align-items: center;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
 }
 
 .titleLabel {
@@ -133,33 +132,34 @@
 .middle-three {
   margin-top: 36rpx;
   display: flex;
-  box-sizing: border-box;
-  width: 100%;
   height: 28rpx;
   justify-content: space-between;
   align-items: center;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
 }
 
 .middle-four {
   margin-top: 32rpx;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  box-sizing: content-box;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
 }
 
 .middle-four .doctor-card {
-  width: 48%;
+  width: 39%;
   background-color: white;
   overflow: hidden;
   border-radius: 10rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 28rpx 24rpx 44rpx 24rpx;
+  box-shadow:0px 1px 5px 0px rgba(0,0,0,0.1)
 }
 
 .doctor-card .doctor_avatar {
-  margin-top: 28rpx;
   width: 80rpx;
   height: 80rpx;
   border-radius: 80rpx;
@@ -172,51 +172,73 @@
 }
 
 .doctor-card .cardInfo_one {
-  margin-top: 20rpx;
-  margin-left: 24rpx;
-  margin-right: 24rpx;
-  line-height: 36rpx;
-}
-
-.doctor-card .cardInfo_two {
-  margin-left: 8rpx;
-  margin-right: 24rpx;
-  line-height: 36rpx;
+  margin-top: 38rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .doctorname {
-  font-size: 28rpx;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-.department {
-  margin-left: 16rpx;
+  height:32rpx;
+  font-size:28rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.85);
+  line-height:32rpx;
 }
 
 .position {
   margin-left: 16rpx;
+  height:24rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:24rpx;
 }
 
-.position, .hospital, .department, .expertise {
-  font-size: 24rpx;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.65);
-  line-height: 36rpx;
+.doctor-card .cardInfo_two {
+  margin-top: 18rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-.expertise {
-  margin-top: 20rpx;
-  margin-left: 24rpx;
-  margin-right: 24rpx;
-  margin-bottom: 44rpx;
+.hospital{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:36rpx;
 }
 
-.bottom {
-  margin-top: 28rpx;
+.department{
+  height:24rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:36rpx;
+  margin-left: 26rpx;
 }
 
-.bottom image {
+.expertise{
+  margin-top: 32rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:36rpx;
+}
+
+.inquiry-view{
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  margin-top: 48rpx;
+  margin-bottom: 58rpx;
+}
+
+.inquiry-view image{
   width: 100%;
-  height: 236rpx;
 }

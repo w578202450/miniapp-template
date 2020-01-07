@@ -11,7 +11,7 @@
     </view>
     <view class="cell-separator"></view>
     <view class="address-seleceted">
-      <picker mode="region"  bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
         <text class="cell-title">所在地区</text>
         <text class="cell-detail">{{region[0]}}，{{region[1]}}，{{region[2]}}</text>
       </picker>
@@ -19,11 +19,11 @@
     </view>
   </view>
   <view class="cell-separator"></view>
-<view class="address-detail">
-  <textarea placeholder="请填写街道、楼牌号等" style="height: 3.3em"></textarea>
-</view>
-<view class="delete">删除地址</view>
-<view class="btnView">
-  <button class="button-theme" style="width: 80%;" bindtap="addAction">保存</button>
-</view>
+  <view class="address-detail">
+    <textarea placeholder="请填写街道、楼牌号等" style="height: 3.3em"></textarea>
+  </view>
+  <view class="delete">删除地址</view>
+  <view class="btnView">
+    <button class="button-theme" style="width: 80%;" bindtap="addAction">保存</button>
+  </view>
 </view>
