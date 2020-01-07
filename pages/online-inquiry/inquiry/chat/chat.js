@@ -112,7 +112,10 @@ Page({
         iconUrl: "../../../../images/chat/m-video.png",
         isFifth: false
       }
-    ]
+    ],
+    aimgurl: "", // //临时图片的路径
+    countIndex: 1, // 可选图片剩余的数量
+    imageData: [] // 所选上传的图片数据
   },
 
   /*查询：列表聊天历史信息 */
@@ -143,6 +146,59 @@ Page({
     })
   },
 
+  /*图片浏览及上传 */
+  browse: function (e) {
+    let that = this;
+    wx.showActionSheet({
+      itemList: ['从相册中选择', '拍照'],
+      itemColor: "#CED63A",
+      success: function (res) {
+        // console.log(res)
+        if (!res.cancel) {
+          if (res.tapIndex == 0) {
+            that.chooseWxImage('album');
+          } else if (res.tapIndex == 1) {
+            that.chooseWxImage('camera');
+          }
+        }
+      }
+    })
+  },
+ //------------------------------发送图片消息------------------------------
+  /*打开相册、相机 */
+  // 1. 选择图片
+  chooseWxImage: function (type) {
+    let that = this;
+    wx.chooseImage({
+      count: that.data.countIndex,
+      sizeType: ['original', 'compressed'],
+      sourceType: [type],
+      success: function (res) {
+        // 选择图片完成后的确认操作(只选一张，目前 SDK 不支持一次发送多张图片)
+        that.setData({
+          aimgurl: res.tempFilePaths
+        });
+        // // 2. 创建消息实例
+        let message = tim.createImageMessage({
+          to: 'user1',
+          conversationType: TIM.TYPES.CONV_C2C,
+          payload: { file: that.data.aimgurl[0] },
+          onProgress: function (event) { console.log('file uploading:', event) }
+        });
+        // 3. 发送图片消息
+        let promise = tim.sendMessage(message);
+        promise.then(function (imResponse) {
+          // 发送成功
+          console.log("===发送图片消息成功===" +imResponse);
+        }).catch(function (imError) {
+          // 发送失败
+          console.warn('sendMessage error:', imError);
+        });
+      }
+    })
+  },
+  //------------------------------发送图片消息------------------------------
+
   /*操作：发送（消息） */
   sendContentMsg: function(e) {
     let that = this;
@@ -164,7 +220,7 @@ Page({
     let promise = tim.sendMessage(message);
     promise.then(function(imResponse) {
       // 发送成功
-      console.log("===发送成功===" + imResponse);
+      console.log("===发送文本消息成功===" + imResponse);
       let nowData = [...that.data.currentMessageList, obj];
       that.setData({
         currentMessageList: nowData,
@@ -178,33 +234,6 @@ Page({
       // console.warn("===发送失败===" + 'sendMessage error:', imError);
     });
    //------------------------------发送文本消息------------------------------
-
-   //------------------------------发送图片消息------------------------------
-    // 小程序端发送图片
-    // 1. 选择图片
-    wx.chooseImage({
-      sourceType: ['album'], // 从相册选择
-      count: 1, // 只选一张，目前 SDK 不支持一次发送多张图片
-      success: function (res) {
-        // 2. 创建消息实例，接口返回的实例可以上屏
-        let message = tim.createImageMessage({
-          to: 'user1',
-          conversationType: TIM.TYPES.CONV_C2C,
-          payload: { file: res },
-          onProgress: function (event) { console.log('file uploading:', event) }
-        });
-        // 3. 发送图片
-        let promise = tim.sendMessage(message);
-        promise.then(function (imResponse) {
-          // 发送成功
-          console.log(imResponse);
-        }).catch(function (imError) {
-          // 发送失败
-          console.warn('sendMessage error:', imError);
-        });
-      }
-    });
-  //------------------------------发送图片消息------------------------------
 
   //------------------------------发送语音消息------------------------------
     // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
