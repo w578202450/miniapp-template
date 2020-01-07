@@ -1,7 +1,7 @@
 const app = getApp()
 const tim = app.tim
 const TIM = app.TIM
-
+var HTTP = require('../../../../utils/http-util.js');
 Page({
 
   /**
