@@ -100,16 +100,19 @@ Page({
     toolbarMenus: [{
         title: "图片",
         iconUrl: "../../../../images/chat/m-image.png",
+      clickFun: "chooseWxImage",
         isFifth: false
       },
       {
         title: "拍照",
         iconUrl: "../../../../images/chat/m-camera.png",
+        clickFun: "cameraWxFun",
         isFifth: false
       },
       {
         title: "视频问诊",
         iconUrl: "../../../../images/chat/m-video.png",
+        clickFun: "videoWxFun",
         isFifth: false
       }
     ],
@@ -148,6 +151,17 @@ Page({
     })
   },
 
+  /*操作：点击工具栏某功能 */
+  toolbarMenusFun:function(e) {
+    let fun = e.currentTarget.dataset.clickfun;
+    if (fun == "chooseWxImage") {
+      this.chooseWxImage();
+    } else if (fun == "cameraWxFun") {
+      this.cameraWxFun();
+    } else if (fun == "videoWxFun") {
+      this.videoWxFun();
+    }
+  },
   /*打开相册*/
   chooseWxImage: function () {
     let that = this;
@@ -288,6 +302,10 @@ Page({
   //------------------------------发送语音消息------------------------------
   },
 
+  /*操作：视频通话 */
+  videoWxFun() {
+    console.log("视频啦");
+  },
   /*打开、关闭 底部工具栏 */
   isOpenBottomBoolbarFun() {
     this.setData({

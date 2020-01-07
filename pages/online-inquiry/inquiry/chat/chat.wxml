@@ -73,7 +73,7 @@
       </view>
     </view>
     <view wx:if="{{isOpenBottomBoolbar}}" class="toolbarBox">
-      <view wx:for="{{toolbarMenus}}" wx:key="{{item.keyID}}" class="{{item.isFifth ? 'toolbarDivFifth' : 'toolbarDiv'}}">
+      <view wx:for="{{toolbarMenus}}" wx:key="{{item.keyID}}" class="{{item.isFifth ? 'toolbarDivFifth' : 'toolbarDiv'}}" bindtap="toolbarMenusFun" data-clickfun="{{item.clickFun}}">
         <image src="{{item.iconUrl}}" class="toolbarIcon" />
         <view class="toolbarTitile">{{item.title}}</view>
       </view>
