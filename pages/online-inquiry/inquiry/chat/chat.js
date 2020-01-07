@@ -244,6 +244,25 @@ Page({
     //     that.getMsgListFun();
     //   }
     // })
+
+    // 发送文本消息，Web 端与小程序端相同
+    // 1. 创建消息实例，接口返回的实例可以上屏
+    let message = tim.createTextMessage({
+      to: 'user1',
+      conversationType: TIM.TYPES.CONV_C2C,
+      payload: {
+        text: that.data.maySendContent
+      }
+    });
+    // 2. 发送消息
+    let promise = tim.sendMessage(message);
+    promise.then(function (imResponse) {
+      // 发送成功
+      console.log(imResponse);
+    }).catch(function (imError) {
+      // 发送失败
+      console.warn('sendMessage error:', imError);
+    });
     that.getMsgListFun();
   },
   /*打开、关闭 底部工具栏 */

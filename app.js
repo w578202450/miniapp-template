@@ -1,4 +1,3 @@
-//app.js
 // 引入腾讯云IM
 import TIM from './miniprogram_npm/tim-wx-sdk/index.js'
 import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js'
@@ -111,6 +110,26 @@ App({
     }).catch(function (imError) {
       console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
     });
+
+    // IM登出
+    // let promise = tim.logout();
+    // promise.then(function (imResponse) {
+    //   console.log("===登出成功===" + imResponse.data); // 登出成功
+    // }).catch(function (imError) {
+    //   console.warn("===登出成功===" + 'logout error:', imError);
+    // });
+
+    // 创建私有群
+    // let promise1 = tim.createGroup({
+    //   type: TIM.TYPES.GRP_PRIVATE,
+    //   name: 'WebSDK',
+    //   memberList: [{ userID: 'user1' }, { userID: 'user2' }] // 如果填写了 memberList，则必须填写 userID
+    // });
+    // promise1.then(function (imResponse) { // 创建成功
+    //   console.log("===创建私有群成功===" + imResponse.data.group); // 创建的群的资料
+    // }).catch(function (imError) {
+    //   console.warn('createGroup error:', imError); // 创建群组失败的相关信息
+    // });
 
   },
 
