@@ -85,9 +85,8 @@
 }
 
 .message-list-two {
-  height: calc(100vh - 362rpx);
+  height: calc(100vh - 242rpx);
   background-color: #f6f6f6;
-  background: red;
 }
 
 /*空置盒子1*/

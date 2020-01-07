@@ -320,10 +320,20 @@ Page({
   videoWxFun() {
     console.log("视频啦");
   },
-  /*打开、关闭 底部工具栏 */
+
+  /*操作：点击消息窗口 */
+  clickScrollViewFun() {
+    this.setData({
+      isOpenBottomBoolbar: false,
+      toView: `item${this.data.currentMessageList.length - 1}`
+    });
+  },
+  
+  /*操作：打开、关闭 底部工具栏 */
   isOpenBottomBoolbarFun() {
     this.setData({
-      isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar
+      isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar,
+      toView: `item${this.data.currentMessageList.length - 1}`
     });
   },
 

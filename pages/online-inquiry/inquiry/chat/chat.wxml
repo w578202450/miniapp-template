@@ -23,7 +23,7 @@
     </view>
   </view>
   <!-- 消息列表 -->
-  <scroll-view class="message-list" scroll-into-view="{{toView}}" scroll-with-animation="true" upper-threshold="100" scroll-y="true" enable-back-to-top="true">
+  <scroll-view class="{{isOpenBottomBoolbar ? 'message-list-two': 'message-list'}}" scroll-into-view="{{toView}}" scroll-with-animation="true" upper-threshold="100" scroll-y="true" enable-back-to-top="true" bindtap="clickScrollViewFun">
   <!-- 空置盒子1 -->
     <view class="marginBoxOne"></view>
     <view class="row" wx:for="{{currentMessageList}}" wx:key="{{item.keyID}}" id="item{{index}}">
