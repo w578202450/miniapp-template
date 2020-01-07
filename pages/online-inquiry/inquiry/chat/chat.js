@@ -258,10 +258,10 @@ Page({
     let promise = tim.sendMessage(message);
     promise.then(function (imResponse) {
       // 发送成功
-      console.log(imResponse);
+      console.log("===发送成功===" + imResponse);
     }).catch(function (imError) {
       // 发送失败
-      console.warn('sendMessage error:', imError);
+      console.warn("===发送失败===" + 'sendMessage error:', imError);
     });
     that.getMsgListFun();
   },
