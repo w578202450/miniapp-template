@@ -59,10 +59,25 @@ module.exports = {
   getPatientInfo: function getPatientInfo(parmas){
     return request('api/tmc/patient/getPatientInfoByOpenID', true, 'get', parmas);
   },
+<<<<<<< HEAD
 /*
   *查询患者处方列表
   */
   getRpListByPerson: function getRpListByPerson(parmas){
     return request('api/tmc/rp/getRpListByPerson', true, 'get', parmas);
+=======
+  /*
+  *查询患者的多方对话
+  */
+  getPatientMultiTalk: function getPatientMultiTalk(parmas){
+    return request('api/tmc/multiTalk/getPatientMultiTalk', true, 'get', parmas);
+  },
+   /*
+  *创建问诊
+  */
+  createInquiry: function createInquiry(parmas){
+    return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
+>>>>>>> 0a47f89d32abdfb2f03ee8d65b4246591d99848a
   }
+
 }

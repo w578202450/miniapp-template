@@ -9,6 +9,7 @@ Page({
    */
   data: {
     toView: '',
+    peerID: "user1",
     // 用户信息
     userInfo: {
       keyID: "111",
@@ -17,45 +18,12 @@ Page({
     },
     // 对话信息
     talkInfo: {
-      patientInfo: {
-        keyID: "111"
-      },
-      assistantInfo: {
-        keyID: "222"
-      },
-      doctorInfo: {
-        keyID: "333"
-      }
+      patientInfo: {},
+      assistantInfo: {},
+      doctorInfo: {}
     },
     // 聊天列表信息
     currentMessageList: [{
-        keyID: "1",
-        type: "TIM.TYPES.MSG_TEXT",
-        personID: "111",
-        personName: "大娃",
-        addTime: "2019-12-28 10:03:00",
-        faceImage: "../../../../images/home/home_doctor.png",
-        msgText: "医生，你好，我生病了。"
-      },
-      {
-        keyID: "2",
-        type: "TIM.TYPES.MSG_TEXT",
-        personID: "222",
-        personName: "胡助理",
-        addTime: "2019-12-28 10:03:00",
-        faceImage: "../../../../images/home/home_doctor.png",
-        msgText: "什么病？"
-      },
-      {
-        keyID: "3",
-        type: "TIM.TYPES.MSG_TEXT",
-        personID: "333",
-        personName: "路医生",
-        addTime: "2019-12-28 10:03:00",
-        faceImage: "../../../../images/home/home_doctor.png",
-        msgText: "请描述的详细一些，方便我们诊断。"
-      },
-      {
         keyID: "4",
         type: "TIM.TYPES.MSG_TEXT",
         personID: "111",
@@ -129,34 +97,53 @@ Page({
     })
   },
 
-  // 创建问诊
-  createInquiry: function() {
+  // 查询患者的多方对话
+  getPatientMultiTalk() {
+    let that = this;
     let prams = {
-        orgID: "",
-        patientID: "",
-        assistantStaffID: "",
-        assistantName: "",
-        doctorStaffID: "",
-        doctorName: ""
-      };
-    HTTP.postRequest("http://10.0.0.210:6112/api/tmc/inquiryRecord/createInquiry", prams,
-      function(res) {
-        if (res.code == 0) {
-          console.log("===请求成功===" + JSON.stringify(res.data));
-        } else {
-          wx.showToast({
-            title: res.message,
-            duration: 2000
-          })
-        }
+      orgID: "19122116554357936820511001",
+      patientID: "20010620211271745513006001",
+      doctorStaffID: "20010614315987359400514001",
+      assistantStaffID: "20010614411088137430514001"
+    };
+    HTTP.getPatientMultiTalk(prams).then(res => {
+      if (res.code == 0) {
+        console.log("===请求成功||查询患者的多方对话===" + JSON.stringify(res.data));
+        // 医生信息
+        that.data.talkInfo.doctorInfo = res.data.doctor;
+        // 医助信息
+        that.data.talkInfo.assistantInfo = res.data.assistant;
+        // 患者信息
+        that.data.talkInfo.patientInfo = res.data.patient;
+        // 创建问诊
+        that.createInquiry();
+      } else {
+        console.log("===请求失败||查询患者的多方对话===");
+      }
+    })
+  },
 
-      },
-      function(err) {
-        wx.showToast({
-          title: '创建问诊失败',
-          duration: 2000
-        })
-      })
+  // 创建问诊
+  createInquiry() {
+    let prams = {
+      orgID: "19122116554357936820511001",
+      patientID: "20010620211271745513006001",
+      assistantStaffID: "20010614411088137430514001",
+      assistantName: "tmc1011",
+      doctorStaffID: "20010614315987359400514001",
+      doctorName: "tmc1001"
+    };
+    HTTP.createInquiry(prams).then(res => {
+      if (res.code == 0) {
+        console.log("===请求成功||创建问诊===" + JSON.stringify(res.data));
+        // wx.setStorage({
+        //   key: 'personInfo',
+        //   data: res.data
+        // })
+      } else {
+        console.log("===请求失败||创建问诊===");
+      }
+    })
   },
 
   /*查询：列表聊天历史信息 */
@@ -176,7 +163,8 @@ Page({
   closeBottomBoolbarFun() {
     // 有问题，需要修改
     // this.setData({
-    //   isOpenBottomBoolbar: false
+    //   isOpenBottomBoolbar: false,
+    //   toView: `item${this.data.currentMessageList.length - 1}`
     // });
   },
 
@@ -198,6 +186,7 @@ Page({
       this.videoWxFun();
     }
   },
+  
   /*打开相册*/
   chooseWxImage: function() {
     let that = this;
@@ -239,7 +228,7 @@ Page({
     let that = this;
     // 1. 创建消息实例
     let message = tim.createImageMessage({
-      to: 'user1',
+      to: that.data.peerID,
       conversationType: TIM.TYPES.CONV_C2C,
       payload: {
         file: that.data.aimgurl
@@ -256,7 +245,7 @@ Page({
       console.log("===发送图片成功===" + imResponse);
     }).catch(function(imError) {
       // 发送失败
-      console.warn('sendMessage error:', imError);
+      console.warn('===发送图片失败===', imError);
     });
   },
   //------------------------------发送图片消息------------------------------
@@ -272,7 +261,7 @@ Page({
     //------------------------------发送文本消息------------------------------
     // 1. 创建消息实例，接口返回的实例可以上屏
     let message = tim.createTextMessage({
-      to: 'user1',
+      to: that.data.peerID,
       conversationType: TIM.TYPES.CONV_C2C,
       payload: {
         text: that.data.maySendContent
@@ -321,7 +310,7 @@ Page({
 
       // 4. 创建消息实例，接口返回的实例可以上屏
       const message = tim.createAudioMessage({
-        to: 'user1',
+        to: that.data.peerID,
         conversationType: TIM.TYPES.CONV_C2C,
         payload: {
           file: res
@@ -369,6 +358,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 查询患者的多方对话
+    this.getPatientMultiTalk();
     // 查询：聊天列表信息
     this.getMsgListFun();
   },
