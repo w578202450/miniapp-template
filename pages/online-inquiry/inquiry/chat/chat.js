@@ -121,7 +121,18 @@ Page({
     imageData: [] // 所选上传的图片数据
   },
 
-  //
+  // 点击医生查看详情
+  doctorDetailTap: function () {
+    wx.navigateTo({
+      url: '/pages/online-inquiry/doctor-details/doctor-details',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+  
+  //创建问诊
+  
 
   /*查询：列表聊天历史信息 */
   getMsgListFun: function() {

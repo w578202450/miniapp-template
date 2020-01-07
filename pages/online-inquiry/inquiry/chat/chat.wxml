@@ -1,7 +1,7 @@
 <view class="page">
   <!-- 顶部 -->
   <view class="middle-one">
-    <view class="middleOne-box middleOne-box-one">
+    <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap">
       <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
         <view class="flexRowStartCenter">
@@ -11,7 +11,7 @@
         <text class="info_two">副主任医师</text>
       </view>
     </view>
-    <view class="middleOne-box">
+    <view class="middleOne-box" bindtap="doctorDetailTap">
       <image src="../../../../images/home/home_doctor.png"></image>
       <view class="info-box">
         <view class="flexRowStartCenter">
