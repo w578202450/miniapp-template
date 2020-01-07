@@ -138,7 +138,15 @@
 				{
 					"id": -1,
 					"name": "聊天页",
-					"pathName": "pages/online-inquiry/inquiry/chat/chat"
+					"pathName": "pages/online-inquiry/inquiry/chat/chat",
+					"query": ""
+				},
+				{
+					"id": 12,
+					"name": "测试上传图片",
+					"pathName": "pages/online-inquiry/inquiry/index/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
