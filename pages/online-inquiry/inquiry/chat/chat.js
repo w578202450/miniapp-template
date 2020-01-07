@@ -118,6 +118,8 @@ Page({
     imageData: [] // 所选上传的图片数据
   },
 
+  //
+
   /*查询：列表聊天历史信息 */
   getMsgListFun: function() {
     // 初始化数据
@@ -146,56 +148,60 @@ Page({
     })
   },
 
-  /*图片浏览及上传 */
-  browse: function (e) {
-    let that = this;
-    wx.showActionSheet({
-      itemList: ['从相册中选择', '拍照'],
-      itemColor: "#CED63A",
-      success: function (res) {
-        // console.log(res)
-        if (!res.cancel) {
-          if (res.tapIndex == 0) {
-            that.chooseWxImage('album');
-          } else if (res.tapIndex == 1) {
-            that.chooseWxImage('camera');
-          }
-        }
-      }
-    })
-  },
- //------------------------------发送图片消息------------------------------
-  /*打开相册、相机 */
-  // 1. 选择图片
-  chooseWxImage: function (type) {
+  /*打开相册*/
+  chooseWxImage: function () {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
-      sourceType: [type],
+      sourceType: ["album"],
       success: function (res) {
-        // 选择图片完成后的确认操作(只选一张，目前 SDK 不支持一次发送多张图片)
+        // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res.tempFilePaths
         });
-        // // 2. 创建消息实例
-        let message = tim.createImageMessage({
-          to: 'user1',
-          conversationType: TIM.TYPES.CONV_C2C,
-          payload: { file: that.data.aimgurl[0] },
-          onProgress: function (event) { console.log('file uploading:', event) }
-        });
-        // 3. 发送图片消息
-        let promise = tim.sendMessage(message);
-        promise.then(function (imResponse) {
-          // 发送成功
-          console.log("===发送图片消息成功===" +imResponse);
-        }).catch(function (imError) {
-          // 发送失败
-          console.warn('sendMessage error:', imError);
-        });
+        // 发送图片消息
+        that.sendImageMsg();
       }
     })
+  },
+
+  /*打开相机 */
+  cameraWxFun: function () {
+    let that = this;
+    wx.chooseImage({
+      count: that.data.countIndex,
+      sizeType: ['original', 'compressed'],
+      sourceType: ["camera"],
+      success: function (res) {
+        // 选择图片完成后的确认操作
+        that.setData({
+          aimgurl: res.tempFilePaths
+        });
+        // 发送图片消息
+        that.sendImageMsg();
+      }
+    })
+  },
+
+ //------------------------------发送图片消息------------------------------
+  sendImageMsg: function () {
+    // 1. 创建消息实例
+    let message = tim.createImageMessage({
+      to: 'user1',
+      conversationType: TIM.TYPES.CONV_C2C,
+      payload: { file: that.data.aimgurl[0] },
+      onProgress: function (event) { console.log('file uploading:', event) }
+    });
+    // 2. 发送图片
+    let promise = tim.sendMessage(message);
+    promise.then(function (imResponse) {
+      // 发送成功
+      console.log("===发送图片成功===" + imResponse);
+    }).catch(function (imError) {
+      // 发送失败
+      // console.warn('sendMessage error:', imError);
+    });
   },
   //------------------------------发送图片消息------------------------------
 

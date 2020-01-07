@@ -146,7 +146,10 @@ App({
 
   globalData: {
     userInfo: null,
-    receiveMessageInfo: ''
+    receiveMessageInfo: '',
+    baseUrl:'http://10.0.0.23:6112/',
+    // 创建问诊
+    createInquiryUrl: "api/tmc/inquiryRecord/createInquiry",
   },
   tim: tim,
   TIM: TIM
