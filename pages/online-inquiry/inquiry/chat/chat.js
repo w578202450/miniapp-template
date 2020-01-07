@@ -7,14 +7,8 @@ Page({
   /**
    * 页面的初始数据
    */
-  onShareAppMessage() {
-    return {
-      title: 'scroll-view'
-    }
-  },
-
   data: {
-    toView: 'green',
+    toView: '',
     // 用户信息
     userInfo: {
       keyID: "111",
@@ -34,7 +28,8 @@ Page({
       }
     },
     // 聊天列表信息
-    currentMessageList: [{
+    currentMessageList: [
+      {
         keyID: "1",
         type: "TIM.TYPES.MSG_TEXT",
         personID: "111",
@@ -59,7 +54,7 @@ Page({
         personName: "路医生",
         addTime: "2019-12-28 10:03:00",
         faceImage: "../../../../images/home/home_doctor.png",
-        msgText: "请描述的详细一些，方便我们诊断。请描述的详细一些，方便我们诊断。请描述的详细一些，方便我们诊断。"
+        msgText: "请描述的详细一些，方便我们诊断。"
       },
       {
         keyID: "4",
@@ -72,15 +67,6 @@ Page({
       },
       {
         keyID: "5",
-        type: "TIM.TYPES.MSG_TEXT",
-        personID: "111",
-        personName: "大娃",
-        addTime: "2019-12-28 10:03:00",
-        faceImage: "../../../../images/home/home_doctor.png",
-        msgText: "脑壳痛，胸口闷，我有一点昏。脚杆青痛感觉不对头。"
-      },
-      {
-        keyID: "6",
         type: "TIM.TYPES.MSG_IMAGE",
         personID: "111",
         personName: "大娃",
@@ -92,7 +78,7 @@ Page({
         }
       },
       {
-        keyID: "7",
+        keyID: "6",
         type: "TIM.TYPES.MSG_AUDIO",
         personID: "111",
         personName: "大娃",
@@ -111,79 +97,35 @@ Page({
     },
     maySendContent: "", // 输入的聊天内容
     isOpenBottomBoolbar: false, // 是否打开工具栏
-    toolbarMenus: [
-      { title: "图片", iconUrl: "../../../../images/chat/m-image.png", isFifth: false },
-      { title: "拍照", iconUrl: "../../../../images/chat/m-camera.png", isFifth: false },
-      { title: "视频问诊", iconUrl: "../../../../images/chat/m-video.png", isFifth: false }
-    ]
-  },
-
-  upper(e) {
-    console.log(e)
-  },
-
-  lower(e) {
-    console.log(e)
-  },
-
-  scroll(e) {
-    console.log(e)
-  },
-
-  scrollToTop() {
-    this.setAction({
-      scrollTop: 0
-    })
-  },
-
-  tap() {
-    for (let i = 0; i < order.length; ++i) {
-      if (order[i] === this.data.toView) {
-        this.setData({
-          toView: order[i + 1],
-          scrollTop: (i + 1) * 200
-        })
-        break
+    toolbarMenus: [{
+        title: "图片",
+        iconUrl: "../../../../images/chat/m-image.png",
+        isFifth: false
+      },
+      {
+        title: "拍照",
+        iconUrl: "../../../../images/chat/m-camera.png",
+        isFifth: false
+      },
+      {
+        title: "视频问诊",
+        iconUrl: "../../../../images/chat/m-video.png",
+        isFifth: false
       }
-    }
-  },
-
-  tapMove() {
-    this.setData({
-      scrollTop: this.data.scrollTop + 10
-    })
+    ]
   },
 
   /*查询：列表聊天历史信息 */
   getMsgListFun: function() {
-    if (this.data.pageInfo.pageIndex == 1) {
-      this.setData({
-        toView: `item${this.data.currentMessageList.length - 1}`
-      });
-    }
-    console.log(this.data.toView);
-    // let that = this;
-    // let params = {
-    //   patientID: that.data.userInfo.keyID,
-    //   orgID: that.data.userInfo.orgID
-    // };
-    // wx.request({
-    //   url: "",
-    //   data: params,
-    //   success(res) {
-    //     console.log(res.data);
+    // 初始化数据
     //     that.setData({
     //       currentMessageList: res.data,
-    //       // pageInfo: res.pageInfo,
     //       maySendContent: ""
     //     });
-    //     if (that.data.pageInfo.pageIndex == 1) {
-    //       that.setData({
-    //         toView: `item${that.data.currentMessageList.length}`
-    //       });
-    //     }
-    //   }
-    // })
+    // 设置屏幕自动滚动到最后一条消息处
+    this.setData({
+      toView: `item${this.data.currentMessageList.length - 1}`
+    });
   },
 
   /*输入框聚焦，关闭工具栏 */
@@ -207,44 +149,8 @@ Page({
     if (that.httpLoading) {
       return;
     }
+    // 开启隐性加载过程
     that.httpLoading = true;
-    let time = new Date();
-    let m = time.getMonth() + 1;
-    m = m > 10 ? m : ("0" + m);
-    let d = time.getDate();
-    d = d > 10 ? d : ("0" + d);
-    let h = time.getHours();
-    h = h > 10 ? h : ("0" + h);
-    let minute = time.getMinutes();
-    minute = minute > 10 ? minute : ("0" + minute);
-    let seconds = time.getSeconds();
-    seconds = seconds > 10 ? seconds : ("0" + seconds);
-    let nowDateTime = time.getFullYear() + "-" + m + "-" + d + " " + h + ":" + minute + ":" + seconds;
-    let obj = {
-      keyID: Number(that.data.currentMessageList[that.data.currentMessageList.length - 1].keyID) + 1,
-      type: "TIM.TYPES.MSG_TEXT",
-      personID: that.data.userInfo.keyID,
-      personName: that.data.userInfo.patientName,
-      addTime: nowDateTime,
-      faceImage: that.data.userInfo.faceImage,
-      msgText: that.data.maySendContent
-    };
-    let nowData = [...that.data.currentMessageList, obj];
-    that.setData({
-      currentMessageList: nowData,
-      maySendContent: ""
-    });
-    that.httpLoading = false;
-
-    // wx.request({
-    //   url: "",
-    //   data: obj,
-    //   success(res) {
-    //     console.log(res.data);
-    //     that.getMsgListFun();
-    //   }
-    // })
-
     // 发送文本消息，Web 端与小程序端相同
     // 1. 创建消息实例，接口返回的实例可以上屏
     let message = tim.createTextMessage({
@@ -256,15 +162,23 @@ Page({
     });
     // 2. 发送消息
     let promise = tim.sendMessage(message);
-    promise.then(function (imResponse) {
+    promise.then(function(imResponse) {
       // 发送成功
       console.log("===发送成功===" + imResponse);
-    }).catch(function (imError) {
+      let nowData = [...that.data.currentMessageList, obj];
+      that.setData({
+        currentMessageList: nowData,
+        maySendContent: ""
+      });
+      // 关闭隐性加载过程
+      that.httpLoading = false;
+      that.getMsgListFun();
+    }).catch(function(imError) {
       // 发送失败
       console.warn("===发送失败===" + 'sendMessage error:', imError);
     });
-    that.getMsgListFun();
   },
+
   /*打开、关闭 底部工具栏 */
   isOpenBottomBoolbarFun() {
     this.setData({
