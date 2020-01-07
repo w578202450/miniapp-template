@@ -5,7 +5,6 @@ var HTTP = require('http-util.js');
 async function wxlogin() {
   wx.login({
     success: function (res) {
-      console.log("===success--code===" + JSON.stringify(res.code));
       getopenid(res.code);
     },
     fail: function (res) {
@@ -27,7 +26,6 @@ async function getopenid(code) {
   
   HTTP.getWXAuth(prams).then(res => {
     if (res.code == 0){
-      console.log("===success--open===" + JSON.stringify(res.data));
       getPatientInfo(res.data.openid);
     }
   })
@@ -41,7 +39,6 @@ async function getPatientInfo(openID) {
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
-      console.log("===success--base===" + JSON.stringify(res.data));
       wx.setStorage({
         key: 'personInfo',
         data: res.data

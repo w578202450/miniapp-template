@@ -1,6 +1,6 @@
 const app = getApp()
 
-// var nikename = "付志敏"
+
 
 Page({
   data: {
