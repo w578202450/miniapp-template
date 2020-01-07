@@ -2,20 +2,20 @@
   <!-- 顶部 -->
   <view class="middle-one">
     <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap">
-      <image src="../../../../images/home/home_doctor.png"></image>
+      <image src="{{talkInfo.doctorInfo.faceImage}}"/>
       <view class="info-box">
         <view class="flexRowStartCenter">
-          <text class="info_one">李荣豪</text>
+          <text class="info_one">{{talkInfo.doctorInfo.doctorName}}</text>
           <text class="info_one_one">医生</text>
         </view>
         <text class="info_two">副主任医师</text>
       </view>
     </view>
     <view class="middleOne-box" bindtap="doctorDetailTap">
-      <image src="../../../../images/home/home_doctor.png"></image>
+      <image src="{{talkInfo.assistantInfo.faceImage}}"/>
       <view class="info-box">
         <view class="flexRowStartCenter">
-          <text class="info_one">周雅啊</text>
+          <text class="info_one">{{talkInfo.assistantInfo.doctorName}}</text>
           <text class="info_one_one">医助</text>
         </view>
         <text class="info_two">助理医师</text>

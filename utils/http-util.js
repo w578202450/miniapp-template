@@ -54,5 +54,18 @@ module.exports = {
   */
   getPatientInfo: function getPatientInfo(parmas){
     return request('api/tmc/patient/getPatientInfoByOpenID', true, 'get', parmas);
+  },
+  /*
+  *查询患者的多方对话
+  */
+  getPatientMultiTalk: function getPatientMultiTalk(parmas){
+    return request('api/tmc/multiTalk/getPatientMultiTalk', true, 'get', parmas);
+  },
+   /*
+  *创建问诊
+  */
+  createInquiry: function createInquiry(parmas){
+    return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
   }
+
 }
