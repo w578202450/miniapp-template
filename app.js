@@ -7,8 +7,9 @@ import {
 import {
   genTestUserSig
 } from './utils/GenerateTestUserSig';
-// const AUTH = require('utils/auth')
+const AUTH = require('utils/auth')
 const HTTP = require('utils/http-util')
+const UTIL = require('utils/util')
 const tim = TIM.create({
   SDKAppID: SDKAPPID
 })
@@ -20,9 +21,12 @@ tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
 tim.registerPlugin({
   'cos-wx-sdk': COS
 })
+
+
+
 App({
   onLaunch: function() {
-    // AUTH.wxlogin();
+    AUTH.wxlogin();
     let that = this;
     // 监听事件，例如：
     tim.on(TIM.EVENT.SDK_READY, function(event) {

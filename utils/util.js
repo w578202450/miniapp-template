@@ -18,6 +18,7 @@
 //   formatTime: formatTime
 // }
 
+let baseUrl = "http://10.0.0.210:6112"
 
 const formatNumber = n => {
   n = n.toString()
@@ -53,7 +54,12 @@ export function throttle(func, wait) {
   }
 }
 
+export function getUrl(url) {
+  return baseUrl + url
+}
+
 export default {
   formatTime,
-  throttle
+  throttle,
+  getUrl
 }

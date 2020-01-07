@@ -1,85 +1,58 @@
 
-/**
- * 请求头
- */
-// var header = {
-//   'content-type': 'application/x-www-form-urlencoded',
-//   'Authorization': "Bearer " + wx.getStorageSync("token"),
-//   'os': 'android',
-//   'version': '1.0.0',
-// }
-var header = {
-  // 'content-type': 'application/x-www-form-urlencoded'
-  'content-type': 'application/json'
-}
+var API_BASE_URL = 'http://10.0.0.210:6112/';
 
-/**
- * function: 根据需求处理请求参数：添加固定参数配置等
- * @params 请求参数
- */
-function dealParams(params) {
-  console.log("请求参数:", params)
-  return params;
-}
-
-/**
- * 供外部get请求调用
- */
-function get(url, params, onSuccess, onFailed) {
-  console.log("请求方式：", "GET")
-  request(url, params, "GET", onSuccess, onFailed);
-}
-
-/**
- * 供外部post请求调用  
- */
-function post(url, params, onSuccess, onFailed) {
-  console.log("请求方式：", "POST")
-  request(url, params, "POST", onSuccess, onFailed);
-
-}
-
-/**
- * function: 封装网络请求
- * @url URL地址
- * @params 请求参数
- * @method 请求方式：GET/POST
- * @onSuccess 成功回调
- * @onFailed  失败回调
- */
-function request(url, params, method, onSuccess, onFailed) {
-  console.log('请求url：' + url);
-  wx.showLoading({
-    title: "正在加载中...",
-  })
-  console.log("请求头：", header)
-  wx.request({
-    url: url,
-    data: dealParams(params),
-    method: method,
-    header: header,
-    success: function (res) {
-      wx.hideLoading();
-      console.log('响应：', res.data);
-
-      if (res.data) {
-        /** start 根据需求 接口的返回状态码进行处理 */
-        if (res.statusCode == 200) {
-          onSuccess(res.data); //request success
-        } else {
-          onFailed(res.data.message); //request failed
-        }
-        /** end 处理结束*/
+var request = function request(url, needDomain,method, data) {
+  var _url = needDomain ? (API_BASE_URL + url) : url;
+  return new Promise(function (resolve, reject) {
+    console.log("----url-----",_url);
+    wx.request({
+      method: method,
+      url: _url,
+      header: {
+        'content-type': 'application/json'
+      },
+      data: data,
+      success: function success(request) {
+        resolve(request.data);
+      },
+      fail: function fail(error) {
+        reject(error);
+      },
+      complete: function complete(aaa) {
+        // 加载完成
       }
-    },
-    fail: function (error) {
-      onFailed(""); //failure for other reasons
-    }
-  })
-}
+    });
+  });
+};
+
+/**
+ * 小程序的promise没有finally方法，自己扩展下
+ */
+Promise.prototype.finally = function (callback) {
+  var Promise = this.constructor;
+  return this.then(function (value) {
+    Promise.resolve(callback()).then(function () {
+      return value;
+    });
+  }, function (reason) {
+    Promise.resolve(callback()).then(function () {
+      throw reason;
+    });
+  });
+};
 
 // 1.通过module.exports方式提供给外部调用
 module.exports = {
-  postRequest: post,
-  getRequest: get,
+  /*
+  *获取微信openid
+  */
+  getWXAuth: function getWXAuth(parmas){
+    return request('http://10.0.0.23:6203/wx/getWXAuth', false, 'post', parmas);
+  },
+  /*
+  *获取微信个人信息
+  */
+  getPatientInfo: function getPatientInfo(parmas){
+    return request('api/tmc/patient/getPatientInfoByOpenID', true, 'get', parmas);
+  }
 }

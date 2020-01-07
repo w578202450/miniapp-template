@@ -24,44 +24,30 @@ async function getopenid(code) {
   var prams = {
     code: code
   }
-  HTTP.postRequest("http://10.0.0.23:6203/wx/getWXAuth", prams,
-    function (res) {
+  
+  HTTP.getWXAuth(prams).then(res => {
+    if (res.code == 0){
       console.log("===success--open===" + JSON.stringify(res.data));
-      getbaseinfo(res.data.openid);
-    },
-    function (err) {
-      wx.showModal({
-        title: '获取openid失败',
-        content: res.msg,
-        showCancel: false
-      })
-    })
+      getPatientInfo(res.data.openid);
+    }
+  })
 }
 /**
  * 获取基础数据
  */
-async function getbaseinfo(openID) {
+async function getPatientInfo(openID) {
   var prams = {
     openID: openID
   }
-  HTTP.getRequest("http://10.0.0.23:6112/api/tmc/patient/getPatientInfoByOpenID", prams,
-    function (res) {
-      if (res.code == 0) {
-        console.log("===success--base===" + JSON.stringify(res.data));
-      } else {
-        wx.showToast({
-          title: res.message,
-          duration: 2000
-        })
-      }
-
-    },
-    function (err) {
-      wx.showToast({
-        title: '获取基础信息失败',
-        duration: 2000
+  HTTP.getPatientInfo(prams).then(res => {
+    if (res.code == 0) {
+      console.log("===success--base===" + JSON.stringify(res.data));
+      wx.setStorage({
+        key: 'personInfo',
+        data: res.data
       })
-    })
+    }
+  })
 }
 
 module.exports = {
