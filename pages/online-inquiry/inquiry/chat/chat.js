@@ -23,8 +23,7 @@ Page({
       doctorInfo: {}
     },
     // 聊天列表信息
-    currentMessageList: [
-      {
+    currentMessageList: [{
         keyID: "4",
         type: "TIM.TYPES.MSG_TEXT",
         personID: "111",
@@ -98,7 +97,7 @@ Page({
     })
   },
 
-   // 查询患者的多方对话
+  // 查询患者的多方对话
   getPatientMultiTalk() {
     let that = this;
     let prams = {
@@ -124,7 +123,7 @@ Page({
     })
   },
 
- // 创建问诊
+  // 创建问诊
   createInquiry() {
     let prams = {
       orgID: "19122116554357936820511001",
@@ -164,7 +163,8 @@ Page({
   closeBottomBoolbarFun() {
     // 有问题，需要修改
     // this.setData({
-    //   isOpenBottomBoolbar: false
+    //   isOpenBottomBoolbar: false,
+    //   toView: `item${this.data.currentMessageList.length - 1}`
     // });
   },
 
@@ -186,6 +186,7 @@ Page({
       this.videoWxFun();
     }
   },
+  
   /*打开相册*/
   chooseWxImage: function() {
     let that = this;
