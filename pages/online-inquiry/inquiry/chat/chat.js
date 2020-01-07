@@ -130,8 +130,35 @@ Page({
     })
   },
 
-  //创建问诊
+  // 创建问诊
+  createInquiry: function() {
+    let prams = {
+        orgID: "",
+        patientID: "",
+        assistantStaffID: "",
+        assistantName: "",
+        doctorStaffID: "",
+        doctorName: ""
+      };
+    HTTP.postRequest("http://10.0.0.210:6112/api/tmc/inquiryRecord/createInquiry", prams,
+      function(res) {
+        if (res.code == 0) {
+          console.log("===请求成功===" + JSON.stringify(res.data));
+        } else {
+          wx.showToast({
+            title: res.message,
+            duration: 2000
+          })
+        }
 
+      },
+      function(err) {
+        wx.showToast({
+          title: '创建问诊失败',
+          duration: 2000
+        })
+      })
+  },
 
   /*查询：列表聊天历史信息 */
   getMsgListFun: function() {
