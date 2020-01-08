@@ -21,21 +21,27 @@ Page({
     // 聊天列表信息
     currentMessageList: [
       {
+        keyID: "3",
+        type: "TIM.TYPES.MSG_TEXT",
+        personID: "20010614315987342600531001",
+        personName: "医生",
+        addTime: "2019-12-28 10:03:00",
+        msgText: "怎么了"
+      },
+      {
         keyID: "4",
         type: "TIM.TYPES.MSG_TEXT",
-        personID: "111",
+        personID: "20010620125843541630543001",
         personName: "大娃",
         addTime: "2019-12-28 10:03:00",
-        faceImage: "../../../../images/home/home_doctor.png",
         msgText: "脑壳痛，胸口闷，我有一点昏。脚杆青痛感觉不对头。"
       },
       {
         keyID: "5",
         type: "TIM.TYPES.MSG_IMAGE",
-        personID: "111",
+        personID: "20010620125843541630543001",
         personName: "大娃",
         addTime: "2019-12-28 10:03:00",
-        faceImage: "../../../../images/home/home_doctor.png",
         msgText: "",
         imgInfo: {
           imgUrl: "../../../../images/home/home_doctor.png"
@@ -44,10 +50,9 @@ Page({
       {
         keyID: "6",
         type: "TIM.TYPES.MSG_AUDIO",
-        personID: "111",
+        personID: "20010620125843541630543001",
         personName: "大娃",
         addTime: "2019-12-28 10:03:00",
-        faceImage: "../../../../images/home/home_doctor.png",
         msgText: "",
         payload: {
           second: 5
