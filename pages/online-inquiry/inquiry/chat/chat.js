@@ -30,35 +30,35 @@ Page({
     maySendContent: "", // 输入的聊天内容
     isOpenBottomBoolbar: false, // 是否打开工具栏
     toolbarMenus: [{
-        title: "图片",
-        iconUrl: "../../../../images/chat/m-image.png",
-        clickFun: "chooseWxImage",
-        isFifth: false
-      },
-      {
-        title: "拍照",
-        iconUrl: "../../../../images/chat/m-camera.png",
-        clickFun: "cameraWxFun",
-        isFifth: false
-      },
-      {
-        title: "视频问诊",
-        iconUrl: "../../../../images/chat/m-video.png",
-        clickFun: "videoWxFun",
-        isFifth: false
-      }
+      title: "图片",
+      iconUrl: "../../../../images/chat/m-image.png",
+      clickFun: "chooseWxImage",
+      isFifth: false
+    },
+    {
+      title: "拍照",
+      iconUrl: "../../../../images/chat/m-camera.png",
+      clickFun: "cameraWxFun",
+      isFifth: false
+    },
+    {
+      title: "视频问诊",
+      iconUrl: "../../../../images/chat/m-video.png",
+      clickFun: "videoWxFun",
+      isFifth: false
+    }
     ],
     aimgurl: {}, // //临时图片的信息
     countIndex: 1 // 可选图片剩余的数量
   },
 
   // 点击医生查看详情
-  doctorDetailTap: function() {
+  doctorDetailTap: function () {
     wx.navigateTo({
       url: '/pages/online-inquiry/doctor-details/doctor-details',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 
@@ -80,7 +80,7 @@ Page({
   },
 
   // 查询患者的多方对话
-  getPatientMultiTalk: function() {
+  getPatientMultiTalk: function () {
     let that = this;
     let prams = {
       orgID: that.data.userInfo.orgID,
@@ -105,7 +105,7 @@ Page({
   },
 
   // 创建问诊
-  createInquiry: function() {
+  createInquiry: function () {
     let that = this;
     let prams = {
       orgID: that.data.userInfo.orgID,
@@ -144,7 +144,7 @@ Page({
         isCompleted: imResponse.data.isCompleted
       })
     });
-    
+
   },
 
   // 下拉加载历史消息列表
@@ -158,7 +158,7 @@ Page({
   },
 
   /*滚动：消息底部 */
-  toViewBottomFun: function() {
+  toViewBottomFun: function () {
     // 初始化数据
     //     that.setData({
     //       currentMessageList: res.data,
@@ -180,14 +180,14 @@ Page({
   },
 
   /*操作：输入预发送信息 */
-  adInputChange: function(e) {
+  adInputChange: function (e) {
     this.setData({
       maySendContent: e.detail.value,
     })
   },
 
   /*操作：点击工具栏某功能 */
-  toolbarMenusFun: function(e) {
+  toolbarMenusFun: function (e) {
     let fun = e.currentTarget.dataset.clickfun;
     if (fun == "chooseWxImage") {
       this.chooseWxImage();
@@ -197,15 +197,15 @@ Page({
       this.videoWxFun();
     }
   },
-  
+
   /*操作：打开相册*/
-  chooseWxImage: function() {
+  chooseWxImage: function () {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["album"],
-      success: function(res) {
+      success: function (res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res
@@ -217,13 +217,13 @@ Page({
   },
 
   /*操作：打开相机 */
-  cameraWxFun: function() {
+  cameraWxFun: function () {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["camera"],
-      success: function(res) {
+      success: function (res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res
@@ -235,7 +235,7 @@ Page({
   },
 
   /*操作：发送（图片消息） */
-  sendImageMsg: function() {
+  sendImageMsg: function () {
     let that = this;
     if (that.httpLoading) {
       return;
@@ -249,12 +249,12 @@ Page({
       payload: {
         file: that.data.aimgurl
       },
-      onProgress: function(event) {} // 发送图片进度
+      onProgress: function (event) { } // 发送图片进度
     });
     // console.log(message);
     // 2. 发送图片
     let promise = tim.sendMessage(message);
-    promise.then(function(imResponse) {
+    promise.then(function (imResponse) {
       console.log("===发送图片成功===");
       console.log(imResponse);
       let nowData = [...that.data.currentMessageList, imResponse.data.message];
@@ -265,14 +265,14 @@ Page({
       // 关闭隐性加载过程
       that.httpLoading = false;
       that.toViewBottomFun();
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       // 发送失败
       console.warn('===发送图片失败===', imError);
     });
   },
 
   /*操作：发送（文本消息） */
-  sendContentMsg: function(e) {
+  sendContentMsg: function (e) {
     let that = this;
     if (that.httpLoading || !that.data.maySendContent) {
       return;
@@ -290,7 +290,7 @@ Page({
     });
     // 2. 发送消息
     let promise = tim.sendMessage(message);
-    promise.then(function(imResponse) {
+    promise.then(function (imResponse) {
       // 发送成功
       let nowData = [...that.data.currentMessageList, imResponse.data.message];
       that.setData({
@@ -300,7 +300,7 @@ Page({
       // 关闭隐性加载过程
       that.httpLoading = false;
       that.toViewBottomFun();
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       // 发送失败
       // console.warn("===发送失败===" + 'sendMessage error:', imError);
     });
@@ -354,12 +354,12 @@ Page({
   },
 
   /*操作：视频通话 */
-  videoWxFun:function() {
+  videoWxFun: function () {
     console.log("视频啦");
   },
 
   /*操作：点击消息窗口 */
-  clickScrollViewFun: function() {
+  clickScrollViewFun: function () {
     this.setData({
       isOpenBottomBoolbar: false,
       toView: `item${this.data.currentMessageList.length - 1}`
@@ -367,7 +367,7 @@ Page({
   },
 
   /*操作：打开、关闭 底部工具栏 */
-  isOpenBottomBoolbarFun: function() {
+  isOpenBottomBoolbarFun: function () {
     this.setData({
       isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar,
       toView: `item${this.data.currentMessageList.length - 1}`
@@ -377,7 +377,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let that = this;
     // 从storage中获取患者信息
     that.getPersonInfo();
@@ -388,14 +388,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     let that = this;
     // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
     tim.on(TIM.EVENT.MESSAGE_RECEIVED, function (event) {
@@ -412,14 +412,14 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     let promise = tim.logout();
     promise.then(function (imResponse) {
       console.log("===登出成功===" + imResponse.data); // 登出成功
@@ -431,21 +431,21 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
