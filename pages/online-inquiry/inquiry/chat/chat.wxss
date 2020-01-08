@@ -25,7 +25,6 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 20rpx;
-  /* border: 1px solid red; */
 }
 
 .middleOne-box-one {
@@ -148,7 +147,6 @@
   background-color: #fff;
   margin-right: 20rpx;
 }
-
 .body .avatarTwo {
   width: 80rpx;
   height: 80rpx;
@@ -166,29 +164,41 @@
 
 /*文本消息*/
 
-.body .content {
+.body .contentTxtMsg {
   font-size: 32rpx;
   background: #fff;
   border-radius: 20rpx;
   padding: 15rpx;
-  /* line-height: 22rpx; */
   margin-bottom: 20rpx;
-}
-
-/* 三角箭头 */
-
-.body .triangle {
-  background: white;
-  width: 20rpx;
-  height: 20rpx;
-  margin-top: 26rpx;
-  transform: rotate(45deg);
-  position: absolute;
 }
 
 /*图片消息*/
 
-.picture {
+.body .contentPictureMsg {
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  width: 160rpx;
+  height: 160rpx;
+  overflow: hidden;
+}
+
+.body .pictureMsg {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+/*音频消息*/
+.body .contentVideoMsg {
+  margin-bottom: 20rpx;
+  padding: 15rpx;
+  border-radius: 20rpx;
+  background: #fff;
+}
+
+.body .payloadImage {
+  height:20px;
+  width:14px
 }
 
 /*底部工具栏*/

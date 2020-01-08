@@ -33,16 +33,6 @@ App({
       // console.log(`============${event.name}==================`);
     });
 
-    tim.on(TIM.EVENT.MESSAGE_RECEIVED, function(event) {
-      // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
-      // event.name - TIM.EVENT.MESSAGE_RECEIVED
-      // event.data - 存储 Message 对象的数组 - [Message]
-      // console.log(`============${event.name}==================`);
-      // console.log("===MESSAGE_RECEIVED===" + JSON.stringify(event.data));
-      that.globalData.receiveMessageInfo = JSON.stringify(event.data);
-      console.log("===收到的消息===" + that.globalData.receiveMessageInfo);
-    });
-
     tim.on(TIM.EVENT.MESSAGE_REVOKED, function(event) {
       // 收到消息被撤回的通知
       // event.name - TIM.EVENT.MESSAGE_REVOKED
@@ -126,19 +116,9 @@ App({
     }).catch(function(imError) {
       // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
     });
-
-    // IM登出
-    // let promise = tim.logout();
-    // promise.then(function (imResponse) {
-    //   console.log("===登出成功===" + imResponse.data); // 登出成功
-    // }).catch(function (imError) {
-    //   console.warn("===登出成功===" + 'logout error:', imError);
-    // });
-
   },
   globalData: {
     personInfo: {},
-    receiveMessageInfo: '',
     baseUrl: 'http://10.0.0.210:6112/'
   },
   tim: tim,
