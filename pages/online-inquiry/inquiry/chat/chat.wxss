@@ -31,11 +31,29 @@
   border-right: 1rpx solid #dbdee3;
 }
 
-.middleOne-box image {
+.headDiv {
   height: 80rpx;
   width: 80rpx;
   border-radius: 80rpx;
   background-color: rgb(248, 248, 248);
+  overflow: hidden;
+  position:relative;
+}
+
+.middleOne-box .headImg {
+  height: 80rpx;
+  width: 80rpx;
+  position: relative;
+  z-index: 2;
+}
+
+.headImgBac {
+  height: 80rpx;
+  width: 80rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
 }
 
 .middleOne-box .info-box {
@@ -135,7 +153,33 @@
 /*头像容器*/
 
 .body.avatar-container {
-  width: 20%;
+
+}
+
+.body .personHeadImgDiv {
+  position: relative;
+}
+
+/* 患者头像时 */
+.body .personHeadImgBac {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  left: 20rpx;
+  right: 0;
+}
+
+/* 医生、医助头像时 */
+.body .personHeadImgBacTwo {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  right: 20rpx;
 }
 
 /*头像*/
@@ -147,6 +191,7 @@
   background-color: #fff;
   margin-right: 20rpx;
 }
+
 .body .avatarTwo {
   width: 80rpx;
   height: 80rpx;
@@ -189,6 +234,7 @@
 }
 
 /*音频消息*/
+
 .body .contentVideoMsg {
   margin-bottom: 20rpx;
   padding: 15rpx;
@@ -197,8 +243,8 @@
 }
 
 .body .payloadImage {
-  height:20px;
-  width:14px
+  height: 20px;
+  width: 14px;
 }
 
 /*底部工具栏*/
@@ -297,6 +343,7 @@
 }
 
 /*一行末尾的单个功能*/
+
 .toolbarBox .toolbarDivFifth {
   margin: 0 0 20rpx 0;
 }

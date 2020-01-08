@@ -2,7 +2,10 @@
   <!-- 顶部 -->
   <view class="middle-one">
     <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap">
-      <image src="{{talkInfo.doctorInfo.faceImage}}"/>
+      <view class="headDiv">
+        <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" />
+        <image class="headImgBac" src="../../../../images/chat/docBacImg.png" />
+      </view>
       <view class="info-box">
         <view class="flexRowStartCenter">
           <text class="info_one">{{talkInfo.doctorInfo.doctorName}}</text>
@@ -12,7 +15,10 @@
       </view>
     </view>
     <view class="middleOne-box" bindtap="doctorDetailTap">
-      <image src="{{talkInfo.assistantInfo.faceImage}}"/>
+      <view class="headDiv">
+        <image class="headImg" src="{{talkInfo.assistantInfo.faceImage}}" />
+        <image class="headImgBac" src="../../../../images/chat/docBacImg.png" />
+      </view>
       <view class="info-box">
         <view class="flexRowStartCenter">
           <text class="info_one">{{talkInfo.assistantInfo.doctorName}}</text>
@@ -24,7 +30,7 @@
   </view>
   <!-- 消息列表 -->
   <scroll-view class="{{isOpenBottomBoolbar ? 'message-list-two': 'message-list'}}" scroll-into-view="{{toView}}" scroll-with-animation="true" upper-threshold="100" scroll-y="true" enable-back-to-top="true" bindtap="clickScrollViewFun">
-  <!-- 空置盒子1 -->
+    <!-- 空置盒子1 -->
     <view class="marginBoxOne"></view>
     <view class="row" wx:for="{{currentMessageList}}" wx:key="{{item.keyID}}" id="item{{index}}">
       <!-- 日期 -->
@@ -32,9 +38,21 @@
       <!-- 头像与内容文本 -->
       <view class="body" style="flex-flow: {{item.from == talkInfo.multiTalkInfo.patientID ? 'row-reverse': 'row'}}">
         <view class="avatar-container">
-            <image wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" src="{{talkInfo.patientInfo.faceImage}}" class="avatarTwo" />
-            <image wx:elif="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" src="{{talkInfo.doctorInfo.faceImage}}" class="avatarOne" />
-            <image wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}" src="{{talkInfo.assistantInfo.faceImage}}" class="avatarOne" />
+          <!-- 患者头像 -->
+          <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="personHeadImgDiv">
+            <image wx:if="{{!talkInfo.patientInfo.faceImage}}" class="personHeadImgBac" src="../../../../images/chat/docBacImg.png" />
+            <image ex:else src="{{talkInfo.patientInfo.faceImage}}" class="avatarTwo" />
+          </view>
+          <!-- 医生头像 -->
+          <view wx:elif="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" class="personHeadImgDiv">
+            <image wx:if="{{!talkInfo.doctorInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/docBacImg.png" />
+            <image src="{{talkInfo.doctorInfo.faceImage}}" class="avatarOne" />
+          </view>
+          <!-- 医助头像 -->
+          <view wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}" class="personHeadImgDiv">
+            <image wx:if="{{!talkInfo.assistantInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/docBacImg.png" />
+            <image src="{{talkInfo.assistantInfo.faceImage}}" class="avatarOne" />
+          </view>
         </view>
         <!-- 画对话框 -->
         <view>
@@ -68,13 +86,13 @@
     <view class="reply">
       <view class="opration-area">
         <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" />
-        <input class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun"/>
+        <input class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" />
         <image src="../../../../images/chat/inputIcon.png" class="inputIcon" />
       </view>
       <view class="send">
-        <image wx:if="{{isOpenBottomBoolbar}}" src="../../../../images/chat/m-close.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun"/>
+        <image wx:if="{{isOpenBottomBoolbar}}" src="../../../../images/chat/m-close.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
         <view wx:elif="{{maySendContent.length > 0}}" bindtap="sendContentMsg">发送</view>
-        <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun"/>
+        <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
       </view>
     </view>
     <view wx:if="{{isOpenBottomBoolbar}}" class="toolbarBox">
