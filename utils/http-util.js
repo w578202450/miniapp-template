@@ -4,7 +4,12 @@ var API_BASE_URL = 'http://10.0.0.210:6112/';
 var request = function request(url, needDomain,method, data) {
   
   var _url = needDomain ? (API_BASE_URL + url) : url;
-  console.log("request-----method:" + method + "---url:" + _url + "---params:" + JSON.stringify(data));
+  console.log("------------------------");
+  console.log("请求地址:"+ _url);
+  console.log("请求入参:"+ JSON.stringify(data));
+  console.log("请求方式:" + method);
+  console.log("------------------------");
+
   return new Promise(function (resolve, reject) {
     
     wx.request({
@@ -16,11 +21,11 @@ var request = function request(url, needDomain,method, data) {
       data: data,
       success: function success(request) {
         resolve(request.data);
-        console.log("success----data:", request.data)
+        console.log("数据请求成功:", request.data)
       },
       fail: function fail(error) {
         reject(error);
-        console.log("fail----data:", error)
+        console.log("数据请求失败:", error)
       },
       complete: function complete(aaa) {
         // 加载完成
@@ -59,13 +64,12 @@ module.exports = {
   getPatientInfo: function getPatientInfo(parmas){
     return request('api/tmc/patient/getPatientInfoByOpenID', true, 'get', parmas);
   },
-<<<<<<< HEAD
 /*
   *查询患者处方列表
   */
   getRpListByPerson: function getRpListByPerson(parmas){
     return request('api/tmc/rp/getRpListByPerson', true, 'get', parmas);
-=======
+  },
   /*
   *查询患者的多方对话
   */
@@ -77,7 +81,6 @@ module.exports = {
   */
   createInquiry: function createInquiry(parmas){
     return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
->>>>>>> 0a47f89d32abdfb2f03ee8d65b4246591d99848a
   }
 
 }

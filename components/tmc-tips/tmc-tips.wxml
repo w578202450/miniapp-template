@@ -1,0 +1,8 @@
+<view class="tmc-tipView">
+  <image src="{{icon}}" mode="widthFix"></image>
+  <text class="tips-title">{{title}}</text>
+  <text class="message">{{message}}</text>
+  <view class="btnView">
+    <button bindtap="buttonOption">{{buttonTitle}}</button>
+  </view>
+</view>

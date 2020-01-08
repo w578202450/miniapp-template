@@ -4,29 +4,18 @@ const HTTP = require('../../../utils/http-util')
 
 Page({
   data: {
-    params: {}
-    // list: [{
-    //     date: '2019-12-22',
-    //     content: '体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。',
-    //     id: 0
-    //   },
-    //   {
-    //     date: '2019-12-22',
-    //     content: '体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。',
-    //     id: 1
-    //   },
-    //   {
-    //     date: '2019-12-22',
-    //     content: '体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。体弱多病，四肢酸软，腰痛1年多。',
-    //     id: 2
-    //   },
-    // ]
+    params: {},
+    noNetwork: false,
+    noData: false,
+    list: {}
   },
   onLoad: function() {
-    this.quiryDatas()
+    this.loadDatas()
   },
 
-  quiryDatas() {
+  loadDatas() {
+    wx.showLoading();
+    this.data.list = [];
     var that = this;
     wx.getStorage({
       key: 'personInfo',
@@ -37,16 +26,46 @@ Page({
             patientID: res.data.keyID
           },
         })
-        wx.showLoading({
-          title: '加载中',
-        })
-        HTTP.getRpListByPerson(that.data.params).then(res => {
-          wx.hideLoading()
-          if (res.code == 0) {
-          }
-        })
+        HTTP.getRpListByPerson(that.data.params)
+          .then(res => {
+            wx.hideLoading();
+            if (res.code == 0) {
+              if (res.data.length == 0) {
+                that.setData({
+                  noData: true
+                })
+              } else {
+                this.data.list = this.data.list.concat(res.data)
+                that.setData({
+                  list: this.data.list
+                })
+              }
+            }
+          }).catch(e => {
+            wx.hideLoading();
+            that.setData({
+              noNetwork: true
+            })
+          })
+
+      },
+      fail:function(){
+        wx.hideLoading();
       }
     })
+    
+  },
+
+  moreDatas:function(){
 
   },
+
+  noNetworkOption: function() {
+    this.loadDatas()
+  },
+
+  noDataOption: function() {
+
+  }
+
 })

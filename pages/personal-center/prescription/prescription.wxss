@@ -1,5 +1,5 @@
 
-page{
+.tmc-container{
   padding-top: 20rpx;
 }
 .cell{

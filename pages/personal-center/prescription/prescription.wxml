@@ -1,8 +1,18 @@
-<navigator wx:key="id" wx:for="{{list}}" wx:for-item="item" wx:for-index="index" url="/pages/personal-center/prescription-details/prescription-details">
-  <view class="cell">
-    <view>
-      <text class="content">症状：{{item.content}}--------{{index}}</text>
-    </view>
-    <text class="date">开放日期：{{item.date}}</text>
+<block wx:if="{{noNetwork}}">
+  <tmcTipsView bind:buttonOption="noNetworkOption"></tmcTipsView>
+</block>
+<block wx:elif="{{noData}}">
+  <tmcTipsView icon="/images/public/public_no_prescription.png" title="暂无处方" message="您暂无处方信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
+</block>
+<block wx:else>
+  <view class="tmc-container">
+    <navigator wx:key="id" wx:for="{{list}}" wx:for-item="item" wx:for-index="index" url="/pages/personal-center/prescription-details/prescription-details">
+      <view class="cell">
+        <view>
+          <text class="content">症状：{{item.content}}--------{{index}}</text>
+        </view>
+        <text class="date">开放日期：{{item.date}}</text>
+      </view>
+    </navigator>
   </view>
-</navigator>
+</block>
