@@ -147,6 +147,12 @@
 					"pathName": "pages/online-inquiry/inquiry/index/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "处方详情",
+					"pathName": "pages/personal-center/prescription-details/prescription-details",
+					"scene": null
 				}
 			]
 		}

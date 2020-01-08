@@ -22,6 +22,12 @@ var request = function request(url, needDomain,method, data) {
       success: function success(request) {
         resolve(request.data);
         console.log("数据请求成功:", request.data)
+        if (request.data.code != 0){
+          wx.showToast({
+            title: request.data.message,
+            icon: "none"
+          })
+        }
       },
       fail: function fail(error) {
         reject(error);
@@ -81,6 +87,13 @@ module.exports = {
   */
   createInquiry: function createInquiry(parmas){
     return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
-  }
+  },
+  /*
+   *处方详情
+   */
+  getRpInfo: function getRpInfo(parmas) {
+    return request('api/tmc/rp/getRpInfoByInquiryID', true, 'get', parmas);
+  },
+  
 
 }

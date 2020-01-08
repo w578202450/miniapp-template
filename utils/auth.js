@@ -43,6 +43,14 @@ async function getPatientInfo(openID) {
       wx.setStorage({
         key: 'personInfo',
         data: res.data
+      }),
+      wx.setStorage({
+        key: 'orgID',
+        data: res.data.orgID,
+      }),
+      wx.setStorage({
+        key: 'patientID',
+        data: res.data.keyID
       })
     }
   })

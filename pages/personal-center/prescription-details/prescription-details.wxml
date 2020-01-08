@@ -7,25 +7,25 @@
     <view class="header-content">
       <text class="header-title">电子处方</text>
       <view class="header-personinfo">
-        <text class="personinfo-details">姓名：吕梁</text>
-        <text class="personinfo-details">性别：男</text>
-        <text class="personinfo-details">年龄：25</text>
+        <text class="personinfo-details">姓名：{{info.rp.patientName}}</text>
+        <text class="personinfo-details">性别：{{info.rp.sex==0 ? "男" : "女"}}</text>
+        <text class="personinfo-details">年龄：{{info.rp.age}}</text>
       </view>
       <view class="personinfo-other-box">
         <text class="personinfo-other">症状描述：体寒多病</text>
       </view>
       <view class="personinfo-other-box">
-        <text class="personinfo-other">诊断：体虚湿热</text>
+        <text class="personinfo-other">诊断：{{info.rp.diagnosis}}</text>
       </view>
       <view class="personinfo-other-box">
-        <text class="personinfo-other">开方日期：2019-12-30</text>
+        <text class="personinfo-other">开方日期：{{info.rp.rpTime}}</text>
       </view>
     </view>
   </view>
 
   <view class="middle">
   <view class="middle-rp">RP</view>
-  <view class="middle-rp-item" wx:for="{{list}}" wx:for-item="item">
+  <view class="middle-rp-item" wx:for="{{info.rpMedicines}}" wx:for-item="item">
     <view class="rp-info-box">
       <view class="rp-info-subviewBox">
         <text class="rp-name">{{item.name}}</text>
@@ -36,20 +36,20 @@
     <text class="rp-methods">{{item.methods}}</text>
     <view class=".rp-lineView"></view>
   </view>
-  <view class="rp-advice">医嘱：多运动，少熬夜。医嘱：多运动，少熬夜。医嘱：多运动，少熬夜。医嘱：多运动，少熬夜。医嘱：多运动，少熬夜。</view>
+  <view class="rp-advice">医嘱：{{info.rp.rpAdvice}}</view>
   </view>
   <view class="bottom">
     <view class="bottom-doctor-left">
-      <text class="bottom-doctor-name">开方医生：李荣豪</text>
+      <text class="bottom-doctor-name">开方医生：{{info.rp.doctorName}}</text>
       <view class="bottom-seal-box">
-        <text class="bottom-doctor-sealname">李荣豪</text>
+        <text class="bottom-doctor-sealname">{{info.rp.doctorName}}</text>
         <image src="../../../images/profile/profile_doctor_seal.png"></image>
       </view>
     </view>
     <view class="bottom-doctor-right">
-      <text class="bottom-doctor-name">审方药师：王一成</text>
+      <text class="bottom-doctor-name">审方药师：{{info.rp.assistantName}}</text>
       <view class="bottom-seal-box">
-        <text class="bottom-doctor-sealname">王一成</text>
+        <text class="bottom-doctor-sealname">{{info.rp.assistantName}}</text>
         <image src="../../../images/profile/profile_doctor_seal.png"></image>
       </view>
     </view>
