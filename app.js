@@ -13,16 +13,14 @@ const UTIL = require('utils/util')
 const tim = TIM.create({
   SDKAppID: SDKAPPID
 })
-tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
-// tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
+// tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
+tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
 
 // 将腾讯云对象存储服务 SDK （以下简称 COS SDK）注册为插件，IM SDK 发送文件、图片等消息时，需要用到腾讯云的 COS 服务
 // 注册 COS SDK 插件
 tim.registerPlugin({
   'cos-wx-sdk': COS
 })
-
-
 
 App({
   onLaunch: function() {
@@ -133,18 +131,6 @@ App({
     //   console.log("===登出成功===" + imResponse.data); // 登出成功
     // }).catch(function (imError) {
     //   console.warn("===登出成功===" + 'logout error:', imError);
-    // });
-
-    // 创建私有群
-    // let promise1 = tim.createGroup({
-    //   type: TIM.TYPES.GRP_PRIVATE,
-    //   name: 'WebSDK',
-    //   memberList: [{ userID: 'user1' }, { userID: 'user2' }] // 如果填写了 memberList，则必须填写 userID
-    // });
-    // promise1.then(function (imResponse) { // 创建成功
-    //   console.log("===创建私有群成功===" + imResponse.data.group); // 创建的群的资料
-    // }).catch(function (imError) {
-    //   console.warn('createGroup error:', imError); // 创建群组失败的相关信息
     // });
 
   },
