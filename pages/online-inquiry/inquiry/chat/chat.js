@@ -8,26 +8,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    toView: '',
-    groupID: "20010720253396104153012001",
-    orgID: "19122116554357936820511001",
-    patientID: "20010620211271745513006001",
-    // 用户信息
-    userInfo: {
-      keyID: "111",
-      patientName: "大娃",
-      faceImage: "../../../../images/home/home_doctor.png"
-    },
-    // 对话信息
+    toView: "", // 手机屏幕自动滚动到达的位置
+    userInfo: {}, // 当前用户信息
+    // 多方对话对话信息
     talkInfo: {
-      patientInfo: {},
-      assistantInfo: {},
-      doctorInfo: {}
+      doctorInfo: {}, // 医生信息详情
+      assistantInfo: {}, // 医助信息详情
+      patientInfo: {},  // 患者信息详情
+      multiTalkInfo: {} // 三者ID信息
     },
+    inquiryInfo: {}, // 问诊信息
     // 聊天列表信息
-    currentMessageList: [{
-      
-
+    currentMessageList: [
+      {
         keyID: "4",
         type: "TIM.TYPES.MSG_TEXT",
         personID: "111",
@@ -91,22 +84,6 @@ Page({
     countIndex: 1 // 可选图片剩余的数量
   },
 
-  // 从storage中获取患者信息
-  getPersonInfo: function () {
-    let that = this;
-    wx.getStorage({
-      key: 'personInfo',
-      success: function (res) {
-        console.log("===患者信息===" + "orgID:" + res.data.orgID + ",patientID:" + res.data.keyID);
-        that.setData({
-          orgID: res.data.orgID,
-          patientID: res.data.keyID
-        })
-        that.getPatientMultiTalk();
-      }
-    })
-  },
-
   // 点击医生查看详情
   doctorDetailTap: function() {
     wx.navigateTo({
@@ -117,76 +94,97 @@ Page({
     })
   },
 
+  // 从storage中获取患者信息
+  getPersonInfo: function () {
+    let that = this;
+    wx.getStorage({
+      key: 'personInfo',
+      success: function (res) {
+        that.setData({
+          userInfo: res.data
+        });
+        // 查询患者的多方对话
+        that.getPatientMultiTalk();
+      }
+    })
+  },
+
   // 查询患者的多方对话
   getPatientMultiTalk: function() {
     let that = this;
     let prams = {
-      orgID: "19122116554357936820511001",
-      patientID: "20010620211271745513006001",
-      // orgID: that.data.orgID,
-      // patientID: that.data.patientID,
-      doctorStaffID: "20010614315987359400514001",
-      assistantStaffID: "20010614411088137430514001"
+      orgID: that.data.userInfo.orgID,
+      patientID: that.data.userInfo.keyID,
+      doctorStaffID: that.data.userInfo.doctorStaffID,
+      assistantStaffID: that.data.userInfo.assistantStaffID
     };
     HTTP.getPatientMultiTalk(prams).then(res => {
-      if (res.code == 0) {
-        console.log("===请求成功||查询患者的多方对话===" + JSON.stringify(res.data));
-        // 医生信息
-        that.data.talkInfo.doctorInfo = res.data.doctor;
-        // 医助信息
-        that.data.talkInfo.assistantInfo = res.data.assistant;
-        // 患者信息
-        that.data.talkInfo.patientInfo = res.data.patient;
-        // 创建问诊
-        that.createInquiry();
-
-      } else {
-        console.log("===请求失败||查询患者的多方对话===");
-      }
+      let resData = res.data;
+      that.setData({
+        talkInfo: {
+          doctorInfo: resData.doctor,
+          assistantInfo: resData.assistant,
+          patientInfo: resData.patient,
+          multiTalkInfo: resData.multiTalk
+        }
+      });
+      // 创建问诊
+      that.createInquiry();
     })
   },
-
-  // 创建群
-  // creatGroup: function() {
-  //   let that = this;
-  //   // 创建私有群
-  //   let promise = tim.createGroup({
-  //     type: TIM.TYPES.GRP_PRIVATE,
-  //     name: 'WebSDK',
-  //     memberList: [{ userID: '20010614315987342600531001' }, { userID: '20010614411089625710531001' }] // 如果填写了 memberList，则必须填写 userID
-  //   });
-  //   promise.then(function (imResponse) { // 创建成功
-  //     console.log("===创建群成功===" + imResponse.data.group); // 创建的群的资料
-  //   }).catch(function (imError) {
-  //     console.warn("===创建群失败===" + 'createGroup error:', imError); // 创建群组失败的相关信息
-  //   });
-  // },
 
   // 创建问诊
   createInquiry: function() {
+    let that = this;
     let prams = {
-      orgID: "19122116554357936820511001",
-      patientID: "20010620211271745513006001",
-      assistantStaffID: "20010614411088137430514001",
-      assistantName: "tmc1011",
-      doctorStaffID: "20010614315987359400514001",
-      doctorName: "tmc1001"
+      orgID: that.data.userInfo.orgID,
+      patientID: that.data.userInfo.keyID,
+      doctorStaffID: that.data.userInfo.doctorStaffID,
+      doctorName: that.data.talkInfo.doctorInfo.doctorName,
+      assistantStaffID: that.data.userInfo.assistantStaffID,
+      assistantName: that.data.talkInfo.assistantInfo.doctorName
     };
     HTTP.createInquiry(prams).then(res => {
-      if (res.code == 0) {
-        console.log("===请求成功||创建问诊===" + JSON.stringify(res.data));
-        // wx.setStorage({
-        //   key: 'personInfo',
-        //   data: res.data
-        // })
-      } else {
-        console.log("===请求失败||创建问诊===");
-      }
+      that.setData({
+        inquiryInfo: res.data
+      });
+      // 获取历史消息
+      that.getHistoryMessage();
     })
   },
 
-  /*查询：列表聊天历史信息 */
-  getMsgListFun: function() {
+  // 打开会话时,消息设置成已读
+  setMessageRead: function () {
+    let that = this;
+    // 将某会话下所有未读消息已读上报
+    tim.setMessageRead({ conversationID: that.data.inquiryInfo.keyID });
+    console.log("===消息设置成已读===");
+  },
+
+  // 打开会话时,获取最近消息列表
+  getHistoryMessage: function () {
+    let that = this;
+    let promise = tim.getMessageList({ conversationID: that.data.inquiryInfo.keyID, count: 5 });
+    promise.then(function (imResponse) {
+      const messageList = imResponse.data.messageList; // 消息列表
+      console.log("===第一次拉取消息列表===" + JSON.stringify(messageList));
+      const nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段
+      const isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息
+    });
+  },
+
+  // 下拉加载历史消息列表
+  getHistoryMessageNext: function () {
+    let that = this;
+    let promise = tim.getMessageList({ conversationID: that.data.inquiryInfo.keyID, nextReqMessageID: nextReqMessageID, count: 5 });
+    promise.then(function (imResponse) {
+      const messageList = imResponse.data.messageList; // 消息列表
+      console.log("===下一次拉取消息列表===" + JSON.stringify(messageList));
+    });
+  },
+
+  /*滚动：消息底部 */
+  toViewBottomFun: function() {
     // 初始化数据
     //     that.setData({
     //       currentMessageList: res.data,
@@ -226,7 +224,7 @@ Page({
     }
   },
   
-  /*打开相册*/
+  /*操作：打开相册*/
   chooseWxImage: function() {
     let that = this;
     wx.chooseImage({
@@ -244,7 +242,7 @@ Page({
     })
   },
 
-  /*打开相机 */
+  /*操作：打开相机 */
   cameraWxFun: function() {
     let that = this;
     wx.chooseImage({
@@ -267,21 +265,20 @@ Page({
     let that = this;
     // 1. 创建消息实例
     let message = tim.createImageMessage({
-      to: that.data.groupID, // 群ID
+      to: that.data.inquiryInfo.keyID, // 群ID
       conversationType: TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         file: that.data.aimgurl
       },
       onProgress: function(event) {
-        console.log('file uploading:', event)
+        // console.log('file uploading:', event)
       }
     });
-    console.log(message);
+    // console.log(message);
     // 2. 发送图片
     let promise = tim.sendMessage(message);
     promise.then(function(imResponse) {
-      // 发送成功
-      console.log("===发送图片成功===" + imResponse);
+      // console.log("===发送图片成功===" + imResponse);
     }).catch(function(imError) {
       // 发送失败
       console.warn('===发送图片失败===', imError);
@@ -299,9 +296,8 @@ Page({
     that.httpLoading = true;
     //------------------------------发送文本消息------------------------------
     // 1. 创建消息实例，接口返回的实例可以上屏
-    console.log("-------GROUPID-----------" + that.data.groupID)
     let message = tim.createTextMessage({
-      to: that.data.groupID, // 群ID
+      to: that.data.inquiryInfo.keyID, // 群ID
       conversationType: TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         text: that.data.maySendContent
@@ -311,7 +307,6 @@ Page({
     let promise = tim.sendMessage(message);
     promise.then(function(imResponse) {
       // 发送成功
-      console.log("===发送文本消息成功===" + imResponse);
       let nowData = [...that.data.currentMessageList, obj];
       that.setData({
         currentMessageList: nowData,
@@ -319,7 +314,7 @@ Page({
       });
       // 关闭隐性加载过程
       that.httpLoading = false;
-      that.getMsgListFun();
+      that.toViewBottomFun();
     }).catch(function(imError) {
       // 发送失败
       // console.warn("===发送失败===" + 'sendMessage error:', imError);
@@ -374,12 +369,12 @@ Page({
   },
 
   /*操作：视频通话 */
-  videoWxFun() {
+  videoWxFun:function() {
     console.log("视频啦");
   },
 
   /*操作：点击消息窗口 */
-  clickScrollViewFun() {
+  clickScrollViewFun: function() {
     this.setData({
       isOpenBottomBoolbar: false,
       toView: `item${this.data.currentMessageList.length - 1}`
@@ -387,7 +382,7 @@ Page({
   },
 
   /*操作：打开、关闭 底部工具栏 */
-  isOpenBottomBoolbarFun() {
+  isOpenBottomBoolbarFun: function() {
     this.setData({
       isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar,
       toView: `item${this.data.currentMessageList.length - 1}`
@@ -398,13 +393,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 从storage中获取患者信息
     this.getPersonInfo();
-    // 查询患者的多方对话
-    this.getPatientMultiTalk();
     // 创建群
     // this.creatGroup();
-    // 查询：聊天列表信息
-    this.getMsgListFun();
+    // 滚动：小心底部
+    this.toViewBottomFun();
   },
 
   /**
