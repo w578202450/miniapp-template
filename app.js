@@ -116,21 +116,17 @@ App({
     });
 
     // IM登录
-    if (that.globalData.personInfo.keyID) {
-      console.log(that.globalData);
-      let promise = tim.login({
-        // userID: '20010620211271745513006001',
-        // userSig: genTestUserSig('20010620211271745513006001').userSig
-        userID: that.globalData.personInfo.keyID,
-        userSig: genTestUserSig(that.globalData.personInfo.keyID).userSig
-      });
-      promise.then(function (imResponse) {
-        console.log("===登录成功===" + imResponse.data); // 登录成功
-      }).catch(function (imError) {
-        // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
-      });
-    }
-    
+    let userInfo = wx.getStorageSync("personInfo");
+    let promise = tim.login({
+      userID: userInfo.keyID,
+      userSig: genTestUserSig(userInfo.keyID).userSig
+    });
+    promise.then(function(imResponse) {
+      console.log("===登录成功===" + imResponse.data); // 登录成功
+    }).catch(function(imError) {
+      // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
+    });
+
     // IM登出
     // let promise = tim.logout();
     // promise.then(function (imResponse) {
@@ -152,11 +148,10 @@ App({
     // });
 
   },
-
   globalData: {
     personInfo: {},
     receiveMessageInfo: '',
-    baseUrl:'http://10.0.0.210:6112/'
+    baseUrl: 'http://10.0.0.210:6112/'
   },
   tim: tim,
   TIM: TIM
