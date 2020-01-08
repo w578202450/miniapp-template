@@ -116,8 +116,10 @@ App({
     // IM登录
     let userInfo = wx.getStorageSync("personInfo");
     let promise = tim.login({
-      userID: userInfo.keyID,
-      userSig: genTestUserSig(userInfo.keyID).userSig
+      // userID: userInfo.keyID,
+      // userSig: genTestUserSig(userInfo.keyID).userSig
+      userID: "20010620211271745513006001",
+      userSig: genTestUserSig("20010620211271745513006001").userSig
     });
     promise.then(function(imResponse) {
       console.log("===登录成功===" + imResponse.data); // 登录成功
