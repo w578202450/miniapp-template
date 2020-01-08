@@ -102,7 +102,7 @@ Page({
           orgID: res.data.orgID,
           patientID: res.data.keyID
         })
-        getPatientMultiTalk();
+        that.getPatientMultiTalk();
       }
     })
   },
