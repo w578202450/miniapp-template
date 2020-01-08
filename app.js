@@ -10,9 +10,13 @@ import {
 const AUTH = require('utils/auth')
 const HTTP = require('utils/http-util')
 const UTIL = require('utils/util')
+
+// 创建 TIM SDK 实例
 const tim = TIM.create({
   SDKAppID: SDKAPPID
 })
+
+// 设置日志级别
 // tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
 tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
 
