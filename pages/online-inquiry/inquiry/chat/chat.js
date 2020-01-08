@@ -98,7 +98,6 @@ Page({
           multiTalkInfo: resData.multiTalk
         }
       });
-      console.log(that.data.talkInfo);
       // 创建问诊
       that.createInquiry();
     })
@@ -137,7 +136,6 @@ Page({
     let that = this;
     let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, count: 5 });
     promise.then(function (imResponse) {
-      console.log(imResponse.data);
       that.setData({
         currentMessageList: imResponse.data.messageList,
         nextReqMessageID: imResponse.data.nextReqMessageID,
@@ -251,12 +249,9 @@ Page({
       },
       onProgress: function (event) { } // 发送图片进度
     });
-    // console.log(message);
     // 2. 发送图片
     let promise = tim.sendMessage(message);
     promise.then(function (imResponse) {
-      console.log("===发送图片成功===");
-      console.log(imResponse);
       let nowData = [...that.data.currentMessageList, imResponse.data.message];
       that.setData({
         currentMessageList: nowData,
@@ -267,7 +262,7 @@ Page({
       that.toViewBottomFun();
     }).catch(function (imError) {
       // 发送失败
-      console.warn('===发送图片失败===', imError);
+      console.warn('===发送图片失败===sendMessage error:', imError);
     });
   },
 
@@ -302,7 +297,7 @@ Page({
       that.toViewBottomFun();
     }).catch(function (imError) {
       // 发送失败
-      // console.warn("===发送失败===" + 'sendMessage error:', imError);
+      console.warn("===发送失败===sendMessage error:", imError);
     });
     //------------------------------发送文本消息------------------------------
 

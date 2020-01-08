@@ -118,7 +118,7 @@ App({
     promise.then(function(imResponse) {
       console.log("===登录成功===" + imResponse.data); // 登录成功
     }).catch(function(imError) {
-      // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
+      console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
     });
   },
 
@@ -138,7 +138,7 @@ App({
  * 生命周期函数--监听页面隐藏
  */
   onHide: function () {
-    console.log("===页面隐藏===")
+    // console.log("===页面隐藏===")
     tim.off(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
   },
 
