@@ -106,7 +106,7 @@ App({
     });
 
     tim.on(TIM.EVENT.KICKED_OUT, function(event) {
-      // 收到被踢下线通知
+      // 收到被踢下线通知1
       // event.name - TIM.EVENT.KICKED_OUT
       // event.data.type - 被踢下线的原因，例如:
       //    - TIM.TYPES.KICKED_OUT_MULT_ACCOUNT 多实例登录被踢
@@ -116,16 +116,21 @@ App({
     });
 
     // IM登录
-    let promise = tim.login({
-      userID: '20010620211271745513006001',
-      userSig: genTestUserSig('20010620211271745513006001').userSig
-    });
-    promise.then(function(imResponse) {
-      console.log("===登录成功===" + imResponse.data); // 登录成功
-    }).catch(function(imError) {
-      // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
-    });
-
+    if (that.globalData.personInfo.keyID) {
+      console.log(that.globalData);
+      let promise = tim.login({
+        // userID: '20010620211271745513006001',
+        // userSig: genTestUserSig('20010620211271745513006001').userSig
+        userID: that.globalData.personInfo.keyID,
+        userSig: genTestUserSig(that.globalData.personInfo.keyID).userSig
+      });
+      promise.then(function (imResponse) {
+        console.log("===登录成功===" + imResponse.data); // 登录成功
+      }).catch(function (imError) {
+        // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
+      });
+    }
+    
     // IM登出
     // let promise = tim.logout();
     // promise.then(function (imResponse) {
@@ -149,11 +154,9 @@ App({
   },
 
   globalData: {
-    userInfo: null,
+    personInfo: {},
     receiveMessageInfo: '',
-    baseUrl:'http://10.0.0.210:6112/',
-    // 创建问诊
-    createInquiryUrl: "api/tmc/inquiryRecord/createInquiry",
+    baseUrl:'http://10.0.0.210:6112/'
   },
   tim: tim,
   TIM: TIM

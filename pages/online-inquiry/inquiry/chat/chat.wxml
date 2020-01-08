@@ -32,7 +32,7 @@
       <!-- 头像与内容文本 -->
       <view class="body" style="flex-flow: {{item.personID == talkInfo.patientInfo.keyID ? 'row-reverse': 'row'}}">
         <view class="avatar-container">
-          <image class="avatar" src="{{item.faceImage}}" class="{{item.personID == talkInfo.patientInfo.keyID ? 'avatarTwo': 'avatarOne'}}" />
+          <image src="{{item.personID == talkInfo.patientInfo.keyID ? talkInfo.patientInfo.faceImage: item.personID == talkInfo.doctorInfo.keyID ? talkInfo.doctorInfo.faceImage: talkInfo.assistantInfo.faceImage}}" class="{{item.personID == talkInfo.patientInfo.keyID ? 'avatarTwo': 'avatarOne'}}" />
         </view>
         <!-- 画对话框 -->
         <view>
