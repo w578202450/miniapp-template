@@ -171,6 +171,7 @@ Page({
       const nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段
       const isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息
     });
+    
   },
 
   // 下拉加载历史消息列表
