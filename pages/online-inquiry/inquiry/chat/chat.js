@@ -134,7 +134,7 @@ Page({
   // 打开会话时,获取最近消息列表
   getHistoryMessage: function () {
     let that = this;
-    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, count: 5 });
+    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, count: 10 });
     promise.then(function (imResponse) {
       that.setData({
         currentMessageList: imResponse.data.messageList,
@@ -145,13 +145,29 @@ Page({
 
   },
 
+  /*操作：下拉加载数据（页面相关事件处理函数——监听用户下拉动作） */
+  onPullDownRefresh: function () {
+    let that = this;
+    console.log("++++++下拉刷新++++++");
+    wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
+    that.getHistoryMessageNext();
+  
+  },
+
   // 下拉加载历史消息列表
   getHistoryMessageNext: function () {
     let that = this;
-    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, nextReqMessageID: nextReqMessageID, count: 5 });
+    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, nextReqMessageID: that.data.nextReqMessageID, count: 10 });
     promise.then(function (imResponse) {
       const messageList = imResponse.data.messageList; // 消息列表
       console.log("===下一次拉取消息列表===" + JSON.stringify(messageList));
+      that.data.currentMessageList = [...messageList, ...that.data.currentMessageList];
+      console.log(that.data.currentMessageList);
+      setTimeout(function () {
+        wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
+        wx.stopPullDownRefresh(); // 停止下拉刷新过程
+        console.log("------停止刷新------");
+      }, 2000)
     });
   },
 
@@ -351,6 +367,13 @@ Page({
   /*操作：视频通话 */
   videoWxFun: function () {
     console.log("视频啦");
+    wx.navigateTo({
+      // url: '../../../../pages/personal-center/health-information/health-information',
+      url: '../../../../pages/online-inquiry/inquiry/video/room',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
 
   /*操作：点击消息窗口 */
