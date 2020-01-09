@@ -272,19 +272,6 @@ Page({
 
   onLoad: function (options) {
     console.log(options);
-    // let self = this;
-    // self.setData({
-    //   userID: this.data.userID,
-    //   sdkAppID: this.data.sdkAppID,
-    //   roomID: this.data.roomID,
-    //   userSig: this.data.userSig,
-    //   privateMapKey: this.data.privateMapKey // 房间权限 key，需要从自行搭建的签名服务获取
-    //   //如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
-    // },
-    //    var webrtcroomCom = self.selectComponent('#myroom');
-    //   if (webrtcroomCom) {
-    //     webrtcroomCom.start();
-    //   }
     // 这里需要调用签名服务获取 userSig 等签名信息
     // userSig 需要在您的业务服务器上计算，否则会泄露您的私钥从而造成安全隐患
     // userSig 的计算请阅读文档：https://cloud.tencent.com/document/product/647/17275
