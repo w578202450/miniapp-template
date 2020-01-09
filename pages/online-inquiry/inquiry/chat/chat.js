@@ -19,47 +19,10 @@ Page({
     },
     inquiryInfo: {}, // 问诊信息
     // 聊天列表信息
-    currentMessageList: [
-      {
-        keyID: "3",
-        type: "TIM.TYPES.MSG_TEXT",
-        personID: "20010614315987342600531001",
-        personName: "医生",
-        addTime: "2019-12-28 10:03:00",
-        msgText: "怎么了"
-      },
-      {
-        keyID: "4",
-        type: "TIM.TYPES.MSG_TEXT",
-        personID: "20010620125843541630543001",
-        personName: "大娃",
-        addTime: "2019-12-28 10:03:00",
-        msgText: "脑壳痛，胸口闷，我有一点昏。脚杆青痛感觉不对头。"
-      },
-      {
-        keyID: "5",
-        type: "TIM.TYPES.MSG_IMAGE",
-        personID: "20010620125843541630543001",
-        personName: "大娃",
-        addTime: "2019-12-28 10:03:00",
-        msgText: "",
-        imgInfo: {
-          imgUrl: "../../../../images/home/home_doctor.png"
-        }
-      },
-      {
-        keyID: "6",
-        type: "TIM.TYPES.MSG_AUDIO",
-        personID: "20010620125843541630543001",
-        personName: "大娃",
-        addTime: "2019-12-28 10:03:00",
-        msgText: "",
-        payload: {
-          second: 5
-        }
-      }
-    ],
-    httpLoading: false,
+    currentMessageList: [],
+    nextReqMessageID: "", // 用于续拉，分页续拉时需传入该字段
+    isCompleted: false, // 表示是否已经拉完所有消息
+    httpLoading: false, // 是否请求中
     pageInfo: {
       pageIndex: 1,
       pageSize: 10
@@ -67,35 +30,35 @@ Page({
     maySendContent: "", // 输入的聊天内容
     isOpenBottomBoolbar: false, // 是否打开工具栏
     toolbarMenus: [{
-        title: "图片",
-        iconUrl: "../../../../images/chat/m-image.png",
-        clickFun: "chooseWxImage",
-        isFifth: false
-      },
-      {
-        title: "拍照",
-        iconUrl: "../../../../images/chat/m-camera.png",
-        clickFun: "cameraWxFun",
-        isFifth: false
-      },
-      {
-        title: "视频问诊",
-        iconUrl: "../../../../images/chat/m-video.png",
-        clickFun: "videoWxFun",
-        isFifth: false
-      }
+      title: "图片",
+      iconUrl: "../../../../images/chat/m-image.png",
+      clickFun: "chooseWxImage",
+      isFifth: false
+    },
+    {
+      title: "拍照",
+      iconUrl: "../../../../images/chat/m-camera.png",
+      clickFun: "cameraWxFun",
+      isFifth: false
+    },
+    {
+      title: "视频问诊",
+      iconUrl: "../../../../images/chat/m-video.png",
+      clickFun: "videoWxFun",
+      isFifth: false
+    }
     ],
     aimgurl: {}, // //临时图片的信息
     countIndex: 1 // 可选图片剩余的数量
   },
 
   // 点击医生查看详情
-  doctorDetailTap: function() {
+  doctorDetailTap: function () {
     wx.navigateTo({
       url: '/pages/online-inquiry/doctor-details/doctor-details',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 
@@ -108,14 +71,16 @@ Page({
         that.setData({
           userInfo: res.data
         });
-        // 查询患者的多方对话
-        that.getPatientMultiTalk();
+        if (that.data.userInfo.keyID) {
+          // 查询患者的多方对话
+          that.getPatientMultiTalk();
+        }
       }
     })
   },
 
   // 查询患者的多方对话
-  getPatientMultiTalk: function() {
+  getPatientMultiTalk: function () {
     let that = this;
     let prams = {
       orgID: that.data.userInfo.orgID,
@@ -139,7 +104,7 @@ Page({
   },
 
   // 创建问诊
-  createInquiry: function() {
+  createInquiry: function () {
     let that = this;
     let prams = {
       orgID: that.data.userInfo.orgID,
@@ -162,27 +127,28 @@ Page({
   setMessageRead: function () {
     let that = this;
     // 将某会话下所有未读消息已读上报
-    tim.setMessageRead({ conversationID: that.data.inquiryInfo.keyID });
+    tim.setMessageRead({ conversationID: "GROUP" + that.data.inquiryInfo.keyID });
     console.log("===消息设置成已读===");
   },
 
   // 打开会话时,获取最近消息列表
   getHistoryMessage: function () {
     let that = this;
-    let promise = tim.getMessageList({ conversationID: that.data.inquiryInfo.keyID, count: 5 });
+    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, count: 5 });
     promise.then(function (imResponse) {
-      const messageList = imResponse.data.messageList; // 消息列表
-      console.log("===第一次拉取消息列表===" + JSON.stringify(messageList));
-      const nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段
-      const isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息
+      that.setData({
+        currentMessageList: imResponse.data.messageList,
+        nextReqMessageID: imResponse.data.nextReqMessageID,
+        isCompleted: imResponse.data.isCompleted
+      })
     });
-    
+
   },
 
   // 下拉加载历史消息列表
   getHistoryMessageNext: function () {
     let that = this;
-    let promise = tim.getMessageList({ conversationID: that.data.inquiryInfo.keyID, nextReqMessageID: nextReqMessageID, count: 5 });
+    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, nextReqMessageID: nextReqMessageID, count: 5 });
     promise.then(function (imResponse) {
       const messageList = imResponse.data.messageList; // 消息列表
       console.log("===下一次拉取消息列表===" + JSON.stringify(messageList));
@@ -190,7 +156,7 @@ Page({
   },
 
   /*滚动：消息底部 */
-  toViewBottomFun: function() {
+  toViewBottomFun: function () {
     // 初始化数据
     //     that.setData({
     //       currentMessageList: res.data,
@@ -212,14 +178,14 @@ Page({
   },
 
   /*操作：输入预发送信息 */
-  adInputChange: function(e) {
+  adInputChange: function (e) {
     this.setData({
       maySendContent: e.detail.value,
     })
   },
 
   /*操作：点击工具栏某功能 */
-  toolbarMenusFun: function(e) {
+  toolbarMenusFun: function (e) {
     let fun = e.currentTarget.dataset.clickfun;
     if (fun == "chooseWxImage") {
       this.chooseWxImage();
@@ -229,15 +195,15 @@ Page({
       this.videoWxFun();
     }
   },
-  
+
   /*操作：打开相册*/
-  chooseWxImage: function() {
+  chooseWxImage: function () {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["album"],
-      success: function(res) {
+      success: function (res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res
@@ -249,13 +215,13 @@ Page({
   },
 
   /*操作：打开相机 */
-  cameraWxFun: function() {
+  cameraWxFun: function () {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["camera"],
-      success: function(res) {
+      success: function (res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res
@@ -266,9 +232,14 @@ Page({
     })
   },
 
-  //------------------------------发送图片消息------------------------------
-  sendImageMsg: function() {
+  /*操作：发送（图片消息） */
+  sendImageMsg: function () {
     let that = this;
+    if (that.httpLoading) {
+      return;
+    }
+    // 开启隐性加载过程
+    that.httpLoading = true;
     // 1. 创建消息实例
     let message = tim.createImageMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
@@ -276,26 +247,29 @@ Page({
       payload: {
         file: that.data.aimgurl
       },
-      onProgress: function(event) {
-        // console.log('file uploading:', event)
-      }
+      onProgress: function (event) { } // 发送图片进度
     });
-    // console.log(message);
     // 2. 发送图片
     let promise = tim.sendMessage(message);
-    promise.then(function(imResponse) {
-      // console.log("===发送图片成功===" + imResponse);
-    }).catch(function(imError) {
+    promise.then(function (imResponse) {
+      let nowData = [...that.data.currentMessageList, imResponse.data.message];
+      that.setData({
+        currentMessageList: nowData,
+        maySendContent: ""
+      });
+      // 关闭隐性加载过程
+      that.httpLoading = false;
+      that.toViewBottomFun();
+    }).catch(function (imError) {
       // 发送失败
-      console.warn('===发送图片失败===', imError);
+      console.warn('===发送图片失败===sendMessage error:', imError);
     });
   },
-  //------------------------------发送图片消息------------------------------
 
-  /*操作：发送（消息） */
-  sendContentMsg: function(e) {
+  /*操作：发送（文本消息） */
+  sendContentMsg: function (e) {
     let that = this;
-    if (that.httpLoading) {
+    if (that.httpLoading || !that.data.maySendContent) {
       return;
     }
     // 开启隐性加载过程
@@ -311,9 +285,9 @@ Page({
     });
     // 2. 发送消息
     let promise = tim.sendMessage(message);
-    promise.then(function(imResponse) {
+    promise.then(function (imResponse) {
       // 发送成功
-      let nowData = [...that.data.currentMessageList, obj];
+      let nowData = [...that.data.currentMessageList, imResponse.data.message];
       that.setData({
         currentMessageList: nowData,
         maySendContent: ""
@@ -321,9 +295,9 @@ Page({
       // 关闭隐性加载过程
       that.httpLoading = false;
       that.toViewBottomFun();
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       // 发送失败
-      // console.warn("===发送失败===" + 'sendMessage error:', imError);
+      console.warn("===发送失败===sendMessage error:", imError);
     });
     //------------------------------发送文本消息------------------------------
 
@@ -375,12 +349,12 @@ Page({
   },
 
   /*操作：视频通话 */
-  videoWxFun:function() {
+  videoWxFun: function () {
     console.log("视频啦");
   },
 
   /*操作：点击消息窗口 */
-  clickScrollViewFun: function() {
+  clickScrollViewFun: function () {
     this.setData({
       isOpenBottomBoolbar: false,
       toView: `item${this.data.currentMessageList.length - 1}`
@@ -388,7 +362,7 @@ Page({
   },
 
   /*操作：打开、关闭 底部工具栏 */
-  isOpenBottomBoolbarFun: function() {
+  isOpenBottomBoolbarFun: function () {
     this.setData({
       isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar,
       toView: `item${this.data.currentMessageList.length - 1}`
@@ -398,61 +372,75 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
+    let that = this;
     // 从storage中获取患者信息
-    this.getPersonInfo();
-    // 创建群
-    // this.creatGroup();
-    // 滚动：小心底部
-    this.toViewBottomFun();
+    that.getPersonInfo();
+    // 滚动：信息底部
+    that.toViewBottomFun();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
+  onShow: function () {
+    let that = this;
+    // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
+    tim.on(TIM.EVENT.MESSAGE_RECEIVED, function (event) {
+      // event.name - TIM.EVENT.MESSAGE_RECEIVED
+      // event.data - 存储 Message 对象的数组 - [Message]
+      let nowData = [...that.data.currentMessageList, ...event.data];
+      that.setData({
+        currentMessageList: nowData
+      });
+      that.toViewBottomFun();
+    });
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-
+  onUnload: function () {
+    let promise = tim.logout();
+    promise.then(function (imResponse) {
+      console.log("===登出成功===" + imResponse.data); // 登出成功
+    }).catch(function (imError) {
+      console.warn('logout error:', imError);
+    });
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

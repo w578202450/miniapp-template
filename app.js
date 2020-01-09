@@ -10,19 +10,21 @@ import {
 const AUTH = require('utils/auth')
 const HTTP = require('utils/http-util')
 const UTIL = require('utils/util')
+
+// 创建 TIM SDK 实例
 const tim = TIM.create({
   SDKAppID: SDKAPPID
 })
-tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
-// tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
+
+// 设置日志级别
+// tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
+tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
 
 // 将腾讯云对象存储服务 SDK （以下简称 COS SDK）注册为插件，IM SDK 发送文件、图片等消息时，需要用到腾讯云的 COS 服务
 // 注册 COS SDK 插件
 tim.registerPlugin({
   'cos-wx-sdk': COS
 })
-
-
 
 App({
   onLaunch: function() {
@@ -33,16 +35,6 @@ App({
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
       // event.name - TIM.EVENT.SDK_READY
       // console.log(`============${event.name}==================`);
-    });
-
-    tim.on(TIM.EVENT.MESSAGE_RECEIVED, function(event) {
-      // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
-      // event.name - TIM.EVENT.MESSAGE_RECEIVED
-      // event.data - 存储 Message 对象的数组 - [Message]
-      // console.log(`============${event.name}==================`);
-      // console.log("===MESSAGE_RECEIVED===" + JSON.stringify(event.data));
-      that.globalData.receiveMessageInfo = JSON.stringify(event.data);
-      console.log("===收到的消息===" + that.globalData.receiveMessageInfo);
     });
 
     tim.on(TIM.EVENT.MESSAGE_REVOKED, function(event) {
@@ -116,47 +108,43 @@ App({
     });
 
     // IM登录
-    if (that.globalData.personInfo.keyID) {
-      console.log(that.globalData);
-      let promise = tim.login({
-        // userID: '20010620211271745513006001',
-        // userSig: genTestUserSig('20010620211271745513006001').userSig
-        userID: that.globalData.personInfo.keyID,
-        userSig: genTestUserSig(that.globalData.personInfo.keyID).userSig
-      });
-      promise.then(function (imResponse) {
-        console.log("===登录成功===" + imResponse.data); // 登录成功
-      }).catch(function (imError) {
-        // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
-      });
-    }
-    
-    // IM登出
-    // let promise = tim.logout();
-    // promise.then(function (imResponse) {
-    //   console.log("===登出成功===" + imResponse.data); // 登出成功
-    // }).catch(function (imError) {
-    //   console.warn("===登出成功===" + 'logout error:', imError);
-    // });
+    let userInfo = wx.getStorageSync("personInfo");
+    let promise = tim.login({
+      // userID: userInfo.keyID,
+      // userSig: genTestUserSig(userInfo.keyID).userSig
+      userID: "20010620211271745513006001",
+      userSig: genTestUserSig("20010620211271745513006001").userSig
+    });
+    promise.then(function(imResponse) {
+      console.log("===登录成功===" + imResponse.data); // 登录成功
+    }).catch(function(imError) {
+      console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
+    });
+  },
 
-    // 创建私有群
-    // let promise1 = tim.createGroup({
-    //   type: TIM.TYPES.GRP_PRIVATE,
-    //   name: 'WebSDK',
-    //   memberList: [{ userID: 'user1' }, { userID: 'user2' }] // 如果填写了 memberList，则必须填写 userID
-    // });
-    // promise1.then(function (imResponse) { // 创建成功
-    //   console.log("===创建私有群成功===" + imResponse.data.group); // 创建的群的资料
-    // }).catch(function (imError) {
-    //   console.warn('createGroup error:', imError); // 创建群组失败的相关信息
-    // });
+  /**
+ * 生命周期函数--监听页面卸载
+ */
+  onUnload: function () {
+    let promise = tim.logout();
+    promise.then(function (imResponse) {
+      console.log("===登出成功===" + imResponse.data); // 登出成功
+    }).catch(function (imError) {
+      console.warn('logout error:', imError);
+    });
+  },
 
+  /**
+ * 生命周期函数--监听页面隐藏
+ */
+  onHide: function () {
+    // console.log("===页面隐藏===")
+    tim.off(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
   },
 
   globalData: {
     personInfo: {},
-    receiveMessageInfo: '',
-    baseUrl:'http://10.0.0.210:6112/'
+    baseUrl: 'http://10.0.0.210:6112/'
   },
   tim: tim,
   TIM: TIM
