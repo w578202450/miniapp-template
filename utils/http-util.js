@@ -100,6 +100,18 @@ module.exports = {
     return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
   },
   /*
+  *获取UserSig
+  */
+  getUserSig: function getUserSig(parmas) {
+    return request('http://10.0.0.210:6110/api/rp/initial/getUserSig', false, 'get', parmas);
+  },
+  /*
+  *获取roomId
+  */
+  getRoomId: function getRoomId(parmas) {
+    return request('http://10.0.0.210:6110/api/rp/initial/getRoomId', false, 'get', parmas);
+  },
+  /*
    *处方详情
    */
   getRpInfo: function getRpInfo(parmas) {

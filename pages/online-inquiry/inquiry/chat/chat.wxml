@@ -1,23 +1,28 @@
 <view class="page">
   <!-- 顶部 -->
+  <view class="body-view">
+    <loading hidden="{{hidden}}" bindchange="loadingChange">
+      加载中...
+    </loading>
+  </view>
   <view class="middle-one">
     <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" />
-        <image class="headImgBac" src="../../../../images/chat/docBacImg.png" />
+        <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
       </view>
       <view class="info-box">
         <view class="flexRowStartCenter">
           <text class="info_one">{{talkInfo.doctorInfo.doctorName}}</text>
           <text class="info_one_one">医生</text>
         </view>
-        <text class="info_two">副主任医师</text>
+        <text class="info_two">主任医师</text>
       </view>
     </view>
     <view class="middleOne-box" bindtap="doctorDetailTap">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.assistantInfo.faceImage}}" />
-        <image class="headImgBac" src="../../../../images/chat/docBacImg.png" />
+        <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
       </view>
       <view class="info-box">
         <view class="flexRowStartCenter">
@@ -29,10 +34,11 @@
     </view>
   </view>
   <!-- 消息列表 -->
-  <scroll-view class="{{isOpenBottomBoolbar ? 'message-list-two': 'message-list'}}" scroll-into-view="{{toView}}" scroll-with-animation="true" upper-threshold="100" scroll-y="true" enable-back-to-top="true" bindtap="clickScrollViewFun">
-    <!-- 空置盒子1 -->
-    <view class="marginBoxOne"></view>
-    <view class="row" wx:for="{{currentMessageList}}" wx:key="{{item.keyID}}" id="item{{index}}">
+  <!-- <scroll-view class="{{isOpenBottomBoolbar ? 'message-list-two': 'message-list'}}" scroll-into-view="{{toView}}" scroll-with-animation="true" upper-threshold="100" scroll-y="true" enable-back-to-top="true" bindscrolltoupper="getHistoryMessageNext" bindtap="clickScrollViewFun"> -->
+  <!-- 空置盒子1 -->
+  <view class="marginBoxOne"></view>
+  <view id="viewCommunicationBody" bindtap="clickViewCommunicationFun">
+    <view class="row" wx:for="{{currentMessageList}}" wx:key="{{item.ID}}" id="item{{index}}">
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 头像与内容文本 -->
@@ -40,17 +46,17 @@
         <view class="avatar-container">
           <!-- 患者头像 -->
           <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.patientInfo.faceImage}}" class="personHeadImgBac" src="../../../../images/chat/docBacImg.png" />
+            <image wx:if="{{!talkInfo.patientInfo.faceImage}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" />
             <image ex:else src="{{talkInfo.patientInfo.faceImage}}" class="avatarTwo" />
           </view>
           <!-- 医生头像 -->
           <view wx:elif="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.doctorInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/docBacImg.png" />
+            <image wx:if="{{!talkInfo.doctorInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" />
             <image src="{{talkInfo.doctorInfo.faceImage}}" class="avatarOne" />
           </view>
           <!-- 医助头像 -->
           <view wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.assistantInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/docBacImg.png" />
+            <image wx:if="{{!talkInfo.assistantInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" />
             <image src="{{talkInfo.assistantInfo.faceImage}}" class="avatarOne" />
           </view>
         </view>
@@ -78,9 +84,10 @@
         </view>
       </view>
     </view>
-    <!-- 空置盒子2 -->
-    <view class="{{isOpenBottomBoolbar ? 'marginBoxTwoSecond': 'marginBoxTwo'}}"></view>
-  </scroll-view>
+  </view>
+  <!-- 空置盒子2 -->
+  <view class="{{isOpenBottomBoolbar ? 'marginBoxTwoSecond': 'marginBoxTwo'}}"></view>
+  <!-- </scroll-view> -->
   <!-- 底部菜单栏 -->
   <view class="bottomMenus">
     <view class="reply">

@@ -1,4 +1,6 @@
 {
   "usingComponents": {},
-  "navigationBarTitleText": "在线问诊"
+  "navigationBarTitleText": "测试页面",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }
