@@ -49,7 +49,8 @@ Page({
     }
     ],
     aimgurl: {}, // //临时图片的信息
-    countIndex: 1 // 可选图片剩余的数量
+    countIndex: 1, // 可选图片剩余的数量
+    scrollTop: ""
   },
 
   // 点击医生查看详情
@@ -140,44 +141,32 @@ Page({
         currentMessageList: imResponse.data.messageList,
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
-      })
+      });
+      // 滚动：信息底部
+      that.toViewBottomFun();
     });
 
   },
 
-  /*操作：下拉加载数据（页面相关事件处理函数——监听用户下拉动作） */
-  onPullDownRefresh: function () {
-    let that = this;
-    console.log("++++++下拉刷新++++++");
-    wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
-    that.getHistoryMessageNext();
-  
-  },
-
-  // 下拉加载历史消息列表
-  getHistoryMessageNext: function () {
-    let that = this;
-    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, nextReqMessageID: that.data.nextReqMessageID, count: 10 });
-    promise.then(function (imResponse) {
-      const messageList = imResponse.data.messageList; // 消息列表
-      console.log("===下一次拉取消息列表===" + JSON.stringify(messageList));
-      that.data.currentMessageList = [...messageList, ...that.data.currentMessageList];
-      console.log(that.data.currentMessageList);
-      setTimeout(function () {
-        wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
-        wx.stopPullDownRefresh(); // 停止下拉刷新过程
-        console.log("------停止刷新------");
-      }, 2000)
-    });
-  },
+  // // 下拉加载历史消息列表
+  // getHistoryMessageNext: function () {
+  //   let that = this;
+  //   let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, nextReqMessageID: that.data.nextReqMessageID, count: 10 });
+  //   promise.then(function (imResponse) {
+  //     const messageList = imResponse.data.messageList; // 消息列表
+  //     console.log(JSON.stringify(messageList));
+  //     that.data.currentMessageList = [...messageList, ...that.data.currentMessageList];
+  //     console.log(that.data.currentMessageList);
+  //     setTimeout(function () {
+  //       wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
+  //       wx.stopPullDownRefresh(); // 停止下拉刷新过程
+  //       console.log("------停止刷新------");
+  //     }, 2000)
+  //   });
+  // },
 
   /*滚动：消息底部 */
   toViewBottomFun: function () {
-    // 初始化数据
-    //     that.setData({
-    //       currentMessageList: res.data,
-    //       maySendContent: ""
-    //     });
     // 设置屏幕自动滚动到最后一条消息处
     this.setData({
       toView: `item${this.data.currentMessageList.length - 1}`
@@ -399,8 +388,6 @@ Page({
     let that = this;
     // 从storage中获取患者信息
     that.getPersonInfo();
-    // 滚动：信息底部
-    that.toViewBottomFun();
   },
 
   /**
@@ -449,8 +436,27 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
+  // 操作：下拉加载数据
   onPullDownRefresh: function () {
-
+    let that = this;
+    if (that.data.isCompleted) {
+      // 没有更多数据了
+      wx.stopPullDownRefresh();
+      return;
+    }
+    wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
+    let promise = tim.getMessageList({ conversationID: "GROUP" + that.data.inquiryInfo.keyID, nextReqMessageID: that.data.nextReqMessageID, count: 10 });
+    promise.then(function (imResponse) {
+      setTimeout(function () {
+        that.setData({
+          currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
+          nextReqMessageID: imResponse.data.nextReqMessageID,
+          isCompleted: imResponse.data.isCompleted
+        });
+        wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
+        wx.stopPullDownRefresh(); // 停止下拉刷新过程
+      }, 1000);
+    });
   },
 
   /**

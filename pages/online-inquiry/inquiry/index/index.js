@@ -47,12 +47,28 @@ Page({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["camera"],
-      success: function (res) {
+      success: function(res) {
         // 选择图片完成后的确认操作
         that.setData({
           aimgurl: res.tempFilePaths
         });
       }
     })
+  },
+
+  /*操作：下拉加载数据（页面相关事件处理函数——监听用户下拉动作） */
+  onPullDownRefresh: function() {
+    console.log("++++++下拉刷新++++++");
+    wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
+    setTimeout(function () {
+      wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
+      wx.stopPullDownRefresh(); // 停止下拉刷新过程
+      console.log("------停止刷新------");
+    }, 2000)
+  },
+
+  /*操作： 上拉刷新数据（页面上拉触发底事件的处理函数） */
+  onReachBottom: function() {
+
   }
 })
