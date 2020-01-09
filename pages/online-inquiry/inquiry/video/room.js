@@ -247,7 +247,6 @@ Page({
       }
     }
   },
-
   // 通过 onIMEvent 返回 IM 消息事件，如果 enableIM 已关闭，则可以忽略 onIMEvent
   onIMEvent: function (e) {
     switch (e.detail.tag) {
@@ -313,6 +312,4 @@ Page({
       }
     });
   }
-
-
 })
