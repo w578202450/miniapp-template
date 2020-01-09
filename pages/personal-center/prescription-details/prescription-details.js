@@ -55,38 +55,40 @@ Page({
       complete: function(res) {},
     })
   },
-  onLoad: function() {
-    this.loadDatas;
+  onLoad: function(e) {
+    var inquiryID = e.inquiryID;
+    var orgID = e.orgID;
+    console.log("-e----------", orgID, inquiryID)
+    this.loadDatas(orgID, inquiryID);
   },
 
   // 加载数据
-  loadDatas() {
-    wx.showLoading();
-    this.data.list = [];
-    var that = this;
-    HTTP.getRpListByPerson({
-      orgID: wx.getStorageSync("orgID"),
-      patientID: wx.getStorageSync("patientID")
-    })
-      .then(res => {
-        wx.hideLoading();
-        if (res.code == 0) {
-          if (res.data.length == 0) {
-            that.setData({
-              noData: true
-            })
-          } else {
-            this.data.list = this.data.list.concat(res.data)
-            that.setData({
-              list: this.data.list
-            })
-          }
-        }
-      }).catch(e => {
-        wx.hideLoading();
-        that.setData({
-          noNetwork: true
-        })
-      })
+  loadDatas(orgID, inquiryID) {
+    // wx.showLoading();
+    // this.data.list = [];
+    // var that = this;
+    // HTTP.getRpInfo({
+    //     orgID: orgID,
+    //     inquiryID: inquiryID
+    //   })
+    //   .then(res => {
+    //     wx.hideLoading();
+    //     if (res.code == 0) {
+    //       wx.showToast({
+    //         title: '没有数据',
+    //         icon: "none"
+    //       })
+    //     } else {
+    //       this.data.info = res.data
+    //       that.setData({
+    //         info: this.data.info
+    //       })
+    //     }
+    //   }).catch(e => {
+    //     wx.hideLoading();
+    //     that.setData({
+    //       noNetwork: true
+    //     })
+    //   })
   },
 })
