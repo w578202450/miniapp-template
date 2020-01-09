@@ -19,5 +19,8 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
+  },
+  userInfoHandler:function(){
+    
   }
 })

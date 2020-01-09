@@ -28,7 +28,7 @@
   <template is="tmc-separator"></template> -->
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">吸烟史</text>
-    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" id="吸烟史" bind:radioChange="smokingAction"></tmcRadioView>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" bind:radioChange="smokingAction"></tmcRadioView>
     <input hidden="{{hiddenInput}}" class="font-one" placeholder="请填写烟龄" value="{{smoked}}" type="number" bindinput="smokeInput" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text hidden="{{hiddenInput}}" class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
   </view>

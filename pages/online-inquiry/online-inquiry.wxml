@@ -71,71 +71,7 @@
         <image src="../../images/home/home_inquiry.png" mode="widthFix"></image>
       </navigator>
     </view>
-  <!-- <view class="middle-container">
-    <view class="middle-one">
-      <view class="middleOne-box">
-        <image src="../../images/home/home_serverNums.png"></image>
-        <view class="info-box">
-          <text class="info_one">200人</text>
-          <text class="info_two">服务人次</text>
-        </view>
-      </view>
-      <view class="lineView"></view>
-      <view class="middleOne-box">
-        <image src="../../images/home/home_commentNums.png"></image>
-        <view class="info-box">
-          <text class="info_one">100%</text>
-          <text class="info_two">好评率</text>
-        </view>
-      </view>
-    </view>
 
-    <view class="middle-two">
-      <text class="titleLabel">医生资格证书编码</text>
-      <view class="detailLabel">{{qualificationDes}}</view>
-    </view>
-
-    <view class="middle-three">
-      <text class="titleLabel">医疗机构执业许可证</text>
-      <view class="detailLabel">{{licensingDes}}</view>
-    </view>
-
-    <view class="middle-four">
-      <view class="doctor-card" bindtap="doctorDetailTap">
-        <image class="doctor_avatar" src="../../images/home/home_doctor.png"></image>
-        <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
-        <view class="cardInfo_one">
-          <text class="doctorname">李荣豪</text>
-          <text class="position">主治医师</text>
-        </view>
-        <view class="cardInfo_two">
-          <text class="hospital">太原候丽萍骨科医院</text>
-          <text class="department">骨科骨科骨科骨科骨科</text>
-        </view>
-        <text class="expertise">擅长：开展微创多靶点叠加技术，射频消融、臭氧、后路椎间盘镜、侧路镜、椎间孔镜、腰椎间盘切吸…</text>
-      </view>
-      <view class="doctor-card" bindtap="doctorDetailTap">
-        <image class="doctor_avatar" src="../../images/home/home_doctor.png"></image>
-        <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
-        <view class="cardInfo_one">
-          <text class="doctorname">李荣豪</text>
-          <text class="position">主治医师</text>
-        </view>
-        <view class="cardInfo_two">
-          <text class="hospital">太原候丽萍骨科医院</text>
-          <text class="department">骨科</text>
-        </view>
-        <text class="expertise">擅长：开展微创多靶点叠加技术，射频消融、臭氧、后路椎间盘镜、侧路镜、椎间孔镜、腰椎间盘切吸…</text>
-      </view>
-    </view>
-
-
-    <view class="bottom">
-      <navigator url="/pages/online-inquiry/inquiry/chat/chat">
-        <image src="../../images/home/home_inquiry.png"></image>
-      </navigator>
-    </view>
-
-  </view> -->
+    <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler"> Click me </button>
 
 </view>

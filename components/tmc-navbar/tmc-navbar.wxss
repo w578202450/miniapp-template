@@ -2,8 +2,8 @@
   position: relative;
 }
 .back-icon{
-  width:20rpx;
-  height:36rpx;  
+  width:40rpx;
+  height:72rpx;  
   position: absolute;    
   transform: translateY(-50%);    
   top: 50%;    

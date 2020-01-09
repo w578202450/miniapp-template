@@ -7,9 +7,9 @@
         <text class="content-date">{{item.date}}</text>
       </view>
       <view class="right-box">
-        <text class="right-status">{{item.status}}</text>
+        <text class="right-status">{{item.orderStatusID}}==10 ? {{item.deliveryStatusName}} : {{item.orderStatusName}}</text>
 
-        <view wx:if="{{item.button==1}}" style="border:1px solid rgba(254,88,83,1)" class="option-view">
+        <view wx:if="{{item.orderStatusID==0}}" style="border:1px solid rgba(254,88,83,1)" class="option-view">
           <text style="color:rgba(254,88,83,1)">立即支付</text>
         </view>
 

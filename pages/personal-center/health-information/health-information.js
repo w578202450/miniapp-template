@@ -6,12 +6,12 @@ Page({
     smokingItems: [{
       name: '不吸烟',
       value: '不吸烟',
-      checked: 'true',
       id: "1"
     },
     {
       name: '吸烟',
       value: '吸烟',
+      checked: 'true',
       id: "2"
     },
     ],
@@ -96,69 +96,69 @@ Page({
     //既往病史列表
     medicalList: [{
       name: "先天性心脏病",
-      id: "1",
+      id: 1,
       checked: false
     },
     {
       name: "阴道炎",
-      id: "2",
+      id: 2,
       checked: false
     },
     {
       name: "肿瘤",
-      id: "3",
+      id: 3,
       checked: false
     },
     {
       name: "动脉硬化",
-      id: "4",
+      id: 4,
       checked: false
     },
     {
       name: "脑血管病",
-      id: "5",
+      id: 5,
       checked: false
     },
     {
       name: "冠心病",
-      id: "6",
+      id: 6,
       checked: false
     },
     {
       name: "糖尿病",
-      id: "7",
+      id: 7,
       checked: false
     }
     ],
     //过敏史列表
     allergyList: [{
       name: "动物皮屑",
-      id: "1",
+      id: 1,
       checked: false
     },
     {
       name: "尘螨",
-      id: "2",
+      id: 2,
       checked: false
     },
     {
       name: "鸡蛋",
-      id: "3",
+      id: 3,
       checked: false
     },
     {
       name: "牛奶",
-      id: "4",
+      id: 4,
       checked: false
     },
     {
       name: "鱼、虾、海产品",
-      id: "5",
+      id: 5,
       checked: false
     },
     {
       name: "阿司匹林",
-      id: "6",
+      id: 6,
       checked: false
     }
     ],
@@ -364,7 +364,7 @@ Page({
       isHiddenAllergyList: (e.detail == "无") ? true : false
     })
   },
-  // 添加饮酒史
+  // 添加过敏史
   addAllergy: function (e) {
     console.log('------------新增一个过敏史');
     this.setData({
@@ -409,6 +409,7 @@ Page({
     }
     console.log("------sss", this.data.dialogInput, this.data.dialogTarget)
     if (this.data.dialogTarget == "既往病史") {
+      this.data.medicalSendList.push(this.data.dialogInput)
       var list = this.data.medicalList
       list.push({
         name: this.data.dialogInput,
@@ -421,6 +422,7 @@ Page({
         medicalList: list
       })
     } else if (this.data.dialogTarget == "过敏史") {
+      this.data.allergySendList.push(this.data.dialogInput)
       var list = this.data.allergyList
       list.push({
         name: this.data.dialogInput,
@@ -527,13 +529,12 @@ Page({
         }
       }
       this.data.historyOfSicknessInfo.docItemDesc = item.docItemDesc;
+      this.data.medicalSendLis = item.docItemDesc.split(',')
       if (item.docItemDesc.length > 0 && this.data.historyOfSicknessInfo.docItemValue == '有'){
-        var tempList = item.docItemDesc.split(',')
-        console.log('tempList---------', tempList)
         var tempMedicalList = []
-        for (var i in tempList) {
+        for (var i in this.data.medicalSendLis) {
           let obj = { 
-            name: tempList[i],
+            name: this.data.medicalSendLis[i],
             id: i,
             checked:false
           }
@@ -578,12 +579,12 @@ Page({
         }
       }
       this.data.historyOfAllergyInfo.docItemDesc = item.docItemDesc;
+      this.data.allergySendList = item.docItemDesc.split(',')
       if (item.docItemDesc.length > 0 && this.data.historyOfAllergyInfo.docItemValue == '有') {
-        var tempList = item.docItemDesc.split(',')
         var tempAllergyList = []
-        for (var i in tempList) {
+        for (var i in this.data.allergySendList) {
           let obj = {
-            name: tempList[i],
+            name: this.data.allergySendList[i],
             id: i,
             checked: false
           }
@@ -599,13 +600,22 @@ Page({
           }
         }
 
+        console.log("00000000======", tempAllergyList)
+        
+        
         for (var j in tempAllergyList) {
           if (tempAllergyList[j].checked == false) {
-            tempAllergyList[j].checked == true;
-            tempAllergyList[j].id = this.data.allergyList.length + j
-            this.data.allergyList.push(tempAllergyList[j])
+            let obj = { name: tempAllergyList[j].name,
+            id: Number(this.data.allergyList.length) + 1, 
+            checked: true}
+            this.data.allergyList.push(obj)
           }
         }
+
+        console.log("111111======", this.data.allergyList)
+        
+
+        
 
       }
       this.setData({

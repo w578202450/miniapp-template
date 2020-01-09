@@ -11,6 +11,7 @@
     "pages/online-inquiry/inquiry/index/index",
     "pages/address/address-submit/address-submit",
     "pages/address/address-list/address-list",
+    "pages/address/address-add/address-add",
     "pages/order/order-details/order-details",
     "pages/order/drug-orders/drug-orders"
   ],

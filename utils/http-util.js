@@ -60,6 +60,16 @@ Promise.prototype.finally = function (callback) {
 // 1.通过module.exports方式提供给外部调用
 module.exports = {
   /*
+  *获取测试数据
+  */
+  getTestData: function getTestData(api){
+    return request(api, true, 'get', {
+      systemCode: "TMC",
+      groupCode: "D_TMC_PATIENT_RELATION",
+      parentDictCode: ""
+    });
+  },
+  /*
   *获取微信openid
   */
   getWXAuth: function getWXAuth(parmas){
@@ -107,6 +117,14 @@ module.exports = {
   savePatientDoc: function savePatientDoc(parmas){
     return request('api/tmc/patient/savePatientDoc', true, 'post', parmas);
   },
+
+  /*
+     *获取药品订单
+     */
+  getOrderByPerson: function getOrderByPerson(parmas) {
+    return request('http://10.0.0.34:6214/goodsOrder/getOrderByPerson', false, 'get', parmas);
+  },
+  
   
 
 }

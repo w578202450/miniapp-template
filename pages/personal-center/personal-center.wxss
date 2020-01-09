@@ -29,8 +29,8 @@
 .userinfo-avatar {
   width: 112rpx;
   height: 112rpx;
-  opacity: 0.5;
-  border: 2rpx solid rgba(255, 255, 255, 1);
+  border: 4rpx solid rgba(255, 255, 255, 1);
+  border-radius: 112rpx
 }
 
 .userinfo-nikename {
