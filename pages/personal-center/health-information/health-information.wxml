@@ -3,7 +3,7 @@
 <view class="page-container">
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">身高</text>
-    <input class="font-one" placeholder="请填写身高" type="digit" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <input class="font-one" placeholder="请填写身高" value="{{height}}" type="digit" bindinput="heightInput" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">cm</text>
   </view>
 
@@ -11,30 +11,31 @@
 
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">体重</text>
-    <input class="font-one" placeholder="请填写体重" type="digit" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <input class="font-one" placeholder="请填写体重" value="{{weight}}" type="digit" bindinput="weightInput" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">kg</text>
   </view>
 
   <template is="tmc-separator"></template>
 
-  <view class="box-flex-row">
+  <!-- <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">现病史</text>
     <input class="font-one" placeholder="描述现病史" style="flex-grow:1;margin-left: 16rpx;"></input>
+    data: data,
+    
     <image src="../../../images/public/public_circle_add.png" style="height:30rpx;width:30rpx;flex-shrink: 0;margin-left: 16rpx"></image>
   </view>
 
-  <template is="tmc-separator"></template>
-
+  <template is="tmc-separator"></template> -->
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">吸烟史</text>
-    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" bind:radioChange="smokingAction"></tmcRadioView>
-    <input class="font-one" placeholder="请填写烟龄" type="number" style="flex-grow:1;margin-left: 16rpx;"></input>
-    <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" id="吸烟史" bind:radioChange="smokingAction"></tmcRadioView>
+    <input hidden="{{hiddenInput}}" class="font-one" placeholder="请填写烟龄" value="{{smoked}}" type="number" bindinput="smokeInput" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <text hidden="{{hiddenInput}}" class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
   </view>
 
   <template is="tmc-separator"></template>
 
-  <view class="box-flex-row" style="justify-content: flex-start">
+  <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">饮酒史</text>
     <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{drinkingItems}}" bind:radioChange="drinkingAction"></tmcRadioView>
   </view>
@@ -50,12 +51,12 @@
   <tmcGridView hidden="{{isHiddenMedicalList}}" style="margin-left: 16rpx;flex-shrink: 0" gridsList="{{medicalList}}" bind:gridsChange="medicalGridsChange" bind:addItemAction="addMedical"></tmcGridView>
   <view class="box-flex-row" style="padding-top: 0;">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">过敏史</text>
-    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{allergyItems}}" bind:radioChange="allergyAction" bind:gridsChange="allergyGridsChange"></ tmcRadioView>
+    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{allergyItems}}" bind:radioChange="allergyAction" bind:gridsChange="allergyAction"></ tmcRadioView>
   </view>
 
   <template is="tmc-separator"></template>
 
-  <tmcGridView hidden="{{isHiddenAllergyList}}" style="margin-left: 16rpx;flex-shrink: 0" gridsList="{{allergyList}}" bind:gridsChange="allergyAction" bind:addItemAction="addAllergy"></tmcGridView>
+  <tmcGridView hidden="{{isHiddenAllergyList}}" style="margin-left: 16rpx;flex-shrink: 0" gridsList="{{allergyList}}" bind:gridsChange="allergyGridsChange" bind:addItemAction="addAllergy"></tmcGridView>
 
   <view class="box-flex-row" style="padding-top: 0;">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">肝功能</text>

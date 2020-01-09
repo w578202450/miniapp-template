@@ -1,5 +1,5 @@
 
-var API_BASE_URL = 'http://10.0.0.210:6112/';
+var API_BASE_URL = 'http://10.0.0.210:6102/';
 
 var request = function request(url, needDomain,method, data) {
   
@@ -106,6 +106,18 @@ module.exports = {
    */
   getRpInfo: function getRpInfo(parmas) {
     return request('api/tmc/rp/getRpInfoByInquiryID', true, 'get', parmas);
+  },
+  /*
+   *获取患者健康信息
+   */
+  getPatientDoc: function getPatientDoc(parmas) {
+    return request('api/tmc/patient/getPatientDoc', true, 'get', parmas);
+  },
+  /*
+   *保存患者档案
+   */
+  savePatientDoc: function savePatientDoc(parmas){
+    return request('api/tmc/patient/savePatientDoc', true, 'post', parmas);
   },
   
 
