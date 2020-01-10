@@ -92,7 +92,7 @@
   <view class="bottomMenus">
     <view class="reply">
       <view class="opration-area">
-        <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" />
+        <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="sendVidioMsg"/>
         <input class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" />
         <image src="../../../../images/chat/inputIcon.png" class="inputIcon" />
       </view>
