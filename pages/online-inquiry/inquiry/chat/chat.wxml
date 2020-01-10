@@ -93,11 +93,12 @@
     <view class="reply">
       <view class="opration-area">
       <!-- 语音 -->
-        <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="sendRecordMsg"/>
+        <image wx:if="{{!isSendRecordv}}" src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="sendRecordMsg"/>
+        <image wx:if="{{isSendRecordv}}" src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="stopRecordMsg"/>
         <!-- 文本输入框 -->
         <input class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" />
         <!-- 表情 -->
-        <image src="../../../../images/chat/inputIcon.png" class="inputIcon" bindtap="stopRecordMsg"/>
+        <image src="../../../../images/chat/inputIcon.png" class="inputIcon"/>
       </view>
       <!-- 菜单、发送按钮 -->
       <view class="send">

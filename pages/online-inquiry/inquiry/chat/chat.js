@@ -53,7 +53,8 @@ Page({
     aimgurl: {}, // //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
     hidden: true, // 加载中是否隐藏
-    scrollTop: 0 // 内容底部与顶部的距离
+    scrollTop: 0, // 内容底部与顶部的距离
+    isSendRecord: false
   },
 
   /**
@@ -407,6 +408,9 @@ Page({
 
   /*------------------------------发送语音消息------------------------------*/
   sendRecordMsg: function() {
+    this.setData({
+      isSendRecordv: true
+    });
     // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
     // 1. 获取全局唯一的录音管理器 RecorderManager
     // 录音部分参数
@@ -431,6 +435,9 @@ Page({
   /*操作：停止录音并发送 */
   stopRecordMsg: function() {
     let that = this;
+    that.setData({
+      isSendRecordv: false
+    });
     recorderManager.stop();
     recorderManager.onStop(function(res) {
       // 4. 创建消息实例，接口返回的实例可以上屏
