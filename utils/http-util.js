@@ -94,7 +94,7 @@ module.exports = {
     return request('api/tmc/multiTalk/getPatientMultiTalk', true, 'get', parmas);
   },
    /*
-  *创建问诊
+  *图文创建问诊记录
   */
   createInquiry: function createInquiry(parmas){
     return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
@@ -110,6 +110,12 @@ module.exports = {
   */
   getRoomId: function getRoomId(parmas) {
     return request('http://10.0.0.210:6110/api/rp/initial/getRoomId', false, 'get', parmas);
+  },
+  /*
+  *云处方创建视频问诊记录
+  */
+  createVideoInquiry: function createVideoInquiry(){
+    return request('api/rp/inquiry/create', true, 'post', parmas);
   },
   /*
    *处方详情
