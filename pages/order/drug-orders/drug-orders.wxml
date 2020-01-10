@@ -1,41 +1,53 @@
-<view wx:for="{{list}}" wx:key="id" wx:for-item="item">
-  <view class="cell" bindtap="orderDetailsAction">
-    <view class="cell-top">
-      <image src="{{item.avatar}}"></image>
-      <view class="content-box">
-        <text class="content-title">{{item.title}}</text>
-        <text class="content-details">{{item.details}}</text>
-        <text class="content-date">{{item.date}}</text>
-      </view>
-      <view class="right-box">
-        <text class="right-status">{{item.orderStatusID==10 ? item.deliveryStatusName : item.orderStatusName}}</text>
-      </view>
-    </view>
-    <view class="cell-bottom">
-      <block wx:if="{{item.orderStatusID==0}}">
-        <view style="border:1px solid rgba(254,88,83,1)" class="option-view">
-          <text style="color:rgba(254,88,83,1)">立即支付</text>
+<block wx:if="{{noNetwork}}">
+  <tmcTipsView bind:buttonOption="noNetworkOption"></tmcTipsView>
+</block>
+<block wx:elif="{{noData}}">
+  <tmcTipsView icon="/images/public/public_no_order.png" title="暂无订单" message="您暂无订单信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
+</block>
+<block wx:else>
+  <view class="tmc-container" wx:for="{{list}}" wx:key="id" wx:for-item="item">
+
+    <navigator url="/pages/order/order-details/order-details?orderID={{item.orderID}}">
+      <view class="cell" bindtap="orderDetailsAction">
+        <view class="cell-top">
+          <image src="{{item.avatar}}"></image>
+          <view class="content-box">
+            <text class="content-title">{{item.doctorName}}医生的治疗方案</text>
+            <text class="content-details">{{item.diagnosis}}</text>
+            <text class="content-date">开方日期：{{item.modifyTime}}</text>
+          </view>
+          <view class="right-box">
+            <text class="right-status">{{item.orderStatusID==10 ? item.deliveryStatusName : item.orderStatusName}}</text>
+          </view>
         </view>
-      </block>
-      <!-- 订单状态为10 -->
-      <block wx:if="{{item.orderStatusID==10}}">
-        <!-- 发货状态为0  填写地址-->
-        <block wx:if="{{item.orderStatusID==0}}">
-          <view style="border:1px solid rgba(0,0,0,0.25)" class="option-view" catchtap="addressAction">
-            <text>填写地址</text>
-          </view>
-        </block>
-        <!-- 发货状态为1  填写地址 申请退款-->
-        <block wx:if="{{item.orderStatusID==1}}">
-          <view style="border:1px solid rgba(0,0,0,0.25)" class="option-view" catchtap="addressAction">
-            <text>填写地址</text>
-          </view>
-          <view style="border:1px solid rgba(0,0,0,0.25)" class="option-view">
-            <text>申请退款</text>
-          </view>
-        </block>
-      </block>
-    </view>
+        <view class="cell-bottom">
+          <block wx:if="{{item.orderStatusID==0}}">
+            <view style="border:1px solid rgba(254,88,83,1)" class="option-view" style="margin-top: 32rpx">
+              <text style="color:rgba(254,88,83,1)">立即支付</text>
+            </view>
+          </block>
+          <!-- 订单状态为10 -->
+          <block wx:if="{{item.orderStatusID==10}}">
+            <!-- 发货状态为0  填写地址-->
+            <block wx:if="{{item.orderStatusID==0}}">
+              <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
+                <text>填写地址</text>
+              </view>
+            </block>
+            <!-- 发货状态为1  填写地址 申请退款-->
+            <block wx:if="{{item.orderStatusID==1}}">
+              <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
+                <text>填写地址</text>
+              </view>
+              <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view">
+                <text>申请退款</text>
+              </view>
+            </block>
+          </block>
+        </view>
+
+      </view>
+    </navigator>
 
   </view>
-</view>
+</block>

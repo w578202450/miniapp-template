@@ -1,26 +1,35 @@
-
+const HTTP = require('../../../utils/http-util')
 Page({
   data: {
-    list: [
-      {
-        avatar: '../../../images/public/public_avatar.png',
-        name: '舒筋健腰丸',
-        unit: '250ml*10支/盒',
-        price: '¥50.00',
-        num: 'x3'
-      },
-      {
-        avatar: '../../../images/public/public_avatar.png',
-        name: '舒筋健腰丸',
-        unit: '250ml*10支/盒',
-        price: '¥50.00',
-        num: 'x3'
-      }
-    ]
+    list: []
   },
   onReady: function () {
     this.tmcnavbar = this.selectComponent("#tmcnavbar");
   },
-  onLoad: function () {
-  }
+  onLoad: function (e) {
+    var orderID = e.orderID;
+    this.loadDatas(orderID)
+  },
+  // 加载数据
+  loadDatas(orderID) {
+    wx.showLoading({
+      title: '加载订单详情...',
+    });
+    var that = this;
+    HTTP.goodsOrder({
+      orderID: orderID,
+      orgID: '19122116554357936820511001'
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+
+        }
+      }).catch(e => {
+        wx.hideLoading();
+        that.setData({
+          noNetwork: true
+        })
+      })
+  },
 })

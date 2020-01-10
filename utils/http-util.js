@@ -142,7 +142,18 @@ module.exports = {
   getOrderByPerson: function getOrderByPerson(parmas) {
     return request('http://10.0.0.34:6214/goodsOrder/getOrderByPerson', false, 'get', parmas);
   },
-  
+  /*
+     *批量获取处方详情
+     */
+  getRpByList: function getRpByList(parmas) {
+    return request('http://10.0.0.34:6214/rp/getRpByList', false, 'post', parmas);
+  },
+  /*
+    *订单详情页
+    */
+  goodsOrder: function goodsOrder(parmas) {
+    return request('http://10.0.0.34:6214/goodsOrder/detail', false, 'get', parmas);
+  },
   
 
 }

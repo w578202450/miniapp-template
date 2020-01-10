@@ -1,14 +1,14 @@
 
-page{
+.tmc-container{
   padding-top: 20rpx;
+  background-color: #F6F6F6
 }
-
 .cell{
-  margin-bottom: 20rpx;
-  padding: 32rpx;
-  background-color: white;
   display: flex;
   flex-direction: column;
+  background-color: white;
+  padding: 32rpx;
+  margin-bottom: 20rpx;
 }
 
 .cell-top{
@@ -20,7 +20,6 @@ page{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-top: 32rpx;
 }
 
 .content-box{
