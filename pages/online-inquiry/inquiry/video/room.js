@@ -230,9 +230,10 @@ Page({
     // 如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
     beauty: 3, // 美颜指数，取值 0 - 9，数值越大效果越明显
     muted: false, // true 静音 false 不静音
-    debug: false, // true 打印推流 debug 信息 fales 不打印推流 debug 信息
-    enableIM: true // 是否启用IM
+    debug: true, // true 打印推流 debug 信息 fales 不打印推流 debug 信息
+    enableIM: true, // 是否启用IM
     // 其他配置参数可查看 API 文档
+    inquiryId: '' // 问诊记录id
   },
 
   // 通过 onIMEvent 返回 IM 消息事件，如果 enableIM 已关闭，则可以忽略 onIMEvent
@@ -268,6 +269,47 @@ Page({
           break;
         }
     }
+  },
+
+  // 获取UserSig
+  getUserSig: function() {
+    let that = this;
+    let prams = {
+      userId: that.data.userID
+    };
+    HTTP.getUserSig(prams).then(res => {
+      that.setData({
+        userSig: res.data.userSig
+      });
+    })
+  },
+
+  // 云处方创建视频问诊记录
+  createVideoInquiry: function () {
+    let that = this;
+    let prams = {
+      bizID: 'tmc',
+      bizType: 'tmc',
+      clientID: '19100717375019793291301001',
+      sponsorsID: "20010620182884219923006001",
+      sponsorsName: "wq",
+      receiverID: "20010714274425015463012001",
+      receiverName: "20010714274425015463012001",
+      patientName: "wq",
+      requestRole: "0",
+      patientInfo: {
+        patientName: "wq",
+        patientSex: 0,
+        patientAge: 18,
+        patientPhone: "13611111001",
+        patientIdNo: "500111199011115587"
+      }
+    };
+    HTTP.createVideoInquiry(prams).then(res => {
+      that.setData({
+        inquiryId: res.data.inquiryId
+      });
+    })
   },
 
   // 获取roomId
