@@ -72,6 +72,4 @@
       </navigator>
     </view>
 
-    <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler"> Click me </button>
-
 </view>

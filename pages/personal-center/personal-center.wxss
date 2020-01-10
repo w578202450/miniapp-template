@@ -40,7 +40,9 @@
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
   line-height: 32rpx;
+  
 }
+
 
 .weui-cell__bd {
   font-size: 32rpx;

@@ -1,10 +1,11 @@
 <view class="page">
   <view class="header-containner">
     <image class="header-cover" src="../../images/profile/profile_navigation_bg.png"></image>
-    <view class="userinfo-body" bindtap="getUserInfo">
+    <view class="userinfo-body">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
       <view>
-        <text class="userinfo-nikename">{{userInfo.nickName}}</text>
+      <button class="button-auth" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" style="font-size: 32rpx;font-family: PingFangSC-Medium, PingFang SC;font-weight: 500;background-color: rgb(0,0,0,0);color: rgba(255, 255, 255, 1)" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+        <text wx:else class="userinfo-nikename">{{userInfo.nickName}}</text>
       </view>
     </view>
   </view>
@@ -18,3 +19,5 @@
     </block>
   </view>
 </view>
+
+<!-- <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler"> Click me </button> -->
