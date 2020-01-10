@@ -1,4 +1,3 @@
-
 import {
   SDKAPPID
 } from '../../../../utils/GenerateTestUserSig'
@@ -236,19 +235,8 @@ Page({
     // 其他配置参数可查看 API 文档
   },
 
-  // 标签通过 onRoomEvent 返回内部事件
-  onRoomEvent: function (e) {
-    switch (e.detail.tag) {
-      case 'error': {
-        //发生错误
-        var code = e.detail.code;
-        var detail = e.detail.detail;
-        break;
-      }
-    }
-  },
   // 通过 onIMEvent 返回 IM 消息事件，如果 enableIM 已关闭，则可以忽略 onIMEvent
-  onIMEvent: function (e) {
+  onIMEvent: function(e) {
     switch (e.detail.tag) {
       case 'big_group_msg_notify':
         //收到群组消息
@@ -269,47 +257,152 @@ Page({
     }
   },
 
-  onLoad: function (options) {
+  // 标签通过 onRoomEvent 返回内部事件
+  onRoomEvent: function(e) {
+    switch (e.detail.tag) {
+      case 'error':
+        {
+          //发生错误
+          var code = e.detail.code;
+          var detail = e.detail.detail;
+          break;
+        }
+    }
+  },
+
+  // 获取roomId
+  getRoomId: function() {
+    let that = this;
+    let prams = {
+      inquiryId: '20010911052179278411325001', // 问诊记录id	
+      sponsorsId: '19080118270320640501523001', // 发起者id(患者id)
+      receiverId: '19080118270320640501523001' // 接受者id(医生id)
+    };
+    HTTP.getRoomId(prams).then(res => {
+      that.setData({
+        roomID: res.data.roomID
+      });
+    })
+  },
+
+  // 从storage中获取患者信息
+  getPersonInfo: function() {
+    let that = this;
+    wx.getStorage({
+      key: 'personInfo',
+      success: function(res) {
+        that.setData({
+          userInfo: res.data
+        });
+        if (that.data.userInfo.keyID) {
+          // 查询患者的多方对话
+          that.getPatientMultiTalk();
+        }
+      }
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    console.log('room.js onShow');
+    // 保持屏幕常亮
+    wx.setKeepScreenOn({
+      keepScreenOn: true
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+    console.log('room.js onHide');
+  },
+
+  startWebrtc: function() {
+    let that = this;
+    var webrtcroomCom = that.selectComponent('#myroom');
+    if (webrtcroomCom) {
+      webrtcroomCom.start();
+    }
+  },
+
+  onLoad: function(options) {
     console.log(options);
     // 这里需要调用签名服务获取 userSig 等签名信息
     // userSig 需要在您的业务服务器上计算，否则会泄露您的私钥从而造成安全隐患
     // userSig 的计算请阅读文档：https://cloud.tencent.com/document/product/647/17275
-    let self = this;
-    wx.request({
-      url: 'http://10.0.0.210:6110/api/rp/initial/getUserSig',  // 您的计算 usersig 的服务器地址
-      data: {}, // 计算 usersig 所需要的参数，这里留空了，一般是需要带上 userid
-      // 因为 usersig 本质上就是对 userid 和一些信息做了一个 ECDH 签名
-      method: 'get',
-      header: {
-        'content-type': 'application/json',
-        'token': 'aaaa'
-      },
-      success: function (res) {
-        console.log('===获取UserSig请求成功===');
-        console.log(
-          'userID:' + this.data.userID +
-           ",sdkAppID:" + this.data.sdkAppID + 
-           ",roomID:" + this.data.roomID + 
-          ",userSig:" + this.data.userSig);
-        // HTTP 回包解析，此处代码仅仅是示例，正常情况下，应该可以解析出 userid，usersig 等信息
-        // 有了这些信息，我们就可以调用 webrtc-room 对象实例的 start 方法来启动组件了
-        self.setData({
-          userID: this.data.userID,
-          sdkAppID: this.data.sdkAppID,
-          roomID: this.data.roomID,
-          userSig: this.data.userSig,
-          privateMapKey: '' // 房间权限 key，需要从自行搭建的签名服务获取
-          //如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
-        }, function () {
-          var webrtcroomCom = self.selectComponent('#myroom');
-          if (webrtcroomCom) {
-            webrtcroomCom.start();
-          }
-        })
-      },
-      fail: function () {
-        console.error('===获取UserSig请求失败===');
-      }
+    // let that = this;
+    // console.log('userID:' + that.data.userID);
+    //**************************************从服务器获取usersig***************************************************** */
+    // wx.request({
+    //   url: 'http://10.0.0.210:6110/api/rp/initial/getUserSig',  // 您的计算 usersig 的服务器地址
+    //   data: {
+    //     userId: that.data.userID
+    //   }, // 计算 usersig 所需要的参数，这里留空了，一般是需要带上 userid
+    //   // 因为 usersig 本质上就是对 userid 和一些信息做了一个 ECDH 签名
+    //   method: 'get',
+    //   header: {
+    //     'content-type': 'application/json',
+    //     'token': 'aaaa'
+    //   },
+    //   success: function (res) {
+    //     console.log('===获取UserSig请求成功===');
+    //     console.log(
+    //       "sdkAppID:" + that.data.sdkAppID + 
+    //       ",roomID:" + that.data.roomID + 
+    //       ",userSig:" + that.data.userSig);
+    //     // HTTP 回包解析，此处代码仅仅是示例，正常情况下，应该可以解析出 userid，usersig 等信息
+    //     // 有了这些信息，我们就可以调用 webrtc-room 对象实例的 start 方法来启动组件了
+    //     that.setData({
+    //       userID: that.data.userID,
+    //       sdkAppID: that.data.sdkAppID,
+    //       roomID: that.data.roomID,
+    //       userSig: that.data.userSig
+    //       // privateMapKey: '' // 房间权限 key，需要从自行搭建的签名服务获取
+    //       //如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
+    //     }, function () {
+    //       var webrtcroomCom = that.selectComponent('#myroom');
+    //       if (webrtcroomCom) {
+    //         webrtcroomCom.start();
+    //       }
+    //     })
+    //   },
+    //   fail: function () {
+    //     console.error('===获取UserSig请求失败===');
+    //   }
+    // });
+    //**************************************从服务器获取usersig***************************************************** */
+    //   that.setData({
+    //     userID: that.data.userID,
+    //     sdkAppID: that.data.sdkAppID,
+    //     roomID: that.data.roomID,
+    //     userSig: that.data.userSig
+    //   }),
+    //   console.log(
+    //     "userID:" + that.data.userID +
+    //     ",sdkAppID:" + that.data.sdkAppID +
+    //     ",roomID:" + that.data.roomID +
+    //     ",userSig:" + that.data.userSig);
+    // },
+    let that = this;
+    that.setData({
+        userID: that.data.userID,
+        sdkAppID: that.data.sdkAppID,
+        roomID: that.data.roomID,
+        userSig: that.data.userSig
+      }),
+      that.startWebrtc();
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+    // 设置房间标题
+    wx.setNavigationBarTitle({
+      title: '视频问诊'
     });
   }
 })
