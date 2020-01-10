@@ -1,7 +1,7 @@
 <view class="page">
   <view class="header-containner">
     <image class="header-cover" src="../../images/profile/profile_navigation_bg.png"></image>
-    <view class="userinfo-body" bindtap="fetchAuthAction">
+    <view class="userinfo-body" bindtap="getUserInfo">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
       <view>
         <text class="userinfo-nikename">{{userInfo.nickName}}</text>
