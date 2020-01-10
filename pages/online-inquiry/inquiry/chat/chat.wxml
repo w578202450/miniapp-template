@@ -71,11 +71,11 @@
             <view>{{item.payload.text}}</view>
           </view>
           <!-- 图片消息：TIMImageElem -->
-          <view wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}">
+          <view wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="previewImage"  data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
             <image class="pictureMsg" src="{{item.payload.imageInfoArray[0].imageUrl}}" />
           </view>
-          <!-- 音频消息： -->
-          <view wx:elif="{{item.type == 'TIM.TYPES.MSG_AUDIO'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}">
+          <!-- 音频消息：TIMSoundElem -->
+          <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun"  data-recordurl="{{item.payload.url}}">
             <view class="flexRowStartCenter">
               <image src="../../../../images/chat/audio.png" class="payloadImage"></image>
               <view style="padding-left: 10px" class="_div data-v-71681a0a">{{item.payload.second}}s</view>
@@ -92,16 +92,21 @@
   <view class="bottomMenus">
     <view class="reply">
       <view class="opration-area">
-        <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="sendVidioMsg"/>
+      <!-- 语音 -->
+        <image src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="sendRecordMsg"/>
+        <!-- 文本输入框 -->
         <input class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" />
-        <image src="../../../../images/chat/inputIcon.png" class="inputIcon" />
+        <!-- 表情 -->
+        <image src="../../../../images/chat/inputIcon.png" class="inputIcon" bindtap="stopRecordMsg"/>
       </view>
+      <!-- 菜单、发送按钮 -->
       <view class="send">
         <image wx:if="{{isOpenBottomBoolbar}}" src="../../../../images/chat/m-close.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
         <view wx:elif="{{maySendContent.length > 0}}" bindtap="sendContentMsg">发送</view>
         <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
       </view>
     </view>
+    <!-- 功能区 -->
     <view wx:if="{{isOpenBottomBoolbar}}" class="toolbarBox">
       <view wx:for="{{toolbarMenus}}" wx:key="{{item.keyID}}" class="{{item.isFifth ? 'toolbarDivFifth' : 'toolbarDiv'}}" bindtap="toolbarMenusFun" data-clickFun="{{item.clickFun}}">
         <image src="{{item.iconUrl}}" class="toolbarIcon" />

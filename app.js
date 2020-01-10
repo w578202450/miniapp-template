@@ -146,6 +146,13 @@ App({
       // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
     });
   },
+  onUnload: function () {
+    app.tim.logout().then(function(imResponse) {
+      console.log("===登出成功===" + imResponse.data); // 登出成功
+    }).catch(function(imError) {
+      console.warn('logout error:', imError);
+    });
+  },
   globalData: {
     userInfo:null,
     personInfo: {},
