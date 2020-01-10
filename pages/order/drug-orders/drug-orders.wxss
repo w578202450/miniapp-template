@@ -6,9 +6,21 @@ page{
 .cell{
   margin-bottom: 20rpx;
   padding: 32rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.cell-top{
   display: flex;
   flex-direction: row;
-  background-color: white;
+}
+
+.cell-bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 32rpx;
 }
 
 .content-box{
@@ -54,6 +66,7 @@ image{
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
   color:rgba(0,0,0,0.65);
+  flex-grow: 1
 }
 
 .right-box{
@@ -72,12 +85,15 @@ image{
 }
 
 .option-view{
-  height:60rpx;
-  border-radius:30rpx;
+  height:52rpx;
+  border-radius:26rpx;
   border:1px solid rgba(0,0,0,0.25);
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 32rpx;
+  width: 160rpx;
+
 }
 
 .option-view text{
