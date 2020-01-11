@@ -6,7 +6,7 @@
     </loading>
   </view>
   <view class="middle-one">
-    <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap">
+    <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap" data-index="0">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" />
         <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
@@ -19,7 +19,7 @@
         <text class="info_two">主任医师</text>
       </view>
     </view>
-    <view class="middleOne-box" bindtap="doctorDetailTap">
+    <view class="middleOne-box" bindtap="doctorDetailTap" data-index="1">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.assistantInfo.faceImage}}" />
         <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
