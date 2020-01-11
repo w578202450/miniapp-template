@@ -134,14 +134,15 @@ App({
 
     // IM登录
     let userInfo = wx.getStorageSync("personInfo");
+    console.log("===userId===" + userInfo.keyID + "===userSig===" + genTestUserSig(userInfo.keyID).userSig ); 
     let promise = tim.login({
-      // userID: userInfo.keyID,
-      // userSig: genTestUserSig(userInfo.keyID).userSig
-      userID: "20010620211271745513006001",
-      userSig: genTestUserSig("20010620211271745513006001").userSig
+      userID: userInfo.keyID,
+      userSig: genTestUserSig(userInfo.keyID).userSig
+      // userID: "20010620211271745513006001",
+      // userSig: genTestUserSig("20010620211271745513006001").userSig
     });
     promise.then(function(imResponse) {
-      console.log("===登录成功===" + imResponse.data); // 登录成功
+      console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
     }).catch(function(imError) {
       // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
     });
