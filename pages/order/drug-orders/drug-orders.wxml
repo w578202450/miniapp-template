@@ -6,9 +6,9 @@
 </block>
 <block wx:else>
   <view class="tmc-container" wx:for="{{list}}" wx:key="id" wx:for-item="item">
-
+      
     <navigator url="/pages/order/order-details/order-details?orderID={{item.orderID}}">
-      <view class="cell" bindtap="orderDetailsAction">
+      <view class="cell">
         <view class="cell-top">
           <image src="{{item.avatar}}"></image>
           <view class="content-box">

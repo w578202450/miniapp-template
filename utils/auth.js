@@ -20,16 +20,16 @@ async function wxlogin() {
  * 获取openid
  */
 async function getopenid(code) {
-  // var prams = {
-  //   code: code
-  // }
-  // HTTP.getWXAuth(prams).then(res => {
-  //   if (res.code == 0){
-  //     // getPatientInfo(res.data.openid);
-  //     getPatientInfo("o6_DFuMBBkTTwYnKrXsGnrXFoaNE");
-  //   }
-  // })
-  getPatientInfo("o6_DFuMBBkTTwYnKrXsGnrXFoaNE");
+  var prams = {
+    code: code
+  }
+  HTTP.getWXAuth(prams).then(res => {
+    if (res.code == 0){
+      getPatientInfo(res.data.openid);
+      // getPatientInfo("o6_DFuMBBkTTwYnKrXsGnrXFoaNE");
+    }
+  })
+  // getPatientInfo("o6_DFuMBBkTTwYnKrXsGnrXFoaNE");
 }
 /**
  * 获取基础数据

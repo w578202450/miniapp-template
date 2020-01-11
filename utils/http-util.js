@@ -22,7 +22,7 @@ var request = function request(url, needDomain,method, data) {
       data: data,
       success: function success(request) {
         resolve(request.data);
-        console.log("数据请求成功:", request.data)
+        console.log("数据请求成功:", url,request.data)
         if (request.data.code != 0){
           wx.showToast({
             title: request.data.message,
@@ -32,7 +32,7 @@ var request = function request(url, needDomain,method, data) {
       },
       fail: function fail(error) {
         reject(error);
-        console.log("数据请求失败:", error)
+        console.log("数据请求失败:", url, error)
       },
       complete: function complete(aaa) {
         // 加载完成
@@ -154,6 +154,30 @@ module.exports = {
   goodsOrder: function goodsOrder(parmas) {
     return request('http://10.0.0.34:6214/goodsOrder/detail', false, 'get', parmas);
   },
+  /*
+   *根据处方id获取处方详情
+   */
+  getRp: function getRp(parmas) {
+    return request('http://10.0.0.34:6214/rp/get', false, 'get', parmas);
+  },
+
+  /*
+   *根据员工id查询医生信息
+   */
+  getDoctorInfo: function getDoctorInfo(parmas) {
+    return request('api/peachUser/hospitalStaff/getDoctorInfoByStaffID', true, 'get', parmas);
+  },
+
+  /*
+  *获取医生资质编号
+  */
+  getDoctorQualification: function getDoctorQualification(parmas) {
+    return request('api/peachUser/doctorCertify/getDoctorQualification', true, 'get', parmas);
+  },
+
+  
+
+  
   
 
 }

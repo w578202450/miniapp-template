@@ -1,15 +1,15 @@
 <view class="page">
   <view class="header">
     <view class="header-box">
-      <image src="../../../images/home/home_doctor.png"></image>
+      <image src="{{doctorInfo.faceImage ? doctorInfo.faceImage : '../../../images/chat/personBacImg.png'}}"></image>
       <view class="doctor-info">
           <view class="info-one">
-            <text class="doctorname">李荣豪</text>
-            <text class="position">主治医师</text>
+            <text class="doctorname">{{doctorInfo.doctorName}}</text>
+            <text class="position">{{doctorInfo.titleName}}</text>
           </view>
           <view class="info-two">
-            <text class="hospital">太原候丽萍骨科医院</text>
-            <text class="department">骨科</text>
+            <text class="hospital">{{doctorInfo.workPlace}}</text>
+            <text class="department">{{doctorInfo.sectionName}}</text>
           </view>
           <view class="info-three">
             <view>
@@ -31,7 +31,7 @@
       <view class="middle-title">专治疾病</view>
     </view>
     <view class="middle-cotent-box">
-        <text class="middle-cotent">这是专治疾病</text>
+        <text class="middle-cotent">{{doctorInfo.doctorName}}</text>
       </view>
     <view class="middle-bottomLine"></view>
   </view>
@@ -42,7 +42,7 @@
       <view class="middle-title">擅长</view>
     </view>
     <view class="middle-cotent-box">
-      <text class="middle-cotent">这是医生擅长</text>
+      <text class="middle-cotent">{{doctorInfo.goodAt}}</text>
     </view>
     <view class="middle-bottomLine"></view>
   </view>
@@ -53,7 +53,7 @@
       <view class="middle-title">医生简介</view>
     </view>
     <view class="middle-cotent-box">
-      <text class="middle-cotent">这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述这是医生简介描述</text>
+      <text class="middle-cotent">{{doctorInfo.briefDesc}}</text>
     </view>
     <view class="middle-bottomLine"></view>
   </view>

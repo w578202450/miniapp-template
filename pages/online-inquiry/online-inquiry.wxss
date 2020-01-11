@@ -7,13 +7,14 @@
   background: #629ff4;
   opacity: 0.9;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-end;
   flex-direction: row;
   z-index: -1;
 }
 
 .header .header-info {
+  margin-left: 36rpx;
   margin-bottom: 68rpx;
   display: flex;
   flex-direction: column;
@@ -23,25 +24,38 @@
 .header image {
   height: 188rpx;
   width: 184rpx;
-  margin: 0rpx 0rpx 0rpx 40rpx;
+  margin-right: 116rpx;
+  /* margin: 0rpx 0rpx 0rpx 40rpx; */
 }
 
-.header-info .room_name {
-  height: 68rpx;
+.header-info .hospital_name {
+  height: 36rpx;
   font-size: 36rpx;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: rgba(255, 255, 255, 1);
-  line-height: 68rpx;
+  line-height: 36rpx;
+}
+
+.header-info .room_name {
+  margin-top: 55rpx;
+  height: 36rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 36rpx;
 }
 
 .header-info .room_des {
-  height: 36rpx;
-  font-size: 28rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-  line-height: 36rpx;
+  height:28rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
+  line-height:28rpx;
+  margin-top: 20rpx
+
 }
 
 .middle-one {
@@ -196,13 +210,14 @@
   font-weight:400;
   color:rgba(0,0,0,0.65);
   line-height:24rpx;
+  text-align: center
 }
 
 .doctor-card .cardInfo_two {
   margin-top: 18rpx;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  text-align: center;
 }
 
 .hospital{
