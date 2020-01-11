@@ -55,7 +55,7 @@ Page({
     hidden: true, // 加载中是否隐藏
     scrollTop: 0, // 内容底部与顶部的距离
     isSendRecord: false,
-    recordingTxt: "长按进行录音",
+    recordingTxt: "按住 说话",
     startPoint: "",
     sendRecordLock: true // 是否允许发送语音
   },
@@ -427,7 +427,7 @@ Page({
     this.startRecordMsg();
     this.setData({
       startPoint: e.touches[0],
-      recordingTxt: "抬起停止录音",
+      recordingTxt: "松开 结束",
       sendRecordLock: true
     });
     wx.showToast({
@@ -442,7 +442,7 @@ Page({
     wx.hideToast();// 结束录音、隐藏Toast提示框
     this.stopRecordMsg(); 
     this.setData({
-      recordingTxt: "长按进行录音"
+      recordingTxt: "按住 说话"
     });
   },
 
