@@ -3,7 +3,7 @@
 <view class="page">
   <view class="header">
     <view class="header-info">
-    <text class="hospital_name">桃子互联网医院</text>
+      <image src='../../images/public/public_theme_hospital.png' style="width:290rpx;height:56rpx"></image>
       <text class="room_name">{{doctorInfo.doctorName}}的互联网诊室</text>
       <text class="room_des">网上咨询·在线开药·预约就诊</text>
     </view>
@@ -39,36 +39,36 @@
   </view>
 
   <view class="middle-four">
-      <view class="doctor-card" bindtap="doctorDetailTap" data-="0">
-        <image class="doctor_avatar" src="{{doctorInfo.faceImage ? doctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
-        <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
-        <view class="cardInfo_one">
-          <text class="doctorname">{{doctorInfo.doctorName}}</text>
-          <text class="position">{{doctorInfo.titleName}}</text>
-        </view>
-        <view class="cardInfo_two">
-          <text class="hospital">{{doctorInfo.workPlace+doctorInfo.sectionName}}</text>
-        </view>
-        <text class="expertise">{{doctorInfo.goodAt}}</text>
+    <view class="doctor-card" bindtap="doctorDetailTap" data-="0">
+      <image class="doctor_avatar" src="{{doctorInfo.faceImage ? doctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
+      <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
+      <view class="cardInfo_one">
+        <text class="doctorname">{{doctorInfo.doctorName}}</text>
+        <text class="position">{{doctorInfo.titleName}}</text>
       </view>
-      <view class="doctor-card" bindtap="doctorDetailTap" data-="1">
-        <image class="doctor_avatar" src="{{assistantDoctorInfo.faceImage ? assistantDoctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
-        <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
-        <view class="cardInfo_one">
-          <text class="doctorname">{{assistantDoctorInfo.doctorName}}</text>
-          <text class="position">{{assistantDoctorInfo.titleName}}</text>
-        </view>
-        <view class="cardInfo_two">
-          <text class="hospital">{{assistantDoctorInfo.workPlace+assistantDoctorInfo.sectionName}}</text>
-        </view>
-        <text class="expertise">{{assistantDoctorInfo.goodAt}}</text>
+      <view class="cardInfo_two">
+        <text class="hospital">{{doctorInfo.workPlace+doctorInfo.sectionName}}</text>
       </view>
+      <text class="expertise">{{doctorInfo.goodAt}}</text>
     </view>
+    <view class="doctor-card" bindtap="doctorDetailTap" data-="1">
+      <image class="doctor_avatar" src="{{assistantDoctorInfo.faceImage ? assistantDoctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
+      <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
+      <view class="cardInfo_one">
+        <text class="doctorname">{{assistantDoctorInfo.doctorName}}</text>
+        <text class="position">{{assistantDoctorInfo.titleName}}</text>
+      </view>
+      <view class="cardInfo_two">
+        <text class="hospital">{{assistantDoctorInfo.workPlace+assistantDoctorInfo.sectionName}}</text>
+      </view>
+      <text class="expertise">{{assistantDoctorInfo.goodAt}}</text>
+    </view>
+  </view>
 
-    <view class="inquiry-view">
-      <navigator url="/pages/online-inquiry/inquiry/chat/chat">
-        <image src="../../images/home/home_inquiry.png" mode="widthFix"></image>
-      </navigator>
-    </view>
+  <view class="inquiry-view">
+    <navigator url="/pages/online-inquiry/inquiry/chat/chat">
+      <image src="../../images/home/home_inquiry.png" mode="widthFix"></image>
+    </navigator>
+  </view>
 
 </view>

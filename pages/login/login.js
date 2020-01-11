@@ -69,9 +69,9 @@ Page({
             key: 'personInfo',
             success: function(res) {
               wx.hideLoading()
-              wx.switchTab({
+              wx.redirectTo({
                 url: '/pages/online-inquiry/online-inquiry',
-              })
+              });
             },
             fail: function(res) {
               that.getPatientInfo(res.data.openid)
@@ -118,9 +118,10 @@ Page({
             key: 'patientID',
             data: res.data.keyID
           })
-        wx.switchTab({
+
+        wx.redirectTo({
           url: '/pages/online-inquiry/online-inquiry',
-        })
+        });
       } else {
         wx.hideLoading()
         wx.showToast({

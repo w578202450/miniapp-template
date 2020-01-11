@@ -23,22 +23,7 @@
     "navigationBarTextStyle": "black",
     "backgroundColor":"#F6F6F6"
   },
-  "tabBar": {
-    "color": "#6e6d6b",
-    "selectedColor": "#438BEF",
-    "borderStyle": "white",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/online-inquiry/online-inquiry",
-        "text": "在线问诊"
-      },
-      {
-        "pagePath": "pages/personal-center/personal-center",
-        "text": "个人中心"
-      }
-    ]
-  },
+
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {
