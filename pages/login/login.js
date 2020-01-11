@@ -64,23 +64,7 @@ Page({
     }
     HTTP.getWXAuth(prams).then(res => {
       if (res.code == 0) {
-        if (wx.getStorageSync('openid') == res.data.openid) {
-          wx.getStorage({
-            key: 'personInfo',
-            success: function(res) {
-              wx.hideLoading()
-              wx.redirectTo({
-                url: '/pages/online-inquiry/online-inquiry',
-              });
-            },
-            fail: function(res) {
-              that.getPatientInfo(res.data.openid)
-            },
-          })
-        } else {
-          wx.setStorageSync('openid', res.data.openid)
-          that.getPatientInfo(res.data.openid);
-        }
+        that.getPatientInfo(res.data.openid)
       } else {
         wx.hideLoading()
         wx.showToast({
