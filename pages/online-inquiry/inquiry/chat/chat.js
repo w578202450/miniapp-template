@@ -521,8 +521,10 @@ Page({
             file: res
           }
         });
+        console.log(message);
         // 5. 发送消息
         app.tim.sendMessage(message).then(function (imResponse) {
+          console.log(imResponse);
           // 发送成功
           let nowData = [...that.data.currentMessageList, imResponse.data.message];
           that.setData({

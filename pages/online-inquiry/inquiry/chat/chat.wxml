@@ -13,7 +13,7 @@
       </view>
       <view class="info-box">
         <view class="flexRowStartCenter">
-          <text class="info_one">{{talkInfo.doctorInfo.doctorName}}</text>
+          <view class="info_one">{{talkInfo.doctorInfo.doctorName}}</view>
           <text class="info_one_one">医生</text>
         </view>
         <text class="info_two">主任医师</text>
@@ -26,7 +26,7 @@
       </view>
       <view class="info-box">
         <view class="flexRowStartCenter">
-          <text class="info_one">{{talkInfo.assistantInfo.doctorName}}</text>
+          <view class="info_one">{{talkInfo.assistantInfo.doctorName}}</view>
           <text class="info_one_one">医助</text>
         </view>
         <text class="info_two">助理医师</text>
