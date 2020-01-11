@@ -297,7 +297,7 @@ Page({
     that.data.httpLoading = true;
     // 1. 创建消息实例，接口返回的实例可以上屏
     let message = app.tim.createTextMessage({
-      to: "GROUP" + that.data.inquiryInfo.keyID, // 群ID
+      to: that.data.inquiryInfo.keyID, // 群ID
       conversationType: app.TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         text: that.data.maySendContent
@@ -378,7 +378,7 @@ Page({
     that.data.httpLoading = true; // 开启隐性加载过程
     // 1. 创建消息实例
     let message = app.tim.createImageMessage({
-      to: "GROUP" + that.data.inquiryInfo.keyID, // 群ID
+      to: that.data.inquiryInfo.keyID, // 群ID
       conversationType: app.TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         file: that.data.aimgurl
@@ -517,7 +517,7 @@ Page({
       } else if (that.data.sendRecordLock) {
         // 4. 创建消息实例，接口返回的实例可以上屏
         const message = app.tim.createAudioMessage({
-          to: "GROUP" + that.data.inquiryInfo.keyID,
+          to: that.data.inquiryInfo.keyID,
           conversationType: app.TIM.TYPES.CONV_GROUP,
           payload: {
             file: res
