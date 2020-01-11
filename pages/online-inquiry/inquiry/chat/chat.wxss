@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .middle-one {
@@ -37,7 +38,7 @@
   border-radius: 80rpx;
   background-color: rgb(248, 248, 248);
   overflow: hidden;
-  position:relative;
+  position: relative;
 }
 
 .middleOne-box .headImg {
@@ -65,9 +66,8 @@
 .middleOne-box .info-box .info_one {
   font-size: 32rpx;
   font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
-  line-height: 32rpx;
+  max-width: 150rpx;
 }
 
 .middleOne-box .info-box .info_one_one {
@@ -153,7 +153,6 @@
 /*头像容器*/
 
 .body.avatar-container {
-
 }
 
 .body .personHeadImgDiv {
@@ -161,6 +160,7 @@
 }
 
 /* 患者头像时 */
+
 .body .personHeadImgBac {
   width: 80rpx;
   height: 80rpx;
@@ -172,6 +172,7 @@
 }
 
 /* 医生、医助头像时 */
+
 .body .personHeadImgBacTwo {
   width: 80rpx;
   height: 80rpx;
@@ -284,6 +285,20 @@
 .reply .opration-area .voiceIcon {
   width: 55rpx;
   height: 55rpx;
+}
+
+/*语音长按按钮*/
+
+.reply .opration-area .recordBtn {
+  margin: 20rpx 20rpx;
+  width: 445rpx;
+  padding: 0rpx 25rpx 0 15rpx;
+  border-radius: 6px;
+  height: 75rpx;
+  background: #f6f6f6;
+  text-align: center;
+  line-height: 75rpx;
+  color: #555658;
 }
 
 /*回复文本框*/
