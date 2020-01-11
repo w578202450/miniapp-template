@@ -12,7 +12,7 @@
 
   <view class="middle-one">
     <view class="middleOne-box">
-      <image src="../../images/home/home_serverNums.png"></image>
+      <image style="flex-shrink: 0" src="../../images/home/home_serverNums.png"></image>
       <view class="info-box">
         <text class="info_one">200人</text>
         <text class="info_two">服务人次</text>

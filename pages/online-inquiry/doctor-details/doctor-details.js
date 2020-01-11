@@ -16,10 +16,6 @@ Page({
   },
   // 获取主治医师信息
   fetchDoctorInfo(doctorId) {
-    
-    wx.showLoading({
-      title: '获取主治医师信息....',
-    })
     var that = this;
     HTTP.getDoctorInfo({
       staffID: doctorId

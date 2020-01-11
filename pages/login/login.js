@@ -89,7 +89,6 @@ Page({
     }
     HTTP.getPatientInfo(prams).then(res => {
       if (res.code == 0) {
-        wx.hideLoading()
         wx.setStorage({
             key: 'personInfo',
             data: res.data
@@ -102,8 +101,9 @@ Page({
             key: 'patientID',
             data: res.data.keyID
           })
-
+        wx.hideLoading()
         wx.redirectTo({
+          // url:'/pages/personal-center/personal-center'
           url: '/pages/online-inquiry/online-inquiry',
         });
       } else {

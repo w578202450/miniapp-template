@@ -59,15 +59,10 @@ Page({
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
-          if (res.data.length > 0) {
-            for (var i in res.data){
-              for (var j in this.data.list){
-                if (res.data[i].keyID == this.data.list[j].rpID){
-                  this.data.list[j].diagnosis = res.data[i].diagnosis
-                  this.data.list[j].doctorName = res.data[i].doctorName
-                  console.log('diagnosis------', res.data.diagnosis)
-                }
-              }
+          if (res.data) {
+            for (var j in this.data.list) {
+              this.data.list[j].diagnosis = res.data[this.data.list[j].rpID].diagnosis
+              this.data.list[j].doctorName = res.data[this.data.list[j].rpID].doctorName
             }
           } 
         }

@@ -30,9 +30,6 @@ Page({
   },
   // 获取主治医师信息
   fetchDoctorInfo() {
-    wx.showLoading({
-      title: '获取主治医师信息....',
-    })
     var that = this;
     HTTP.getDoctorInfo({
       staffID: wx.getStorageSync('personInfo').doctorStaffID
@@ -58,9 +55,6 @@ Page({
 
   // 获取助理医生信息
   fetchAssistantDoctorInfo() {
-    wx.showLoading({
-      title: '获取助理医师信息....',
-    })
     var that = this;
     HTTP.getDoctorInfo({
       staffID: wx.getStorageSync('personInfo').assistantStaffID
@@ -84,9 +78,6 @@ Page({
 
   // 获取医生资质编号
   fetchDoctorQualification() {
-    wx.showLoading({
-      title: '获取医生资质编号....',
-    })
     var that = this;
     HTTP.getDoctorQualification({
       doctorID: wx.getStorageSync('personInfo').assistantStaffID,
