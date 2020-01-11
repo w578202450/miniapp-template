@@ -1,0 +1,38 @@
+@import "../../common/common.wxss";
+
+page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tipsView{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 48rpx;
+  justify-content: flex-start;
+  background-color: white;
+  width: 100%;
+  padding: 32rpx 
+} 
+
+.titleTips{
+  font-size:30rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:black;
+  line-height:28rpx;
+  margin-left: 32rpx;
+}
+
+.detailsTips{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:24rpx;
+  margin-top: 24rpx;
+  margin-left: 32rpx;
+}

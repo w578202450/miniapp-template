@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/online-inquiry/online-inquiry",
     "pages/online-inquiry/doctor-details/doctor-details",
     "pages/logs/logs",

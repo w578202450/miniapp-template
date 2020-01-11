@@ -19,5 +19,3 @@
     </block>
   </view>
 </view>
-
-<!-- <button open-type="getUserInfo" bindgetuserinfo="userInfoHandler"> Click me </button> -->
