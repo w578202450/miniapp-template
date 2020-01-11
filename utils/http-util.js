@@ -73,7 +73,7 @@ module.exports = {
   *获取微信openid
   */
   getWXAuth: function getWXAuth(parmas){
-    return request('http://10.0.0.23:6203/wx/getWXAuth', false, 'post', parmas);
+    return request('api/peachUser/wx/getWXAuth', true, 'post', parmas);
   },
   /*
   *获取微信个人信息
