@@ -39,7 +39,7 @@
   </view>
 
   <view class="middle-four">
-    <view class="doctor-card" bindtap="doctorDetailTap" data-="0">
+    <view class="doctor-card" bindtap="doctorDetailTap" data-index="0">
       <image class="doctor_avatar" src="{{doctorInfo.faceImage ? doctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
       <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
       <view class="cardInfo_one">
@@ -51,7 +51,7 @@
       </view>
       <text class="expertise">{{doctorInfo.goodAt}}</text>
     </view>
-    <view class="doctor-card" bindtap="doctorDetailTap" data-="1">
+    <view class="doctor-card" bindtap="doctorDetailTap" data-index="1">
       <image class="doctor_avatar" src="{{assistantDoctorInfo.faceImage ? assistantDoctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
       <image class="authenticated_icon" src="../../images/home/home_authenticated.png"></image>
       <view class="cardInfo_one">
