@@ -54,7 +54,10 @@ Page({
     countIndex: 1, // 可选图片剩余的数量
     hidden: true, // 加载中是否隐藏
     scrollTop: 0, // 内容底部与顶部的距离
-    isSendRecord: false
+    isSendRecord: false,
+    recordingTxt: "长按进行录音",
+    startPoint: "",
+    sendRecordLock: true // 是否允许发送语音
   },
 
   /**
@@ -231,7 +234,6 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
-      console.log(that.data.currentMessageList);
       that.toViewBottomFun();
       }).catch(function (imError) {
         that.setData({
@@ -247,7 +249,6 @@ Page({
     // 设置屏幕自动滚动到最后一条消息处
     let that = this;
     wx.createSelectorQuery().select('#viewCommunicationBody').boundingClientRect(function(rect) {
-      console.log(rect);
       wx.pageScrollTo({
         scrollTop: rect.height,
         duration: 100
@@ -392,13 +393,12 @@ Page({
       that.data.httpLoading = false; // 关闭隐性加载过程
       that.toViewBottomFun();
     }).catch(function(imError) {
-      console.warn('===发送图片失败===error:', imError);
+      console.warn("===发送图片失败===error:", imError);
     });
   },
 
   /*操作：点击单张图片*/
   previewImage(e) {
-    console.log(e);
     let url = e.currentTarget.dataset.imagesrc;
     wx.previewImage({
       current: url,
@@ -406,11 +406,82 @@ Page({
     })
   },
 
-  /*------------------------------发送语音消息------------------------------*/
-  sendRecordMsg: function() {
+  /*操作：切换为键盘 */
+  openKeyboardFun:function() {
     this.setData({
-      isSendRecordv: true
+      isSendRecord: false
     });
+  },
+
+  /*操作：切换为语音 */
+  willSendRecordMsg: function() {
+    let that = this;
+    that.setData({
+      isSendRecord: true
+    });
+  },
+
+  /*操作：开始长按录音按钮 */
+  handleTouchStart: function (e) {
+    // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
+    this.startRecordMsg();
+    this.setData({
+      startPoint: e.touches[0],
+      recordingTxt: "抬起停止录音",
+      sendRecordLock: true
+    });
+    wx.showToast({
+      title: "正在录音，上划取消发送",
+      icon: "none",
+      duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+    });
+  },
+
+  /*操作：结束长按录音按钮 */
+  handleTouchEnd: function (e) {
+    wx.hideToast();// 结束录音、隐藏Toast提示框
+    this.stopRecordMsg(); 
+    this.setData({
+      recordingTxt: "长按进行录音"
+    });
+  },
+
+  /*操作：点击了长按录音按钮 */
+  handleClick: function (e) {
+  },
+
+  /*操作：长按录音按钮过程中 */
+  handleLongPress: function (e) {
+  },
+  /*操作：滑动取消 */
+  handleMove:function(e) {
+    let that = this;
+    let moveLenght = e.touches[e.touches.length - 1].clientY - that.data.startPoint.clientY; // 手指移动距离
+    if (Math.abs(moveLenght) > 50) {
+      wx.showToast({
+        title: "松开手指,取消发送",
+        icon: "none",
+        duration: 60000
+      });
+      // 触发了上滑取消发送，上锁
+      that.setData({
+        sendRecordLock: false
+      });
+    } else {
+      wx.showToast({
+        title: "正在录音，上划取消发送",
+        icon: "none",
+        duration: 60000
+      });
+      // 上划距离不足，依然可以发送，不上锁
+      that.setData({
+        sendRecordLock: true
+      });
+    }
+  },
+
+  /*操作：长按录制语音消息 */
+  startRecordMsg: function() {
     // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
     // 1. 获取全局唯一的录音管理器 RecorderManager
     // 录音部分参数
@@ -419,58 +490,60 @@ Page({
       sampleRate: 44100, // 采样率
       numberOfChannels: 1, // 录音通道数
       encodeBitRate: 192000, // 编码码率
-      format: 'aac' // 音频格式，选择此格式创建的音频消息，可以在即时通信 IM 全平台（Android、iOS、微信小程序和 Web）互通
+      format: "aac" // 音频格式，选择此格式创建的音频消息，可以在即时通信 IM 全平台（Android、iOS、微信小程序和 Web）互通
     };
     // 2.开始录音
     recorderManager.start(recordOptions);
-    recorderManager.onStart(() => {
-      console.log('recorder start')
-    });
+    recorderManager.onStart(() => {});
     // 3.监听录音错误事件
     recorderManager.onError(function(errMsg) {
-      console.warn('recorder error:', errMsg);
+      console.warn("录音异常error:", errMsg);
     });
   },
 
   /*操作：停止录音并发送 */
   stopRecordMsg: function() {
     let that = this;
-    that.setData({
-      isSendRecordv: false
-    });
     recorderManager.stop();
     recorderManager.onStop(function(res) {
-      // 4. 创建消息实例，接口返回的实例可以上屏
-      const message = app.tim.createAudioMessage({
-        to: that.data.inquiryInfo.keyID,
-        conversationType: app.TIM.TYPES.CONV_GROUP,
-        payload: {
-          file: res
-        }
-      });
-      // 5. 发送消息
-      app.tim.sendMessage(message).then(function(imResponse) {
-        // 发送成功
-        let nowData = [...that.data.currentMessageList, imResponse.data.message];
-        that.setData({
-          currentMessageList: nowData,
-          maySendContent: ""
+      if (res.duration < 1000) {
+        wx.showToast({
+          title: "录音时间太短",
+          icon: "none",
+          duration: 1000
         });
-        that.toViewBottomFun();
-      }).catch(function(imError) {
-        // 发送失败
-        console.warn('sendRecord error:', imError);
-      });
+      } else if (that.data.sendRecordLock) {
+        // 4. 创建消息实例，接口返回的实例可以上屏
+        const message = app.tim.createAudioMessage({
+          to: that.data.inquiryInfo.keyID,
+          conversationType: app.TIM.TYPES.CONV_GROUP,
+          payload: {
+            file: res
+          }
+        });
+        // 5. 发送消息
+        app.tim.sendMessage(message).then(function (imResponse) {
+          // 发送成功
+          let nowData = [...that.data.currentMessageList, imResponse.data.message];
+          that.setData({
+            currentMessageList: nowData,
+            maySendContent: ""
+          });
+          that.toViewBottomFun();
+        }).catch(function (imError) {
+          // 发送失败
+          console.warn("sendRecord error:", imError);
+        });
+      }
     });
   },
 
   /*操作：播放语音 */
   playRecordFun: function(e) {
-    console.log(e);
     innerAudioContext.src = e.currentTarget.dataset.recordurl;
     innerAudioContext.autoplay = true;
     innerAudioContext.onPlay(() => {
-      console.log('开始播放');
+      // 开始播放
     })
     innerAudioContext.onError((res) => {
       console.log(res.errMsg);
@@ -478,7 +551,7 @@ Page({
     });
     innerAudioContext.onEnded(() => {
       innerAudioContext.stop();
-      console.log('结束播放');
+      // 结束播放
     });
   },
 

@@ -286,6 +286,19 @@
   height: 55rpx;
 }
 
+/*语音长按按钮*/
+.reply .opration-area .recordBtn {
+  margin: 20rpx 20rpx;
+  width: 445rpx;
+  padding: 0rpx 25rpx 0 15rpx;
+  border-radius: 6px;
+  height: 75rpx;
+  background: #f6f6f6;
+  text-align: center;
+  line-height: 75rpx;
+  color: #555658;
+}
+
 /*回复文本框*/
 
 .reply .opration-area .msgInput {
