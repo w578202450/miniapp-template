@@ -1,5 +1,8 @@
 const app = getApp()
 var HTTP = require('../../utils/http-util.js');
+import {
+  genTestUserSig
+} from '../../utils/GenerateTestUserSig';
 
 Page({
   data: {},
@@ -100,12 +103,23 @@ Page({
           wx.setStorage({
             key: 'patientID',
             data: res.data.keyID
-          })
-        wx.hideLoading()
-        wx.redirectTo({
-          // url:'/pages/personal-center/personal-center'
-          url: '/pages/online-inquiry/online-inquiry'
+          }),
+        // IM登录
+          app.tim.login({
+          userID: res.data.keyID,
+          userSig: genTestUserSig(res.data.keyID).userSig
+        }).then(function (imResponse) {
+          console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
+          wx.hideLoading();
+          wx.redirectTo({
+            // url:'/pages/personal-center/personal-center'
+            url: '/pages/online-inquiry/online-inquiry'
+          });
+
+        }).catch(function (imError) {
+          console.warn("===登录失败===", imError); // 登录失败的相关信息
         });
+      
       } else {
         wx.hideLoading()
         wx.showToast({
