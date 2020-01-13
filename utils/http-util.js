@@ -1,5 +1,5 @@
 
-var API_BASE_URL = 'http://10.0.0.210:6102/';
+var API_BASE_URL = 'http://10.0.0.210:6112/';
 
 var request = function request(url, needDomain,method, data) {
   
@@ -103,13 +103,13 @@ module.exports = {
   *获取UserSig
   */
   getUserSig: function getUserSig(parmas) {
-    return request('http://10.0.0.210:6110/api/rp/initial/getUserSig', false, 'get', parmas);
+    return request('api/rp/initial/getUserSig', true, 'get', parmas);
   },
   /*
   *获取roomId
   */
   getRoomId: function getRoomId(parmas) {
-    return request('http://10.0.0.210:6110/api/rp/initial/getRoomId', false, 'get', parmas);
+    return request('/api/rp/initial/getRoomId', true, 'get', parmas);
   },
   /*
   *云处方创建视频问诊记录
@@ -140,25 +140,25 @@ module.exports = {
      *获取药品订单
      */
   getOrderByPerson: function getOrderByPerson(parmas) {
-    return request('http://10.0.0.34:6214/goodsOrder/getOrderByPerson', false, 'get', parmas);
+    return request('api/tmc/goodsOrder/getOrderByPerson', true, 'get', parmas);
   },
   /*
      *批量获取处方详情
      */
   getRpByList: function getRpByList(parmas) {
-    return request('http://10.0.0.34:6214/rp/getRpByList', false, 'post', parmas);
+    return request('api/tmc/rp/getRpByList', true, 'post', parmas);
   },
   /*
     *订单详情页
     */
   goodsOrder: function goodsOrder(parmas) {
-    return request('http://10.0.0.34:6214/goodsOrder/detail', false, 'get', parmas);
+    return request('api/tmc/goodsOrder/detail', true, 'get', parmas);
   },
   /*
    *根据处方id获取处方详情
    */
   getRp: function getRp(parmas) {
-    return request('http://10.0.0.34:6214/rp/get', false, 'get', parmas);
+    return request('api/tmc/rp/get', true, 'get', parmas);
   },
 
   /*
@@ -173,6 +173,13 @@ module.exports = {
   */
   getDoctorQualification: function getDoctorQualification(parmas) {
     return request('api/peachUser/doctorCertify/getDoctorQualification', true, 'get', parmas);
+  },
+
+  /*
+  *添加收货地址
+  */
+  getDoctorQualification: function getDoctorQualification(parmas) {
+    return request('api/peachUser/personDeliveryAddr/addAddress', true, 'get', parmas);
   },
 
   
