@@ -39,13 +39,13 @@ Page({
       iconUrl: "../../../../images/chat/m-camera.png",
       clickFun: "cameraWxFun",
       isFifth: false
-    },
-    {
-      title: "视频问诊",
-      iconUrl: "../../../../images/chat/m-video.png",
-      clickFun: "videoWxFun",
-      isFifth: false
     }
+    // {
+    //   title: "视频问诊",
+    //   iconUrl: "../../../../images/chat/m-video.png",
+    //   clickFun: "videoWxFun",
+    //   isFifth: false
+    // }
     ],
     aimgurl: {}, // //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
@@ -231,7 +231,6 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
-      console.log(that.data.currentMessageList);
       that.toViewBottomFun();
     }).catch(function (imError) {
       that.setData({
@@ -405,8 +404,6 @@ Page({
       that.setData({
         currentMessageList: nowDatas
       });
-      // that.toViewBottomFun();
-      console.log(that.data.currentMessageList);
       that.data.httpLoading = false; // 关闭隐性加载过程
     }).catch(function (imError) {
       // let nowDatas = [...that.data.currentMessageList ];
@@ -446,21 +443,22 @@ Page({
   /*操作：开始长按录音按钮 */
   handleTouchStart: function (e) {
     let that = this;
+    that.startRecordMsg();
+    that.setData({
+      startPoint: e.touches[0],
+      recordingTxt: "松开 结束",
+      sendRecordLock: true
+    });
     wx.getSetting({
       success(res) {
-        if (res.authSetting['scope.record']) {
-          // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-          // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
-          that.startRecordMsg();
-          that.setData({
-            startPoint: e.touches[0],
-            recordingTxt: "松开 结束",
-            sendRecordLock: true
-          });
+        if (!res.authSetting['scope.record']) {
+          wx.hideToast();// 结束录音、隐藏Toast提示框
+          recorderManager.stop();
+          recorderManager.onStop(function (res) { });
           wx.showToast({
-            title: "正在录音，上划取消发送",
+            title: "您未允许本小程序语音授权，无法发送语音",
             icon: "none",
-            duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+            duration: 3000
           });
         }
       }
@@ -469,7 +467,6 @@ Page({
 
   /*操作：结束长按录音按钮 */
   handleTouchEnd: function (e) {
-    wx.hideToast();// 结束录音、隐藏Toast提示框
     this.stopRecordMsg();
     this.setData({
       recordingTxt: "按住 说话"
@@ -522,6 +519,11 @@ Page({
       encodeBitRate: 192000, // 编码码率
       format: "aac" // 音频格式，选择此格式创建的音频消息，可以在即时通信 IM 全平台（Android、iOS、微信小程序和 Web）互通
     };
+    wx.showToast({
+      title: "正在录音，上划取消发送",
+      icon: "none",
+      duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+    });
     // 2.开始录音
     recorderManager.start(recordOptions);
     recorderManager.onStart(() => { });
@@ -534,6 +536,7 @@ Page({
   /*操作：停止录音并发送 */
   stopRecordMsg: function () {
     let that = this;
+    wx.hideToast();// 结束录音、隐藏Toast提示框
     recorderManager.stop();
     recorderManager.onStop(function (res) {
       if (res.duration < 1000) {
