@@ -71,14 +71,13 @@
             <view>{{item.payload.text}}</view>
           </view>
           <!-- 图片消息：TIMImageElem -->
-          <view
-           wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="previewImage"  data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
-           <image wx:if="{{item.showLoadingState}}" src="../../../../images/chat/loading-fail.png" class="imageLoading"/>
-            <!-- <weui-loading wx:if="{{item.showLoadingState}}" class="imageLoading" type="circle" tips="{{tips}}"></weui-loading> -->
+          <view wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="previewImage" data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
+            <!-- <image wx:if="{{item.showLoadingState}}" src="../../../../images/chat/loading-fail.png" class="imageLoading"/> -->
+            <weui-loading wx:if="{{item.showLoadingState}}" class="imageLoading" type="circle" tips="{{tips}}"></weui-loading>
             <image class="pictureMsg" src="{{item.payload.imageInfoArray[0].imageUrl}}" />
           </view>
           <!-- 音频消息：TIMSoundElem -->
-          <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun"  data-recordurl="{{item.payload.url}}">
+          <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun" data-recordurl="{{item.payload.url}}">
             <view style="display: flex;flex-direction: row;justify-content: flex-start;align-items: center;flex-wrap: wrap;width: {{item.recordViewWidth}}rpx;">
               <image src="../../../../images/chat/audio.png" class="payloadImage"></image>
               <view style="padding-left: 10px" class="_div data-v-71681a0a">{{item.payload.second}}s</view>
@@ -95,16 +94,16 @@
   <view class="bottomMenus">
     <view class="reply">
       <view class="opration-area">
-      <!-- 切换键盘 -->
-        <image wx:if="{{isSendRecord}}" src="../../../../images/chat/jianpan.png" class="voiceIcon" bindtap="openKeyboardFun"/>
+        <!-- 切换键盘 -->
+        <image wx:if="{{isSendRecord}}" src="../../../../images/chat/jianpan.png" class="voiceIcon" bindtap="openKeyboardFun" />
         <!-- 切换语音 -->
-        <image wx:else src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="willSendRecordMsg"/>
+        <image wx:else src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="willSendRecordMsg" />
         <!-- 录音按钮 -->
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框 -->
         <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" />
         <!-- 表情 -->
-        <image src="../../../../images/chat/inputIcon.png" class="inputIcon"/>
+        <image src="../../../../images/chat/inputIcon.png" class="inputIcon" />
       </view>
       <!-- 菜单、发送按钮 -->
       <view class="send">

@@ -355,7 +355,6 @@ Page({
         that.setData({
           aimgurl: res
         });
-        console.log(that.data.aimgurl);
         that.sendImageMsg();
       }
     })
@@ -385,36 +384,36 @@ Page({
     }
     that.data.httpLoading = true; // 开启隐性加载过程
     // 1. 创建消息实例
-    let message = app.tim.createImageMessage({
+    const message = app.tim.createImageMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
       conversationType: app.TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         file: that.data.aimgurl
-      },
-      showLoadingState:false
+      }
     });
-    console.log(message);
+    message.showLoadingState = true;
     let nowData = [...that.data.currentMessageList, message];
     that.setData({
-      currentMessageList: nowData,
-      maySendContent: ""
+      currentMessageList: nowData
     });
-    console.log(that.data.currentMessageList);
+    that.toViewBottomFun();
     // 2. 发送数据
     app.tim.sendMessage(message).then(function (imResponse) {
-      // let nowDatas = [...that.data.currentMessageList];
-      // nowDatas[nowDatas.length - 1].showLoadingState = true;
-      // that.setData({
-      //   currentMessageList: nowDatas
-      // });
-      that.data.httpLoading = false; // 关闭隐性加载过程
-      that.toViewBottomFun();
-    }).catch(function (imError) {
-      let nowDatas = [...that.data.currentMessageList ];
-      nowDatas[nowDatas.length - 1].showLoadingState = true;
+      // let nowDatas = [...that.data.currentMessageList, imResponse.data.message];
+      let nowDatas = [...that.data.currentMessageList];
+      nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
         currentMessageList: nowDatas
       });
+      // that.toViewBottomFun();
+      console.log(that.data.currentMessageList);
+      that.data.httpLoading = false; // 关闭隐性加载过程
+    }).catch(function (imError) {
+      // let nowDatas = [...that.data.currentMessageList ];
+      // nowDatas[nowDatas.length - 1].showLoadingStateTwo = true;
+      // that.setData({
+      //   currentMessageList: nowDatas
+      // });
       console.warn(imError);
       that.data.httpLoading = false; // 关闭隐性加载过程
     });
@@ -450,7 +449,19 @@ Page({
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.record']) {
-          that.startRecord();
+          // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+          // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
+          that.startRecordMsg();
+          that.setData({
+            startPoint: e.touches[0],
+            recordingTxt: "松开 结束",
+            sendRecordLock: true
+          });
+          wx.showToast({
+            title: "正在录音，上划取消发送",
+            icon: "none",
+            duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+          });
         }
       }
     });
@@ -498,24 +509,6 @@ Page({
         sendRecordLock: true
       });
     }
-  },
-
-  /*操作：开始录音 */
-  startRecord() {
-    // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-    let that = this;
-    // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
-    that.startRecordMsg();
-    that.setData({
-      startPoint: e.touches[0],
-      recordingTxt: "松开 结束",
-      sendRecordLock: true
-    });
-    wx.showToast({
-      title: "正在录音，上划取消发送",
-      icon: "none",
-      duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
-    });
   },
   /*操作：长按录制语音消息 */
   startRecordMsg: function () {
@@ -567,13 +560,8 @@ Page({
         that.toViewBottomFun();
         // 5. 发送消息
         app.tim.sendMessage(message).then(function (imResponse) {
-          console.log(imResponse);
           // 发送成功
-          // let nowData = [...that.data.currentMessageList, imResponse.data.message];
-          // that.setData({
-          //   currentMessageList: nowData,
-          //   maySendContent: ""
-          // });
+          // console.log(imResponse);
         }).catch(function (imError) {
           // 发送失败
           console.log(imError);
