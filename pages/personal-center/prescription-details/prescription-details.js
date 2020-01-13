@@ -2,50 +2,8 @@ const HTTP = require('../../../utils/http-util')
 
 Page({
   data: {
-    tipShow: true, //是否展示tip提示
-    payShow: true, //是否展示支付界面
-    info: {
-      "rp": {
-        "keyID": "11111",
-        "orgID": "19122116554357936820511001",
-        "patientID": "11111",
-        "inquiryID": "1",
-        "personID": "",
-        "patientName": "11111",
-        "sex": 0,
-        "age": 0,
-        "consultDisease": "11111",
-        "diagnosis": "11111",
-        "rpAdvice": "11111",
-        "duration": 0,
-        "price": 0,
-        "rpStatus": 0,
-        "payStatus": 0,
-        "rpType": 0,
-        "assistantStaffID": "11111",
-        "assistantName": "11111",
-        "doctorStaffID": "11111",
-        "doctorName": "11111",
-        "rpTime": "1900-01-01 00:00:00.0",
-        "pharmacistStaffID": "11111",
-        "reviewTime": "1900-01-01 00:00:00.0",
-        "reviewStatus": 0,
-        "reviewResult": "1",
-        "orderID": "1",
-        "yunRpStatus": 0,
-        "yunRpID": "111111",
-        "rpFileStampFileID": "11111",
-        "rpFileStampFileUrl": "11111",
-        "rpImgFileID": "11111",
-        "rpImgFileUrl": "11111",
-        "addUser": "11111",
-        "addTime": "1900-01-01 00:00:00.0",
-        "modifyUser": "11111",
-        "modifyTime": "2020-01-04 16:01:45.0",
-        "isDelete": 0
-      },
-      "rpMedicines": []
-    }
+    tipHidden: true, //是否展示tip提示
+    payHidden: true //是否展示支付界面
   },
   payAction: function() {
     wx.navigateTo({
@@ -56,10 +14,17 @@ Page({
     })
   },
   onLoad: function(e) {
-    var inquiryID = e.inquiryID;
-    var orgID = e.orgID;
-    console.log("-e----------", orgID, inquiryID)
-    this.loadDatas(orgID, inquiryID);
+    var rpID = e.rpID
+    console.log('------eeee--',e.index)
+    //处方列表跳转
+    this.data.tipHidden = e.index == 0 ? true : false;
+    this.data.payHidden = e.index == 0 ? true : false;
+    console.log("-e----------", rpID)
+    // var inquiryID = e.inquiryID;
+    // var orgID = e.orgID;
+    // console.log("-e----------", orgID, inquiryID)
+    // this.loadDatas(orgID, inquiryID);
+    this.getRp(e.rpID)
   },
 
   // 加载数据
@@ -90,5 +55,33 @@ Page({
     //       noNetwork: true
     //     })
     //   })
+  },
+
+  getRp(rpID) {
+
+    wx.showLoading({
+      title: '获取处方详情...',
+    });
+    var that = this;
+    HTTP.getRp({
+      rpID: rpID,
+      orgID: '19122116554357936820511001'
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          this.setData({
+            rpData: res.data,
+            tipHidden: this.data.tipHidden,
+            payHidden: this.data.payHidden
+          })
+        }
+      }).catch(e => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '网络链接失败',
+          icon: 'none'
+        })
+      })
   },
 })

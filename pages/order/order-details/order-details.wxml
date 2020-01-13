@@ -12,13 +12,13 @@
           <image style="width:58rpx;height:58rpx" src="../../../images/order/order_delivery.png"></image>
           <text>订单已发货</text>
         </block>
-        
+
       </block>
       <block wx:elif='{{detail.orderStatusID == 2}}'>
-          <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
-          <text>订单已取消，未收到退款请联系客服</text>
-        </block>
-      
+        <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
+        <text>订单已取消，未收到退款请联系客服</text>
+      </block>
+
     </view>
   </view>
 
@@ -41,7 +41,7 @@
           <!-- <image src="{{item.avatar}}"></image> -->
           <view class="drugs-cell-middle">
             <text class="drugs-cell-name">{{item.medicineName}}</text>
-            <text class="drugs-cell-unit">{{item.unit}}</text>
+            <text class="drugs-cell-unit">{{item.specification}}</text>
           </view>
           <view class="drugs-cell-right">
             <text class="drugs-cell-price">¥{{item.priceSum}}</text>
@@ -59,7 +59,11 @@
         <view class="prescription-header-lineView"></view>
         <view class="prescription-header-title">处方签</view>
       </view>
-      <image class="prescription-image" src="../../../images/order/order_prescription.png" bindtap="previewPrescriptionAction"></image>
+      <view class="prescription-image" style="position: relative" bindtap="previewPrescriptionAction">
+        <image src="../../../images/order/order_prescription.png" style="width: 100rpx;height: 100rpx;position: absolute"></image>
+        <view style="background:rgba(0,0,0,1);border-radius:0px 0px 3px 3px;opacity:0.4;width:100rpx;height:30rpx;position: absolute;margin-top:70rpx;font-size:11px;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(255,255,255,1);text-align: center">预览</view>
+
+      </view>
       <view class="separator" style="margin-top: 25rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>配送方式：</text>
@@ -97,15 +101,29 @@
     <view class="separator" style="height:24rpx"></view>
 
     <view style="display: flex;flex-direction: row;justify-content: space-between;padding:32rpx">
-      <view class="options-view" style="width:176px">
-        <text>咨询医生</text>
-      </view>
-      <view class="options-view" style="width:232px;margin-left:10rpx">
-        <text>拨打客服电话</text>
-      </view>
-      <view class="options-view" style="width:176px;margin-left:10rpx">
-        <text>取消订单</text>
-      </view>
+      <block wx:if='{{detail.orderStatusID == 10}}'>
+        <block wx:if='{{detail.deliveryStatusID == 1}}'>
+          <view class="options-view" style="width:176px" bindtap="contactDoctor">
+            <text>咨询医生</text>
+          </view>
+        </block>
+        <block wx:elif='{{detail.deliveryStatusID == 2 || detail.deliveryStatusID == 3}}'>
+          <view class="options-view" style="width:176px" bindtap="contactDoctor">
+            <text>咨询医生</text>
+          </view>
+          <view class="options-view" style="width:176px;background:rgba(67,139,239,1)" bindtap="confirmGoods">
+            <text style="color:rgba(255,255,255,1)">确认收货</text>
+          </view>
+        </block>
+      </block>
+      <block wx:elif='{{detail.orderStatusID == 2}}'>
+        <!-- <view class="options-view" style="width:176px" bindtap="contactDoctor">
+          <text>咨询医生</text>
+        </view> -->
+        <view class="options-view" style="width:176px;background:rgba(67,139,239,1);border:0" bindtap="confirmGoods">
+            <text style="color:rgba(255,255,255,1)">确认收货</text>
+          </view>
+      </block>
     </view>
 
   </view>

@@ -18,8 +18,8 @@ Page({
     this.data.list = [];
     var that = this;
     HTTP.getOrderByPerson({
-      buyerID: '123',
-      orgID: '19122116554357936820511001',
+      buyerID: wx.getStorageSync('personInfo').personID,
+      orgID: wx.getStorageSync('orgID'),
       pageIndex: 1,
       pageSize: 100
     })
