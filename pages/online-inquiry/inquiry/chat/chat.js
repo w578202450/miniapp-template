@@ -80,7 +80,11 @@ Page({
     // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
     app.tim.on(app.TIM.EVENT.MESSAGE_RECEIVED, function (event) {
       if (event.data.type == "TIMSoundElem") {
-        event.data.recordViewWidth = event.data.payload.second * 2 + 100; // 最大宽度220,最小宽度100
+        if (Number(event.data.payload.second) <= 15) {
+          event.data.recordViewWidth = event.data.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+        } else {
+          event.data.recordViewWidth = (Number(event.data.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
+        }
       }
       let nowData = [...that.data.currentMessageList, ...event.data];
       that.setData({
@@ -124,7 +128,11 @@ Page({
     }).then(function (imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
-          item.recordViewWidth = item.payload.second * 2 + 100; // 最大宽度220,最小宽度100
+          if (Number(item.payload.second) <= 15) {
+            item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+          } else {
+            item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+          }
         }
       })
       setTimeout(function () {
@@ -223,7 +231,11 @@ Page({
     }).then(function (imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
-          item.recordViewWidth = item.payload.second * 2 + 100; // 最大宽度220,最小宽度100
+          if (Number(item.payload.second) <= 15) {
+            item.recordViewWidth = item.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+          } else {
+            item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+          }
         }
       })
       that.setData({
@@ -554,7 +566,11 @@ Page({
             file: res
           }
         });
-        message.recordViewWidth = message.payload.second * 2 + 100; // 最大宽度220,最小宽度100
+        if (Number(message.payload.second) <= 15) {
+          message.recordViewWidth = message.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+        } else {
+          message.recordViewWidth = (Number(message.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+        }
         let nowData = [...that.data.currentMessageList, message];
         that.setData({
           currentMessageList: nowData,
