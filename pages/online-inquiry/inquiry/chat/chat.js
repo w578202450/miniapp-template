@@ -418,17 +418,24 @@ Page({
 
   /*操作：开始长按录音按钮 */
   handleTouchStart: function (e) {
-    // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
-    this.startRecordMsg();
-    this.setData({
-      startPoint: e.touches[0],
-      recordingTxt: "松开 结束",
-      sendRecordLock: true
-    });
-    wx.showToast({
-      title: "正在录音，上划取消发送",
-      icon: "none",
-      duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+    let that = this;
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting['scope.record']) {
+          // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
+          that.startRecordMsg();
+          that.setData({
+            startPoint: e.touches[0],
+            recordingTxt: "松开 结束",
+            sendRecordLock: true
+          });
+          wx.showToast({
+            title: "正在录音，上划取消发送",
+            icon: "none",
+            duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+          });
+        }
+      }
     });
   },
 
@@ -443,6 +450,7 @@ Page({
 
   /*操作：点击了长按录音按钮 */
   handleClick: function (e) {
+
   },
 
   /*操作：长按录音按钮过程中 */
