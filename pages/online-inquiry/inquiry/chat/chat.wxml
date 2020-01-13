@@ -76,7 +76,7 @@
           </view>
           <!-- 音频消息：TIMSoundElem -->
           <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun"  data-recordurl="{{item.payload.url}}">
-            <view class="flexRowStartCenter">
+            <view style="display: flex;flex-direction: row;justify-content: flex-start;align-items: center;flex-wrap: wrap;width: {{item.recordViewWidth}}rpx;">
               <image src="../../../../images/chat/audio.png" class="payloadImage"></image>
               <view style="padding-left: 10px" class="_div data-v-71681a0a">{{item.payload.second}}s</view>
             </view>

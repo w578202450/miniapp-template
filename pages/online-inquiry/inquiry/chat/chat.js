@@ -78,6 +78,9 @@ Page({
     let that = this;
     // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
     app.tim.on(app.TIM.EVENT.MESSAGE_RECEIVED, function (event) {
+      if (event.data.type == "TIMSoundElem") {
+        event.data.recordViewWidth = event.data.payload.second * 2 + 100; // 最大宽度220,最小宽度100
+      }
       let nowData = [...that.data.currentMessageList, ...event.data];
       that.setData({
         currentMessageList: nowData
@@ -118,6 +121,11 @@ Page({
       nextReqMessageID: that.data.nextReqMessageID,
       count: 10
     }).then(function (imResponse) {
+      imResponse.data.messageList.forEach(item => {
+        if (item.type == "TIMSoundElem") {
+          item.recordViewWidth = item.payload.second * 2 + 100; // 最大宽度220,最小宽度100
+        }
+      })
       setTimeout(function () {
         that.setData({
           currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
@@ -212,11 +220,17 @@ Page({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
       count: 10
     }).then(function (imResponse) {
+      imResponse.data.messageList.forEach(item => {
+        if (item.type == "TIMSoundElem") {
+          item.recordViewWidth = item.payload.second * 2 + 100; // 最大宽度220,最小宽度100
+        }
+      })
       that.setData({
         currentMessageList: imResponse.data.messageList,
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
+      console.log(that.data.currentMessageList);
       that.toViewBottomFun();
     }).catch(function (imError) {
       that.setData({
@@ -422,18 +436,7 @@ Page({
     wx.getSetting({
       success(res) {
         if (res.authSetting['scope.record']) {
-          // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
-          that.startRecordMsg();
-          that.setData({
-            startPoint: e.touches[0],
-            recordingTxt: "松开 结束",
-            sendRecordLock: true
-          });
-          wx.showToast({
-            title: "正在录音，上划取消发送",
-            icon: "none",
-            duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
-          });
+          that.startRecord();
         }
       }
     });
@@ -483,6 +486,23 @@ Page({
     }
   },
 
+  /*操作：开始录音 */
+  startRecord() {
+    // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+    let that = this;
+    // 记录长按时开始点信息，后面用于计算上划取消时手指滑动的距离。
+    that.startRecordMsg();
+    that.setData({
+      startPoint: e.touches[0],
+      recordingTxt: "松开 结束",
+      sendRecordLock: true
+    });
+    wx.showToast({
+      title: "正在录音，上划取消发送",
+      icon: "none",
+      duration: 60000 // 先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+    });
+  },
   /*操作：长按录制语音消息 */
   startRecordMsg: function () {
     // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
@@ -524,6 +544,7 @@ Page({
             file: res
           }
         });
+        message.recordViewWidth = message.payload.second * 2 + 100; // 最大宽度220,最小宽度100
         let nowData = [...that.data.currentMessageList, message];
         that.setData({
           currentMessageList: nowData,
