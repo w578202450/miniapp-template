@@ -20,7 +20,7 @@ Page({
     var that = this;
     HTTP.goodsOrder({
       orderID: orderID,
-      orgID: '19122116554357936820511001'
+      orgID: wx.getStorageSync('orgID')
     })
       .then(res => {
         wx.hideLoading();
@@ -33,14 +33,13 @@ Page({
           this.data.rpID = res.data.rpID
         }
       }).catch(e => {
-        wx.hideLoading();
+        wx.hideLoading(); 
         wx.showToast({
-          title: '网络链接失败',
+          title: e,
           icon:'none'
         })
       })
   },
-
   getRp(rpID){
     
     wx.showLoading({
@@ -49,7 +48,7 @@ Page({
     var that = this;
     HTTP.getRp({
       rpID: rpID,
-      orgID:'19122116554357936820511001'
+      orgID: wx.getStorageSync('orgID')
     })
       .then(res => {
         wx.hideLoading();

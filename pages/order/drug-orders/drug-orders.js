@@ -95,6 +95,10 @@ Page({
     })
   },
 
+  payOrder:function(){
+
+  },
+
   // 无网络
   noNetworkOption: function () {
     this.loadDatas()

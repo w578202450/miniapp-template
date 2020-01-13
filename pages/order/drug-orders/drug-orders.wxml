@@ -7,7 +7,7 @@
 <block wx:else>
   <view class="tmc-container" wx:for="{{list}}" wx:key="id" wx:for-item="item">
       
-    <navigator url="/pages/order/order-details/order-details?orderID={{item.orderID}}">
+    <navigator url="/pages/order/order-details/order-details?orderID={{item.keyID}}">
       <view class="cell">
         <view class="cell-top">
           <image src="{{item.avatar}}"></image>
@@ -22,7 +22,7 @@
         </view>
         <view class="cell-bottom">
           <block wx:if="{{item.orderStatusID==0}}">
-            <view style="border:1px solid rgba(254,88,83,1)" class="option-view" style="margin-top: 32rpx">
+            <view style="border:1px solid rgba(254,88,83,1)" class="option-view" style="margin-top: 32rpx" catchtap="payOrder">
               <text style="color:rgba(254,88,83,1)">立即支付</text>
             </view>
           </block>
