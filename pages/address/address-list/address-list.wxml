@@ -1,5 +1,5 @@
 <view wx:for="{{list}}" wx:for-item="item">
-  <view class="cell">
+  <view class="cell" bindtap="selectedAddress" data-index="{{index}}">
     <view class="info-box">
       <text class="name">{{item.name}}</text>
       <text class="phone">{{item.phone}}</text>
@@ -8,7 +8,7 @@
     <text class="address">{{item.address}}</text>
     <view class="separator"></view>
     <view class="bottom-box">
-      <view class="bottom-left" bindtap="defaultAddress" data-index="{{index}}">
+      <view class="bottom-left" catchtap="defaultAddress" data-index="{{index}}">
         <image class="ImageTitle-image" src="{{item.selected ? '../../../images/public/public_circle_selected.png' : '../../../images/public/public_circle_normal.png'}}"></image>
         <text class="ImageTitle-title">默认地址</text>
       </view>

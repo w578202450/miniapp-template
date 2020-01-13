@@ -48,6 +48,29 @@ Page({
     })
   },
 
+  selectedAddress:function(e){
+    var index = e.currentTarget.dataset.index;
+    let pages = getCurrentPages();      //获取所有页面
+    let currentPage = null;   //当前页面
+    let prevPage = null; //上一个页面
+    if (pages.length >= 2) {
+      currentPage = pages[pages.length - 1]; //获取当前页面，将其赋值
+      prevPage = pages[pages.length - 2]; //获取上一个页面，将其赋值
+    } 
+    if (prevPage) {
+      prevPage.setData({
+        addressInfo: {
+          name: this.data.list[index].name,
+          phone: this.data.list[index].phone,
+          address: this.data.list[index].address
+        }                 //将想要传的信息赋值给上一个页面data中的值
+      })
+    }
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
+
   defaultAddress:function(e){
     var index = e.currentTarget.dataset.index;
     for (var i = 0; i < this.data.list.length; i++) {

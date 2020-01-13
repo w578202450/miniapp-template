@@ -44,6 +44,7 @@
   border-top-left-radius: 15rpx;
   border-top-right-radius: 15rpx;
   overflow: hidden;
+  background-color: white
 }
 
 .weui-cells {
@@ -83,4 +84,57 @@
 .btnView {
   width: 100%;
   margin-top: 112rpx;
+}
+
+.info-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+  padding-top: 32rpx;
+}
+
+.name,.phone{
+  font-size:28rpx;
+  font-family:PingFangSC-Medium,PingFang SC;
+  font-weight:500;
+  color:rgba(0,0,0,0.85);
+  line-height:28rpx;
+}
+
+.phone{
+  margin-left: 16rpx;
+}
+
+.address{
+  margin-top: 32rpx;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.65);
+  line-height:24rpx;
+  margin-left: 32rpx;
+}
+
+.defaultAddressView{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 32rpx;
+}
+
+.selectedBtn{
+  width:86rpx;
+  height:36rpx;
+  background-color:rgba(67,139,239,1);
+  border-radius:22rpx;
+  margin-left: 32rpx;
+  text-align: center;
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255,255,255,1);
 }

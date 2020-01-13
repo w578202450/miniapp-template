@@ -119,7 +119,7 @@ Page({
   },
 
   onLoad: function() {
-    // this.loadDatas()
+    this.loadDatas()
   },
   // 加载数据
   loadDatas() {
@@ -162,7 +162,7 @@ Page({
   // 无数据
   noDataOption: function(e) {
     wx.navigateTo({
-      url: '../../online-inquiry/inquiry/chat/chat',
+      url: '/pages/online-inquiry/inquiry/chat/chat',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

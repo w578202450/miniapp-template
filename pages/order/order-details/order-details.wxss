@@ -131,6 +131,7 @@
   font-weight:400;
   color:rgba(0,0,0,0.45);
   line-height:24rpx;
+  margin-top: 20rpx
 }
 
 .drugs-cell-right{
@@ -178,12 +179,14 @@
   color:rgba(42,44,48,1);
   line-height:28rpx;
   margin-left: 4rpx;
+  
 }
 
 .prescription-image{
   width: 100rpx;
   height: 100rpx;
   margin-left: 32rpx;
+  
 }
 
 .prescription-delivery{

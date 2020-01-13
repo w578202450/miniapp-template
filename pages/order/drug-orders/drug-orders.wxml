@@ -39,9 +39,9 @@
               <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
                 <text>填写地址</text>
               </view>
-              <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view">
+              <!-- <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view">
                 <text>申请退款</text>
-              </view>
+              </view> -->
             </block>
           </block>
         </view>
