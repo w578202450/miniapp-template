@@ -1,12 +1,14 @@
 const HTTP = require('../../../utils/http-util')
 
 Page({
+  addressInfo: null,
   noNetwork: false,
   noData: false,
+  orderID: '',
   data: {
     list: []
   },
-  onLoad: function () {
+  onLoad: function() {
     this.loadDatas()
   },
 
@@ -18,11 +20,11 @@ Page({
     this.data.list = [];
     var that = this;
     HTTP.getOrderByPerson({
-      buyerID: wx.getStorageSync('personInfo').personID,
-      orgID: wx.getStorageSync('orgID'),
-      pageIndex: 1,
-      pageSize: 100
-    })
+        buyerID: wx.getStorageSync('personInfo').personID,
+        orgID: wx.getStorageSync('orgID'),
+        pageIndex: 1,
+        pageSize: 100
+      })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
@@ -32,7 +34,7 @@ Page({
             })
           } else {
             this.data.list = this.data.list.concat(res.data.datas)
-          
+
             var tempRpIds = []
             for (var index in this.data.list) {
               tempRpIds.push(this.data.list[index].rpID)
@@ -43,11 +45,6 @@ Page({
               rpIDs: tempRpIds
             })
           }
-        } else {
-          wx.showToast({
-            title: res.message,
-            icon: 'none'
-          })
         }
       }).catch(e => {
         wx.hideLoading();
@@ -56,7 +53,7 @@ Page({
         })
       })
   },
-  getRpByList(params){
+  getRpByList(params) {
     wx.showLoading({
       title: '加载处方详情...',
     });
@@ -69,12 +66,7 @@ Page({
               this.data.list[j].diagnosis = res.data[this.data.list[j].rpID].diagnosis
               this.data.list[j].doctorName = res.data[this.data.list[j].rpID].doctorName
             }
-          } 
-        } else {
-          wx.showToast({
-            title: res.message,
-            icon: 'none'
-          })
+          }
         }
         this.setData({
           list: this.data.list
@@ -84,7 +76,7 @@ Page({
       })
   },
 
-  addressAction: function(){
+  addressAction: function() {
     wx.navigateTo({
       url: '/pages/address/address-add/address-add',
       success: function(res) {},
@@ -93,121 +85,150 @@ Page({
     })
   },
 
-  orderDetailsAction:function(){
+  orderDetailsAction: function() {
     wx.navigateTo({
       url: '/pages/order/order-details/order-details',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   },
 
-  payOrder:function(e){
+  payOrder: function(e) {
     var that = this
-    console.log('ddddd----',e.currentTarget.dataset.index)
     var index = e.currentTarget.dataset.index;
+    this.data.orderID = this.data.list[index].keyID
+    this.data.addressInfo = {
+      name: this.data.list[index].receiverName,
+      phone: this.data.list[index].receiverPhone,
+      address: this.data.list[index].address
+    }
     HTTP.orderPrePay({
-      orgID:wx.getStorageSync('orgID'),
-      orderID: this.data.list[index].keyID,
-      price: this.data.list[index].prePrice,
-      personID: this.data.list[index].buyerID
-    })
+        orgID: wx.getStorageSync('orgID'),
+        orderID: this.data.list[index].keyID,
+        price: this.data.list[index].prePrice,
+        personID: this.data.list[index].buyerID
+      })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
-          this.tradeOrder(res.data.accountTransID, res.data.paymentID);
-        } else {
-          wx.showToast({
-            title: res.message,
-            icon:'none'
-          })
+          this.tradeOrder(res.data.paymentID);
         }
-        
+
       }).catch(e => {
         wx.hideLoading();
       })
-    
+
   },
 
-  tradeOrder:function(accountTransID, paymentID){
-    console.log('---支付校验---', accountTransID, paymentID)
+  tradeOrder: function(paymentID) {
+    console.log('---支付校验---', paymentID)
     var that = this
     HTTP.tradeOrder({
-      body: '医护上门',
-      detail: '医护上门PICC换药',
-      transID: accountTransID,
-      sysCode: 'person-app'
-    })
+        body: '医护上门',
+        detail: '医护上门PICC换药',
+        transID: paymentID,
+        sysCode: 'person-tmc',
+        openID: wx.getStorageSync('openID')
+      })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
           wx.showToast({
             title: '支付校验成功',
           })
-          that.wxPayOptions()
-        } else {
-          wx.showToast({
-            title: res.message,
-            icon: 'none'
-          })
+          that.wxPayOptions(res.data)
         }
       }).catch(e => {
         wx.hideLoading();
       })
   },
 
-  wxPayOptions(){
-    wx.requestPayment(
-      {
-        'timeStamp': '',
-        'nonceStr': '',
-        'package': '',
-        'signType': 'MD5',
-        'paySign': '',
-        'success': function (res) {
-          wx.showToast({
-            title: '支付成功',
-          })
-         },
-        'fail': function (res) { },
-        'complete': function (res) { }
-      })
+  wxPayOptions(payInfo) {
+    var that = this
+    wx.showLoading({
+      title: '支付中...',
+      icon: 'none'
+    })
+    wx.requestPayment({
+      'timeStamp': payInfo.timestamp,
+      'nonceStr': payInfo.nonce_str,
+      'package': "prepay_id=" + payInfo.prepay_id,
+      'signType': 'MD5',
+      'paySign': payInfo.sign,
+      'success': function(res) {
+        console.log('微信支付成功----', res)
+        wx.showToast({
+          title: '支付成功',
+        })
+        that.orderPaySuccess()
+      },
+      'fail': function(res) {
+        wx.showToast({
+          title: '支付失败',
+        })
+        console.log('微信支付失败----', res)
+      },
+      'complete': function(res) {}
+    })
   },
 
-  orderPaySuccess(){
+  orderPaySuccess() {
     HTTP.orderPaySuccess({
-      // orgID: ,
-      // orderID: ,
-      // personID: ,
-    })
+        orgID: wx.getStorageSync('orgID'),
+        orderID: this.data.orderID,
+        personID: wx.getStorageSync('personID'),
+      })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
           wx.showToast({
-            title: '支付成功',
+            title: '支付回调成功',
           })
+          this.navigateToAddress()
         } else {
           wx.showToast({
             title: res.message,
-            icon: 'none'
           })
         }
       }).catch(e => {
         wx.hideLoading();
+        wx.showToast({
+          title: '支付回调失败',
+        })
       })
   },
 
-  // 无网络
-  noNetworkOption: function () {
-    this.loadDatas()
+
+  navigateToAddress() {
+    var that = this
+    this.data.list = []
+    this.data.addressInfo = {
+      name: null,
+      phone: null,
+      address: null
+    }
+    this.data.noNetwork = false
+    this.data.noData = false
+
+    if (this.data.addressInfo.name && this.data.addressInfo.phone && this.data.addressInfo.address) {
+      wx.navigateTo({
+        url: "/pages/address/address-submit/address-submit?name=" + this.data.addressInfo.name + ' &phone=' + this.data.addressInfo.phone + ' &address=' + this.data.addressInfo.address,
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) {
+          that.loadDatas()
+        },
+      })
+    } else {
+      wx.navigateTo({
+        url: "/pages/address/address-submit/address-submit",
+        success: function (res) { },
+        fail: function (res) { },
+        complete: function (res) {
+          that.loadDatas()
+        },
+      })
+    }
   },
-  // 无数据
-  noDataOption: function (e) {
-    wx.navigateTo({
-      url: '../../online-inquiry/inquiry/chat/chat',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  }
 })

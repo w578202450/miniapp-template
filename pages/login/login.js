@@ -17,22 +17,22 @@ Page({
     })
   },
 
-// 微信授权
+  // 微信授权
   getUserInfo: function(e) {
     let that = this
-    if (e.detail.userInfo){
+    if (e.detail.userInfo) {
       app.globalData.userInfo = e.detail.userInfo
       wx.setStorage({
         key: 'userinfo',
         data: e.detail.userInfo,
-        success: function (res) {
+        success: function(res) {
           that.wxlogin()
         }
       })
     }
-    
+
   },
-// 微信登录获取临时code
+  // 微信登录获取临时code
   wxlogin() {
     wx.showLoading({
       title: '登录中...',
@@ -87,6 +87,7 @@ Page({
    */
 
   getPatientInfo(openID) {
+    let that = this
     var prams = {
       openID: openID
     }
@@ -104,24 +105,44 @@ Page({
             key: 'patientID',
             data: res.data.keyID
           }),
-        // IM登录
-          app.tim.login({
-          userID: res.data.keyID,
-          userSig: genTestUserSig(res.data.keyID).userSig
-        }).then(function (imResponse) {
-          console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
-          wx.hideLoading();
-          wx.redirectTo({
-            // url:'/pages/personal-center/personal-center'
-            url: '/pages/online-inquiry/online-inquiry'
-          });
-        }).catch(function (imError) {
-          console.warn("===登录失败===", imError); // 登录失败的相关信息
-          wx.hideLoading();
-          wx.showToast({
-            title: 'IM登录失败'
+          wx.setStorage({
+            key: 'openID',
+            data: openID
+          }),
+          wx.setStorage({
+            key: 'personID',
+            data: res.data.personID
+          }),
+          wx.getSetting({
+            success(res){
+              if(!res.authSetting['scope.record']){
+                wx.authorize({
+                  scope: 'scope.record',
+                  success(){
+                    wx.startRecord()
+                  }
+                })
+              }
+            }
           })
-        });
+          // IM登录
+          app.tim.login({
+            userID: res.data.keyID,
+            userSig: genTestUserSig(res.data.keyID).userSig
+          }).then(function(imResponse) {
+            console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
+            wx.hideLoading();
+            wx.redirectTo({
+              url: '/pages/personal-center/personal-center'
+              // url: '/pages/online-inquiry/online-inquiry'
+            });
+          }).catch(function(imError) {
+            console.warn("===登录失败===", imError); // 登录失败的相关信息
+            wx.hideLoading();
+            wx.showToast({
+              title: 'IM登录失败'
+            })
+          });
       } else {
         wx.hideLoading()
         wx.showToast({

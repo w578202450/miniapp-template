@@ -1,42 +1,32 @@
-const app = getApp()
+const HTTP = require('../../../utils/http-util')
 
 Page({
   data: {
-    list: [
-      {
-        name: '王重阳',
-        phone: '138****9988',
-        address: '四川省成都市黄龙大道290号',
-        selected: true
-      },
-      {
-        name: '王重阳',
-        phone: '138****9988',
-        address: '四川省成都市黄龙大道290号',
-        selected: false
-      },
-      {
-        name: '王重阳',
-        phone: '138****9988',
-        address: '四川省成都市黄龙大道290号',
-        selected: false
-      },
-      {
-        name: '王重阳',
-        phone: '138****9988',
-        address: '四川省成都市黄龙大道290号',
-        selected: false
-      },
-      {
-        name: '王重阳',
-        phone: '138****9988',
-        address: '四川省成都市黄龙大道290号',
-        selected: false
-      },
-    ]
+    list: []
   },
-  onLoad: function () {
 
+  onLoad: function () {
+    this.loadDatas()
+  },
+
+  loadDatas(){
+    wx.showLoading({
+      title: '获取地址...',
+    });
+    HTTP.getAddress({
+      personID:wx.getStorageSync('personID')
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          this.setData({
+            list: this.data.list
+          })
+        }
+        
+      }).catch(e => {
+        wx.hideLoading();
+      })
   },
 
   addAction: function(){

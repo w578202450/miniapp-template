@@ -2,12 +2,12 @@
   <view class="address">
     <view class="cell">
       <text class="cell-title">收货人</text>
-      <input class="weui-input cell-detail" placeholder="请填写收货人姓名" />
+      <input class="weui-input cell-detail" placeholder="请填写收货人姓名" bindinput="receiverNameInput"/>
     </view>
     <view class="cell-separator"></view>
     <view class="cell">
       <text class="cell-title">手机号码</text>
-      <input class="weui-input cell-detail" type="number" placeholder="请填写11位手机号码" />
+      <input class="weui-input cell-detail" type="number" placeholder="请填写11位手机号码" bindinput="receiverPhoneInput" />
     </view>
     <view class="cell-separator"></view>
     <view class="address-seleceted">
@@ -20,9 +20,10 @@
   </view>
   <view class="cell-separator"></view>
   <view class="address-detail">
-    <textarea placeholder="请填写街道、楼牌号等" style="height: 3.3em"></textarea>
+    <textarea placeholder="请填写街道、楼牌号等" style="height: 3.3em" bindinput="addressInput"></textarea>
   </view>
-  <view class="delete">删除地址</view>
+
+  <view wx:if='{{edit}}' class="delete">删除地址</view>
   <view class="btnView">
     <button class="button-theme" style="width: 80%;" bindtap="addAction">保存</button>
   </view>

@@ -1,11 +1,7 @@
 
 Page({
   data: {
-    addressInfo:{
-      name:'张三',
-      phone:'1234566677',
-      address:'北极颠三倒四的史蒂夫舒服的'
-    }
+    addressInfo:null
   },
 
   submitAction: function () {
@@ -17,6 +13,20 @@ Page({
     })
   },
   
-  onLoad: function () {
+  onLoad: function (e) {
+    console.log('e---', e)
+    console.log('e.name---', e.name)
+    console.log('e.phone---', e.phone)
+    console.log('e.address---', e.address)
+    if (e.name && e.phone && e.address){
+      this.data.addressInfo = {
+        name: e.name,
+        phone: e.phone,
+        address: e.address
+      }
+      this.setData({
+        addressInfo: this.data.addressInfo
+      })
+    }
   }
 })

@@ -7,7 +7,7 @@
 <block wx:else>
   <view class="tmc-container">
     <navigator wx:key="keyID" wx:for="{{list}}" wx:for-item="item" wx:for-index="index" 
-    url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}" data-index="index">
+    url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}&index=0">
       <view class="cell">
         <view>
           <text class="content">症状：体弱多病，四肢酸软，腰痛1年多。</text>
