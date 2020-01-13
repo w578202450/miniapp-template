@@ -25,12 +25,9 @@ Page({
     nextReqMessageID: "", // 用于续拉，分页续拉时需传入该字段
     isCompleted: false, // 表示是否已经拉完所有消息
     httpLoading: false, // 是否请求中
-    pageInfo: {
-      pageIndex: 1,
-      pageSize: 10
-    },
     maySendContent: "", // 输入的聊天内容
     isOpenBottomBoolbar: false, // 是否打开工具栏
+    // 底部菜单栏
     toolbarMenus: [{
       title: "图片",
       iconUrl: "../../../../images/chat/m-image.png",
@@ -56,7 +53,7 @@ Page({
     scrollTop: 0, // 内容底部与顶部的距离
     isSendRecord: false,
     recordingTxt: "按住 说话",
-    startPoint: "",
+    startPoint: {}, // 手指触摸屏幕的位置
     sendRecordLock: true // 是否允许发送语音
   },
 
@@ -64,9 +61,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let that = this;
-    // 从storage中获取患者信息
-    that.getPersonInfo();
+    this.getPersonInfo(); // 从storage中获取患者信息
   },
 
   /**
@@ -89,6 +84,7 @@ Page({
       });
       that.toViewBottomFun();
     });
+    // this.setMessageRead();
   },
 
   /**
@@ -152,14 +148,13 @@ Page({
   getPersonInfo: function () {
     let that = this;
     wx.getStorage({
-      key: 'personInfo',
+      key: "personInfo",
       success: function (res) {
         that.setData({
           userInfo: res.data
         });
         if (that.data.userInfo.keyID) {
-          // 查询患者的多方对话
-          that.getPatientMultiTalk();
+          that.getPatientMultiTalk(); // 查询患者的多方对话
         }
       }
     })
@@ -184,8 +179,7 @@ Page({
           multiTalkInfo: resData.multiTalk
         }
       });
-      // 创建问诊
-      that.createInquiry();
+      that.createInquiry(); // 创建问诊
     })
   },
 
@@ -207,19 +201,8 @@ Page({
       that.setData({
         inquiryInfo: res.data
       });
-      // 获取历史消息
-      that.getHistoryMessage();
+      that.getHistoryMessage(); // 获取历史消息
     })
-  },
-
-  /*打开会话时,消息设置成已读 */
-  setMessageRead: function () {
-    let that = this;
-    // 将某会话下所有未读消息已读上报
-    app.tim.setMessageRead({
-      conversationID: "GROUP" + that.data.inquiryInfo.keyID
-    });
-    console.log("===消息设置成已读===");
   },
 
   /*打开会话时,获取最近消息列表 */
@@ -239,9 +222,18 @@ Page({
       that.setData({
         hidden: true
       });
-      console.warn("===请求异常===error:", imError);
+      console.warn(imError);
     });
 
+  },
+
+  /*打开会话时,消息设置成已读 */
+  setMessageRead: function () {
+    let that = this;
+    // 将某会话下所有未读消息已读上报
+    app.tim.setMessageRead({
+      conversationID: "GROUP" + that.data.inquiryInfo.keyID
+    });
   },
 
   /*自动：滚动到消息底部 */
@@ -293,8 +285,7 @@ Page({
     if (that.data.httpLoading || !that.data.maySendContent) {
       return;
     }
-    // 开启隐性加载过程
-    that.data.httpLoading = true;
+    that.data.httpLoading = true; // 开启隐性加载过程
     // 1. 创建消息实例，接口返回的实例可以上屏
     let message = app.tim.createTextMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
@@ -313,7 +304,8 @@ Page({
       that.data.httpLoading = false; // 关闭隐性加载过程
       that.toViewBottomFun();
     }).catch(function (imError) {
-      console.warn("===发送失败===sendMessage error:", imError);
+      that.data.httpLoading = false; // 关闭隐性加载过程
+      console.warn(imError);
     });
   },
 
@@ -395,7 +387,8 @@ Page({
       that.data.httpLoading = false; // 关闭隐性加载过程
       that.toViewBottomFun();
     }).catch(function (imError) {
-      console.warn("===发送图片失败===error:", imError);
+      console.warn(imError);
+      that.data.httpLoading = false; // 关闭隐性加载过程
     });
   },
 
@@ -499,7 +492,7 @@ Page({
     recorderManager.onStart(() => { });
     // 3.监听录音错误事件
     recorderManager.onError(function (errMsg) {
-      console.warn("录音异常error:", errMsg);
+      console.warn(errMsg);
     });
   },
 
@@ -523,20 +516,24 @@ Page({
             file: res
           }
         });
-        console.log(message);
+        let nowData = [...that.data.currentMessageList, message];
+        that.setData({
+          currentMessageList: nowData,
+          maySendContent: ""
+        });
+        that.toViewBottomFun();
         // 5. 发送消息
         app.tim.sendMessage(message).then(function (imResponse) {
           console.log(imResponse);
           // 发送成功
-          let nowData = [...that.data.currentMessageList, imResponse.data.message];
-          that.setData({
-            currentMessageList: nowData,
-            maySendContent: ""
-          });
-          that.toViewBottomFun();
+          // let nowData = [...that.data.currentMessageList, imResponse.data.message];
+          // that.setData({
+          //   currentMessageList: nowData,
+          //   maySendContent: ""
+          // });
         }).catch(function (imError) {
           // 发送失败
-          console.warn("sendRecord error:", imError);
+          console.log(imError);
         });
       }
     });
@@ -550,8 +547,7 @@ Page({
       // 开始播放
     })
     innerAudioContext.onError((res) => {
-      console.log(res.errMsg);
-      console.log(res.errCode);
+      // 错误信息
     });
     innerAudioContext.onEnded(() => {
       innerAudioContext.stop();
@@ -561,7 +557,6 @@ Page({
 
   /*操作：视频通话 */
   videoWxFun: function () {
-    console.log("视频啦");
     wx.navigateTo({
       // url: '../../../../pages/personal-center/health-information/health-information',
       url: '../../../../pages/online-inquiry/inquiry/video/room',

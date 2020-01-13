@@ -103,8 +103,8 @@ Page({
           })
         wx.hideLoading()
         wx.redirectTo({
-          url:'/pages/personal-center/personal-center'
-          // url: '/pages/online-inquiry/online-inquiry',
+          // url:'/pages/personal-center/personal-center'
+          url: '/pages/online-inquiry/online-inquiry'
         });
       } else {
         wx.hideLoading()
