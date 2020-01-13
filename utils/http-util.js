@@ -23,10 +23,11 @@ var request = function request(url, needDomain, method, data) {
         resolve(request.data);
         console.log("数据请求成功:", url, request.data)
         if (request.data.code != 0) {
-          wx.showToast({
-            title: request.data.message,
-            icon: "none"
-          })
+          console.log("数据请求失败:", request.data.message);
+          // wx.showToast({
+          //   title: request.data.message,
+          //   icon: "none"
+          // })
         }
       },
       fail: function fail(error) {
