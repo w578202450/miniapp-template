@@ -43,6 +43,11 @@ Page({
               rpIDs: tempRpIds
             })
           }
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
         }
       }).catch(e => {
         wx.hideLoading();
@@ -65,15 +70,17 @@ Page({
               this.data.list[j].doctorName = res.data[this.data.list[j].rpID].doctorName
             }
           } 
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
         }
         this.setData({
           list: this.data.list
         })
       }).catch(e => {
         wx.hideLoading();
-        that.setData({
-          noNetwork: true
-        })
       })
   },
 
@@ -95,8 +102,99 @@ Page({
     })
   },
 
-  payOrder:function(){
+  payOrder:function(e){
+    var that = this
+    console.log('ddddd----',e.currentTarget.dataset.index)
+    var index = e.currentTarget.dataset.index;
+    HTTP.orderPrePay({
+      orgID:wx.getStorageSync('orgID'),
+      orderID: this.data.list[index].keyID,
+      price: this.data.list[index].prePrice,
+      personID: this.data.list[index].buyerID
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          this.tradeOrder(res.data.accountTransID, res.data.paymentID);
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
+        }
+        
+      }).catch(e => {
+        wx.hideLoading();
+      })
+    
+  },
 
+  tradeOrder:function(accountTransID, paymentID){
+    console.log('---支付校验---', accountTransID, paymentID)
+    var that = this
+    HTTP.tradeOrder({
+      body: '医护上门',
+      detail: '医护上门PICC换药',
+      transID: accountTransID,
+      sysCode: 'person-app'
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          wx.showToast({
+            title: '支付校验成功',
+          })
+          that.wxPayOptions()
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
+        }
+      }).catch(e => {
+        wx.hideLoading();
+      })
+  },
+
+  wxPayOptions(){
+    wx.requestPayment(
+      {
+        'timeStamp': '',
+        'nonceStr': '',
+        'package': '',
+        'signType': 'MD5',
+        'paySign': '',
+        'success': function (res) {
+          wx.showToast({
+            title: '支付成功',
+          })
+         },
+        'fail': function (res) { },
+        'complete': function (res) { }
+      })
+  },
+
+  orderPaySuccess(){
+    HTTP.orderPaySuccess({
+      // orgID: ,
+      // orderID: ,
+      // personID: ,
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          wx.showToast({
+            title: '支付成功',
+          })
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
+        }
+      }).catch(e => {
+        wx.hideLoading();
+      })
   },
 
   // 无网络

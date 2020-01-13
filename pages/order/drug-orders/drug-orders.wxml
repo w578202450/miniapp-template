@@ -5,7 +5,7 @@
   <tmcTipsView icon="/images/public/public_no_order.png" title="暂无订单" message="您暂无订单信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>
 <block wx:else>
-  <view class="tmc-container" wx:for="{{list}}" wx:key="id" wx:for-item="item">
+  <view class="tmc-container" wx:for="{{list}}" wx:key="id" wx:for-index="index" wx:for-item="item">
       
     <navigator url="/pages/order/order-details/order-details?orderID={{item.keyID}}">
       <view class="cell">
@@ -22,7 +22,7 @@
         </view>
         <view class="cell-bottom">
           <block wx:if="{{item.orderStatusID==0}}">
-            <view style="border:1px solid rgba(254,88,83,1)" class="option-view" style="margin-top: 32rpx" catchtap="payOrder">
+            <view style="border:1px solid rgba(254,88,83,1)" class="option-view" style="margin-top: 32rpx" catchtap="payOrder" data-index="{{index}}">
               <text style="color:rgba(254,88,83,1)">立即支付</text>
             </view>
           </block>

@@ -1,29 +1,28 @@
-
 var API_BASE_URL = 'http://10.0.0.210:6112/';
 
-var request = function request(url, needDomain,method, data) {
-  
+var request = function request(url, needDomain, method, data) {
+
   var _url = needDomain ? (API_BASE_URL + url) : url;
   console.log("------------------------");
-  console.log("请求地址:"+ _url);
-  console.log("请求入参:"+ JSON.stringify(data));
+  console.log("请求地址:" + _url);
+  console.log("请求入参:" + JSON.stringify(data));
   console.log("请求方式:" + method);
   console.log("------------------------");
 
-  return new Promise(function (resolve, reject) {
-    
+  return new Promise(function(resolve, reject) {
+
     wx.request({
       method: method,
       url: _url,
       header: {
         'content-type': 'application/json',
-        'token':'aaaa'
+        'token': 'aaaa'
       },
       data: data,
       success: function success(request) {
         resolve(request.data);
-        console.log("数据请求成功:", url,request.data)
-        if (request.data.code != 0){
+        console.log("数据请求成功:", url, request.data)
+        if (request.data.code != 0) {
           wx.showToast({
             title: request.data.message,
             icon: "none"
@@ -44,14 +43,14 @@ var request = function request(url, needDomain,method, data) {
 /**
  * 小程序的promise没有finally方法，自己扩展下
  */
-Promise.prototype.finally = function (callback) {
+Promise.prototype.finally = function(callback) {
   var Promise = this.constructor;
-  return this.then(function (value) {
-    Promise.resolve(callback()).then(function () {
+  return this.then(function(value) {
+    Promise.resolve(callback()).then(function() {
       return value;
     });
-  }, function (reason) {
-    Promise.resolve(callback()).then(function () {
+  }, function(reason) {
+    Promise.resolve(callback()).then(function() {
       throw reason;
     });
   });
@@ -60,9 +59,9 @@ Promise.prototype.finally = function (callback) {
 // 1.通过module.exports方式提供给外部调用
 module.exports = {
   /*
-  *获取测试数据
-  */
-  getTestData: function getTestData(api){
+   *获取测试数据
+   */
+  getTestData: function getTestData(api) {
     return request(api, true, 'get', {
       systemCode: "TMC",
       groupCode: "D_TMC_PATIENT_RELATION",
@@ -70,51 +69,51 @@ module.exports = {
     });
   },
   /*
-  *获取微信openid
-  */
-  getWXAuth: function getWXAuth(parmas){
+   *获取微信openid
+   */
+  getWXAuth: function getWXAuth(parmas) {
     return request('api/peachUser/wx/getWXAuth', true, 'post', parmas);
   },
   /*
-  *获取微信个人信息
-  */
-  getPatientInfo: function getPatientInfo(parmas){
+   *获取微信个人信息
+   */
+  getPatientInfo: function getPatientInfo(parmas) {
     return request('api/tmc/patient/getPatientInfoByOpenID', true, 'get', parmas);
   },
-/*
-  *查询患者处方列表
-  */
-  getRpListByPerson: function getRpListByPerson(parmas){
+  /*
+   *查询患者处方列表
+   */
+  getRpListByPerson: function getRpListByPerson(parmas) {
     return request('api/tmc/rp/getRpListByPerson', true, 'get', parmas);
   },
   /*
-  *查询患者的多方对话
-  */
-  getPatientMultiTalk: function getPatientMultiTalk(parmas){
+   *查询患者的多方对话
+   */
+  getPatientMultiTalk: function getPatientMultiTalk(parmas) {
     return request('api/tmc/multiTalk/getPatientMultiTalk', true, 'get', parmas);
   },
-   /*
-  *图文创建问诊记录
-  */
-  createInquiry: function createInquiry(parmas){
+  /*
+   *图文创建问诊记录
+   */
+  createInquiry: function createInquiry(parmas) {
     return request('api/tmc/inquiryRecord/createInquiry', true, 'post', parmas);
   },
   /*
-  *获取UserSig
-  */
+   *获取UserSig
+   */
   getUserSig: function getUserSig(parmas) {
     return request('api/rp/initial/getUserSig', true, 'get', parmas);
   },
   /*
-  *获取roomId
-  */
+   *获取roomId
+   */
   getRoomId: function getRoomId(parmas) {
     return request('/api/rp/initial/getRoomId', true, 'get', parmas);
   },
   /*
-  *云处方创建视频问诊记录
-  */
-  createVideoInquiry: function createVideoInquiry(){
+   *云处方创建视频问诊记录
+   */
+  createVideoInquiry: function createVideoInquiry() {
     return request('api/rp/inquiry/create', true, 'post', parmas);
   },
   /*
@@ -132,25 +131,25 @@ module.exports = {
   /*
    *保存患者档案
    */
-  savePatientDoc: function savePatientDoc(parmas){
+  savePatientDoc: function savePatientDoc(parmas) {
     return request('api/tmc/patient/savePatientDoc', true, 'post', parmas);
   },
 
   /*
-     *获取药品订单
-     */
+   *获取药品订单
+   */
   getOrderByPerson: function getOrderByPerson(parmas) {
     return request('api/tmc/goodsOrder/getOrderByPerson', true, 'get', parmas);
   },
   /*
-     *批量获取处方详情
-     */
+   *批量获取处方详情
+   */
   getRpByList: function getRpByList(parmas) {
     return request('api/tmc/rp/getRpByList', true, 'post', parmas);
   },
   /*
-    *订单详情页
-    */
+   *订单详情页
+   */
   goodsOrder: function goodsOrder(parmas) {
     return request('api/tmc/goodsOrder/detail', true, 'get', parmas);
   },
@@ -169,22 +168,73 @@ module.exports = {
   },
 
   /*
-  *获取医生资质编号
-  */
+   *获取医生资质编号
+   */
   getDoctorQualification: function getDoctorQualification(parmas) {
     return request('api/peachUser/doctorCertify/getDoctorQualification', true, 'get', parmas);
   },
 
   /*
-  *添加收货地址
-  */
-  getDoctorQualification: function getDoctorQualification(parmas) {
-    return request('api/peachUser/personDeliveryAddr/addAddress', true, 'get', parmas);
+   *预支付
+   */
+  orderPrePay: function orderPrePay(parmas) {
+    return request('api/tmc/goodsOrder/orderPrePay', true, 'get', parmas);
+  },
+  /*
+   *订单校验
+   */
+  tradeOrder: function tradeOrder(parmas) {
+    return request('api/payment/wxAppPay/tradeOrder', true, 'post', parmas);
   },
 
-  
+  /*
+   *支付成功回调
+   */
+  orderPaySuccess: function orderPaySuccess(parmas) {
+    return request('api/tmc/goodsOrder/orderPaySuccess', true, 'get', parmas);
+  },
 
-  
-  
+  /*
+   *添加收货地址
+   */
+  addAddress: function addAddress(parmas) {
+    return request('api/peachUser/personDeliveryAddr/addAddress', true, 'post', parmas);
+  },
+
+  /*
+   *修改收货地址
+   */
+  updateAddress: function updateAddress(parmas) {
+    return request('api/peachUser/personDeliveryAddr/updateAddress', true, 'post', parmas);
+  },
+
+  /*
+   *设置默认
+   */
+  setDefault: function setDefault(parmas) {
+    return request('api/peachUser/personDeliveryAddr/setDefault', true, 'post', parmas);
+  },
+
+  /*
+   *个人收货地址列表
+   */
+  getAddress: function getAddress(parmas) {
+    return request('api/peachUser/personDeliveryAddr/getAddress', true, 'get', parmas);
+  },
+
+  /*
+   *删除收货地址
+   */
+  deleteAddress: function deleteAddress(parmas) {
+    return request('api/peachUser/personDeliveryAddr/delete', true, 'post', parmas);
+  },
+
+
+
+
+
+
+
+
 
 }
