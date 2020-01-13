@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "weui-loading": "../loading/loading"
+  },
   "navigationBarTitleText": "在线问诊",
   "enablePullDownRefresh": true,
   "backgroundTextStyle": "dark"

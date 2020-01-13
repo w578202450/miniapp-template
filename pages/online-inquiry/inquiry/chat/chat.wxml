@@ -38,7 +38,7 @@
   <!-- 空置盒子1 -->
   <view class="marginBoxOne"></view>
   <view id="viewCommunicationBody" bindtap="clickViewCommunicationFun">
-    <view class="row" wx:for="{{currentMessageList}}" wx:key="{{item.ID}}" id="item{{index}}">
+    <view class="row" wx:for="{{currentMessageList}}" wx:key="{{index}}" id="item{{index}}">
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 头像与内容文本 -->
@@ -71,7 +71,10 @@
             <view>{{item.payload.text}}</view>
           </view>
           <!-- 图片消息：TIMImageElem -->
-          <view wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="previewImage"  data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
+          <view
+           wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="previewImage"  data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
+           <image wx:if="{{item.showLoadingState}}" src="../../../../images/chat/loading-fail.png" class="imageLoading"/>
+            <!-- <weui-loading wx:if="{{item.showLoadingState}}" class="imageLoading" type="circle" tips="{{tips}}"></weui-loading> -->
             <image class="pictureMsg" src="{{item.payload.imageInfoArray[0].imageUrl}}" />
           </view>
           <!-- 音频消息：TIMSoundElem -->

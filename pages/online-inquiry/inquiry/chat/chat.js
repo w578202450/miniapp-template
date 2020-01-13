@@ -54,7 +54,8 @@ Page({
     isSendRecord: false,
     recordingTxt: "按住 说话",
     startPoint: {}, // 手指触摸屏幕的位置
-    sendRecordLock: true // 是否允许发送语音
+    sendRecordLock: true, // 是否允许发送语音
+    animated: true // loading加载框动画
   },
 
   /**
@@ -354,6 +355,7 @@ Page({
         that.setData({
           aimgurl: res
         });
+        console.log(that.data.aimgurl);
         that.sendImageMsg();
       }
     })
@@ -389,18 +391,30 @@ Page({
       payload: {
         file: that.data.aimgurl
       },
-      onProgress: function (event) { } // 发送图片进度
+      showLoadingState:false
     });
+    console.log(message);
+    let nowData = [...that.data.currentMessageList, message];
+    that.setData({
+      currentMessageList: nowData,
+      maySendContent: ""
+    });
+    console.log(that.data.currentMessageList);
     // 2. 发送数据
     app.tim.sendMessage(message).then(function (imResponse) {
-      let nowData = [...that.data.currentMessageList, imResponse.data.message];
-      that.setData({
-        currentMessageList: nowData,
-        maySendContent: ""
-      });
+      // let nowDatas = [...that.data.currentMessageList];
+      // nowDatas[nowDatas.length - 1].showLoadingState = true;
+      // that.setData({
+      //   currentMessageList: nowDatas
+      // });
       that.data.httpLoading = false; // 关闭隐性加载过程
       that.toViewBottomFun();
     }).catch(function (imError) {
+      let nowDatas = [...that.data.currentMessageList ];
+      nowDatas[nowDatas.length - 1].showLoadingState = true;
+      that.setData({
+        currentMessageList: nowDatas
+      });
       console.warn(imError);
       that.data.httpLoading = false; // 关闭隐性加载过程
     });
