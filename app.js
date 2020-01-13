@@ -27,7 +27,7 @@ tim.registerPlugin({
 })
 
 App({
-  onLaunch: function() {
+  onLaunch: function () {
     // AUTH.wxlogin();
 
     // wx.getSetting({
@@ -56,13 +56,13 @@ App({
 
     let that = this;
     // 监听事件，例如：
-    tim.on(TIM.EVENT.SDK_READY, function(event) {
+    tim.on(TIM.EVENT.SDK_READY, function (event) {
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
       // event.name - TIM.EVENT.SDK_READY
       // console.log(`============${event.name}==================`);
     });
 
-    tim.on(TIM.EVENT.MESSAGE_REVOKED, function(event) {
+    tim.on(TIM.EVENT.MESSAGE_REVOKED, function (event) {
       // 收到消息被撤回的通知
       // event.name - TIM.EVENT.MESSAGE_REVOKED
       // event.data - 存储 Message 对象的数组 - [Message] - 每个 Message 对象的 isRevoked 属性值为 true
@@ -70,7 +70,7 @@ App({
       // console.log("===收到消息被撤回===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.CONVERSATION_LIST_UPDATED, function(event) {
+    tim.on(TIM.EVENT.CONVERSATION_LIST_UPDATED, function (event) {
       // 收到会话列表更新通知，可通过遍历 event.data 获取会话列表数据并渲染到页面
       // event.name - TIM.EVENT.CONVERSATION_LIST_UPDATED
       // event.data - 存储 Conversation 对象的数组 - [Conversation]
@@ -78,7 +78,7 @@ App({
       // console.log("===会话列表===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.GROUP_LIST_UPDATED, function(event) {
+    tim.on(TIM.EVENT.GROUP_LIST_UPDATED, function (event) {
       // 收到群组列表更新通知，可通过遍历 event.data 获取群组列表数据并渲染到页面
       // event.name - TIM.EVENT.GROUP_LIST_UPDATED
       // event.data - 存储 Group 对象的数组 - [Group]
@@ -86,7 +86,7 @@ App({
       // console.log("===群组列表===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.GROUP_SYSTEM_NOTICE_RECEIVED, function(event) {
+    tim.on(TIM.EVENT.GROUP_SYSTEM_NOTICE_RECEIVED, function (event) {
       // 收到新的群系统通知
       // event.name - TIM.EVENT.GROUP_SYSTEM_NOTICE_RECEIVED
       // event.data.type - 群系统通知的类型，详情请参见 GroupSystemNoticePayload 的 operationType 枚举值说明
@@ -95,19 +95,19 @@ App({
       // console.log("===收到群系统通知===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.PROFILE_UPDATED, function(event) {
+    tim.on(TIM.EVENT.PROFILE_UPDATED, function (event) {
       // 收到自己或好友的资料变更通知
       // event.name - TIM.EVENT.PROFILE_UPDATED
       // event.data - 存储 Profile 对象的数组 - [Profile]
     });
 
-    tim.on(TIM.EVENT.BLACKLIST_UPDATED, function(event) {
+    tim.on(TIM.EVENT.BLACKLIST_UPDATED, function (event) {
       // 收到黑名单列表更新通知
       // event.name - TIM.EVENT.BLACKLIST_UPDATED
       // event.data - 存储 userID 的数组 - [userID]
     });
 
-    tim.on(TIM.EVENT.ERROR, function(event) {
+    tim.on(TIM.EVENT.ERROR, function (event) {
       // 收到 SDK 发生错误通知，可以获取错误码和错误信息
       // event.name - TIM.EVENT.ERROR
       // event.data.code - 错误码
@@ -116,13 +116,13 @@ App({
       // console.log("===错误码===" + event.data.code + "===错误信息===" + event.data.message);
     });
 
-    tim.on(TIM.EVENT.SDK_NOT_READY, function(event) {
+    tim.on(TIM.EVENT.SDK_NOT_READY, function (event) {
       // 收到 SDK 进入 not ready 状态通知，此时 SDK 无法正常工作
       // event.name - TIM.EVENT.SDK_NOT_READY
       // console.log(`============${event.name}==================`);
     });
 
-    tim.on(TIM.EVENT.KICKED_OUT, function(event) {
+    tim.on(TIM.EVENT.KICKED_OUT, function (event) {
       // 收到被踢下线通知1
       // event.name - TIM.EVENT.KICKED_OUT
       // event.data.type - 被踢下线的原因，例如:
@@ -134,25 +134,21 @@ App({
 
     // IM登录
     let userInfo = wx.getStorageSync("personInfo");
-    console.log("===userId===" + userInfo.keyID + "===userSig===" + genTestUserSig(userInfo.keyID).userSig);
     tim.login({
       userID: userInfo.keyID,
       userSig: genTestUserSig(userInfo.keyID).userSig
       // userID: "20010620211271745513006001",
       // userSig: genTestUserSig("20010620211271745513006001").userSig
-    }).then(function(imResponse) {
+    }).then(function (imResponse) {
       console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
-    }).catch(function(imError) {
-      // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
+    }).catch(function (imError) {
+      console.warn("===登录失败===", imError); // 登录失败的相关信息
     });
-    if (wx.getStorageSync("personInfo").keyID) {
-
-    }
   },
-  onUnload: function() {
-    app.tim.logout().then(function(imResponse) {
+  onUnload: function () {
+    app.tim.logout().then(function (imResponse) {
       console.log("===登出成功===" + imResponse.data); // 登出成功
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       console.warn('logout error:', imError);
     });
   },
