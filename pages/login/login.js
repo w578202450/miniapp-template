@@ -133,8 +133,8 @@ Page({
             console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
             wx.hideLoading();
             wx.redirectTo({
-              url: '/pages/personal-center/personal-center'
-              // url: '/pages/online-inquiry/online-inquiry'
+              // url: '/pages/personal-center/personal-center'
+              url: '/pages/online-inquiry/online-inquiry'
             });
           }).catch(function(imError) {
             console.warn("===登录失败===", imError); // 登录失败的相关信息
