@@ -4,9 +4,9 @@ import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js'
 import {
   SDKAPPID
 } from './utils/GenerateTestUserSig'
-import {
-  genTestUserSig
-} from './utils/GenerateTestUserSig';
+// import {
+//   genTestUserSig
+// } from './utils/GenerateTestUserSig';
 // const AUTH = require('utils/auth')
 const HTTP = require('utils/http-util')
 const UTIL = require('utils/util')
@@ -60,6 +60,7 @@ App({
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
       // event.name - TIM.EVENT.SDK_READY
       // console.log(`============${event.name}==================`);
+      console.log(`============TIM SDK已处于READY状态==================`);
     });
 
     tim.on(TIM.EVENT.MESSAGE_REVOKED, function(event) {
@@ -133,21 +134,19 @@ App({
     });
 
     // IM登录
-    let userInfo = wx.getStorageSync("personInfo");
-    console.log("===userId===" + userInfo.keyID + "===userSig===" + genTestUserSig(userInfo.keyID).userSig ); 
-    let promise = tim.login({
-      userID: userInfo.keyID,
-      userSig: genTestUserSig(userInfo.keyID).userSig
-      // userID: "20010620211271745513006001",
-      // userSig: genTestUserSig("20010620211271745513006001").userSig
-    });
-    promise.then(function(imResponse) {
-      console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
-    }).catch(function(imError) {
-      // console.warn("===登录失败===" + 'login error:', imError); // 登录失败的相关信息
-    });
+    // let userInfo = wx.getStorageSync("personInfo");
+    // tim.login({
+    //   userID: userInfo.keyID,
+    //   userSig: genTestUserSig(userInfo.keyID).userSig
+    //   // userID: "20010620211271745513006001",
+    //   // userSig: genTestUserSig("20010620211271745513006001").userSig
+    // }).then(function (imResponse) {
+    //   console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
+    // }).catch(function (imError) {
+    //   console.warn("===登录失败===", imError); // 登录失败的相关信息
+    // });
   },
-  onUnload: function () {
+  onUnload: function() {
     app.tim.logout().then(function(imResponse) {
       console.log("===登出成功===" + imResponse.data); // 登出成功
     }).catch(function(imError) {
@@ -155,7 +154,7 @@ App({
     });
   },
   globalData: {
-    userInfo:null,
+    userInfo: null,
     personInfo: {},
     baseUrl: 'http://10.0.0.210:6112/'
   },
