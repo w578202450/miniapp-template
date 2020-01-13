@@ -115,11 +115,13 @@ Page({
             // url:'/pages/personal-center/personal-center'
             url: '/pages/online-inquiry/online-inquiry'
           });
-
         }).catch(function (imError) {
           console.warn("===登录失败===", imError); // 登录失败的相关信息
+          wx.hideLoading();
+          wx.showToast({
+            title: 'IM登录失败'
+          })
         });
-      
       } else {
         wx.hideLoading()
         wx.showToast({
