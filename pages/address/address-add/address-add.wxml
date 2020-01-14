@@ -2,28 +2,28 @@
   <view class="address">
     <view class="cell">
       <text class="cell-title">收货人</text>
-      <input class="weui-input cell-detail" placeholder="请填写收货人姓名" bindinput="receiverNameInput"/>
+      <input class="weui-input cell-detail" placeholder="请填写收货人姓名" bindinput="receiverNameInput" value="{{receiverName}}"/>
     </view>
     <view class="cell-separator"></view>
     <view class="cell">
       <text class="cell-title">手机号码</text>
-      <input class="weui-input cell-detail" type="number" placeholder="请填写11位手机号码" bindinput="receiverPhoneInput" />
+      <input class="weui-input cell-detail" type="number" placeholder="请填写11位手机号码" bindinput="receiverPhoneInput" value="{{receiverPhone}}" />
     </view>
     <view class="cell-separator"></view>
     <view class="address-seleceted">
-      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <picker mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}" range-key="label" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange">
         <text class="cell-title">所在地区</text>
-        <text class="cell-detail">{{region[0]}}，{{region[1]}}，{{region[2]}}</text>
+        <text class="cell-detail">{{multiArray[0][multiIndex[0]].label}}，{{multiArray[1][multiIndex[1]].label}}，{{multiArray[2][multiIndex[2]].label}}</text>
       </picker>
       <image src="../../../images/public/public_right.png"></image>
     </view>
   </view>
   <view class="cell-separator"></view>
   <view class="address-detail">
-    <textarea placeholder="请填写街道、楼牌号等" style="height: 3.3em" bindinput="addressInput"></textarea>
+    <textarea placeholder="请填写街道、楼牌号等" style="height: 3.3em" bindinput="addressInput" value="{{address}}"></textarea>
   </view>
 
-  <view wx:if='{{edit}}' class="delete">删除地址</view>
+  <view wx:if='{{edit}}' class="delete" bindtap="deleteAction">删除地址</view>
   <view class="btnView">
     <button class="button-theme" style="width: 80%;" bindtap="addAction">保存</button>
   </view>

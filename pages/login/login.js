@@ -113,18 +113,20 @@ Page({
             key: 'personID',
             data: res.data.personID
           }),
+
           wx.getSetting({
-            success(res){
-              if(!res.authSetting['scope.record']){
+            success(res) {
+              if (!res.authSetting['scope.record']) {
                 wx.authorize({
                   scope: 'scope.record',
-                  success(){
+                  success() {
                     wx.startRecord()
                   }
                 })
               }
             }
           })
+          
           // IM登录
           app.tim.login({
             userID: res.data.keyID,

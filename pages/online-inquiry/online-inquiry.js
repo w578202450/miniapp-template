@@ -10,10 +10,12 @@ Page({
   data: {
   },
   onLoad: function() {
+    
     this.fetchDoctorInfo()
     this.fetchAssistantDoctorInfo()
     this.fetchDoctorQualification()
   },
+  
 
   doctorDetailTap: function(e) {
     var index = e.currentTarget.dataset.index
@@ -38,6 +40,10 @@ Page({
         wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
+            wx.setStorage({
+              key: 'doctorInfo',
+              data: res.data,
+            })
             this.setData({
               doctorInfo: res.data
             })
