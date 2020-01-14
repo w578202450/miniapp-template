@@ -333,7 +333,7 @@
 .reply .opration-area .msgInput {
   margin: 20rpx 20rpx;
   /* width: 445rpx; */
-  width: 400rpx;
+  /* width: 400rpx; */
   padding: 0rpx 25rpx 0 15rpx !important;
   border: none;
   border-radius: 6px;
