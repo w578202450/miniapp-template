@@ -25,6 +25,7 @@ Page({
     isCompleted: false, // 表示是否已经拉完所有消息
     httpLoading: false, // 是否请求中
     maySendContent: "", // 输入的聊天内容
+    maySendContentSure: false, // 是否允许发送的内容格式
     isOpenBottomBoolbar: false, // 是否打开工具栏
     // 底部菜单栏
     toolbarMenus: [{
@@ -58,7 +59,7 @@ Page({
     innerAudioContext: null, // 音频播放事件
     recordIndex: "", // 播放的音频的下标
     recordFileUrl: "", // 播放的音频文件的路径
-    recordIconUrlSelf: "../../../../images/chat/audio.png", // 语音消息的图标 => 自己发的
+    recordIconUrlSelf: "../../../../images/chat/audioSelf.png", // 语音消息的图标 => 自己发的
     recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
     recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
     recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif" // 播放语音时的GIF => 他人发的
@@ -329,9 +330,27 @@ Page({
 
   /*操作：输入预发送信息 */
   adInputChange: function (e) {
-    this.setData({
+    let that = this;
+    that.setData({
       maySendContent: e.detail.value,
-    })
+    });
+    let value = that.data.maySendContent;//先把输入的值复制一份，用于操作
+    value.trim();//用正则表达式去掉所有的空白字符（空格是其中一种
+  //去掉所有空格之后，再对它进行判断，  
+  //如果字符串中还有别的内容，说明输入的内容不是空格，  
+  //然后就可以加入数组了。 
+  console.log(value);  
+    if (value != "") {
+      that.setData({
+        maySendContentSure: true
+      });
+    } else {
+      that.setData({
+        maySendContentSure: false
+      });
+    }
+    console.log(that.data.maySendContent.length);
+    console.log(that.data.maySendContentSure);
   },
 
   /*操作：发送（文本消息） */

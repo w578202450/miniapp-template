@@ -67,7 +67,7 @@
             <text wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}">{{talkInfo.assistantInfo.doctorName}} -医助</text>
           </view>
           <!-- 文本消息：TIMTextElem -->
-          <view wx:if="{{item.type == 'TIMTextElem'}}" class="contentTxtMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}">
+          <view wx:if="{{item.type == 'TIMTextElem'}}" class="contentTxtMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}};min-width: 35rpx;min-height: 45rpx;">
             <view>{{item.payload.text}}</view>
           </view>
           <!-- 图片消息：TIMImageElem -->

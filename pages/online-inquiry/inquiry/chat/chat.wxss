@@ -317,8 +317,7 @@
 
 .reply .opration-area .recordBtn {
   margin: 20rpx 20rpx;
-  width: 445rpx;
-  /* width: 400rpx; */
+  width: 515rpx;
   padding: 0rpx 25rpx 0 15rpx;
   border-radius: 6px;
   height: 75rpx;
