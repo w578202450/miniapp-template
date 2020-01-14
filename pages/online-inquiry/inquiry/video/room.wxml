@@ -46,17 +46,13 @@
   </view>
 </view> -->
 
-<webrtc-room id="myroom"
-  roomID="{{roomID}}"
-  userID="{{userID}}"
-  userSig="{{userSig}}"
-  sdkAppID="{{sdkAppID}}"
-  privateMapKey="{{privateMapKey}}"
-  template="{{template}}"
-  beauty="{{beauty}}"
-  muted="{{muted}}"
-  debug="{{debug}}"
-  bindRoomEvent="onRoomEvent"
-  enableIM="{{enableIM}}"
-  bindIMEvent="onIMEvent">
-</webrtc-room>
+<view class="container-box">
+  <view class="camera-box">
+    <webrtc-room id="myroom" roomID="{{roomID}}" userID="{{userID}}" userSig="{{userSig}}" sdkAppID="{{sdkAppID}}" privateMapKey="{{privateMapKey}}" template="{{template}}" beauty="{{beauty}}" muted="{{muted}}" debug="{{debug}}" bindRoomEvent="onRoomEvent"
+      enableIM="{{enableIM}}" bindIMEvent="onIMEvent">
+    </webrtc-room>
+    <cover-view class='img-box'>
+      <cover-image class='img-view' src='/pages/Resources/endcall.png' bindtap="goBack"></cover-image>
+    </cover-view>
+  </view>
+</view>

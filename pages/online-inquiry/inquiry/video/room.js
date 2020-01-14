@@ -221,9 +221,10 @@ Page({
   // },
   data: {
     //...
+    userInfo: {}, // 当前用户信息
     roomID: '123', // [必选]房间号，可以由您的服务指定
-    userID: '20010620211271745513006001', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
-    userSig: genTestUserSig("20010620211271745513006001").userSig, // [必选]身份签名，需要从自行搭建的签名服务获取
+    // userID: '20010620211271745513006001', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
+    userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     sdkAppID: '1400283798', // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
     template: 'float', // [必选]标识组件使用的界面模版，组件内置了 bigsmall，float，grid 三种布局
     privateMapKey: '', // 房间权限 key，需要从自行搭建的签名服务获取
@@ -271,21 +272,18 @@ Page({
     }
   },
 
-  // 获取UserSig
-  getUserSig: function() {
+  /*从storage中获取患者信息 */
+  getPersonInfo: function() {
     let that = this;
-    let prams = {
-      userId: that.data.userID
-    };
-    HTTP.getUserSig(prams).then(res => {
-      that.setData({
-        userSig: res.data.userSig
-      });
-    })
+    let userInfo = wx.getStorageSync("personInfo");
+    that.setData({
+      userInfo: userInfo
+    });
+    Console.log("===患者信息===" + userInfo);
   },
 
   // 云处方创建视频问诊记录
-  createVideoInquiry: function () {
+  createVideoInquiry: function() {
     let that = this;
     let prams = {
       bizID: 'tmc',
@@ -336,11 +334,24 @@ Page({
         that.setData({
           userInfo: res.data
         });
-        if (that.data.userInfo.keyID) {
-          // 查询患者的多方对话
-          that.getPatientMultiTalk();
-        }
+        Console.log("从storage中获取患者信息：" + JSON.stringify(res.data));
+        // 获取userSig
+        // this.getUserSig();
       }
+    })
+  },
+
+  // 获取UserSig
+  getUserSig: function () {
+    let that = this;
+    let prams = {
+      userId: userInfo.keyID
+    };
+    HTTP.getUserSig(prams).then(res => {
+      that.setData({
+        userSig: res.data.userSig
+      });
+      Console.log("视频获取userSig：" + that.data.userSig);
     })
   },
 
@@ -429,8 +440,9 @@ Page({
     //     ",userSig:" + that.data.userSig);
     // },
     let that = this;
+    this.getPersonInfo(); // 从storage中获取患者信息
     that.setData({
-        userID: that.data.userID,
+        userID: userInfo.keyID,
         sdkAppID: that.data.sdkAppID,
         roomID: that.data.roomID,
         userSig: that.data.userSig

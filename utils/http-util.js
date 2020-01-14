@@ -1,4 +1,9 @@
+// 开发环境
 var API_BASE_URL = 'http://10.0.0.210:6112/';
+// // 测试环境
+// var API_BASE_URL = 'https://tmcpro-cs.jk.100cbc.com/';
+// // 生产环境
+// var API_BASE_URL = 'https://tmcpro.jk.100cbc.com/';
 
 var request = function request(url, needDomain, method, data) {
 
