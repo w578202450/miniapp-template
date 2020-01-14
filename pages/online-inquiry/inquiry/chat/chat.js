@@ -1,8 +1,7 @@
-const app = getApp()
+const app = getApp();
 // const tim = app.tim
 // const TIM = app.TIM
-const recorderManager = wx.getRecorderManager()
-const innerAudioContext = wx.createInnerAudioContext()
+const recorderManager = wx.getRecorderManager();
 var HTTP = require('../../../../utils/http-util.js');
 Page({
 
@@ -55,14 +54,41 @@ Page({
     recordingTxt: "按住 说话",
     startPoint: {}, // 手指触摸屏幕的位置
     sendRecordLock: true, // 是否允许发送语音
-    animated: true // loading加载框动画
+    animated: true, // loading加载框动画
+    innerAudioContext: null, // 音频播放事件
+    recordIndex: "", // 播放的音频的下标
+    recordFileUrl: "", // 播放的音频文件的路径
+    recordIconUrlSelf: "../../../../images/chat/audio.png", // 语音消息的图标 => 自己发的
+    recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
+    recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
+    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif" // 播放语音时的GIF => 他人发的
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getPersonInfo(); // 从storage中获取患者信息
+    let that = this;
+    that.getPersonInfo(); // 从storage中获取患者信息
+    let innerAudioContext = wx.createInnerAudioContext();
+    that.setData({
+      innerAudioContext: innerAudioContext
+    });
+    innerAudioContext.onPlay(() => {
+      // 录音播放中时
+    });
+    innerAudioContext.onStop(() => {
+      // 录音播放停止时
+      that.initItemRecordStatusFun();
+    });
+    innerAudioContext.onEnded(() => {
+      // 录音播放结束时
+      that.initItemRecordStatusFun();
+    });
+    innerAudioContext.onError(() => {
+      // 录音播放错误时
+      that.initItemRecordStatusFun();
+    });
   },
 
   /**
@@ -80,6 +106,7 @@ Page({
     // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
     app.tim.on(app.TIM.EVENT.MESSAGE_RECEIVED, function (event) {
       if (event.data.type == "TIMSoundElem") {
+        event.data.recordStatus = false; // 播放状态
         if (Number(event.data.payload.second) <= 15) {
           event.data.recordViewWidth = event.data.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
         } else {
@@ -92,7 +119,7 @@ Page({
       });
       that.toViewBottomFun();
     });
-    // this.setMessageRead();
+    that.setMessageRead();
   },
 
   /**
@@ -106,7 +133,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    this.data.innerAudioContext.stop();
   },
 
   /**
@@ -128,6 +155,7 @@ Page({
     }).then(function (imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
+          item.recordStatus = false; // 播放状态
           if (Number(item.payload.second) <= 15) {
             item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
           } else {
@@ -231,6 +259,7 @@ Page({
     }).then(function (imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
+          item.recordStatus = false; // 播放状态
           if (Number(item.payload.second) <= 15) {
             item.recordViewWidth = item.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
           } else {
@@ -293,9 +322,9 @@ Page({
   /*操作：输入框聚焦，关闭工具栏 */
   closeBottomBoolbarFun() {
     // 有问题，需要修改
-    this.setData({
-      isOpenBottomBoolbar: false
-    });
+    // this.setData({
+    //   isOpenBottomBoolbar: false
+    // });
   },
 
   /*操作：输入预发送信息 */
@@ -410,7 +439,6 @@ Page({
     that.toViewBottomFun();
     // 2. 发送数据
     app.tim.sendMessage(message).then(function (imResponse) {
-      // let nowDatas = [...that.data.currentMessageList, imResponse.data.message];
       let nowDatas = [...that.data.currentMessageList];
       nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
@@ -418,11 +446,6 @@ Page({
       });
       that.data.httpLoading = false; // 关闭隐性加载过程
     }).catch(function (imError) {
-      // let nowDatas = [...that.data.currentMessageList ];
-      // nowDatas[nowDatas.length - 1].showLoadingStateTwo = true;
-      // that.setData({
-      //   currentMessageList: nowDatas
-      // });
       console.warn(imError);
       that.data.httpLoading = false; // 关闭隐性加载过程
     });
@@ -566,6 +589,7 @@ Page({
             file: res
           }
         });
+        message.recordStatus = false; // 播放状态
         if (Number(message.payload.second) <= 15) {
           message.recordViewWidth = message.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
         } else {
@@ -580,7 +604,6 @@ Page({
         // 5. 发送消息
         app.tim.sendMessage(message).then(function (imResponse) {
           // 发送成功
-          // console.log(imResponse);
         }).catch(function (imError) {
           // 发送失败
           console.log(imError);
@@ -591,18 +614,37 @@ Page({
 
   /*操作：播放语音 */
   playRecordFun: function (e) {
-    innerAudioContext.src = e.currentTarget.dataset.recordurl;
-    innerAudioContext.autoplay = true;
-    innerAudioContext.onPlay(() => {
-      // 开始播放
-    })
-    innerAudioContext.onError((res) => {
-      // 错误信息
+    let that = this;
+    wx.stopVoice(); // 停止播放所有音频
+    that.initItemRecordStatusFun();
+    let recordurl = e.currentTarget.dataset.recordurl; // 获取播放音频的路径
+    that.data.innerAudioContext.src = recordurl; // 设置播放音频的路径
+    that.setData({
+      recordIndex: e.currentTarget.dataset.recordindex // 语音在数组中的下标
     });
-    innerAudioContext.onEnded(() => {
-      innerAudioContext.stop();
-      // 结束播放
-    });
+    if (recordurl == that.data.recordFileUrl) {
+      that.data.innerAudioContext.stop(); // 播放同一个语音时，将其停止
+      that.setData({
+        recordFileUrl: "",
+        ["currentMessageList[" + that.data.recordIndex + "].recordStatus"]: false
+      });
+    } else {
+      that.data.innerAudioContext.play(); //不是同一个语音 直接播放点击的音频，记录此次语音路径
+      that.setData({
+        recordFileUrl: recordurl,
+        ["currentMessageList[" + that.data.recordIndex + "].recordStatus"]: true
+      });
+    }
+  },
+
+  /*操作：初始化音频图标 */
+  initItemRecordStatusFun: function () {
+    let that = this;
+    if (that.data.recordIndex != "") {
+      that.setData({
+        ["currentMessageList[" + that.data.recordIndex + "].recordStatus"]: false
+      });
+    }
   },
 
   /*操作：视频通话 */
@@ -621,6 +663,5 @@ Page({
     this.setData({
       isOpenBottomBoolbar: false
     });
-    // this.toViewBottomFun();
   }
 })

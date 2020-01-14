@@ -251,9 +251,27 @@
   background: #fff;
 }
 
+.body .recordDivSelf {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.body .recordDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 .body .payloadImage {
   height: 20px;
   width: 14px;
+  margin-left: 15rpx;
+  margin-right: 15rpx;
 }
 
 /*底部工具栏*/
@@ -300,6 +318,7 @@
 .reply .opration-area .recordBtn {
   margin: 20rpx 20rpx;
   width: 445rpx;
+  /* width: 400rpx; */
   padding: 0rpx 25rpx 0 15rpx;
   border-radius: 6px;
   height: 75rpx;
@@ -313,7 +332,8 @@
 
 .reply .opration-area .msgInput {
   margin: 20rpx 20rpx;
-  width: 445rpx;
+  /* width: 445rpx; */
+  width: 400rpx;
   padding: 0rpx 25rpx 0 15rpx !important;
   border: none;
   border-radius: 6px;
@@ -345,6 +365,13 @@
 .reply .menusIcon {
   width: 55rpx;
   height: 55rpx;
+}
+
+.reply .send .sendContentMsgBtn {
+  background-color: #438bef;
+  border-radius: 5rpx;
+  padding: 4rpx 22rpx;
+  color: #fff;
 }
 
 /*工具箱*/

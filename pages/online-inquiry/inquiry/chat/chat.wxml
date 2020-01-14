@@ -77,10 +77,18 @@
             <image class="pictureMsg" src="{{item.payload.imageInfoArray[0].imageUrl}}" />
           </view>
           <!-- 音频消息：TIMSoundElem -->
-          <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun" data-recordurl="{{item.payload.url}}">
-            <view style="display: flex;flex-direction: row;justify-content: flex-start;align-items: center;flex-wrap: wrap;width: {{item.recordViewWidth}}rpx;">
-              <image src="../../../../images/chat/audio.png" class="payloadImage"></image>
-              <view style="padding-left: 10px" class="_div data-v-71681a0a">{{item.payload.second}}s</view>
+          <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun" data-recordurl="{{item.payload.url}}"  data-recordindex="{{index}}">
+            <!-- 自己发的 -->
+            <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="recordDivSelf" style="width: {{item.recordViewWidth}}rpx;">
+              <view class="_div data-v-71681a0a">{{item.payload.second}}"</view>
+              <image wx:if="{{item.recordStatus}}" src="{{recordIconClickedUrlSelf}}" class="payloadImage"></image>
+              <image wx:else src="{{recordIconUrlSelf}}" class="payloadImage"></image>
+            </view>
+            <!-- 别人发的 -->
+            <view wx:else class="recordDiv" style="width: {{item.recordViewWidth}}rpx;">
+              <image wx:if="{{item.recordStatus}}" src="{{recordIconClickedUrlOthers}}" class="payloadImage"></image>
+              <image wx:else src="{{recordIconUrlOthers}}" class="payloadImage"></image>
+              <view class="_div data-v-71681a0a">{{item.payload.second}}"</view>
             </view>
           </view>
         </view>
@@ -101,14 +109,14 @@
         <!-- 录音按钮 -->
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框 -->
-        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" />
+        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContent.length > 0 ? '400': '445'}}rpx;"/>
         <!-- 表情 -->
         <image src="../../../../images/chat/inputIcon.png" class="inputIcon" />
       </view>
       <!-- 菜单、发送按钮 -->
       <view class="send">
         <image wx:if="{{isOpenBottomBoolbar}}" src="../../../../images/chat/m-close.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
-        <view wx:elif="{{maySendContent.length > 0}}" bindtap="sendContentMsg">发送</view>
+        <view wx:elif="{{!isSendRecord && maySendContent.length > 0}}" class="sendContentMsgBtn" bindtap="sendContentMsg">发送</view>
         <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
       </view>
     </view>
