@@ -2,7 +2,7 @@
   <view class="address">
     <view class="cell">
       <text class="cell-title">收货人</text>
-      <input class="weui-input cell-detail" placeholder="请填写收货人姓名" bindinput="receiverNameInput" value="{{receiverName}}"/>
+      <input class="weui-input cell-detail" placeholder="请填写收货人姓名" bindinput="receiverNameInput" value="{{receiverName}}" />
     </view>
     <view class="cell-separator"></view>
     <view class="cell">
@@ -24,7 +24,8 @@
   </view>
 
   <view wx:if='{{edit}}' class="delete" bindtap="deleteAction">删除地址</view>
-  <view class="btnView">
-    <button class="button-theme" style="width: 80%;" bindtap="addAction">保存</button>
+  <view style="bottom:32rpx;position: absolute;left:32rpx;right:32rpx" class="button-background" bindtap="saveOptions">
+    <text class="button-text">保存</text>
   </view>
 </view>
+

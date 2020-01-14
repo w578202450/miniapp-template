@@ -3,22 +3,29 @@
     <image class="header-bgImage" src="../../../images/public/public_order_bg.png"></image>
     <tmcnavbar titleText="订单详情"></tmcnavbar>
     <view class="paySuccess" style="margin-top: 50rpx">
-      <block wx:if='{{detail.orderStatusID == 10}}'>
-        <block wx:if='{{detail.deliveryStatusID == 1}}'>
+    <!-- 已支付 -->
+      <block wx:if='{{orderInfo.orderStatusID == 10}}'>
+      <!-- 待发货 -->
+        <block wx:if='{{orderInfo.deliveryStatusID == 1}}'>
           <image style="width:58rpx;height:58rpx" src="../../../images/order/order_wait.png"></image>
           <text>订单已支付，等待商家发货</text>
         </block>
-        <block wx:elif='{{detail.deliveryStatusID == 2 || detail.deliveryStatusID == 3}}'>
+        <!-- 已发货 确认收货 -->
+        <block wx:elif='{{orderInfo.deliveryStatusID == 2 || orderInfo.deliveryStatusID == 3}}'>
           <image style="width:58rpx;height:58rpx" src="../../../images/order/order_delivery.png"></image>
           <text>订单已发货</text>
         </block>
-
       </block>
-      <block wx:elif='{{detail.orderStatusID == 2}}'>
+      <!-- 已取消 -->
+      <block wx:elif='{{orderInfo.orderStatusID == 2}}'>
         <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
         <text>订单已取消，未收到退款请联系客服</text>
       </block>
-
+      <!-- 待支付 -->
+      <block wx:elif='{{orderInfo.orderStatusID == 0}}'>
+        <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
+        <text>请立即支付当前订单</text>
+      </block>
     </view>
   </view>
 
@@ -38,7 +45,6 @@
       </view>
       <view class="drugs-cell" wx:for="{{rpMedicines}}" wx:for-item="item">
         <view class="drugs-cell-content">
-          <!-- <image src="{{item.avatar}}"></image> -->
           <view class="drugs-cell-middle">
             <text class="drugs-cell-name">{{item.medicineName}}</text>
             <text class="drugs-cell-unit">{{item.specification}}</text>
@@ -67,62 +73,54 @@
       <view class="separator" style="margin-top: 25rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>配送方式：</text>
-        <text>{{detail.deliveryTypeID == 0 ? "上门自取" : (detail.deliveryTypeID == 1 ? "送货上门" : "快递")}}</text>
+        <text>{{orderInfo.deliveryTypeID == 0 ? "上门自取" : (orderInfo.deliveryTypeID == 1 ? "送货上门" : "快递")}}</text>
       </view>
       <view class="separator" style="margin-left: 32rpx;margin-right: 32rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>药品金额：</text>
-        <text>¥{{detail.costPrice}}</text>
+        <text>¥{{orderInfo.costPrice}}</text>
       </view>
       <view class="prescription-delivery prescription-text">
         <text>支付方式：</text>
-        <text>{{detail.payWay == 0 ? "定金" : (detail.payWay == 1 ? "全款" : "货到付款")}}</text>
+        <text>{{orderInfo.payWay == 0 ? "在线支付" : (orderInfo.payWay == 1 ? "付定金" : "货到付款")}}</text>
       </view>
       <view class="prescription-delivery prescription-text">
         <text>定金金额：</text>
-        <text style="color:rgba(254,88,83,1)">¥{{detail.prePrice}}</text>
+        <text style="color:rgba(254,88,83,1)">¥{{orderInfo.prePrice}}</text>
       </view>
       <view class="separator"></view>
       <view style="display: flex;flex-direction: row;padding:32rpx;align-items: center">
         <text class="prescription-text" style="flex-shrink: 0">备注</text>
-        <text class="prescription-text" style="margin-left:32rpx;line-height:40rpx">{{detail.remarks}}</text>
+        <text class="prescription-text" style="margin-left:32rpx;line-height:40rpx">{{orderInfo.remarks}}</text>
       </view>
     </view>
 
     <view class="separator" style="height:24rpx"></view>
 
     <view style="display: flex;flex-direction: column;padding:32rpx">
-      <text class="other-text">订单编号：{{detail.orderID}}</text>
-      <text class="other-text">创建时间：{{detail.createTime}}</text>
-      <text class="other-text">付款时间：{{detail.payTime}}</text>
-      <text class="other-text">发货时间：{{detail.deliveryTime}}</text>
+      <text class="other-text">订单编号：{{orderInfo.orderID}}</text>
+      <text class="other-text">创建时间：{{orderInfo.createTime}}</text>
+      <text class="other-text">付款时间：{{orderInfo.payTime}}</text>
+      <text class="other-text">发货时间：{{orderInfo.deliveryTime}}</text>
     </view>
 
     <view class="separator" style="height:24rpx"></view>
 
     <view style="display: flex;flex-direction: row;justify-content: space-between;padding:32rpx">
-      <block wx:if='{{detail.orderStatusID == 10}}'>
-        <block wx:if='{{detail.deliveryStatusID == 1}}'>
-          <view class="options-view" style="width:176px" bindtap="contactDoctor">
-            <text>咨询医生</text>
-          </view>
-        </block>
-        <block wx:elif='{{detail.deliveryStatusID == 2 || detail.deliveryStatusID == 3}}'>
-          <view class="options-view" style="width:176px" bindtap="contactDoctor">
-            <text>咨询医生</text>
-          </view>
-          <view class="options-view" style="width:176px;background:rgba(67,139,239,1)" bindtap="confirmGoods">
-            <text style="color:rgba(255,255,255,1)">确认收货</text>
-          </view>
-        </block>
+      <view class="options-view" style="width:176px" bindtap="contactDoctorOption">
+        <text>咨询医生</text>
+      </view>
+      <!-- 待支付 -->
+      <block wx:if='{{orderInfo.orderStatusID == 0}}'>
+        <view class="options-view" style="width:176px" bindtap="payOption">
+          <text>立即支付</text>
+        </view>
       </block>
-      <block wx:elif='{{detail.orderStatusID == 2}}'>
-        <!-- <view class="options-view" style="width:176px" bindtap="contactDoctor">
-          <text>咨询医生</text>
-        </view> -->
-        <view class="options-view" style="width:176px;background:rgba(67,139,239,1);border:0" bindtap="confirmGoods">
-            <text style="color:rgba(255,255,255,1)">确认收货</text>
-          </view>
+      <!-- 已支付 在线支付 已发货 -->
+      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 0 && orderInfo.deliveryStatusID == 2}}'>
+        <view class="options-view" style="width:176px" bindtap="payOption">
+          <text>确认收货</text>
+        </view>
       </block>
     </view>
 

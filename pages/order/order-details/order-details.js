@@ -1,47 +1,53 @@
 const HTTP = require('../../../utils/http-util')
+
 Page({
   data: {
-    detail:null,
-    rpID:''
+    rpID:'',
+    orderID:'',
+    orderInfo:null
   },
   onReady: function () {
     this.tmcnavbar = this.selectComponent("#tmcnavbar");
   },
   onLoad: function (e) {
     console.log('------e---', e.orderID)
-    var orderID = e.orderID;
-    this.loadDatas(orderID)
+    this.data.orderID = e.orderID;
+    this.fetchOrderDetails()
   },
-  // 加载数据
-  loadDatas(orderID) {
+  /**
+   * 获取订单详情
+   */
+  fetchOrderDetails(){
     wx.showLoading({
       title: '加载订单详情...',
     });
     var that = this;
     HTTP.goodsOrder({
-      orderID: orderID,
+      orderID: this.data.orderID,
       orgID: wx.getStorageSync('orgID')
     })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
-          this.data.detail = res.data
+          this.data.orderInfo = res.data
           this.setData({
-            detail: this.data.detail
+            orderInfo: this.data.orderInfo
           })
-          this.getRp(res.data.rpID)
+          this.fetchRpDetails(res.data.rpID)
           this.data.rpID = res.data.rpID
         }
       }).catch(e => {
-        wx.hideLoading(); 
+        wx.hideLoading();
         wx.showToast({
           title: e,
-          icon:'none'
+          icon: 'none'
         })
       })
   },
-  getRp(rpID){
-    
+  /**
+   * 获取处方详情
+   */
+  fetchRpDetails(rpID){
     wx.showLoading({
       title: '获取处方详情...',
     });
@@ -65,15 +71,19 @@ Page({
         })
       })
   },
-
+  /**
+   * 预览处方
+   */
   previewPrescriptionAction:function(){
     wx.navigateTo({
       url: '../../personal-center/prescription-details/prescription-details?index=0&rpID=' + this.data.rpID,
     })
 
   },
-
-  conn(){
+  /**
+   * 咨询医生
+   */
+  contactDoctorOption(){
     wx.navigateTo({
       url: '../../online-inquiry/inquiry/chat/chat',
       success: function(res) {},
@@ -81,10 +91,113 @@ Page({
       complete: function(res) {},
     })
   },
+  /**
+   * 在线支付
+   */
+  payOption(){
+    var that = this
+    HTTP.orderPrePay({
+      orgID: wx.getStorageSync('orgID'),
+      orderID: this.data.orderInfo.keyID,
+      price: this.data.orderInfo.prePrice,
+      personID: this.data.orderInfo.buyerID
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          this.tradeOrder(res.data.paymentID);
+        }
 
-  confirmGoods:function(){
-    
+      }).catch(e => {
+        wx.hideLoading();
+      })
   },
-
+  /**
+   * 支付验证
+   */
+  tradeOrder: function (paymentID) {
+    console.log('---支付校验---', paymentID)
+    var that = this
+    HTTP.tradeOrder({
+      body: '医护上门',
+      detail: '医护上门PICC换药',
+      transID: paymentID,
+      sysCode: 'person-tmc',
+      openID: wx.getStorageSync('openID')
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          wx.showToast({
+            title: '支付校验成功',
+          })
+          that.wxPayOptions(res.data)
+        }
+      }).catch(e => {
+        wx.hideLoading();
+      })
+  },
+  /**
+   * 微信支付
+   */
+  wxPayOptions(payInfo) {
+    var that = this
+    wx.showLoading({
+      title: '支付中...',
+      icon: 'none'
+    })
+    wx.requestPayment({
+      'timeStamp': payInfo.timestamp,
+      'nonceStr': payInfo.nonce_str,
+      'package': "prepay_id=" + payInfo.prepay_id,
+      'signType': 'MD5',
+      'paySign': payInfo.sign,
+      'success': function (res) {
+        console.log('微信支付成功----', res)
+        wx.showToast({
+          title: '支付成功',
+        })
+        that.orderPaySuccess()
+      },
+      'fail': function (res) {
+        wx.showToast({
+          title: '支付失败',
+        })
+        console.log('微信支付失败----', res)
+      },
+      'complete': function (res) { }
+    })
+  },
+  /**
+   * 订单支付回调
+   */
+  orderPaySuccess() {
+    wx.showLoading({
+      title: '支付回调...'
+    })
+    HTTP.orderPaySuccess({
+      orgID: wx.getStorageSync('orgID'),
+      orderID: this.data.orderID,
+      personID: wx.getStorageSync('personID'),
+    })
+      .then(res => {
+        wx.hideLoading();
+        console.log('支付回调------', res)
+        if (res.code == 0) {
+          wx.showToast({
+            title: '支付回调成功',
+          })
+        } else {
+          wx.showToast({
+            title: res.message,
+          })
+        }
+      }).catch(e => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '支付回调失败',
+        })
+      })
+  },
 
 })

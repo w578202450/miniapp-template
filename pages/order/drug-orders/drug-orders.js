@@ -4,15 +4,18 @@ Page({
   addressInfo: null,
   noNetwork: false,
   noData: false,
-  orderID: '',
   data: {
     list: []
   },
+  currentIndex:0,
+
   onLoad: function() {
     this.loadDatas()
   },
 
-  // 加载数据
+  /**
+   * 加载订单列表
+   */
   loadDatas() {
     wx.showLoading({
       title: '加载订单列表...',
@@ -53,6 +56,9 @@ Page({
         })
       })
   },
+  /**
+   * 获取对于的诊断结果
+   */
   getRpByList(params) {
     wx.showLoading({
       title: '加载处方详情...',
@@ -75,7 +81,9 @@ Page({
         wx.hideLoading();
       })
   },
-
+  /**
+   * 添加地址
+   */
   addressAction: function() {
     wx.navigateTo({
       url: '/pages/address/address-add/address-add',
@@ -84,151 +92,19 @@ Page({
       complete: function(res) {},
     })
   },
-
-  orderDetailsAction: function() {
+  /**
+   * 立即支付
+   */
+  payOrder: function(e) {
+    var that = this
+    var index = e.currentTarget.dataset.index;
+    this.data.currentIndex = index;
+    
     wx.navigateTo({
-      url: '/pages/order/order-details/order-details',
+      url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
-  },
-
-  payOrder: function(e) {
-    var that = this
-    var index = e.currentTarget.dataset.index;
-    this.data.orderID = this.data.list[index].keyID
-    this.data.addressInfo = {
-      name: this.data.list[index].receiverName,
-      phone: this.data.list[index].receiverPhone,
-      address: this.data.list[index].address
-    }
-    HTTP.orderPrePay({
-        orgID: wx.getStorageSync('orgID'),
-        orderID: this.data.list[index].keyID,
-        price: this.data.list[index].prePrice,
-        personID: this.data.list[index].buyerID
-      })
-      .then(res => {
-        wx.hideLoading();
-        if (res.code == 0) {
-          this.tradeOrder(res.data.paymentID);
-        }
-
-      }).catch(e => {
-        wx.hideLoading();
-      })
-
-  },
-
-  tradeOrder: function(paymentID) {
-    console.log('---支付校验---', paymentID)
-    var that = this
-    HTTP.tradeOrder({
-        body: '医护上门',
-        detail: '医护上门PICC换药',
-        transID: paymentID,
-        sysCode: 'person-tmc',
-        openID: wx.getStorageSync('openID')
-      })
-      .then(res => {
-        wx.hideLoading();
-        if (res.code == 0) {
-          wx.showToast({
-            title: '支付校验成功',
-          })
-          that.wxPayOptions(res.data)
-        }
-      }).catch(e => {
-        wx.hideLoading();
-      })
-  },
-
-  wxPayOptions(payInfo) {
-    var that = this
-    wx.showLoading({
-      title: '支付中...',
-      icon: 'none'
-    })
-    wx.requestPayment({
-      'timeStamp': payInfo.timestamp,
-      'nonceStr': payInfo.nonce_str,
-      'package': "prepay_id=" + payInfo.prepay_id,
-      'signType': 'MD5',
-      'paySign': payInfo.sign,
-      'success': function(res) {
-        console.log('微信支付成功----', res)
-        wx.showToast({
-          title: '支付成功',
-        })
-        that.orderPaySuccess()
-      },
-      'fail': function(res) {
-        wx.showToast({
-          title: '支付失败',
-        })
-        console.log('微信支付失败----', res)
-      },
-      'complete': function(res) {}
-    })
-  },
-
-  orderPaySuccess() {
-    HTTP.orderPaySuccess({
-        orgID: wx.getStorageSync('orgID'),
-        orderID: this.data.orderID,
-        personID: wx.getStorageSync('personID'),
-      })
-      .then(res => {
-        wx.hideLoading();
-        if (res.code == 0) {
-          wx.showToast({
-            title: '支付回调成功',
-          })
-          this.navigateToAddress()
-        } else {
-          wx.showToast({
-            title: res.message,
-          })
-        }
-      }).catch(e => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '支付回调失败',
-        })
-      })
-  },
-
-
-  navigateToAddress() {
-    var that = this
-    this.data.list = []
-    this.data.addressInfo = {
-      name: null,
-      phone: null,
-      address: null
-    }
-    this.data.noNetwork = false
-    this.data.noData = false
-
-    if (this.data.addressInfo.name && this.data.addressInfo.phone && this.data.addressInfo.address) {
-      wx.navigateTo({
-        url: "/pages/address/address-submit/address-submit?name=" + this.data.addressInfo.name + ' &phone=' + this.data.addressInfo.phone + ' &address=' + this.data.addressInfo.address,
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) {
-          that.loadDatas()
-        },
-      })
-    } else {
-      wx.navigateTo({
-        url: "/pages/address/address-submit/address-submit",
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) {
-          that.loadDatas()
-        },
-      })
-    }
-  },
+  }
 })

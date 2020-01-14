@@ -24,6 +24,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  
 }
 
 .userinfo-avatar {
@@ -62,3 +63,5 @@
   border-top-right-radius: 15rpx;
   overflow: hidden;
 }
+
+

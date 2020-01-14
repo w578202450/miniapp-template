@@ -15,12 +15,12 @@ Page({
         title: '我的处方'
       },
       {
-        url:"/pages/personal-center/prescription-details/prescription-details?index=1&rpID=111",
+        url:"/pages/address/address-list/address-list?option=0",
         title: '收货地址'
       }
-
     ]
   },
+  // url: "/pages/personal-center/prescription-details/prescription-details?index=1&rpID=111",
   // url: '/pages/address/address-list/address-list',
   onLoad: function() {
     this.setData({

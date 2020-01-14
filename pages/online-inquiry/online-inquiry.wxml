@@ -29,7 +29,7 @@
   </view>
 
   <view class="middle-two">
-    <text class="titleLabel">医生资格证书编码</text>
+    <text class="titleLabel">医生执业证编号</text>
     <view class="detailLabel">{{certifyInfo.certifyNo}}</view>
   </view>
 
@@ -47,9 +47,10 @@
         <text class="position">{{doctorInfo.titleName}}</text>
       </view>
       <view class="cardInfo_two">
-        <text class="hospital">{{doctorInfo.workPlace+doctorInfo.sectionName}}</text>
+        <text class="hospital">{{doctorInfo.workPlace}}</text>
+        <text class="hospital">{{doctorInfo.sectionName}}</text>
       </view>
-      <text class="expertise">{{doctorInfo.goodAt}}</text>
+      <text class="expertise">擅长：{{doctorInfo.goodAt}}</text>
     </view>
     <view class="doctor-card" bindtap="doctorDetailTap" data-index="1">
       <image class="doctor_avatar" src="{{assistantDoctorInfo.faceImage ? assistantDoctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
@@ -59,9 +60,10 @@
         <text class="position">{{assistantDoctorInfo.titleName}}</text>
       </view>
       <view class="cardInfo_two">
-        <text class="hospital">{{assistantDoctorInfo.workPlace+assistantDoctorInfo.sectionName}}</text>
+        <text class="hospital">{{assistantDoctorInfo.workPlace}}</text>
+        <text class="hospital">{{assistantDoctorInfo.sectionName}}</text>
       </view>
-      <text class="expertise">{{assistantDoctorInfo.goodAt}}</text>
+      <text class="expertise">擅长：{{assistantDoctorInfo.goodAt}}</text>
     </view>
   </view>
 

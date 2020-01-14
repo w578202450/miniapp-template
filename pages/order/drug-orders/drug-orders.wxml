@@ -6,7 +6,7 @@
 </block>
 <block wx:else>
   <view class="tmc-container" wx:for="{{list}}" wx:key="id" wx:for-index="index" wx:for-item="item">
-      
+
     <navigator url="/pages/order/order-details/order-details?orderID={{item.keyID}}">
       <view class="cell">
         <view class="cell-top">
@@ -26,23 +26,11 @@
               <text style="color:rgba(254,88,83,1)">立即支付</text>
             </view>
           </block>
-          <!-- 订单状态为10 -->
-          <block wx:if="{{item.orderStatusID==10}}">
-            <!-- 发货状态为0  填写地址-->
-            <block wx:if="{{item.orderStatusID==0}}">
-              <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
-                <text>填写地址</text>
-              </view>
-            </block>
-            <!-- 发货状态为1  填写地址 申请退款-->
-            <block wx:if="{{item.orderStatusID==1}}">
-              <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
-                <text>填写地址</text>
-              </view>
-              <!-- <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view">
-                <text>申请退款</text>
-              </view> -->
-            </block>
+          <!-- 订单状态为10 发货状态为0  填写地址 -->
+          <block wx:if="{{item.orderStatusID==10 && item.deliveryStatusID==0}}">
+            <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
+              <text>填写地址</text>     cc
+            </view>
           </block>
         </view>
 

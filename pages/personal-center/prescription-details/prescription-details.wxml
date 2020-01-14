@@ -1,26 +1,26 @@
-<view class="page">
-  <view class="{{tipHidden ? '' : 'tip-show'}}" hidden="{{tipHidden}}">
-    <text class="tip">过期失效的处方不能支付，有效期3天</text>
-  </view>
-  <view class="header">
-    <image src="../../../images/profile/profile_company_seal.png"></image>
-    <view class="header-content">
-      <text class="header-title">电子处方</text>
-      <view class="header-personinfo">
-        <text class="personinfo-details">姓名：{{rpData.patientName}}</text>
-        <text class="personinfo-details">性别：{{rpData.sex==0 ? "男" : "女"}}</text>
-        <text class="personinfo-details">年龄：{{rpData.age}}</text>
-      </view>
-      <view class="personinfo-other-box">
-        <text class="personinfo-other">诊断：{{rpData.diagnosis}}</text>
-      </view>
-      <view class="personinfo-other-box">
-        <text class="personinfo-other">开方日期：{{rpData.rpTime}}</text>
-      </view>
+
+<view class="{{rpData.payStatus == 1 ? '' : 'tip-show'}}" hidden="{{rpData.payStatus == 1}}">
+  <text class="tip">过期失效的处方不能支付，有效期3天</text>
+</view>
+<view class="header">
+  <image src="../../../images/profile/profile_company_seal.png"></image>
+  <view class="header-content">
+    <text class="header-title">电子处方</text>
+    <view class="header-personinfo">
+      <text class="personinfo-details">姓名：{{rpData.patientName}}</text>
+      <text class="personinfo-details">性别：{{rpData.sex==0 ? "男" : "女"}}</text>
+      <text class="personinfo-details">年龄：{{rpData.age}}</text>
+    </view>
+    <view class="personinfo-other-box">
+      <text class="personinfo-other">诊断：{{rpData.diagnosis}}</text>
+    </view>
+    <view class="personinfo-other-box">
+      <text class="personinfo-other">开方日期：{{rpData.rpTime}}</text>
     </view>
   </view>
+</view>
 
-  <view class="middle">
+<view class="middle">
   <view class="middle-rp">RP</view>
   <view class="middle-rp-item" wx:key="keyID" wx:for="{{rpData.rpMedicines}}" wx:for-item="item">
     <view class="rp-info-box">
@@ -34,29 +34,30 @@
     <view class=".rp-lineView"></view>
   </view>
   <view class="rp-advice">医嘱：{{rpData.rpAdvice}}</view>
-  </view>
-  <view class="bottom">
-    <view class="bottom-doctor-left">
-      <text class="bottom-doctor-name">开方医生：{{rpData.doctorName}}</text>
-      <view class="bottom-seal-box">
-        <text class="bottom-doctor-sealname">{{rpData.doctorName}}</text>
-        <image src="../../../images/profile/profile_doctor_seal.png"></image>
-      </view>
-    </view>
-    <view class="bottom-doctor-right" hidden="{{rpData.pharmacistName ? false : true}}">
-      <text class="bottom-doctor-name">审方药师：{{rpData.pharmacistName}}</text>
-      <view class="bottom-seal-box">
-        <text class="bottom-doctor-sealname">{{rpData.pharmacistName}}</text>
-        <image src="../../../images/profile/profile_doctor_seal.png"></image>
-      </view>
+</view>
+<view class="bottom" style="margin-bottom:172rpx">
+  <view class="bottom-doctor-left">
+    <text class="bottom-doctor-name">开方医生：{{rpData.doctorName}}</text>
+    <view class="bottom-seal-box">
+      <text class="bottom-doctor-sealname">{{rpData.doctorName}}</text>
+      <image src="../../../images/profile/profile_doctor_seal.png"></image>
     </view>
   </view>
+  <view class="bottom-doctor-right" hidden="{{rpData.pharmacistName ? false : true}}">
+    <text class="bottom-doctor-name">审方药师：{{rpData.pharmacistName}}</text>
+    <view class="bottom-seal-box">
+      <text class="bottom-doctor-sealname">{{rpData.pharmacistName}}</text>
+      <image src="../../../images/profile/profile_doctor_seal.png"></image>
+    </view>
+  </view>
+</view>
 
-  <view hidden='{{payHidden}}' class="{{payHidden ? '' : 'pay-show'}}">
-    <view class="pay-left">
-      <image src="../../../images/profile/profile_company_seal.png"></image>
-      <text>咨询医生</text>
-    </view>
-    <button  class="button-theme" style="width: 100%;margin-left:48rpx" bindtap="payAction">立即支付（实付：¥{{prePrice}}）</button>
+<view style="position:fixed;bottom:0;left:0;right:0" hidden='{{rpData.payStatus == 1}}' class="{{payHidden ? '' : 'pay-show'}}">
+  <view class="pay-left">
+    <image src="../../../images/profile/profile_company_seal.png"></image>
+    <text>咨询医生</text>
+  </view>
+  <view class="button-background" style="margin-left:32rpx;background-color: rgba(255,255,255,1)" bindtap="payAction">
+    <text class="button-text">立即支付（实付：¥{{rpData.price}}）</text>
   </view>
 </view>

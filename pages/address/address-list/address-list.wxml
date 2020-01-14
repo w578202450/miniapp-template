@@ -1,32 +1,35 @@
-<view wx:for="{{list}}" wx:for-item="item" wx:key="{{keyID}}">
-  <view class="cell" bindtap="selectedAddress" data-index="{{index}}">
-    <view class="info-box">
-      <text class="name">{{item.receiverName}}</text>
-      <text class="phone">{{item.receiverPhone}}</text>
-      <view wx:if = "{{item.isDefault == 1}}" class="selectedBtn">默认</view>
-    </view>
-    <text class="address">{{item.address}}</text>
-    <view class="separator"></view>
-    <view class="bottom-box">
-      <view class="bottom-left" catchtap="defaultAddress" data-index="{{index}}">
-        <image class="ImageTitle-image" src="{{item.isDefault == 1 ? '../../../images/public/public_circle_selected.png' : '../../../images/public/public_circle_normal.png'}}"></image>
-        <text class="ImageTitle-title">默认地址</text>
+<view style="margin-bottom:144rpx">
+  <view wx:for="{{list}}" wx:for-item="item" wx:key="{{keyID}}">
+    <view class="cell" bindtap="selectedAddress" data-index="{{index}}">
+      <view class="info-box">
+        <text class="name">{{item.receiverName}}</text>
+        <text class="phone">{{item.receiverPhone}}</text>
+        <view wx:if="{{item.isDefault == 1}}" class="selectedBtn">默认</view>
       </view>
-      <view class="bottom-right">
-        <view class="ImageTitle-edit" catchtap="editAction" data-index="{{index}}">
-          <image class="ImageTitle-image" src="../../../images/public/public_edit.png"></image>
-          <text class="ImageTitle-title">编辑</text>
+      <text class="address">{{item.province+item.city+item.area+item.address}}</text>
+      <view class="separator"></view>
+      <view class="bottom-box">
+        <view class="bottom-left" catchtap="defaultAddress" data-index="{{index}}">
+          <image class="ImageTitle-image" src="{{item.isDefault == 1 ? '../../../images/public/public_circle_selected.png' : '../../../images/public/public_circle_normal.png'}}"></image>
+          <text class="ImageTitle-title">默认地址</text>
         </view>
-        <view class="ImageTitle-delete" catchtap="deleteAction" data-index="{{index}}">
-          <image class="ImageTitle-image" src="../../../images/public/public_delete.png"></image>
-          <text class="ImageTitle-title">删除</text>
+        <view class="bottom-right">
+          <view class="ImageTitle-edit" catchtap="editAction" data-index="{{index}}">
+            <image class="ImageTitle-image" src="../../../images/public/public_edit.png"></image>
+            <text class="ImageTitle-title">编辑</text>
+          </view>
+          <view class="ImageTitle-delete" catchtap="deleteAction" data-index="{{index}}">
+            <image class="ImageTitle-image" src="../../../images/public/public_delete.png"></image>
+            <text class="ImageTitle-title">删除</text>
+          </view>
         </view>
+
       </view>
 
     </view>
-
   </view>
 </view>
-<view class="btnView">
-  <button bindtap="addAction">+ 新增地址</button>
+
+<view style="position: fixed;bottom: 32rpx;left: 32rpx;right: 32rpx;" class="button-background" bindtap="addAction">
+  <text class="button-text">+ 新增地址</text>
 </view>

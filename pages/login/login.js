@@ -89,7 +89,9 @@ Page({
   getPatientInfo(openID) {
     let that = this
     var prams = {
-      openID: openID
+      openID: openID,
+      nickName: app.globalData.userInfo.nickName,
+      avatarUrl: app.globalData.userInfo.avatarUrl
     }
     HTTP.getPatientInfo(prams).then(res => {
       if (res.code == 0) {

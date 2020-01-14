@@ -233,7 +233,13 @@ module.exports = {
   deleteAddress: function deleteAddress(parmas) {
     return request('api/peachUser/personDeliveryAddr/delete', true, 'post', parmas);
   },
-
+  /*
+   *设置订单配送地址
+   */
+  fillDeliveryAddr: function fillDeliveryAddr(parmas) {
+    return request('api/tmc/goodsOrder/fillDeliveryAddr', true, 'post', parmas);
+  },
+  
 
 
 

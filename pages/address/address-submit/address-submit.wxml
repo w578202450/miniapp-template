@@ -17,9 +17,9 @@
             <view class="info-box">
               <text class="name">{{addressInfo.name}}</text>
               <text class="phone">{{addressInfo.phone}}</text>
-              <view class="selectedBtn">默认</view>
+              <view hidden="{{addressInfo.isDefault == '0'}}" class="selectedBtn">默认</view>
             </view>
-            <text class="address">{{addressInfo.address}}</text>
+            <text class="address">{{addressInfo.province+addressInfo.city+addressInfo.area+addressInfo.address}}</text>
           </view>
           <image src="../../../images/public/public_right.png" style="width:24rpx;height:24rpx"></image>
         </view>
@@ -39,14 +39,19 @@
     <view class="textarea weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="给商家留言（选填）" style="height: 3.3em" />
+          <textarea class="weui-textarea" placeholder="给商家留言（选填）" style="height: 3.3em" value="{{addressInfo.remarks}}" bindinput="remarksInput" />
         </view>
       </view>
     </view>
   </view>
 
-  <view class="btnView">
-    <button class="button-theme" style="width: 80%;" bindtap="submitAction">提交</button>
+  <view style="display:flex;justify-content: center;align-items: center;padding:32rpx;margin-top:80rpx">
+    <view class="button-background" bindtap="payAction">
+      <text class="button-text">提交</text>
+    </view>
   </view>
+
+
+
 
 </view>
