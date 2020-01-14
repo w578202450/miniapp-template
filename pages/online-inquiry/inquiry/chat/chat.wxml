@@ -109,15 +109,15 @@
         <!-- 录音按钮 -->
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框 -->
-        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContent.length > 0 ? '470': '515'}}rpx;"/>
-<!-- bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContent.length > 0 ? '400': '445'}}rpx;"/> -->
+        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '470': '515'}}rpx;"/>
+<!-- bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '400': '445'}}rpx;"/> -->
         <!-- 表情 -->
         <!-- <image src="../../../../images/chat/inputIcon.png" class="inputIcon" /> -->
       </view>
       <!-- 菜单、发送按钮 -->
       <view class="send">
         <image wx:if="{{isOpenBottomBoolbar}}" src="../../../../images/chat/m-close.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
-        <view wx:elif="{{!isSendRecord && maySendContent.length > 0}}" class="sendContentMsgBtn" bindtap="sendContentMsg">发送</view>
+        <view wx:elif="{{!isSendRecord && maySendContentSure}}" class="sendContentMsgBtn" bindtap="sendContentMsg">发送</view>
         <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
       </view>
     </view>

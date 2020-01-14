@@ -334,12 +334,10 @@ Page({
     that.setData({
       maySendContent: e.detail.value,
     });
-    let value = that.data.maySendContent;//先把输入的值复制一份，用于操作
-    value.trim();//用正则表达式去掉所有的空白字符（空格是其中一种
-  //去掉所有空格之后，再对它进行判断，  
-  //如果字符串中还有别的内容，说明输入的内容不是空格，  
-  //然后就可以加入数组了。 
-  console.log(value);  
+    let value = that.data.maySendContent; // 先把输入的值复制一份，用于操作
+    value = value.replace(/\s+/g, ""); // 用正则表达式去掉所有的空白字符（空格是其中一种）
+    //去掉所有空格之后，再对它进行判断，  
+    //如果字符串中还有别的内容，说明输入的内容不是空格，则可以发送
     if (value != "") {
       that.setData({
         maySendContentSure: true
@@ -349,8 +347,6 @@ Page({
         maySendContentSure: false
       });
     }
-    console.log(that.data.maySendContent.length);
-    console.log(that.data.maySendContentSure);
   },
 
   /*操作：发送（文本消息） */
