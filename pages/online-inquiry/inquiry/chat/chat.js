@@ -40,12 +40,12 @@ Page({
       clickFun: "cameraWxFun",
       isFifth: false
     }
-    // {
-    //   title: "视频问诊",
-    //   iconUrl: "../../../../images/chat/m-video.png",
-    //   clickFun: "videoWxFun",
-    //   isFifth: false
-    // }
+      // {
+      //   title: "视频问诊",
+      //   iconUrl: "../../../../images/chat/m-video.png",
+      //   clickFun: "videoWxFun",
+      //   isFifth: false
+      // }
     ],
     aimgurl: {}, // //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
@@ -199,6 +199,7 @@ Page({
         that.setData({
           userInfo: res.data
         });
+        console.log("患者信息:" + JSON.stringify(res.data));
         if (that.data.userInfo.keyID) {
           that.getPatientMultiTalk(); // 查询患者的多方对话
         }
@@ -225,6 +226,7 @@ Page({
           multiTalkInfo: resData.multiTalk
         }
       });
+      console.log("查询患者的多方对话:" + JSON.stringify(res.data));
       that.createInquiry(); // 创建问诊
     })
   },
@@ -247,6 +249,11 @@ Page({
       that.setData({
         inquiryInfo: res.data
       });
+      wx.setStorage({
+        key: 'inquiryInfo',
+        data: res.data
+      });
+      console.log("创建问诊:" + JSON.stringify(res.data));
       that.getHistoryMessage(); // 获取历史消息
     })
   },

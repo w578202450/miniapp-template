@@ -5,6 +5,7 @@ import {
 import {
   genTestUserSig
 } from '../../../../utils/GenerateTestUserSig';
+var HTTP = require('../../../../utils/http-util.js');
 
 Page({
   // /**
@@ -222,9 +223,10 @@ Page({
   data: {
     //...
     userInfo: {}, // 当前用户信息
-    roomID: '123', // [必选]房间号，可以由您的服务指定
-    // userID: '20010620211271745513006001', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
+    roomID: '', // [必选]房间号，可以由您的服务指定
+    userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
+    inquiryInfo:{}, // 问诊信息
     sdkAppID: '1400283798', // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
     template: 'float', // [必选]标识组件使用的界面模版，组件内置了 bigsmall，float，grid 三种布局
     privateMapKey: '', // 房间权限 key，需要从自行搭建的签名服务获取
@@ -272,16 +274,6 @@ Page({
     }
   },
 
-  /*从storage中获取患者信息 */
-  getPersonInfo: function() {
-    let that = this;
-    let userInfo = wx.getStorageSync("personInfo");
-    that.setData({
-      userInfo: userInfo
-    });
-    Console.log("===患者信息===" + userInfo);
-  },
-
   // 云处方创建视频问诊记录
   createVideoInquiry: function() {
     let that = this;
@@ -289,21 +281,22 @@ Page({
       bizID: 'tmc',
       bizType: 'tmc',
       clientID: '19100717375019793291301001',
-      sponsorsID: "20010620182884219923006001",
-      sponsorsName: "wq",
-      receiverID: "20010714274425015463012001",
-      receiverName: "20010714274425015463012001",
-      patientName: "wq",
+      sponsorsID: that.data.userInfo.keyID,
+      sponsorsName: that.data.userInfo.patientName,
+      receiverID: that.data.inquiryInfo.keyID,
+      receiverName: that.data.inquiryInfo.keyID,
+      patientName: that.data.userInfo.patientName,
       requestRole: "0",
       patientInfo: {
-        patientName: "wq",
+        patientName: that.data.userInfo.patientName,
         patientSex: 0,
-        patientAge: 18,
-        patientPhone: "13611111001",
-        patientIdNo: "500111199011115587"
+        patientAge: that.data.userInfo.birthDate,
+        patientPhone: that.data.userInfo.phone,
+        patientIdNo: that.data.userInfo.idNumber
       }
     };
     HTTP.createVideoInquiry(prams).then(res => {
+      console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
       that.setData({
         inquiryId: res.data.inquiryId
       });
@@ -314,45 +307,66 @@ Page({
   getRoomId: function() {
     let that = this;
     let prams = {
-      inquiryId: '20010911052179278411325001', // 问诊记录id	
-      sponsorsId: '19080118270320640501523001', // 发起者id(患者id)
-      receiverId: '19080118270320640501523001' // 接受者id(医生id)
+      inquiryId: that.data.inquiryId, // 问诊记录id	
+      sponsorsId: that.data.userInfo.keyID, // 发起者id(患者id)
+      receiverId: that.data.inquiryInfo.keyID // 接受者id(医生id)
     };
     HTTP.getRoomId(prams).then(res => {
+      console.log("获取roomId:" + res.data.roomID);
       that.setData({
         roomID: res.data.roomID
       });
     })
   },
 
-  // 从storage中获取患者信息
+  /*从storage中获取患者信息 */
   getPersonInfo: function() {
     let that = this;
+    // let userInfo = wx.getStorageSync("personInfo");
     wx.getStorage({
-      key: 'personInfo',
+      key: "personInfo",
       success: function(res) {
         that.setData({
           userInfo: res.data
         });
-        Console.log("从storage中获取患者信息：" + JSON.stringify(res.data));
-        // 获取userSig
-        // this.getUserSig();
+        that.getUserSig();
+        console.log("===患者信息===" + JSON.stringify(that.data.userInfo));
+        that.getInquiryInfo();
       }
     })
   },
 
-  // 获取UserSig
-  getUserSig: function () {
+   /**
+  * 获取UserSig
+  */
+  getUserSig: function() {
     let that = this;
-    let prams = {
-      userId: userInfo.keyID
-    };
-    HTTP.getUserSig(prams).then(res => {
-      that.setData({
-        userSig: res.data.userSig
-      });
-      Console.log("视频获取userSig：" + that.data.userSig);
-    })
+    let userSig = wx.getStorageSync("userSig");
+    that.setData({
+      userSig: userSig
+    });
+    console.log("===userSig===" + userSig);
+    // wx.getStorage({
+    //   key: 'userSig',
+    //   success: function(res) {
+    //     that.setData({
+    //       userSig: res.data.userSig
+    //     });
+    //     console.log("===userSig===" + JSON.stringify(res.data.userSig));
+    //   },
+    // })
+  },
+
+ /**
+  * 获取群聊问诊信息
+  */
+  getInquiryInfo: function() {
+    let that = this;
+    let inquiryInfo = wx.getStorageSync("inquiryInfo");
+    that.setData({
+      inquiryInfo: inquiryInfo
+    });
+    console.log("===获取群聊问诊信息===" + JSON.stringify(inquiryInfo));
   },
 
   /**
@@ -427,27 +441,21 @@ Page({
     //   }
     // });
     //**************************************从服务器获取usersig***************************************************** */
-    //   that.setData({
-    //     userID: that.data.userID,
-    //     sdkAppID: that.data.sdkAppID,
-    //     roomID: that.data.roomID,
-    //     userSig: that.data.userSig
-    //   }),
-    //   console.log(
-    //     "userID:" + that.data.userID +
-    //     ",sdkAppID:" + that.data.sdkAppID +
-    //     ",roomID:" + that.data.roomID +
-    //     ",userSig:" + that.data.userSig);
-    // },
+
     let that = this;
-    this.getPersonInfo(); // 从storage中获取患者信息
+    this.getPersonInfo(); // 从storage中获取患者信息和userSig
     that.setData({
-        userID: userInfo.keyID,
+        userID: that.data.userInfo.keyID,
         sdkAppID: that.data.sdkAppID,
         roomID: that.data.roomID,
         userSig: that.data.userSig
       }),
-      that.startWebrtc();
+      console.log(
+        "userID:" + that.data.userInfo.keyID +
+        ",sdkAppID:" + that.data.sdkAppID +
+        ",roomID:" + that.data.roomID +
+        ",userSig:" + that.data.userSig);
+    that.startWebrtc();
   },
 
   /**
