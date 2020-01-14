@@ -106,6 +106,12 @@ Page({
           // IM登录
           that.loginIM(userId);
         }
+      } else {
+        console.log("获取userSig失败：" + "code:" + res.data.code + ",message:" + res.data.message);
+        wx.hideLoading();
+        wx.showToast({
+          title: '获取userSig失败'
+        })
       }
     })
   },
@@ -177,7 +183,7 @@ Page({
               }
             }
           }),
-          
+
         // 获取userSig
         that.getUserSig(res.data.keyID);
       } else {
