@@ -51,7 +51,7 @@ Page({
    */
   payAction: function() {
     wx.navigateTo({
-      url: "/pages/order/order-details/order-details?orderID=" + this.data.orderID + '&delta=3',
+      url: "/pages/order/order-details/order-details?orderID=" + this.data.orderID,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

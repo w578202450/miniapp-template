@@ -8,7 +8,7 @@
     url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}&index=0">
       <view class="cell">
         <view>
-          <text class="content">症状：体弱多病，四肢酸软，腰痛1年多。</text>
+          <text class="content">{{item.diagnosis}}</text>
         </view>
         <text class="date">开放日期：{{item.modifyTime}}</text>
       </view>

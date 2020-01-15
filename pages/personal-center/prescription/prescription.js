@@ -12,6 +12,9 @@ Page({
     this.loadDatas()
   },
   
+  onPullDownRefresh(){
+    this.loadDatas()
+  },
   /**
    * 获取处方列表
    */
@@ -24,6 +27,7 @@ Page({
       patientID: wx.getStorageSync("patientID")
     })
       .then(res => {
+        wx.stopPullDownRefresh()
         wx.hideLoading();
         if (res.code == 0) {
           if (res.data.length == 0) {
@@ -39,6 +43,7 @@ Page({
         }
       }).catch(e => {
         wx.hideLoading();
+        wx.stopPullDownRefresh()
       })
   },
   // 加载更多数据

@@ -11,7 +11,7 @@
 
   <view class="detail">
     <block wx:if="{{addressInfo}}">
-      <navigator url="../address-list/address-list?option=1">
+      <navigator url="../address-list/address-list?optionType=1">
         <view class="defaultAddressView">
           <view>
             <view class="info-box">

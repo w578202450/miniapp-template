@@ -1,16 +1,20 @@
 const HTTP = require('../../../utils/http-util')
 /**
- * option为0 表示从个人中心进入地址列表界面
- * option为1 表示从其他界面进入地址列表界面
+ * optionType为0 表示从个人中心进入地址列表界面
+ * optionType为1 表示从其他界面进入地址列表界面
  */
 Page({
   data: {
     list: [],
-    option: 0
+    optionType: 0
   },
 
   onLoad: function(e) {
-    this.data.option = e.option
+    this.data.optionType = e.optionType
+    this.loadDatas()
+  },
+
+  onPullDownRefresh(){
     this.loadDatas()
   },
   /**
@@ -25,6 +29,7 @@ Page({
       })
       .then(res => {
         wx.hideLoading();
+        wx.stopPullDownRefresh()
         if (res.code == 0) {
           this.data.list = res.data
           this.setData({
@@ -33,6 +38,7 @@ Page({
         }
 
       }).catch(e => {
+        wx.stopPullDownRefresh()
         wx.hideLoading();
       })
   },
@@ -64,7 +70,7 @@ Page({
    * 选择地址
    */
   selectedAddress: function(e) {
-    if (this.data.option == 0) { //从个人中心界面进入不做选择操作
+    if (this.data.optionType == 0) { //从个人中心界面进入不做选择操作
       return;
     }
     var index = e.currentTarget.dataset.index;

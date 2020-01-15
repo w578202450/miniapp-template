@@ -15,7 +15,7 @@ Page({
         title: '我的处方'
       },
       {
-        url:"/pages/address/address-list/address-list?option=0",
+        url:"/pages/address/address-list/address-list?optionType=0",
         title: '收货地址'
       }
     ]

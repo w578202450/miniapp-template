@@ -1,27 +1,23 @@
 const HTTP = require('../../../utils/http-util')
-/**
- * delta==2 订单列表跳转
- * delta==3 聊天页面跳转
- */
+
 Page({
   data: {
     rpID: '',
     orderID: '',
-    orderInfo: null,
-    delta: 2
+    orderInfo: null
   },
   onReady: function() {
     this.tmcnavbar = this.selectComponent("#tmcnavbar");
   },
+
   onLoad: function(e) {
     this.data.orderID = e.orderID;
-    this.data.delta = e.delta
-    this.fetchOrderDetails()
+    this.loadDatas()
   },
   /**
    * 获取订单详情
    */
-  fetchOrderDetails() {
+  loadDatas() {
     wx.showLoading({
       title: '加载订单详情...',
     });
@@ -193,23 +189,11 @@ Page({
           wx.showToast({
             title: '支付回调成功',
             success: function() {
-              let addressInfo = {
-                name: that.data.orderInfo.receiverName,
-                phone: that.data.orderInfo.receiverPhone,
-                address: that.data.orderInfo.address,
-                province: that.data.orderInfo.province,
-                city: that.data.orderInfo.city,
-                area: that.data.orderInfo.area,
-                remarks: that.data.orderInfo.remarks,
-                isDefault: that.data.orderInfo.isDefault
-              }
-              let obj = JSON.stringify(addressInfo)
-              wx.navigateTo({
-                url: '../../address/address-submit/address-submit?delta=' + that.data.delta + '&addressInfo=' + obj + '&orderID=' + that.data.orderID + '&modifyUser=' + that.data.orderInfo.modifyUser,
-                success: function(res) {},
-                fail: function(res) {},
-                complete: function(res) {},
-              })
+              //1.刷新上一个界面的状态和当前界面数据
+              that.loadDatas()
+              that.refreshPrePage()
+              //2.跳转到地址管理界面
+              that.skipAddressSubmit()
             }
           })
         } else {
@@ -224,5 +208,39 @@ Page({
         })
       })
   },
+
+  refreshPrePage() {
+    let currentPage = null; //当前页面
+    let prevPage = null; //上一个页面
+    let pages = getCurrentPages();
+    if (pages.length >= 2) {
+      currentPage = pages[pages.length - 1]; //获取当前页面，将其赋值
+      prevPage = pages[pages.length - 2]; //获取上一个页面，将其赋值
+    }
+    if (prevPage) {
+      prevPage.loadDatas()
+    }
+  },
+
+  skipAddressSubmit() {
+    let that = this
+    let addressInfo = {
+      name: that.data.orderInfo.receiverName,
+      phone: that.data.orderInfo.receiverPhone,
+      address: that.data.orderInfo.address,
+      province: that.data.orderInfo.province,
+      city: that.data.orderInfo.city,
+      area: that.data.orderInfo.area,
+      remarks: that.data.orderInfo.remarks,
+      isDefault: that.data.orderInfo.isDefault
+    }
+    let obj = JSON.stringify(addressInfo)
+    wx.navigateTo({
+      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + that.data.orderID + '&modifyUser=' + that.data.orderInfo.modifyUser,
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  }
 
 })

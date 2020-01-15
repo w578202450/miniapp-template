@@ -1,14 +1,14 @@
-
 .tmc-container{
   padding-top: 20rpx;
-  background-color: #F6F6F6
+  background-color: #F6F6F6;
 }
 .cell{
   display: flex;
   flex-direction: column;
-  background-color: white;
   padding: 32rpx;
   margin-bottom: 20rpx;
+  background-color: white
+  
 }
 
 .cell-top{

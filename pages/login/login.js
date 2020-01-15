@@ -130,8 +130,7 @@ Page({
       that.setData({
         loginBtnDisabled:true
       })
-      wx.redirectTo({
-        // url: '/pages/personal-center/personal-center'
+      wx.switchTab({
         url: '/pages/online-inquiry/online-inquiry'
       });
     }).catch(function (imError) {

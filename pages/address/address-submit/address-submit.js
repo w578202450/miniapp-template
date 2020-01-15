@@ -1,20 +1,13 @@
 const HTTP = require('../../../utils/http-util')
-/**
- * delta==2 订单列表跳转
- * delta==3 聊天页面跳转
- */
+
 Page({
   data: {
     addressInfo:null,
     orderID:'',
-    modifyUser:'',
-    delta:0
+    modifyUser:''
   },
   
   onLoad: function (e) {
-    if (e.delta){
-      this.data.delta = e.delta
-    }
     if (e.orderID){
       this.data.orderID = e.orderID
     }
@@ -38,6 +31,7 @@ Page({
    * 设置订单配送地址
    */
   submitOption(){
+    let that = this
     wx.showLoading({
       title: '确认收货地址...',
     });
@@ -59,10 +53,7 @@ Page({
           wx.showToast({
             title: '地址绑定完成',
             success:function(){
-              // 返回到指定界面  delta==2 返回订单列表 delta==3 返回聊天页面
-              wx.navigateBack({
-                delta: this.data.delta
-              })
+              that.navigateBack()
             }
           })
         }
@@ -70,5 +61,24 @@ Page({
       }).catch(e => {
         wx.hideLoading();
       })
+  },
+  /**
+   * 返回
+   */
+  navigateBack() {
+    let currentPage = null;   //当前页面
+    let prevPage = null; //上一个页面
+    let pages = getCurrentPages();
+    if (pages.length >= 2) {
+      currentPage = pages[pages.length - 1]; //获取当前页面，将其赋值
+      prevPage = pages[pages.length - 2]; //获取上一个页面，将其赋值
+    }
+    if (prevPage) {
+      prevPage.loadDatas()
+    }
+    wx.navigateBack({
+      delta: 1,
+    })
   }
+
 })

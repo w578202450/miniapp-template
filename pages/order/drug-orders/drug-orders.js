@@ -12,6 +12,10 @@ Page({
     this.loadDatas()
   },
 
+  onPullDownRefresh(){
+    this.loadDatas()
+  },
+
   /**
    * 加载订单列表
    */
@@ -81,12 +85,25 @@ Page({
   /**
    * 添加地址
    */
-  addressAction: function() {
+  addressAction: function(e) {
+    var that = this
+    var index = e.currentTarget.dataset.index;
+    let addressInfo = {
+      name: that.data.list[index].receiverName,
+      phone: that.data.list[index].receiverPhone,
+      address: that.data.list[index].address,
+      province: that.data.list[index].province,
+      city: that.data.list[index].city,
+      area: that.data.list[index].area,
+      remarks: that.data.list[index].remarks,
+      isDefault: that.data.list[index].isDefault
+    }
+    let obj = JSON.stringify(addressInfo)
     wx.navigateTo({
-      url: '/pages/address/address-add/address-add',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + that.data.orderID + '&modifyUser=' + that.data.orderInfo.modifyUser,
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
   /**
@@ -98,7 +115,7 @@ Page({
     this.data.currentIndex = index;
     
     wx.navigateTo({
-      url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID +'&delta=2',
+      url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

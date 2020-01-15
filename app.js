@@ -8,8 +8,6 @@ import {
 //   genTestUserSig
 // } from './utils/GenerateTestUserSig';
 // const AUTH = require('utils/auth')
-const HTTP = require('utils/http-util')
-const UTIL = require('utils/util')
 
 // 创建 TIM SDK 实例
 const tim = TIM.create({
@@ -167,10 +165,13 @@ App({
   },
   globalData: {
     userInfo: null,
-    userinfo: null,
     personInfo: {},
     baseUrl: 'http://10.0.0.210:6112/',
     doctorInfo:null
+    // 地址列表 0表示个人中心收货地址进入  1表示确认收货地址界面进入
+    // addressListType:0,
+    // // 确认收货地址 0表示处方详情  1表示确认收货地址界面进入
+    // confirmAddressType:0
   },
   tim: tim,
   TIM: TIM

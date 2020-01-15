@@ -2,5 +2,6 @@
   "usingComponents": {
     "tmcTipsView": "/components/tmc-tips/tmc-tips"
   },
-  "navigationBarTitleText": "药品订单"
+  "navigationBarTitleText": "药品订单",
+  "enablePullDownRefresh": true
 }

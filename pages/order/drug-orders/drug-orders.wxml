@@ -3,12 +3,12 @@
   <tmcTipsView icon="/images/public/public_no_order.png" title="暂无订单" message="您暂无订单信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>
 <block wx:else>
-  <view class="tmc-container" wx:for="{{list}}" wx:key="id" wx:for-index="index" wx:for-item="item">
+  <view class="tmc-container" >
 
-    <navigator url="/pages/order/order-details/order-details?orderID={{item.keyID}}">
+    <navigator wx:for="{{list}}" wx:key="id" wx:for-index="index" wx:for-item="item" url="/pages/order/order-details/order-details?orderID={{item.keyID}}">
       <view class="cell">
         <view class="cell-top">
-          <image src="{{item.avatar}}"></image>
+          <!-- <image src="{{item.avatar}}"></image> -->
           <view class="content-box">
             <text class="content-title">{{item.doctorName}}医生的治疗方案</text>
             <text class="content-details">{{item.diagnosis}}</text>
@@ -26,7 +26,7 @@
           </block>
           <!-- 订单状态为10 发货状态为0  填写地址 -->
           <block wx:if="{{item.orderStatusID==10 && item.deliveryStatusID==0}}">
-            <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
+            <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction" data-index="{{index}}">
               <text>填写地址</text> 
             </view>
           </block>
