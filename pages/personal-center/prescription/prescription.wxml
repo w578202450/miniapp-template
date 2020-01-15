@@ -1,7 +1,5 @@
-<block wx:if="{{noNetwork}}">
-  <tmcTipsView bind:buttonOption="noNetworkOption"></tmcTipsView>
-</block>
-<block wx:elif="{{noData}}">
+
+<block wx:if="{{noData}}">
   <tmcTipsView icon="/images/public/public_no_prescription.png" title="暂无处方" message="您暂无处方信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>
 <block wx:else>

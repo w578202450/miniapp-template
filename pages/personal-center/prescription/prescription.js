@@ -4,7 +4,6 @@ const HTTP = require('../../../utils/http-util')
 Page({
   data: {
     params: {},
-    noNetwork: false,
     noData: false,
     list: null
   },
@@ -40,18 +39,11 @@ Page({
         }
       }).catch(e => {
         wx.hideLoading();
-        that.setData({
-          noNetwork: true
-        })
       })
   },
   // 加载更多数据
   moreDatas:function(){
 
-  },
-  // 无网络
-  noNetworkOption: function() {
-    this.loadDatas()
   },
   // 无数据
   noDataOption: function(e) {

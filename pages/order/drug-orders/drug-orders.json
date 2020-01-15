@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "tmcTipsView": "/components/tmc-tips/tmc-tips"
+  },
   "navigationBarTitleText": "药品订单"
 }

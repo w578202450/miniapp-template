@@ -127,6 +127,9 @@ Page({
     }).then(function (imResponse) {
       console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
       wx.hideLoading();
+      that.setData({
+        loginBtnDisabled:true
+      })
       wx.redirectTo({
         // url: '/pages/personal-center/personal-center'
         url: '/pages/online-inquiry/online-inquiry'

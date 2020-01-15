@@ -27,7 +27,7 @@ Page({
     })
     HTTP.getRp({
         rpID: rpID,
-        orgID: '19122116554357936820511001'
+        orgID: wx.getStorageSync('orgID')
       })
       .then(res => {
         console.log('-------', res)
@@ -51,7 +51,7 @@ Page({
    */
   payAction: function() {
     wx.navigateTo({
-      url: "/pages/order/order-details/order-details?orderID=" + this.data.orderID,
+      url: "/pages/order/order-details/order-details?orderID=" + this.data.orderID + '&delta=3',
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

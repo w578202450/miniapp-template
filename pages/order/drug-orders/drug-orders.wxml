@@ -1,7 +1,5 @@
-<block wx:if="{{noNetwork}}">
-  <tmcTipsView bind:buttonOption="noNetworkOption"></tmcTipsView>
-</block>
-<block wx:elif="{{noData}}">
+
+<block wx:if="{{noData}}">
   <tmcTipsView icon="/images/public/public_no_order.png" title="暂无订单" message="您暂无订单信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>
 <block wx:else>
@@ -29,7 +27,7 @@
           <!-- 订单状态为10 发货状态为0  填写地址 -->
           <block wx:if="{{item.orderStatusID==10 && item.deliveryStatusID==0}}">
             <view style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction">
-              <text>填写地址</text>     cc
+              <text>填写地址</text> 
             </view>
           </block>
         </view>

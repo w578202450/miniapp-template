@@ -3,6 +3,6 @@
   <text class="titleTips">正在登录桃子互联网医院，请稍后...</text>
   <text class="detailsTips">如果页面没有跳转，请手动授权使用。</text>
 </view>
-<button size="default" style="width: 80%;font-weight:400;font-family:PingFangSC-Regular,PingFang SC" type="primary" bindgetuserinfo="getUserInfo" open-type="getUserInfo"  >授权使用</button>
+<button disabled="{{loginBtnDisabled}}" size="default" style="width: 80%;font-weight:400;font-family:PingFangSC-Regular,PingFang SC" type="primary" bindgetuserinfo="getUserInfo" open-type="getUserInfo"  >授权使用</button>
 
 <!-- bindgetuserinfo="getUserInfo" open-type="getUserInfo" -->

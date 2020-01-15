@@ -50,7 +50,7 @@
         <text class="hospital">{{doctorInfo.workPlace}}</text>
         <text class="hospital">{{doctorInfo.sectionName}}</text>
       </view>
-      <text class="expertise">擅长：{{doctorInfo.goodAt}}</text>
+      <text class="department">擅长：{{doctorInfo.goodAt}}</text>
     </view>
     <view class="doctor-card" bindtap="doctorDetailTap" data-index="1">
       <image class="doctor_avatar" src="{{assistantDoctorInfo.faceImage ? assistantDoctorInfo.faceImage : '../../images/chat/personBacImg.png'}}"></image>
@@ -63,7 +63,7 @@
         <text class="hospital">{{assistantDoctorInfo.workPlace}}</text>
         <text class="hospital">{{assistantDoctorInfo.sectionName}}</text>
       </view>
-      <text class="expertise">擅长：{{assistantDoctorInfo.goodAt}}</text>
+      <text class="department">擅长：{{assistantDoctorInfo.goodAt}}</text>
     </view>
   </view>
 
