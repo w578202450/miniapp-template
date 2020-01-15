@@ -46,8 +46,8 @@
         <view class="avatar-container">
           <!-- 患者头像 -->
           <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="personHeadImgDiv">
-            <image wx:if="{{!userInfo.avatarUrl}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" />
-            <image ex:else src="{{userInfo.avatarUrl}}" class="avatarTwo" />
+            <image wx:if="{{!wexinInfo.avatarUrl}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" />
+            <image ex:else src="{{wexinInfo.avatarUrl}}" class="avatarTwo" />
           </view>
           <!-- 医生头像 -->
           <view wx:elif="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" class="personHeadImgDiv">
@@ -67,12 +67,12 @@
             <text wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}">{{talkInfo.assistantInfo.doctorName}} -医助</text>
           </view>
           <!-- 自定义消息 -->
-          <view class="cardRpBox">
+          <!-- <view class="cardRpBox">
             <view class="cardRpTitleDiv">
               <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
               <view class="cardRpTitle">治疗方案</view>
             </view>
-          </view>
+          </view> -->
           <!-- 文本消息：TIMTextElem -->
           <view wx:if="{{item.type == 'TIMTextElem'}}" class="contentTxtMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}};min-width: 35rpx;min-height: 45rpx;">
             <view>{{item.payload.text}}</view>

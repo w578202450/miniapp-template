@@ -289,12 +289,18 @@ Page({
       requestRole: "0",
       patientInfo: {
         patientName: that.data.userInfo.patientName,
-        patientSex: 0,
+        patientSex: that.data.userInfo.sex,
         patientAge: that.data.userInfo.birthDate,
         patientPhone: that.data.userInfo.phone,
         patientIdNo: that.data.userInfo.idNumber
       }
     };
+    console.log("sponsorsID:" + that.data.userInfo.keyID
+      + "sponsorsName:" + that.data.userInfo.patientName
+      + "receiverID:" + that.data.inquiryInfo.keyID
+      + "receiverName:" + that.data.inquiryInfo.keyID
+      + "patientName:" + that.data.userInfo.patientName
+       );
     HTTP.createVideoInquiry(prams).then(res => {
       console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
       that.setData({
@@ -455,6 +461,7 @@ Page({
         ",sdkAppID:" + that.data.sdkAppID +
         ",roomID:" + that.data.roomID +
         ",userSig:" + that.data.userSig);
+    that.createVideoInquiry();    
     that.startWebrtc();
   },
 
