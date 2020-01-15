@@ -11,6 +11,7 @@ Page({
   data: {
     toView: "", // 手机屏幕自动滚动到达的位置
     userInfo: {}, // 当前用户信息
+    doctorInfo: {}, // 医生信息<主要是拿到职称>
     // 多方对话对话信息
     talkInfo: {
       doctorInfo: {}, // 医生信息详情
@@ -204,7 +205,16 @@ Page({
           that.getPatientMultiTalk(); // 查询患者的多方对话
         }
       }
-    })
+    });
+    wx.getStorage({
+      key: "doctorInfo",
+      success: function (res) {
+        that.setData({
+          doctorInfo: res.data
+        });
+        console.log(JSON.stringify(res.data));
+      }
+    });
   },
 
   /*查询患者的多方对话 */
