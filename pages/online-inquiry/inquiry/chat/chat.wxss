@@ -274,6 +274,28 @@
   margin-right: 15rpx;
 }
 
+/*自定义卡片消息*/
+
+.cardRpBox {
+  font-size: 32rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 15rpx;
+  margin-bottom: 20rpx;
+}
+
+.cardRpBox .cardRpTitleDiv {
+  background-color: #00D8D0;
+  border-top-left-radius: 20rpx;
+  border-top-right-radius: 20rpx;
+  width: 100%;
+}
+
+.cardRpBox .cardRpTitle {
+  color: #fff;
+  font-size: 35rpx;
+}
+
 /*底部工具栏*/
 
 .bottomMenus {
