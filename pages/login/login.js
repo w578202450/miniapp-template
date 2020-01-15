@@ -120,10 +120,14 @@ Page({
    */
   loginIM: function (userId) {
     let that = this;
+    // wx.showModal({
+    //   title: '微信授权信息',
+    //   content: "userId:" + userId + ",userSig:" + that.data.userSig
+    // })
     // IM登录
     app.tim.login({
       userID: userId,
-      userSig: /*genTestUserSig(res.data.keyID).userSig*/ that.data.userSig
+      userSig: genTestUserSig(userId).userSig/*that.data.userSig*/
     }).then(function (imResponse) {
       console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
       wx.hideLoading();
