@@ -161,7 +161,10 @@ Page({
     var prams = {
       openID: openID,
       nickName: app.globalData.userInfo.nickName,
-      avatarUrl: app.globalData.userInfo.avatarUrl
+      avatarUrl: app.globalData.userInfo.avatarUrl,
+      sex: app.globalData.userInfo.sex,
+      city: app.globalData.userInfo.city,
+      province: app.globalData.userInfo.province,
     }
     HTTP.getPatientInfo(prams).then(res => {
       if (res.code == 0) {

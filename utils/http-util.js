@@ -83,7 +83,7 @@ module.exports = {
    *获取微信个人信息
    */
   getPatientInfo: function getPatientInfo(parmas) {
-    return request('api/tmc/patient/getPatientInfoByOpenID', true, 'get', parmas);
+    return request('api/tmc/patient/getPatientInfoByOpenID', true, 'post', parmas);
   },
   /*
    *查询患者处方列表
