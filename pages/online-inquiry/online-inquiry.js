@@ -2,18 +2,26 @@
 //获取应用实例
 
 const HTTP = require('../../utils/http-util')
-
-
 const app = getApp()
+
+let systemInfo = wx.getSystemInfoSync();
+let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null; //胶囊按钮位置信息
+let navBarHeight = (function () { //导航栏高度
+  let gap = rect.top - systemInfo.statusBarHeight; //动态计算每台手机状态栏到胶囊按钮间距
+  return 2 * gap + rect.height;
+})();
 
 Page({
   data: {
+    statusBarHeight: rect.top,
+    navBarHeight: rect.height
   },
   onLoad: function() {
-    
+    console.log('statusBarHeight--', systemInfo)
+    console.log('navBarHeight--', this.data.navBarHeight)
+    console.log('capsuleLeft--', rect)
     this.fetchDoctorInfo()
     this.fetchAssistantDoctorInfo()
-    this.fetchDoctorQualification()
   },
   
 
@@ -41,6 +49,7 @@ Page({
         if (res.code == 0) {
           if (res.data) {
             app.globalData.doctorInfo = res.data
+            this.fetchDoctorQualification(res.data.doctorID)
             this.setData({
               doctorInfo: res.data
             })
@@ -80,20 +89,18 @@ Page({
   },
 
   // 获取医生资质编号
-  fetchDoctorQualification() {
+  fetchDoctorQualification(doctorID) {
     var that = this;
     HTTP.getDoctorQualification({
-      doctorID: wx.getStorageSync('personInfo').assistantStaffID,
-      certifyCode: 'QUALIFICATION'
+      doctorID: doctorID,
+      certifyCode: 'PROFESSION'
     })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
-          if (res.data.length > 0) {
-            that.setData({
-              certifyInfo: res.data
-            })
-          }
+          that.setData({
+            certifyInfo: res.data
+          })
         }
       }).catch(e => {
         wx.hideLoading();
