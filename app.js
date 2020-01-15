@@ -168,7 +168,8 @@ App({
   globalData: {
     userInfo: null,
     personInfo: {},
-    baseUrl: 'http://10.0.0.210:6112/'
+    baseUrl: 'http://10.0.0.210:6112/',
+    doctorInfo:null
   },
   tim: tim,
   TIM: TIM

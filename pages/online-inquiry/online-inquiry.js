@@ -40,10 +40,7 @@ Page({
         wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
-            wx.setStorage({
-              key: 'doctorInfo',
-              data: res.data,
-            })
+            app.globalData.doctorInfo = res.data
             this.setData({
               doctorInfo: res.data
             })
