@@ -213,7 +213,7 @@
 .body .contentTxtMsg {
   font-size: 32rpx;
   background: #fff;
-  border-radius: 20rpx;
+  border-radius: 15rpx;
   padding: 15rpx;
   margin-bottom: 20rpx;
 }
@@ -222,7 +222,7 @@
 
 .body .contentPictureMsg {
   background: #fff;
-  border-radius: 20rpx;
+  border-radius: 15rpx;
   margin-bottom: 20rpx;
   width: 160rpx;
   height: 160rpx;
@@ -247,7 +247,7 @@
 .body .contentVideoMsg {
   margin-bottom: 20rpx;
   padding: 15rpx;
-  border-radius: 20rpx;
+  border-radius: 15rpx;
   background: #fff;
 }
 
@@ -277,28 +277,52 @@
 /*自定义卡片消息*/
 
 .cardRpBox {
-  font-size: 32rpx;
   background: #fff;
-  border-radius: 20rpx;
-  padding: 15rpx;
+  border-radius: 15rpx;
+  background-color: #00D8D0;
   margin-bottom: 20rpx;
+  width: 480rpx;
 }
 
 .cardRpBox .cardRpTitleDiv {
-  background-color: #00D8D0;
-  border-top-left-radius: 20rpx;
-  border-top-right-radius: 20rpx;
+  padding: 15rpx 15rpx;
+  border-top-left-radius: 15rpx;
+  border-top-right-radius: 15rpx;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .cardRpBox .cardRpIcon {
-  width: 36rpx;
-  height: 40rpx
+  width: 48rpx;
+  height: 55rpx;
+  margin-right: 15rpx;
 }
 
 .cardRpBox .cardRpTitle {
   color: #fff;
-  font-size: 35rpx;
+  font-size: 32rpx;
+}
+
+.cardRpBox .cardRpInfoDiv {
+  background-color: #fff;
+  padding: 0 15rpx;
+  border-bottom-left-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+}
+
+.cardRpBox .cardRpInfo {
+  font-size: 29rpx;
+  color: #555658;
+  padding: 15rpx 0;
+  width: 450rpx;
+  display: block;
+}
+
+.cardRpBox .borderBottomLine {
+  border-bottom: 1rpx solid #E8E8E8;
 }
 
 /*底部工具栏*/

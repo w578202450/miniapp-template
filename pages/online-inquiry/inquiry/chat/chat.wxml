@@ -16,7 +16,7 @@
           <view class="info_one">{{talkInfo.doctorInfo.doctorName}}</view>
           <text class="info_one_one">医生</text>
         </view>
-        <text class="info_two">主任医师</text>
+        <text class="info_two">{{doctorInfo.titleName}}</text>
       </view>
     </view>
     <view class="middleOne-box" bindtap="doctorDetailTap" data-index="1">
@@ -67,14 +67,18 @@
             <text wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}">{{talkInfo.assistantInfo.doctorName}} -医助</text>
           </view>
           <!-- 自定义消息 -->
-          <!-- <view class="cardRpBox">
+          <view wx:if="{{item.type == '自定义消息'}}" class="cardRpBox" bindtap="toRpDetailFun" data-rpid="{{item.payload.keyID}}">
             <view class="cardRpTitleDiv">
               <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
               <view class="cardRpTitle">治疗方案</view>
             </view>
-          </view> -->
+            <view class="cardRpInfoDiv">
+              <text class="cardRpInfo borderBottomLine">患者： 吕梁（男 32岁）</text>
+              <text class="cardRpInfo">诊断： 骨痹-寒湿痹阻</text>
+            </view>
+          </view>
           <!-- 文本消息：TIMTextElem -->
-          <view wx:if="{{item.type == 'TIMTextElem'}}" class="contentTxtMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}};min-width: 35rpx;min-height: 45rpx;">
+          <view wx:elif="{{item.type == 'TIMTextElem'}}" class="contentTxtMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}};min-width: 35rpx;min-height: 45rpx;">
             <view>{{item.payload.text}}</view>
           </view>
           <!-- 图片消息：TIMImageElem -->
@@ -84,7 +88,7 @@
             <image class="pictureMsg" src="{{item.payload.imageInfoArray[0].imageUrl}}" />
           </view>
           <!-- 音频消息：TIMSoundElem -->
-          <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun" data-recordurl="{{item.payload.url}}"  data-recordindex="{{index}}">
+          <view wx:elif="{{item.type == 'TIMSoundElem'}}" class="contentVideoMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}}" bindtap="playRecordFun" data-recordurl="{{item.payload.url}}" data-recordindex="{{index}}">
             <!-- 自己发的 -->
             <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="recordDivSelf" style="width: {{item.recordViewWidth}}rpx;">
               <view class="_div data-v-71681a0a">{{item.payload.second}}"</view>
@@ -116,8 +120,9 @@
         <!-- 录音按钮 -->
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框 -->
-        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"/>
-<!-- bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '400': '445'}}rpx;"/> -->
+        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"
+        />
+        <!-- bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '400': '445'}}rpx;"/> -->
         <!-- 表情 -->
         <!-- <image src="../../../../images/chat/inputIcon.png" class="inputIcon" /> -->
       </view>
