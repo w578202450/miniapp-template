@@ -69,6 +69,7 @@
           <!-- 自定义消息 -->
           <view class="cardRpBox">
             <view class="cardRpTitleDiv">
+              <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
               <view class="cardRpTitle">治疗方案</view>
             </view>
           </view>

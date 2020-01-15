@@ -291,6 +291,11 @@
   width: 100%;
 }
 
+.cardRpBox .cardRpIcon {
+  width: 36rpx;
+  height: 40rpx
+}
+
 .cardRpBox .cardRpTitle {
   color: #fff;
   font-size: 35rpx;
