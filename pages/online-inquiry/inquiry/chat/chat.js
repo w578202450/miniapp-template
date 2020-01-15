@@ -148,6 +148,11 @@ Page({
     if (that.data.isCompleted) {
       // 没有更多数据了
       wx.stopPullDownRefresh();
+      wx.showToast({
+        title: "没有更多历史消息了~",
+        icon: "none",
+        duration: 2000
+      });
       return;
     }
     wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
@@ -221,7 +226,6 @@ Page({
         that.setData({
           doctorInfo: res.data
         });
-        console.log(JSON.stringify(res.data));
       }
     });
   },
@@ -704,5 +708,15 @@ Page({
     this.setData({
       isOpenBottomBoolbar: false
     });
+  },
+
+  /*操作：点击治疗方案 */
+  toRpDetailFun: function(e) {
+    let rpID = e.currentTarget.dataset.rpid;
+    if (rpID) {
+      wx.navigateTo({
+        url: '',
+      });
+    }
   }
 })
