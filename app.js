@@ -167,6 +167,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    userinfo: null,
     personInfo: {},
     baseUrl: 'http://10.0.0.210:6112/',
     doctorInfo:null

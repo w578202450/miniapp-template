@@ -46,8 +46,8 @@
         <view class="avatar-container">
           <!-- 患者头像 -->
           <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.patientInfo.faceImage}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" />
-            <image ex:else src="{{talkInfo.patientInfo.faceImage}}" class="avatarTwo" />
+            <image wx:if="{{!wexinInfo.avatarUrl}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" />
+            <image ex:else src="{{wexinInfo.avatarUrl}}" class="avatarTwo" />
           </view>
           <!-- 医生头像 -->
           <view wx:elif="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" class="personHeadImgDiv">
@@ -66,6 +66,13 @@
             <text wx:if="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}">{{talkInfo.doctorInfo.doctorName}} -医生</text>
             <text wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}">{{talkInfo.assistantInfo.doctorName}} -医助</text>
           </view>
+          <!-- 自定义消息 -->
+          <!-- <view class="cardRpBox">
+            <view class="cardRpTitleDiv">
+              <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
+              <view class="cardRpTitle">治疗方案</view>
+            </view>
+          </view> -->
           <!-- 文本消息：TIMTextElem -->
           <view wx:if="{{item.type == 'TIMTextElem'}}" class="contentTxtMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}};min-width: 35rpx;min-height: 45rpx;">
             <view>{{item.payload.text}}</view>
@@ -109,7 +116,7 @@
         <!-- 录音按钮 -->
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框 -->
-        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '470': '515'}}rpx;"/>
+        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"/>
 <!-- bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '400': '445'}}rpx;"/> -->
         <!-- 表情 -->
         <!-- <image src="../../../../images/chat/inputIcon.png" class="inputIcon" /> -->
