@@ -223,7 +223,7 @@ Page({
   data: {
     //...
     userInfo: {}, // 当前用户信息
-    roomID: '', // [必选]房间号，可以由您的服务指定
+    roomID: '123', // [必选]房间号，可以由您的服务指定
     userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     inquiryInfo:{}, // 问诊信息
@@ -290,22 +290,26 @@ Page({
       patientInfo: {
         patientName: that.data.userInfo.patientName,
         patientSex: that.data.userInfo.sex,
-        patientAge: that.data.userInfo.birthDate,
+        patientAge: 0,
         patientPhone: that.data.userInfo.phone,
         patientIdNo: that.data.userInfo.idNumber
       }
     };
-    console.log("sponsorsID:" + that.data.userInfo.keyID
-      + "sponsorsName:" + that.data.userInfo.patientName
-      + "receiverID:" + that.data.inquiryInfo.keyID
-      + "receiverName:" + that.data.inquiryInfo.keyID
-      + "patientName:" + that.data.userInfo.patientName
+    console.log("视频问诊:sponsorsID:" + that.data.userInfo.keyID
+      + ",sponsorsName:" + that.data.userInfo.patientName
+      + ",receiverID:" + that.data.inquiryInfo.keyID
+      + ",receiverName:" + that.data.inquiryInfo.keyID
+      + ",patientName:" + that.data.userInfo.patientName
+      + ",patientSex:" + that.data.userInfo.sex
+      + ",patientPhone:" + that.data.userInfo.phone
+      + ",patientIdNo:" + that.data.userInfo.idNumber
        );
     HTTP.createVideoInquiry(prams).then(res => {
       console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
       that.setData({
         inquiryId: res.data.inquiryId
       });
+      that.getRoomId();
     })
   },
 
@@ -317,6 +321,10 @@ Page({
       sponsorsId: that.data.userInfo.keyID, // 发起者id(患者id)
       receiverId: that.data.inquiryInfo.keyID // 接受者id(医生id)
     };
+    console.log("获取roomId参数:inquiryId:" + that.data.inquiryId
+      + ",sponsorsId:" + that.data.userInfo.keyID
+      + ",receiverID:" + that.data.inquiryInfo.keyID
+    );
     HTTP.getRoomId(prams).then(res => {
       console.log("获取roomId:" + res.data.roomID);
       that.setData({
@@ -461,8 +469,8 @@ Page({
         ",sdkAppID:" + that.data.sdkAppID +
         ",roomID:" + that.data.roomID +
         ",userSig:" + that.data.userSig);
-    that.createVideoInquiry();    
-    that.startWebrtc();
+    this.createVideoInquiry();    
+    this.startWebrtc();
   },
 
   /**

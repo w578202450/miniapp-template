@@ -123,7 +123,7 @@ module.exports = {
   /*
    *云处方创建视频问诊记录
    */
-  createVideoInquiry: function createVideoInquiry() {
+  createVideoInquiry: function createVideoInquiry(parmas) {
     return request('api/rp/inquiry/create', true, 'post', parmas);
   },
   /*
