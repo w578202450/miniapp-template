@@ -13,8 +13,8 @@ let navBarHeight = (function () { //导航栏高度
 
 Page({
   data: {
-    statusBarHeight: rect.top,
-    navBarHeight: rect.height
+    statusBarHeight: systemInfo.statusBarHeight,
+    navBarHeight: navBarHeight
   },
   onLoad: function() {
     console.log('statusBarHeight--', systemInfo)
