@@ -8,7 +8,7 @@
   <view class="middle-one">
     <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap" data-index="0">
       <view class="headDiv">
-        <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" mode="aspectFill"/>
+        <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" mode="aspectFill" />
         <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
       </view>
       <view class="info-box">
@@ -21,7 +21,7 @@
     </view>
     <view class="middleOne-box" bindtap="doctorDetailTap" data-index="1">
       <view class="headDiv">
-        <image class="headImg" src="{{talkInfo.assistantInfo.faceImage}}" mode="aspectFill"/>
+        <image class="headImg" src="{{talkInfo.assistantInfo.faceImage}}" mode="aspectFill" />
         <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
       </view>
       <view class="info-box">

@@ -1,4 +1,9 @@
 var sysinfo = wx.getSystemInfoSync();
+let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null; //胶囊按钮位置信息
+let navBarHeight = (function () { //导航栏高度
+  let gap = rect.top - sysinfo.statusBarHeight; //动态计算每台手机状态栏到胶囊按钮间距
+  return 2 * gap + rect.height;
+})();
 
 Page({
   data: {
@@ -56,16 +61,9 @@ Component({
       var that = this
         , sysinfo = wx.getSystemInfoSync()
         , statusHeight = sysinfo.statusBarHeight
-        , isiOS = sysinfo.system.indexOf('iOS') > -1
-        , navHeight;
-      if (!isiOS) {
-        navHeight = 48;
-      } else {
-        navHeight = 44;
-      }
       that.setData({
         status: statusHeight,
-        navHeight: navHeight
+        navBarHeight: navBarHeight
       })
     },
     setStyle: function () {
