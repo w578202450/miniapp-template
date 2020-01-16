@@ -45,7 +45,6 @@ Page({
       staffID: wx.getStorageSync('personInfo').doctorStaffID
     })
       .then(res => {
-        wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
             app.globalData.doctorInfo = res.data
@@ -54,11 +53,8 @@ Page({
               doctorInfo: res.data
             })
           }
-        } else {
-          
-        }
+        } 
       }).catch(e => {
-        wx.hideLoading();
         that.setData({
           noNetwork: true
         })
@@ -72,7 +68,6 @@ Page({
       staffID: wx.getStorageSync('personInfo').assistantStaffID
     })
       .then(res => {
-        wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -81,7 +76,6 @@ Page({
           }
         }
       }).catch(e => {
-        wx.hideLoading();
         that.setData({
           noNetwork: true
         })
@@ -96,14 +90,12 @@ Page({
       certifyCode: 'PROFESSION'
     })
       .then(res => {
-        wx.hideLoading();
         if (res.code == 0) {
           that.setData({
             certifyInfo: res.data
           })
         }
       }).catch(e => {
-        wx.hideLoading();
         that.setData({
           noNetwork: true
         })
