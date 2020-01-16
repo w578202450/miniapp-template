@@ -4,7 +4,6 @@
 .page-container{
   padding-left: 32rpx;
   padding-right: 32rpx;
-  padding-bottom: 32rpx;
   margin-top: 20rpx;
   background-color: white;
 }

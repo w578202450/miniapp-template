@@ -19,7 +19,9 @@ Page({
    * 获取处方列表
    */
   loadDatas() {
-    wx.showLoading();
+    wx.showLoading({
+      title: '加载中...',
+    });
     this.data.list = [];
     var that = this;
     HTTP.getRpListByPerson({

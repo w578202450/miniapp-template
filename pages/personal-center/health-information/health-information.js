@@ -448,14 +448,14 @@ Page({
   loadDatas: function (orgID, keyID){
     let that = this
     wx.showLoading({
-      title: '加载中。。。',
-    })
+      title: '加载中...',
+    });
     HTTP.getPatientDoc({
       orgID: orgID,
       keyID: keyID
     })
       .then(res => {
-        wx.hideLoading();
+        wx.hideLog();
         for (var index in res.data) {
           that.handleQueryInfo(res.data[index])
         }

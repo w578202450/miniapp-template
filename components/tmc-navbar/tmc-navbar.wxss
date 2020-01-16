@@ -2,20 +2,20 @@
   position: relative;
 }
 .back-icon{
-  width:40rpx;
-  height:72rpx;  
+  width:100rpx;
+  height:36rpx;  
   position: absolute;    
   transform: translateY(-50%);    
   top: 50%;    
   display: flex;
 }
 .back-icon{    
-  left: 16px;
+  left: 10px;
 }
 .back-icon image{    
   width:20rpx;
   height:36rpx;   
-  margin: auto;
+  margin-left: 0
 }
 
 .nav-title{    

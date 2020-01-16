@@ -21,7 +21,7 @@ Page({
    */
   loadDatas() {
     wx.showLoading({
-      title: '加载订单列表...',
+      title: '加载中...',
     });
     this.data.list = [];
     var that = this;

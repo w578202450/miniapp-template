@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "医生详情"
+  "usingComponents": {
+    "tmcnavbar": "/components/tmc-navbar/tmc-navbar"
+  },
+  "navigationStyle": "custom"
 }

@@ -1,7 +1,8 @@
 .page{
   background-color: white;
   width: 100%;
-}
+  }
+/* 
 .header{
   width: 100%;
   background-color: white;
@@ -70,7 +71,61 @@
 
 .position,.department{
   margin-left: 32rpx;
+} */
+
+.header{
+  width: 100%;
+  height: 640rpx;
+  position: relative;
 }
+
+.doctor-info{
+  position: absolute;
+  bottom:50rpx;
+  width:100%;
+}
+
+.position,.hospital,.department{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255, 255, 255, 1);
+  line-height:24rpx;
+}
+
+.position,.department{
+  margin-left: 32rpx;
+}
+
+.doctorname{
+  height:32rpx;
+  font-size:32rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255, 255, 255, 1);
+}
+
+.info-three{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 50rpx
+}
+
+.info-three-title{
+  font-size:24rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255, 255, 255, 1);
+}
+
+.info-three-details{
+  font-size:28rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(255, 255, 255, 1);
+}
+
 
 .middle{
   margin-top: 50rpx;
