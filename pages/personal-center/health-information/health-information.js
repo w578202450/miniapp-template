@@ -278,9 +278,9 @@ Page({
   
   onLoad: function () {
     let that = this
-    this.data.orgID = "19122116554357936820511001"
-    this.data.patientID = "19123015344465220080543001"
-    this.loadDatas(this.data.orgID, this.data.patientID)
+    this.data.orgID = wx.getStorageSync('orgID')
+    this.data.patientID = wx.getStorageSync("patientID")
+    this.loadDatas()
   },
   //methods
   // 高度输入
@@ -445,17 +445,17 @@ Page({
   },
 
   // 查询健康信息
-  loadDatas: function (orgID, keyID){
+  loadDatas(){
     let that = this
     wx.showLoading({
       title: '加载中...',
     });
     HTTP.getPatientDoc({
-      orgID: orgID,
-      keyID: keyID
+      orgID: this.data.orgID,
+      keyID: this.data.patientID
     })
       .then(res => {
-        wx.hideLog();
+        wx.hideLoading()
         for (var index in res.data) {
           that.handleQueryInfo(res.data[index])
         }
