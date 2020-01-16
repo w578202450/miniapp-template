@@ -159,7 +159,7 @@ Page({
   addAddress(){
     let that = this
     wx.showLoading({
-      title: '新增地址...',
+      title: '保存中...',
     });
     HTTP.addAddress({
       "personID": wx.getStorageSync('personID'),
@@ -179,7 +179,7 @@ Page({
         wx.hideLoading();
         if (res.code == 0) {
           wx.showToast({
-            title: '新增地址成功',
+            title: '保存成功',
             success: function (res) { 
               that.navigateBack()
             }
@@ -196,7 +196,7 @@ Page({
   editAddress() {
     var that = this
     wx.showLoading({
-      title: '更新地址...',
+      title: '保存中...',
     });
     HTTP.updateAddress({
       "receiverName": this.data.receiverName,
@@ -216,7 +216,7 @@ Page({
         wx.hideLoading();
         if (res.code == 0) {
           wx.showToast({
-            title: '更新成功',
+            title: '保存成功',
             success: function () {
               that.navigateBack()
             }
@@ -252,11 +252,11 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.showLoading({
-            title: '删除地址...',
+            title: '删除中...',
           });
           HTTP.deleteAddress({
-            "addrID": that.data.addressInfo.keyID,
-            "personID": wx.getStorageSync('personID')
+            addrID: that.data.addressInfo.keyID,
+            personID: wx.getStorageSync('personID')
           })
             .then(res => {
               wx.hideLoading();

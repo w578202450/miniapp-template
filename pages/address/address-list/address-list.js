@@ -11,7 +11,7 @@ Page({
 
   onLoad: function(e) {
     this.data.optionType = e.optionType
-    this.loadDatas()
+    wx.startPullDownRefresh()
   },
 
   onPullDownRefresh(){
@@ -21,14 +21,10 @@ Page({
    * 获取地址列表
    */
   loadDatas() {
-    wx.showLoading({
-      title: '获取地址...',
-    });
     HTTP.getAddress({
         personID: wx.getStorageSync('personID')
       })
       .then(res => {
-        wx.hideLoading();
         wx.stopPullDownRefresh()
         if (res.code == 0) {
           this.data.list = res.data
@@ -39,7 +35,6 @@ Page({
 
       }).catch(e => {
         wx.stopPullDownRefresh()
-        wx.hideLoading();
       })
   },
   /**
@@ -108,7 +103,7 @@ Page({
     var defaultIndex = null
     var defaultItem = null
     wx.showLoading({
-      title: '默认地址...',
+      title: '设置中...',
     });
     HTTP.setDefault({
         "keyID": this.data.list[index].keyID,
@@ -118,7 +113,7 @@ Page({
         wx.hideLoading();
         if (res.code == 0) {
           wx.showToast({
-            title: '设置默认成功',
+            title: '设置成功',
             success: function() {
               for (var i = 0; i < that.data.list.length; i++) {
                 if (i == index) {
@@ -165,7 +160,7 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.showLoading({
-            title: '删除地址...',
+            title: '删除...',
           });
           HTTP.deleteAddress({
               "addrID": that.data.list[index].keyID,

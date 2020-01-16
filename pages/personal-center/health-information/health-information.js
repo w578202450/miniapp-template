@@ -613,9 +613,6 @@ Page({
         }
 
         console.log("111111======", this.data.allergyList)
-        
-
-        
 
       }
       this.setData({
@@ -724,17 +721,21 @@ Page({
       saveData[index].orgID = this.data.orgID;
     }
 
+    wx.showLoading({
+      title: '信息更新...',
+    })
+
     HTTP.savePatientDoc(saveData)
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
           wx.showToast({
-            title: '保存成功',
+            title: '更新成功',
             duration: 2000
           })
         } else {
           wx.showToast({
-            title: '保存信息失败',
+            title: '更新失败',
             icon:'none',
             duration: 2000
           })
@@ -742,7 +743,7 @@ Page({
       }).catch(e => {
         wx.hideLoading();
         wx.showToast({
-          title: '保存信息失败',
+          title: '更新失败',
           icon: 'none',
           duration: 2000
         })

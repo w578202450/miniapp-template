@@ -36,16 +36,16 @@ Page({
       title: '确认收货地址...',
     });
     HTTP.fillDeliveryAddr({
-      "orgID": wx.getStorageSync('orgID'),
-      "orderID": this.data.orderID,
-      "receiverName": this.data.addressInfo.receiverName,
-      "receiverPhone": this.data.addressInfo.receiverPhone,
-      "province": this.data.addressInfo.province,
-      "city": this.data.addressInfo.city,
-      "area": this.data.addressInfo.area,
-      "address": this.data.addressInfo.address,
-      "remarks": this.data.addressInfo.remarks,
-      "modifyUser": this.data.modifyUser
+      orgID: wx.getStorageSync('orgID'),
+      orderID: this.data.orderID,
+      receiverName: this.data.addressInfo.receiverName,
+      receiverPhone: this.data.addressInfo.receiverPhone,
+      province: this.data.addressInfo.province,
+      city: this.data.addressInfo.city,
+      area: this.data.addressInfo.area,
+      address: this.data.addressInfo.address,
+      remarks: this.data.addressInfo.remarks,
+      modifyUser: this.data.modifyUser
     })
       .then(res => {
         wx.hideLoading();
