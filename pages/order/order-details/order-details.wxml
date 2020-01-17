@@ -111,17 +111,17 @@
         <text style="color:rgba(0, 0, 0, 0.45)">咨询医生</text>
       </view>
       <!-- 待支付 -->
-      <!-- <block wx:if='{{orderInfo.orderStatusID == 0}}'>
+      <block wx:if='{{orderInfo.orderStatusID == 0}}'>
         <view class="options-view" style="border:1px solid rgba(254,88,83,1)" bindtap="payOption">
           <text style="color:rgba(254, 88, 83, 1)">立即支付</text>
         </view>
-      </block> -->
+      </block>
       <!-- 已支付 在线支付 已发货 -->
-      <!-- <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 0 && orderInfo.deliveryStatusID == 2}}'>
-        <view class="options-view" style="background:rgba(67,139,239,1);border:1px solid rgba(67,139,239,1)" bindtap="payOption">
+      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 0 && orderInfo.deliveryStatusID == 2}}'>
+        <view class="options-view" style="background:rgba(67,139,239,1);border:1px solid rgba(67,139,239,1)" bindtap="confirmGoods">
           <text style="color:rgba(255,255,255,1)">确认收货</text>
         </view>
-      </block> -->
+      </block>
     </view>
 
   </view>

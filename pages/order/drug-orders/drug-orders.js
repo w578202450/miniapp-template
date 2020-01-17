@@ -60,12 +60,8 @@ Page({
    * 获取对于的诊断结果
    */
   getRpByList(params) {
-    wx.showLoading({
-      title: '加载处方详情...',
-    });
     HTTP.getRpByList(params)
       .then(res => {
-        wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
             for (var j in this.data.list) {
@@ -78,7 +74,6 @@ Page({
           list: this.data.list
         })
       }).catch(e => {
-        wx.hideLoading();
       })
   },
   /**

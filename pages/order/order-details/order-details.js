@@ -239,7 +239,9 @@ Page({
       prevPage.loadDatas()
     }
   },
-
+  /**
+   * 确认收货地址
+   */
   skipAddressSubmit() {
     let that = this
     let addressInfo = {
@@ -259,6 +261,12 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
+  },
+  /**
+   * 确认收货
+   */
+  confirmGoods(){
+
   }
 
 })

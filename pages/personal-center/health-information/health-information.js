@@ -271,7 +271,7 @@ Page({
       docGroupName: "疾病史",
       docItemCode: "PREGNANCY",
       docItemName: "妊娠哺乳",
-      docItemValue: "否",
+      docItemValue: "无",
       docItemDesc: ""
     }
   },
