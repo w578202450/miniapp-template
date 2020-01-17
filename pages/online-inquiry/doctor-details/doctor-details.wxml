@@ -55,10 +55,10 @@
   <view class="middle">
     <view class="middle-header">
       <view class="middle-lineView"></view>
-      <view class="middle-title">专治疾病</view>
+      <text class="middle-title">专治疾病</text>
     </view>
     <view class="middle-cotent-box">
-      <text class="middle-cotent">{{doctorInfo.doctorName}}</text>
+      <text class="middle-cotent">{{doctorInfo.sectionName}}</text>
     </view>
     <view class="middle-bottomLine"></view>
   </view>
@@ -66,7 +66,7 @@
   <view class="middle">
     <view class="middle-header">
       <view class="middle-lineView"></view>
-      <view class="middle-title">擅长</view>
+      <text class="middle-title">擅长</text>
     </view>
     <view class="middle-cotent-box">
       <text class="middle-cotent">{{doctorInfo.goodAt}}</text>
@@ -77,7 +77,7 @@
   <view class="middle">
     <view class="middle-header">
       <view class="middle-lineView"></view>
-      <view class="middle-title">医生简介</view>
+      <text class="middle-title">医生简介</text>
     </view>
     <view class="middle-cotent-box">
       <text class="middle-cotent">{{doctorInfo.briefDesc}}</text>
@@ -88,7 +88,7 @@
   <view class="comment">
     <view class="middle-header">
       <view class="middle-lineView"></view>
-      <view class="middle-title">患者评价</view>
+      <text class="middle-title">患者评价</text>
     </view>
 
     <view class="weui-cells">

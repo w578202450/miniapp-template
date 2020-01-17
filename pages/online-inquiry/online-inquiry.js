@@ -40,11 +40,15 @@ Page({
   },
   // 获取主治医师信息
   fetchDoctorInfo() {
+    wx.showLoading({
+      title: '加载...',
+    })
     var that = this;
     HTTP.getDoctorInfo({
       staffID: wx.getStorageSync('personInfo').doctorStaffID
     })
       .then(res => {
+        wx.hideLoading()
         if (res.code == 0) {
           if (res.data) {
             app.globalData.doctorInfo = res.data
@@ -55,6 +59,7 @@ Page({
           }
         } 
       }).catch(e => {
+        wx.hideLoading()
         that.setData({
           noNetwork: true
         })

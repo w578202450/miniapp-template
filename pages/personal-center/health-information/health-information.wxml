@@ -1,5 +1,5 @@
 <import src="../../../template/template.wxml" />
-
+<view style="height:20rpx;background-color: rgba(246, 246, 246, 1)"></view>
 <view class="page-container" style="margin-bottom:144rpx">
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">身高</text>

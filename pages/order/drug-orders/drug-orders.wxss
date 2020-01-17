@@ -86,7 +86,6 @@ image{
 .option-view{
   height:52rpx;
   border-radius:26rpx;
-  border:1px solid rgba(0,0,0,0.25);
   display: flex;
   justify-content: center;
   align-items: center;

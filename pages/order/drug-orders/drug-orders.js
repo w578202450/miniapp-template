@@ -35,13 +35,12 @@ Page({
         wx.hideLoading();
         if (res.code == 0) {
           console.log('res.data.datas.length---', res.data.datas.length)
-          if (res.data.datas.length == 0) {
+          if (res.data.datas && res.data.datas.length == 0) {
             that.setData({
               noData: true
             })
           } else {
             this.data.list = this.data.list.concat(res.data.datas)
-
             var tempRpIds = []
             for (var index in this.data.list) {
               tempRpIds.push(this.data.list[index].rpID)
