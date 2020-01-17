@@ -1,3 +1,4 @@
+const app = getApp();
 import {
   SDKAPPID
 } from '../../../../utils/GenerateTestUserSig'
@@ -5,7 +6,10 @@ import {
 import {
   genTestUserSig
 } from '../../../../utils/GenerateTestUserSig';
-var HTTP = require('../../../../utils/http-util.js');
+var HTTP = require('../../../../utils/http-util');
+var msgStorage = require("../../../../utils/msgstorage");
+var tim = app.globalData.tim;
+var TIM = app.globalData.TIM;
 
 Page({
   // /**
@@ -226,8 +230,8 @@ Page({
     roomID: '123', // [必选]房间号，可以由您的服务指定
     userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
-    inquiryInfo:{}, // 问诊信息
-    sdkAppID: '1400283798', // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
+    inquiryInfo: {}, // 问诊信息
+    sdkAppID: '1400200900', // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
     template: 'float', // [必选]标识组件使用的界面模版，组件内置了 bigsmall，float，grid 三种布局
     privateMapKey: '', // 房间权限 key，需要从自行搭建的签名服务获取
     // 如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
@@ -236,7 +240,12 @@ Page({
     debug: true, // true 打印推流 debug 信息 fales 不打印推流 debug 信息
     enableIM: true, // 是否启用IM
     // 其他配置参数可查看 API 文档
-    inquiryId: '' // 问诊记录id
+    inquiryId: '', // 问诊记录id
+    customMsgType: '', // 自定义消息类型(根据payload{childType}确定)
+    username: {
+      type: Object,
+      value: {},
+    },
   },
 
   // 通过 onIMEvent 返回 IM 消息事件，如果 enableIM 已关闭，则可以忽略 onIMEvent
@@ -245,6 +254,7 @@ Page({
       case 'big_group_msg_notify':
         //收到群组消息
         console.debug(e.detail.detail)
+        console.log("收到群组消息:" + e.detail.detail)
         break;
       case 'login_event':
         //登录事件通知
@@ -295,43 +305,44 @@ Page({
         patientIdNo: that.data.userInfo.idNumber
       }
     };
-    console.log("视频问诊:sponsorsID:" + that.data.userInfo.keyID
-      + ",sponsorsName:" + that.data.userInfo.patientName
-      + ",receiverID:" + that.data.inquiryInfo.keyID
-      + ",receiverName:" + that.data.inquiryInfo.keyID
-      + ",patientName:" + that.data.userInfo.patientName
-      + ",patientSex:" + that.data.userInfo.sex
-      + ",patientPhone:" + that.data.userInfo.phone
-      + ",patientIdNo:" + that.data.userInfo.idNumber
-       );
+    console.log("视频问诊:sponsorsID:" + that.data.userInfo.keyID +
+      ",sponsorsName:" + that.data.userInfo.patientName +
+      ",receiverID:" + that.data.inquiryInfo.keyID +
+      ",receiverName:" + that.data.inquiryInfo.keyID +
+      ",patientName:" + that.data.userInfo.patientName +
+      ",patientSex:" + that.data.userInfo.sex +
+      ",patientPhone:" + that.data.userInfo.phone +
+      ",patientIdNo:" + that.data.userInfo.idNumber
+    );
     HTTP.createVideoInquiry(prams).then(res => {
       console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
       that.setData({
         inquiryId: res.data.inquiryId
       });
-      that.getRoomId();
+      // 发送自定义消息
+      that.sendCustomMsg();
     })
   },
 
   // 获取roomId
-  getRoomId: function() {
-    let that = this;
-    let prams = {
-      inquiryId: that.data.inquiryId, // 问诊记录id	
-      sponsorsId: that.data.userInfo.keyID, // 发起者id(患者id)
-      receiverId: that.data.inquiryInfo.keyID // 接受者id(医生id)
-    };
-    console.log("获取roomId参数:inquiryId:" + that.data.inquiryId
-      + ",sponsorsId:" + that.data.userInfo.keyID
-      + ",receiverID:" + that.data.inquiryInfo.keyID
-    );
-    HTTP.getRoomId(prams).then(res => {
-      console.log("获取roomId:" + res.data.roomID);
-      that.setData({
-        roomID: res.data.roomID
-      });
-    })
-  },
+  // getRoomId: function() {
+  //   let that = this;
+  //   let prams = {
+  //     inquiryId: that.data.inquiryId, // 问诊记录id	
+  //     sponsorsId: that.data.userInfo.keyID, // 发起者id(患者id)
+  //     receiverId: that.data.inquiryInfo.keyID // 接受者id(医生id)
+  //   };
+  //   console.log("获取roomId参数:inquiryId:" + that.data.inquiryId
+  //     + ",sponsorsId:" + that.data.userInfo.keyID
+  //     + ",receiverID:" + that.data.inquiryInfo.keyID
+  //   );
+  //   HTTP.getRoomId(prams).then(res => {
+  //     console.log("获取roomId:" + res.data.roomID);
+  //     that.setData({
+  //       roomID: res.data.roomID
+  //     });
+  //   })
+  // },
 
   /*从storage中获取患者信息 */
   getPersonInfo: function() {
@@ -350,9 +361,9 @@ Page({
     })
   },
 
-   /**
-  * 获取UserSig
-  */
+  /**
+   * 获取UserSig
+   */
   getUserSig: function() {
     let that = this;
     let userSig = wx.getStorageSync("userSig");
@@ -371,9 +382,9 @@ Page({
     // })
   },
 
- /**
-  * 获取群聊问诊信息
-  */
+  /**
+   * 获取群聊问诊信息
+   */
   getInquiryInfo: function() {
     let that = this;
     let inquiryInfo = wx.getStorageSync("inquiryInfo");
@@ -388,98 +399,162 @@ Page({
    */
   onShow: function() {
     console.log('room.js onShow');
+    let that = this;
     // 保持屏幕常亮
     wx.setKeepScreenOn({
       keepScreenOn: true
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-    console.log('room.js onHide');
-  },
-
-  startWebrtc: function() {
-    let that = this;
-    var webrtcroomCom = that.selectComponent('#myroom');
-    if (webrtcroomCom) {
-      webrtcroomCom.start();
-    }
-  },
-
-  onLoad: function(options) {
-    console.log(options);
-    // 这里需要调用签名服务获取 userSig 等签名信息
-    // userSig 需要在您的业务服务器上计算，否则会泄露您的私钥从而造成安全隐患
-    // userSig 的计算请阅读文档：https://cloud.tencent.com/document/product/647/17275
-    // let that = this;
-    // console.log('userID:' + that.data.userID);
-    //**************************************从服务器获取usersig***************************************************** */
-    // wx.request({
-    //   url: 'http://10.0.0.210:6110/api/rp/initial/getUserSig',  // 您的计算 usersig 的服务器地址
-    //   data: {
-    //     userId: that.data.userID
-    //   }, // 计算 usersig 所需要的参数，这里留空了，一般是需要带上 userid
-    //   // 因为 usersig 本质上就是对 userid 和一些信息做了一个 ECDH 签名
-    //   method: 'get',
-    //   header: {
-    //     'content-type': 'application/json',
-    //     'token': 'aaaa'
-    //   },
-    //   success: function (res) {
-    //     console.log('===获取UserSig请求成功===');
-    //     console.log(
-    //       "sdkAppID:" + that.data.sdkAppID + 
-    //       ",roomID:" + that.data.roomID + 
-    //       ",userSig:" + that.data.userSig);
-    //     // HTTP 回包解析，此处代码仅仅是示例，正常情况下，应该可以解析出 userid，usersig 等信息
-    //     // 有了这些信息，我们就可以调用 webrtc-room 对象实例的 start 方法来启动组件了
-    //     that.setData({
-    //       userID: that.data.userID,
-    //       sdkAppID: that.data.sdkAppID,
-    //       roomID: that.data.roomID,
-    //       userSig: that.data.userSig
-    //       // privateMapKey: '' // 房间权限 key，需要从自行搭建的签名服务获取
-    //       //如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
-    //     }, function () {
-    //       var webrtcroomCom = that.selectComponent('#myroom');
-    //       if (webrtcroomCom) {
-    //         webrtcroomCom.start();
-    //       }
-    //     })
-    //   },
-    //   fail: function () {
-    //     console.error('===获取UserSig请求失败===');
-    //   }
-    // });
-    //**************************************从服务器获取usersig***************************************************** */
-
-    let that = this;
-    this.getPersonInfo(); // 从storage中获取患者信息和userSig
-    that.setData({
-        userID: that.data.userInfo.keyID,
-        sdkAppID: that.data.sdkAppID,
-        roomID: that.data.roomID,
-        userSig: that.data.userSig
-      }),
-      console.log(
-        "userID:" + that.data.userInfo.keyID +
-        ",sdkAppID:" + that.data.sdkAppID +
-        ",roomID:" + that.data.roomID +
-        ",userSig:" + that.data.userSig);
-    this.createVideoInquiry();    
-    this.startWebrtc();
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-    // 设置房间标题
-    wx.setNavigationBarTitle({
-      title: '视频问诊'
     });
+    let username = this.data.username;
+    let myUsername = wx.getStorageSync("myUsername");
+    console.log("username:" + JSON.stringify(username));
+    // let sessionKey = username.groupId ?
+    //   username.groupId + myUsername :
+    //   username.your + myUsername;
+    // let chatMsg = wx.getStorageSync(sessionKey) || [];
+    // console.log("chatMsg:" + chatMsg);
+    msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
+        console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
+        // TODO
+        // customType
+      let customType = renderableMsg.payload.data.customType;
+        // childType
+      let childType = renderableMsg.payload.data.childType;
+        // data
+      let data = renderableMsg.payload.data.data;
+      console.log("payload{data}:" + JSON.stringify(data));
+        // 问诊ID
+        // let inquiryId = event.data.payload.data.data.inquiryId;
+        // console.log("payload{data.inquiryId}:" + inquiryId);
+        // 房间号
+      let roomid = renderableMsg.payload.data.data.roomId;
+        console.log("===roomID===" + roomid);
+        // 视频问诊的消息类型处理
+        if (childType == "video") {
+          that.setData({
+            roomID: roomid,
+            customMsgType: childType
+          })
+        }
+    });
+  // // 收消息
+  // tim.on(TIM.EVENT.MESSAGE_RECEIVED, function(event) {
+  //   // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
+  //   // event.name - TIM.EVENT.MESSAGE_RECEIVED
+  //   // event.data - 存储 Message 对象的数组 - [Message]
+  //   console.log("===视频问诊接收消息===" + JSON.stringify(event.data));
+  //   if (event.data.type == "TIMCustomElem") { // 自定义消息
+  //     // customType
+  //     let customType = event.data.payload.data.customType;
+  //     // childType
+  //     let childType = event.data.payload.data.childType;
+  //     // data
+  //     let data = event.data.payload.data.data;
+  //     console.log("payload{data}:" + JSON.stringify(data));
+  //     // 问诊ID
+  //     // let inquiryId = event.data.payload.data.data.inquiryId;
+  //     // console.log("payload{data.inquiryId}:" + inquiryId);
+  //     // 房间号
+  //     let roomid = event.data.payload.data.data.roomId;
+  //     console.log("===roomID===" + roomid);
+  //     // 视频问诊的消息类型处理
+  //     if (childType == "video") {
+  //       that.setData({
+  //         roomID: roomid,
+  //         customMsgType: childType
+  //       })
+  //     }
+  //   }
+  // });
+},
+
+/* 操作：发送自定义消息 */
+sendCustomMsg: function(e) {
+  let that = this;
+  let parmas = {
+    customType: "sys",
+    childType: "video",
+    data: {
+      inquiryId: that.data.inquiryId /*"20011711191832397541325001"*/ ,
+      bizId: "tmc",
+      requestRole: "0"
+    }
+  };
+  console.log("视频问诊发送自定义消息内容：" + JSON.stringify(parmas));
+  // 创建消息实例
+  let message = tim.createCustomMessage({
+    to: that.data.inquiryInfo.keyID,
+    conversationType: TIM.TYPES.CONV_GROUP, // 群聊
+    payload: {
+      data: parmas,
+      description: "[视频问诊消息]",
+      extension: 'tmc'
+    }
+  });
+  // 发送消息
+  let promise = tim.sendMessage(message);
+  promise.then(function(imResponse) {
+    // 发送成功
+    console.log('视频问诊发送自定义消息成功:' + JSON.stringify(imResponse));
+  }).catch(function(imError) {
+    // 发送失败
+    console.warn('视频问诊发送自定义消息失败:', JSON.stringify(imError));
+  });
+},
+
+/**
+ * 生命周期函数--监听页面隐藏
+ */
+onHide: function() {
+  console.log('room.js onHide');
+},
+
+startWebrtc: function() {
+  let that = this;
+  var webrtcroomCom = that.selectComponent('#myroom');
+  if (webrtcroomCom) {
+    webrtcroomCom.start();
   }
+},
+
+onLoad: function(options) {
+  // console.log(options);
+  let that = this;
+  this.getPersonInfo(); // 从storage中获取患者信息和userSig
+  // that.setData({
+  //     userID: that.data.userInfo.keyID,
+  //     sdkAppID: that.data.sdkAppID,
+  //     roomID: that.data.roomID,
+  //     userSig: that.data.userSig
+  //   }),
+  //   console.log(
+  //     "userID:" + that.data.userInfo.keyID +
+  //     ",sdkAppID:" + that.data.sdkAppID +
+  //     ",roomID:" + that.data.roomID +
+  //     ",userSig:" + that.data.userSig);
+  // 创建问诊   
+  this.createVideoInquiry();
+  that.setData({
+      userID: that.data.userInfo.keyID,
+      sdkAppID: that.data.sdkAppID,
+      roomID: that.data.roomID,
+      userSig: that.data.userSig
+    }),
+    console.log("进入房间参数：" +
+      "userID:" + that.data.userInfo.keyID +
+      ",sdkAppID:" + that.data.sdkAppID +
+      ",roomID:" + that.data.roomID +
+      ",userSig:" + that.data.userSig);
+  // 获取房间号进入房间
+  this.startWebrtc();
+},
+
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+onReady: function() {
+  // 设置房间标题
+  wx.setNavigationBarTitle({
+    title: '视频问诊'
+  });
+}
 })
