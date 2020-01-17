@@ -76,7 +76,7 @@ Page({
    */
   previewPrescriptionAction: function() {
     wx.navigateTo({
-      url: '../../personal-center/prescription-details/prescription-details?index=0&rpID=' + this.data.rpID,
+      url: '../../personal-center/prescription-details/prescription-details?index=0&isPreviewRp=1&rpID=' + this.data.rpID,
     })
 
   },
@@ -106,10 +106,19 @@ Page({
         wx.hideLoading();
         if (res.code == 0) {
           this.tradeOrder(res.data.paymentID);
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
         }
 
       }).catch(e => {
         wx.hideLoading();
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
+        })
       })
   },
   /**
@@ -132,9 +141,18 @@ Page({
             title: '支付校验成功',
           })
           that.wxPayOptions(res.data)
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
         }
       }).catch(e => {
         wx.hideLoading();
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
+        })
       })
   },
   /**

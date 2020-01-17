@@ -9,11 +9,14 @@ Page({
     rpID: '',
     addressInfo: null,
     orderID: '',
-    prePrice: 0
+    prePrice: 0,
+    isPreviewRp:0//预览状态
   },
 
   onLoad: function(e) {
     console.log('---eee', e)
+    console.log('---isPreviewRp--', e.isPreviewRp)
+    this.data.isPreviewRp = e.isPreviewRp
     this.data.rpID = e.rpID
     this.getRp(e.rpID)
   },
@@ -35,7 +38,8 @@ Page({
         if (res.code == 0) {
           this.data.orderID = res.data.orderID
           this.setData({
-            rpData: res.data
+            rpData: res.data,
+            isPreviewRp: this.data.isPreviewRp
           })
         }
       }).catch(e => {
@@ -55,6 +59,18 @@ Page({
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
+    })
+  },
+
+  /**
+   * 咨询医生
+   */
+  contactDoctorOption() {
+    wx.navigateTo({
+      url: '../../online-inquiry/inquiry/chat/chat',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
     })
   },
 })

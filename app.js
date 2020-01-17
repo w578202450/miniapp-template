@@ -26,33 +26,33 @@ tim.registerPlugin({
 
 App({
   onLaunch: function() {
-      // AUTH.wxlogin();
+    // AUTH.wxlogin();
 
-      // wx.getSetting({
-      //   success: res => {
-      //     console.log('-------授权成功')
-      //     if (res.authSetting['scope.userInfo']) {
-      //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-      //       wx.getUserInfo({
-      //         success: res => {
-      //           // 可以将 res 发送给后台解码出 unionId
-      //           this.globalData.userInfo = res.userInfo
+    // wx.getSetting({
+    //   success: res => {
+    //     console.log('-------授权成功')
+    //     if (res.authSetting['scope.userInfo']) {
+    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           // 可以将 res 发送给后台解码出 unionId
+    //           this.globalData.userInfo = res.userInfo
 
-      //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      //           // 所以此处加入 callback 以防止这种情况
-      //           if (this.userInfoReadyCallback) {
-      //             this.userInfoReadyCallback(res)
-      //           }
-      //         }
-      //       })
-      //     }
-      //   },
-      //   fail:res =>{
-      //     console.log('-------授权失败')
-      //   }
-      // })
+    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //           // 所以此处加入 callback 以防止这种情况
+    //           if (this.userInfoReadyCallback) {
+    //             this.userInfoReadyCallback(res)
+    //           }
+    //         }
+    //       })
+    //     }
+    //   },
+    //   fail:res =>{
+    //     console.log('-------授权失败')
+    //   }
+    // })
 
-      let that = this;
+    let that = this;
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.record']) {
@@ -163,54 +163,50 @@ App({
       console.warn('logout error:', imError);
     });
   },
-  onShow:function(){
+  onShow: function() {
     this.upDataApp()
   },
-  upDataApp: function () {//版本更新
-  console.log('版本更新-----')
-    if (wx.canIUse('getUpdateManager')) {//判断当前微信版本是否支持版本更新
-      
+  /**
+   * 版本更新
+   */
+  upDataApp: function() {
+    if (wx.canIUse('getUpdateManager')) { //判断当前微信版本是否支持版本更新
       const updateManager = wx.getUpdateManager();
-      console.log('当前微信版本支持版本更新---')
-      updateManager.onCheckForUpdate(function (res) {
+      updateManager.onCheckForUpdate(function(res) {
         if (res.hasUpdate) { // 请求完新版本信息的回调
-          console.log('有新版本更新-----')
-          updateManager.onUpdateReady(function () {
-            console.log('更新成功-----')
+          updateManager.onUpdateReady(function() {
             wx.showModal({
               title: '更新提示',
               content: '新版本已经准备好，是否重启应用？',
-              success: function (res) {
-                if (res.confirm) {// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+              success: function(res) {
+                if (res.confirm) { // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
                   updateManager.applyUpdate()
                 }
               }
             })
           });
-          updateManager.onUpdateFailed(function () {
-            console.log('更新失败-----')
-            wx.showModal({// 新的版本下载失败
+          updateManager.onUpdateFailed(function() {
+            wx.showModal({ // 新的版本下载失败
               title: '已经有新版本了哟~',
               content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
             })
           })
         } else {
-          console.log('没有新版本更新-----')
         }
       })
     } else {
-      console.log('当前微信版本不支持版本更新---')
-      wx.showModal({// 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
+      wx.showModal({ // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
         title: '提示',
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
   },
+  
   globalData: {
     userInfo: null,
     personInfo: {},
     baseUrl: 'http://10.0.0.210:6112/',
-    doctorInfo:null
+    doctorInfo: null
     // 地址列表 0表示个人中心收货地址进入  1表示确认收货地址界面进入
     // addressListType:0,
     // // 确认收货地址 0表示处方详情  1表示确认收货地址界面进入

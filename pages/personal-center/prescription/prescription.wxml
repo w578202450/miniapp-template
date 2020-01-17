@@ -5,7 +5,7 @@
 <block wx:else>
   <view class="tmc-container">
     <navigator wx:key="keyID" wx:for="{{list}}" wx:for-item="item" wx:for-index="index" 
-    url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}&index=0">
+    url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}&index=0&isPreviewRp=1">
       <view class="cell">
         <view>
           <text class="content">{{item.diagnosis}}</text>

@@ -1,5 +1,5 @@
 
-<view class="{{rpData.payStatus == 1 ? '' : 'tip-show'}}" hidden="{{rpData.payStatus == 1}}">
+<view class="{{isPreviewRp==1 ? '' : 'tip-show'}}" hidden="{{isPreviewRp==1}}">
   <text class="tip">过期失效的处方不能支付，有效期3天</text>
 </view>
 <view class="header">
@@ -52,12 +52,12 @@
   </view>
 </view>
 
-<view style="position:fixed;bottom:0;left:0;right:0" hidden='{{rpData.payStatus == 1}}' class="{{payHidden ? '' : 'pay-show'}}">
+<view style="position:fixed;bottom:0;left:0;right:0" hidden='{{isPreviewRp==1}}' class="{{payHidden ? '' : 'pay-show'}}" bindtap="contactDoctorOption">
   <view class="pay-left">
-    <image src="../../../images/profile/profile_company_seal.png"></image>
+    <image src="../../../images/public/public_contact_doctor.png"></image>
     <text>咨询医生</text>
   </view>
   <view class="button-background" style="margin-left:32rpx;background-color: rgba(255,255,255,1)" bindtap="payAction">
-    <text class="button-text">立即支付（实付：¥{{rpData.price}}）</text>
+    <text class="button-text">立即支付（实付：¥{{rpData.price/100}}）</text>
   </view>
 </view>

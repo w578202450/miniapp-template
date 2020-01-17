@@ -23,8 +23,8 @@
       </block>
       <!-- 待支付 -->
       <block wx:elif='{{orderInfo.orderStatusID == 0}}'>
-        <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
-        <text>请立即支付当前订单</text>
+        <image style="width:58rpx;height:58rpx" src="../../../images/order/order_wait.png"></image>
+        <text>订单待支付</text>
       </block>
     </view>
   </view>
@@ -78,7 +78,7 @@
       <view class="separator" style="margin-left: 32rpx;margin-right: 32rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>药品金额：</text>
-        <text>¥{{orderInfo.costPrice}}</text>
+        <text>¥{{orderInfo.costPrice/100}}</text>
       </view>
       <view class="prescription-delivery prescription-text">
         <text>支付方式：</text>
@@ -86,7 +86,7 @@
       </view>
       <view class="prescription-delivery prescription-text">
         <text>定金金额：</text>
-        <text style="color:rgba(254,88,83,1)">¥{{orderInfo.prePrice}}</text>
+        <text style="color:rgba(254,88,83,1)">¥{{orderInfo.prePrice/100}}</text>
       </view>
       <view class="separator"></view>
       <view style="display: flex;flex-direction: row;padding:32rpx;align-items: center">
@@ -106,22 +106,22 @@
 
     <view class="separator" style="height:24rpx"></view>
 
-    <view style="display: flex;flex-direction: row;justify-content: space-between;padding:32rpx">
-      <view class="options-view" style="width:176px" bindtap="contactDoctorOption">
-        <text>咨询医生</text>
+    <view style="display: flex;flex-direction: row;justify-content: space-between;padding:32rpx 32rpx 32rpx 0rpx">
+      <view class="options-view" style="border:1px solid rgba(0,0,0,0.25)" bindtap="contactDoctorOption">
+        <text style="color:rgba(0, 0, 0, 0.45)">咨询医生</text>
       </view>
       <!-- 待支付 -->
-      <block wx:if='{{orderInfo.orderStatusID == 0}}'>
-        <view class="options-view" style="width:176px" bindtap="payOption">
-          <text>立即支付</text>
+      <!-- <block wx:if='{{orderInfo.orderStatusID == 0}}'>
+        <view class="options-view" style="border:1px solid rgba(254,88,83,1)" bindtap="payOption">
+          <text style="color:rgba(254, 88, 83, 1)">立即支付</text>
         </view>
-      </block>
+      </block> -->
       <!-- 已支付 在线支付 已发货 -->
-      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 0 && orderInfo.deliveryStatusID == 2}}'>
-        <view class="options-view" style="width:176px" bindtap="payOption">
-          <text>确认收货</text>
+      <!-- <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 0 && orderInfo.deliveryStatusID == 2}}'>
+        <view class="options-view" style="background:rgba(67,139,239,1);border:1px solid rgba(67,139,239,1)" bindtap="payOption">
+          <text style="color:rgba(255,255,255,1)">确认收货</text>
         </view>
-      </block>
+      </block> -->
     </view>
 
   </view>
