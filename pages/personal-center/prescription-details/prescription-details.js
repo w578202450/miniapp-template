@@ -10,7 +10,7 @@ Page({
     addressInfo: null,
     orderID: '',
     prePrice: 0,
-    isPreviewRp:0//预览状态
+    isPreviewRp:1//预览状态
   },
 
   onLoad: function(e) {
