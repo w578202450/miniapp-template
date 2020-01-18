@@ -246,6 +246,8 @@ Page({
       type: Object,
       value: {},
     },
+    isInCalling: false, // 是否视频中
+    doctorInfo: {} // 医生信息
   },
 
   // 通过 onIMEvent 返回 IM 消息事件，如果 enableIM 已关闭，则可以忽略 onIMEvent
@@ -343,10 +345,9 @@ Page({
   //   })
   // },
 
-  /*从storage中获取患者信息 */
+  /*从storage中获取患者、医生信息 */
   getPersonInfo: function() {
     let that = this;
-    // let userInfo = wx.getStorageSync("personInfo");
     wx.getStorage({
       key: "personInfo",
       success: function(res) {
@@ -357,7 +358,15 @@ Page({
         console.log("===患者信息===" + JSON.stringify(that.data.userInfo));
         that.getInquiryInfo();
       }
-    })
+    });
+    wx.getStorage({
+      key: "doctorInfo",
+      success: function (res) {
+        that.setData({
+          doctorInfo: res.data
+        });
+      }
+    });
   },
 
   /**
@@ -528,6 +537,7 @@ Page({
   // },
   // 进房
   joinRoom: function(res) {
+    let that = this;
     that.setData({
       userID: res.data.userID, // [必选]用户 ID，可以由您的服务指定，或者使用小程序的openid
       sdkAppID: res.data.sdkAppID, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
@@ -562,9 +572,8 @@ Page({
   },
 
   onLoad: function(options) {
-    // console.log(options);
     let that = this;
-    this.getPersonInfo(); // 从storage中获取患者信息和userSig
+    that.getPersonInfo(); // 从storage中获取患者信息和userSig
     // that.setData({
     //     userID: that.data.userInfo.keyID,
     //     sdkAppID: that.data.sdkAppID,
@@ -577,7 +586,7 @@ Page({
     //     ",roomID:" + that.data.roomID +
     //     ",userSig:" + that.data.userSig);
     // 创建问诊   
-    this.createVideoInquiry();
+    that.createVideoInquiry();
     that.setData({
         userID: that.data.userInfo.keyID,
         sdkAppID: that.data.sdkAppID,
@@ -598,7 +607,7 @@ Page({
       userSig: that.data.userSig, // [必选]身份签名，需要从自行搭建的签名服务获取
       privateMapKey: '' // 一般不需要填
     };
-    this.joinRoom(params);
+    that.joinRoom(params);
   },
 
   /**
