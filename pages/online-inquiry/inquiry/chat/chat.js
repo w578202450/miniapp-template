@@ -450,7 +450,8 @@ Page({
       let nowData = [...that.data.currentMessageList, imResponse.data.message];
       that.setData({
         currentMessageList: nowData,
-        maySendContent: ""
+        maySendContent: "",
+        maySendContentSure: false
       });
       that.data.httpLoading = false; // 关闭隐性加载过程
       that.toViewBottomFun();
@@ -565,8 +566,7 @@ Page({
 
   /*操作：切换为语音 */
   willSendRecordMsg: function() {
-    let that = this;
-    that.setData({
+    this.setData({
       isSendRecord: true
     });
   },
