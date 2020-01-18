@@ -23,17 +23,28 @@ Page({
 
   // 微信授权
   getUserInfo: function(e) {
+    
     let that = this
-    if (e.detail.userInfo) {
-      app.globalData.userInfo = e.detail.userInfo
-      wx.setStorage({
-        key: 'userinfo',
-        data: e.detail.userInfo,
-        success: function(res) {
-          that.wxlogin()
+    wx.checkSession({
+      success() {
+        //session_key 未过期，并且在本生命周期一直有效
+        that.getounionid()
+      },
+      fail() {
+        wx.setStorageSync('encryptedData', e.detail.encryptedData)
+        wx.setStorageSync('iv', e.detail.iv)
+        if (e.detail.userInfo) {
+          app.globalData.userInfo = e.detail.userInfo
+          wx.setStorage({
+            key: 'userinfo',
+            data: e.detail.userInfo,
+            success: function (res) {
+              that.wxlogin()
+            }
+          })
         }
-      })
-    }
+      }
+    })
 
   },
   // 微信登录获取临时code
@@ -44,7 +55,8 @@ Page({
     let that = this
     wx.login({
       success: function(res) {
-        that.getopenid(res.code);
+        wx.setStorageSync('wxCode', res.code)
+        that.getounionid();
       },
       fail: function(res) {
         wx.hideLoading()
@@ -64,14 +76,17 @@ Page({
    * 2.1根据新的openid获取相应的基础数据并缓存新的openid
    * 
    */
-  getopenid(code) {
+  getounionid() {
     let that = this
     var prams = {
-      code: code
+      code: wx.getStorageSync('wxCode'),
+      encryptedData: wx.getStorageSync('encryptedData'),
+      iv: wx.getStorageSync('iv')
     }
     HTTP.getWXAuth(prams).then(res => {
       if (res.code == 0) {
         // unionid
+        console.log('ddd-----', res.data.unionid)
         that.getPatientInfo(res.data.unionid)
       } else {
         wx.hideLoading()
@@ -154,6 +169,7 @@ Page({
    */
 
   getPatientInfo(unionID) {
+
     let that = this
     var prams = {
       unionID: unionID,
@@ -163,6 +179,8 @@ Page({
       city: app.globalData.userInfo.city,
       province: app.globalData.userInfo.province,
     }
+
+    console.log('parmas----', prams)
     HTTP.getPatientInfo(prams).then(res => {
       if (res.code == 0) {
         wx.setStorage({

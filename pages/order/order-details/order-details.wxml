@@ -52,8 +52,7 @@
         <view class="drugs-cell-content">
           <view class="drugs-cell-middle">
             <text class="drugs-cell-name">{{item.medicineName}}</text>
-            <text class="drugs-cell-unit">用法用量：{{item.takeDose}}{{item.formType}}+</text>
-            <!-- 用法用量：{{item.takeDose}}{{item.formType}/次，{{item.takeFrequence}}，{{item.takeDirection}}，{{item.medicationDays}} 天 -->
+            <text class="drugs-cell-unit">{{item.specification}}</text>
           </view>
           <view class="drugs-cell-right">
             <text class="drugs-cell-price">¥{{item.unitPrice/100}}</text>
@@ -90,8 +89,8 @@
         <text>支付方式：</text>
         <text>{{orderInfo.payWay == 1 ? "在线支付" : (orderInfo.payWay == 0 ? "付定金" : "货到付款")}}</text>
       </view>
-      <view class="prescription-delivery prescription-text">
-        <text>定金金额：</text>
+      <view wx:if='{{orderInfo.payWay == 1 || orderInfo.payWay == 0}}' class="prescription-delivery prescription-text">
+        <text>{{orderInfo.payWay == 1}} ? 应付金额： : 在线定金：</text>
         <text style="color:rgba(254,88,83,1)">¥{{orderInfo.prePrice/100}}</text>
       </view>
       <view class="separator"></view>

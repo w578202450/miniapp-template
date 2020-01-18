@@ -33,9 +33,9 @@
         <text class="rp-name">{{item.medicineName}}</text>
         <text class="rp-unit">{{item.specification}}</text>
       </view>
-      <text class="rp-num">x{{item.medicineAmount}}</text>
+      <text class="rp-num">x{{item.medicineAmount}}{{item.unit}}</text>
     </view>
-    <text class="rp-methods">{{item.takeDirection}}</text>
+    <text class="rp-methods">用法用量：{{item.takeDose}}{{item.formType}}/次，{{item.takeFrequence}}，{{item.takeDirection}}，{{item.medicationDays}}天</text>
     <view class=".rp-lineView"></view>
   </view>
   <view class="rp-advice">医嘱：{{rpData.rpAdvice}}</view>
