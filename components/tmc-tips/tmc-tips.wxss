@@ -5,12 +5,12 @@
   align-items: center;
 }
 
-image{
+.tmc-tipView .image{
   margin-top: 200rpx;
   width: 80%;
 }
 
-.message{
+.tmc-tipView .message{
   font-size:28rpx;
   font-family:PingFangSC-Regular,PingFang SC;
   font-weight:400;
@@ -19,7 +19,7 @@ image{
   margin-top: 48rpx;
 }
 
-.tips-title{
+.tmc-tipView .tips-title{
   font-size:32rpx;
   font-family:PingFangSC-Medium,PingFang SC;
   font-weight:500;

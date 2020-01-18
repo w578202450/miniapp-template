@@ -118,7 +118,7 @@ Page({
         } else {
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon: 'none'
           })
         }
 
@@ -228,7 +228,7 @@ Page({
         } else {
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon: 'none'
           })
         }
       }).catch(e => {
@@ -252,7 +252,7 @@ Page({
     }
   },
   /**
-   * 确认收货地址
+   * 跳转到确认收货地址界面
    */
   skipAddressSubmit() {
     let that = this
@@ -277,8 +277,42 @@ Page({
   /**
    * 确认收货
    */
-  confirmGoods(){
+  confirmGoods() {
+    wx.showModal({
+      content: '确定收货？',
+      success(res) {
+        if (res.confirm) {
+          wx.showLoading({
+            title: '请稍等...',
+          });
+          HTTP.deleteAddress({
+              orgID: wx.getStorageSync('orgID'),
+              deliveryStatusID: '3',
+              modifyUser: this.data.orderInfo.modifyUser,
+              orderID: this.data.orderInfo.keyID
+            })
+            .then(res => {
+              wx.hideLoading();
+              if (res.code == 0) {
+                wx.showToast({
+                  title: '收货成功',
+                  success: function() {
+                    that.loadDatas()
+                    that.refreshPrePage()
+                  }
+                })
+              }
 
+            }).catch(e => {
+              wx.hideLoading();
+            })
+
+        } else if (res.cancel) {
+
+        }
+      }
+
+    })
   }
 
 })

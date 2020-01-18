@@ -32,7 +32,7 @@
         <text class="rp-name">{{item.medicineName}}</text>
         <text class="rp-unit">{{item.specification}}</text>
       </view>
-      <text class="rp-num">{{item.medicineAmount}}</text>
+      <text class="rp-num">x{{item.medicineAmount}}</text>
     </view>
     <text class="rp-methods">{{item.takeDirection}}</text>
     <view class=".rp-lineView"></view>

@@ -1,5 +1,5 @@
 
-const version = 0 //0开发、1测试 2发布                                                                                                          
+const version = 1 //0开发、1测试 2发布                                                                                                          
 let API_BASE_URL = (function(){
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
@@ -244,9 +244,17 @@ module.exports = {
   fillDeliveryAddr: function fillDeliveryAddr(parmas) {
     return request('api/tmc/goodsOrder/fillDeliveryAddr', true, 'post', parmas);
   },
+
+  /*
+  *修改订单状态
+  */
+  changeStatus: function changeStatus(parmas) {
+    return request('api/tmc/goodsOrder/changeStatus', true, 'post', parmas);
+  },
+
   
 
-
+  
 
 
 

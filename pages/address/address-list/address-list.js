@@ -31,9 +31,13 @@ Page({
         if (res.code == 0) {
           this.data.list = res.data
           this.setData({
-            list: res.data
+            list: res.data,
+            noNetwork:false
           })
         } else {
+          this.setData({
+            noNetwork: false
+          })
           wx.showToast({
             title: res.message,
             icon:'none'
@@ -43,9 +47,8 @@ Page({
       }).catch(e => {
         wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
-        wx.showToast({
-          title: '连接失败',
-          icon: 'none'
+        this.setData({
+          noNetwork: true
         })
       })
   },
@@ -135,6 +138,11 @@ Page({
               });
             }
           })
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
         }
 
       }).catch(e => {
@@ -179,6 +187,11 @@ Page({
                     });
                   }
                 })
+              } else {
+                wx.showToast({
+                  title: res.message,
+                  icon: 'none'
+                })
               }
 
             }).catch(e => {
@@ -191,5 +204,9 @@ Page({
       }
 
     })
+  },
+
+  noNetworkOption() {
+    this.loadDatas()
   }
 })

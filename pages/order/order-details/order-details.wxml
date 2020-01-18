@@ -3,23 +3,28 @@
     <image class="header-bgImage" src="../../../images/public/public_order_bg.png"></image>
     <tmcnavbar titleText="订单详情"></tmcnavbar>
     <view class="paySuccess" style="margin-top: 50rpx">
-    <!-- 已支付 -->
+      <!-- 已支付 -->
       <block wx:if='{{orderInfo.orderStatusID == 10}}'>
-      <!-- 待发货 -->
+        <!-- 待发货 -->
         <block wx:if='{{orderInfo.deliveryStatusID == 1}}'>
           <image style="width:58rpx;height:58rpx" src="../../../images/order/order_wait.png"></image>
           <text>订单已支付，等待商家发货</text>
         </block>
         <!-- 已发货 确认收货 -->
-        <block wx:elif='{{orderInfo.deliveryStatusID == 2 || orderInfo.deliveryStatusID == 3}}'>
+        <block wx:elif='{{orderInfo.deliveryStatusID == 2}}'>
           <image style="width:58rpx;height:58rpx" src="../../../images/order/order_delivery.png"></image>
           <text>订单已发货</text>
         </block>
-      </block>
-      <!-- 已取消 -->
-      <block wx:elif='{{orderInfo.orderStatusID == 2}}'>
-        <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
-        <text>订单已取消，未收到退款请联系客服</text>
+        <!-- 确认收货 -->
+        <block wx:if='{{orderInfo.deliveryStatusID == 3}}'>
+          <image style="width:58rpx;height:58rpx" src="../../../images/order/order_delivery.png"></image>
+          <text>订单已确认收货</text>
+        </block>
+        <!-- 已取消 -->
+        <block wx:elif='{{orderInfo.orderStatusID == 2}}'>
+          <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
+          <text>订单已取消，未收到退款请联系客服</text>
+        </block>
       </block>
       <!-- 待支付 -->
       <block wx:elif='{{orderInfo.orderStatusID == 0}}'>
@@ -50,7 +55,7 @@
             <text class="drugs-cell-unit">{{item.specification}}</text>
           </view>
           <view class="drugs-cell-right">
-            <text class="drugs-cell-price">¥{{item.priceSum}}</text>
+            <text class="drugs-cell-price">¥{{item.unitPrice/100}}</text>
             <text class="drugs-cell-num">{{item.medicineAmount}}</text>
           </view>
         </view>
