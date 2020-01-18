@@ -303,28 +303,6 @@ Page({
     })
   },
 
-  getHistoryMsg: function() {
-    let that = this;
-    let username = that.data.username;
-    let myUsername = wx.getStorageSync("myUsername");
-    let sessionKey = username.groupId ? username.groupId + myUsername : username.your + myUsername;
-    let historyChatMsgs = wx.getStorageSync("rendered_" + sessionKey) || [];
-
-    if (Index < historyChatMsgs.length) {
-      let timesMsgList = historyChatMsgs.slice(-Index - 10, -Index)
-
-      this.setData({
-        chatMsg: timesMsgList.concat(me.data.chatMsg),
-        toView: timesMsgList[timesMsgList.length - 1].mid,
-      });
-      Index += timesMsgList.length;
-      if (timesMsgList.length == 10) {
-        page++;
-      }
-      wx.stopPullDownRefresh();
-    }
-  },
-
   /*打开会话时,获取最近消息列表 */
   getHistoryMessage: function() {
     let that = this;
@@ -340,6 +318,16 @@ Page({
           } else {
             item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
           }
+        } else if (item.type == "TIMCustomElem") { // 自定义消息
+          // 处理自定义消息
+          // customType
+          let customType = item.payload.data.customType;
+          // childType
+          let childType = item.payload.data.childType;
+          // data
+          let data = item.payload.data;
+          console.log("payload{data}:" + JSON.stringify(data));
+
         }
       })
       that.setData({
