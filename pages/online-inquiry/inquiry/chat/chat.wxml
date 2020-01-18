@@ -85,11 +85,11 @@
                <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfo">已取消</text>
                <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfo">已拒绝</text>
                <text wx:else class="videoStatusInfo">聊天时长 00：30</text>
-                <image class="videoMsgIcon" src="../../../../images/chat/m-video.png" />
+                <image class="videoMsgIcon" src="../../../../images/chat/videoSelf.png" />
               </view>
               <!-- 医生发起的 -->
               <view wx:else>
-               <image class="videoMsgIcon" src="../../../../images/chat/m-video.png" />
+               <image class="videoMsgIcon" src="../../../../images/chat/video.png" />
                 <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfoDoc">已取消</text>
                <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfoDoc">已拒绝</text>
                <text wx:else class="videoStatusInfoDoc">聊天时长 00：30</text>
