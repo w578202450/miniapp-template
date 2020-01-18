@@ -1,6 +1,4 @@
 const app = getApp();
-// const tim = app.tim
-// const TIM = app.TIM
 const recorderManager = wx.getRecorderManager();
 var HTTP = require('../../../../utils/http-util');
 var msgStorage = require("../../../../utils/msgstorage");
@@ -118,36 +116,29 @@ Page({
     let that = this;
     let username = this.data.username;
     let myUsername = wx.getStorageSync("myUsername");
-    // console.log("username:" + JSON.stringify(username));
-    // let sessionKey = username.groupId ?
-    //   username.groupId + myUsername :
-    //   username.your + myUsername;
-    // let chatMsg = wx.getStorageSync(sessionKey) || [];
-    // console.log("chatMsg:" + chatMsg);
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      // console.log("分发到聊天界面消息:" + JSON.stringify(renderableMsg));
-      // TODO
-      // customType
-      let customType = renderableMsg.payload.data.customType;
-      // childType
-      let childType = renderableMsg.payload.data.childType;
-      // data
-      let data = renderableMsg.payload.data.data;
-      console.log("payload{data}:" + JSON.stringify(data));
+      console.log("分发到聊天界面消息:" + JSON.stringify(renderableMsg));
       // msgType
-      let msgType = renderableMsg.msg.type;
-      // console.log("msg{Type}:" + msgType);
-      if (msgType == "TIMSoundElem") {
-        event.data.recordStatus = false; // 播放状态
-        if (Number(event.data.payload.second) <= 15) {
-          event.data.recordViewWidth = event.data.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+      let msgType = renderableMsg.type;
+      console.log("msg{Type}:" + msgType);
+      if (msgType == "TIMSoundElem") { // 语音消息
+        renderableMsg.recordStatus = false; // 播放状态
+        if (Number(renderableMsg.payload.second) <= 15) {
+          renderableMsg.recordViewWidth = renderableMsg.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
         } else {
-          event.data.recordViewWidth = (Number(event.data.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
+          renderableMsg.recordViewWidth = (Number(renderableMsg.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
         }
-      } else if (msgType == "TIMCustomElem") {
+      } else if (msgType == "TIMCustomElem") { // 自定义消息
         // 处理自定义消息
+        // customType
+        let customType = renderableMsg.payload.data.customType;
+        // childType
+        let childType = renderableMsg.payload.data.childType;
+        // data
+        let data = renderableMsg.payload.data;
+        console.log("payload{data}:" + JSON.stringify(data));
       }
-      let nowData = [...that.data.currentMessageList, ...renderableMsg];
+      let nowData = [...that.data.currentMessageList, renderableMsg];
       that.setData({
         currentMessageList: nowData
       });
@@ -452,7 +443,8 @@ Page({
       let nowData = [...that.data.currentMessageList, imResponse.data.message];
       that.setData({
         currentMessageList: nowData,
-        maySendContent: ""
+        maySendContent: "",
+        maySendContentSure: false
       });
       that.data.httpLoading = false; // 关闭隐性加载过程
       that.toViewBottomFun();
@@ -522,9 +514,9 @@ Page({
     }
     that.data.httpLoading = true; // 开启隐性加载过程
     // 1. 创建消息实例
-    const message = app.tim.createImageMessage({
+    const message = tim.createImageMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
-      conversationType: app.TIM.TYPES.CONV_GROUP, // 群聊
+      conversationType: TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         file: that.data.aimgurl
       }
@@ -567,8 +559,7 @@ Page({
 
   /*操作：切换为语音 */
   willSendRecordMsg: function() {
-    let that = this;
-    that.setData({
+    this.setData({
       isSendRecord: true
     });
   },
@@ -679,9 +670,9 @@ Page({
         });
       } else if (that.data.sendRecordLock) {
         // 4. 创建消息实例，接口返回的实例可以上屏
-        const message = app.tim.createAudioMessage({
+        const message = tim.createAudioMessage({
           to: that.data.inquiryInfo.keyID,
-          conversationType: app.TIM.TYPES.CONV_GROUP,
+          conversationType: TIM.TYPES.CONV_GROUP,
           payload: {
             file: res
           }

@@ -222,11 +222,9 @@
 
 .body .contentPictureMsg {
   background: #fff;
-  border-radius: 15rpx;
   margin-bottom: 20rpx;
   width: 160rpx;
   height: 160rpx;
-  /* overflow: hidden; */
   position: relative;
 }
 
