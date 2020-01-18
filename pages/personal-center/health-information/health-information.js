@@ -447,20 +447,26 @@ Page({
   // 查询健康信息
   loadDatas(){
     let that = this
-    wx.showLoading({
-      title: '加载中...',
-    });
+    wx.showNavigationBarLoading()
     HTTP.getPatientDoc({
       orgID: this.data.orgID,
       keyID: this.data.patientID
     })
       .then(res => {
-        wx.hideLoading()
-        for (var index in res.data) {
-          that.handleQueryInfo(res.data[index])
+        wx.hideNavigationBarLoading()
+        if(res.data){
+          for (var index in res.data) {
+            that.handleQueryInfo(res.data[index])
+          }
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
         }
         
       }).catch(e => {
+        wx.hideNavigationBarLoading()
         wx.hideLoading();
         wx.showToast({
           title: '获取信息失败',

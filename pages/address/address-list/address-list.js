@@ -11,7 +11,7 @@ Page({
 
   onLoad: function(e) {
     this.data.optionType = e.optionType
-    wx.startPullDownRefresh()
+    this.loadDatas()
   },
 
   onPullDownRefresh(){
@@ -21,32 +21,33 @@ Page({
    * 获取地址列表
    */
   loadDatas() {
+    wx.showNavigationBarLoading()
     HTTP.getAddress({
         personID: wx.getStorageSync('personID')
       })
       .then(res => {
+        wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
         if (res.code == 0) {
           this.data.list = res.data
           this.setData({
             list: res.data
           })
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
         }
 
       }).catch(e => {
+        wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
+        })
       })
-  },
-  /**
-   * 添加新地址
-   */
-  addAction: function() {
-    wx.navigateTo({
-      url: '/pages/address/address-add/address-add?count=' + this.data.list.length,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
-    })
   },
   /**
    * 编辑地址

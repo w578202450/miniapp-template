@@ -25,24 +25,27 @@ Page({
    *获取处方详情 
    */
   getRp(rpID) {
-    wx.showLoading({
-      title: '处方详情...',
-    })
+    wx.showNavigationBarLoading()
     HTTP.getRp({
         rpID: rpID,
         orgID: wx.getStorageSync('orgID')
       })
       .then(res => {
-        console.log('-------', res)
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
         if (res.code == 0) {
           this.data.orderID = res.data.orderID
           this.setData({
             rpData: res.data,
             isPreviewRp: this.data.isPreviewRp
           })
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
         }
       }).catch(e => {
+        wx.hideNavigationBarLoading()
         wx.hideLoading();
         wx.showToast({
           title: '网络链接失败',
