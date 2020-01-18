@@ -1,11 +1,7 @@
 @import "../../../common/common.wxss";
 
-page{
-  padding-top: 20rpx;
-}
-
 .cell{
-  margin-bottom: 20rpx;
+  margin-top: 20rpx;
   display: flex;
   flex-direction: column;
   background-color: white;

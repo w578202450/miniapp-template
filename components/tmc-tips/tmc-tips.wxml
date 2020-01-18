@@ -2,7 +2,7 @@
   <image src="{{icon}}" mode="widthFix"></image>
   <text class="tips-title">{{title}}</text>
   <text class="message">{{message}}</text>
-  <view style="margin-top:64rpx;height:80rpx;width:256rpx" class="button-background" bindtap="buttonOption">
+  <view  style="margin-top:64rpx;width:256rpx" class="button-background" bindtap="buttonOption">
     <text class="button-text">{{buttonTitle}}</text>
   </view>
 </view>
