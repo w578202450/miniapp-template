@@ -118,14 +118,14 @@ Page({
     let that = this;
     let username = this.data.username;
     let myUsername = wx.getStorageSync("myUsername");
-    console.log("username:" + JSON.stringify(username));
+    // console.log("username:" + JSON.stringify(username));
     // let sessionKey = username.groupId ?
     //   username.groupId + myUsername :
     //   username.your + myUsername;
     // let chatMsg = wx.getStorageSync(sessionKey) || [];
     // console.log("chatMsg:" + chatMsg);
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      console.log("分发到聊天界面消息:" + JSON.stringify(renderableMsg));
+      // console.log("分发到聊天界面消息:" + JSON.stringify(renderableMsg));
       // TODO
       // customType
       let customType = renderableMsg.payload.data.customType;
@@ -136,7 +136,7 @@ Page({
       console.log("payload{data}:" + JSON.stringify(data));
       // msgType
       let msgType = renderableMsg.msg.type;
-      console.log("msg{Type}:" + msgType);
+      // console.log("msg{Type}:" + msgType);
       if (msgType == "TIMSoundElem") {
         event.data.recordStatus = false; // 播放状态
         if (Number(event.data.payload.second) <= 15) {
@@ -144,6 +144,8 @@ Page({
         } else {
           event.data.recordViewWidth = (Number(event.data.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
         }
+      } else if (msgType == "TIMCustomElem") {
+        // 处理自定义消息
       }
       let nowData = [...that.data.currentMessageList, ...renderableMsg];
       that.setData({
@@ -151,28 +153,8 @@ Page({
       });
       that.toViewBottomFun();
     });
-
-    // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
-    // app.tim.on(app.TIM.EVENT.MESSAGE_RECEIVED, function(event) {
-    //   console.log("收到消息：" + JSON.stringify(event.data));
-    //   if (event.data.type == "TIMSoundElem") {
-    //     event.data.recordStatus = false; // 播放状态
-    //     if (Number(event.data.payload.second) <= 15) {
-    //       event.data.recordViewWidth = event.data.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-    //     } else {
-    //       event.data.recordViewWidth = (Number(event.data.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
-    //     }
-    //   }
-    //   let nowData = [...that.data.currentMessageList, ...event.data];
-    //   that.setData({
-    //     currentMessageList: nowData
-    //   });
-    //   that.toViewBottomFun();
-    // });
     that.setMessageRead();
   },
-
-
 
   /**
    * 生命周期函数--监听页面隐藏
