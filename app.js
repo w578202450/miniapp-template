@@ -9,20 +9,20 @@ import {
 // } from './utils/GenerateTestUserSig';
 // const AUTH = require('utils/auth')
 
-// 创建 TIM SDK 实例
-const tim = TIM.create({
-  SDKAppID: SDKAPPID
-})
+// // 创建 TIM SDK 实例
+// const tim = TIM.create({
+//   SDKAppID: SDKAPPID
+// })
 
-// 设置日志级别
-// tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
-tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
+// // 设置日志级别
+// // tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
+// tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
 
-// 将腾讯云对象存储服务 SDK （以下简称 COS SDK）注册为插件，IM SDK 发送文件、图片等消息时，需要用到腾讯云的 COS 服务
-// 注册 COS SDK 插件
-tim.registerPlugin({
-  'cos-wx-sdk': COS
-})
+// // 将腾讯云对象存储服务 SDK （以下简称 COS SDK）注册为插件，IM SDK 发送文件、图片等消息时，需要用到腾讯云的 COS 服务
+// // 注册 COS SDK 插件
+// tim.registerPlugin({
+//   'cos-wx-sdk': COS
+// })
 
 App({
   onLaunch: function() {
@@ -53,6 +53,23 @@ App({
     // })
 
     let that = this;
+    let msgStorage = require("utils/msgstorage");
+
+    // 创建 TIM SDK 实例
+    let tim = TIM.create({
+      SDKAppID: SDKAPPID
+    });
+
+    // 设置日志级别
+    // tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
+    tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用 
+
+    // 将腾讯云对象存储服务 SDK （以下简称 COS SDK）注册为插件，IM SDK 发送文件、图片等消息时，需要用到腾讯云的 COS 服务
+    // 注册 COS SDK 插件
+    tim.registerPlugin({
+      'cos-wx-sdk': COS
+    });
+
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.record']) {
@@ -70,7 +87,16 @@ App({
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
       // event.name - TIM.EVENT.SDK_READY
       // console.log(`============${event.name}==================`);
-      console.log(`============TIM SDK已处于READY状态==================`);
+      console.log("============TIM SDK已处于READY状态==================");
+    });
+
+    tim.on(TIM.EVENT.MESSAGE_RECEIVED, function (event) {
+      // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
+      // event.name - TIM.EVENT.MESSAGE_RECEIVED
+      // event.data - 存储 Message 对象的数组 - [Message]
+      console.log("===全局收消息===" + JSON.stringify(event.data));
+      // 全局收消息分发
+      msgStorage.saveReceiveMsg(event.data);
     });
 
     tim.on(TIM.EVENT.MESSAGE_REVOKED, function(event) {
@@ -189,14 +215,18 @@ App({
         wx.hideToast()
       }
     });
+    this.globalData.tim = tim,
+    this.globalData.TIM = TIM
   },
+ 
   onUnload: function() {
-    app.tim.logout().then(function(imResponse) {
+    tim.logout().then(function(imResponse) {
       console.log("===登出成功===" + imResponse.data); // 登出成功
     }).catch(function(imError) {
       console.warn('logout error:', imError);
     });
   },
+
   onShow: function() {
     this.upDataApp()
   },
@@ -235,18 +265,13 @@ App({
       })
     }
   },
-  
+
   globalData: {
+    tim: null,
+    TIM: null,
     userInfo: null,
     personInfo: {},
-    baseUrl: 'http://10.0.0.210:6112/',
     doctorInfo: null,
-    // 地址列表 0表示个人中心收货地址进入  1表示确认收货地址界面进入
-    // addressListType:0,
-    // // 确认收货地址 0表示处方详情  1表示确认收货地址界面进入
-    // confirmAddressType:0
     isConnected:true
   },
-  tim: tim,
-  TIM: TIM
 })

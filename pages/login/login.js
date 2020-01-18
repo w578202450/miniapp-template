@@ -3,6 +3,8 @@ var HTTP = require('../../utils/http-util.js');
 import {
   genTestUserSig
 } from '../../utils/GenerateTestUserSig';
+var tim = getApp().globalData.tim;
+var TIM = getApp().globalData.TIM;
 
 Page({
   data: {
@@ -124,8 +126,9 @@ Page({
     //   title: '微信授权信息',
     //   content: "userId:" + userId + ",userSig:" + that.data.userSig
     // })
+    wx.setStorageSync('myUsername', userId);
     // IM登录
-    app.tim.login({
+    tim.login({
       userID: userId,
       userSig: genTestUserSig(userId).userSig/*that.data.userSig*/
     }).then(function (imResponse) {

@@ -52,7 +52,7 @@
       enableIM="{{enableIM}}" bindIMEvent="onIMEvent">
     </webrtc-room>
     <cover-view class='img-box'>
-      <cover-image class='img-view' src='/pages/Resources/endcall.png' bindtap="goBack"></cover-image>
+      <cover-image class='img-view' src='/pages/images/video/endcall.png' bindtap="goBack"></cover-image>
     </cover-view>
   </view>
 </view>
