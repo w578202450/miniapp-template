@@ -327,7 +327,6 @@ Page({
           // data
           let data = item.payload.data;
           console.log("payload{data}:" + JSON.stringify(data));
-
         }
       })
       that.setData({

@@ -66,14 +66,34 @@
             <text wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}">{{talkInfo.assistantInfo.doctorName}} -医助</text>
           </view>
           <!-- 自定义消息 -->
-          <view wx:if="{{item.type == '自定义消息'}}" class="cardRpBox" bindtap="toRpDetailFun" data-rpid="{{item.payload.keyID}}">
-            <view class="cardRpTitleDiv">
-              <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
-              <view class="cardRpTitle">治疗方案</view>
+          <view wx:if="{{item.type == 'TIMCustomElem'}}">
+            <!-- 自定义的卡片消息 -->
+            <view wx:if="{{item.payload.description == '[卡片消息]'}}" class="cardRpBox" bindtap="toRpDetailFun" data-rpid="{{item.payload.keyID}}">
+              <view class="cardRpTitleDiv">
+                <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
+                <view class="cardRpTitle">治疗方案</view>
+              </view>
+              <view class="cardRpInfoDiv">
+                <text class="cardRpInfo borderBottomLine">患者： 吕梁（男 32岁）</text>
+                <text class="cardRpInfo">诊断： 骨痹-寒湿痹阻</text>
+              </view>
             </view>
-            <view class="cardRpInfoDiv">
-              <text class="cardRpInfo borderBottomLine">患者： 吕梁（男 32岁）</text>
-              <text class="cardRpInfo">诊断： 骨痹-寒湿痹阻</text>
+            <!-- 自定义的视频聊天消息 -->
+            <view wx:elif="{{item.payload.description == '[视频问诊消息]'}}" class="videoMsgBox">
+              <!-- 自己发起的 -->
+              <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}">
+               <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfo">已取消</text>
+               <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfo">已拒绝</text>
+               <text wx:else class="videoStatusInfo">聊天时长 00：30</text>
+                <image class="videoMsgIcon" src="../../../../images/chat/m-video.png" />
+              </view>
+              <!-- 医生发起的 -->
+              <view wx:else>
+               <image class="videoMsgIcon" src="../../../../images/chat/m-video.png" />
+                <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfoDoc">已取消</text>
+               <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfoDoc">已拒绝</text>
+               <text wx:else class="videoStatusInfoDoc">聊天时长 00：30</text>
+              </view>
             </view>
           </view>
           <!-- 文本消息：TIMTextElem -->
