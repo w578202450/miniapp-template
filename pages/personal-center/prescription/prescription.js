@@ -19,18 +19,19 @@ Page({
    * 获取处方列表
    */
   loadDatas() {
-    wx.showLoading({
-      title: '加载中...',
-    });
     this.data.list = [];
     var that = this;
+    wx.showNavigationBarLoading()
     HTTP.getRpListByPerson({
       orgID: wx.getStorageSync("orgID"),
       patientID: wx.getStorageSync("patientID")
     })
       .then(res => {
+        wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
-        wx.hideLoading();
+        that.setData({
+          noNetwork: false
+        })
         if (res.code == 0) {
           if (res.data.length == 0) {
             that.setData({
@@ -42,10 +43,18 @@ Page({
               list: this.data.list
             })
           }
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
         }
       }).catch(e => {
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
+        that.setData({
+          noNetwork:true
+        })
       })
   },
   // 加载更多数据
@@ -60,6 +69,10 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
+  },
+
+  noNetworkOption(){
+    this.loadDatas()
   }
 
 })

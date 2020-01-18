@@ -20,11 +20,9 @@ Page({
    * 加载订单列表
    */
   loadDatas() {
-    wx.showLoading({
-      title: '加载中...',
-    });
     this.data.list = [];
     var that = this;
+    wx.showNavigationBarLoading()
     HTTP.getOrderByPerson({
         buyerID: wx.getStorageSync('personInfo').personID,
         orgID: wx.getStorageSync('orgID'),
@@ -32,7 +30,11 @@ Page({
         pageSize: 100
       })
       .then(res => {
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+        that.setData({
+          noNetwork: false
+        })
         if (res.code == 0) {
           console.log('res.data.datas.length---', res.data.datas.length)
           if (res.data.datas && res.data.datas.length == 0) {
@@ -51,17 +53,28 @@ Page({
               rpIDs: tempRpIds
             })
           }
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
         }
       }).catch(e => {
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+        that.setData({
+          noNetwork: true
+        })
       })
   },
   /**
    * 获取对于的诊断结果
    */
   getRpByList(params) {
+    wx.showNavigationBarLoading()
     HTTP.getRpByList(params)
       .then(res => {
+        wx.hideNavigationBarLoading()
         if (res.code == 0) {
           if (res.data) {
             for (var j in this.data.list) {
@@ -74,6 +87,7 @@ Page({
           list: this.data.list
         })
       }).catch(e => {
+        wx.hideNavigationBarLoading()
       })
   },
   /**
@@ -123,5 +137,10 @@ Page({
       fail: function (res) { },
       complete: function (res) { },
     })
+  },
+
+  noNetworkOption() {
+    this.loadDatas()
   }
+
 })

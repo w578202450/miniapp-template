@@ -18,16 +18,14 @@ Page({
    * 获取订单详情
    */
   loadDatas() {
-    wx.showLoading({
-      title: '加载订单详情...',
-    });
+    wx.showNavigationBarLoading()
     var that = this;
     HTTP.goodsOrder({
         orderID: this.data.orderID,
         orgID: wx.getStorageSync('orgID')
       })
       .then(res => {
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
         if (res.code == 0) {
           this.data.orderInfo = res.data
           this.setData({
@@ -35,9 +33,14 @@ Page({
           })
           this.fetchRpDetails(res.data.rpID)
           this.data.rpID = res.data.rpID
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
         }
       }).catch(e => {
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
         wx.showToast({
           title: e,
           icon: 'none'
@@ -48,23 +51,26 @@ Page({
    * 获取处方详情
    */
   fetchRpDetails(rpID) {
-    wx.showLoading({
-      title: '获取处方详情...',
-    });
     var that = this;
+    wx.showNavigationBarLoading()
     HTTP.getRp({
         rpID: rpID,
         orgID: wx.getStorageSync('orgID')
       })
       .then(res => {
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
         if (res.code == 0) {
           this.setData({
             rpMedicines: res.data.rpMedicines
           })
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
         }
       }).catch(e => {
-        wx.hideLoading();
+        wx.hideNavigationBarLoading()
         wx.showToast({
           title: '网络链接失败',
           icon: 'none'
@@ -96,6 +102,9 @@ Page({
    */
   payOption() {
     var that = this
+    wx.showLoading({
+      title: '支付中',
+    })
     HTTP.orderPrePay({
         orgID: wx.getStorageSync('orgID'),
         orderID: this.data.orderInfo.keyID,
@@ -127,6 +136,9 @@ Page({
   tradeOrder: function(paymentID) {
     console.log('---支付校验---', paymentID)
     var that = this
+    wx.showLoading({
+      title: '支付中...'
+    })
     HTTP.tradeOrder({
         body: '医护上门',
         detail: '医护上门PICC换药',
@@ -161,8 +173,7 @@ Page({
   wxPayOptions(payInfo) {
     var that = this
     wx.showLoading({
-      title: '支付中...',
-      icon: 'none'
+      title: '支付中...'
     })
     wx.requestPayment({
       'timeStamp': payInfo.timestamp,
@@ -193,7 +204,7 @@ Page({
   orderPaySuccess() {
     let that = this
     wx.showLoading({
-      title: '支付回调...'
+      title: '支付中...'
     })
     HTTP.orderPaySuccess({
         orgID: wx.getStorageSync('orgID'),
@@ -217,6 +228,7 @@ Page({
         } else {
           wx.showToast({
             title: res.message,
+            icon:'none'
           })
         }
       }).catch(e => {

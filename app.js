@@ -155,6 +155,40 @@ App({
     // }).catch(function (imError) {
     //   console.warn("===登录失败===", imError); // 登录失败的相关信息
     // });
+    /**
+     * 初次加载判断网络情况
+     * 无网络状态下根据实际情况进行调整
+     */
+    wx.getNetworkType({
+      success(res) {
+        const networkType = res.networkType
+        if (networkType === 'none') {
+          that.globalData.isConnected = false
+          wx.showToast({
+            title: '当前无网络',
+            icon: 'loading',
+            duration: 2000
+          })
+        }
+      }
+    });
+    /**
+     * 监听网络状态变化
+     * 可根据业务需求进行调整
+     */
+    wx.onNetworkStatusChange(function (res) {
+      if (!res.isConnected) {
+        that.globalData.isConnected = false
+        wx.showToast({
+          title: '网络已断开',
+          icon: 'loading',
+          duration: 2000
+        })
+      } else {
+        that.globalData.isConnected = true
+        wx.hideToast()
+      }
+    });
   },
   onUnload: function() {
     app.tim.logout().then(function(imResponse) {
@@ -206,11 +240,12 @@ App({
     userInfo: null,
     personInfo: {},
     baseUrl: 'http://10.0.0.210:6112/',
-    doctorInfo: null
+    doctorInfo: null,
     // 地址列表 0表示个人中心收货地址进入  1表示确认收货地址界面进入
     // addressListType:0,
     // // 确认收货地址 0表示处方详情  1表示确认收货地址界面进入
     // confirmAddressType:0
+    isConnected:true
   },
   tim: tim,
   TIM: TIM

@@ -13,7 +13,9 @@ Page({
   onLoad: function (e) {
     var doctorId = e.doctorId
     this.fetchDoctorInfo(doctorId)
+    
   },
+
   // 获取主治医师信息
   fetchDoctorInfo(doctorId) {
     var that = this;
@@ -21,7 +23,6 @@ Page({
       staffID: doctorId
     })
       .then(res => {
-        wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
             this.setData({
@@ -29,12 +30,15 @@ Page({
             })
           }
         } else {
-
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
         }
       }).catch(e => {
-        wx.hideLoading();
-        that.setData({
-          noNetwork: true
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
         })
       })
   },
