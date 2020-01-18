@@ -116,36 +116,29 @@ Page({
     let that = this;
     let username = this.data.username;
     let myUsername = wx.getStorageSync("myUsername");
-    // console.log("username:" + JSON.stringify(username));
-    // let sessionKey = username.groupId ?
-    //   username.groupId + myUsername :
-    //   username.your + myUsername;
-    // let chatMsg = wx.getStorageSync(sessionKey) || [];
-    // console.log("chatMsg:" + chatMsg);
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      // console.log("分发到聊天界面消息:" + JSON.stringify(renderableMsg));
-      // TODO
-      // customType
-      let customType = renderableMsg.payload.data.customType;
-      // childType
-      let childType = renderableMsg.payload.data.childType;
-      // data
-      let data = renderableMsg.payload.data.data;
-      console.log("payload{data}:" + JSON.stringify(data));
+      console.log("分发到聊天界面消息:" + JSON.stringify(renderableMsg));
       // msgType
-      let msgType = renderableMsg.msg.type;
-      // console.log("msg{Type}:" + msgType);
-      if (msgType == "TIMSoundElem") {
-        event.data.recordStatus = false; // 播放状态
-        if (Number(event.data.payload.second) <= 15) {
-          event.data.recordViewWidth = event.data.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+      let msgType = renderableMsg.type;
+      console.log("msg{Type}:" + msgType);
+      if (msgType == "TIMSoundElem") { // 语音消息
+        renderableMsg.recordStatus = false; // 播放状态
+        if (Number(renderableMsg.payload.second) <= 15) {
+          renderableMsg.recordViewWidth = renderableMsg.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
         } else {
-          event.data.recordViewWidth = (Number(event.data.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
+          renderableMsg.recordViewWidth = (Number(renderableMsg.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
         }
-      } else if (msgType == "TIMCustomElem") {
+      } else if (msgType == "TIMCustomElem") { // 自定义消息
         // 处理自定义消息
+        // customType
+        let customType = renderableMsg.payload.data.customType;
+        // childType
+        let childType = renderableMsg.payload.data.childType;
+        // data
+        let data = renderableMsg.payload.data;
+        console.log("payload{data}:" + JSON.stringify(data));
       }
-      let nowData = [...that.data.currentMessageList, ...renderableMsg];
+      let nowData = [...that.data.currentMessageList, renderableMsg];
       that.setData({
         currentMessageList: nowData
       });
