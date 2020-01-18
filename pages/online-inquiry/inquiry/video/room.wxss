@@ -47,6 +47,7 @@
   top: 20%;
   /* background: red; */
 }
+
 /* 医生头像 */
 .img-head {
   width: 180rpx;

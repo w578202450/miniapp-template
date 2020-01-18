@@ -323,6 +323,30 @@
   border-bottom: 1rpx solid #E8E8E8;
 }
 
+/* 自定义视频聊天消息 */
+
+.videoMsgBox {
+  margin-bottom: 20rpx;
+  padding: 15rpx;
+  border-radius: 15rpx;
+  background: #fff;
+}
+
+.videoMsgBox .videoMsgIcon {
+  width: 35rpx;
+  height: 20rpx;
+}
+
+.videoMsgBox .videoStatusInfo {
+  font-size: 32rpx;
+  margin-right: 15rpx;
+}
+
+.videoMsgBox .videoStatusInfoDoc {
+  font-size: 32rpx;
+  margin-left: 15rpx;
+}
+
 /*底部工具栏*/
 
 .bottomMenus {
