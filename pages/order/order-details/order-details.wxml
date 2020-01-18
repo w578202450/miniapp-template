@@ -52,11 +52,12 @@
         <view class="drugs-cell-content">
           <view class="drugs-cell-middle">
             <text class="drugs-cell-name">{{item.medicineName}}</text>
-            <text class="drugs-cell-unit">{{item.specification}}</text>
+            <text class="drugs-cell-unit">用法用量：{{item.takeDose}}{{item.formType}}+</text>
+            <!-- 用法用量：{{item.takeDose}}{{item.formType}/次，{{item.takeFrequence}}，{{item.takeDirection}}，{{item.medicationDays}} 天 -->
           </view>
           <view class="drugs-cell-right">
             <text class="drugs-cell-price">¥{{item.unitPrice/100}}</text>
-            <text class="drugs-cell-num">{{item.medicineAmount}}</text>
+            <text class="drugs-cell-num">x{{item.medicineAmount}}{{item.unit}}</text>
           </view>
         </view>
         <view class="cell-info-separator"></view>
@@ -87,7 +88,7 @@
       </view>
       <view class="prescription-delivery prescription-text">
         <text>支付方式：</text>
-        <text>{{orderInfo.payWay == 0 ? "在线支付" : (orderInfo.payWay == 1 ? "付定金" : "货到付款")}}</text>
+        <text>{{orderInfo.payWay == 1 ? "在线支付" : (orderInfo.payWay == 0 ? "付定金" : "货到付款")}}</text>
       </view>
       <view class="prescription-delivery prescription-text">
         <text>定金金额：</text>
@@ -104,9 +105,9 @@
 
     <view style="display: flex;flex-direction: column;padding:32rpx">
       <text class="other-text">订单编号：{{orderInfo.orderID}}</text>
-      <text class="other-text">创建时间：{{orderInfo.createTime}}</text>
-      <text class="other-text">付款时间：{{orderInfo.payTime}}</text>
-      <text class="other-text">发货时间：{{orderInfo.deliveryTime}}</text>
+      <text class="other-text">创建时间：{{orderInfo.createTime=='1900-01-01 00:00:00' ? '' : orderInfo.payTime}}</text>
+      <text class="other-text">付款时间：{{orderInfo.payTime=='1900-01-01 00:00:00' ? '' : orderInfo.payTime}}</text>
+      <text class="other-text">发货时间：{{orderInfo.deliveryTime=='1900-01-01 00:00:00' ? '' : orderInfo.deliveryTime}}</text>
     </view>
 
     <view class="separator" style="height:24rpx"></view>
@@ -122,7 +123,7 @@
         </view>
       </block>
       <!-- 已支付 在线支付 已发货 -->
-      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 0 && orderInfo.deliveryStatusID == 2}}'>
+      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 1 && orderInfo.deliveryStatusID == 2}}'>
         <view class="options-view" style="background:rgba(67,139,239,1);border:1px solid rgba(67,139,239,1)" bindtap="confirmGoods">
           <text style="color:rgba(255,255,255,1)">确认收货</text>
         </view>

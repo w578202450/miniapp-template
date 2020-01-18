@@ -1,5 +1,5 @@
 
-const version = 1 //0开发、1测试 2发布                                                                                                          
+const version = 0 //0开发、1测试 2发布                                                                                                          
 let API_BASE_URL = (function(){
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
@@ -88,7 +88,7 @@ module.exports = {
    *获取微信个人信息
    */
   getPatientInfo: function getPatientInfo(parmas) {
-    return request('api/tmc/patient/getPatientInfoByOpenID', true, 'post', parmas);
+    return request('api/tmc/patient/getPatientInfoByUnionID', true, 'post', parmas);
   },
   /*
    *查询患者处方列表

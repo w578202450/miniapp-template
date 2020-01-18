@@ -137,6 +137,7 @@ page {
   align-items: center;
   margin-left: 32rpx;
   margin-right: 32rpx;
+  width: 100%;
 }
 
 .titleLabel {
@@ -165,6 +166,7 @@ page {
   align-items: center;
   margin-left: 32rpx;
   margin-right: 32rpx;
+  width: 100%;
 }
 
 .middle-four {
@@ -174,7 +176,8 @@ page {
   background: rgba(255, 255, 255, 1);
   box-shadow:0px 1px 4px 0px rgba(0,0,0,0.1);
   border-radius: 10rpx;
-  padding: 30rpx 32rpx 36rpx 32rpx
+  padding: 30rpx 32rpx 36rpx 32rpx;
+  width: 100%;
 }
 
 .middle-four .doctor-card {

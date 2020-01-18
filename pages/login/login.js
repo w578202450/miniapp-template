@@ -71,7 +71,8 @@ Page({
     }
     HTTP.getWXAuth(prams).then(res => {
       if (res.code == 0) {
-        that.getPatientInfo(res.data.openid)
+        // unionid
+        that.getPatientInfo(res.data.unionid)
       } else {
         wx.hideLoading()
         wx.showToast({
@@ -152,10 +153,10 @@ Page({
    * 获取基础数据
    */
 
-  getPatientInfo(openID) {
+  getPatientInfo(unionID) {
     let that = this
     var prams = {
-      openID: openID,
+      unionID: unionID,
       nickName: app.globalData.userInfo.nickName,
       avatarUrl: app.globalData.userInfo.avatarUrl,
       sex: app.globalData.userInfo.sex,
@@ -177,8 +178,8 @@ Page({
             data: res.data.keyID
           }),
           wx.setStorage({
-            key: 'openID',
-            data: openID
+          key: 'unionID',
+          data: unionID
           }),
           wx.setStorage({
             key: 'personID',

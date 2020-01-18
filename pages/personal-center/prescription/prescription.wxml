@@ -13,7 +13,7 @@
         <view>
           <text class="content">{{item.diagnosis}}</text>
         </view>
-        <text class="date">开放日期：{{item.modifyTime}}</text>
+        <text class="date">开方时间：{{item.modifyTime}}</text>
       </view>
     </navigator>
   </view>

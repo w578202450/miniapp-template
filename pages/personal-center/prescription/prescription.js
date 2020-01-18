@@ -33,16 +33,16 @@ Page({
           noNetwork: false
         })
         if (res.code == 0) {
-          // if (res.data.length == 0) {
+          if (res.data.length == 0) {
             that.setData({
               noData: true
             })
-          // } else {
-          //   this.data.list = this.data.list.concat(res.data)
-          //   that.setData({
-          //     list: this.data.list
-          //   })
-          // }
+          } else {
+            this.data.list = this.data.list.concat(res.data)
+            that.setData({
+              list: this.data.list
+            })
+          }
         } else {
           wx.showToast({
             title: res.message,
