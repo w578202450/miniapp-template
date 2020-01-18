@@ -136,10 +136,11 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "聊天页",
-					"pathName": "pages/online-inquiry/inquiry/chat/chat",
-					"query": ""
+					"id": 11,
+					"name": "视频",
+					"pathName": "pages/online-inquiry/inquiry/video/room",
+					"query": "",
+					"scene": null
 				},
 				{
 					"id": 12,
@@ -152,6 +153,7 @@
 					"id": -1,
 					"name": "处方详情",
 					"pathName": "pages/personal-center/prescription-details/prescription-details",
+					"query": "",
 					"scene": null
 				}
 			]

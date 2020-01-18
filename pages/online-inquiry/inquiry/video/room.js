@@ -238,7 +238,7 @@ Page({
     beauty: 3, // 美颜指数，取值 0 - 9，数值越大效果越明显
     muted: false, // true 静音 false 不静音
     debug: true, // true 打印推流 debug 信息 fales 不打印推流 debug 信息
-    enableIM: true, // 是否启用IM
+    enableIM: false, // 是否启用IM
     // 其他配置参数可查看 API 文档
     inquiryId: '', // 问诊记录id
     customMsgType: '', // 自定义消息类型(根据payload{childType}确定)
