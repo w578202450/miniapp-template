@@ -90,7 +90,7 @@
         <text>{{orderInfo.payWay == 1 ? "在线支付" : (orderInfo.payWay == 0 ? "付定金" : "货到付款")}}</text>
       </view>
       <view wx:if='{{orderInfo.payWay == 1 || orderInfo.payWay == 0}}' class="prescription-delivery prescription-text">
-        <text>{{orderInfo.payWay == 1}} ? 应付金额： : 在线定金：</text>
+        <text>{{orderInfo.payWay == 1 ? '应付金额：' : '在线定金：'}}</text>
         <text style="color:rgba(254,88,83,1)">¥{{orderInfo.prePrice/100}}</text>
       </view>
       <view class="separator"></view>

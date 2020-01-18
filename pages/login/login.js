@@ -23,12 +23,11 @@ Page({
 
   // 微信授权
   getUserInfo: function(e) {
-    
     let that = this
     wx.checkSession({
       success() {
         //session_key 未过期，并且在本生命周期一直有效
-        that.getounionid()
+        that.getounionid(wx.getStorageSync('sessionKey'))
       },
       fail() {
         wx.setStorageSync('encryptedData', e.detail.encryptedData)
@@ -56,7 +55,7 @@ Page({
     wx.login({
       success: function(res) {
         wx.setStorageSync('wxCode', res.code)
-        that.getounionid();
+        that.getounionid("");
       },
       fail: function(res) {
         wx.hideLoading()
@@ -74,19 +73,19 @@ Page({
    * 1.1再判断本地是否缓存了相应的基础信息，存在就直接跳转到首页，不存在就请求基础数据
    * 2.和缓存的openid是不一致
    * 2.1根据新的openid获取相应的基础数据并缓存新的openid
-   * 
-   */
-  getounionid() {
+   * */
+  getounionid(sessionKey) {
     let that = this
     var prams = {
       code: wx.getStorageSync('wxCode'),
       encryptedData: wx.getStorageSync('encryptedData'),
-      iv: wx.getStorageSync('iv')
+      iv: wx.getStorageSync('iv'),
+      sessionKey: sessionKey
     }
     HTTP.getWXAuth(prams).then(res => {
       if (res.code == 0) {
         // unionid
-        console.log('ddd-----', res.data.unionid)
+        wx.setStorageSync('sessionKey', res.data.session_key)
         that.getPatientInfo(res.data.unionid)
       } else {
         wx.hideLoading()
@@ -179,8 +178,6 @@ Page({
       city: app.globalData.userInfo.city,
       province: app.globalData.userInfo.province,
     }
-
-    console.log('parmas----', prams)
     HTTP.getPatientInfo(prams).then(res => {
       if (res.code == 0) {
         wx.setStorage({
