@@ -381,7 +381,7 @@ Page({
   // },
 
   sendCustomMsg: function (msgPayload) {
-    // let that = this;
+    let that = this;
     // let msgPayload = {
     //   data:{
     //     customType: "sys",
