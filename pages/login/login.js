@@ -258,7 +258,6 @@ Page({
           that.loginIM(userId);
         }
       } else {
-        console.log("获取userSig失败：" + "code:" + res.data.code + ",message:" + res.data.message);
         wx.hideLoading();
         wx.showToast({
           title: '获取userSig失败'
@@ -279,7 +278,7 @@ Page({
     // IM登录
     tim.login({
       userID: userId,
-      userSig: genTestUserSig(userId).userSig /*that.data.userSig*/
+      userSig: /*genTestUserSig(userId).userSig*/ that.data.userSig
     }).then(function(imResponse) {
       console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
       wx.hideLoading();

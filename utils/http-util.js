@@ -1,6 +1,12 @@
-
-const version = 1 //0开发、1测试 2发布                                                                                                          
-let API_BASE_URL = (function(){
+const version = 1; //0开发、1测试 2发布  
+// const _SDKAPPID = (function() {
+//   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
+//     return "1400200900"
+//   } else { // 0开发，2发布(开发和发布SDKAPPID为1400283798)
+//     return "1400283798"
+//   }
+// })();
+let API_BASE_URL = (function() {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
   } else if (version == 1) {
@@ -246,19 +252,19 @@ module.exports = {
   },
 
   /*
-  *修改订单状态
-  */
+   *修改订单状态
+   */
   changeStatus: function changeStatus(parmas) {
     return request('api/tmc/goodsOrder/changeStatus', true, 'post', parmas);
   },
 
-  
-
-  
-
-
-
-
-
-
+  /**
+   * 获取SDKAPPID
+   */
+  genSDKappid: function genSDKappid() {
+    var SDKAPPID = _SDKAPPID;
+    return {
+      sdkappid: SDKAPPID
+    };
+  }
 }
