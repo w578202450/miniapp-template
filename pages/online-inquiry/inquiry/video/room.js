@@ -214,11 +214,6 @@ Page({
     let username = this.data.username;
     let myUsername = wx.getStorageSync("myUsername");
     console.log("username:" + JSON.stringify(username));
-    // let sessionKey = username.groupId ?
-    //   username.groupId + myUsername :
-    //   username.your + myUsername;
-    // let chatMsg = wx.getStorageSync(sessionKey) || [];
-    // console.log("chatMsg:" + chatMsg);
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
       console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
       // msgType
@@ -540,31 +535,6 @@ Page({
   onLoad: function(options) {
     let that = this;
     this.data.webrtcroomComponent = this.selectComponent('#myroom');
-    // this.getPersonInfo(); // 从storage中获取患者信息和userSig
-    // wx.getStorage({
-    //   key: "personInfo",
-    //   success: function(res) {
-    //     that.setData({
-    //       userInfo: res.data
-    //     });
-    //     // that.getUserSig();
-    //     let userSig = wx.getStorageSync("userSig");
-    //     that.setData({
-    //       userSig: userSig
-    //     });
-    //     wx.getStorage({
-    //       key: 'inquiryInfo',
-    //       success: function(res) {
-    //         that.setData({
-    //           inquiryInfo: res.data
-    //         });
-    //         // 创建问诊   
-    //         that.createVideoInquiry();
-    //         that.joinRoom();
-    //       },
-    //     })
-    //   }
-    // })
     wx.getStorage({
       key: 'personInfo',
       success: function(res) {
