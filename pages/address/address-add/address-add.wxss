@@ -91,4 +91,7 @@
   bottom: 36rpx;
 }
 
+picker{
+  width: 100%
+}
 

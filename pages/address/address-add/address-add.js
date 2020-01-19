@@ -154,9 +154,30 @@ Page({
    * 保存地址
    */
   saveOptions() {
+    if (!this.data.receiverName){
+      wx.showToast({
+        title: '请填写收货人姓名',
+        icon: 'none'
+      })
+      return
+    }
+    if (!this.data.receiverPhone) {
+      wx.showToast({
+        title: '请填写手机号码',
+        icon: 'none'
+      })
+      return
+    }
     if (this.data.noSelected) {
       wx.showToast({
         title: '请填写省市区',
+        icon: 'none'
+      })
+      return
+    }
+    if (!this.data.address) {
+      wx.showToast({
+        title: '请填写详细地址',
         icon: 'none'
       })
       return
@@ -181,6 +202,7 @@ Page({
     wx.showLoading({
       title: '保存中...',
     });
+    
     HTTP.addAddress({
         "personID": wx.getStorageSync('personID'),
         "receiverName": this.data.receiverName,

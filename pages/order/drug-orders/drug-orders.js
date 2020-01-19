@@ -107,8 +107,9 @@ Page({
       isDefault: that.data.list[index].isDefault
     }
     let obj = JSON.stringify(addressInfo)
+    let modifyUser = that.data.list[index].modifyUser ? that.data.list[index].modifyUser : ''
     wx.navigateTo({
-      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + that.data.orderID + '&modifyUser=' + that.data.orderInfo.modifyUser,
+      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + that.data.orderID + '&modifyUser=' + modifyUser,
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },

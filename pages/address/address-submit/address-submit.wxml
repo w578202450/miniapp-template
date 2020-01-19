@@ -17,7 +17,6 @@
             <view class="info-box">
               <text class="name">{{addressInfo.name}}</text>
               <text class="phone">{{addressInfo.phone}}</text>
-              <view hidden="{{addressInfo.isDefault == '0'}}" class="selectedBtn">默认</view>
             </view>
             <text class="address">{{addressInfo.province+addressInfo.city+addressInfo.area+addressInfo.address}}</text>
           </view>
