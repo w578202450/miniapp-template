@@ -436,11 +436,18 @@ Page({
   },
 
   /*操作：输入框聚焦，关闭工具栏 */
-  closeBottomBoolbarFun() {
+  menusInputFocusFun: function(e) {
     // 有问题，需要修改
     // this.setData({
     //   isOpenBottomBoolbar: false
     // });
+    console.log(e);
+    console.log("聚焦了");
+  },
+
+  /*操作：消息输入框失去焦点时 */
+  menusInputBlurFun:function() {
+    console.log("失去焦点了");
   },
 
   /*操作：输入预发送信息 */
