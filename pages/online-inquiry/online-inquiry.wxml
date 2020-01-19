@@ -4,7 +4,7 @@
   <view class="header" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;">
     <image src="../../images/home/home_header_bg.png" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;"></image>
     <view class="header-titleView" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
-    <text>侯丽萍风湿病远程诊疗中心</text>
+    <text>{{doctorInfo.orgName}}</text>
     </view>
     <!-- <view class="header-one" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
       <image src='../../images/public/public_theme_hospital.png' style="width:290rpx;height:56rpx"></image>
