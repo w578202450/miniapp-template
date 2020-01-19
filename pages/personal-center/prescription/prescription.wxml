@@ -11,7 +11,7 @@
     url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}&index=0&isPreviewRp=1">
       <view class="cell">
         <view>
-          <text class="content">{{item.diagnosis}}</text>
+          <text class="content">诊断结果：{{item.diagnosis}}</text>
         </view>
         <text class="date">开方时间：{{item.modifyTime}}</text>
       </view>

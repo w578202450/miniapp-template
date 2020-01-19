@@ -81,17 +81,18 @@ Page({
       prevPage = pages[pages.length - 2]; //获取上一个页面，将其赋值
     }
     if (prevPage) {
+      prevPage.data.addressInfo = {
+        name: this.data.list[index].receiverName,
+        phone: this.data.list[index].receiverPhone,
+        address: this.data.list[index].address,
+        province: this.data.list[index].province,
+        city: this.data.list[index].city,
+        area: this.data.list[index].area,
+        remarks: this.data.list[index].remarks ? this.data.list[index].remarks : '',
+        isDefault: this.data.list[index].isDefault
+      } //将想要传的信息赋值给上一个页面data中的值
       prevPage.setData({
-        addressInfo: {
-          name: this.data.list[index].receiverName,
-          phone: this.data.list[index].receiverPhone,
-          address: this.data.list[index].address,
-          province: this.data.list[index].province,
-          city: this.data.list[index].city,
-          area: this.data.list[index].area,
-          remarks: this.data.list[index].remarks,
-          isDefault: this.data.list[index].isDefault
-        } //将想要传的信息赋值给上一个页面data中的值
+        addressInfo: prevPage.data.addressInfo
       })
     }
     wx.navigateBack({
@@ -156,13 +157,6 @@ Page({
   deleteAction: function(e) {
     var that = this
     var index = e.currentTarget.dataset.index;
-    if (this.data.list[index].isDefault == 1) {
-      wx.showToast({
-        title: '当前为默认地址',
-        icon: 'none'
-      })
-      return;
-    }
 
     wx.showModal({
       content: '确定删除当前地址？',

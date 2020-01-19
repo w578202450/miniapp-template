@@ -8,6 +8,8 @@ Page({
   },
   
   onLoad: function (e) {
+    console.log('e--------', e)
+    console.log('e.orderID--------', e.orderID)
     if (e.orderID){
       this.data.orderID = e.orderID
     }
@@ -31,20 +33,35 @@ Page({
    * 设置订单配送地址
    */
   submitOption(){
+    console.log('submitOption=====',this.data.addressInfo)
     let that = this
     wx.showLoading({
       title: '确认收货地址...',
     });
+    if (!this.data.addressInfo.name ||
+      !this.data.addressInfo.phone ||
+      !this.data.addressInfo.province ||
+      !this.data.addressInfo.city ||
+      !this.data.addressInfo.area || 
+      !this.data.addressInfo.address){
+        wx.showToast({
+          title: '请选择收货地址',
+          icon:'none'
+        })
+
+        return;
+    }
+
     HTTP.fillDeliveryAddr({
       orgID: wx.getStorageSync('orgID'),
       orderID: this.data.orderID,
-      receiverName: this.data.addressInfo.receiverName,
-      receiverPhone: this.data.addressInfo.receiverPhone,
+      receiverName: this.data.addressInfo.name,
+      receiverPhone: this.data.addressInfo.phone,
       province: this.data.addressInfo.province,
       city: this.data.addressInfo.city,
       area: this.data.addressInfo.area,
       address: this.data.addressInfo.address,
-      remarks: this.data.addressInfo.remarks,
+      remarks: this.data.addressInfo.remarks ? his.data.addressInfo.remarks : '',
       modifyUser: this.data.modifyUser
     })
       .then(res => {

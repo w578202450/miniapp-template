@@ -2,7 +2,7 @@
 
   <view class="header">
     <image class="header-bgImage" src="../../../images/public/public_order_bg.png"></image>
-    <tmcnavbar titleText="提交收货地址"></tmcnavbar>
+    <tmcnavbar titleText="确认收货地址"></tmcnavbar>
     <view class="paySuccess">
       <image src="../../../images/address/address_paySuccess.png"></image>
       <text>订单支付成功，请完善订单信息~</text>
@@ -45,7 +45,7 @@
   </view>
 
   <view style="display:flex;justify-content: center;align-items: center;padding:32rpx;margin-top:80rpx">
-    <view class="button-background" bindtap="payAction">
+    <view class="button-background" bindtap="submitOption">
       <text class="button-text">提交</text>
     </view>
   </view>

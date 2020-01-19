@@ -13,7 +13,7 @@
           <view class="content-box">
             <text class="content-title">{{item.doctorName}}医生的治疗方案</text>
             <text class="content-details">{{item.diagnosis}}</text>
-            <text class="content-date">开方日期：{{item.modifyTime}}</text>
+            <text class="content-date">开方日期：{{item.modifyTime=='1900-01-01 00:00:00' ? '' : item.modifyTime}}</text>
           </view>
           <view class="right-box">
             <text class="right-status">{{item.orderStatusID==10 ? item.deliveryStatusName : item.orderStatusName}}</text>

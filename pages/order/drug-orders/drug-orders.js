@@ -96,6 +96,10 @@ Page({
   addressAction: function(e) {
     var that = this
     var index = e.currentTarget.dataset.index;
+    console.log('index--------',index)
+    console.log('this.data.list--------', this.data.list)
+    console.log('this.data.list[index]--------', this.data.list[index])
+    console.log('this.data.list[index].orderID--------', this.data.list[index].orderID)
     let addressInfo = {
       name: that.data.list[index].receiverName,
       phone: that.data.list[index].receiverPhone,
@@ -103,13 +107,15 @@ Page({
       province: that.data.list[index].province,
       city: that.data.list[index].city,
       area: that.data.list[index].area,
-      remarks: that.data.list[index].remarks,
+      remarks: that.data.list[index].remarks ? that.data.list[index].remarks : '',
       isDefault: that.data.list[index].isDefault
     }
     let obj = JSON.stringify(addressInfo)
     let modifyUser = that.data.list[index].modifyUser ? that.data.list[index].modifyUser : ''
+    let orderID = this.data.list[index].orderID ? this.data.list[index].orderID : orderID;
+    console.log('orderID--------', orderID)
     wx.navigateTo({
-      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + that.data.orderID + '&modifyUser=' + modifyUser,
+      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + orderID + '&modifyUser=' + modifyUser,
       success: function (res) { },
       fail: function (res) { },
       complete: function (res) { },

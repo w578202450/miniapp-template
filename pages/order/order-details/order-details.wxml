@@ -109,7 +109,7 @@
 
     <view style="display: flex;flex-direction: column;padding:32rpx">
       <text class="other-text">订单编号：{{orderInfo.orderID}}</text>
-      <text class="other-text">创建时间：{{orderInfo.createTime=='1900-01-01 00:00:00' ? '' : orderInfo.payTime}}</text>
+      <text class="other-text">创建时间：{{orderInfo.createTime=='1900-01-01 00:00:00' ? '' : orderInfo.createTime}}</text>
       <text class="other-text">付款时间：{{orderInfo.payTime=='1900-01-01 00:00:00' ? '' : orderInfo.payTime}}</text>
       <text class="other-text">发货时间：{{orderInfo.deliveryTime=='1900-01-01 00:00:00' ? '' : orderInfo.deliveryTime}}</text>
     </view>

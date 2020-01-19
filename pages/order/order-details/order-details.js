@@ -216,7 +216,7 @@ Page({
         console.log('支付回调------', res)
         if (res.code == 0) {
           wx.showToast({
-            title: '支付回调成功',
+            title: '支付成功',
             success: function() {
               //1.刷新上一个界面的状态和当前界面数据
               that.loadDatas()
@@ -234,7 +234,7 @@ Page({
       }).catch(e => {
         wx.hideLoading();
         wx.showToast({
-          title: '支付回调失败',
+          title: '支付失败',
         })
       })
   },

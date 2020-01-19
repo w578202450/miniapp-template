@@ -20,7 +20,7 @@
       <text class="personinfo-other">诊断：{{rpData.diagnosis}}</text>
     </view>
     <view class="personinfo-other-box">
-      <text class="personinfo-other">开方日期：{{rpData.rpTime}}</text>
+      <text class="personinfo-other">开方日期：{{rpData.rpTime == '1900-01-01 00:00:00' ? '' : rpData.rpTime}}</text>
     </view>
   </view>
 </view>
