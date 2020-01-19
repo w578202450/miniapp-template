@@ -181,6 +181,10 @@ Page({
    * 处理卡片消息
    */
   dealHintMessage: function(data) {
+    let that = this;
+    let childType = data.childType;
+    console.log("childType:" + childType);
+
 
   },
 
