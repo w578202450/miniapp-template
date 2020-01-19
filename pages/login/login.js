@@ -327,6 +327,7 @@ Page({
         disabled: false
       })
       if (res.code == 0) {
+        app.globalData.orgName = res.data.orgName
         wx.setStorage({
             key: 'personInfo',
             data: res.data

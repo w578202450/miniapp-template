@@ -4,18 +4,8 @@
   <view class="header" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;">
     <image src="../../images/home/home_header_bg.png" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;"></image>
     <view class="header-titleView" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
-    <text>{{doctorInfo.orgName}}</text>
+      <text>{{orgName}}</text>
     </view>
-    <!-- <view class="header-one" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
-      <image src='../../images/public/public_theme_hospital.png' style="width:290rpx;height:56rpx"></image>
-    </view>
-    <view class="header-two">
-      <view class="header-info">
-        <text class="room_name">{{doctorInfo.doctorName}}的互联网诊室</text>
-        <text class="room_des">网上咨询·在线开药·预约就诊</text>
-      </view>
-      <image src="../../images/home/home_doctor.png"></image>
-    </view> -->
   </view>
 
   <view class="middle-one">

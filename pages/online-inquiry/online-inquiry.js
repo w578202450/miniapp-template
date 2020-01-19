@@ -20,7 +20,8 @@ Page({
   },
   onLoad: function() {
     console.log('statusBarHeight--', systemInfo)
-    console.log('navBarHeight--', this.data.navBarHeight)
+    console.log('statusBarHeight--', systemInfo)
+    console.log('orgName--', app.globalData.orgName)
     console.log('capsuleLeft--', rect)
     this.fetchDoctorInfo()
     this.fetchAssistantDoctorInfo()
@@ -53,7 +54,8 @@ Page({
             app.globalData.doctorInfo = res.data
             // this.fetchDoctorQualification(res.data.doctorID)
             this.setData({
-              doctorInfo: res.data
+              doctorInfo: res.data,
+              orgName: app.globalData.orgName
             })
           }
         } 

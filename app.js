@@ -200,7 +200,8 @@ App({
     iv:'',//密码
     code:'',//临时code
     sessionKey:'',
-    openid:''
+    openid:'',
+    orgName:''
   },
   
 })
