@@ -246,7 +246,7 @@ Page({
    */
   getUserSig: function(userId) {
     wx.showLoading({
-      title: 'IM登录...',
+      title: '登录中...',
     })
     let that = this;
     let prams = {
