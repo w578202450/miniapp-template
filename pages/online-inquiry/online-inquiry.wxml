@@ -1,8 +1,12 @@
 <!--index.wxml-->
 
 <view class="page">
-  <view class="header">
-    <view class="header-one" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
+  <view class="header" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;">
+    <image src="../../images/home/home_header_bg.png" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;"></image>
+    <view class="header-titleView" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
+    <text>侯丽萍风湿病远程诊疗中心</text>
+    </view>
+    <!-- <view class="header-one" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
       <image src='../../images/public/public_theme_hospital.png' style="width:290rpx;height:56rpx"></image>
     </view>
     <view class="header-two">
@@ -11,7 +15,7 @@
         <text class="room_des">网上咨询·在线开药·预约就诊</text>
       </view>
       <image src="../../images/home/home_doctor.png"></image>
-    </view>
+    </view> -->
   </view>
 
   <view class="middle-one">
