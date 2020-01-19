@@ -111,9 +111,8 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  padding-top: 16rpx;
-  padding-bottom: 16rpx;
-  margin-left: 32rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
   flex-grow: 1;
 }
 

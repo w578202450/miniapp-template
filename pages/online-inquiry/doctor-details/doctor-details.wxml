@@ -32,7 +32,7 @@
       <text class="middle-title">专治疾病</text>
     </view>
     <view class="middle-cotent-box">
-      <text class="middle-cotent">{{doctorInfo.sectionName}}</text>
+      <text class="middle-cotent">{{disease}}</text>
     </view>
     <view class="middle-bottomLine"></view>
   </view>

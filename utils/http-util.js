@@ -1,6 +1,5 @@
-
-const version = 1 //0开发、1测试 2发布                                                                                                          
-let API_BASE_URL = (function(){
+const version = 0 //0开发、1测试 2发布                                                                                                          
+let API_BASE_URL = (function() {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
   } else if (version == 1) {
@@ -246,15 +245,22 @@ module.exports = {
   },
 
   /*
-  *修改订单状态
-  */
+   *修改订单状态
+   */
   changeStatus: function changeStatus(parmas) {
     return request('api/tmc/goodsOrder/changeStatus', true, 'post', parmas);
   },
+  /*
+   *获取医生专治疾病
+   */
+  getDoctorDiseaseByDoctorID: function getDoctorDiseaseByDoctorID(parmas) {
+    return request('api/peachUser/hospitalDoctor/getDoctorDiseaseByDoctorID', true, 'get', parmas);
+  },
 
-  
 
-  
+
+
+
 
 
 

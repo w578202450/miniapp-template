@@ -11,9 +11,8 @@ Page({
     ]
   },
   onLoad: function (e) {
-    var doctorId = e.doctorId
-    this.fetchDoctorInfo(doctorId)
-    
+    var staffID = e.staffID
+    this.fetchDoctorInfo(staffID)
   },
 
   // 获取主治医师信息
@@ -28,6 +27,7 @@ Page({
             this.setData({
               doctorInfo: res.data
             })
+            this.getDoctorDiseaseByDoctorID(res.data.doctorID)
           }
         } else {
           wx.showToast({
@@ -42,4 +42,35 @@ Page({
         })
       })
   },
+
+  getDoctorDiseaseByDoctorID(doctorId){
+    var that = this;
+    HTTP.getDoctorDiseaseByDoctorID({
+      doctorID: doctorId
+    })
+      .then(res => {
+        console.log('getDoctorDiseaseByDoctorID-----',res)
+        if (res.code == 0) {
+          if (res.data) {
+            var disease = []
+            for (var index in res.data) {
+              disease.push(res.data[index].diseaseName) 
+            }
+            this.setData({
+              disease: disease.join(',')
+            })
+          }
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
+        }
+      }).catch(e => {
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
+        })
+      })
+  }
 })

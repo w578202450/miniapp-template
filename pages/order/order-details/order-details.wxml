@@ -46,7 +46,7 @@
     <view class="drugs-list">
       <view class="drugs-list-header">
         <view class="drugs-list-lineView"></view>
-        <view class="drugs-list-source">药品由{{detail.deliveryMan}}为你提供</view>
+        <view class="drugs-list-source">药品由桃子互联网医院为你提供</view>
       </view>
       <view class="drugs-cell" wx:for="{{rpMedicines}}" wx:for-item="item">
         <view class="drugs-cell-content">
@@ -78,7 +78,12 @@
       <view class="separator" style="margin-top: 25rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>配送方式：</text>
-        <text>{{orderInfo.deliveryTypeID == 0 ? "上门自取" : (orderInfo.deliveryTypeID == 1 ? "送货上门" : "快递")}}</text>
+        <block wx:if='{{orderInfo.deliveryStatusName}}'>
+          <text>{{orderInfo.deliveryStatusName}}</text>
+        </block>
+        <block wx:else>
+          <text>{{orderInfo.deliveryTypeID == 0 ? "上门自取" : (orderInfo.deliveryTypeID == 1 ? "送货上门" : "快递")}}</text>
+        </block>
       </view>
       <view class="separator" style="margin-left: 32rpx;margin-right: 32rpx"></view>
       <view class="prescription-delivery prescription-text">

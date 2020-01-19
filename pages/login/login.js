@@ -124,15 +124,22 @@ Page({
         // unionid
         wx.setStorageSync('sessionKey', res.data.session_key)
         wx.setStorageSync('unionid', res.data.unionid)
+        wx.setStorageSync('openID', res.data.openid)
         app.globalData.sessionKey = res.data.session_key
         that.getPatientInfo(res.data.unionid)
       } else {
+        that.setData({
+          disabled: false
+        })
         wx.showToast({
           title: res.message,
           icon: 'none'
         })
       }
     }).catch(e => {
+      that.setData({
+        disabled: false
+      })
       wx.hideLoading()
       wx.showToast({
         title: '网络异常'
@@ -258,7 +265,7 @@ Page({
           that.loginIM(userId);
         }
       } else {
-        console.log("获取userSig失败：" + "code:" + res.data.code + ",message:" + res.data.message);
+        // console.log("获取userSig失败：" + "code:" + res.data.code + ",message:" + res.data.message);
         wx.hideLoading();
         wx.showToast({
           title: '获取userSig失败'

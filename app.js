@@ -26,6 +26,7 @@ import {
 
 App({
   onLaunch: function() {
+    this.upDataApp()
     // AUTH.wxlogin();
 
     // wx.getSetting({
@@ -228,7 +229,7 @@ App({
   },
 
   onShow: function() {
-    this.upDataApp()
+    
   },
   /**
    * 版本更新
