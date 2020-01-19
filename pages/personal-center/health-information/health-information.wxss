@@ -46,8 +46,12 @@ page{
   align-items: center;
 }
 
+.tempView{
+  width: 100%;
+  height: 116rpx;
+}
+
 .button-view{
   width: 100%;
-  padding-top: 36rpx;
   padding-bottom: 36rpx;
 }

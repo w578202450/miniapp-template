@@ -20,8 +20,8 @@
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">吸烟史</text>
     <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" bind:radioChange="smokingAction"></tmcRadioView>
-    <input hidden="{{hiddenInput}}" class="font-one" placeholder="请填写烟龄" value="{{smoked}}" type="number" bindinput="smokeInput" style="flex-grow:1;margin-left: 16rpx;"></input>
-    <text hidden="{{hiddenInput}}" class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
+    <input hidden="{{hiddenSmokeInput}}" class="font-one" placeholder="请填写烟龄" value="{{smoked}}" type="number" bindinput="smokeInput" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <text hidden="{{hiddenSmokeInput}}" class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
   </view>
 
   <template is="tmc-separator"></template>
@@ -29,6 +29,8 @@
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">饮酒史</text>
     <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{drinkingItems}}" bind:radioChange="drinkingAction"></tmcRadioView>
+    <input hidden="{{hiddenDrinkInput}}" class="font-one" placeholder="请填写酒龄" value="{{drink}}" type="number" bindinput="drinkInput" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <text hidden="{{hiddenDrinkInput}}" class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
   </view>
 
   <template is="tmc-separator"></template>
@@ -70,14 +72,20 @@
 
   <template is="tmc-separator"></template>
 
-  <view class="button-background" style="position:fixed;left:32rpx;right:32rpx;bottom:32rpx;background-color: rgba(255,255,255,1)" bindtap="submitAction">
-    <text class="button-text">保存</text>
-  </view>
+  <view class="tempView"></view>
 
-  <!-- <view class="button-view">
+  <!-- <view class="button-view">Number(this.data.allergyList.length) + 1
+
+
+
+  
     <button class="button-theme" bindtap="submitAction" style="margin-top:96rpx;width:80%">保存</button>
   </view> -->
   <modal hidden="{{isHiddenDialog}}" title="新增" confirm-text="保存" cancel-text="取消" bindcancel="cancleDialog" bindconfirm="confirmDialog">
     <input bindinput='fetchInput' value="{{dialogInput}}" type='text' placeholder="请输入新增史" auto-focus/>
   </modal>
+</view>
+
+<view class="button-background" style="position:fixed;left:32rpx;right:32rpx;bottom:32rpx;background-color: rgba(255,255,255,1)" bindtap="submitAction">
+  <text class="button-text">保存</text>
 </view>
