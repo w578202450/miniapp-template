@@ -220,8 +220,6 @@ page {
   font-weight: 400;
   color: rgba(0, 0, 0, 0.65);
   text-align: center;
-  flex-shrink: 0;
-  width: 96rpx;
 }
 
 .doctor-card .cardInfo_two {

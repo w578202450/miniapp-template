@@ -19,8 +19,9 @@ Page({
      * 2.不存在unionid 进行微信登录
      */
     app.globalData.unionid = wx.getStorageSync('unionid')
+    app.globalData.openid = wx.getStorageSync('openID')
     app.globalData.userInfo = wx.getStorageSync('userInfo') ? wx.getStorageSync('userInfo') : ''
-    if (app.globalData.unionid) {
+    if (app.globalData.unionid && app.globalData.openid) {
       this.getPatientInfo(app.globalData.unionid)
     } else {
       this.fetchWxCode()
@@ -78,10 +79,11 @@ Page({
     app.globalData.iv = e.detail.iv
     app.globalData.userInfo = e.detail.userInfo
     app.globalData.unionid = wx.getStorageSync('unionid')
+    app.globalData.openid = wx.getStorageSync('openID')
     wx.setStorageSync('encryptedData', e.detail.encryptedData)
     wx.setStorageSync('iv', e.detail.iv)
     wx.setStorageSync('userInfo', e.detail.userInfo)
-    if (app.globalData.unionid) {
+    if (app.globalData.unionid && app.globalData.openid) {
       this.getPatientInfo(app.globalData.unionid)
     } else {
       let that = this

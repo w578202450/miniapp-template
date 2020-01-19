@@ -200,6 +200,7 @@ App({
     encryptedData:'',//密码
     iv:'',//密码
     code:'',//临时code
-    sessionKey:''
+    sessionKey:'',
+    openid:''
   },
 })
