@@ -335,9 +335,16 @@
   background: #fff;
 }
 
+.videoDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .videoMsgBox .videoMsgIcon {
-  width: 35rpx;
-  height: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .videoMsgBox .videoStatusInfo {

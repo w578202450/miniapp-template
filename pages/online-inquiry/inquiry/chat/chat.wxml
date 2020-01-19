@@ -81,18 +81,18 @@
             <!-- 自定义的视频聊天消息 -->
             <view wx:elif="{{item.payload.description == '[视频问诊消息]'}}" class="videoMsgBox">
               <!-- 自己发起的 -->
-              <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}">
-               <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfo">已取消</text>
-               <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfo">已拒绝</text>
-               <text wx:else class="videoStatusInfo">聊天时长 00：30</text>
+              <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="videoDiv">
+                <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfo">已取消</text>
+                <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfo">已拒绝</text>
+                <text wx:else class="videoStatusInfo">聊天时长 00：30</text>
                 <image class="videoMsgIcon" src="../../../../images/chat/videoSelf.png" />
               </view>
               <!-- 医生发起的 -->
-              <view wx:else>
-               <image class="videoMsgIcon" src="../../../../images/chat/video.png" />
+              <view wx:else class="videoDiv">
+                <image class="videoMsgIcon" src="../../../../images/chat/video.png" />
                 <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfoDoc">已取消</text>
-               <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfoDoc">已拒绝</text>
-               <text wx:else class="videoStatusInfoDoc">聊天时长 00：30</text>
+                <text wx:if="{{item.payload.data.state ==  '已拒绝'}}" class="videoStatusInfoDoc">已拒绝</text>
+                <text wx:else class="videoStatusInfoDoc">聊天时长 00：30</text>
               </view>
             </view>
           </view>
