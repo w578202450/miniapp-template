@@ -48,12 +48,13 @@ Page({
         iconUrl: "../../../../images/chat/m-camera.png",
         clickFun: "cameraWxFun",
         isFifth: false
-      }, {
-        title: "视频问诊",
-        iconUrl: "../../../../images/chat/m-video.png",
-        clickFun: "videoWxFun",
-        isFifth: false
       }
+      // ,{
+      //   title: "视频问诊",
+      //   iconUrl: "../../../../images/chat/m-video.png",
+      //   clickFun: "videoWxFun",
+      //   isFifth: false
+      // }
     ],
     aimgurl: {}, // //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
