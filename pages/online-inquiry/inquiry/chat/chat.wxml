@@ -71,11 +71,11 @@
             <view wx:if="{{item.payload.description == '[卡片消息]'}}" class="cardRpBox" bindtap="toRpDetailFun" data-rpid="{{item.payload.keyID}}">
               <view class="cardRpTitleDiv">
                 <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
-                <view class="cardRpTitle">治疗方案</view>
+                <text class="cardRpInfo">初步诊断： 骨痹-寒湿痹阻骨骨痹-寒湿痹阻骨</text>
               </view>
-              <view class="cardRpInfoDiv">
-                <text class="cardRpInfo borderBottomLine">患者： 吕梁（男 32岁）</text>
-                <text class="cardRpInfo">诊断： 骨痹-寒湿痹阻</text>
+              <view class="toRpDetailDiv">
+                <text class="toRpDetailTitle">查看处方详情</text>
+                <image class="toRpDetailIcon" src="../../../../images/chat/you.png" />
               </view>
             </view>
             <!-- 自定义的视频聊天消息 -->

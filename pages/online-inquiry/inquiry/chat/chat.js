@@ -29,8 +29,7 @@ Page({
       type: Object,
       value: {},
     },
-    // 聊天列表信息
-    currentMessageList: [],
+    currentMessageList: [], // 聊天列表信息
     nextReqMessageID: "", // 用于续拉，分页续拉时需传入该字段
     isCompleted: false, // 表示是否已经拉完所有消息
     httpLoading: false, // 是否请求中
