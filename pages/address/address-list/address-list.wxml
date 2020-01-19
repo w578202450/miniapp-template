@@ -34,9 +34,13 @@
     </view>
   </view>
 
-  <navigator url="/pages/address/address-add/address-add?count={{list.length}}">
+  <view class="tempView"></view>
+
+  
+</block>
+
+<navigator url="/pages/address/address-add/address-add?count={{list.length}}">
     <view style="position: fixed;bottom: 32rpx;left: 32rpx;right: 32rpx;" class="button-background">
       <text class="button-text">+ 新增地址</text>
     </view>
   </navigator>
-</block>
