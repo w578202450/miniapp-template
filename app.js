@@ -201,7 +201,9 @@ App({
     code:'',//临时code
     sessionKey:'',
     openid:'',
-    orgName:''
+    orgName:'',
+    personID:'',
+    orgID:''
   },
   
 })

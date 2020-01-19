@@ -1,5 +1,7 @@
 const HTTP = require('../../../utils/http-util')
 
+let app = getApp()
+
 Page({
   data: {
     addressInfo:null,
@@ -21,7 +23,75 @@ Page({
       this.setData({
         addressInfo: this.data.addressInfo
       })
+    } else {
+      this.fetchDefaultAddress()
     }
+  },
+
+  /**
+   * 获取默认地址
+   */
+  fetchDefaultAddress() {
+    wx.showNavigationBarLoading()
+    if (!app.globalData.personID) {
+      wx.showToast({
+        title: 'personID为空',
+        icon: 'none'
+      })
+      return;
+    }
+    HTTP.getAddress({
+      personID: app.globalData.personID
+    })
+      .then(res => {
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+        if (res.code == 0) {
+          if (res.data){
+            for (var index in res.data){
+              let item = res.data[index]
+              if (item.isDefault == 1){
+                this.data.addressInfo = {
+                  name: item.receiverName,
+                  phone: item.receiverPhone,
+                  address: item.address,
+                  province: item.province,
+                  city: item.city,
+                  area: item.area,
+                  remarks: item.remarks ? item.remarks : '',
+                  isDefault: item.isDefault
+                } //将想要传的信息赋值给上一个页面data中的值
+                break;
+              }
+            }
+
+            this.setData({
+              addressInfo: this.data.addressInfo
+            })
+          }
+          
+          this.data.list = res.data
+          this.setData({
+            list: res.data,
+            noNetwork: false
+          })
+        } else {
+          this.setData({
+            noNetwork: false
+          })
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
+        }
+
+      }).catch(e => {
+        wx.hideNavigationBarLoading()
+        wx.stopPullDownRefresh()
+        this.setData({
+          noNetwork: true
+        })
+      })
   },
   /**
    * 备注

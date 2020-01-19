@@ -17,6 +17,7 @@
             <view class="info-box">
               <text class="name">{{addressInfo.name}}</text>
               <text class="phone">{{addressInfo.phone}}</text>
+              <view wx:if="{{addressInfo.isDefault == 1}}" class="selectedBtn">默认</view>
             </view>
             <text class="address">{{addressInfo.province+addressInfo.city+addressInfo.area+addressInfo.address}}</text>
           </view>
@@ -49,8 +50,4 @@
       <text class="button-text">提交</text>
     </view>
   </view>
-
-
-
-
 </view>

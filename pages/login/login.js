@@ -328,6 +328,9 @@ Page({
       })
       if (res.code == 0) {
         app.globalData.orgName = res.data.orgName
+        app.globalData.personID = res.data.personID
+        app.globalData.patientID = res.data.keyID
+        app.globalData.orgID = res.data.orgID
         wx.setStorage({
             key: 'personInfo',
             data: res.data

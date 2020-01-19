@@ -1,4 +1,6 @@
 const HTTP = require('../../../utils/http-util')
+
+let app = getApp()
 /**
  * optionType为0 表示从个人中心进入地址列表界面
  * optionType为1 表示从其他界面进入地址列表界面
@@ -22,8 +24,15 @@ Page({
    */
   loadDatas() {
     wx.showNavigationBarLoading()
+    if (!app.globalData.personID){
+      wx.showToast({
+        title: 'personID为空',
+        icon:'none'
+      })
+      return;
+    }
     HTTP.getAddress({
-        personID: wx.getStorageSync('personID')
+      personID: app.globalData.personID
       })
       .then(res => {
         wx.hideNavigationBarLoading()

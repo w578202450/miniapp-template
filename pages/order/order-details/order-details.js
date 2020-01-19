@@ -255,20 +255,38 @@ Page({
    * 跳转到确认收货地址界面
    */
   skipAddressSubmit() {
-    let that = this
-    let addressInfo = {
-      name: that.data.orderInfo.receiverName,
-      phone: that.data.orderInfo.receiverPhone,
-      address: that.data.orderInfo.address,
-      province: that.data.orderInfo.province,
-      city: that.data.orderInfo.city,
-      area: that.data.orderInfo.area,
-      remarks: that.data.orderInfo.remarks,
-      isDefault: that.data.orderInfo.isDefault
+    var addressInfo = null
+    if (!this.data.orderInfo.receiverName ||
+      !this.data.orderInfo.receiverPhone ||
+      !this.data.orderInfo.address ||
+      !this.data.orderInfo.province ||
+      !this.data.orderInfo.city ||
+      !this.data.orderInfo.area
+    ){
+      addressInfo = null
+    } else {
+      addressInfo = {
+        name: this.data.orderInfo.receiverName,
+        phone: this.data.orderInfo.receiverPhone,
+        address: this.data.orderInfo.address,
+        province: this.data.orderInfo.province,
+        city: this.data.orderInfo.city,
+        area: this.data.orderInfo.area,
+        remarks: this.data.orderInfo.remarks,
+        isDefault: this.data.orderInfo.isDefault ? this.data.orderInfo.isDefault : 0
+      }
     }
-    let obj = JSON.stringify(addressInfo)
+
+    var navigateToUrl = ''
+    if (addressInfo){
+      let obj = JSON.stringify(addressInfo)
+      url = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
+    } else {
+      url = '../../address/address-submit/address-submit?orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
+    }
+    
     wx.navigateTo({
-      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + that.data.orderID + '&modifyUser=' + that.data.orderInfo.modifyUser,
+      url: navigateToUrl,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
