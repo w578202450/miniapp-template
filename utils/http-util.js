@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-const version = 0 //0开发、1测试 2发布                                                                                                          
-=======
-const version = 1; //0开发、1测试 2发布  
+
+const version = 0; //0开发、1测试 2发布  
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
 //     return "1400200900"
@@ -9,7 +7,6 @@ const version = 1; //0开发、1测试 2发布
 //     return "1400283798"
 //   }
 // })();
->>>>>>> 297534c273650ede646d6c74c666a582febf0556
 let API_BASE_URL = (function() {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
@@ -267,20 +264,6 @@ module.exports = {
   getDoctorDiseaseByDoctorID: function getDoctorDiseaseByDoctorID(parmas) {
     return request('api/peachUser/hospitalDoctor/getDoctorDiseaseByDoctorID', true, 'get', parmas);
   },
-
-
-
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-}
-=======
   /**
    * 获取SDKAPPID
    */
@@ -291,4 +274,3 @@ module.exports = {
     };
   }
 }
->>>>>>> 297534c273650ede646d6c74c666a582febf0556
