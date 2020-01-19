@@ -223,8 +223,7 @@
 .body .contentPictureMsg {
   background: #fff;
   margin-bottom: 20rpx;
-  width: 160rpx;
-  height: 160rpx;
+  width: 240rpx;
   position: relative;
 }
 
@@ -236,8 +235,8 @@
 }
 
 .body .pictureMsg {
-  width: 160rpx;
-  height: 160rpx;
+  width: 240rpx;
+  height: 240rpx;
 }
 
 /*音频消息*/
