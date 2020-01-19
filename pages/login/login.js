@@ -315,6 +315,9 @@ Page({
       province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
     }
     HTTP.getPatientInfo(prams).then(res => {
+      that.setData({
+        disabled: false
+      })
       if (res.code == 0) {
         wx.setStorage({
             key: 'personInfo',
@@ -360,6 +363,9 @@ Page({
         })
       }
     }).catch(e => {
+      that.setData({
+        disabled: false
+      })
       wx.hideLoading()
       wx.showToast({
         title: '网络异常'
