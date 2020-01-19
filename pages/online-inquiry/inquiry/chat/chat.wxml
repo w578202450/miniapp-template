@@ -138,7 +138,7 @@
         <!-- 录音按钮 -->
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框 -->
-        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"
+        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" bindblur="menusInputBlurFun" adjust-position="{{true}}" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"
         />
         <!-- bindfocus="closeBottomBoolbarFun" style="width: {{!isSendRecord && maySendContentSure ? '400': '445'}}rpx;"/> -->
         <!-- 表情 -->
