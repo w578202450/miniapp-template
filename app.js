@@ -269,9 +269,15 @@ App({
   globalData: {
     tim: null,
     TIM: null,
-    userInfo: null,
+    userInfo: {},
     personInfo: {},
-    doctorInfo: null,
-    isConnected:true
+    doctorInfo: {},
+    isConnected:true,
+    unionid: '',//unionidId
+    patientID:'',//病人id
+    encryptedData:'',//密码
+    iv:'',//密码
+    code:'',//临时code
+    sessionKey:''
   },
 })
