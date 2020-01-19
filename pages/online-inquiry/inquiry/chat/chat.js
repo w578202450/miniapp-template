@@ -29,8 +29,7 @@ Page({
       type: Object,
       value: {},
     },
-    // 聊天列表信息
-    currentMessageList: [],
+    currentMessageList: [], // 聊天列表信息
     nextReqMessageID: "", // 用于续拉，分页续拉时需传入该字段
     isCompleted: false, // 表示是否已经拉完所有消息
     httpLoading: false, // 是否请求中
@@ -129,14 +128,25 @@ Page({
           renderableMsg.recordViewWidth = (Number(renderableMsg.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
         }
       } else if (msgType == "TIMCustomElem") { // 自定义消息
-        // 处理自定义消息
-        // customType
-        let customType = renderableMsg.payload.data.customType;
-        // childType
-        let childType = renderableMsg.payload.data.childType;
+        /* 处理自定义消息 */
         // data
         let data = renderableMsg.payload.data;
         console.log("payload{data}:" + JSON.stringify(data));
+        // customType
+        let customType = data.customType;
+        // childType
+        // let childType = data.childType;
+        switch (customType) {
+          case "sys": // 系统消息
+            that.dealSysMessage(data);
+            break;
+          case "hint": // hint消息
+            that.dealHintMessage(data);
+            break;
+          case "card": // 卡片消息
+            that.dealCardMessage(data);
+            break;
+        }
       }
       let nowData = [...that.data.currentMessageList, renderableMsg];
       that.setData({
@@ -146,6 +156,45 @@ Page({
     });
     that.setMessageRead();
   },
+
+  /**
+   * 处理系统消息
+   */
+  dealSysMessage: function(data) {
+    let that = this;
+    let childType = data.childType;
+    switch (childType) {
+      case "video": // 视频问诊消息
+        that.dealSysVideoMessage(data);
+        break;
+    }
+  },
+
+  /**
+   * 处理hint消息
+   */
+  dealHintMessage: function(data) {
+
+  },
+
+  /**
+   * 处理卡片消息
+   */
+  dealHintMessage: function(data) {
+
+  },
+
+  /**
+   * 处理视频问诊消息
+   */
+  dealSysVideoMessage: function(data) {
+    console.log("===处理视频问诊消息===" + JSON.stringify(data));
+    let that = this;
+    let requestRole = data.requestRole;
+
+  },
+
+
 
   /**
    * 生命周期函数--监听页面隐藏

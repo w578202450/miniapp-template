@@ -286,7 +286,7 @@ Page({
     // IM登录
     tim.login({
       userID: userId,
-      userSig: genTestUserSig(userId).userSig /*that.data.userSig*/
+      userSig: /*genTestUserSig(userId).userSig*/ that.data.userSig
     }).then(function(imResponse) {
       console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
       wx.hideLoading();

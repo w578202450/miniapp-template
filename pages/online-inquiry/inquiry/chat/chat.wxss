@@ -277,13 +277,13 @@
 .cardRpBox {
   background: #fff;
   border-radius: 15rpx;
-  background-color: #00D8D0;
+  background-color: #6aca6b;
   margin-bottom: 20rpx;
-  width: 480rpx;
+  width: 500rpx;
 }
 
 .cardRpBox .cardRpTitleDiv {
-  padding: 15rpx 15rpx;
+  padding: 20rpx 15rpx;
   border-top-left-radius: 15rpx;
   border-top-right-radius: 15rpx;
   width: 100%;
@@ -294,33 +294,36 @@
 }
 
 .cardRpBox .cardRpIcon {
-  width: 48rpx;
+  width: 55rpx;
   height: 55rpx;
   margin-right: 15rpx;
 }
 
-.cardRpBox .cardRpTitle {
+.cardRpBox .cardRpInfo {
+  font-size: 30rpx;
   color: #fff;
-  font-size: 32rpx;
+  width: 400rpx;
 }
 
-.cardRpBox .cardRpInfoDiv {
+.cardRpBox .toRpDetailDiv {
   background-color: #fff;
-  padding: 0 15rpx;
+  padding: 10rpx 15rpx;
   border-bottom-left-radius: 15rpx;
   border-bottom-right-radius: 15rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.cardRpBox .cardRpInfo {
-  font-size: 29rpx;
+.cardRpBox .toRpDetailTitle {
   color: #555658;
-  padding: 15rpx 0;
-  width: 450rpx;
-  display: block;
+  font-size: 30rpx;
 }
 
-.cardRpBox .borderBottomLine {
-  border-bottom: 1rpx solid #E8E8E8;
+.cardRpBox .toRpDetailIcon {
+  width: 15rpx;
+  height: 27rpx;
 }
 
 /* 自定义视频聊天消息 */
@@ -332,9 +335,16 @@
   background: #fff;
 }
 
+.videoDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .videoMsgBox .videoMsgIcon {
-  width: 35rpx;
-  height: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 
 .videoMsgBox .videoStatusInfo {
@@ -404,8 +414,7 @@
 
 .reply .opration-area .msgInput {
   margin: 20rpx 20rpx;
-  /* width: 445rpx; */
-  /* width: 400rpx; */
+  /* width: 445rpx; *//* width: 400rpx; */
   padding: 0rpx 25rpx 0 15rpx !important;
   border: none;
   border-radius: 6px;
