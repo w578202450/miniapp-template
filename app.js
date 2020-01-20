@@ -202,6 +202,7 @@ App({
     userInfo: {},
     personInfo: {},
     doctorInfo: {},
+    assistantInfo:{},
     isConnected:true,
     unionid: '',//unionidId
     patientID:'',//病人id

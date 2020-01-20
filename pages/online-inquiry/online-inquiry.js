@@ -68,6 +68,7 @@ Page({
         if (res.code == 0) {
           if (res.data) {
             wx.setStorageSync('assistantInfo', res.data)
+            app.globalData.assistantInfo = res.data
             that.setData({
               assistantDoctorInfo: res.data
             })
