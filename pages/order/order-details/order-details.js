@@ -214,6 +214,7 @@ Page({
     wx.showLoading({
       title: '支付中...'
     })
+    console.log('开始支付回调')
     HTTP.orderPaySuccess({
         orgID: app.globalData.orgID,
         orderID: this.data.orderID,
@@ -226,6 +227,7 @@ Page({
           wx.showToast({
             title: '支付成功',
             success: function() {
+              console.log('支付回调成功')
               //1.刷新上一个界面的状态和当前界面数据
               that.loadDatas()
               that.refreshPrePage()
@@ -234,6 +236,7 @@ Page({
             }
           })
         } else {
+          console.log('支付回调失败',res.message)
           wx.showToast({
             title: res.message,
             icon: 'none'
@@ -263,6 +266,7 @@ Page({
    * 跳转到确认收货地址界面
    */
   skipAddressSubmit() {
+    console.log('开始跳转this.data.orderInfo---', this.data.orderInfo)
     var addressInfo = null
     if (!this.data.orderInfo.receiverName ||
       !this.data.orderInfo.receiverPhone ||
@@ -285,13 +289,20 @@ Page({
       }
     }
 
+    console.log('开始跳转addressInfo---', addressInfo)
+
+    console.log('开始跳转this.data.orderID---', this.data.orderID)
+    console.log('开始跳转this.data.orderInfo.modifyUser---', this.data.orderInfo.modifyUser)
     var navigateToUrl = ''
     if (addressInfo) {
       let obj = JSON.stringify(addressInfo)
-      url = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
+      console.log('开始跳转obj---', obj)
+      navigateToUrl = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
     } else {
-      url = '../../address/address-submit/address-submit?orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
+      navigateToUrl = '../../address/address-submit/address-submit?orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
     }
+
+    console.log('开始跳转url---', navigateToUrl)
 
     wx.navigateTo({
       url: navigateToUrl,

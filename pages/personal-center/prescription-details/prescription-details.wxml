@@ -1,4 +1,4 @@
-<block wx:if="{{isPreviewRp==0}}">
+<block wx:if="{{payStatus==0 && isPreviewRp == 0}}">
   <view class="tip" style="height:52rpx;background:rgba(67,139,239,0.2);">
     <text style="font-size: 28rpx;font-family: PingFangSC-Regular, PingFang SC;font-weight: 400;color: rgba(67, 139, 239, 1);">过期失效的处方不能支付，有效期3天</text>
   </view>
@@ -57,7 +57,7 @@
   </view>
 </view>
 
-<view wx:if="{{isPreviewRp==0}}" class="pay-show" style="position:fixed;bottom:0;left:0;right:0" catchtap="contactDoctorOption">
+<view wx:if="{{payStatus==0 && isPreviewRp == 0}}" class="pay-show" style="position:fixed;bottom:0;left:0;right:0" catchtap="contactDoctorOption">
   <view class="pay-left">
     <image src="../../../images/public/public_contact_doctor.png"></image>
     <text>咨询医生</text>

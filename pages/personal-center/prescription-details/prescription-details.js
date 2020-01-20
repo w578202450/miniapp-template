@@ -11,21 +11,26 @@ Page({
     rpID: '', //处方id
     inquiryID: '', //问诊id
     orderID: '',
-    isPreviewRp: 1 //预览状态 只预览不进行支付
+    isPreviewRp:0
   },
 
   onLoad: function(e) {
     console.log('---eee', e)
-    console.log('---isPreviewRp--', e.isPreviewRp)
+    if (e.isPreviewRp){
+      this.data.isPreviewRp = e.isPreviewRp
+    }
     this.data.inquiryID = e.inquiryID
-    this.data.isPreviewRp = e.isPreviewRp
     this.data.rpID = e.rpID
-    if (this.data.isPreviewRp == 0 && this.data.inquiryID) { //处方id查处方
+    this.loadDatas();
+
+  },
+
+  loadDatas(){
+    if (this.data.inquiryID) { //处方id查处方
       this.fetchRpByInquiryID(this.data.inquiryID)
-    } else if (this.data.isPreviewRp == 1 && this.data.rpID) { //问诊id查处方
+    } else if (this.data.rpID) { //问诊id查处方
       this.fetchRpByRpID(this.data.rpID)
     }
-
   },
 
   /**
@@ -43,6 +48,7 @@ Page({
           this.data.orderID = res.data.rp.orderID
           this.setData({
             rpData: res.data.rp,
+            payStatus: res.data.rp.payStatus,
             isPreviewRp: this.data.isPreviewRp
           })
         } else {
@@ -76,6 +82,7 @@ Page({
           this.data.orderID = res.data.orderID
           this.setData({
             rpData: res.data,
+            payStatus: res.data.payStatus,
             isPreviewRp: this.data.isPreviewRp
           })
         } else {
