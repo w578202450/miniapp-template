@@ -130,8 +130,8 @@ Page({
         }
       } else if (msgType == "TIMCustomElem") { // 自定义消息
         /* 处理自定义消息 */
-        let jsonData = JSON.parse(renderableMsg.payload.data);
-        let customType = jsonData.customType;
+        // let jsonData = JSON.parse(renderableMsg.payload.data);
+        // let customType = jsonData.customType;
         // switch (customType) {
         //   case "sys": // 系统消息
         //     that.dealSysMessage(data);
@@ -184,9 +184,9 @@ Page({
   dealCardMessage: function(payload) {
     let that = this;
     // payload
-    let data = JSON.parse(payload.data);
-    let childType = data.childType;
-    if (childType == "rpInfo") {
+    // let data = JSON.parse(payload.data);
+    // let childType = data.childType;
+    // if (childType == "rpInfo") {
       // // 标题
       // let title = data.data.title;
       // // orgID
@@ -202,12 +202,7 @@ Page({
       //   }
       // });
       // console.log("处方详情：" + JSON.stringify(that.data.rpInfoCard));
-      let nowData = [...that.data.currentMessageList,];
-      that.setData({
-        currentMessageList: nowData
-      });
-    }
-
+    // }
   },
 
   /**
