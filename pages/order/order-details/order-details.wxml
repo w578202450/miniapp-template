@@ -78,8 +78,8 @@
       <view class="separator" style="margin-top: 25rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>配送方式：</text>
-        <block wx:if='{{orderInfo.deliveryStatusName}}'>
-          <text>{{orderInfo.deliveryStatusName}}</text>
+        <block wx:if='{{orderInfo.deliveryTypeName}}'>
+          <text>{{orderInfo.deliveryTypeName}}</text>
         </block>
         <block wx:else>
           <text>{{orderInfo.deliveryTypeID == 0 ? "上门自取" : (orderInfo.deliveryTypeID == 1 ? "送货上门" : "快递")}}</text>
