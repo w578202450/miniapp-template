@@ -1,6 +1,7 @@
 /*引入本地定义的json数据的js*/
 var addressData = require("../address.js");
 const HTTP = require('../../../utils/http-util')
+const Common = require('../../../common/common')
 
 /**
  * count=0表示当前创建地址为默认地址 
@@ -136,7 +137,11 @@ Page({
    * 输入收货名字
    */
   receiverNameInput(e) {
-    this.data.receiverName = e.detail.value;
+    let value = Common.filterEmoji(e.detail.value)
+    this.data.receiverName = value;
+    return {
+      value: value
+    }
   },
   /***
    * 输入收货人电话
@@ -148,13 +153,18 @@ Page({
    * 输入详细地址
    */
   addressInput(e) {
-    this.data.address = e.detail.value
+    let value = Common.filterEmoji(e.detail.value)
+    this.data.address = value;
+    return {
+      value: value
+    }
+    
   },
   /**
    * 保存地址
    */
   saveOptions() {
-    if (!this.data.receiverName){
+    if (!this.data.receiverName) {
       wx.showToast({
         title: '请填写收货人姓名',
         icon: 'none'
@@ -202,7 +212,7 @@ Page({
     wx.showLoading({
       title: '保存中...',
     });
-    
+
     HTTP.addAddress({
         "personID": wx.getStorageSync('personID'),
         "receiverName": this.data.receiverName,
@@ -229,7 +239,7 @@ Page({
         } else {
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon: 'none'
           })
         }
 

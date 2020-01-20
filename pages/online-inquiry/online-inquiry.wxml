@@ -1,8 +1,8 @@
 <!--index.wxml-->
 
 <view class="page">
-  <view class="header" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;">
-    <image src="../../images/home/home_header_bg.png" style="width: 100%;height: {{screenWidth*2*348/750}}rpx;"></image>
+  <view class="header" style="width: 100%;height: {{screenWidth*2*174/375}}rpx;">
+    <image src="../../images/home/home_header_bg.png" style="width: 100%;height: {{screenWidth*2*174/375}}rpx;"></image>
     <view class="header-titleView" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
       <text>{{orgName}}</text>
     </view>

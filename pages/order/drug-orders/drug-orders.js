@@ -96,28 +96,46 @@ Page({
    * 添加地址
    */
   addressAction: function(e) {
-    var that = this
     var index = e.currentTarget.dataset.index;
     console.log('index--------', index)
     console.log('this.data.list--------', this.data.list)
     console.log('this.data.list[index]--------', this.data.list[index])
     console.log('this.data.list[index].orderID--------', this.data.list[index].orderID)
-    let addressInfo = {
-      name: that.data.list[index].receiverName,
-      phone: that.data.list[index].receiverPhone,
-      address: that.data.list[index].address,
-      province: that.data.list[index].province,
-      city: that.data.list[index].city,
-      area: that.data.list[index].area,
-      remarks: that.data.list[index].remarks ? that.data.list[index].remarks : '',
-      isDefault: that.data.list[index].isDefault
-    }
-    let obj = JSON.stringify(addressInfo)
-    let modifyUser = that.data.list[index].modifyUser ? that.data.list[index].modifyUser : ''
+    var addressInfo = null
+    if (!this.data.list[index].receiverName ||
+      !this.data.list[index].receiverPhone||
+      !this.data.list[index].address ||
+      !this.data.list[index].province ||
+      !this.data.list[index].city ||
+      !this.data.list[index].area){
+        addressInfo = null
+    } else {
+      addressInfo = {
+        name: this.data.list[index].receiverName,
+        phone: this.data.list[index].receiverPhone,
+        address: this.data.list[index].address,
+        province: this.data.list[index].province,
+        city: this.data.list[index].city,
+        area: this.data.list[index].area,
+        remarks: this.data.list[index].remarks ? this.data.list[index].remarks : '',
+        isDefault: this.data.list[index].isDefault ? this.data.list[index].isDefault : 0
+      }
+    } 
+
+    let modifyUser = this.data.list[index].modifyUser ? this.data.list[index].modifyUser : ''
     let orderID = this.data.list[index].orderID ? this.data.list[index].orderID : orderID;
-    console.log('orderID--------', orderID)
+
+    var navigateToUrl = ''
+
+    if (addressInfo){
+      let obj = JSON.stringify(addressInfo)
+      navigateToUrl = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + orderID + '&modifyUser=' + modifyUser
+    } else {
+      navigateToUrl = '../../address/address-submit/address-submit?orderID=' + orderID + '&modifyUser=' + modifyUser
+    }
+  
     wx.navigateTo({
-      url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + orderID + '&modifyUser=' + modifyUser,
+      url: navigateToUrl,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

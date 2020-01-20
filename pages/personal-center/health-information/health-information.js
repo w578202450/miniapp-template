@@ -1,4 +1,5 @@
 const HTTP = require('../../../utils/http-util')
+const Common = require('../../../common/common')
 let app = getApp()
 
 Page({
@@ -451,9 +452,14 @@ Page({
   },
   // 获取弹框中输入框的值
   fetchInput: function(e) {
+    let value = Common.filterEmoji(e.detail.value)
     this.setData({
-      dialogInput: e.detail.value
+      dialogInput: value
     })
+    return {
+      value: value
+    }
+    
   },
 
   // 查询健康信息

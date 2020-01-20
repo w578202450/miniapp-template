@@ -5,12 +5,21 @@ import {
   SDKAPPID
 } from './utils/GenerateTestUserSig'
 
+let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null; 
+//胶囊按钮位置信息
+let systemInfo = wx.getSystemInfoSync();
+let navBarHeight = (function () { //导航栏高度
+  let gap = rect.top - systemInfo.statusBarHeight; //动态计算每台手机状态栏到胶囊按钮间距
+  return 2 * gap + rect.height;
+})();
+
 App({
   onLaunch: function() {
     this.upDataApp()
     let that = this;
     let msgStorage = require("utils/msgstorage");
-
+    this.globalData.systemInfo = systemInfo
+    this.globalData.navBarHeight = navBarHeight
     // 创建 TIM SDK 实例
     let tim = TIM.create({
       SDKAppID: SDKAPPID
@@ -203,7 +212,9 @@ App({
     openid:'',
     orgName:'',
     personID:'',
-    orgID:''
+    orgID:'',
+    systemInfo:{},//小程序系统信息
+    navBarHeight:''//导航栏高度
   },
   
 })

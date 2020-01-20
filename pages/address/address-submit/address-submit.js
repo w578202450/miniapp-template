@@ -1,5 +1,5 @@
 const HTTP = require('../../../utils/http-util')
-
+const Common = require('../../../common/common')
 let app = getApp()
 
 Page({
@@ -97,7 +97,11 @@ Page({
    * 备注
    */
   remarksInput(e){
-    this.data.addressInfo.remarks = e.detail.value;
+    let value = Common.filterEmoji(e.detail.value)
+    this.data.addressInfo.remarks = value;
+    return {
+      value: value
+    }
   },
   /**
    * 设置订单配送地址

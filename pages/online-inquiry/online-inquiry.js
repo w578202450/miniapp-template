@@ -4,30 +4,20 @@
 const HTTP = require('../../utils/http-util')
 const app = getApp()
 
-let systemInfo = wx.getSystemInfoSync();
-let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null; //胶囊按钮位置信息
-let navBarHeight = (function () { //导航栏高度
-  let gap = rect.top - systemInfo.statusBarHeight; //动态计算每台手机状态栏到胶囊按钮间距
-  return 2 * gap + rect.height;
-})();
-
 Page({
   data: {
-    statusBarHeight: systemInfo.statusBarHeight,
-    navBarHeight: navBarHeight,
-    screenHeight: systemInfo.screenHeight,
-    screenWidth: systemInfo.screenWidth
+    statusBarHeight: app.globalData.systemInfo.statusBarHeight,
+    navBarHeight: app.globalData.navBarHeight,
+    screenHeight: app.globalData.systemInfo.screenHeight,
+    screenWidth: app.globalData.systemInfo.screenWidth,
+    pixelRatio: app.globalData.systemInfo.pixelRatio
   },
   onLoad: function() {
-    console.log('statusBarHeight--', systemInfo)
-    console.log('statusBarHeight--', systemInfo)
-    console.log('orgName--', app.globalData.orgName)
-    console.log('capsuleLeft--', rect)
+    console.log('systemInfo--', app.globalData.systemInfo)
     this.fetchDoctorInfo()
     this.fetchAssistantDoctorInfo()
   },
   
-
   doctorDetailTap: function(e) {
     var index = e.currentTarget.dataset.index
     var staffID = index == '0' ? wx.getStorageSync('personInfo').doctorStaffID : wx.getStorageSync('personInfo').assistantStaffID
