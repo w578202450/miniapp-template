@@ -1,4 +1,5 @@
 <view class="page">
+<wxs src="./filter.wxs" module="filter" />
   <!-- 顶部 -->
   <view class="body-view">
     <loading hidden="{{hidden}}" bindchange="loadingChange">
@@ -68,10 +69,10 @@
           <!-- 自定义消息 -->
           <view wx:if="{{item.type == 'TIMCustomElem'}}">
             <!-- 自定义的卡片消息 -->
-            <view wx:if="{{item.payload.description == '[卡片消息]'}}" class="cardRpBox" bindtap="toRpDetailFun" data-rpid="{{item.payload.keyID}}">
+            <view wx:if="{{filter.formatJSON(item.payload.data).childType == 'rpInfo'}}" class="cardRpBox" bindtap="toRpDetailFun" data-rpid="{{filter.formatJSON(item.payload.data).data.inquiryID}}">
               <view class="cardRpTitleDiv">
                 <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
-                <text class="cardRpInfo">初步诊断： 骨痹-寒湿痹阻骨骨痹-寒湿痹阻骨</text>
+                 <text wx:if="{{filter.formatJSON(item.payload.data).childType == 'rpInfo'}}" >{{filter.formatJSON(item.payload.data).data.title}}</text>
               </view>
               <view class="toRpDetailDiv">
                 <text class="toRpDetailTitle">查看处方详情</text>
@@ -79,7 +80,7 @@
               </view>
             </view>
             <!-- 自定义的视频聊天消息 -->
-            <view wx:elif="{{item.payload.description == '[视频问诊消息]'}}" class="videoMsgBox">
+            <view wx:elif="{{filter.formatJSON(item.payload.data).childType == 'video'}}" class="videoMsgBox">
               <!-- 自己发起的 -->
               <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="videoDiv">
                 <text wx:if="{{item.payload.data.state ==  '已取消'}}" class="videoStatusInfo">已取消</text>

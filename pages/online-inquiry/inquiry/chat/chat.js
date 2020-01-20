@@ -4,8 +4,6 @@ var HTTP = require('../../../../utils/http-util');
 var msgStorage = require("../../../../utils/msgstorage");
 var tim = app.globalData.tim;
 var TIM = app.globalData.TIM;
-let page = 0;
-let Index = 0;
 
 Page({
 
@@ -24,7 +22,7 @@ Page({
       patientInfo: {}, // 患者信息详情
       multiTalkInfo: {} // 三者ID信息
     },
-    inquiryInfo: {}, // 问诊信息
+    inquiryInfo: {}, // 问诊信息 
     username: {
       type: Object,
       value: {},
@@ -57,8 +55,6 @@ Page({
       // }
     ],
     aimgurl: {}, //临时图片的信息
-    imgWidth:"", // 从相册或拍照选取图片宽度
-    imgHeight: "", // 从相册或拍照选取图片高度
     countIndex: 1, // 可选图片剩余的数量
     hidden: true, // 加载中是否隐藏
     scrollTop: 0, // 内容底部与顶部的距离
@@ -119,7 +115,7 @@ Page({
     let username = this.data.username;
     let myUsername = wx.getStorageSync("myUsername");
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      console.log("分发到聊天界面消息:" + JSON.stringify(renderableMsg));
+      console.log(renderableMsg);
       // msgType
       let msgType = renderableMsg.type;
       console.log("msg{Type}:" + msgType);
@@ -132,24 +128,24 @@ Page({
         }
       } else if (msgType == "TIMCustomElem") { // 自定义消息
         /* 处理自定义消息 */
-        // data
-        let data = renderableMsg.payload.data;
-        console.log("payload{data}:" + JSON.stringify(data));
-        // customType
-        let customType = data.customType;
-        // childType
-        // let childType = data.childType;
-        switch (customType) {
-          case "sys": // 系统消息
-            that.dealSysMessage(data);
-            break;
-          case "hint": // hint消息
-            that.dealHintMessage(data);
-            break;
-          case "card": // 卡片消息
-            that.dealCardMessage(data);
-            break;
-        }
+        let jsonData = JSON.parse(renderableMsg.payload.data);
+        let customType = jsonData.customType;
+        // switch (customType) {
+        //   case "sys": // 系统消息
+        //     that.dealSysMessage(data);
+        //     break;
+        //   case "hint": // hint消息
+        //     that.dealHintMessage(data);
+        //     break;
+        //   case "card": // 卡片消息
+        //     that.dealCardMessage(payload);
+        //     break;
+        // }
+        // if (customType == "card") {
+        //   if (jsonData.childType == "rpInfo") {
+            
+        //   }
+        // }
       }
       let nowData = [...that.data.currentMessageList, renderableMsg];
       that.setData({
@@ -183,11 +179,32 @@ Page({
   /**
    * 处理卡片消息
    */
-  dealHintMessage: function(data) {
+  dealCardMessage: function(payload) {
     let that = this;
+    // payload
+    let data = JSON.parse(payload.data);
     let childType = data.childType;
-    console.log("childType:" + childType);
-
+    if (childType == "rpInfo") {
+      // // 标题
+      // let title = data.data.title;
+      // // orgID
+      // let orgID = data.data.orgID;
+      // // inquiryID
+      // let inquiryID = data.data.inquiryID;
+      // console.log("处方信息：" + "title:" + title + ",orgID:" + orgID + ",inquiryID:" + inquiryID);
+      // that.setData({
+      //   rpInfoCard: {
+      //     title: title,
+      //     orgID: orgID,
+      //     inquiryID: inquiryID
+      //   }
+      // });
+      // console.log("处方详情：" + JSON.stringify(that.data.rpInfoCard));
+      let nowData = [...that.data.currentMessageList,];
+      that.setData({
+        currentMessageList: nowData
+      });
+    }
 
   },
 
@@ -373,14 +390,34 @@ Page({
             item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
           }
         } else if (item.type == "TIMCustomElem") { // 自定义消息
-          // 处理自定义消息
-          // customType
-          let customType = item.payload.data.customType;
-          // childType
-          let childType = item.payload.data.childType;
-          // data
-          let data = item.payload.data;
-          console.log("payload{data}:" + JSON.stringify(data));
+          // /* 处理自定义消息 */
+          // // // payload
+          // let data = item.payload.data;
+          // // description
+          // let description = item.payload.description;
+          // // extension
+          // let extension = item.payload.extension;
+
+          // let childType = data.childType;
+          // console.log("childType:" + childType);
+
+          // if (childType == "rpInfo") {
+          //   // 标题
+          //   let title = data.data.title;
+          //   // orgID
+          //   let orgID = data.data.orgID;
+          //   // inquiryID
+          //   let inquiryID = data.data.inquiryID;
+          //   console.log("处方信息：" + "title:" + title + ",orgID:" + orgID + ",inquiryID:" + inquiryID);
+          //   that.setData({
+          //     rpInfoCard: {
+          //       title: title,
+          //       orgID: orgID,
+          //       inquiryID: inquiryID
+          //     }
+          //   });
+          //   console.log("处方详情：" + JSON.stringify(that.data.rpInfoCard));
+          // }
         }
       })
       that.setData({
@@ -388,7 +425,7 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
-      console.log("currentMessageList:" + JSON.stringify(imResponse.data.messageList));
+      console.log(imResponse.data.messageList);
       that.toViewBottomFun();
     }).catch(function(imError) {
       that.setData({
@@ -803,12 +840,13 @@ Page({
     });
   },
 
-  /*操作：点击治疗方案 */
+  /*操作：点击处方卡片消息查看详情 */
   toRpDetailFun: function(e) {
-    let rpID = e.currentTarget.dataset.rpid;
-    if (rpID) {
+    let inquiryID = e.currentTarget.dataset.rpid;
+    console.log("inquiryID:" + inquiryID);
+    if (inquiryID) {
       wx.navigateTo({
-        url: '',
+        url: '../../../personal-center/prescription-details/prescription-details?isPreviewRp=0&inquiryID=' + inquiryID,
       });
     }
   }
