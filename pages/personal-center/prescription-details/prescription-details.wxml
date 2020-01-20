@@ -9,7 +9,8 @@
 <view class="header">
   <image src="../../../images/profile/profile_company_seal.png"></image>
   <view class="header-content">
-    <text class="header-title">电子处方</text>
+  <text class="header-title">桃子互联网医院</text>
+    <text class="header-title" style="margin-top:32rpx">电子处方笺</text>
     <view class="header-personinfo">
       <text class="personinfo-details">姓名：{{rpData.patientName}}</text>
       <text class="personinfo-details">{{rpData.sex == 0 ? "性别" : (rpData.sex == 1 ? "性别：男" : "性别：女")}}</text>

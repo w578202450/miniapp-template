@@ -38,7 +38,6 @@ Page({
           noNetwork: false
         })
         if (res.code == 0) {
-          console.log('res.data.datas.length---', res.data.datas.length)
           if (res.data.datas && res.data.datas.length == 0) {
             that.setData({
               noData: true
@@ -97,10 +96,6 @@ Page({
    */
   addressAction: function(e) {
     var index = e.currentTarget.dataset.index;
-    console.log('index--------', index)
-    console.log('this.data.list--------', this.data.list)
-    console.log('this.data.list[index]--------', this.data.list[index])
-    console.log('this.data.list[index].orderID--------', this.data.list[index].orderID)
     var addressInfo = null
     if (!this.data.list[index].receiverName ||
       !this.data.list[index].receiverPhone||
@@ -148,7 +143,13 @@ Page({
     var that = this
     var index = e.currentTarget.dataset.index;
     this.data.currentIndex = index;
-
+    if (!this.data.list[index].keyID){
+      wx.showToast({
+        title: '缺少订单id',
+        icon:'none'
+      })
+      return;
+    }
     wx.navigateTo({
       url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID,
       success: function(res) {},

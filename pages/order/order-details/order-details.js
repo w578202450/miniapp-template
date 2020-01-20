@@ -109,6 +109,13 @@ Page({
    * 在线支付
    */
   payOption() {
+    if (!this.data.orderInfo.prePrice) {
+      wx.showToast({
+        title: '缺少金额',
+        icon: 'none'
+      })
+      return;
+    }
     var that = this
     wx.showLoading({
       title: '支付中',
@@ -142,7 +149,13 @@ Page({
    * 支付验证
    */
   tradeOrder: function(paymentID) {
-    console.log('---支付校验---', paymentID)
+    if (!paymentID) {
+      wx.showToast({
+        title: '参数paymentID为nil',
+        icon: 'none'
+      })
+      return;
+    }
     var that = this
     wx.showLoading({
       title: '支付中...'
@@ -236,7 +249,7 @@ Page({
             }
           })
         } else {
-          console.log('支付回调失败',res.message)
+          console.log('支付回调失败', res.message)
           wx.showToast({
             title: res.message,
             icon: 'none'
@@ -284,25 +297,18 @@ Page({
         province: this.data.orderInfo.province,
         city: this.data.orderInfo.city,
         area: this.data.orderInfo.area,
-        remarks: this.data.orderInfo.remarks,
+        remarks: this.data.orderInfo.remarks ? this.data.orderInfo.remarks : '',
         isDefault: this.data.orderInfo.isDefault ? this.data.orderInfo.isDefault : 0
       }
     }
-
-    console.log('开始跳转addressInfo---', addressInfo)
-
-    console.log('开始跳转this.data.orderID---', this.data.orderID)
-    console.log('开始跳转this.data.orderInfo.modifyUser---', this.data.orderInfo.modifyUser)
     var navigateToUrl = ''
+    let modifyUser = this.data.orderInfo.modifyUser ? this.data.orderInfo.modifyUser : ''
     if (addressInfo) {
       let obj = JSON.stringify(addressInfo)
-      console.log('开始跳转obj---', obj)
-      navigateToUrl = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
+      navigateToUrl = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + this.data.orderID + '&modifyUser=' + modifyUser
     } else {
-      navigateToUrl = '../../address/address-submit/address-submit?orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
+      navigateToUrl = '../../address/address-submit/address-submit?orderID=' + this.data.orderID + '&modifyUser=' + modifyUser
     }
-
-    console.log('开始跳转url---', navigateToUrl)
 
     wx.navigateTo({
       url: navigateToUrl,
@@ -325,7 +331,7 @@ Page({
           HTTP.deleteAddress({
               orgID: app.globalData.orgID,
               deliveryStatusID: '3',
-              modifyUser: this.data.orderInfo.modifyUser,
+              modifyUser: this.data.orderInfo.modifyUser ? this.data.orderInfo.modifyUser : '',
               orderID: this.data.orderInfo.keyID
             })
             .then(res => {

@@ -546,56 +546,7 @@ Page({
       // 既往病史
     } else if (item.docGroupCode === this.data.historyOfSicknessInfo.docGroupCode &&
       item.docItemCode === this.data.historyOfSicknessInfo.docItemCode) {
-      // this.data.historyOfSicknessInfo.docItemValue = item.docItemValue;
-      // for (var index in this.data.medicalItems) {
-      //   if (this.data.medicalItems[index].name == item.docItemValue) {
-      //     this.data.medicalItems[index].checked = true;
-      //   } else {
-      //     this.data.medicalItems[index].checked = false;
-      //   }
-      // }
-      // this.data.historyOfSicknessInfo.docItemDesc = item.docItemDesc;
-      // this.data.medicalSendLis = item.docItemDesc.split(',')
-      // if (item.docItemDesc.length > 0 && this.data.historyOfSicknessInfo.docItemValue == '有'){
-      //   var tempMedicalList = []
-      //   for (var i in this.data.medicalSendLis) {
-      //     let obj = { 
-      //       name: this.data.medicalSendLis[i],
-      //       id: i,
-      //       checked:false
-      //     }
-      //     tempMedicalList.push(obj)
-      //   }
-
-      //   for (var i in this.data.medicalList){
-      //     for (var j in tempMedicalList){
-      //       if (tempMedicalList[j].name == this.data.medicalList[i].name){
-      //         this.data.medicalList[i].checked = true;
-      //         tempMedicalList[j].checked = true;
-      //       }
-      //     }
-      //   }
-
-      //   console.log('tempMedicalList---------', tempMedicalList)
-      //   console.log('this.data.medicalList---------', this.data.medicalList)
-
-      //   for (var j in tempMedicalList) {
-      //     if (tempMedicalList[j].checked == false){
-      //       let obj = {
-      //         name: tempMedicalList[j].name,
-      //         id: Number(this.data.medicalList.length) + 1,
-      //         checked: true
-      //       }
-      //       this.data.medicalList.push(obj)
-      //     }
-      //   }
-
-      // }
-      // this.setData({
-      //   medicalItems: that.data.medicalItems,
-      //   medicalList:that.data.medicalList,
-      //   isHiddenMedicalList:item.docItemValue == '无' ? true : false
-      // })
+   
       this.data.historyOfSicknessInfo.docItemValue = item.docItemValue;
       for (var index in this.data.medicalItems) {
         if (this.data.medicalItems[index].name == item.docItemValue) {
@@ -625,10 +576,6 @@ Page({
             }
           }
         }
-
-        console.log("tempMedicalList00000000======", tempMedicalList)
-
-
         for (var j in tempMedicalList) {
           if (tempMedicalList[j].checked == false) {
             let obj = {
@@ -639,9 +586,6 @@ Page({
             this.data.medicalList.push(obj)
           }
         }
-
-        console.log("medicalList111111======", this.data.medicalList)
-
       }
       this.setData({
         medicalItems: that.data.medicalItems,
@@ -680,10 +624,6 @@ Page({
             }
           }
         }
-
-        console.log("00000000======", tempAllergyList)
-
-
         for (var j in tempAllergyList) {
           if (tempAllergyList[j].checked == false) {
             let obj = {
@@ -694,8 +634,6 @@ Page({
             this.data.allergyList.push(obj)
           }
         }
-
-        console.log("111111======", this.data.allergyList)
 
       }
       this.setData({

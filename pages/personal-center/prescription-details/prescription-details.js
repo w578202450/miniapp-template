@@ -30,6 +30,11 @@ Page({
       this.fetchRpByInquiryID(this.data.inquiryID)
     } else if (this.data.rpID) { //问诊id查处方
       this.fetchRpByRpID(this.data.rpID)
+    } else {
+      wx.showToast({
+        title: '缺少处方id',
+        icon:'none'
+      })
     }
   },
 
