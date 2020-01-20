@@ -225,6 +225,7 @@
   margin-bottom: 20rpx;
   width: 240rpx;
   position: relative;
+  overflow: hidden
 }
 
 .body .imageLoading {

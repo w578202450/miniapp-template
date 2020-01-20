@@ -220,18 +220,19 @@ Page({
       let msgType = renderableMsg.type;
       console.log("msg{Type}:" + msgType);
       if (msgType == "TIMCustomElem") { // 自定义消息
+        let jsonData = JSON.parse(renderableMsg.payload.data);
         // customType
-        let customType = renderableMsg.payload.data.customType;
+        let customType = jsonData.customType;
         // childType
-        let childType = renderableMsg.payload.data.childType;
+        let childType = jsonData.childType;
         console.log("payload.data.{childType}:" + childType);
         // data
-        let data = renderableMsg.payload.data.data;
-        console.log("payload{data}:" + JSON.stringify(data));
+        let data = jsonData.data;
+        console.log("payload{data}:" + data);
         // 视频问诊的消息类型处理
         if (childType == "video") {
           // 是否接收还是拒绝
-          let isaccept = renderableMsg.payload.data.data.type;
+          let isaccept = jsonData.data.type;
           console.log("payload.data.data.{type}:" + isaccept);
           if (isaccept == "reject") { // 对方拒绝
             // 退出房间
@@ -253,7 +254,7 @@ Page({
               title: '医生已接听...'
             });
             // 房间号
-            let roomid = renderableMsg.payload.data.data.roomId;
+            let roomid = jsonData.data.roomId;
             console.log("payload.data.data.{roomId}:" + roomid);
             that.setData({
               roomID: roomid
