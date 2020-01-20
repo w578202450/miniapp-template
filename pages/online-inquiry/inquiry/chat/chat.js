@@ -69,7 +69,9 @@ Page({
     recordIconUrlSelf: "../../../../images/chat/audioSelf.png", // 语音消息的图标 => 自己发的
     recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
     recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
-    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif" // 播放语音时的GIF => 他人发的
+    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif", // 播放语音时的GIF => 他人发的
+    bottomMenusDistance: 0, // 底部工具栏距离底部的距离
+    inputShowed: false // 输入框是否获取焦点
   },
 
   /**
@@ -115,10 +117,10 @@ Page({
     let username = this.data.username;
     let myUsername = wx.getStorageSync("myUsername");
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      console.log(renderableMsg);
+      // console.log(renderableMsg);
       // msgType
       let msgType = renderableMsg.type;
-      console.log("msg{Type}:" + msgType);
+      // console.log("msg{Type}:" + msgType);
       if (msgType == "TIMSoundElem") { // 语音消息
         renderableMsg.recordStatus = false; // 播放状态
         if (Number(renderableMsg.payload.second) <= 15) {
@@ -126,26 +128,8 @@ Page({
         } else {
           renderableMsg.recordViewWidth = (Number(renderableMsg.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
         }
-      } else if (msgType == "TIMCustomElem") { // 自定义消息
-        /* 处理自定义消息 */
-        let jsonData = JSON.parse(renderableMsg.payload.data);
-        let customType = jsonData.customType;
-        // switch (customType) {
-        //   case "sys": // 系统消息
-        //     that.dealSysMessage(data);
-        //     break;
-        //   case "hint": // hint消息
-        //     that.dealHintMessage(data);
-        //     break;
-        //   case "card": // 卡片消息
-        //     that.dealCardMessage(payload);
-        //     break;
-        // }
-        // if (customType == "card") {
-        //   if (jsonData.childType == "rpInfo") {
-            
-        //   }
-        // }
+      } else if (msgType == "TIMCustomElem") {
+        // 自定义消息
       }
       let nowData = [...that.data.currentMessageList, renderableMsg];
       that.setData({
@@ -177,45 +161,12 @@ Page({
   },
 
   /**
-   * 处理卡片消息
-   */
-  dealCardMessage: function(payload) {
-    let that = this;
-    // payload
-    let data = JSON.parse(payload.data);
-    let childType = data.childType;
-    if (childType == "rpInfo") {
-      // // 标题
-      // let title = data.data.title;
-      // // orgID
-      // let orgID = data.data.orgID;
-      // // inquiryID
-      // let inquiryID = data.data.inquiryID;
-      // console.log("处方信息：" + "title:" + title + ",orgID:" + orgID + ",inquiryID:" + inquiryID);
-      // that.setData({
-      //   rpInfoCard: {
-      //     title: title,
-      //     orgID: orgID,
-      //     inquiryID: inquiryID
-      //   }
-      // });
-      // console.log("处方详情：" + JSON.stringify(that.data.rpInfoCard));
-      let nowData = [...that.data.currentMessageList,];
-      that.setData({
-        currentMessageList: nowData
-      });
-    }
-
-  },
-
-  /**
    * 处理视频问诊消息
    */
   dealSysVideoMessage: function(data) {
-    console.log("===处理视频问诊消息===" + JSON.stringify(data));
+    // console.log("===处理视频问诊消息===" + JSON.stringify(data));
     let that = this;
     let requestRole = data.requestRole;
-
   },
 
   /**
@@ -299,7 +250,7 @@ Page({
         that.setData({
           userInfo: res.data
         });
-        console.log("患者信息:" + JSON.stringify(res.data));
+        // console.log("患者信息:" + JSON.stringify(res.data));
         if (that.data.userInfo.keyID) {
           that.getPatientMultiTalk(); // 查询患者的多方对话
         }
@@ -342,7 +293,7 @@ Page({
           multiTalkInfo: resData.multiTalk
         }
       });
-      console.log("查询患者的多方对话:" + JSON.stringify(res.data));
+      // console.log("查询患者的多方对话:" + JSON.stringify(res.data));
       that.createInquiry(); // 创建问诊
     })
   },
@@ -369,7 +320,7 @@ Page({
         key: 'inquiryInfo',
         data: res.data
       });
-      console.log("创建问诊:" + JSON.stringify(res.data));
+      // console.log("创建问诊:" + JSON.stringify(res.data));
       that.getHistoryMessage(); // 获取历史消息
     })
   },
@@ -389,35 +340,8 @@ Page({
           } else {
             item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
           }
-        } else if (item.type == "TIMCustomElem") { // 自定义消息
-          // /* 处理自定义消息 */
-          // // // payload
-          // let data = item.payload.data;
-          // // description
-          // let description = item.payload.description;
-          // // extension
-          // let extension = item.payload.extension;
-
-          // let childType = data.childType;
-          // console.log("childType:" + childType);
-
-          // if (childType == "rpInfo") {
-          //   // 标题
-          //   let title = data.data.title;
-          //   // orgID
-          //   let orgID = data.data.orgID;
-          //   // inquiryID
-          //   let inquiryID = data.data.inquiryID;
-          //   console.log("处方信息：" + "title:" + title + ",orgID:" + orgID + ",inquiryID:" + inquiryID);
-          //   that.setData({
-          //     rpInfoCard: {
-          //       title: title,
-          //       orgID: orgID,
-          //       inquiryID: inquiryID
-          //     }
-          //   });
-          //   console.log("处方详情：" + JSON.stringify(that.data.rpInfoCard));
-          // }
+        } else if (item.type == "TIMCustomElem") {
+          // 自定义消息
         }
       })
       that.setData({
@@ -425,7 +349,7 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
-      console.log(imResponse.data.messageList);
+      // console.log(imResponse.data.messageList);
       that.toViewBottomFun();
     }).catch(function(imError) {
       that.setData({
@@ -474,17 +398,21 @@ Page({
 
   /*操作：输入框聚焦，关闭工具栏 */
   menusInputFocusFun: function(e) {
-    // 有问题，需要修改
-    // this.setData({
-    //   isOpenBottomBoolbar: false
-    // });
-    console.log(e);
-    console.log("聚焦了");
+    this.setData({
+      isOpenBottomBoolbar: false,
+      bottomMenusDistance: e.detail.height,
+      inputShowed: true
+    });
+    this.toViewBottomFun();
   },
 
   /*操作：消息输入框失去焦点时 */
   menusInputBlurFun:function() {
-    console.log("失去焦点了");
+    this.setData({
+      bottomMenusDistance: 0,
+      inputShowed: false
+    });
+    this.toViewBottomFun();
   },
 
   /*操作：输入预发送信息 */
@@ -514,7 +442,9 @@ Page({
     if (that.data.httpLoading || !that.data.maySendContent) {
       return;
     }
-    that.data.httpLoading = true; // 开启隐性加载过程
+    that.setData({
+      httpLoading: true // 开启隐性加载过程
+    });
     // 1. 创建消息实例，接口返回的实例可以上屏
     let message = tim.createTextMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
@@ -523,18 +453,21 @@ Page({
         text: that.data.maySendContent
       }
     });
+    let nowData = [...that.data.currentMessageList, message];
+    that.setData({
+      currentMessageList: nowData,
+      maySendContent: "",
+      maySendContentSure: false,
+      httpLoading: false // 关闭隐性加载过程
+    });
+    that.toViewBottomFun();
     // 2. 发送消息
     tim.sendMessage(message).then(function(imResponse) {
-      let nowData = [...that.data.currentMessageList, imResponse.data.message];
-      that.setData({
-        currentMessageList: nowData,
-        maySendContent: "",
-        maySendContentSure: false
-      });
-      that.data.httpLoading = false; // 关闭隐性加载过程
-      that.toViewBottomFun();
+
     }).catch(function(imError) {
-      that.data.httpLoading = false; // 关闭隐性加载过程
+      that.setData({
+        httpLoading: false // 关闭隐性加载过程
+      });
       console.warn(imError);
     });
   },
@@ -542,7 +475,8 @@ Page({
   /*操作：打开、关闭 底部工具栏 */
   isOpenBottomBoolbarFun: function() {
     this.setData({
-      isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar
+      isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar,
+      isSendRecord: false
     });
     this.toViewBottomFun();
   },
@@ -599,7 +533,9 @@ Page({
     if (that.data.httpLoading) {
       return;
     }
-    that.data.httpLoading = true; // 开启隐性加载过程
+    that.setData({
+      httpLoading: true // 开启隐性加载过程
+    });
     // 1. 创建消息实例
     const message = tim.createImageMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
@@ -619,12 +555,14 @@ Page({
       let nowDatas = [...that.data.currentMessageList];
       nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
-        currentMessageList: nowDatas
+        currentMessageList: nowDatas,
+        httpLoading: true // 关闭隐性加载过程
       });
-      that.data.httpLoading = false; // 关闭隐性加载过程
     }).catch(function(imError) {
       console.warn(imError);
-      that.data.httpLoading = false; // 关闭隐性加载过程
+      that.setData({
+        httpLoading: true // 关闭隐性加载过程
+      });
     });
   },
 
@@ -640,14 +578,16 @@ Page({
   /*操作：切换为键盘 */
   openKeyboardFun: function() {
     this.setData({
-      isSendRecord: false
+      isSendRecord: false,
+      isOpenBottomBoolbar: false
     });
   },
 
   /*操作：切换为语音 */
   willSendRecordMsg: function() {
     this.setData({
-      isSendRecord: true
+      isSendRecord: true,
+      isOpenBottomBoolbar: false
     });
   },
 
@@ -843,10 +783,10 @@ Page({
   /*操作：点击处方卡片消息查看详情 */
   toRpDetailFun: function(e) {
     let inquiryID = e.currentTarget.dataset.rpid;
-    console.log("inquiryID:" + inquiryID);
+    // console.log("inquiryID:" + inquiryID);
     if (inquiryID) {
       wx.navigateTo({
-        url: '../../../personal-center/prescription-details/prescription-details?isPreviewRp=0&inquiryID=' + inquiryID,
+        url: '../../../personal-center/prescription-details/prescription-details?&inquiryID=' + inquiryID,
       });
     }
   }
