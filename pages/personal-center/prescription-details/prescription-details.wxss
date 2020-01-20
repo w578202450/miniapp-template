@@ -171,7 +171,6 @@ page {
   position: absolute;
   height: 104rpx;
   width: 184rpx;
-  z-index: 1;
 }
 
 .bottom-doctor-sealname {
