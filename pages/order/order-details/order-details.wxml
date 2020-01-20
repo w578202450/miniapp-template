@@ -46,7 +46,7 @@
     <view class="drugs-list">
       <view class="drugs-list-header">
         <view class="drugs-list-lineView"></view>
-        <view class="drugs-list-source">药品由桃子互联网医院为你提供</view>
+        <view class="drugs-list-source">药品由{{orgName}}为你提供</view>
       </view>
       <view class="drugs-cell" wx:for="{{rpMedicines}}" wx:for-item="item">
         <view class="drugs-cell-content">

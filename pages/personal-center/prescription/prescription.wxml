@@ -13,7 +13,7 @@
         <view>
           <text class="content">诊断结果：{{item.diagnosis}}</text>
         </view>
-        <text class="date">开方日期：{{item.modifyTime}}</text>
+        <text class="date">开方时间：{{item.addTime=='1900-01-01 00:00:00' ? '' : item.addTime}}</text>
       </view>
     </navigator>
   </view>
