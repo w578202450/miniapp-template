@@ -69,9 +69,10 @@ Page({
     recordIconUrlSelf: "../../../../images/chat/audioSelf.png", // 语音消息的图标 => 自己发的
     recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
     recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
-    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif" // 播放语音时的GIF => 他人发的
+    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif", // 播放语音时的GIF => 他人发的
     // bottomMenusDistance: 0, // 底部工具栏距离底部的距离
-    // inputShowed: false // 输入框是否获取焦点
+    inputShowed: false, // 输入框是否获取焦点
+    docInfoBoxTop: 0 // 医生医助信息栏与顶部的距离
   },
 
   /**
@@ -398,21 +399,39 @@ Page({
 
   /*操作：输入框聚焦，关闭工具栏 */
   menusInputFocusFun: function(e) {
-    // this.setData({
-    //   isOpenBottomBoolbar: false,
-    //   bottomMenusDistance: e.detail.height,
-    //   inputShowed: true
-    // });
+    this.setData({
+      // isOpenBottomBoolbar: false,
+      // bottomMenusDistance: e.detail.height,
+      docInfoBoxTop: e.detail.height * 2
+      // inputShowed: true
+    });
+    // console.log(this.data.docInfoBoxTop);
     // this.toViewBottomFun();
   },
 
   /*操作：消息输入框失去焦点时 */
   menusInputBlurFun:function() {
-    // this.setData({
-    //   bottomMenusDistance: 0,
-    //   inputShowed: false
-    // });
+    this.setData({
+      // bottomMenusDistance: 0,
+      docInfoBoxTop: 0
+      // inputShowed: false
+    });
+    // console.log(this.data.docInfoBoxTop);
     // this.toViewBottomFun();
+  },
+
+  /*操作：键盘高度变化时 */
+  menusInputHeightChangeFun:function(e) {
+    // console.log(e);
+    // if (e.detail.height) {
+    //   this.setData({
+    //     docInfoBoxTop: e.detail.height * 2
+    //   });
+    // } else {
+    //   this.setData({
+    //     docInfoBoxTop: 0
+    //   });
+    // }
   },
 
   /*操作：输入预发送信息 */
@@ -557,12 +576,12 @@ Page({
       nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
         currentMessageList: nowDatas,
-        httpLoading: true // 关闭隐性加载过程
+        httpLoading: false // 关闭隐性加载过程
       });
     }).catch(function(imError) {
       console.warn(imError);
       that.setData({
-        httpLoading: true // 关闭隐性加载过程
+        httpLoading: false // 关闭隐性加载过程
       });
     });
   },
