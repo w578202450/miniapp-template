@@ -46,7 +46,7 @@
     <view class="drugs-list">
       <view class="drugs-list-header">
         <view class="drugs-list-lineView"></view>
-        <view class="drugs-list-source">药品由{{orgName}}为你提供</view>
+        <view class="drugs-list-source">药品由{{orgName}}为您提供</view>
       </view>
       <view class="drugs-cell" wx:for="{{rpMedicines}}" wx:for-item="item">
         <view class="drugs-cell-content">
@@ -68,7 +68,7 @@
     <view class="prescription-container">
       <view class="prescription-header">
         <view class="prescription-header-lineView"></view>
-        <view class="prescription-header-title">处方签</view>
+        <view class="prescription-header-title">处方笺</view>
       </view>
       <view class="prescription-image" style="position: relative" bindtap="previewPrescriptionAction">
         <image src="../../../images/order/order_prescription.png" style="width: 100rpx;height: 100rpx;position: absolute"></image>
@@ -78,17 +78,12 @@
       <view class="separator" style="margin-top: 25rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>配送方式：</text>
-        <block wx:if='{{orderInfo.deliveryTypeName}}'>
-          <text>{{orderInfo.deliveryTypeName}}</text>
-        </block>
-        <block wx:else>
-          <text>{{orderInfo.deliveryTypeID == 0 ? "上门自取" : (orderInfo.deliveryTypeID == 1 ? "送货上门" : "快递")}}</text>
-        </block>
+        <text>{{orderInfo.deliveryTypeName}}</text>
       </view>
       <view class="separator" style="margin-left: 32rpx;margin-right: 32rpx"></view>
       <view class="prescription-delivery prescription-text">
         <text>药品金额：</text>
-        <text>¥{{orderInfo.costPrice/100}}</text>
+        <text style="color:rgba(254,88,83,1)">¥{{orderInfo.costPrice/100}}</text>
       </view>
       <view class="prescription-delivery prescription-text">
         <text>支付方式：</text>
