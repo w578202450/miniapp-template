@@ -17,12 +17,13 @@ Page({
   onLoad: function(e) {
     console.log('---eee', e)
     console.log('---isPreviewRp--', e.isPreviewRp)
+    this.data.inquiryID = e.inquiryID
     this.data.isPreviewRp = e.isPreviewRp
     this.data.rpID = e.rpID
-    if (isPreviewRp == 0 && inquiryID) { //处方id查处方
-      this.fetchRpByInquiryID(inquiryID)
-    } else if (isPreviewRp == 1 && rpID) { //问诊id查处方
-      this.fetchRpByRpID(e.rpID)
+    if (this.data.isPreviewRp == 0 && this.data.inquiryID) { //处方id查处方
+      this.fetchRpByInquiryID(this.data.inquiryID)
+    } else if (this.data.isPreviewRp == 1 && this.data.rpID) { //问诊id查处方
+      this.fetchRpByRpID(this.data.rpID)
     }
 
   },
@@ -116,11 +117,8 @@ Page({
    * 咨询医生
    */
   contactDoctorOption() {
-    wx.navigateTo({
-      url: '../../online-inquiry/inquiry/chat/chat',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+    wx.navigateBack({
+
     })
   },
 })
