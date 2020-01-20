@@ -146,7 +146,7 @@
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框 -->
         <!-- <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" bindblur="menusInputBlurFun" adjust-position="{{false}}" focus="{{inputShowed}}" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;" /> -->
-        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" bindblur="menusInputBlurFun" bindkeyboardheightchange="menusInputHeightChangeFun" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;" />
+        <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send" bindtap="inputClickedFun" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" bindblur="menusInputBlurFun" bindkeyboardheightchange="menusInputHeightChangeFun" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;" />
         <!-- '400': '445' -->
         <!-- 表情 -->
         <!-- <image src="../../../../images/chat/inputIcon.png" class="inputIcon" /> -->

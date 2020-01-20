@@ -397,12 +397,20 @@ Page({
     })
   },
 
+  /*操作：点击输入框时 */
+  inputClickedFun: function() {
+    console.log("点击率");
+    this.setData({
+      isOpenBottomBoolbar: false
+    });
+  },
+
   /*操作：输入框聚焦，关闭工具栏 */
   menusInputFocusFun: function(e) {
     this.setData({
-      // isOpenBottomBoolbar: false,
+      isOpenBottomBoolbar: false,
       // bottomMenusDistance: e.detail.height,
-      docInfoBoxTop: e.detail.height * 2
+      docInfoBoxTop: e.detail.height * 2,
       // inputShowed: true
     });
     // console.log(this.data.docInfoBoxTop);
