@@ -123,7 +123,7 @@ Page({
     }
 
     HTTP.fillDeliveryAddr({
-      orgID: wx.getStorageSync('orgID'),
+      orgID: app.globalData.orgID,
       orderID: this.data.orderID,
       receiverName: this.data.addressInfo.name,
       receiverPhone: this.data.addressInfo.phone,

@@ -340,10 +340,6 @@ Page({
             data: res.data.orgID,
           }),
           wx.setStorage({
-            key: 'patientID',
-            data: res.data.keyID
-          }),
-          wx.setStorage({
             key: 'unionID',
             data: unionID
           }),

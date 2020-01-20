@@ -1,5 +1,7 @@
 const HTTP = require('../../../utils/http-util')
 
+let app = getApp()
+
 Page({
   data: {
     rpID: '',
@@ -22,7 +24,7 @@ Page({
     var that = this;
     HTTP.goodsOrder({
         orderID: this.data.orderID,
-        orgID: wx.getStorageSync('orgID')
+        orgID: app.globalData.orgID
       })
       .then(res => {
         wx.hideNavigationBarLoading()
@@ -55,7 +57,7 @@ Page({
     wx.showNavigationBarLoading()
     HTTP.getRp({
         rpID: rpID,
-        orgID: wx.getStorageSync('orgID')
+        orgID: app.globalData.orgID
       })
       .then(res => {
         wx.hideNavigationBarLoading()
@@ -81,6 +83,12 @@ Page({
    * 预览处方
    */
   previewPrescriptionAction: function() {
+    if (!this.data.rpID) {
+      wx.showToast({
+        title: '确实处方id',
+      })
+      return
+    }
     wx.navigateTo({
       url: '../../personal-center/prescription-details/prescription-details?index=0&isPreviewRp=1&rpID=' + this.data.rpID,
     })
@@ -106,7 +114,7 @@ Page({
       title: '支付中',
     })
     HTTP.orderPrePay({
-        orgID: wx.getStorageSync('orgID'),
+        orgID: app.globalData.orgID,
         orderID: this.data.orderInfo.keyID,
         price: this.data.orderInfo.prePrice,
         personID: this.data.orderInfo.buyerID
@@ -207,7 +215,7 @@ Page({
       title: '支付中...'
     })
     HTTP.orderPaySuccess({
-        orgID: wx.getStorageSync('orgID'),
+        orgID: app.globalData.orgID,
         orderID: this.data.orderID,
         personID: wx.getStorageSync('personID'),
       })
@@ -262,7 +270,7 @@ Page({
       !this.data.orderInfo.province ||
       !this.data.orderInfo.city ||
       !this.data.orderInfo.area
-    ){
+    ) {
       addressInfo = null
     } else {
       addressInfo = {
@@ -278,13 +286,13 @@ Page({
     }
 
     var navigateToUrl = ''
-    if (addressInfo){
+    if (addressInfo) {
       let obj = JSON.stringify(addressInfo)
       url = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
     } else {
       url = '../../address/address-submit/address-submit?orderID=' + this.data.orderID + '&modifyUser=' + this.data.orderInfo.modifyUser
     }
-    
+
     wx.navigateTo({
       url: navigateToUrl,
       success: function(res) {},
@@ -304,7 +312,7 @@ Page({
             title: '请稍等...',
           });
           HTTP.deleteAddress({
-              orgID: wx.getStorageSync('orgID'),
+              orgID: app.globalData.orgID,
               deliveryStatusID: '3',
               modifyUser: this.data.orderInfo.modifyUser,
               orderID: this.data.orderInfo.keyID

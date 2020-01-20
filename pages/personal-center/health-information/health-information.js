@@ -1,4 +1,5 @@
 const HTTP = require('../../../utils/http-util')
+let app = getApp()
 
 Page({
   data: {
@@ -281,8 +282,8 @@ Page({
 
   onLoad: function() {
     let that = this
-    this.data.orgID = wx.getStorageSync('orgID')
-    this.data.patientID = wx.getStorageSync("patientID")
+    this.data.orgID = app.globalData.orgID
+    this.data.patientID = app.globalData.patientID
     this.loadDatas()
   },
   //methods

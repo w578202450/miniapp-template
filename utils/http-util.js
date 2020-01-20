@@ -1,4 +1,4 @@
-const version = 1; //0开发、1测试 2发布  
+const version = 0; //0开发、1测试 2发布  
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
 //     return "1400200900"
@@ -263,6 +263,13 @@ module.exports = {
   getDoctorDiseaseByDoctorID: function getDoctorDiseaseByDoctorID(parmas) {
     return request('api/peachUser/hospitalDoctor/getDoctorDiseaseByDoctorID', true, 'get', parmas);
   },
+  /*
+   *问诊id查处方详情
+   */
+  getRpInfoByInquiryID: function getRpInfoByInquiryID(parmas) {
+    return request('api/tmc/rp/getRpInfoByInquiryID', true, 'get', parmas);
+  },
+
   /**
    * 获取SDKAPPID
    */

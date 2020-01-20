@@ -1,18 +1,20 @@
 const HTTP = require('../../../utils/http-util')
 
+let app = getApp()
+
 Page({
   addressInfo: null,
   noData: false,
   data: {
     list: []
   },
-  currentIndex:0,
+  currentIndex: 0,
 
   onLoad: function() {
     this.loadDatas()
   },
 
-  onPullDownRefresh(){
+  onPullDownRefresh() {
     this.loadDatas()
   },
 
@@ -25,7 +27,7 @@ Page({
     wx.showNavigationBarLoading()
     HTTP.getOrderByPerson({
         buyerID: wx.getStorageSync('personInfo').personID,
-        orgID: wx.getStorageSync('orgID'),
+        orgID: app.globalData.orgID,
         pageIndex: 1,
         pageSize: 100
       })
@@ -49,14 +51,14 @@ Page({
             }
 
             that.getRpByList({
-              orgID: this.data.list[0].orgID,
+              orgID: app.globalData.orgID,
               rpIDs: tempRpIds
             })
           }
         } else {
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon: 'none'
           })
         }
       }).catch(e => {
@@ -96,7 +98,7 @@ Page({
   addressAction: function(e) {
     var that = this
     var index = e.currentTarget.dataset.index;
-    console.log('index--------',index)
+    console.log('index--------', index)
     console.log('this.data.list--------', this.data.list)
     console.log('this.data.list[index]--------', this.data.list[index])
     console.log('this.data.list[index].orderID--------', this.data.list[index].orderID)
@@ -116,9 +118,9 @@ Page({
     console.log('orderID--------', orderID)
     wx.navigateTo({
       url: '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + orderID + '&modifyUser=' + modifyUser,
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   },
   /**
@@ -128,7 +130,7 @@ Page({
     var that = this
     var index = e.currentTarget.dataset.index;
     this.data.currentIndex = index;
-    
+
     wx.navigateTo({
       url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID,
       success: function(res) {},
@@ -137,12 +139,12 @@ Page({
     })
   },
   // 无数据
-  noDataOption: function (e) {
+  noDataOption: function(e) {
     wx.navigateTo({
       url: '/pages/online-inquiry/inquiry/chat/chat',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   },
 

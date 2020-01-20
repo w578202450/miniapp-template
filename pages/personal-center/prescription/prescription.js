@@ -1,5 +1,6 @@
 
 const HTTP = require('../../../utils/http-util')
+let app = getApp()
 
 Page({
   data: {
@@ -23,8 +24,8 @@ Page({
     var that = this;
     wx.showNavigationBarLoading()
     HTTP.getRpListByPerson({
-      orgID: wx.getStorageSync("orgID"),
-      patientID: wx.getStorageSync("patientID")
+      orgID: app.globalData.orgID,
+      patientID: app.globalData.patientID
     })
       .then(res => {
         wx.hideNavigationBarLoading()
