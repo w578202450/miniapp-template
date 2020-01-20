@@ -69,9 +69,9 @@ Page({
     recordIconUrlSelf: "../../../../images/chat/audioSelf.png", // 语音消息的图标 => 自己发的
     recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
     recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
-    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif", // 播放语音时的GIF => 他人发的
-    bottomMenusDistance: 0, // 底部工具栏距离底部的距离
-    inputShowed: false // 输入框是否获取焦点
+    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif" // 播放语音时的GIF => 他人发的
+    // bottomMenusDistance: 0, // 底部工具栏距离底部的距离
+    // inputShowed: false // 输入框是否获取焦点
   },
 
   /**
@@ -80,7 +80,7 @@ Page({
   onLoad: function(options) {
     let that = this;
     that.getPersonInfo(); // 从storage中获取患者信息
-
+    
     let innerAudioContext = wx.createInnerAudioContext();
     that.setData({
       innerAudioContext: innerAudioContext
@@ -398,21 +398,21 @@ Page({
 
   /*操作：输入框聚焦，关闭工具栏 */
   menusInputFocusFun: function(e) {
-    this.setData({
-      isOpenBottomBoolbar: false,
-      bottomMenusDistance: e.detail.height,
-      inputShowed: true
-    });
-    this.toViewBottomFun();
+    // this.setData({
+    //   isOpenBottomBoolbar: false,
+    //   bottomMenusDistance: e.detail.height,
+    //   inputShowed: true
+    // });
+    // this.toViewBottomFun();
   },
 
   /*操作：消息输入框失去焦点时 */
   menusInputBlurFun:function() {
-    this.setData({
-      bottomMenusDistance: 0,
-      inputShowed: false
-    });
-    this.toViewBottomFun();
+    // this.setData({
+    //   bottomMenusDistance: 0,
+    //   inputShowed: false
+    // });
+    // this.toViewBottomFun();
   },
 
   /*操作：输入预发送信息 */

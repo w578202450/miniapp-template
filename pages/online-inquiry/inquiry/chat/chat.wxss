@@ -566,7 +566,6 @@
   line-height: 34px;
   margin: 0 auto;
   margin-bottom: 10px;
-  width: 90%;
 }
 
 .hud-body .warning {

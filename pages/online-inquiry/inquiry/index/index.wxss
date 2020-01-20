@@ -1,124 +1,31 @@
-.flex-wrap.s ,.house{
-  flex-direction:row-reverse;
+/* // 样式 */
 
-}
-.h49{
+.container {
   width: 100%;
-  height: 49px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.chat-item.flex-wrap.s{
-  margin: 20px 10px 20px 0px;
 
+.head {
+  height: 200rpx;
+  background: yellowgreen;
 }
-.chat-item.flex-wrap{
-  line-height: 20px;
-  height: auto;
-  margin: 20px 0px 20px 10px;
-  
-}
-.chat-footer{
-  position: fixed;
-  bottom: 0;
-  left: 0;
+
+/* // 需要滑动的主体内容设置为flex:1;overflow: scroll,这样当内容超出时只会在主体内滑动，而不会被底部固定的部分影响 */
+
+.main {
+  flex: 1;
   width: 100%;
-  height: 49px;
-  background: #ffffff;
+  height: 900rpx;
+  background-color: pink;
+  overflow: scroll;
 }
-.send{
+
+/* //需要固定不动的部分设置固定的高， */
+
+.foot {
+  height: 120rpx;
   width: 100%;
-  height: 49px;
-  line-height: 49px;
-  text-align: center;
-  background: #69BEFF;
-  color: #ffffff;
-  font-size: 16px;
-}
-.icon-yuyin::before{
-  font-size: 70rpx;
-  color: #7F8389;
-  display: block;
-  height: 49px;
-  line-height: 49px;
-  text-align: center;
-}
-.input{
-  height: 49px;
-  line-height: 49px;
-  font-size: 13px;
-}
-.avatar{
-  width: 40px;
-  height: 40px;
-  background: #69BEFF;
-  border-radius:50%;
-  text-align: center;
-  line-height: 40px;
-  color: #ffffff;
-}
-.chat-item.flex-wrap .content{
-  background: #ffffff;
-  margin-left: 10px;
-  padding:12px;
-  border-radius:10px; 
-  width: auto;
-  max-width: 480rpx;
-  font-size: 15px;
-  text-align: justify;
-}
-.chat-item.flex-wrap.house{
-  margin-right: 10px;
-}
-
-.chat-item.flex-wrap.s .content{
-  margin-right: 10px;
-  background: #69BEFF;
-  color: #ffffff;
-}
-.chat-item.flex-wrap.house .content{
-  margin-right: 10px;
-  padding: 0;
-  width: 520rpx;
-  
-}
-.content .img{
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-.chat-time{
-  width: 80px;
-  height: 21px;
-  line-height: 21px;
-  background: #CECECE;
-  color: #ffffff;
-  font-size: 12px;
-  margin: 20px auto 0px;
-  text-align: center;
-  border-radius:5px;
-
-}
-.content .info{
-  padding:0 20rpx 20rpx;
-}
-.info-price{
-  color: #E93D26;
-  font-size: 14px;
-}
-.info-title{
-  color: #999999;
-  font-size: 12px;
-}
-.info-type{
-  width: 50px;
-  height: 18px;
-  line-height: 18px;
-  color: #ffffff;
-  font-size: 12px;
-  background: #CECECE;
-  text-align: center;
-  border-radius: 2px;
-
-}
-.footer-h{
-  height: 49px;
-  width: 100%;
+  background-color: yellow;
 }
