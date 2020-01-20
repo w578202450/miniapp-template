@@ -259,7 +259,7 @@ Page({
       }
     });
     wx.getStorage({
-      key: "userinfo",
+      key: "userInfo",
       success: function (res) {
         that.setData({
           wexinInfo: res.data
