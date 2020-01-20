@@ -55,8 +55,6 @@ Page({
       // }
     ],
     aimgurl: {}, //临时图片的信息
-    imgWidth: "", // 从相册或拍照选取图片宽度
-    imgHeight: "", // 从相册或拍照选取图片高度
     countIndex: 1, // 可选图片剩余的数量
     hidden: true, // 加载中是否隐藏
     scrollTop: 0, // 内容底部与顶部的距离
