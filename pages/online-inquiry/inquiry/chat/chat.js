@@ -399,7 +399,6 @@ Page({
 
   /*操作：点击输入框时 */
   inputClickedFun: function() {
-    console.log("点击率");
     this.setData({
       isOpenBottomBoolbar: false
     });
