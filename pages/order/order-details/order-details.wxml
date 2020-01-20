@@ -37,8 +37,8 @@
   <view class="content">
 
     <view class="person-info">
-      <text>{{detail.receiverName}}  {{detail.receiverPhone}}</text>
-      <view class="person-info-address">{{detail.address}}</view>
+      <text>{{orderInfo.receiverName}}  {{orderInfo.receiverPhone}}</text>
+      <view class="person-info-address">{{orderInfo.province}}{{orderInfo.city}}{{orderInfo.area}}{{orderInfo.address}}</view>
     </view>
 
     <view class="person-info-separator"></view>
