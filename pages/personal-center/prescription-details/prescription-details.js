@@ -69,7 +69,7 @@ Page({
   },
 
   /**
-   *通过处方id获取处方详情 
+   *通过处方id获取处方详情
    */
   fetchRpByRpID(rpID) {
     wx.showNavigationBarLoading()
