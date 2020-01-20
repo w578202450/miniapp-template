@@ -416,22 +416,11 @@ Page({
       docInfoBoxTop: 0
       // inputShowed: false
     });
-    // console.log(this.data.docInfoBoxTop);
     // this.toViewBottomFun();
   },
 
   /*操作：键盘高度变化时 */
   menusInputHeightChangeFun:function(e) {
-    // console.log(e);
-    // if (e.detail.height) {
-    //   this.setData({
-    //     docInfoBoxTop: e.detail.height * 2
-    //   });
-    // } else {
-    //   this.setData({
-    //     docInfoBoxTop: 0
-    //   });
-    // }
   },
 
   /*操作：输入预发送信息 */
