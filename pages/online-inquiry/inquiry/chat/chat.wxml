@@ -104,7 +104,7 @@
             <view>{{item.payload.text}}</view>
           </view>
           <!-- 图片消息：TIMImageElem -->
-          <view wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #F6F6F6' : ''}}" bindtap="previewImage" data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
+          <view wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: item.showLoadingState ? #B6D1F9 : #F6F6F6' : ''}}" bindtap="previewImage" data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
             <!-- <image wx:if="{{item.showLoadingState}}" src="../../../../images/chat/loading-fail.png" class="imageLoading"/> -->
             <weui-loading wx:if="{{item.showLoadingState}}" class="imageLoading" type="circle" tips="{{tips}}"></weui-loading>
             <image class="pictureMsg" src="{{item.payload.imageInfoArray[0].imageUrl}}" mode="widthFix" />

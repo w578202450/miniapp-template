@@ -31,7 +31,8 @@ Page({
         if (res.code == 0) {
           this.data.orderInfo = res.data
           this.setData({
-            orderInfo: this.data.orderInfo
+            orderInfo: this.data.orderInfo,
+            orgName: app.globalData.orgName
           })
           this.fetchRpDetails(res.data.rpID)
           this.data.rpID = res.data.rpID
