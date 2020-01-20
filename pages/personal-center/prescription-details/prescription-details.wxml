@@ -27,7 +27,7 @@
 
 <view class="middle">
   <view class="middle-rp">RP</view>
-  <view class="middle-rp-item" wx:key="keyID" wx:for="{{rpData.rpMedicines}}" wx:for-item="item">
+  <view class="middle-rp-item" wx:key="keyID" wx:for="{{rpMedicines}}" wx:for-item="item">
     <view class="rp-info-box">
       <view class="rp-info-subviewBox">
         <text class="rp-name">{{item.medicineName}}</text>

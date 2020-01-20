@@ -49,7 +49,8 @@ Page({
           this.setData({
             rpData: res.data.rp,
             payStatus: res.data.rp.payStatus,
-            isPreviewRp: this.data.isPreviewRp
+            isPreviewRp: this.data.isPreviewRp,
+            rpMedicines: res.data.rpMedicines
           })
         } else {
           wx.showToast({
@@ -83,7 +84,8 @@ Page({
           this.setData({
             rpData: res.data,
             payStatus: res.data.payStatus,
-            isPreviewRp: this.data.isPreviewRp
+            isPreviewRp: this.data.isPreviewRp,
+            rpMedicines: res.data.rpMedicines
           })
         } else {
           wx.showToast({
