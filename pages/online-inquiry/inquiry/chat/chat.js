@@ -128,26 +128,8 @@ Page({
         } else {
           renderableMsg.recordViewWidth = (Number(renderableMsg.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
         }
-      } else if (msgType == "TIMCustomElem") { // 自定义消息
-        /* 处理自定义消息 */
-        // let jsonData = JSON.parse(renderableMsg.payload.data);
-        // let customType = jsonData.customType;
-        // switch (customType) {
-        //   case "sys": // 系统消息
-        //     that.dealSysMessage(data);
-        //     break;
-        //   case "hint": // hint消息
-        //     that.dealHintMessage(data);
-        //     break;
-        //   case "card": // 卡片消息
-        //     that.dealCardMessage(payload);
-        //     break;
-        // }
-        // if (customType == "card") {
-        //   if (jsonData.childType == "rpInfo") {
-            
-        //   }
-        // }
+      } else if (msgType == "TIMCustomElem") {
+        // 自定义消息
       }
       let nowData = [...that.data.currentMessageList, renderableMsg];
       that.setData({
@@ -176,33 +158,6 @@ Page({
    */
   dealHintMessage: function(data) {
 
-  },
-
-  /**
-   * 处理卡片消息
-   */
-  dealCardMessage: function(payload) {
-    let that = this;
-    // payload
-    // let data = JSON.parse(payload.data);
-    // let childType = data.childType;
-    // if (childType == "rpInfo") {
-      // // 标题
-      // let title = data.data.title;
-      // // orgID
-      // let orgID = data.data.orgID;
-      // // inquiryID
-      // let inquiryID = data.data.inquiryID;
-      // console.log("处方信息：" + "title:" + title + ",orgID:" + orgID + ",inquiryID:" + inquiryID);
-      // that.setData({
-      //   rpInfoCard: {
-      //     title: title,
-      //     orgID: orgID,
-      //     inquiryID: inquiryID
-      //   }
-      // });
-      // console.log("处方详情：" + JSON.stringify(that.data.rpInfoCard));
-    // }
   },
 
   /**
@@ -521,7 +476,7 @@ Page({
   isOpenBottomBoolbarFun: function() {
     this.setData({
       isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar,
-      inputShowed: false
+      isSendRecord: false
     });
     this.toViewBottomFun();
   },
@@ -624,8 +579,7 @@ Page({
   openKeyboardFun: function() {
     this.setData({
       isSendRecord: false,
-      isOpenBottomBoolbar: false,
-      inputShowed: false
+      isOpenBottomBoolbar: false
     });
   },
 
@@ -633,8 +587,7 @@ Page({
   willSendRecordMsg: function() {
     this.setData({
       isSendRecord: true,
-      isOpenBottomBoolbar: false,
-      inputShowed: false
+      isOpenBottomBoolbar: false
     });
   },
 
