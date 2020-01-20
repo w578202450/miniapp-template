@@ -399,6 +399,7 @@ Page({
 
   /*操作：点击输入框时 */
   inputClickedFun: function() {
+    console.log("dianji")
     this.setData({
       isOpenBottomBoolbar: false
     });
@@ -406,28 +407,42 @@ Page({
 
   /*操作：输入框聚焦，关闭工具栏 */
   menusInputFocusFun: function (e) {
-    this.setData({
-      isOpenBottomBoolbar: false,
+    console.log("jujiao")
+    // this.setData({
+      // isOpenBottomBoolbar: false,
       // bottomMenusDistance: e.detail.height,
-      docInfoBoxTop: e.detail.height * 2,
+      // docInfoBoxTop: e.detail.height * 2,
       // inputShowed: true
-    });
+    // });
     // console.log(this.data.docInfoBoxTop);
     // this.toViewBottomFun();
   },
 
   /*操作：消息输入框失去焦点时 */
   menusInputBlurFun: function () {
-    this.setData({
+    console.log("shiqu")
+    // this.setData({
       // bottomMenusDistance: 0,
-      docInfoBoxTop: 0
+      // docInfoBoxTop: 0
       // inputShowed: false
-    });
+    // });
     // this.toViewBottomFun();
   },
 
   /*操作：键盘高度变化时 */
   menusInputHeightChangeFun: function (e) {
+    let that = this;
+    console.log(e);
+    if(e.detail.height) {
+      that.setData({
+        docInfoBoxTop: e.detail.height * 2
+      })
+    } else {
+      that.setData({
+        docInfoBoxTop: 0        
+      })
+    }
+    console.log(that.data.docInfoBoxTop)
   },
 
   /*操作：输入预发送信息 */
