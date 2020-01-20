@@ -131,7 +131,7 @@ Page({
       city: this.data.addressInfo.city,
       area: this.data.addressInfo.area,
       address: this.data.addressInfo.address,
-      remarks: this.data.addressInfo.remarks ? his.data.addressInfo.remarks : '',
+      remarks: this.data.addressInfo.remarks ? this.data.addressInfo.remarks : '',
       modifyUser: this.data.modifyUser
     })
       .then(res => {
