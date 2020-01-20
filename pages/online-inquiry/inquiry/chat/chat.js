@@ -463,9 +463,9 @@ Page({
   /*操作： 点击医生查看详情 */
   doctorDetailTap: function(e) {
     var index = e.currentTarget.dataset.index
-    var doctorId = index == '0' ? wx.getStorageSync('personInfo').doctorStaffID : wx.getStorageSync('personInfo').assistantStaffID
+    var doctorStaffID = index == '0' ? wx.getStorageSync('personInfo').doctorStaffID : wx.getStorageSync('personInfo').assistantStaffID
     wx.navigateTo({
-      url: '/pages/online-inquiry/doctor-details/doctor-details?doctorId=' + doctorId,
+      url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + doctorStaffID,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
