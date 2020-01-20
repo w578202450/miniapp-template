@@ -31,7 +31,7 @@
           <view class="info_one">{{talkInfo.assistantInfo.doctorName}}</view>
           <text class="info_one_one">医助</text>
         </view>
-        <text class="info_two">助理医师</text>
+        <text class="info_two">{{assistantDoctorInfo.titleName}}</text>
       </view>
     </view>
   </view>
@@ -150,8 +150,8 @@
       </view>
       <!-- 菜单、发送按钮 -->
       <view class="send">
-        <image wx:if="{{isOpenBottomBoolbar}}" src="../../../../images/chat/m-close.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
-        <view wx:elif="{{!isSendRecord && maySendContentSure}}" class="sendContentMsgBtn" bindtap="sendContentMsg">发送</view>
+        <view wx:if="{{!isSendRecord && maySendContentSure}}" class="sendContentMsgBtn" bindtap="sendContentMsg">发送</view>
+        <image wx:elif="{{isOpenBottomBoolbar}}" src="../../../../images/chat/m-close.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
         <image wx:else src="../../../../images/chat/menusIcon.png" class="menusIcon" bindtap="isOpenBottomBoolbarFun" />
       </view>
     </view>

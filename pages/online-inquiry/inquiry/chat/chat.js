@@ -15,6 +15,7 @@ Page({
     userInfo: {}, // 当前用户信息
     wexinInfo: {}, // 当前用户微信信息
     doctorInfo: {}, // 医生信息<主要是拿到职称>
+    assistantDoctorInfo: {}, // 医助信息详情
     // 多方对话对话信息
     talkInfo: {
       doctorInfo: {}, // 医生信息详情
@@ -146,11 +147,11 @@ Page({
           systemInfo: res,
         })
         if (res.platform == "devtools") {
-          console.log("PC");
+          // console.log("PC");
         } else if (res.platform == "ios") {            
-          console.log("IOS");
+          // console.log("IOS");
         } else if (res.platform == "android") {            
-          console.log("android");
+          // console.log("android");
         }
       }
     });
@@ -273,7 +274,7 @@ Page({
       }
     });
     wx.getStorage({
-      key: "userinfo",
+      key: "userInfo",
       success: function(res) {
         that.setData({
           wexinInfo: res.data
@@ -285,6 +286,14 @@ Page({
       success: function(res) {
         that.setData({
           doctorInfo: res.data
+        });
+      }
+    });
+    wx.getStorage({
+      key: "assistantInfo",
+      success: function(res) {
+        that.setData({
+          assistantDoctorInfo: res.data
         });
       }
     });
@@ -415,7 +424,6 @@ Page({
   /*操作：点击输入框时，关闭工具栏  */
   inputClickedFun: function() {
     let that = this;
-    console.log("dianji")
     if (that.data.systemInfo.platform == "android" && that.data.isOpenBottomBoolbar) {
       this.setData({
         isOpenBottomBoolbar: false
@@ -425,24 +433,12 @@ Page({
 
   /*操作：键盘高度变化时 */
   menusInputHeightChangeFun: function(e) {
-    let that = this;
-    console.log(e);
-    // if(e.detail.height) {
-    //   that.setData({
-    //     docInfoBoxTop: e.detail.height * 2
-    //   })
-    // } else {
-    //   that.setData({
-    //     docInfoBoxTop: 0        
-    //   })
-    // }
-    console.log(that.data.docInfoBoxTop)
+
   },
 
   /*操作：输入框聚焦*/
   menusInputFocusFun: function(e) {
     let that = this;
-    console.log("jujiao")
     if (that.data.systemInfo.platform == "ios" && that.data.isOpenBottomBoolbar) {
       this.setData({
         // isOpenBottomBoolbar: false,
@@ -455,13 +451,10 @@ Page({
         docInfoBoxTop: e.detail.height * 2
       });
     }
-    console.log(this.data.docInfoBoxTop);
-    // this.toViewBottomFun();
   },
 
   /*操作：消息输入框失去焦点时 */
   menusInputBlurFun: function(e) {
-    console.log("shiqu")
     this.setData({
       // bottomMenusDistance: 0,
       // inputShowed: false,
@@ -470,13 +463,27 @@ Page({
     // this.toViewBottomFun();
   },
 
+  /*操作：键盘高度变化时 */
+  // menusInputHeightChangeFun: function(e) {
+    // let that = this;
+    // if (e.detail.height) {
+    //   that.setData({
+    //     docInfoBoxTop: e.detail.height * 2
+    //   })
+    // } else {
+    //   that.setData({
+    //     docInfoBoxTop: 0
+    //   })
+    // }
+  // },
+
   /*操作：输入预发送信息 */
   adInputChange: function(e) {
     let that = this;
-    // that.setData({
-    // maySendContent: e.detail.value,
-    // });
-    that.data.maySendContent = e.detail.value;
+    that.setData({
+      maySendContent: e.detail.value,
+    });
+    // that.data.maySendContent = e.detail.value;
     let value = that.data.maySendContent; // 先把输入的值复制一份，用于操作
     value = value.replace(/\s+/g, ""); // 用正则表达式去掉所有的空白字符（空格是其中一种）
     //去掉所有空格之后，再对它进行判断，  
@@ -514,6 +521,7 @@ Page({
       currentMessageList: nowData,
       maySendContent: "",
       maySendContentSure: false,
+      isOpenBottomBoolbar: false,
       httpLoading: false // 关闭隐性加载过程
     });
     that.toViewBottomFun();
@@ -612,6 +620,7 @@ Page({
       nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
         currentMessageList: nowDatas,
+        isOpenBottomBoolbar: false,
         httpLoading: false // 关闭隐性加载过程
       });
     }).catch(function(imError) {

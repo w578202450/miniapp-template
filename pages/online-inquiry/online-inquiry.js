@@ -42,6 +42,7 @@ Page({
         if (res.code == 0) {
           if (res.data) {
             app.globalData.doctorInfo = res.data
+            wx.setStorageSync('doctorInfo', res.data)
             // this.fetchDoctorQualification(res.data.doctorID)
             this.setData({
               doctorInfo: res.data,
@@ -66,6 +67,8 @@ Page({
       .then(res => {
         if (res.code == 0) {
           if (res.data) {
+            wx.setStorageSync('assistantInfo', res.data)
+            app.globalData.assistantInfo = res.data
             that.setData({
               assistantDoctorInfo: res.data
             })
