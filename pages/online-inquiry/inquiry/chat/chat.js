@@ -418,9 +418,10 @@ Page({
   /*操作：输入预发送信息 */
   adInputChange: function(e) {
     let that = this;
-    that.setData({
-      maySendContent: e.detail.value,
-    });
+    // that.setData({
+      // maySendContent: e.detail.value,
+    // });
+    that.data.maySendContent = e.detail.value;
     let value = that.data.maySendContent; // 先把输入的值复制一份，用于操作
     value = value.replace(/\s+/g, ""); // 用正则表达式去掉所有的空白字符（空格是其中一种）
     //去掉所有空格之后，再对它进行判断，  
