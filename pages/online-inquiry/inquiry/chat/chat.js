@@ -786,7 +786,7 @@ Page({
     // console.log("inquiryID:" + inquiryID);
     if (inquiryID) {
       wx.navigateTo({
-        url: '../../../personal-center/prescription-details/prescription-details?isPreviewRp=0&inquiryID=' + inquiryID,
+        url: '../../../personal-center/prescription-details/prescription-details?&inquiryID=' + inquiryID,
       });
     }
   }
