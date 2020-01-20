@@ -1,5 +1,5 @@
 <view class="page">
-<wxs src="./filter.wxs" module="filter" />
+  <wxs src="./filter.wxs" module="filter" />
   <!-- 顶部 -->
   <view class="body-view">
     <loading hidden="{{hidden}}" bindchange="loadingChange">
@@ -72,7 +72,7 @@
             <view wx:if="{{filter.formatJSON(item.payload.data).childType == 'rpInfo'}}" class="cardRpBox" bindtap="toRpDetailFun" data-rpid="{{filter.formatJSON(item.payload.data).data.inquiryID}}">
               <view class="cardRpTitleDiv">
                 <image class="cardRpIcon" src="../../../../images/chat/rxIcon.png" />
-                 <text wx:if="{{filter.formatJSON(item.payload.data).childType == 'rpInfo'}}" style="font-size:28rpx;font-family:PingFangSC-Medium,PingFang SC;font-weight:500;color:rgba(255,255,255,1)" >{{filter.formatJSON(item.payload.data).data.title}}</text>
+                <text wx:if="{{filter.formatJSON(item.payload.data).childType == 'rpInfo'}}" style="font-size:28rpx;font-family:PingFangSC-Medium,PingFang SC;font-weight:500;color:rgba(255,255,255,1)">{{filter.formatJSON(item.payload.data).data.title}}</text>
               </view>
               <view class="toRpDetailDiv">
                 <text class="toRpDetailTitle" style="font-size:28rpx;font-family:PingFangSC-Medium,PingFang SC;font-weight:500">查看处方详情</text>
