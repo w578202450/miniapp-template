@@ -1,7 +1,8 @@
 const HTTP = require('../../../utils/http-util')
-
+let app = getApp()
 Page({
   data: {
+    screenWidth: app.globalData.systemInfo.screenWidth,
     list: [
       {
         name: '张**',

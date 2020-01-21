@@ -75,7 +75,7 @@
 
 .header{
   width: 100%;
-  height: 640rpx;
+  height: 750rpx;
   position: relative;
 }
 

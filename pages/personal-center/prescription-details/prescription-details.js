@@ -55,7 +55,8 @@ Page({
             rpData: res.data.rp,
             payStatus: res.data.rp.payStatus,
             isPreviewRp: this.data.isPreviewRp,
-            rpMedicines: res.data.rpMedicines
+            rpMedicines: res.data.rpMedicines,
+            isHiddenPregnancy: res.data.rp.sex == 2 ? false : true
           })
         } else {
           wx.showToast({
@@ -90,7 +91,8 @@ Page({
             rpData: res.data,
             payStatus: res.data.payStatus,
             isPreviewRp: this.data.isPreviewRp,
-            rpMedicines: res.data.rpMedicines
+            rpMedicines: res.data.rpMedicines,
+            isHiddenPregnancy: res.data.sex == 2 ? false : true
           })
         } else {
           wx.showToast({

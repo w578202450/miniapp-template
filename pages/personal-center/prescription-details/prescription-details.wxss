@@ -77,7 +77,7 @@ page {
   justify-content: center;
   flex-flow: column;
   background-color: white;
-  padding: 64rpx 32rpx 48rpx 32rpx;
+  padding: 24rpx 32rpx 48rpx 32rpx;
 }
 
 .middle-rp {
@@ -85,11 +85,11 @@ page {
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: rgba(42, 44, 48, 1);
-  line-height: 36rpx;
+  line-height: 70rpx;
 }
 
 .rp-info-box {
-  margin-top: 32rpx;
+  margin-top: 14rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -149,14 +149,14 @@ page {
 .bottom-doctor-left {
   display: flex;
   flex-flow: column;
+  justify-content:space-between;
   width: 48%;
 }
 
 .bottom-doctor-right {
   display: flex;
   flex-flow: column;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content:space-between;
   width: 48%;
 }
 

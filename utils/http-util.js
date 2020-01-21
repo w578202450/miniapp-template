@@ -1,4 +1,4 @@
-const version = 0; //0开发、1测试 2发布  
+const version = 1; //0开发、1测试 2发布  
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
 //     return "1400200900"
@@ -195,6 +195,13 @@ module.exports = {
    */
   orderPrePay: function orderPrePay(parmas) {
     return request('api/tmc/goodsOrder/orderPrePay', true, 'get', parmas);
+  },
+
+  /*
+   *校验预创单
+   */
+  checkOrderPrePay: function checkOrderPrePay(parmas) {
+    return request('api/payment/transPayment/checkOrderPrePay', true, 'get', parmas);
   },
   /*
    *订单校验

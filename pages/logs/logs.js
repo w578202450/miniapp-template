@@ -11,5 +11,11 @@ Page({
     //     return util.formatTime(new Date(log))
     //   })
     // })
+  },
+
+  skipToLoginView(){
+    wx.navigateTo({
+      url: '/pages/login/login?selctedIndex=1',
+    })
   }
 })

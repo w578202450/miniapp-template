@@ -26,7 +26,7 @@ Page({
     var that = this;
     wx.showNavigationBarLoading()
     HTTP.getOrderByPerson({
-        buyerID: wx.getStorageSync('personInfo').personID,
+        buyerID: app.globalData.personInfo.personID,
         orgID: app.globalData.orgID,
         pageIndex: 1,
         pageSize: 100
@@ -79,8 +79,14 @@ Page({
         if (res.code == 0) {
           if (res.data) {
             for (var j in this.data.list) {
-              this.data.list[j].diagnosis = res.data[this.data.list[j].rpID].diagnosis
-              this.data.list[j].doctorName = res.data[this.data.list[j].rpID].doctorName
+              if (res.data[this.data.list[j].rpID]){
+                this.data.list[j].diagnosis = res.data[this.data.list[j].rpID].diagnosis
+                this.data.list[j].doctorName = res.data[this.data.list[j].rpID].doctorName
+              } else {
+                this.data.list[j].diagnosis = ''
+                this.data.list[j].doctorName = ''
+              }
+              
             }
           }
         }
@@ -98,12 +104,12 @@ Page({
     var index = e.currentTarget.dataset.index;
     var addressInfo = null
     if (!this.data.list[index].receiverName ||
-      !this.data.list[index].receiverPhone||
+      !this.data.list[index].receiverPhone ||
       !this.data.list[index].address ||
       !this.data.list[index].province ||
       !this.data.list[index].city ||
-      !this.data.list[index].area){
-        addressInfo = null
+      !this.data.list[index].area) {
+      addressInfo = null
     } else {
       addressInfo = {
         name: this.data.list[index].receiverName,
@@ -115,20 +121,20 @@ Page({
         remarks: this.data.list[index].remarks ? this.data.list[index].remarks : '',
         isDefault: this.data.list[index].isDefault ? this.data.list[index].isDefault : 0
       }
-    } 
+    }
 
     let modifyUser = this.data.list[index].modifyUser ? this.data.list[index].modifyUser : ''
     let orderID = this.data.list[index].orderID ? this.data.list[index].orderID : orderID;
 
     var navigateToUrl = ''
 
-    if (addressInfo){
+    if (addressInfo) {
       let obj = JSON.stringify(addressInfo)
       navigateToUrl = '../../address/address-submit/address-submit?addressInfo=' + obj + '&orderID=' + orderID + '&modifyUser=' + modifyUser
     } else {
       navigateToUrl = '../../address/address-submit/address-submit?orderID=' + orderID + '&modifyUser=' + modifyUser
     }
-  
+
     wx.navigateTo({
       url: navigateToUrl,
       success: function(res) {},
@@ -143,10 +149,10 @@ Page({
     var that = this
     var index = e.currentTarget.dataset.index;
     this.data.currentIndex = index;
-    if (!this.data.list[index].keyID){
+    if (!this.data.list[index].keyID) {
       wx.showToast({
         title: '缺少订单id',
-        icon:'none'
+        icon: 'none'
       })
       return;
     }

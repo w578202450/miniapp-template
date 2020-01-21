@@ -178,7 +178,6 @@ Page({
     dialogTarget: "",
     //---------------上传data---------
     patientID: "",
-    orgID: "",
     medicalSendList: [],
     allergySendList: [],
     // 身高信息
@@ -283,7 +282,6 @@ Page({
 
   onLoad: function() {
     let that = this
-    this.data.orgID = app.globalData.orgID
     this.data.patientID = app.globalData.patientID
     this.loadDatas()
   },
@@ -467,7 +465,7 @@ Page({
     let that = this
     wx.showNavigationBarLoading()
     HTTP.getPatientDoc({
-        orgID: this.data.orgID,
+      orgID: app.globalData.orgID,
         keyID: this.data.patientID
       })
       .then(res => {
@@ -739,7 +737,7 @@ Page({
 
     for (var index in saveData) {
       saveData[index].patientID = this.data.patientID;
-      saveData[index].orgID = this.data.orgID;
+      saveData[index].orgID = app.globalData.orgID;
     }
 
     wx.showLoading({

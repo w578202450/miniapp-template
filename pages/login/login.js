@@ -9,10 +9,14 @@ var TIM = getApp().globalData.TIM;
 Page({
   data: {
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
-    disabled: true
+    disabled: true,
+    selctedIndex:0//公众号跳转带参数  0在线问诊 1个人中心
   },
 
-  onLoad: function() {
+  onLoad: function(e) {
+    if (e.selctedIndex){
+      this.data.selctedIndex = e.selctedIndex
+    } 
     /**
      * 本地缓存读取 
      * 1.存在unionid 直接进行用户数据请求
@@ -294,9 +298,16 @@ Page({
       that.setData({
         loginBtnDisabled: true
       })
-      wx.switchTab({
-        url: '/pages/online-inquiry/online-inquiry'
-      });
+      if (that.data.selctedIndex == 1){
+        wx.switchTab({
+          url: '/pages/personal-center/personal-center'
+        });
+      } else {
+        wx.switchTab({
+          url: '/pages/online-inquiry/online-inquiry'
+        });
+      }
+      
     }).catch(function(imError) {
       console.warn("===登录失败===", imError); // 登录失败的相关信息
       wx.hideLoading();
@@ -331,6 +342,7 @@ Page({
         app.globalData.personID = res.data.personID
         app.globalData.patientID = res.data.keyID
         app.globalData.orgID = res.data.orgID
+        app.globalData.personInfo = res.data
         wx.setStorage({
             key: 'personInfo',
             data: res.data
