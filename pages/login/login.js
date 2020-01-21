@@ -261,7 +261,7 @@ Page({
           key: 'userSig',
           data: res.data.userSig
         });
-        console.log("获取userSig：" + that.data.userSig);
+        // console.log("获取userSig：" + that.data.userSig);
         if (that.data.userSig) {
           // IM登录
           that.loginIM(userId);
@@ -283,13 +283,13 @@ Page({
     //   title: '微信授权信息',
     //   content: "userId:" + userId + ",userSig:" + that.data.userSig
     // })
-    wx.setStorageSync('myUsername', userId);
     // IM登录
     tim.login({
       userID: userId,
       userSig: genTestUserSig(userId).userSig /*that.data.userSig*/
     }).then(function(imResponse) {
-      console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
+      // console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
+      wx.setStorageSync('myUsername', userId);
       wx.hideLoading();
       that.setData({
         loginBtnDisabled: true

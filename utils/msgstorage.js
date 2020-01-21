@@ -31,7 +31,7 @@ msgStorage.saveMsg = function(sendableMsg, type, receiveMsg) {
   let curChatMsg = wx.getStorageSync(sessionKey) || [];
   let renderableMsg = msgPackager(sendableMsg, type, myName); //消息封装
   curChatMsg.push(renderableMsg);
-  console.log('消息封装renderableMsgrenderableMsg', renderableMsg)
+  // console.log('消息封装renderableMsgrenderableMsg', renderableMsg)
   wx.setStorage({
     key: sessionKey,
     data: curChatMsg,

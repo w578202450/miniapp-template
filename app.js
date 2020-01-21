@@ -53,6 +53,8 @@ App({
       console.log("============TIM SDK已处于READY状态==================");
     });
 
+    tim.off
+
     tim.on(TIM.EVENT.MESSAGE_RECEIVED, function (event) {
       // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
       // event.data - 存储 Message 对象的数组 - [Message]
@@ -151,7 +153,7 @@ App({
  
   onUnload: function() {
     tim.logout().then(function(imResponse) {
-      console.log("===登出成功===" + imResponse.data); // 登出成功
+      // console.log("===登出成功===" + imResponse.data); // 登出成功
     }).catch(function(imError) {
       console.warn('logout error:', imError);
     });

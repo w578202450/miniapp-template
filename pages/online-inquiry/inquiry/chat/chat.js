@@ -103,24 +103,10 @@ Page({
       // 录音播放错误时
       that.initItemRecordStatusFun();
     });
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    let that = this;
-    let username = this.data.username;
     let myUsername = wx.getStorageSync("myUsername");
-    msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      // console.log(renderableMsg);
+    msgStorage.on("newChatMsg", function (renderableMsg, type, curChatMsg, sesskey) {
+      // console.log("分发到聊天界面的消息：" + JSON.stringify(renderableMsg));
       // msgType
       let msgType = renderableMsg.type;
       // console.log("msg{Type}:" + msgType);
@@ -140,21 +126,39 @@ Page({
       });
       that.toViewBottomFun();
     });
-    that.setMessageRead();
+
+    /**
+     * 获取手机系统
+     */
     wx.getSystemInfo({
-      success: function(res) {
+      success: function (res) {
         that.setData({
           systemInfo: res,
         })
         if (res.platform == "devtools") {
           // console.log("PC");
-        } else if (res.platform == "ios") {            
+        } else if (res.platform == "ios") {
           // console.log("IOS");
-        } else if (res.platform == "android") {            
+        } else if (res.platform == "android") {
           // console.log("android");
         }
       }
     });
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    let that = this;
+    that.setMessageRead();
   },
 
   /**
@@ -462,20 +466,6 @@ Page({
     });
     // this.toViewBottomFun();
   },
-
-  /*操作：键盘高度变化时 */
-  // menusInputHeightChangeFun: function(e) {
-    // let that = this;
-    // if (e.detail.height) {
-    //   that.setData({
-    //     docInfoBoxTop: e.detail.height * 2
-    //   })
-    // } else {
-    //   that.setData({
-    //     docInfoBoxTop: 0
-    //   })
-    // }
-  // },
 
   /*操作：输入预发送信息 */
   adInputChange: function(e) {
