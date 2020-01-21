@@ -18,7 +18,7 @@
     "pages/order/drug-orders/drug-orders"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTextStyle": "black",
     "backgroundColor":"#F6F6F6"

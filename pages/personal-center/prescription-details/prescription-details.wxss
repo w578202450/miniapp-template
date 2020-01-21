@@ -7,7 +7,6 @@ page {
 .tip {
   padding-left: 32rpx;
   padding-right: 32rpx;
-  width: 100%;
   display: flex;
   align-items: center;
 }

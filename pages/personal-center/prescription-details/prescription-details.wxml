@@ -64,6 +64,6 @@
     <text>咨询医生</text>
   </view>
   <view class="button-background" style="margin-left:32rpx;background-color: rgba(255,255,255,1)" catchtap="payAction">
-    <text class="button-text">立即支付（实付：¥{{rpData.price/100}}）</text>
+    <text class="button-text">去支付</text>
   </view>
 </view>
