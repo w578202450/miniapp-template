@@ -70,11 +70,11 @@ Page({
     recordIconUrlSelf: "../../../../images/chat/audioSelf.png", // 语音消息的图标 => 自己发的
     recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
     recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
-    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif", // 播放语音时的GIF => 他人发的
+    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif" // 播放语音时的GIF => 他人发的
     // bottomMenusDistance: 0, // 底部工具栏距离底部的距离
-    inputShowed: false, // 输入框是否获取焦点
-    docInfoBoxTop: 0, // 医生医助信息栏与顶部的距离
-    systemInfo: {} // 当前手机类型相关信息
+    // inputShowed: false, // 输入框是否获取焦点
+    // docInfoBoxTop: 0, // 医生医助信息栏与顶部的距离
+    // systemInfo: {} // 当前手机类型相关信息
   },
 
   /**
@@ -130,20 +130,20 @@ Page({
     /**
      * 获取手机系统
      */
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          systemInfo: res,
-        })
-        if (res.platform == "devtools") {
-          // console.log("PC");
-        } else if (res.platform == "ios") {
-          // console.log("IOS");
-        } else if (res.platform == "android") {
-          // console.log("android");
-        }
-      }
-    });
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     that.setData({
+    //       systemInfo: res,
+    //     })
+    //     if (res.platform == "devtools") {
+    //       // console.log("PC");
+    //     } else if (res.platform == "ios") {
+    //       // console.log("IOS");
+    //     } else if (res.platform == "android") {
+    //       // console.log("android");
+    //     }
+    //   }
+    // });
   },
 
   /**
@@ -427,12 +427,12 @@ Page({
 
   /*操作：点击输入框时，关闭工具栏  */
   inputClickedFun: function() {
-    let that = this;
-    if (that.data.systemInfo.platform == "android" && that.data.isOpenBottomBoolbar) {
-      this.setData({
-        isOpenBottomBoolbar: false
-      });
-    }
+    // let that = this;
+    // if (that.data.systemInfo.platform == "android" && that.data.isOpenBottomBoolbar) {
+    //   this.setData({
+    //     isOpenBottomBoolbar: false
+    //   });
+    // }
   },
 
   /*操作：键盘高度变化时 */
@@ -442,29 +442,23 @@ Page({
 
   /*操作：输入框聚焦*/
   menusInputFocusFun: function(e) {
-    let that = this;
-    if (that.data.systemInfo.platform == "ios" && that.data.isOpenBottomBoolbar) {
-      this.setData({
-        // isOpenBottomBoolbar: false,
-        // bottomMenusDistance: e.detail.height,
-        // inputShowed: true,
-        docInfoBoxTop: e.detail.height + 30
-      });
-    } else {
-      this.setData({
-        docInfoBoxTop: e.detail.height * 2
-      });
-    }
+    // let that = this;
+    // if (that.data.systemInfo.platform == "ios" && that.data.isOpenBottomBoolbar) {
+    //   this.setData({
+    //     docInfoBoxTop: e.detail.height + 30
+    //   });
+    // } else {
+    //   this.setData({
+    //     docInfoBoxTop: e.detail.height * 2
+    //   });
+    // }
   },
 
   /*操作：消息输入框失去焦点时 */
   menusInputBlurFun: function(e) {
-    this.setData({
-      // bottomMenusDistance: 0,
-      // inputShowed: false,
-      docInfoBoxTop: 0
-    });
-    // this.toViewBottomFun();
+    // this.setData({
+    //   docInfoBoxTop: 0
+    // });
   },
 
   /*操作：输入预发送信息 */
@@ -473,7 +467,6 @@ Page({
     that.setData({
       maySendContent: e.detail.value,
     });
-    // that.data.maySendContent = e.detail.value;
     let value = that.data.maySendContent; // 先把输入的值复制一份，用于操作
     value = value.replace(/\s+/g, ""); // 用正则表达式去掉所有的空白字符（空格是其中一种）
     //去掉所有空格之后，再对它进行判断，  
