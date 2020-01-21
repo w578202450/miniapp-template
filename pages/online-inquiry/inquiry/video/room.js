@@ -215,25 +215,25 @@ Page({
     let myUsername = wx.getStorageSync("myUsername");
     console.log("username:" + JSON.stringify(username));
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
+      // console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
       // msgType
       let msgType = renderableMsg.type;
-      console.log("msg{Type}:" + msgType);
+      // console.log("msg{Type}:" + msgType);
       if (msgType == "TIMCustomElem") { // 自定义消息
         let jsonData = JSON.parse(renderableMsg.payload.data);
         // customType
         let customType = jsonData.customType;
         // childType
         let childType = jsonData.childType;
-        console.log("payload.data.{childType}:" + childType);
+        // console.log("payload.data.{childType}:" + childType);
         // data
         let data = jsonData.data;
-        console.log("payload{data}:" + data);
+        // console.log("payload{data}:" + data);
         // 视频问诊的消息类型处理
         if (childType == "video") {
           // 是否接收还是拒绝
           let isaccept = jsonData.data.type;
-          console.log("payload.data.data.{type}:" + isaccept);
+          // console.log("payload.data.data.{type}:" + isaccept);
           if (isaccept == "reject") { // 对方拒绝
             // 退出房间
             wx.showToast({
@@ -255,7 +255,7 @@ Page({
             });
             // 房间号
             let roomid = jsonData.data.roomId;
-            console.log("payload.data.data.{roomId}:" + roomid);
+            // console.log("payload.data.data.{roomId}:" + roomid);
             that.setData({
               roomID: roomid
             });
@@ -282,7 +282,7 @@ Page({
                 console.log('用户点击接受视频');
                 // 房间号
                 let inquiryid = renderableMsg.payload.data.data.inquiryId;
-                console.log("payload.data.data.{inquiryId}:" + inquiryid);
+                // console.log("payload.data.data.{inquiryId}:" + inquiryid);
                 that.setData({
                   inquiryId: inquiryid
                 });
@@ -391,7 +391,7 @@ Page({
     //   description: "[视频问诊消息]",
     //   extension: 'tmc'
     // };
-    console.log("视频问诊发送自定义消息内容：" + JSON.stringify(msgPayload));
+    // console.log("视频问诊发送自定义消息内容：" + JSON.stringify(msgPayload));
     let data = msgPayload.data;
     let description = msgPayload.description;
     let extension = msgPayload.extension;
@@ -543,7 +543,7 @@ Page({
         that.setData({
           userInfo: res.data
         });
-        console.log("===患者信息===" + JSON.stringify(that.data));
+        // console.log("===患者信息===" + JSON.stringify(that.data));
         wx.getStorage({
           key: 'userSig',
           success: function(res) {
@@ -551,7 +551,7 @@ Page({
             that.setData({
               userSig: res.data
             });
-            console.log("===userSig===" + JSON.stringify(res.data));
+            // console.log("===userSig===" + JSON.stringify(res.data));
             wx.getStorage({
               key: 'inquiryInfo',
               success: function(res) {
@@ -559,7 +559,7 @@ Page({
                 that.setData({
                   inquiryInfo: res.data
                 });
-                console.log("===获取群聊问诊信息===" + JSON.stringify(res.data));
+                // console.log("===获取群聊问诊信息===" + JSON.stringify(res.data));
                 // 创建问诊   
                 that.createVideoInquiry();
                 // that.joinRoom();
