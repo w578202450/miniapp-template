@@ -34,6 +34,8 @@ Page({
     isInCalling: false, // 是否视频中
     doctorInfo: {}, // 医生信息
     isAcceptCall: false, // 是否展示接听按钮
+    isHiddenAcceptInterface: true, // 是否隐藏接听界面
+    isHiddenCallInterface: true,//是否隐藏拨打界面
     hidden: false // 是否隐藏接听按钮
   },
 
@@ -234,9 +236,50 @@ Page({
   /**
    * 挂断视频
    */
-  hangUpVideo: function() {
-    console.log("-----------" + '挂断');
+  hangUpVideo: function(e) {
+
     let that = this;
+
+    let index = e.currentTarget.dataset.index;
+
+    if (index == 0){//取消拨打
+      let dataParams = {
+        customType: "sys",
+        childType: "video",
+        data: {
+          roomId: res.data.roomId,
+          bizId: "tmc",
+          type: "reject",
+          requestRole: "0"
+        }
+      };
+      let msgPayload = {
+        data: JSON.stringify(dataParams),
+        description: "[视频问诊消息]",
+        extension: 'tmc'
+      };
+      that.sendCustomMsg(msgPayload);
+
+    } else {//挂断接听
+      let dataParams = {
+        customType: "sys",
+        childType: "video",
+        data: {
+          roomId: res.data.roomId,
+          bizId: "tmc",
+          type: "accept",
+          requestRole: "0"
+        }
+      };
+      let msgPayload = {
+        data: JSON.stringify(dataParams),
+        description: "[视频问诊消息]",
+        extension: 'tmc'
+      };
+      that.sendCustomMsg(msgPayload);
+    }
+
+    console.log("-----------" + '挂断');
     that.exitRoom();
     that.goBack();
   },
@@ -351,10 +394,19 @@ Page({
     });
     // console.log(options);
     if (options.isCall == 1) { // 主动发起
+    that.setData({
+      isHiddenAcceptInterface: true,
+      // isAcceptCall: true,
+      isHiddenCallInterface: false,
+    })
+      
       that.callVideo();
     } else if (options.isCall == 2) { // 接收发起
       that.setData({
-        isAcceptCall: true,
+        isHiddenAcceptInterface:false,
+        // isAcceptCall: true,
+        isHiddenCallInterface:true,
+        
         inquiryId: options.inquiryID,
       });
       console.log("======----" + this.data.inquiryID + "   " + options.inquiryID);

@@ -8,29 +8,29 @@
       <view hidden="{{hidden}}" wx:if="{{!isInCalling}}" class="docInfoBox">
         <image wx:if="{{doctorInfo.faceImage && doctorInfo.faceImage.lengt > 0}}" class="img-head" src="{{doctorInfo.faceImage}}" />
         <image wx:else class='img-head' src='../../../../images/chat/personBacImg.png'></image>
-         <view class="callDocTitle"></view>
+        <view class="callDocTitle"></view>
         <!-- <view class="callDocTitle">呼叫{{doctorInfo.doctorName}}医生中...</view> -->
       </view>
       <view class="optionsBtn-box">
         <!-- 主动发起视频 -->
         <!-- 取消、挂断视频的按钮 -->
-        <block wx:if="{{!isAcceptCall}}">
-          <view class="endCallBoxSelf" bindtap="hangUpVideo">
-            <image class='img-view' src='../../../../images/video/hang-up.png'></image>
-            <text wx:if="{{isInCalling}}" class="endCallTxt">挂断</text>
-            <text wx:else class="endCallTxt">取消</text>
-          </view>
-        </block>
-        <!-- 被动接听视频 -->
-        <block wx:else>
-          <!-- 取消、挂断视频的按钮 -->
-          <view class="endCallBox" bindtap="hangUpVideo">
-            <image class='img-view' src='../../../../images/video/hang-up.png'></image>
-            <text wx:if="{{isInCalling}}" class="endCallTxt">挂断</text>
-            <text wx:else class="endCallTxt">取消</text>
-          </view>
-          <!-- 接听视频的按钮 -->
+        
+        <view hidden="{{isHiddenAcceptInterface}}" class="endCallBoxSelf" bindtap="hangUpVideo" data-index="0">
+          <image class='img-view' src='../../../../images/video/hang-up.png'></image>
+          <text wx:if="{{isInCalling}}" class="endCallTxt">挂断</text>
+          <text wx:else class="endCallTxt">取消</text>
+        </view>
 
+        <!-- 被动接听视频 -->
+        <!-- 取消、挂断视频的按钮 -->
+        <view hidden="{{isHiddenCallInterface}}" class="endCallBox" bindtap="hangUpVideo" data-index="1">
+          <image class='img-view' src='../../../../images/video/hang-up.png'></image>
+          <text wx:if="{{isInCalling}}" class="endCallTxt">挂断</text>
+          <text wx:else class="endCallTxt">取消</text>
+        </view>
+        <!-- 接听视频的按钮 -->
+
+        <block wx:if="{{!isHiddenCallInterface}}">
           <view hidden="{{hidden}}" class="sureCallBox" bindtap="acceptVideo">
             <image class='img-view' src='../../../../images/video/answer.png'></image>
             <text class="endCallTxt">接听</text>
