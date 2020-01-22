@@ -27,19 +27,14 @@ Page({
     beauty: 3, // 美颜指数，取值 0 - 9，数值越大效果越明显
     muted: false, // true 静音 false 不静音
     debug: false, // true 打印推流 debug 信息 fales 不打印推流 debug 信息
-    enableIM: true, // 是否启用IM
     // 其他配置参数可查看 API 文档
     inquiryId: '', // 问诊记录id
     customMsgType: '', // 自定义消息类型(根据payload{childType}确定)
     enableCamera: true,
-    username: {
-      type: Object,
-      value: {},
-    },
     isInCalling: false, // 是否视频中
     doctorInfo: {}, // 医生信息
     isAcceptCall: false, // 是否展示接听按钮
-    hidden: false
+    hidden: false // 是否隐藏接听按钮
   },
 
   /**
@@ -133,21 +128,6 @@ Page({
       that.setData({
         inquiryId: res.data.inquiryId
       });
-      // 发送自定义消息
-      // let msgPayload = {
-      //   data: {
-      //     customType: "sys",
-      //     childType: "video",
-      //     data: {
-      //       inquiryId: res.data.inquiryId,
-      //       bizId: "tmc",
-      //       requestRole: "0"
-      //     }
-      //   },
-      //   description: "[视频问诊消息]",
-      //   extension: 'tmc'
-      // };
-      // that.sendCustomMsg(msgPayload);
     })
   },
 
@@ -249,6 +229,16 @@ Page({
   changeCamera: function() {
     let that = this;
     this.data.webrtcroomComponent.switchCamera();
+  },
+
+  /**
+   * 挂断视频
+   */
+  hangUpVideo: function() {
+    console.log("-----------" + '挂断');
+    let that = this;
+    that.exitRoom();
+    that.goBack();
   },
 
   /**
@@ -387,10 +377,10 @@ Page({
   callVideo: function() {
     let that = this;
     that.setData({
-      hidden: false
-    }),
-    // 创建问诊   
-    that.createVideoInquiry();
+        hidden: false
+      }),
+      // 创建问诊   
+      that.createVideoInquiry();
   },
 
   /**
@@ -399,10 +389,10 @@ Page({
   acceptVideo: function() {
     let that = this;
     that.setData({
-      hidden : true
-    }),
-    that.getRoomId();
-  
+        hidden: true
+      }),
+      that.getRoomId();
+
   },
 
   // 获取roomId

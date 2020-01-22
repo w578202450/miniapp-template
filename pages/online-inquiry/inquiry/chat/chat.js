@@ -131,9 +131,9 @@ Page({
           // 视频问诊的消息类型处理
           if (childType == "video") {
             // 医生发起(接收视频)
-            if (jsonData.data.requestRole == 1) {
+            if (jsonData.data.requestRole == 1 && jsonData.data.inquiryId) {
               let inquiryType = jsonData.data.type;
-              console.log(jsonData.data.inquiryId);
+              console.log("医生发起(接收视频)inquiryID:" + jsonData.data.inquiryId);
               that.videoWxFun(jsonData.data.inquiryId);
             };
 
@@ -185,7 +185,8 @@ Page({
       });
       if (msgType != "TIMCustomElem") {
         that.toViewBottomFun();
-      }
+      };
+      // that.setMessageRead();
     });
 
     /**
@@ -219,7 +220,6 @@ Page({
    */
   onShow: function() {
     let that = this;
-    that.setMessageRead();
   },
 
   /**
@@ -571,12 +571,12 @@ Page({
     that.toViewBottomFun();
     // 2. 发送消息
     tim.sendMessage(message).then(function(imResponse) {
-
+      console.log("aaaaaaaaa");
     }).catch(function(imError) {
       that.setData({
         httpLoading: false // 关闭隐性加载过程
       });
-      console.warn(imError);
+      console.warn('imError-------', imError);
     });
   },
 
@@ -882,17 +882,15 @@ Page({
     let isCall = 1;
     if (inqID) {
       inquiryID = inqID;
-      isCall = 2
+      isCall = 2;
     };
     wx.navigateTo({
       url: '../../../../pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
-
-
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
-    console.log("-0-----------" + inquiryID);
+    console.log("--------跳转到视频-----------" + inquiryID);
   },
 
   /*操作：点击消息窗口 */

@@ -183,7 +183,7 @@ Component({
 
   detached: function () {
     self.exitRoom();
-    imHandler.logout();
+    // imHandler.logout();
   },
 
   methods: {
@@ -381,7 +381,7 @@ Component({
       self.requestSigServer(self.data.userSig, self.data.privateMapKey);
       if (this.data.enableIM) {
         this.initIm(); // 初始化IM
-      }
+      } 
     },
 
     /**

@@ -291,7 +291,7 @@ Page({
       userID: userId,
       userSig: genTestUserSig(userId).userSig /*that.data.userSig*/
     }).then(function(imResponse) {
-      // console.log("===IM登录成功===" + JSON.stringify(imResponse.data)); // 登录成功
+      console.log("===IM登录成功==="); // 登录成功
       wx.setStorageSync('myUsername', userId);
       wx.hideLoading();
       that.setData({
