@@ -99,34 +99,28 @@ Page({
    * 云处方创建视频问诊记录
    */
   createVideoInquiry: function() {
+    console.log('createVideoInquiry---', JSON.stringify(this.data.inquiryInfo))
     let that = this;
     let prams = {
       bizID: 'tmc',
       bizType: 'tmc',
       clientID: '19100717375019793291301001',
-      sponsorsID: that.data.userInfo.keyID,
-      sponsorsName: that.data.userInfo.patientName,
-      receiverID: that.data.inquiryInfo.keyID,
-      receiverName: that.data.inquiryInfo.keyID,
-      patientName: that.data.userInfo.patientName,
+      sponsorsID: app.globalData.personInfo.keyID,
+      sponsorsName: app.globalData.personInfo.patientName,
+      receiverID: wx.getStorageSync('inquiryInfo').keyID,
+      receiverName: wx.getStorageSync('inquiryInfo').keyID,
+      patientName: app.globalData.personInfo.patientName,
       requestRole: "0",
-      patientInfo: {
-        patientName: that.data.userInfo.patientName,
-        patientSex: that.data.userInfo.sex,
-        patientAge: 0,
-        patientPhone: that.data.userInfo.phone,
-        patientIdNo: that.data.userInfo.idNumber
-      }
     };
-    console.log("视频问诊:sponsorsID:" + that.data.userInfo.keyID +
-      ",sponsorsName:" + that.data.userInfo.patientName +
-      ",receiverID:" + that.data.inquiryInfo.keyID +
-      ",receiverName:" + that.data.inquiryInfo.keyID +
-      ",patientName:" + that.data.userInfo.patientName +
-      ",patientSex:" + that.data.userInfo.sex +
-      ",patientPhone:" + that.data.userInfo.phone +
-      ",patientIdNo:" + that.data.userInfo.idNumber
-    );
+    // console.log("视频问诊:sponsorsID:" + that.data.userInfo.keyID +
+    //   ",sponsorsName:" + app.globalData.personInfo.patientName +
+    //   ",receiverID:" + that.data.inquiryInfo.keyID +
+    //   ",receiverName:" + that.data.inquiryInfo.keyID +
+    //   ",patientName:" + app.globalData.personInfo.patientName +
+    //   ",patientSex:" + that.data.userInfo.sex +
+    //   ",patientPhone:" + that.data.userInfo.phone +
+    //   ",patientIdNo:" + that.data.userInfo.idNumber
+    // );
     HTTP.createVideoInquiry(prams).then(res => {
       console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
       that.setData({
@@ -154,7 +148,7 @@ Page({
     let extension = msgPayload.extension;
     // 创建消息实例
     let message = tim.createCustomMessage({
-      to: that.data.inquiryInfo.keyID,
+      to: wx.getStorageSync('inquiryInfo').keyID,
       conversationType: TIM.TYPES.CONV_GROUP, // 群聊
       payload: {
         data: data,
@@ -397,7 +391,7 @@ Page({
         that.setData({
           userInfo: res.data
         });
-        console.log("===患者信息===" + JSON.stringify(that.data));
+        console.log("===患者信息===" + JSON.stringify(that.data.userInfo));
         wx.getStorage({
           key: 'userSig',
           success: function(res) {
@@ -482,11 +476,11 @@ Page({
     let prams = {
       inquiryId: that.data.inquiryId, // 问诊记录id	
       sponsorsId: that.data.userInfo.keyID, // 发起者id(患者id)
-      receiverId: that.data.inquiryInfo.keyID // 接受者id(医生id)
+      receiverId: wx.getStorageSync('inquiryInfo').keyID // 接受者id(医生id)
     };
     console.log("获取roomId参数:inquiryId:" + that.data.inquiryId +
       ",sponsorsId:" + that.data.userInfo.keyID +
-      ",receiverID:" + that.data.inquiryInfo.keyID
+      ",receiverID:" + wx.getStorageSync('inquiryInfo').keyID
     );
     HTTP.getRoomId(prams).then(res => {
       console.log("获取roomId:" + JSON.stringify(res));

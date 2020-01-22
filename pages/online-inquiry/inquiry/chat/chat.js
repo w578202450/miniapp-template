@@ -410,7 +410,7 @@ Page({
         key: 'inquiryInfo',
         data: res.data
       });
-      // console.log("创建问诊:" + JSON.stringify(res.data));
+      console.log("创建问诊:" + JSON.stringify(res.data));
       that.getHistoryMessage(); // 获取历史消息
     })
   },
