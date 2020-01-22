@@ -187,10 +187,10 @@ Page({
   joinRoom: function () {
     let that = this;
     that.setData({
-      userID: that.data.userInfo.keyID, // [必选]用户 ID，可以由您的服务指定，或者使用小程序的openid
+      userID: app.globalData.personInfo.keyID, // [必选]用户 ID，可以由您的服务指定，或者使用小程序的openid
       sdkAppID: that.data.sdkAppID, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
       roomID: that.data.roomID, // [必选]房间号，可以由您的服务指定
-      userSig: genTestUserSig(userID).userSig /*that.data.userSig*/, // [必选]身份签名，需要从自行搭建的签名服务获取
+      userSig: genTestUserSig(app.globalData.personInfo.keyID).userSig /*that.data.userSig*/, // [必选]身份签名，需要从自行搭建的签名服务获取
       privateMapKey: '' // 一般不需要填
     }, function () {
       // 开始推流

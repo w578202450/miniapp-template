@@ -19,7 +19,7 @@
           <view class="info_one">{{talkInfo.doctorInfo.doctorName}}</view>
           <text class="info_one_one">医生</text>
         </view>
-        <text class="info_two">{{doctorInfo.titleName}}</text>
+        <text class="info_two">{{talkInfo.doctorTitleName}}</text>
       </view>
     </view>
     <view class="middleOne-box" bindtap="doctorDetailTap" data-index="1">

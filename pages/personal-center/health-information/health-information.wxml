@@ -65,12 +65,13 @@
 
   <template is="tmc-separator"></template>
 
-  <view class="box-flex-row">
-    <text class="font-one" style="flex-shrink: 0;width: 120rpx">妊娠哺乳</text>
-    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{gestationItems}}" bind:radioChange="gestationAction"></tmcRadioView>
-  </view>
-
-  <template is="tmc-separator"></template>
+  <block wx:if='{{sex==2}}'>
+    <view class="box-flex-row">
+      <text class="font-one" style="flex-shrink: 0;width: 120rpx">妊娠哺乳</text>
+      <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{gestationItems}}" bind:radioChange="gestationAction"></tmcRadioView>
+    </view>
+    <template is="tmc-separator"></template>
+  </block>
 
   <view class="tempView"></view>
 

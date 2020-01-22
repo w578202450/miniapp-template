@@ -287,7 +287,7 @@ Page({
     tim.getMessageList({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
       nextReqMessageID: that.data.nextReqMessageID,
-      count: 20
+      count: 15
     }).then(function(imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
@@ -348,15 +348,6 @@ Page({
         });
       }
     });
-    // wx.getStorage({
-    //   key: "doctorInfo",
-    //   success: function(res) {
-    //     that.setData({
-    //       doctorInfo: res.data
-    //     });
-    //   }
-    // });
-    console.log("");
     wx.getStorage({
       key: "assistantInfo",
       success: function(res) {
@@ -380,6 +371,7 @@ Page({
       let resData = res.data;
       that.setData({
         talkInfo: {
+          doctorTitleName: app.globalData.doctorInfo.titleName,
           doctorInfo: resData.doctor,
           assistantInfo: resData.assistant,
           patientInfo: resData.patient,
@@ -424,7 +416,7 @@ Page({
     let that = this;
     tim.getMessageList({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
-      count: 20
+      count: 15
     }).then(function(imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {

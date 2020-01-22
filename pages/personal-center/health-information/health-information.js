@@ -720,7 +720,8 @@ Page({
         }
       }
       this.setData({
-        gestationItems: that.data.gestationItems
+        gestationItems: that.data.gestationItems,
+        sex: app.globalData.personInfo.sex
       })
     }
   },
