@@ -216,6 +216,13 @@
 					"id": -1,
 					"name": "pages/login/login",
 					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "视频界面",
+					"pathName": "pages/online-inquiry/inquiry/video/room",
 					"scene": null
 				}
 			]

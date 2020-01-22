@@ -1,5 +1,6 @@
 const HTTP = require('../../../utils/http-util')
 let app = getApp()
+
 Page({
   data: {
     screenWidth: app.globalData.systemInfo.screenWidth,
@@ -11,12 +12,15 @@ Page({
       }
     ]
   },
+
   onLoad: function (e) {
     var staffID = e.staffID
     this.fetchDoctorInfo(staffID)
   },
 
-  // 获取主治医师信息
+  /**
+   * 医师信息
+   */
   fetchDoctorInfo(doctorId) {
     var that = this;
     HTTP.getDoctorInfo({
@@ -43,7 +47,10 @@ Page({
         })
       })
   },
-
+  
+  /**
+   * 获取专治病
+   */
   getDoctorDiseaseByDoctorID(doctorId){
     var that = this;
     HTTP.getDoctorDiseaseByDoctorID({

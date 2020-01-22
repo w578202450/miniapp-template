@@ -47,9 +47,8 @@ Page({
           disabled: false
         })
         if (res.code) {
+          wx.setStorageSync('code', res.code)
           app.globalData.code = res.code
-          app.globalData.code = wx.setStorageSync('code', res.code)
-          console.log('获取到微信临时code-----', res.code)
         } else {
           wx.showToast({
             title: res.errMsg,

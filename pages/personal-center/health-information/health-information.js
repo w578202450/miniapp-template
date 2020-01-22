@@ -286,23 +286,33 @@ Page({
     this.loadDatas()
   },
   //methods
-  // 高度输入
+  /**
+   * 高度输入
+   */
   heightInput: function(e) {
     this.data.heightInfo.docItemValue = e.detail.value
   },
-  // 体重输入
+  /**
+   * 体重输入
+   */
   weightInput: function(e) {
     this.data.weightInfo.docItemValue = e.detail.value
   },
-  // 烟龄
+  /**
+   * 烟龄
+   */
   smokeInput: function(e) {
     this.data.smokeInfo.docItemDesc = e.detail.value
   },
-  //烟龄
+  /***
+   * 烟龄
+   */
   drinkInput: function(e) {
     this.data.drinkInfo.docItemDesc = e.detail.value
   },
-  // 选择吸烟
+  /**
+   * 选择吸烟
+   */
   smokingAction: function(e) {
     console.log('------------吸烟史：', e.detail);
     this.data.smokeInfo.docItemValue = e.detail
@@ -311,7 +321,9 @@ Page({
       smoked: e.detail == "不吸烟" ? "" : e.value
     })
   },
-  // 选择饮酒
+  /**
+   * 选择饮酒
+   */
   drinkingAction: function(e) {
     console.log('------------饮酒史：', e.detail);
     this.data.drinkInfo.docItemValue = e.detail
@@ -320,14 +332,19 @@ Page({
       drink: e.detail == "不吸烟" ? "" : e.value
     })
   },
-  // 选择既往病史
+  /**
+   * 选择既往病史
+   */
   medicalAction: function(e) {
     this.data.historyOfSicknessInfo.docItemValue = e.detail
     this.setData({
       isHiddenMedicalList: (e.detail == "无") ? true : false
     })
   },
-  // 选择既往病史列表
+  
+  /**
+   * 选择既往病史列表
+   */
   medicalGridsChange: function(e) {
     var index = e.detail;
     var item = this.data.medicalList[e.detail];
@@ -341,7 +358,9 @@ Page({
     this.data.medicalSendList = selectedData;
     console.log("既往病史-------", e.detail)
   },
-  // 过敏史选择
+  /**
+   * 过敏史选择
+   */
   allergyGridsChange: function(e) {
     var index = e.detail;
     var item = this.data.allergyList[e.detail];
@@ -356,7 +375,9 @@ Page({
     console.log("过敏史选择-------", e.detail)
     console.log("this.data.allergySendList-------", this.data.allergySendList)
   },
-  // 添加既往病史
+  /**
+   * 添加既往病史
+   */
   addMedical: function() {
     console.log('------------新增一个病史');
     this.setData({
@@ -366,7 +387,9 @@ Page({
     })
 
   },
-  // 选择过敏史
+  /**
+   * 选择过敏史
+   */
   allergyAction: function(e) {
     console.log("------------", e.detail)
     this.data.historyOfAllergyInfo.docItemValue = e.detail
@@ -375,7 +398,9 @@ Page({
       isHiddenAllergyList: (e.detail == "无") ? true : false
     })
   },
-  // 添加过敏史
+  /**
+   * 添加过敏史
+   */
   addAllergy: function(e) {
     console.log('------------新增一个过敏史');
     this.setData({
@@ -384,30 +409,40 @@ Page({
       isHiddenDialog: false
     })
   },
-  // 选择肝功能
+  /**
+   * 选择肝功能
+   */
   liverAction: function(e) {
     console.log('------------肝功能：', e.detail);
     this.data.liverInfo.docItemValue = e.detail
   },
-  // 选择肾功能
+  /**
+   * 选择肾功能
+   */
   kidneyAction: function(e) {
     console.log('------------肾功能：', e.detail);
     this.data.renalInfo.docItemValue = e.detail
   },
-  // 选择妊娠哺乳
+  /**
+   * 选择妊娠哺乳
+   */
   gestationAction: function(e) {
     console.log('------------妊娠哺乳：', e.detail);
     this.data.pregnancyInfo.docItemValue = e.detail
   },
 
-  // 弹框取消
+  /***
+   * 弹框取消
+   */
   cancleDialog: function() {
     this.setData({
       isHiddenDialog: true,
       dialogTarget: ""
     })
   },
-  // 弹框保存
+  /**
+   *弹框保存
+   */ 
   confirmDialog: function() {
 
     var value = this.data.dialogInput;
@@ -448,7 +483,9 @@ Page({
     }
 
   },
-  // 获取弹框中输入框的值
+  /**
+   * 获取弹框中输入框的值
+   */
   fetchInput: function(e) {
     let value = Common.filterEmoji(e.detail.value)
     this.setData({
@@ -460,7 +497,9 @@ Page({
     
   },
 
-  // 查询健康信息
+  /**
+   * 查询健康信息
+   */
   loadDatas() {
     let that = this
     wx.showNavigationBarLoading()
@@ -491,7 +530,9 @@ Page({
         })
       })
   },
-  // 载入健康信息
+  /**
+   * 载入健康信息
+   */
   handleQueryInfo: function(item) {
     let that = this
     // 身高
@@ -684,7 +725,9 @@ Page({
     }
   },
 
-  // 保存健康信息操作
+  /**
+   * 保存健康信息操作
+   */
   submitAction: function() {
     var that = this
     wx.showModal({
@@ -705,7 +748,9 @@ Page({
     })
   },
 
-  // 保存健康信息请求
+  /**
+   * 保存健康信息请求
+   */
   savePatientInfo: function() {
     //吸烟史
     if (this.data.smokeInfo.docItemValue === '不吸烟') {
