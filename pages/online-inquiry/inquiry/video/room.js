@@ -16,7 +16,7 @@ Page({
   data: {
     webrtcroomComponent: null,
     userInfo: {}, // 当前用户信息
-    roomID: '123', // [必选]房间号，可以由您的服务指定
+    roomID: '', // [必选]房间号，可以由您的服务指定
     userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     inquiryInfo: {}, // 问诊信息
@@ -31,11 +31,13 @@ Page({
     inquiryId: '', // 问诊记录id
     customMsgType: '', // 自定义消息类型(根据payload{childType}确定)
     enableCamera: true,
+    enableIM: false, // 不启用IM
     isInCalling: false, // 是否视频中
     doctorInfo: {}, // 医生信息
     isAcceptCall: false, // 是否展示接听按钮
     isHiddenAcceptInterface: true, // 是否隐藏接听界面
-    isHiddenCallInterface: true,//是否隐藏拨打界面
+    isHiddenCallInterface: true, //是否隐藏拨打界面
+    isEnterRoom: false, // 是否进入房间(接听之前cancel,接通之后)
     hidden: false // 是否隐藏接听按钮
   },
 
@@ -242,59 +244,87 @@ Page({
 
     let index = e.currentTarget.dataset.index;
 
-    if (index == 0){//取消拨打
-      let dataParams = {
-        customType: "sys",
-        childType: "video",
-        data: {
-          roomId: res.data.roomId,
-          bizId: "tmc",
-          type: "reject",
-          requestRole: "0"
-        }
-      };
-      let msgPayload = {
-        data: JSON.stringify(dataParams),
-        description: "[视频问诊消息]",
-        extension: 'tmc'
-      };
-      that.sendCustomMsg(msgPayload);
+    console.log("---------------挂断视频-------------------" + JSON.stringify(that.data));
 
-    } else {//挂断接听
-      let dataParams = {
-        customType: "sys",
-        childType: "video",
-        data: {
-          roomId: res.data.roomId,
-          bizId: "tmc",
-          type: "accept",
-          requestRole: "0"
-        }
-      };
+    if (index == 0) { //取消拨打
+
+      if (!that.data.roomID) {
+        let dataParams = {
+          customType: "sys",
+          childType: "video",
+          data: {
+            bizId: "tmc",
+            type: "cancel",
+            requestRole: "0"
+          }
+        };
+        let msgPayload = {
+          data: JSON.stringify(dataParams),
+          description: "[视频问诊消息]",
+          extension: 'tmc'
+        };
+        that.sendCustomMsg(msgPayload);
+        that.goBack();
+      } else {
+        let dataParams = {
+          customType: "sys",
+          childType: "video",
+          data: {
+            bizId: "tmc",
+            type: "hangUp",
+            requestRole: "0"
+          }
+        };
+        let msgPayload = {
+          data: JSON.stringify(dataParams),
+          description: "[视频问诊消息]",
+          extension: 'tmc'
+        };
+        that.sendCustomMsg(msgPayload);
+        that.exitRoom();
+        that.goBack();
+      }
+    } else {
+      let dataParams = {};
+      if (that.data.roomID) {
+        dataParams = {
+          customType: "sys",
+          childType: "video",
+          data: {
+            bizId: "tmc",
+            type: "hangUp",
+            requestRole: "0"
+          }
+        };
+      } else {
+        dataParams = {
+          customType: "sys",
+          childType: "video",
+          data: {
+            bizId: "tmc",
+            type: "reject",
+            requestRole: "0"
+          }
+        };
+      }
       let msgPayload = {
         data: JSON.stringify(dataParams),
         description: "[视频问诊消息]",
         extension: 'tmc'
       };
       that.sendCustomMsg(msgPayload);
+      that.exitRoom();
+      that.goBack();
     }
-
-    console.log("-----------" + '挂断');
-    that.exitRoom();
-    that.goBack();
   },
 
   /**
    * 返回上一页
    */
   goBack() {
-    let that = this;
-    var pages = getCurrentPages();
-    if (pages.length > 1 && (pages[pages.length - 1].__route__ == 'pages/online-inquiry/inquiry/video/room')) {
-      wx.navigateBack({
-        delta: 1
-      });
-    }
+    wx.navigateBack({
+      delta: 1
+    });
   },
 
   onLoad: function(options) {
@@ -333,9 +363,6 @@ Page({
             that.exitRoom();
             that.goBack();
           } else if (isaccept == "accept") { // 对方接收
-            that.setData({
-              isInCalling: true
-            });
             wx.showToast({
               title: '医生已接听...'
             });
@@ -345,13 +372,15 @@ Page({
             that.setData({
               roomID: roomid
             });
-            // 进入房间
-            that.joinRoom();
+            if (roomid) {
+              that.setData({
+                isInCalling: true
+              });
+              // 进入房间
+              that.joinRoom();
+            }
           } else if (isaccept == "hangUp") { // 对方挂断
             // 退出房间
-            wx.showToast({
-              title: '医生已挂断...'
-            });
             that.exitRoom();
             that.goBack();
           }
@@ -394,19 +423,19 @@ Page({
     });
     // console.log(options);
     if (options.isCall == 1) { // 主动发起
-    that.setData({
-      isHiddenAcceptInterface: true,
-      // isAcceptCall: true,
-      isHiddenCallInterface: false,
-    })
-      
+      that.setData({
+        isHiddenAcceptInterface: true,
+        // isAcceptCall: true,
+        isHiddenCallInterface: false,
+      })
+
       that.callVideo();
     } else if (options.isCall == 2) { // 接收发起
       that.setData({
-        isHiddenAcceptInterface:false,
+        isHiddenAcceptInterface: false,
         // isAcceptCall: true,
-        isHiddenCallInterface:true,
-        
+        isHiddenCallInterface: true,
+
         inquiryId: options.inquiryID,
       });
       console.log("======----" + this.data.inquiryID + "   " + options.inquiryID);

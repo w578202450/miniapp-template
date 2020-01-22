@@ -14,8 +14,8 @@
       <view class="optionsBtn-box">
         <!-- 主动发起视频 -->
         <!-- 取消、挂断视频的按钮 -->
-        
-        <view hidden="{{isHiddenAcceptInterface}}" class="endCallBoxSelf" bindtap="hangUpVideo" data-index="0">
+
+        <view hidden="{{isHiddenCallInterface}}" class="endCallBoxSelf" bindtap="hangUpVideo" data-index="0">
           <image class='img-view' src='../../../../images/video/hang-up.png'></image>
           <text wx:if="{{isInCalling}}" class="endCallTxt">挂断</text>
           <text wx:else class="endCallTxt">取消</text>
@@ -23,14 +23,14 @@
 
         <!-- 被动接听视频 -->
         <!-- 取消、挂断视频的按钮 -->
-        <view hidden="{{isHiddenCallInterface}}" class="endCallBox" bindtap="hangUpVideo" data-index="1">
+        <view hidden="{{isHiddenAcceptInterface}}" class="endCallBox" bindtap="hangUpVideo" data-index="1">
           <image class='img-view' src='../../../../images/video/hang-up.png'></image>
           <text wx:if="{{isInCalling}}" class="endCallTxt">挂断</text>
           <text wx:else class="endCallTxt">取消</text>
         </view>
         <!-- 接听视频的按钮 -->
 
-        <block wx:if="{{!isHiddenCallInterface}}">
+        <block wx:if="{{!isHiddenAcceptInterface}}">
           <view hidden="{{hidden}}" class="sureCallBox" bindtap="acceptVideo">
             <image class='img-view' src='../../../../images/video/answer.png'></image>
             <text class="endCallTxt">接听</text>
