@@ -287,7 +287,7 @@ Page({
     tim.getMessageList({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
       nextReqMessageID: that.data.nextReqMessageID,
-      count: 20
+      count: 15
     }).then(function(imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
@@ -424,7 +424,7 @@ Page({
     let that = this;
     tim.getMessageList({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
-      count: 20
+      count: 15
     }).then(function(imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
