@@ -65,6 +65,13 @@ Page({
     }
   },
 
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+    msgStorage.off('newChatMsg')
+  },
   /**
    * 标签通过 onRoomEvent 返回内部事件
    */
@@ -317,7 +324,6 @@ Page({
    */
   goBack() {
     wx.navigateBack({
-      delta: 1
     });
   },
 
