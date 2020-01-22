@@ -47,7 +47,7 @@ App({
         }
       }
     });
-    // 监听事件，例如：
+    // 监听事件
     tim.on(TIM.EVENT.SDK_READY, function(event) {
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
       console.log("============TIM SDK已处于READY状态==================");
