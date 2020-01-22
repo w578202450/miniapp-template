@@ -65,13 +65,13 @@ Page({
     }
   },
 
-
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    msgStorage.off('newChatMsg')
+    // msgStorage.off('newChatMsg')
   },
+
   /**
    * 标签通过 onRoomEvent 返回内部事件
    */
@@ -139,7 +139,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('room.js onShow');
+    // console.log('room.js onShow');
     let that = this;
     // 保持屏幕常亮
     wx.setKeepScreenOn({
@@ -169,7 +169,7 @@ Page({
       console.log('视频问诊发送自定义消息成功:' + JSON.stringify(imResponse));
     }).catch(function (imError) {
       // 发送失败
-      console.warn('视频问诊发送自定义消息失败:', JSON.stringify(imError));
+      // console.warn('视频问诊发送自定义消息失败:', JSON.stringify(imError));
     });
   },
 
@@ -177,9 +177,8 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log('room.js onHide');
+    // console.log('room.js onHide');
   },
-
 
   /**
    * 进入房间
@@ -222,7 +221,6 @@ Page({
    */
   enableCamera: function (isEnableCamera) {
     let that = this;
-    // this.data.enableCamera = !this.data.enableCamera;
     this.setData({
       enableCamera: this.data.enableCamera
     });
@@ -240,15 +238,10 @@ Page({
    * 挂断视频
    */
   hangUpVideo: function (e) {
-
     let that = this;
-
     let index = e.currentTarget.dataset.index;
-
-    console.log("---------------挂断视频-------------------" + JSON.stringify(that.data));
-
+    console.log("===挂断视频===" + JSON.stringify(that.data));
     if (index == 0) { //取消拨打
-
       if (!that.data.roomID) {
         let dataParams = {
           customType: "sys",
@@ -328,7 +321,7 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log("-----111----" + JSON.stringify(options));
+    // console.log("===options===" + JSON.stringify(options));
     let that = this;
     this.data.webrtcroomComponent = this.selectComponent('#myroom');
     /**
@@ -336,7 +329,7 @@ Page({
      */
     let myUsername = wx.getStorageSync("myUsername");
     msgStorage.on("newChatMsg", function (renderableMsg, type, curChatMsg, sesskey) {
-      console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
+      // console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
       // msgType
       let msgType = renderableMsg.type;
       // console.log("msg{Type}:" + msgType);
@@ -368,7 +361,7 @@ Page({
             });
             // 房间号
             let roomid = jsonData.data.roomId;
-            console.log("payload.data.data.{roomId}:" + roomid);
+            // console.log("payload.data.data.{roomId}:" + roomid);
             that.setData({
               roomID: roomid
             });
@@ -387,6 +380,7 @@ Page({
         }
       }
     });
+
     /**
      * 获取基础信息
      */
@@ -429,24 +423,22 @@ Page({
         })
       },
     });
-    // console.log(options);
+
     if (options.isCall == 1) { // 主动发起
       that.setData({
         isHiddenAcceptInterface: true,
         // isAcceptCall: true,
         isHiddenCallInterface: false,
       })
-
       that.callVideo();
     } else if (options.isCall == 2) { // 接收发起
       that.setData({
         isHiddenAcceptInterface: false,
         // isAcceptCall: true,
         isHiddenCallInterface: true,
-
         inquiryId: options.inquiryID,
       });
-      console.log("======----" + this.data.inquiryID + "   " + options.inquiryID);
+      // console.log("===inquiryID===" + this.data.inquiryID + "," + options.inquiryID);
     }
   },
 
