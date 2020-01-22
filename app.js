@@ -56,7 +56,7 @@ App({
     tim.on(TIM.EVENT.MESSAGE_RECEIVED, function (event) {
       // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
       // event.data - 存储 Message 对象的数组 - [Message]
-      // console.log("===全局收消息===" + JSON.stringify(event.data));
+      console.log("===全局收消息===" + JSON.stringify(event));
       // 全局收消息分发
       msgStorage.saveReceiveMsg(event.data);
     });

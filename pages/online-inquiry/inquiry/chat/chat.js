@@ -47,13 +47,12 @@ Page({
         iconUrl: "../../../../images/chat/m-camera.png",
         clickFun: "cameraWxFun",
         isFifth: false
+      }, {
+        title: "视频问诊",
+        iconUrl: "../../../../images/chat/m-video.png",
+        clickFun: "videoWxFun",
+        isFifth: false
       }
-      // ,{
-      //   title: "视频问诊",
-      //   iconUrl: "../../../../images/chat/m-video.png",
-      //   clickFun: "videoWxFun",
-      //   isFifth: false
-      // }
     ],
     aimgurl: {}, //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
@@ -105,7 +104,7 @@ Page({
     });
 
     let myUsername = wx.getStorageSync("myUsername");
-    msgStorage.on("newChatMsg", function (renderableMsg, type, curChatMsg, sesskey) {
+    msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
       // console.log("分发到聊天界面的消息：" + JSON.stringify(renderableMsg));
       // msgType
       let msgType = renderableMsg.type;
@@ -119,12 +118,74 @@ Page({
         }
       } else if (msgType == "TIMCustomElem") {
         // 自定义消息
+        // msgType
+        let msgType = renderableMsg.type;
+        // console.log("msg{Type}:" + msgType);
+        if (msgType == "TIMCustomElem") { // 自定义消息
+          let jsonData = JSON.parse(renderableMsg.payload.data);
+          // customType
+          let customType = jsonData.customType;
+          // childType
+          let childType = jsonData.childType;
+          console.log("payload.data.{childType}:" + childType);
+          // 视频问诊的消息类型处理
+          if (childType == "video") {
+            // 医生发起(接收视频)
+            if (jsonData.data.requestRole == 1) {
+              let inquiryType = jsonData.data.type;
+              console.log(jsonData.data.inquiryId);
+              that.videoWxFun(jsonData.data.inquiryId);
+            };
+
+            //   console.log("payload.data.data.{type}:" + isaccept);
+            //   if (isaccept == "reject") { // 对方拒绝
+            //     // 退出房间
+            //     wx.showToast({
+            //       title: '医生已拒绝...'
+            //     });
+            //     this.exitRoom();
+            //     this.goBack();
+            //   } else if (isaccept == "busy") { // 对方忙碌
+            //     // 退出房间
+            //     wx.showToast({
+            //       title: '医生忙碌中...'
+            //     });
+            //     this.exitRoom();
+            //     this.goBack();
+            //   } else if (isaccept == "accept") { // 对方接收
+            //     that.setData({
+            //       isInCalling: true
+            //     });
+            //     // 进入房间
+            //     wx.showToast({
+            //       title: '医生已接听...'
+            //     });
+            //     // 房间号
+            //     let roomid = jsonData.data.roomId;
+            //     console.log("payload.data.data.{roomId}:" + roomid);
+            //     that.setData({
+            //       roomID: roomid
+            //     });
+            //     // 进入房间
+            //     that.joinRoom();
+            //   } else if (isaccept == "hangUp") { // 对方挂断
+            //     // 退出房间
+            //     wx.showToast({
+            //       title: '医生已挂断...'
+            //     });
+            //     this.exitRoom();
+            //     this.goBack();
+            //   }
+          }
+        }
       }
       let nowData = [...that.data.currentMessageList, renderableMsg];
       that.setData({
         currentMessageList: nowData
       });
-      that.toViewBottomFun();
+      if (msgType != "TIMCustomElem") {
+        that.toViewBottomFun();
+      }
     });
 
     /**
@@ -536,6 +597,7 @@ Page({
     } else if (fun == "cameraWxFun") {
       this.cameraWxFun();
     } else if (fun == "videoWxFun") {
+      // 主动发起不需要传inquiryID;
       this.videoWxFun();
     }
   },
@@ -811,14 +873,26 @@ Page({
   },
 
   /*操作：视频通话 */
-  videoWxFun: function() {
+  videoWxFun: function(inqID) {
+    /**
+     * isCall 1主动发起视频
+     * isCall 2接收发起视频
+     */
+    let inquiryID = '';
+    let isCall = 1;
+    if (inqID) {
+      inquiryID = inqID;
+      isCall = 2
+    };
     wx.navigateTo({
-      // url: '../../../../pages/personal-center/health-information/health-information',
-      url: '../../../../pages/online-inquiry/inquiry/video/room',
+      url: '../../../../pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
+
+
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},
     })
+    console.log("-0-----------" + inquiryID);
   },
 
   /*操作：点击消息窗口 */
