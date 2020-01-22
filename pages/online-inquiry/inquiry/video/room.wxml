@@ -6,7 +6,7 @@
     <view class='img-box' style="background-color: {{isInCalling ? 'rgba(0,0,0,0)': 'rgba(0,0,0,0.5)'}}">
       <!-- 呼叫中提示信息 -->
       <view hidden="{{hidden}}" wx:if="{{!isInCalling}}" class="docInfoBox">
-        <image wx:if="{{doctorInfo.faceImage && doctorInfo.faceImage.lengt > 0}}" class="img-head" src="{{doctorInfo.faceImage}}" />
+        <image wx:if="{{doctorInfo.faceImage && doctorInfo.faceImage.length > 0}}" class="img-head" src="{{doctorInfo.faceImage}}" />
         <image wx:else class='img-head' src='../../../../images/chat/personBacImg.png'></image>
         <view class="callDocTitle"></view>
         <!-- <view class="callDocTitle">呼叫{{doctorInfo.doctorName}}医生中...</view> -->

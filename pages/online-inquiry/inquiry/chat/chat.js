@@ -131,6 +131,7 @@ Page({
           // 视频问诊的消息类型处理
           if (childType == "video") {
             // 医生发起(接收视频)
+            console.log("---------接收视频-------")
             if (jsonData.data.requestRole == 1 && jsonData.data.inquiryId) {
               let inquiryType = jsonData.data.type;
               console.log("医生发起(接收视频)inquiryID:" + jsonData.data.inquiryId);
@@ -286,7 +287,7 @@ Page({
     tim.getMessageList({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
       nextReqMessageID: that.data.nextReqMessageID,
-      count: 10
+      count: 20
     }).then(function(imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {
@@ -347,14 +348,15 @@ Page({
         });
       }
     });
-    wx.getStorage({
-      key: "doctorInfo",
-      success: function(res) {
-        that.setData({
-          doctorInfo: res.data
-        });
-      }
-    });
+    // wx.getStorage({
+    //   key: "doctorInfo",
+    //   success: function(res) {
+    //     that.setData({
+    //       doctorInfo: res.data
+    //     });
+    //   }
+    // });
+    console.log("");
     wx.getStorage({
       key: "assistantInfo",
       success: function(res) {
@@ -384,7 +386,8 @@ Page({
           multiTalkInfo: resData.multiTalk
         }
       });
-      // console.log("查询患者的多方对话:" + JSON.stringify(res.data));
+      wx.setStorageSync('doctorInfo', resData.doctor)
+      console.log("医生信息:" + JSON.stringify(resData.doctor));
       that.createInquiry(); // 创建问诊
     })
   },
@@ -421,7 +424,7 @@ Page({
     let that = this;
     tim.getMessageList({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
-      count: 10
+      count: 20
     }).then(function(imResponse) {
       imResponse.data.messageList.forEach(item => {
         if (item.type == "TIMSoundElem") {

@@ -20,7 +20,7 @@ Page({
     userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     inquiryInfo: {}, // 问诊信息
-    sdkAppID: SDKAPPID /*'1400200900'*/ , // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
+    sdkAppID: SDKAPPID /*'1400200900'*/, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
     template: 'float', // [必选]标识组件使用的界面模版，组件内置了 bigsmall，float，grid 三种布局
     privateMapKey: '', // 房间权限 key，需要从自行搭建的签名服务获取
     // 如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
@@ -44,7 +44,7 @@ Page({
   /**
    * 通过 onIMEvent 返回 IM 消息事件，如果 enableIM 已关闭，则可以忽略 onIMEvent
    */
-  onIMEvent: function(e) {
+  onIMEvent: function (e) {
     switch (e.detail.tag) {
       case 'big_group_msg_notify':
         //收到群组消息
@@ -75,7 +75,7 @@ Page({
   /**
    * 标签通过 onRoomEvent 返回内部事件
    */
-  onRoomEvent: function(e) {
+  onRoomEvent: function (e) {
     let that = this;
     switch (e.detail.tag) {
       case 'error':
@@ -92,7 +92,7 @@ Page({
             title: '提示',
             content: code + ":" + detail,
             showCancel: false,
-            complete: function() {
+            complete: function () {
               this.data.isErrorModalShow = false;
               this.goBack();
             }
@@ -106,7 +106,6 @@ Page({
    * 云处方创建视频问诊记录
    */
   createVideoInquiry: function() {
-    console.log('createVideoInquiry---', JSON.stringify(this.data.inquiryInfo))
     let that = this;
     let prams = {
       bizID: 'tmc',
@@ -139,7 +138,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     console.log('room.js onShow');
     let that = this;
     // 保持屏幕常亮
@@ -148,7 +147,7 @@ Page({
     });
   },
 
-  sendCustomMsg: function(msgPayload) {
+  sendCustomMsg: function (msgPayload) {
     let that = this;
     let data = msgPayload.data;
     let description = msgPayload.description;
@@ -165,10 +164,10 @@ Page({
     });
     // 发送消息
     let promise = tim.sendMessage(message);
-    promise.then(function(imResponse) {
+    promise.then(function (imResponse) {
       // 发送成功
       console.log('视频问诊发送自定义消息成功:' + JSON.stringify(imResponse));
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       // 发送失败
       console.warn('视频问诊发送自定义消息失败:', JSON.stringify(imError));
     });
@@ -177,7 +176,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     console.log('room.js onHide');
   },
 
@@ -185,15 +184,18 @@ Page({
   /**
    * 进入房间
    */
-  joinRoom: function() {
+  joinRoom: function () {
     let that = this;
     that.setData({
       userID: that.data.userInfo.keyID, // [必选]用户 ID，可以由您的服务指定，或者使用小程序的openid
       sdkAppID: that.data.sdkAppID, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
       roomID: that.data.roomID, // [必选]房间号，可以由您的服务指定
-      userSig: that.data.userSig, // [必选]身份签名，需要从自行搭建的签名服务获取
+      userSig: genTestUserSig(userID).userSig /*that.data.userSig*/, // [必选]身份签名，需要从自行搭建的签名服务获取
       privateMapKey: '' // 一般不需要填
-    }, function() {
+    }, function () {
+      // 切换摄像头
+      that.changeCamera();
+      // 开始推流
       this.data.webrtcroomComponent.start();
     })
   },
@@ -201,7 +203,7 @@ Page({
   /**
    * 退出房间
    */
-  exitRoom: function() {
+  exitRoom: function () {
     let that = this;
     this.data.webrtcroomComponent.stop();
   },
@@ -209,7 +211,7 @@ Page({
   /**
    * 开启（或关闭）本地声音采集
    */
-  changeMute: function(isMuteMute) {
+  changeMute: function (isMuteMute) {
     let that = this;
     this.data.muted = isMuteMute; // true or false
     this.setData({
@@ -220,7 +222,7 @@ Page({
   /**
    * 开启（或关闭）本地视频采集
    */
-  enableCamera: function(isEnableCamera) {
+  enableCamera: function (isEnableCamera) {
     let that = this;
     // this.data.enableCamera = !this.data.enableCamera;
     this.setData({
@@ -231,7 +233,7 @@ Page({
   /**
    * 切换摄像头
    */
-  changeCamera: function() {
+  changeCamera: function () {
     let that = this;
     this.data.webrtcroomComponent.switchCamera();
   },
@@ -239,7 +241,7 @@ Page({
   /**
    * 挂断视频
    */
-  hangUpVideo: function(e) {
+  hangUpVideo: function (e) {
 
     let that = this;
 
@@ -327,7 +329,7 @@ Page({
     });
   },
 
-  onLoad: function(options) {
+  onLoad: function (options) {
     console.log("-----111----" + JSON.stringify(options));
     let that = this;
     this.data.webrtcroomComponent = this.selectComponent('#myroom');
@@ -335,7 +337,7 @@ Page({
      * 收消息
      */
     let myUsername = wx.getStorageSync("myUsername");
-    msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
+    msgStorage.on("newChatMsg", function (renderableMsg, type, curChatMsg, sesskey) {
       console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
       // msgType
       let msgType = renderableMsg.type;
@@ -392,7 +394,7 @@ Page({
      */
     wx.getStorage({
       key: 'personInfo',
-      success: function(res) {
+      success: function (res) {
         // 获取患者信息
         that.setData({
           userInfo: res.data
@@ -400,7 +402,7 @@ Page({
         console.log("===患者信息===" + JSON.stringify(that.data.userInfo));
         wx.getStorage({
           key: 'userSig',
-          success: function(res) {
+          success: function (res) {
             // 获取userSig
             that.setData({
               userSig: res.data
@@ -408,15 +410,23 @@ Page({
             console.log("===userSig===" + JSON.stringify(res.data));
             wx.getStorage({
               key: 'inquiryInfo',
-              success: function(res) {
+              success: function (res) {
                 // 获取inquiryInfo
                 that.setData({
                   inquiryInfo: res.data
                 });
                 console.log("===获取群聊问诊信息===" + JSON.stringify(res.data));
-
               },
-            })
+            });
+            wx.getStorage({
+              key: 'doctorInfo',
+              success: function(res) {
+                that.setData({
+                  doctorInfo: res.data
+                });
+              },
+            });
+            console.log("===获取doctorInfo===" + JSON.stringify(res.data));
           },
         })
       },
@@ -445,7 +455,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
     // 设置房间标题
     wx.setNavigationBarTitle({
       title: '视频问诊'
@@ -455,11 +465,11 @@ Page({
   /**
    * 主动发起
    */
-  callVideo: function() {
+  callVideo: function () {
     let that = this;
     that.setData({
-        hidden: false
-      }),
+      hidden: false
+    }),
       // 创建问诊   
       that.createVideoInquiry();
   },
@@ -467,17 +477,17 @@ Page({
   /**
    * 接听视频
    */
-  acceptVideo: function() {
+  acceptVideo: function () {
     let that = this;
     that.setData({
-        hidden: true
-      }),
+      hidden: true
+    }),
       that.getRoomId();
 
   },
 
   // 获取roomId
-  getRoomId: function() {
+  getRoomId: function () {
     let that = this;
     let prams = {
       inquiryId: that.data.inquiryId, // 问诊记录id	
