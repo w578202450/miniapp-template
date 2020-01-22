@@ -193,8 +193,6 @@ Page({
       userSig: genTestUserSig(userID).userSig /*that.data.userSig*/, // [必选]身份签名，需要从自行搭建的签名服务获取
       privateMapKey: '' // 一般不需要填
     }, function () {
-      // 切换摄像头
-      that.changeCamera();
       // 开始推流
       this.data.webrtcroomComponent.start();
     })
