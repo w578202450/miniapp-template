@@ -1,4 +1,5 @@
 const app = getApp()
+const AUTH = require('../../utils/auth')
 var HTTP = require('../../utils/http-util.js');
 import {
   genTestUserSig
@@ -10,7 +11,8 @@ Page({
   data: {
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     disabled: true,
-    selctedIndex:0//公众号跳转带参数  0在线问诊 1个人中心
+    selctedIndex:0,//公众号跳转带参数  0在线问诊 1个人中心
+    logined:false//是否处于登录状态
   },
 
   onLoad: function(e) {
@@ -24,46 +26,26 @@ Page({
      */
     app.globalData.unionid = wx.getStorageSync('unionid')
     app.globalData.openid = wx.getStorageSync('openID')
-    app.globalData.userInfo = wx.getStorageSync('userInfo') ? wx.getStorageSync('userInfo') : ''
-    if (app.globalData.unionid && app.globalData.openid) {
+    this.data.logined = app.globalData.unionid && app.globalData.openid
+    if (this.data.logined) {
+      app.globalData.userInfo = wx.getStorageSync('userInfo')
       this.getPatientInfo(app.globalData.unionid)
     } else {
-      this.fetchWxCode()
+      this.fetchTempCode()
     }
   },
   /** 
    * 微信登录
    * 1.登录成功缓存当前临时code 判断登录态用 
    */
-  fetchWxCode() {
-    wx.showLoading({
-      title: '登录中...',
-    })
+  fetchTempCode() {
     let that = this
-    wx.login({
-      success(res) {
-        wx.hideLoading()
-        that.setData({
-          disabled: false
-        })
-        if (res.code) {
-          wx.setStorageSync('code', res.code)
-          app.globalData.code = res.code
-        } else {
-          wx.showToast({
-            title: res.errMsg,
-            icon: 'none'
-          })
-          console.log('登录失败！' + res.errMsg)
-        }
-      },
-
-      fail() {
-        wx.hideLoading()
-        wx.showToast({
-          title: '登录失败',
-          icon: 'none'
-        })
+    AUTH.fetchTempCode().then(function(res){
+      that.setData({
+        disabled: false
+      })
+      if (res.code){
+        wx.setStorageSync('code', res.code)
       }
     })
   },
@@ -77,29 +59,20 @@ Page({
    * 4.2session_key过期：拿到当前code encryptedData iv 进行unionid请求
    */
   getUserInfo(e) {
-    console.log('获取到微信临时code-----', app.globalData.code)
-    app.globalData.encryptedData = e.detail.encryptedData
-    app.globalData.iv = e.detail.iv
-    app.globalData.userInfo = e.detail.userInfo
-    app.globalData.unionid = wx.getStorageSync('unionid')
-    app.globalData.openid = wx.getStorageSync('openID')
     wx.setStorageSync('encryptedData', e.detail.encryptedData)
     wx.setStorageSync('iv', e.detail.iv)
     wx.setStorageSync('userInfo', e.detail.userInfo)
-    if (app.globalData.unionid && app.globalData.openid) {
+    app.globalData.userInfo = e.detail.userInfo
+    if (this.data.logined) {
       this.getPatientInfo(app.globalData.unionid)
     } else {
       let that = this
       wx.checkSession({
         success() {
-          //session_key 未过期，并且在本生命周期一直有效
-          app.globalData.code = wx.getStorageSync('code')
-          app.globalData.sessionKey = wx.getStorageSync('sessionKey')
-          that.getounionid(app.globalData.sessionKey)
+          that.getounionid(true)
         },
         fail() {
-          app.globalData.userInfo = e.detail.userInfo
-          that.getounionid('')
+          that.getounionid(false)
         }
       })
     }
@@ -112,138 +85,17 @@ Page({
    * 1.2缓存unionid：用于直接登录
   
    */
-  getounionid(sessionKey) {
-    wx.showLoading({
-      title: '登录中...',
-    })
+  getounionid(isLoginStatus) {
     let that = this
-    var prams = {
-      code: app.globalData.code ? app.globalData.code : '',
-      encryptedData: app.globalData.encryptedData ? app.globalData.encryptedData : '',
-      iv: app.globalData.iv ? app.globalData.iv : '',
-      sessionKey: sessionKey
-    }
-    HTTP.getWXAuth(prams).then(res => {
-      wx.hideLoading()
-      if (res.code == 0) {
-        // unionid
-        wx.setStorageSync('sessionKey', res.data.session_key)
-        wx.setStorageSync('unionid', res.data.unionid)
-        wx.setStorageSync('openID', res.data.openid)
-        app.globalData.sessionKey = res.data.session_key
-        that.getPatientInfo(res.data.unionid)
-      } else {
-        that.setData({
-          disabled: false
-        })
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
-      }
-    }).catch(e => {
+    AUTH.getounionid(isLoginStatus).then(function(res){
+      that.getPatientInfo(res)
+    },function(error){
       that.setData({
         disabled: false
-      })
-      wx.hideLoading()
-      wx.showToast({
-        title: '网络异常'
       })
     })
   },
 
-
-  //   onLoad: function() {
-  //     let that = this
-  //     wx.getStorage({
-  //       key: 'userinfo',
-  //       success: function(res) {
-  //         app.globalData.userInfo = res.data
-  //         that.wxlogin()
-  //       },
-  //     })
-  //   },
-
-  //   // 微信授权
-  //   getUserInfo: function(e) {
-  //     let that = this
-  //     wx.checkSession({
-  //       success() {
-  //         //session_key 未过期，并且在本生命周期一直有效
-  //         that.getounionid(wx.getStorageSync('sessionKey'))
-  //       },
-  //       fail() {
-  //         wx.setStorageSync('encryptedData', e.detail.encryptedData)
-  //         wx.setStorageSync('iv', e.detail.iv)
-  //         if (e.detail.userInfo) {
-  //           app.globalData.userInfo = e.detail.userInfo
-  //           wx.setStorage({
-  //             key: 'userinfo',
-  //             data: e.detail.userInfo,
-  //             success: function (res) {
-  //               that.wxlogin()
-  //             }
-  //           })
-  //         }
-  //       }
-  //     })
-
-  //   },
-  //   // 微信登录获取临时code
-  //   wxlogin() {
-  //     wx.showLoading({
-  //       title: '登录中...',
-  //     })
-  //     let that = this
-  //     wx.login({
-  //       success: function(res) {
-  //         wx.setStorageSync('wxCode', res.code)
-  //         that.getounionid("");
-  //       },
-  //       fail: function(res) {
-  //         wx.hideLoading()
-  //         wx.showModal({
-  //           title: '登录失败',
-  //           content: res.msg,
-  //           showCancel: false
-  //         })
-  //       },
-  //     })
-  //   },
-  //   /**
-  //    * 获取openid 判断和缓存的openid是否一致
-  //    * 1.和缓存的openid是一致
-  //    * 1.1再判断本地是否缓存了相应的基础信息，存在就直接跳转到首页，不存在就请求基础数据
-  //    * 2.和缓存的openid是不一致
-  //    * 2.1根据新的openid获取相应的基础数据并缓存新的openid
-  //    * */
-  //   getounionid(sessionKey) {
-  //     let that = this
-  //     var prams = {
-  //       code: wx.getStorageSync('wxCode'),
-  //       encryptedData: wx.getStorageSync('encryptedData'),
-  //       iv: wx.getStorageSync('iv'),
-  //       sessionKey: sessionKey
-  //     }
-  //     HTTP.getWXAuth(prams).then(res => {
-  //       if (res.code == 0) {
-  //         // unionid
-  //         wx.setStorageSync('sessionKey', res.data.session_key)
-  //         that.getPatientInfo(res.data.unionid)
-  //       } else {
-  //         wx.hideLoading()
-  //         wx.showToast({
-  //           title: res.message,
-  //           icon: 'none'
-  //         })
-  //       }
-  //     }).catch(e => {
-  //       wx.hideLoading()
-  //       wx.showToast({
-  //         title: '网络异常'
-  //       })
-  //     })
-  //   },
   /**
    * 获取userSig
    */
@@ -282,10 +134,6 @@ Page({
    */
   loginIM: function(userId) {
     let that = this;
-    // wx.showModal({
-    //   title: '微信授权信息',
-    //   content: "userId:" + userId + ",userSig:" + that.data.userSig
-    // })
     // IM登录
     tim.login({
       userID: userId,
