@@ -396,7 +396,8 @@ Page({
       doctorStaffID: that.data.userInfo.doctorStaffID,
       doctorName: that.data.talkInfo.doctorInfo.doctorName,
       assistantStaffID: that.data.userInfo.assistantStaffID,
-      assistantName: that.data.talkInfo.assistantInfo.doctorName
+      assistantName: that.data.talkInfo.assistantInfo.doctorName,
+      talkID: that.data.talkInfo.multiTalkInfo.keyID
     };
     HTTP.createInquiry(prams).then(res => {
       that.setData({
