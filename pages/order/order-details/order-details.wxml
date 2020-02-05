@@ -107,6 +107,9 @@
       <text class="other-text">创建时间：{{orderInfo.createTime=='1900-01-01 00:00:00' ? '' : orderInfo.createTime}}</text>
       <text class="other-text">付款时间：{{orderInfo.payTime=='1900-01-01 00:00:00' ? '' : orderInfo.payTime}}</text>
       <text class="other-text">发货时间：{{orderInfo.deliveryTime=='1900-01-01 00:00:00' ? '' : orderInfo.deliveryTime}}</text>
+      <text class="other-text">快递公司：{{orderInfo.deliveryCompany}}</text>
+      <text class="other-text">物流单号：{{orderInfo.deliveryNo}}</text>
+      <text class="other-text">发货备注：{{orderInfo.deliveryRemarks}}</text>
     </view>
 
     <view class="separator" style="height:24rpx"></view>

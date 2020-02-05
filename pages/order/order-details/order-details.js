@@ -117,20 +117,62 @@ Page({
       })
       return;
     }
+    this.orderPrePay();
+  },
+  /**
+   * 预创单
+   */
+  orderPrePay(){
     var that = this
     wx.showLoading({
       title: '支付中',
     })
     HTTP.orderPrePay({
-        orgID: app.globalData.orgID,
-        orderID: this.data.orderInfo.keyID,
-        price: this.data.orderInfo.prePrice,
-        personID: this.data.orderInfo.buyerID
-      })
+      orgID: app.globalData.orgID,
+      orderID: this.data.orderInfo.keyID,
+      price: this.data.orderInfo.prePrice,
+      personID: this.data.orderInfo.buyerID
+    })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
-          this.tradeOrder(res.data.paymentID);
+          this.checkOrderPrePay(res.data.paymentID);
+          // this.tradeOrder(res.data.paymentID);
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
+        }
+
+      }).catch(e => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
+        })
+      })
+  },
+  /**
+   * 校验预创单
+   */
+  checkOrderPrePay(paymentID){
+    var that = this
+    wx.showLoading({
+      title: '支付中',
+    })
+    HTTP.checkOrderPrePay({
+      transID: paymentID,
+      sysCode: 'person-tmc'
+    })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          if (res.data.payResult == 1){//已支付成功
+            this.orderPaySuccess()
+          } else if (res.data.payResult == 0){//未支付成功
+            this.tradeOrder(paymentID);
+          }
         } else {
           wx.showToast({
             title: res.message,

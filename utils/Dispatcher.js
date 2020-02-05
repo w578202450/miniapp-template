@@ -15,11 +15,16 @@ Dispatcher.prototype = {
 	},
 	off(type, cb){
 		let cbtypes = dispCbs[dispIns.indexOf(this)];
+    console.log('-------------', cbtypes)
 		let cbs = cbtypes[type] = (cbtypes[type] || []);
-		let curTypeCbIdx = cbs.indexOf(cb);
-		if(~curTypeCbIdx){
-			cbs.splice(curTypeCbIdx, 1);
-		}
+    console.log('-------------', cbs)
+    if (cbs.length > 0){
+      cbs.pop()
+    }
+		// let curTypeCbIdx = cbs.indexOf(cb);
+		// if(~curTypeCbIdx){
+		// 	cbs.splice(curTypeCbIdx, 1);
+		// }
 	},
 	fire(type, ...args){
 		let cbtypes = dispCbs[dispIns.indexOf(this)];

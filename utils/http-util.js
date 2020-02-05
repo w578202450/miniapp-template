@@ -196,6 +196,13 @@ module.exports = {
   orderPrePay: function orderPrePay(parmas) {
     return request('api/tmc/goodsOrder/orderPrePay', true, 'get', parmas);
   },
+
+  /*
+   *校验预创单
+   */
+  checkOrderPrePay: function checkOrderPrePay(parmas) {
+    return request('api/payment/transPayment/checkOrderPrePay', true, 'get', parmas);
+  },
   /*
    *订单校验
    */

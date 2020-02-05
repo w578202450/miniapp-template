@@ -2,7 +2,7 @@
 <view style="height:20rpx;background-color: rgba(246, 246, 246, 1)"></view>
 <view class="page-container" style="margin-bottom:144rpx">
   <view class="box-flex-row">
-    <text class="font-one" style="flex-shrink: 0;width: 120rpx">身高</text>
+    <text class="font-one" placeholder-class="font-one" style="flex-shrink: 0;width: 120rpx">身高</text>
     <input class="font-one" placeholder="请填写身高" value="{{height}}" type="digit" bindinput="heightInput" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">cm</text>
   </view>
@@ -65,12 +65,13 @@
 
   <template is="tmc-separator"></template>
 
-  <view class="box-flex-row">
-    <text class="font-one" style="flex-shrink: 0;width: 120rpx">妊娠哺乳</text>
-    <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{gestationItems}}" bind:radioChange="gestationAction"></tmcRadioView>
-  </view>
-
-  <template is="tmc-separator"></template>
+  <block wx:if='{{sex==2}}'>
+    <view class="box-flex-row">
+      <text class="font-one" style="flex-shrink: 0;width: 120rpx">妊娠哺乳</text>
+      <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{gestationItems}}" bind:radioChange="gestationAction"></tmcRadioView>
+    </view>
+    <template is="tmc-separator"></template>
+  </block>
 
   <view class="tempView"></view>
 

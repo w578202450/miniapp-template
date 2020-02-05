@@ -20,6 +20,17 @@
     <view class="personinfo-other-box">
       <text class="personinfo-other">诊断：{{rpData.diagnosis}}</text>
     </view>
+    <view class="personinfo-other-box" style="display: flex;justify-content: space-between;">
+      <text class="personinfo-other" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;align-content: center;line-height:32rpx">过敏史：{{rpData.allergyDetail ? rpData.allergyDetail : rpData.historyOfAllergy}}</text>
+      <text class="personinfo-other" style="flex-shrink: 0;margin-left:32rpx">肝功能：{{rpData.liver}}</text>
+    </view>
+    <view class="personinfo-other-box" style="display: flex;justify-content: space-between;">
+      <text class="personinfo-other" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;align-content: center;line-height:32rpx">既往病史：{{rpData.sicknessDetail ? rpData.sicknessDetail : rpData.historyOfSickness}}</text>
+      <text class="personinfo-other" style="flex-shrink: 0;margin-left:32rpx">肾功能：{{rpData.renal}}</text>
+    </view>
+    <view hidden="{{isHiddenPregnancy}}" class="personinfo-other-box">
+      <text  class="personinfo-other">妊娠哺乳：{{rpData.pregnancy}}</text>
+    </view>
     <view class="personinfo-other-box">
       <text class="personinfo-other">开方时间：{{rpData.addTime == '1900-01-01 00:00:00' ? '' : rpData.addTime}}</text>
     </view>
@@ -27,7 +38,7 @@
 </view>
 
 <view class="middle">
-  <view class="middle-rp">RP</view>
+  <view class="middle-rp">Rp</view>
   <view class="middle-rp-item" wx:key="keyID" wx:for="{{rpMedicines}}" wx:for-item="item">
     <view class="rp-info-box">
       <view class="rp-info-subviewBox">
@@ -37,21 +48,20 @@
       <text class="rp-num">x{{item.medicineAmount}}{{item.unit}}</text>
     </view>
     <text class="rp-methods">用法用量：{{item.takeDose}}{{item.formType}}/次，{{item.takeFrequence}}，{{item.takeDirection}}，{{item.medicationDays}}天</text>
-    <view class=".rp-lineView"></view>
   </view>
   <view class="rp-advice">医嘱：{{rpData.rpAdvice}}</view>
 </view>
 <view class="bottom" style="margin-bottom:172rpx">
   <view class="bottom-doctor-left">
-    <text class="bottom-doctor-name">开方医生：{{rpData.doctorName}}</text>
+    <text class="bottom-doctor-name" style="width: 100%">开方医生：{{rpData.doctorName}}</text>
     <view class="bottom-seal-box">
       <text class="bottom-doctor-sealname">{{rpData.doctorName}}</text>
       <image src="../../../images/profile/profile_doctor_seal.png"></image>
     </view>
   </view>
-  <view class="bottom-doctor-right" hidden="{{rpData.pharmacistName ? false : true}}">
-    <text class="bottom-doctor-name">审方药师：{{rpData.pharmacistName}}</text>
-    <view class="bottom-seal-box">
+  <view class="bottom-doctor-right">
+    <text class="bottom-doctor-name" style="width: 100%">审方药师：{{rpData.pharmacistName}}</text>
+    <view class="bottom-seal-box" hidden="{{rpData.pharmacistName ? false : true}}">
       <text class="bottom-doctor-sealname">{{rpData.pharmacistName}}</text>
       <image src="../../../images/profile/profile_doctor_seal.png"></image>
     </view>

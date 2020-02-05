@@ -19,7 +19,7 @@
           <view class="info_one">{{talkInfo.doctorInfo.doctorName}}</view>
           <text class="info_one_one">医生</text>
         </view>
-        <text class="info_two">{{doctorInfo.titleName}}</text>
+        <text class="info_two">{{talkInfo.doctorTitleName}}</text>
       </view>
     </view>
     <view class="middleOne-box" bindtap="doctorDetailTap" data-index="1">
@@ -40,7 +40,7 @@
   <!-- 空置盒子1 -->
   <view class="marginBoxOne"></view>
   <view id="viewCommunicationBody" bindtap="clickViewCommunicationFun">
-    <view class="row" wx:for="{{currentMessageList}}" wx:key="{{index}}" id="item{{index}}">
+    <view wx:if="{{filter.formatJSON(item.payload.data).childType != 'video'}}" class="row" wx:for="{{currentMessageList}}" wx:key="{{index}}" id="item{{index}}">
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 头像与内容文本 -->

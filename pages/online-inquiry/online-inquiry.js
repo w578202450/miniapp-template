@@ -20,7 +20,7 @@ Page({
   
   doctorDetailTap: function(e) {
     var index = e.currentTarget.dataset.index
-    var staffID = index == '0' ? wx.getStorageSync('personInfo').doctorStaffID : wx.getStorageSync('personInfo').assistantStaffID
+    var staffID = index == '0' ? app.globalData.personInfo.doctorStaffID : app.globalData.personInfo.assistantStaffID
     wx.navigateTo({
       url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + staffID,
       success: function(res) {},
@@ -35,7 +35,7 @@ Page({
   fetchDoctorInfo() {
     var that = this;
     HTTP.getDoctorInfo({
-      staffID: wx.getStorageSync('personInfo').doctorStaffID
+      staffID: app.globalData.personInfo.doctorStaffID
     })
       .then(res => {
         wx.hideLoading()
@@ -62,7 +62,7 @@ Page({
   fetchAssistantDoctorInfo() {
     var that = this;
     HTTP.getDoctorInfo({
-      staffID: wx.getStorageSync('personInfo').assistantStaffID
+      staffID: app.globalData.personInfo.assistantStaffID
     })
       .then(res => {
         if (res.code == 0) {

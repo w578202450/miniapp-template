@@ -4,3 +4,5 @@
     <text class="log-item">{{index + 1}}. {{log}}</text>
   </block>
 </view> -->
+
+<button bindtap="skipToLoginView">跳转测试</button>
