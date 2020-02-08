@@ -69,7 +69,8 @@ Page({
     recordIconUrlSelf: "../../../../images/chat/audioSelf.png", // 语音消息的图标 => 自己发的
     recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
     recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
-    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif" // 播放语音时的GIF => 他人发的
+    recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif", // 播放语音时的GIF => 他人发的
+    isOverChat: false // 是否结束了问诊
     // bottomMenusDistance: 0, // 底部工具栏距离底部的距离
     // inputShowed: false, // 输入框是否获取焦点
     // docInfoBoxTop: 0, // 医生医助信息栏与顶部的距离
@@ -105,89 +106,121 @@ Page({
 
     let myUsername = wx.getStorageSync("myUsername");
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      // console.log("分发到聊天界面的消息：" + JSON.stringify(renderableMsg));
-      // msgType
-      let msgType = renderableMsg.type;
-      // console.log("msg{Type}:" + msgType);
-      if (msgType == "TIMSoundElem") { // 语音消息
-        renderableMsg.recordStatus = false; // 播放状态
-        if (Number(renderableMsg.payload.second) <= 15) {
-          renderableMsg.recordViewWidth = renderableMsg.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-        } else {
-          renderableMsg.recordViewWidth = (Number(renderableMsg.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
-        }
-      } else if (msgType == "TIMCustomElem") {
-        // 自定义消息
-        // msgType
+      console.log(JSON.stringify(renderableMsg));
+      if (renderableMsg && renderableMsg.type) {
         let msgType = renderableMsg.type;
-        // console.log("msg{Type}:" + msgType);
-        if (msgType == "TIMCustomElem") { // 自定义消息
-          let jsonData = JSON.parse(renderableMsg.payload.data);
-          // customType
-          let customType = jsonData.customType;
-          // childType
-          let childType = jsonData.childType;
-          console.log("payload.data.{childType}:" + childType);
-          // 视频问诊的消息类型处理
-          if (childType == "video") {
-            // 医生发起(接收视频)
-            console.log("---------接收视频-------")
-            if (jsonData.data.requestRole == 1 && jsonData.data.inquiryId) {
-              let inquiryType = jsonData.data.type;
-              console.log("医生发起(接收视频)inquiryID:" + jsonData.data.inquiryId);
-              that.videoWxFun(jsonData.data.inquiryId);
-            };
+        if (msgType == "TIMSoundElem") { // 语音消息
+          renderableMsg.recordStatus = false; // 播放状态
+          if (Number(renderableMsg.payload.second) <= 15) {
+            renderableMsg.recordViewWidth = renderableMsg.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+          } else {
+            renderableMsg.recordViewWidth = (Number(renderableMsg.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
+          }
+        } else if (msgType == "TIMCustomElem") {
+          // 自定义消息
+          let msgType = renderableMsg.type;
+          if (msgType == "TIMCustomElem") { // 自定义消息
+            let jsonData = JSON.parse(renderableMsg.payload.data);
+            let customType = jsonData.customType;
+            let childType = jsonData.childType;
+            console.log("payload.data.{childType}:" + childType);
+            // 视频问诊的消息类型处理
+            if (childType == "video") {
+              // 医生发起(接收视频)
+              console.log("---------接收视频-------")
+              if (jsonData.data.requestRole == 1 && jsonData.data.inquiryId) {
+                let inquiryType = jsonData.data.type;
+                console.log("医生发起(接收视频)inquiryID:" + jsonData.data.inquiryId);
+                that.videoWxFun(jsonData.data.inquiryId);
+              };
 
-            //   console.log("payload.data.data.{type}:" + isaccept);
-            //   if (isaccept == "reject") { // 对方拒绝
-            //     // 退出房间
-            //     wx.showToast({
-            //       title: '医生已拒绝...'
-            //     });
-            //     this.exitRoom();
-            //     this.goBack();
-            //   } else if (isaccept == "busy") { // 对方忙碌
-            //     // 退出房间
-            //     wx.showToast({
-            //       title: '医生忙碌中...'
-            //     });
-            //     this.exitRoom();
-            //     this.goBack();
-            //   } else if (isaccept == "accept") { // 对方接收
-            //     that.setData({
-            //       isInCalling: true
-            //     });
-            //     // 进入房间
-            //     wx.showToast({
-            //       title: '医生已接听...'
-            //     });
-            //     // 房间号
-            //     let roomid = jsonData.data.roomId;
-            //     console.log("payload.data.data.{roomId}:" + roomid);
-            //     that.setData({
-            //       roomID: roomid
-            //     });
-            //     // 进入房间
-            //     that.joinRoom();
-            //   } else if (isaccept == "hangUp") { // 对方挂断
-            //     // 退出房间
-            //     wx.showToast({
-            //       title: '医生已挂断...'
-            //     });
-            //     this.exitRoom();
-            //     this.goBack();
-            //   }
+              //   console.log("payload.data.data.{type}:" + isaccept);
+              //   if (isaccept == "reject") { // 对方拒绝
+              //     // 退出房间
+              //     wx.showToast({
+              //       title: '医生已拒绝...'
+              //     });
+              //     this.exitRoom();
+              //     this.goBack();
+              //   } else if (isaccept == "busy") { // 对方忙碌
+              //     // 退出房间
+              //     wx.showToast({
+              //       title: '医生忙碌中...'
+              //     });
+              //     this.exitRoom();
+              //     this.goBack();
+              //   } else if (isaccept == "accept") { // 对方接收
+              //     that.setData({
+              //       isInCalling: true
+              //     });
+              //     // 进入房间
+              //     wx.showToast({
+              //       title: '医生已接听...'
+              //     });
+              //     // 房间号
+              //     let roomid = jsonData.data.roomId;
+              //     console.log("payload.data.data.{roomId}:" + roomid);
+              //     that.setData({
+              //       roomID: roomid
+              //     });
+              //     // 进入房间
+              //     that.joinRoom();
+              //   } else if (isaccept == "hangUp") { // 对方挂断
+              //     // 退出房间
+              //     wx.showToast({
+              //       title: '医生已挂断...'
+              //     });
+              //     this.exitRoom();
+              //     this.goBack();
+              //   }
+            }
+            // 结束问诊、创建问诊
+            if (customType == "sys" && jsonData.data.talkID == that.data.talkInfo.multiTalkInfo.keyID) {
+              if (renderableMsg.to == that.data.inquiryInfo.keyID && childType == "endTMCInquiry") {
+                // 结束问诊
+                that.setData({
+                  isOverChat: true,
+                  inquiryInfo: {},
+                  isSendRecord: false,
+                  isOpenBottomBoolbar: false
+                });
+              } else if (childType == "createTMCInquiry") {
+                that.setData({
+                  isOverChat: true,
+                  inquiryInfo: jsonData.data.inquiryID,
+                  isSendRecord: false,
+                  isOpenBottomBoolbar: false
+                });
+                // 创建问诊
+                that.createInquiry();
+              }
+            }
           }
         }
+        // let nowData = [...that.data.currentMessageList, renderableMsg];
+        // that.setData({
+        //   currentMessageList: nowData
+        // });
+        // if (msgType != "TIMCustomElem") {
+        //   that.toViewBottomFun();
+        // }
+        let nowData = [...that.data.currentMessageList, renderableMsg];
+        that.setData({
+          currentMessageList: nowData
+        });
+        if (msgType == "TIMCustomElem") {
+          let jsonData = JSON.parse(renderableMsg.payload.data);
+          let customType = jsonData.customType;
+          let childType = jsonData.childType;
+          if (childType != "video") {
+            that.toViewBottomFun();
+          }
+        } else {
+          that.toViewBottomFun();
+        }
+
+        // that.setMessageRead();
       }
-      let nowData = [...that.data.currentMessageList, renderableMsg];
-      that.setData({
-        currentMessageList: nowData
-      });
-      if (msgType != "TIMCustomElem") {
-        that.toViewBottomFun();
-      };
-      // that.setMessageRead();
     });
 
     /**
@@ -380,6 +413,9 @@ Page({
       });
       wx.setStorageSync('doctorInfo', resData.doctor)
       console.log("医生信息:" + JSON.stringify(resData.doctor));
+      that.setData({
+        hidden: false
+      });
       that.createInquiry(); // 创建问诊
     })
   },
@@ -387,9 +423,6 @@ Page({
   /*创建问诊 */
   createInquiry: function() {
     let that = this;
-    that.setData({
-      hidden: false
-    });
     let prams = {
       orgID: that.data.userInfo.orgID,
       patientID: that.data.userInfo.keyID,
@@ -407,8 +440,48 @@ Page({
         key: 'inquiryInfo',
         data: res.data
       });
-      // console.log("创建问诊:" + JSON.stringify(res.data));
-      that.getHistoryMessage(); // 获取历史消息
+      if (that.data.isOverChat) {
+        that.setData({
+          isOverChat: false
+        });
+      } else {
+        that.getHistoryMessage(); // 获取历史消息
+      }
+    })
+  },
+
+  // 操作：结束问诊后，患者主动发消息时，创建问诊
+  createInquirySelf: function (type) {
+    let that = this;
+    let prams = {
+      orgID: that.data.userInfo.orgID,
+      patientID: that.data.userInfo.keyID,
+      doctorStaffID: that.data.userInfo.doctorStaffID,
+      doctorName: that.data.talkInfo.doctorInfo.doctorName,
+      assistantStaffID: that.data.userInfo.assistantStaffID,
+      assistantName: that.data.talkInfo.assistantInfo.doctorName,
+      talkID: that.data.talkInfo.multiTalkInfo.keyID
+    };
+    HTTP.createInquiry(prams).then(res => {
+      that.setData({
+        inquiryInfo: res.data
+      });
+      wx.setStorage({
+        key: 'inquiryInfo',
+        data: res.data
+      });
+      that.setData({
+        isOverChat: false
+      });
+      if (type == "normalFun") {
+        // 不作任何操作
+      } else if (type == "contentMSg") {
+        that.sendMessageFun(); // 发送文本消息
+      } else if (type == "imageFun") {
+        that.sendImageMsgFun(); // 发送图片消息
+      } else if (type == "videoFun") {
+        that.videoWxFun(); // 拨打视频
+      }
     })
   },
 
@@ -540,7 +613,7 @@ Page({
     }
   },
 
-  /*操作：发送（文本消息） */
+  /*操作：预发送（文本消息） */
   sendContentMsg: function(e) {
     let that = this;
     if (that.data.httpLoading || !that.data.maySendContent) {
@@ -549,7 +622,18 @@ Page({
     that.setData({
       httpLoading: true // 开启隐性加载过程
     });
-    // 1. 创建消息实例，接口返回的实例可以上屏
+    if (that.data.isOverChat) {
+      let type = "contentMSg";
+      that.createInquirySelf(type);
+    } else {
+      that.sendMessageFun();
+    }
+  },
+
+  /*操作：发送（文本消息） */
+  sendMessageFun: function() {
+    let that = this;
+    // 1. 创建消息实例，接口返回的实例可以上屏 createInquiry
     let message = tim.createTextMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
       conversationType: TIM.TYPES.CONV_GROUP, // 群聊
@@ -567,9 +651,9 @@ Page({
     });
     that.toViewBottomFun();
     // 2. 发送消息
-    tim.sendMessage(message).then(function(imResponse) {
+    tim.sendMessage(message).then(function (imResponse) {
       console.log("aaaaaaaaa");
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       that.setData({
         httpLoading: false // 关闭隐性加载过程
       });
@@ -579,23 +663,30 @@ Page({
 
   /*操作：打开、关闭 底部工具栏 */
   isOpenBottomBoolbarFun: function() {
-    this.setData({
-      isOpenBottomBoolbar: !this.data.isOpenBottomBoolbar,
+    let that = this;
+    that.setData({
+      isOpenBottomBoolbar: !that.data.isOpenBottomBoolbar,
       isSendRecord: false
     });
-    this.toViewBottomFun();
+    that.toViewBottomFun();
   },
 
   /*操作：点击工具栏某功能 */
   toolbarMenusFun: function(e) {
+    let that = this;
     let fun = e.currentTarget.dataset.clickfun;
     if (fun == "chooseWxImage") {
-      this.chooseWxImage();
+      that.chooseWxImage();
     } else if (fun == "cameraWxFun") {
-      this.cameraWxFun();
+      that.cameraWxFun();
     } else if (fun == "videoWxFun") {
       // 主动发起不需要传inquiryID;
-      this.videoWxFun();
+      if (that.data.isOverChat) {
+        let type = "videoFun";
+        that.createInquirySelf(type);
+      } else {
+        that.videoWxFun();
+      }
     }
   },
 
@@ -633,7 +724,7 @@ Page({
     })
   },
 
-  /*操作：发送（图片消息） */
+  /*操作：预发送（图片消息） */
   sendImageMsg: function() {
     let that = this;
     if (that.data.httpLoading) {
@@ -642,6 +733,17 @@ Page({
     that.setData({
       httpLoading: true // 开启隐性加载过程
     });
+    if (that.data.isOverChat) {
+      let type = "imageFun";
+      that.createInquirySelf(type);
+    } else {
+      that.sendImageMsgFun();
+    }
+  },
+
+  /*操作：发送图片*/
+  sendImageMsgFun: function() {
+    let that = this;
     // 1. 创建消息实例
     const message = tim.createImageMessage({
       to: that.data.inquiryInfo.keyID, // 群ID
@@ -657,7 +759,7 @@ Page({
     });
     that.toViewBottomFun();
     // 2. 发送数据
-    tim.sendMessage(message).then(function(imResponse) {
+    tim.sendMessage(message).then(function (imResponse) {
       let nowDatas = [...that.data.currentMessageList];
       nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
@@ -665,7 +767,7 @@ Page({
         isOpenBottomBoolbar: false,
         httpLoading: false // 关闭隐性加载过程
       });
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       console.warn(imError);
       that.setData({
         httpLoading: false // 关闭隐性加载过程
@@ -684,7 +786,12 @@ Page({
 
   /*操作：切换为键盘 */
   openKeyboardFun: function() {
-    this.setData({
+    let that = this;
+    if (that.data.isOverChat) {
+      let type = "normalFun";
+      that.createInquirySelf(type);
+    }
+    that.setData({
       isSendRecord: false,
       isOpenBottomBoolbar: false
     });
@@ -692,10 +799,15 @@ Page({
 
   /*操作：切换为语音 */
   willSendRecordMsg: function() {
-    this.setData({
+    let that = this;
+    that.setData({
       isSendRecord: true,
       isOpenBottomBoolbar: false
     });
+    if (that.data.isOverChat) {
+      let type = "normalFun";
+      that.createInquirySelf(type);
+    }
   },
 
   /*操作：开始长按录音按钮 */

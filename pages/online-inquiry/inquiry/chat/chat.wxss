@@ -122,6 +122,21 @@
   height: 362rpx;
 }
 
+/* 结束问诊提示盒子 */
+.endTMCInqueryDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* 结束问诊提示文字 */
+.endTMCInqueryTxt {
+  font-size: 26rpx;
+  color: #818181;
+  border-radius: 14rpx;
+  padding: 8rpx 20rpx;
+}
+
 /*单元行*/
 
 .row {

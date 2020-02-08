@@ -43,8 +43,19 @@
     <view wx:if="{{filter.formatJSON(item.payload.data).childType != 'video'}}" class="row" wx:for="{{currentMessageList}}" wx:key="{{index}}" id="item{{index}}">
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
-      <!-- 头像与内容文本 -->
-      <view class="body" style="flex-flow: {{item.from == talkInfo.multiTalkInfo.patientID ? 'row-reverse': 'row'}}">
+      <!-- 系统消息：自定义结束问诊的提示 -->
+      <view wx:if="{{item.from == 'administrator'}}">
+        <view wx:if="{{filter.formatJSON(item.payload.data).customType == 'hint'}}" class="endTMCInqueryDiv">
+          <text wx:if="{{filter.formatJSON(item.payload.data).childType == 'both' || filter.formatJSON(item.payload.data).childType == 'self'}}" class="endTMCInqueryTxt">{{filter.formatJSON(item.payload.data).data.text}}</text>
+        </view>
+      </view>
+      <!-- <view wx:if="{{item.from == 'administrator'}}">
+        <view class="endTMCInqueryDiv">
+          <text class="endTMCInqueryTxt">结束问诊</text>
+        </view>
+      </view> -->
+      <!-- 用户发送的消息：头像与内容文本 -->
+      <view wx:else class="body" style="flex-flow: {{item.from == talkInfo.multiTalkInfo.patientID ? 'row-reverse': 'row'}}">
         <view class="avatar-container">
           <!-- 患者头像 -->
           <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="personHeadImgDiv">
