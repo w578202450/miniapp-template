@@ -213,21 +213,23 @@ Page({
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
-          wx.showToast({
-            title: '支付校验成功',
-          })
+          // wx.showToast({
+          //   title: '支付校验成功',
+          // })
           that.wxPayOptions(res.data)
         } else {
           wx.showToast({
             title: res.message,
-            icon: 'none'
+            icon: 'none',
+            duration: 2000
           })
         }
       }).catch(e => {
         wx.hideLoading();
         wx.showToast({
           title: '连接失败',
-          icon: 'none'
+          icon: 'none',
+          duration: 2000
         })
       })
   },
@@ -235,10 +237,7 @@ Page({
    * 微信支付
    */
   wxPayOptions(payInfo) {
-    var that = this
-    wx.showLoading({
-      title: '支付中...'
-    })
+    var that = this;
     wx.requestPayment({
       'timeStamp': payInfo.timestamp,
       'nonceStr': payInfo.nonce_str,
@@ -247,10 +246,12 @@ Page({
       'paySign': payInfo.sign,
       'success': function(res) {
         console.log('微信支付成功----', res)
-        wx.showToast({
-          title: '支付成功',
-        })
-        that.orderPaySuccess()
+        // wx.showToast({
+        //   title: '支付成功',
+        //   icon: 'none',
+        //   duration: 2000
+        // })
+        that.orderPaySuccess();
       },
       'fail': function(res) {
         wx.showToast({
@@ -269,8 +270,8 @@ Page({
     let that = this
     wx.showLoading({
       title: '支付中...'
-    })
-    console.log('开始支付回调')
+    });
+    console.log('开始支付回调');
     HTTP.orderPaySuccess({
         orgID: app.globalData.orgID,
         orderID: this.data.orderID,
@@ -280,28 +281,42 @@ Page({
         wx.hideLoading();
         console.log('支付回调------', res)
         if (res.code == 0) {
+          // wx.showToast({
+          //   title: '支付成功',
+          //   success: function() {
+          //     console.log('支付回调成功')
+          //     //1.刷新上一个界面的状态和当前界面数据
+          //     that.loadDatas()
+          //     that.refreshPrePage()
+          //     //2.跳转到地址管理界面
+          //     that.skipAddressSubmit()
+          //   }
+          // })
           wx.showToast({
-            title: '支付成功',
-            success: function() {
-              console.log('支付回调成功')
-              //1.刷新上一个界面的状态和当前界面数据
-              that.loadDatas()
-              that.refreshPrePage()
-              //2.跳转到地址管理界面
-              that.skipAddressSubmit()
-            }
-          })
+            title: "支付成功",
+            icon: 'none',
+            duration: 2000
+          });
+          console.log('支付回调成功');
+          //1.刷新上一个界面的状态和当前界面数据
+          that.loadDatas();
+          that.refreshPrePage();
+          //2.跳转到地址管理界面
+          that.skipAddressSubmit();
         } else {
           console.log('支付回调失败', res.message)
           wx.showToast({
             title: res.message,
-            icon: 'none'
+            icon: 'none',
+            duration: 2000
           })
         }
       }).catch(e => {
         wx.hideLoading();
         wx.showToast({
           title: '支付失败',
+          icon: 'none',
+          duration: 2000
         })
       })
   },

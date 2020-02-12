@@ -378,14 +378,20 @@ Page({
           if (isaccept == "reject") { // 对方拒绝
             // 退出房间
             wx.showToast({
-              title: '医生忙碌中...'
+              title: "医生忙碌中",
+              icon: "none",
+              duration: 2000
             });
-            that.exitRoom();
-            that.goBack();
+            that.exitRoom(); // 停止上传影像
+            setTimeout(function () {
+              that.goBack(); // 返回聊天页
+            }, 2000);
           } else if (isaccept == "accept") { // 对方接收
-            wx.showToast({
-              title: '医生已接听...'
-            });
+            // wx.showToast({
+            //   title: "医生已接听",
+            //   icon: "none",
+            //   duration: 2000
+            // });
             // 房间号
             let roomid = jsonData.data.roomId;
             console.log("payload.data.data.{roomId}:" + roomid);
@@ -400,9 +406,15 @@ Page({
               that.joinRoom();
             }
           } else if (isaccept == "hangUp") { // 对方挂断
-            // 退出房间
-            that.exitRoom();
-            that.goBack();
+            wx.showToast({
+              title: "医生已挂断",
+              icon: "none",
+              duration: 2000
+            });
+            that.exitRoom(); // 停止上传影像
+            setTimeout(function () {
+              that.goBack(); // 返回聊天页
+            }, 2000);
           }
         }
       }
