@@ -129,10 +129,25 @@ Page({
     // );
     HTTP.createVideoInquiry(prams).then(res => {
       console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
-      that.setData({
-        inquiryId: res.data.inquiryId
+      if (res.data.inquiryId) {
+        that.setData({
+          inquiryId: res.data.inquiryId
+        });
+        console.log("视频问诊ID：" + that.data.inquiryId);
+      } else {
+        wx.showToast({
+          title: "发起视频失败",
+          icon: "none",
+          duration: 2000
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      wx.showToast({
+        title: "发起视频失败",
+        icon: "none",
+        duration: 2000
       });
-      console.log("视频问诊ID：" + that.data.inquiryId);
     })
   },
 
