@@ -17,6 +17,8 @@ Page({
     webrtcroomComponent: null,
     userInfo: {}, // 当前用户信息
     roomID: '', // [必选]房间号，可以由您的服务指定
+    receiverStreamId: "",
+    sponsorsStreamId: "",
     userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     inquiryInfo: {}, // 问诊信息
@@ -117,16 +119,9 @@ Page({
       receiverName: wx.getStorageSync('inquiryInfo').keyID,
       patientName: app.globalData.personInfo.patientName,
       requestRole: "0",
+      clientUserID: wx.getStorageSync('inquiryInfo').keyID
     };
-    // console.log("视频问诊:sponsorsID:" + that.data.userInfo.keyID +
-    //   ",sponsorsName:" + app.globalData.personInfo.patientName +
-    //   ",receiverID:" + that.data.inquiryInfo.keyID +
-    //   ",receiverName:" + that.data.inquiryInfo.keyID +
-    //   ",patientName:" + app.globalData.personInfo.patientName +
-    //   ",patientSex:" + that.data.userInfo.sex +
-    //   ",patientPhone:" + that.data.userInfo.phone +
-    //   ",patientIdNo:" + that.data.userInfo.idNumber
-    // );
+    console.log(prams);
     HTTP.createVideoInquiry(prams).then(res => {
       console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
       if (res.data.inquiryId) {
@@ -135,6 +130,9 @@ Page({
         });
         console.log("视频问诊ID：" + that.data.inquiryId);
       } else {
+        that.setData({
+          inquiryId: ""
+        });
         wx.showToast({
           title: "发起视频失败",
           icon: "none",
@@ -163,6 +161,9 @@ Page({
     });
   },
 
+  /**
+   * 发送消息
+   */
   sendCustomMsg: function(msgPayload) {
     let that = this;
     let data = msgPayload.data;
@@ -355,7 +356,7 @@ Page({
      */
     let myUsername = wx.getStorageSync("myUsername");
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      // console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
+      console.log("分发到视频界面消息:" + JSON.stringify(renderableMsg));
       // msgType
       let msgType = renderableMsg.type;
       // console.log("msg{Type}:" + msgType);
@@ -387,7 +388,7 @@ Page({
             });
             // 房间号
             let roomid = jsonData.data.roomId;
-            // console.log("payload.data.data.{roomId}:" + roomid);
+            console.log("payload.data.data.{roomId}:" + roomid);
             that.setData({
               roomID: roomid
             });
@@ -527,6 +528,8 @@ Page({
       console.log("获取roomId:" + JSON.stringify(res));
       that.setData({
         roomID: res.data.roomId,
+        receiverStreamId: res.data.receiverStreamId,
+        sponsorsStreamId: res.data.sponsorsStreamId
       });
       // 发送问诊ID
       // 发送自定义消息通知医生
@@ -537,7 +540,9 @@ Page({
           roomId: res.data.roomId,
           bizId: "tmc",
           type: "accept",
-          requestRole: "0"
+          requestRole: "0",
+          receiverStreamId: that.data.receiverStreamId,
+          sponsorsStreamId: that.data.sponsorsStreamId
         }
       };
       let msgPayload = {
