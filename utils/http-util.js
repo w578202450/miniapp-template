@@ -285,5 +285,26 @@ module.exports = {
     return {
       sdkappid: SDKAPPID
     };
-  }
+  },
+
+  /**
+   * 修改医生响应状态(视频拒绝、取消时)
+   */
+  updateDocInquiryType: function updateDocInquiryType(parmas) {
+    return request('api/rp/inquiry/updateInquiryType', true, 'post', parmas);
+  },
+
+  /**
+   * 修改响应时间(接听视频时)
+   */
+  changeDocResponseInquiry: function changeDocResponseInquiry(parmas) {
+    return request('api/rp/inquiry/responseInquiry', true, 'post', parmas);
+  },
+
+  /**
+  * 结束问诊（挂断视频）
+  */
+  endVideoInquiry: function endVideoInquiry(parmas) {
+    return request('api/rp/inquiry/end', true, 'post', parmas);
+  },
 }

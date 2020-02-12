@@ -26,7 +26,7 @@
         <view hidden="{{isHiddenAcceptInterface}}" class="endCallBox" bindtap="hangUpVideo" data-index="1">
           <image class='img-view' src='../../../../images/video/hang-up.png'></image>
           <text wx:if="{{isInCalling}}" class="endCallTxt">挂断</text>
-          <text wx:else class="endCallTxt">取消</text>
+          <text wx:else class="endCallTxt">拒绝</text>
         </view>
         <!-- 接听视频的按钮 -->
 
