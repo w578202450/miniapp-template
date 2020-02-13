@@ -532,10 +532,7 @@ Page({
       // receiverId: wx.getStorageSync('doctorInfo').keyID // 接受者id(医生id)
       receiverId: that.data.userInfo.doctorStaffID
     };
-    console.log("获取roomId参数:inquiryId:" + that.data.inquiryId +
-      ",sponsorsId:" + that.data.userInfo.keyID +
-      ",receiverID:" + that.data.userInfo.doctorStaffID
-    );
+    console.log("获取roomId参数:inquiryId:" + that.data.prams);
     HTTP.getRoomId(prams).then(res => {
       console.log("获取roomId:" + JSON.stringify(res));
       that.setData({

@@ -57,6 +57,7 @@ Page({
     aimgurl: {}, //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
     hidden: true, // 加载中是否隐藏
+    isShowLoading: true, // 发送中是否显示
     scrollTop: 0, // 内容底部与顶部的距离
     isSendRecord: false,
     recordingTxt: "按住 说话",
@@ -118,7 +119,7 @@ Page({
           }
         } else if (msgType == "TIMCustomElem") {
           // 自定义消息
-          let msgType = renderableMsg.type;
+          // let msgType = renderableMsg.type;
           if (msgType == "TIMCustomElem") { // 自定义消息
             let jsonData = JSON.parse(renderableMsg.payload.data);
             let customType = jsonData.customType;
@@ -127,7 +128,7 @@ Page({
             // 视频问诊的消息类型处理
             if (childType == "video") {
               // 医生发起(接收视频)
-              console.log("---------接收视频-------")
+              console.log("---------接收视频-------");
               if (jsonData.data.requestRole == 1 && jsonData.data.inquiryId) {
                 let inquiryType = jsonData.data.type;
                 console.log("医生发起(接收视频)inquiryID:" + jsonData.data.inquiryId);
@@ -184,10 +185,14 @@ Page({
                   isSendRecord: false,
                   isOpenBottomBoolbar: false
                 });
+                wx.hideToast(); // 结束录音、隐藏Toast提示框
+                recorderManager.stop();
               } else if (childType == "createTMCInquiry") {
                 that.setData({
                   isOverChat: true,
-                  inquiryInfo: jsonData.data.inquiryID,
+                  inquiryInfo: {
+                    keyID: jsonData.data.inquiryID
+                  },
                   isSendRecord: false,
                   isOpenBottomBoolbar: false
                 });
@@ -451,7 +456,7 @@ Page({
   },
 
   // 操作：结束问诊后，患者主动发消息时，创建问诊
-  createInquirySelf: function (type) {
+  createInquirySelf: function(type) {
     let that = this;
     let prams = {
       orgID: that.data.userInfo.orgID,
@@ -474,7 +479,9 @@ Page({
         isOverChat: false
       });
       if (type == "normalFun") {
-        // 不作任何操作
+        that.setData({
+          hidden: true // 隐藏加载中
+        });
       } else if (type == "contentMSg") {
         that.sendMessageFun(); // 发送文本消息
       } else if (type == "imageFun") {
@@ -482,6 +489,17 @@ Page({
       } else if (type == "videoFun") {
         that.videoWxFun(); // 拨打视频
       }
+    }).catch(() => {
+      that.setData({
+        hidden: true,
+        isShowLoading: true,
+        httpLoading: false
+      });
+      wx.showToast({
+        title: "发起问诊失败",
+        icon: "warn",
+        duration: 2000
+      });
     })
   },
 
@@ -620,7 +638,8 @@ Page({
       return;
     }
     that.setData({
-      httpLoading: true // 开启隐性加载过程
+      httpLoading: true, // 开启隐性加载过程
+      isShowLoading: false // 显示发送中
     });
     if (that.data.isOverChat) {
       let type = "contentMSg";
@@ -642,22 +661,34 @@ Page({
       }
     });
     let nowData = [...that.data.currentMessageList, message];
+    let oldmaySendContent = that.data.maySendContent;
     that.setData({
       currentMessageList: nowData,
       maySendContent: "",
       maySendContentSure: false,
       isOpenBottomBoolbar: false,
-      httpLoading: false // 关闭隐性加载过程
+      httpLoading: false, // 关闭隐性加载过程
+      isShowLoading: true // 隐藏发送中
     });
     that.toViewBottomFun();
     // 2. 发送消息
-    tim.sendMessage(message).then(function (imResponse) {
-      console.log("aaaaaaaaa");
-    }).catch(function (imError) {
-      that.setData({
-        httpLoading: false // 关闭隐性加载过程
-      });
+    tim.sendMessage(message).then(function(imResponse) {
+      console.log("发送文本消息成功");
+    }).catch(function(imError) {
       console.warn('imError-------', imError);
+      wx.showToast({
+        title: "发送消息： '" + oldmaySendContent + "' 失败",
+        icon: "warn",
+        duration: 2000
+      });
+      let nowData = [...that.data.currentMessageList];
+      if (nowData.length > 0) {
+        nowData = nowData.splice(nowData.length - 1, 1);
+      }
+      that.setData({
+        currentMessageList: nowData
+      });
+      that.toViewBottomFun();
     });
   },
 
@@ -682,6 +713,9 @@ Page({
     } else if (fun == "videoWxFun") {
       // 主动发起不需要传inquiryID;
       if (that.data.isOverChat) {
+        that.setData({
+          hidden: false // 显示加载中
+        });
         let type = "videoFun";
         that.createInquirySelf(type);
       } else {
@@ -731,7 +765,8 @@ Page({
       return;
     }
     that.setData({
-      httpLoading: true // 开启隐性加载过程
+      httpLoading: true, // 开启隐性加载过程
+      isShowLoading: false // 显示发送中
     });
     if (that.data.isOverChat) {
       let type = "imageFun";
@@ -759,19 +794,35 @@ Page({
     });
     that.toViewBottomFun();
     // 2. 发送数据
-    tim.sendMessage(message).then(function (imResponse) {
+    tim.sendMessage(message).then(function(imResponse) {
       let nowDatas = [...that.data.currentMessageList];
       nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
         currentMessageList: nowDatas,
         isOpenBottomBoolbar: false,
-        httpLoading: false // 关闭隐性加载过程
+        httpLoading: false, // 关闭隐性加载过程
+        isShowLoading: true // 隐藏发送中
       });
-    }).catch(function (imError) {
-      console.warn(imError);
+      console.log("发送图片消息成功");
+    }).catch(function(imError) {
+      console.warn("发送图片失败" + JSON.stringify(imError));
       that.setData({
-        httpLoading: false // 关闭隐性加载过程
+        httpLoading: false, // 关闭隐性加载过程
+        isShowLoading: true // 隐藏发送中
       });
+      wx.showToast({
+        title: "发送图片失败",
+        icon: "warn",
+        duration: 2000
+      });
+      let nowData = [...that.data.currentMessageList];
+      if (nowData.length > 0) {
+        nowData = nowData.splice(nowData.length - 1, 1);
+      }
+      that.setData({
+        currentMessageList: nowData
+      });
+      that.toViewBottomFun();
     });
   },
 
@@ -788,6 +839,9 @@ Page({
   openKeyboardFun: function() {
     let that = this;
     if (that.data.isOverChat) {
+      that.setData({
+        hidden: false // 显示加载中
+      });
       let type = "normalFun";
       that.createInquirySelf(type);
     }
@@ -805,6 +859,9 @@ Page({
       isOpenBottomBoolbar: false
     });
     if (that.data.isOverChat) {
+      that.setData({
+        hidden: false // 显示加载中
+      });
       let type = "normalFun";
       that.createInquirySelf(type);
     }
@@ -938,6 +995,7 @@ Page({
         // 5. 发送消息
         tim.sendMessage(message).then(function(imResponse) {
           // 发送成功
+          console.log("发送语音消息成功");
         }).catch(function(imError) {
           // 发送失败
           console.log(imError);
@@ -987,6 +1045,9 @@ Page({
      * isCall 1主动发起视频
      * isCall 2接收发起视频
      */
+    this.setData({
+      hidden: true // 隐藏加载中
+    });
     let inquiryID = '';
     let isCall = 1;
     if (inqID) {
@@ -994,7 +1055,7 @@ Page({
       isCall = 2;
     };
     wx.navigateTo({
-      url: '../../../../pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
+      url: '/pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {},

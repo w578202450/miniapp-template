@@ -62,6 +62,25 @@ App({
       // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
       // event.data - 存储 Message 对象的数组 - [Message]
       console.log("===全局收消息===" + JSON.stringify(event));
+      // if (event.data && event.data[0].type == "TIMCustomElem") {
+      //   let jsonData = JSON.parse(event.data[0].payload.data);
+      //   if (jsonData.customType === "sys" && jsonData.childType == "video") {
+      //     if (jsonData.data.type == "inquiry" && jsonData.data.inquiryId) { // 视频请求进来了
+      //       console.log("视频请求进来了");
+      //       let inquiryID = jsonData.data.inquiryId;
+      //       let isCall = 2;
+      //       wx.navigateTo({
+      //         url: '/pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
+      //         success: function (res) { },
+      //         fail: function (res) { },
+      //         complete: function (res) { },
+      //       });
+      //       console.log("视频跳转");
+      //     } else if (jsonData.data.type == "hangUp" || jsonData.data.type == "cancel") { // 视频请求取消了
+      //       console.log("视频请求取消了");
+      //     }
+      //   }
+      // }
       // 全局收消息分发
       msgStorage.saveReceiveMsg(event.data);
     });

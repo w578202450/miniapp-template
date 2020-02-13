@@ -5,6 +5,9 @@
     <loading hidden="{{hidden}}" bindchange="loadingChange">
       加载中...
     </loading>
+    <loading hidden="{{isShowLoading}}" bindchange="loadingChange">
+      发送中...
+    </loading>
   </view>
   <!-- 顶部医生医助信息栏 -->
   <!-- <view class="middle-one" style="top: {{docInfoBoxTop}}rpx;"> -->
@@ -44,9 +47,9 @@
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 系统消息：自定义结束问诊的提示 -->
-      <view wx:if="{{item.from == 'administrator'}}">
-        <view wx:if="{{filter.formatJSON(item.payload.data).customType == 'hint'}}" class="endTMCInqueryDiv">
-          <text wx:if="{{filter.formatJSON(item.payload.data).childType == 'both' || filter.formatJSON(item.payload.data).childType == 'self'}}" class="endTMCInqueryTxt">{{filter.formatJSON(item.payload.data).data.text}}</text>
+      <view wx:if="{{filter.formatJSON(item.payload.data).customType == 'hint'}}">
+        <view wx:if="{{filter.formatJSON(item.payload.data).childType == 'both' || filter.formatJSON(item.payload.data).childType == 'self'}}" class="endTMCInqueryDiv">
+          <text class="endTMCInqueryTxt">{{filter.formatJSON(item.payload.data).data.text}}</text>
         </view>
       </view>
       <!-- <view wx:if="{{item.from == 'administrator'}}">
