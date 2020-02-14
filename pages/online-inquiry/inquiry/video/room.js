@@ -22,7 +22,7 @@ Page({
     userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     inquiryInfo: {}, // 问诊信息
-    sdkAppID: SDKAPPID /*'1400200900'*/ , // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
+    sdkAppID: SDKAPPID /*'1400200900'*/, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
     template: 'float', // [必选]标识组件使用的界面模版，组件内置了 bigsmall，float，grid 三种布局
     privateMapKey: '', // 房间权限 key，需要从自行搭建的签名服务获取
     // 如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
@@ -119,7 +119,8 @@ Page({
       receiverName: wx.getStorageSync('inquiryInfo').keyID,
       patientName: app.globalData.personInfo.patientName,
       requestRole: "0",
-      clientUserID: wx.getStorageSync('inquiryInfo').keyID
+      clientUserID: wx.getStorageSync('inquiryInfo').keyID,
+      doctorID: wx.getStorageSync('inquiryInfo').doctorStaffID
     };
     console.log(prams);
     HTTP.createVideoInquiry(prams).then(res => {
@@ -206,7 +207,7 @@ Page({
       userID: app.globalData.personInfo.keyID, // [必选]用户 ID，可以由您的服务指定，或者使用小程序的openid
       sdkAppID: that.data.sdkAppID, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
       roomID: that.data.roomID, // [必选]房间号，可以由您的服务指定
-      userSig: genTestUserSig(app.globalData.personInfo.keyID).userSig /*that.data.userSig*/ , // [必选]身份签名，需要从自行搭建的签名服务获取
+      userSig: genTestUserSig(app.globalData.personInfo.keyID).userSig /*that.data.userSig*/, // [必选]身份签名，需要从自行搭建的签名服务获取
       privateMapKey: '' // 一般不需要填
     }, function() {
       // 开始推流
@@ -383,7 +384,7 @@ Page({
               duration: 2000
             });
             that.exitRoom(); // 停止上传影像
-            setTimeout(function () {
+            setTimeout(function() {
               that.goBack(); // 返回聊天页
             }, 2000);
           } else if (isaccept == "accept") { // 对方接收
@@ -412,7 +413,7 @@ Page({
               duration: 2000
             });
             that.exitRoom(); // 停止上传影像
-            setTimeout(function () {
+            setTimeout(function() {
               that.goBack(); // 返回聊天页
             }, 2000);
           }
@@ -567,7 +568,7 @@ Page({
   /**
    * 操作：取消、拒绝视频时，修改响应状态
    */
-  updateInqueryStateFun: function (type) {
+  updateInqueryStateFun: function(type) {
     let that = this;
     let params = {
       keyID: that.data.inquiryInfo.keyID,  // 聊天问诊ID
@@ -588,7 +589,7 @@ Page({
   /**
    * 操作：挂断视频时，结束问诊
    */
-  endVideoInquiryFun: function () {
+  endVideoInquiryFun: function() {
     let that = this;
     let params = {
       keyID: that.data.inquiryInfo.keyID,  // 聊天问诊ID
