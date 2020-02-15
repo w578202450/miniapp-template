@@ -22,7 +22,7 @@ Page({
     userID: '', // [必选]用户 ID，可以由您的服务指定，或者使用小程序的 openid
     userSig: '', // [必选]身份签名，需要从自行搭建的签名服务获取
     inquiryInfo: {}, // 问诊信息
-    sdkAppID: SDKAPPID /*'1400200900'*/, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
+    sdkAppID: SDKAPPID /*'1400200900'*/ , // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
     template: 'float', // [必选]标识组件使用的界面模版，组件内置了 bigsmall，float，grid 三种布局
     privateMapKey: '', // 房间权限 key，需要从自行搭建的签名服务获取
     // 如果您没有在【控制台】>【实时音视频】>【您的应用名称】>【帐号信息】中启用权限密钥，可不用填
@@ -40,7 +40,8 @@ Page({
     isHiddenAcceptInterface: true, // 是否隐藏接听界面
     isHiddenCallInterface: true, //是否隐藏拨打界面
     isEnterRoom: false, // 是否进入房间(接听之前cancel,接通之后)
-    hidden: false // 是否隐藏接听按钮
+    hidden: false, // 是否隐藏接听按钮
+    isCanCalling: true // 是否可进行视频通话
   },
 
   /**
@@ -124,21 +125,59 @@ Page({
     };
     console.log(prams);
     HTTP.createVideoInquiry(prams).then(res => {
-      console.log("云处方创建视频问诊记录:" + res.data.inquiryId);
-      if (res.data.inquiryId) {
+      console.log("云处方创建视频问诊记录:" + JSON.stringify(res));
+      if (res.code === -1 || res.code === "-1") {
         that.setData({
-          inquiryId: res.data.inquiryId
-        });
-        console.log("视频问诊ID：" + that.data.inquiryId);
-      } else {
-        that.setData({
-          inquiryId: ""
+          inquiryId: "",
+          isCanCalling: false
         });
         wx.showToast({
-          title: "发起视频失败",
+          title: "医生忙碌中...",
           icon: "none",
           duration: 2000
         });
+        that.exitRoom(); // 停止上传影像
+        setTimeout(function() {
+          that.goBack(); // 返回聊天页
+        }, 2000);
+      } else {
+        if (res.data.inquiryId) {
+          that.setData({
+            inquiryId: res.data.inquiryId,
+            isCanCalling: true
+          });
+          setTimeout(function () {
+            if (!that.data.isInCalling) {
+              wx.showToast({
+                title: "医生忙碌中...",
+                icon: "none",
+                duration: 2000
+              });
+            }
+          }, 30000);
+          setTimeout(function () {
+            if (!that.data.isInCalling) {
+              let dataParams = {
+                customType: "sys",
+                childType: "video",
+                data: {
+                  bizId: "tmc",
+                  type: "cancel",
+                  requestRole: "0"
+                }
+              };
+              let msgPayload = {
+                data: JSON.stringify(dataParams),
+                description: "[视频问诊消息]",
+                extension: 'tmc'
+              };
+              that.sendCustomMsg(msgPayload);
+              // 主动发起视频后，取消 =》 修改响应状态
+              let type = 4; // 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
+              that.updateInqueryStateFun(type);
+            }
+          }, 32000);
+        }
       }
     }).catch(err => {
       console.log(err);
@@ -147,6 +186,10 @@ Page({
         icon: "none",
         duration: 2000
       });
+      that.exitRoom(); // 停止上传影像
+      setTimeout(function () {
+        that.goBack(); // 返回聊天页
+      }, 2000);
     })
   },
 
@@ -207,7 +250,7 @@ Page({
       userID: app.globalData.personInfo.keyID, // [必选]用户 ID，可以由您的服务指定，或者使用小程序的openid
       sdkAppID: that.data.sdkAppID, // [必选]开通实时音视频服务创建应用后分配的 sdkAppID
       roomID: that.data.roomID, // [必选]房间号，可以由您的服务指定
-      userSig: genTestUserSig(app.globalData.personInfo.keyID).userSig /*that.data.userSig*/, // [必选]身份签名，需要从自行搭建的签名服务获取
+      userSig: genTestUserSig(app.globalData.personInfo.keyID).userSig /*that.data.userSig*/ , // [必选]身份签名，需要从自行搭建的签名服务获取
       privateMapKey: '' // 一般不需要填
     }, function() {
       // 开始推流
@@ -257,40 +300,73 @@ Page({
    */
   hangUpVideo: function(e) {
     let that = this;
-    let index = e.currentTarget.dataset.index;
-    console.log("===挂断视频===" + JSON.stringify(that.data));
-    // index => 0:主动发起视频请求   1:被动接收视频请求
-    if (index == 0) {
-      if (!that.data.roomID) { // 取消
-        let dataParams = {
-          customType: "sys",
-          childType: "video",
-          data: {
-            bizId: "tmc",
-            type: "cancel",
-            requestRole: "0"
-          }
-        };
-        let msgPayload = {
-          data: JSON.stringify(dataParams),
-          description: "[视频问诊消息]",
-          extension: 'tmc'
-        };
-        that.sendCustomMsg(msgPayload);
-        // 主动发起视频后，取消 =》 修改响应状态
-        let type = 4; // 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
-        that.updateInqueryStateFun(type);
-        // that.goBack();
-      } else { // 挂断
-        let dataParams = {
-          customType: "sys",
-          childType: "video",
-          data: {
-            bizId: "tmc",
-            type: "hangUp",
-            requestRole: "0"
-          }
-        };
+    if (that.data.isCanCalling) {
+      let index = e.currentTarget.dataset.index;
+      console.log("===挂断视频===" + JSON.stringify(that.data));
+      // index => 0:主动发起视频请求   1:被动接收视频请求
+      if (index == 0) {
+        if (!that.data.roomID) { // 取消
+          let dataParams = {
+            customType: "sys",
+            childType: "video",
+            data: {
+              bizId: "tmc",
+              type: "cancel",
+              requestRole: "0"
+            }
+          };
+          let msgPayload = {
+            data: JSON.stringify(dataParams),
+            description: "[视频问诊消息]",
+            extension: 'tmc'
+          };
+          that.sendCustomMsg(msgPayload);
+          // 主动发起视频后，取消 =》 修改响应状态
+          let type = 4; // 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
+          that.updateInqueryStateFun(type);
+          // that.goBack();
+        } else { // 挂断
+          let dataParams = {
+            customType: "sys",
+            childType: "video",
+            data: {
+              bizId: "tmc",
+              type: "hangUp",
+              requestRole: "0"
+            }
+          };
+          let msgPayload = {
+            data: JSON.stringify(dataParams),
+            description: "[视频问诊消息]",
+            extension: 'tmc'
+          };
+          that.sendCustomMsg(msgPayload);
+          that.exitRoom();
+          that.goBack();
+        }
+      } else {
+        let dataParams = {};
+        if (that.data.roomID) { // 挂断
+          dataParams = {
+            customType: "sys",
+            childType: "video",
+            data: {
+              bizId: "tmc",
+              type: "hangUp",
+              requestRole: "0"
+            }
+          };
+        } else { // 拒绝
+          dataParams = {
+            customType: "sys",
+            childType: "video",
+            data: {
+              bizId: "tmc",
+              type: "reject",
+              requestRole: "0"
+            }
+          };
+        }
         let msgPayload = {
           data: JSON.stringify(dataParams),
           description: "[视频问诊消息]",
@@ -298,45 +374,14 @@ Page({
         };
         that.sendCustomMsg(msgPayload);
         that.exitRoom();
-        that.goBack();
-      }
-    } else {
-      let dataParams = {};
-      if (that.data.roomID) { // 挂断
-        dataParams = {
-          customType: "sys",
-          childType: "video",
-          data: {
-            bizId: "tmc",
-            type: "hangUp",
-            requestRole: "0"
-          }
-        };
-      } else { // 拒绝
-        dataParams = {
-          customType: "sys",
-          childType: "video",
-          data: {
-            bizId: "tmc",
-            type: "reject",
-            requestRole: "0"
-          }
-        };
-      }
-      let msgPayload = {
-        data: JSON.stringify(dataParams),
-        description: "[视频问诊消息]",
-        extension: 'tmc'
-      };
-      that.sendCustomMsg(msgPayload);
-      that.exitRoom();
-      if (that.data.isInCalling) {
-        that.endVideoInquiryFun(); // 被动接受视频后，挂断 =》结束问诊
-      } else {
-        // 被动接收视频，拒绝 =》 修改响应状态
-        let type = 3; // 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
-        that.updateInqueryStateFun(type);
-        // that.goBack();
+        if (that.data.isInCalling) {
+          that.endVideoInquiryFun(); // 被动接受视频后，挂断 =》结束问诊
+        } else {
+          // 被动接收视频，拒绝 =》 修改响应状态
+          let type = 3; // 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
+          that.updateInqueryStateFun(type);
+          // that.goBack();
+        }
       }
     }
   },
@@ -406,7 +451,7 @@ Page({
               // 进入房间
               that.joinRoom();
             }
-          } else if (isaccept == "hangUp") { // 对方挂断
+          } else if (isaccept == "hangUp" || isaccept == "cancel") { // 对方挂断
             wx.showToast({
               title: "医生已挂断",
               icon: "none",
@@ -571,7 +616,7 @@ Page({
   updateInqueryStateFun: function(type) {
     let that = this;
     let params = {
-      keyID: that.data.inquiryInfo.keyID,  // 聊天问诊ID
+      keyID: that.data.inquiryInfo.keyID, // 聊天问诊ID
       inquiryType: type, // 状态 =》 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
       clientUserID: that.data.inquiryId, // 视频问诊ID
       // doctorID: that.data.doctorInfo.keyID // 医生ID
@@ -592,7 +637,7 @@ Page({
   endVideoInquiryFun: function() {
     let that = this;
     let params = {
-      keyID: that.data.inquiryInfo.keyID,  // 聊天问诊ID
+      keyID: that.data.inquiryInfo.keyID, // 聊天问诊ID
       clientUserID: that.data.inquiryId, // 视频问诊ID
       // doctorID: that.data.doctorInfo.keyID // 医生ID
       doctorID: that.data.userInfo.doctorStaffID
