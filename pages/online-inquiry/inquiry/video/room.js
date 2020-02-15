@@ -146,7 +146,7 @@ Page({
             inquiryId: res.data.inquiryId,
             isCanCalling: true
           });
-          setTimeout(function () {
+          setTimeout(function() {
             if (!that.data.isInCalling) {
               wx.showToast({
                 title: "医生忙碌中...",
@@ -155,7 +155,7 @@ Page({
               });
             }
           }, 30000);
-          setTimeout(function () {
+          setTimeout(function() {
             if (!that.data.isInCalling) {
               let dataParams = {
                 customType: "sys",
@@ -187,7 +187,7 @@ Page({
         duration: 2000
       });
       that.exitRoom(); // 停止上传影像
-      setTimeout(function () {
+      setTimeout(function() {
         that.goBack(); // 返回聊天页
       }, 2000);
     })
@@ -263,7 +263,7 @@ Page({
    */
   exitRoom: function() {
     let that = this;
-    this.data.webrtcroomComponent.stop();
+    that.data.webrtcroomComponent.stop();
   },
 
   /**
@@ -302,7 +302,6 @@ Page({
     let that = this;
     if (that.data.isCanCalling) {
       let index = e.currentTarget.dataset.index;
-      console.log("===挂断视频===" + JSON.stringify(that.data));
       // index => 0:主动发起视频请求   1:被动接收视频请求
       if (index == 0) {
         if (!that.data.roomID) { // 取消
@@ -373,15 +372,17 @@ Page({
           extension: 'tmc'
         };
         that.sendCustomMsg(msgPayload);
-        that.exitRoom();
         if (that.data.isInCalling) {
+          console.log("===挂断视频===");
           that.endVideoInquiryFun(); // 被动接受视频后，挂断 =》结束问诊
         } else {
+          console.log("===拒绝视频===");
           // 被动接收视频，拒绝 =》 修改响应状态
           let type = 3; // 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
           that.updateInqueryStateFun(type);
           // that.goBack();
         }
+        that.exitRoom();
       }
     }
   },
@@ -560,8 +561,8 @@ Page({
     });
     that.getRoomId();
     let params = {
-      keyID: that.data.inquiryInfo.keyID, // 聊天问诊ID
-      clientUserID: that.data.inquiryId, // 视频问诊ID
+      clientUserID: that.data.inquiryInfo.keyID, // 聊天问诊ID
+      keyID: that.data.inquiryId, // 视频问诊ID
       doctorID: that.data.userInfo.doctorStaffID // 患者ID
     };
     HTTP.changeDocResponseInquiry(params).then(res => {
@@ -616,9 +617,9 @@ Page({
   updateInqueryStateFun: function(type) {
     let that = this;
     let params = {
-      keyID: that.data.inquiryInfo.keyID, // 聊天问诊ID
+      clientUserID: that.data.inquiryInfo.keyID, // 聊天问诊ID
       inquiryType: type, // 状态 =》 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
-      clientUserID: that.data.inquiryId, // 视频问诊ID
+      keyID: that.data.inquiryId, // 视频问诊ID
       // doctorID: that.data.doctorInfo.keyID // 医生ID
       doctorID: that.data.userInfo.doctorStaffID
     };
@@ -637,13 +638,14 @@ Page({
   endVideoInquiryFun: function() {
     let that = this;
     let params = {
-      keyID: that.data.inquiryInfo.keyID, // 聊天问诊ID
-      clientUserID: that.data.inquiryId, // 视频问诊ID
+      clientUserID: that.data.inquiryInfo.keyID, // 聊天问诊ID
+      keyID: that.data.inquiryId, // 视频问诊ID
       // doctorID: that.data.doctorInfo.keyID // 医生ID
       doctorID: that.data.userInfo.doctorStaffID
     };
     HTTP.endVideoInquiry(params).then(res => {
-      // console.log("挂断视频，结束问诊成功");
+      console.log(res);
+      console.log("挂断视频，结束问诊成功");
       that.goBack();
     }).catch((err) => {
       console.log(err);
