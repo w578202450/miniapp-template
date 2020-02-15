@@ -137,11 +137,14 @@ Page({
    * 输入收货名字
    */
   receiverNameInput(e) {
-    let value = Common.filterEmoji(e.detail.value)
-    this.data.receiverName = value;
-    return {
-      value: value
-    }
+    let that = this;
+    let value = Common.filterEmoji(e.detail.value);
+    that.setData({
+      receiverName: value
+    });
+    // return {
+    //   value: value
+    // }
   },
   /***
    * 输入收货人电话

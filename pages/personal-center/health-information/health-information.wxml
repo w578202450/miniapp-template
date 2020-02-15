@@ -3,7 +3,7 @@
 <view class="page-container" style="margin-bottom:144rpx">
   <view class="box-flex-row">
     <text class="font-one" placeholder-class="font-one" style="flex-shrink: 0;width: 120rpx">身高</text>
-    <input class="font-one" placeholder="请填写身高" value="{{height}}" type="digit" bindinput="heightInput" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <input class="font-one" placeholder="请填写身高" value="{{height}}" type="digit" bindinput="heightInput" maxlength="6" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">cm</text>
   </view>
 
@@ -11,7 +11,7 @@
 
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">体重</text>
-    <input class="font-one" placeholder="请填写体重" value="{{weight}}" type="digit" bindinput="weightInput" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <input class="font-one" placeholder="请填写体重" value="{{weight}}" type="digit" bindinput="weightInput" maxlength="6" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text class="font-two" style="flex-shrink: 0;margin-left:32rpx">kg</text>
   </view>
 
@@ -20,7 +20,7 @@
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">吸烟史</text>
     <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{smokingItems}}" bind:radioChange="smokingAction"></tmcRadioView>
-    <input hidden="{{hiddenSmokeInput}}" class="font-one" placeholder="请填写烟龄" value="{{smoked}}" type="number" bindinput="smokeInput" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <input hidden="{{hiddenSmokeInput}}" class="font-one" placeholder="请填写烟龄" value="{{smoked}}" type="number" bindinput="smokeInput" maxlength="10" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text hidden="{{hiddenSmokeInput}}" class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
   </view>
 
@@ -29,7 +29,7 @@
   <view class="box-flex-row">
     <text class="font-one" style="flex-shrink: 0;width: 120rpx">饮酒史</text>
     <tmcRadioView style="margin-left: 16rpx;flex-shrink: 0" radioItems="{{drinkingItems}}" bind:radioChange="drinkingAction"></tmcRadioView>
-    <input hidden="{{hiddenDrinkInput}}" class="font-one" placeholder="请填写酒龄" value="{{drink}}" type="number" bindinput="drinkInput" style="flex-grow:1;margin-left: 16rpx;"></input>
+    <input hidden="{{hiddenDrinkInput}}" class="font-one" placeholder="请填写酒龄" value="{{drink}}" type="number" bindinput="drinkInput" maxlength="10" style="flex-grow:1;margin-left: 16rpx;"></input>
     <text hidden="{{hiddenDrinkInput}}" class="font-two" style="flex-shrink: 0;margin-left:32rpx">年</text>
   </view>
 
