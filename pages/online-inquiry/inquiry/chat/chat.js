@@ -47,13 +47,12 @@ Page({
         iconUrl: "../../../../images/chat/m-camera.png",
         clickFun: "cameraWxFun",
         isFifth: false
+      }, {
+        title: "视频问诊",
+        iconUrl: "../../../../images/chat/m-video.png",
+        clickFun: "videoWxFun",
+        isFifth: false
       }
-      // , {
-      //   title: "视频问诊",
-      //   iconUrl: "../../../../images/chat/m-video.png",
-      //   clickFun: "videoWxFun",
-      //   isFifth: false
-      // }
     ],
     aimgurl: {}, //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
@@ -712,16 +711,25 @@ Page({
     } else if (fun == "cameraWxFun") {
       that.cameraWxFun();
     } else if (fun == "videoWxFun") {
+      // 处理一
       // 主动发起不需要传inquiryID;
-      if (that.data.isOverChat) {
-        that.setData({
-          hidden: false // 显示加载中
-        });
-        let type = "videoFun";
-        that.createInquirySelf(type);
-      } else {
-        that.videoWxFun();
-      }
+      // if (that.data.isOverChat) {
+      //   that.setData({
+      //     hidden: false // 显示加载中
+      //   });
+      //   let type = "videoFun";
+      //   that.createInquirySelf(type);
+      // } else {
+      //   that.videoWxFun();
+      // }
+
+      // 处理二
+      // 提示用户：发消息联系医生医助，想要与医生进行视频问诊。
+      wx.showToast({
+        title: "您可发消息联系医生助理为您预约视频问诊",
+        icon: "none",
+        duration: 2000
+      });
     }
   },
 
