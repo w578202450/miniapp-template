@@ -124,7 +124,7 @@ Page({
             let jsonData = JSON.parse(renderableMsg.payload.data);
             let customType = jsonData.customType;
             let childType = jsonData.childType;
-            console.log("payload.data.{childType}:" + childType);
+            console.log("收到的自定义消息的payload.data.{childType}:" + childType);
             // 视频问诊的消息类型处理
             if (childType == "video") {
               // 医生发起(接收视频)
@@ -285,7 +285,6 @@ Page({
    * 处理视频问诊消息
    */
   dealSysVideoMessage: function(data) {
-    // console.log("===处理视频问诊消息===" + JSON.stringify(data));
     let that = this;
     let requestRole = data.requestRole;
   },
@@ -309,44 +308,93 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   // 操作：下拉加载数据
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function(countNum) {
     let that = this;
-    if (that.data.isCompleted) {
-      // 没有更多数据了
-      wx.stopPullDownRefresh();
-      wx.showToast({
-        title: "没有更多历史消息了~",
-        icon: "none",
-        duration: 2000
-      });
-      return;
-    }
-    wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
-    tim.getMessageList({
-      conversationID: "GROUP" + that.data.inquiryInfo.keyID,
-      nextReqMessageID: that.data.nextReqMessageID,
-      count: 15
-    }).then(function(imResponse) {
-      imResponse.data.messageList.forEach(item => {
-        if (item.type == "TIMSoundElem") {
-          item.recordStatus = false; // 播放状态
-          if (Number(item.payload.second) <= 15) {
-            item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-          } else {
-            item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+    // countNum 数字存在时，是初始查询历史消息； 不存在时，是下拉加载历史消息 
+    if (countNum) {
+      if (that.data.isCompleted) {
+        // 没有更多数据了
+        return;
+      }
+      let count = 15 - countNum;
+      tim.getMessageList({
+        conversationID: "GROUP" + that.data.inquiryInfo.keyID,
+        nextReqMessageID: that.data.nextReqMessageID,
+        count: count
+      }).then(function (imResponse) {
+        let spliceNum = 0;
+        let imResponseArr = [];
+        imResponse.data.messageList.forEach(item => {
+          let isAddToArr = true;
+          if (item.type == "TIMSoundElem") {
+            item.recordStatus = false; // 播放状态
+            if (Number(item.payload.second) <= 15) {
+              item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+            } else {
+              item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+            }
+          } else if (item.type == "TIMCustomElem") {
+            // 自定义消息：有视频问诊消息，就不添加到数组中，然后再次请求相应数量的历史消息
+            if (JSON.parse(item.payload.data).childType == "video") {
+              isAddToArr = false
+              spliceNum = spliceNum + 1;
+            }
           }
-        }
-      })
-      setTimeout(function() {
+          if (isAddToArr) {
+            imResponseArr.push(item);
+          }
+        });
         that.setData({
-          currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
+          currentMessageList: [...imResponseArr, ...that.data.currentMessageList],
           nextReqMessageID: imResponse.data.nextReqMessageID,
           isCompleted: imResponse.data.isCompleted
         });
-        wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
-        wx.stopPullDownRefresh(); // 停止下拉刷新过程
-      }, 1000);
-    });
+        if (spliceNum && !that.data.isCompleted) {
+          that.onPullDownRefresh(spliceNum);
+        } else {
+          console.log(that.data.currentMessageList);
+          that.toViewBottomFun();
+        }
+      });
+    } else {
+      if (that.data.isCompleted) {
+        // 没有更多数据了
+        wx.stopPullDownRefresh();
+        wx.showToast({
+          title: "没有更多历史消息了~",
+          icon: "none",
+          duration: 2000
+        });
+        return;
+      }
+      wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
+      tim.getMessageList({
+        conversationID: "GROUP" + that.data.inquiryInfo.keyID,
+        nextReqMessageID: that.data.nextReqMessageID,
+        count: 15
+      }).then(function (imResponse) {
+        imResponse.data.messageList.forEach(item => {
+          if (item.type == "TIMSoundElem") {
+            item.recordStatus = false; // 播放状态
+            if (Number(item.payload.second) <= 15) {
+              item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+            } else {
+              item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+            }
+          }
+        })
+        setTimeout(function () {
+          that.setData({
+            currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
+            nextReqMessageID: imResponse.data.nextReqMessageID,
+            isCompleted: imResponse.data.isCompleted
+          });
+          console.log(that.data.currentMessageList);
+          wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
+          wx.stopPullDownRefresh(); // 停止下拉刷新过程
+        }, 1000);
+      });
+    }
   },
 
   /**
@@ -416,10 +464,10 @@ Page({
           multiTalkInfo: resData.multiTalk
         }
       });
-      wx.setStorageSync('doctorInfo', resData.doctor)
-      console.log("医生信息:" + JSON.stringify(resData.doctor));
+      wx.setStorageSync('doctorInfo', resData.doctor);
       that.setData({
-        hidden: false
+        hidden: false,
+        isOverChat: false
       });
       that.createInquiry(); // 创建问诊
     })
@@ -510,7 +558,10 @@ Page({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
       count: 15
     }).then(function(imResponse) {
+      let spliceNum = 0;
+      let imResponseArr = [];
       imResponse.data.messageList.forEach(item => {
+        let isAddToArr = true;
         if (item.type == "TIMSoundElem") {
           item.recordStatus = false; // 播放状态
           if (Number(item.payload.second) <= 15) {
@@ -519,7 +570,14 @@ Page({
             item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
           }
         } else if (item.type == "TIMCustomElem") {
-          // 自定义消息
+          // 自定义消息：有视频问诊消息，就不添加到数组中，然后再次请求相应数量的历史消息
+          if (JSON.parse(item.payload.data).childType == "video") {
+            isAddToArr = false
+            spliceNum = spliceNum + 1;
+          }
+        }
+        if (isAddToArr) {
+          imResponseArr.push(item);
         }
       })
       that.setData({
@@ -527,8 +585,12 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
-      // console.log(imResponse.data.messageList);
-      that.toViewBottomFun();
+      if (spliceNum && !that.data.isCompleted) {
+        that.onPullDownRefresh(spliceNum);
+      } else {
+        console.log(that.data.currentMessageList);
+        that.toViewBottomFun();
+      }
     }).catch(function(imError) {
       that.setData({
         hidden: true
@@ -1082,7 +1144,6 @@ Page({
   /*操作：点击处方卡片消息查看详情 */
   toRpDetailFun: function(e) {
     let inquiryID = e.currentTarget.dataset.rpid;
-    // console.log("inquiryID:" + inquiryID);
     if (inquiryID) {
       wx.navigateTo({
         url: '../../../personal-center/prescription-details/prescription-details?&inquiryID=' + inquiryID,
