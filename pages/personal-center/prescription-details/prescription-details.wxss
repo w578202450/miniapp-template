@@ -18,9 +18,9 @@ page {
 
 .header image {
   position: absolute;
-  width: 118rpx;
-  height: 118rpx;
-  margin-top: 28rpx;
+  width: 140rpx;
+  height: 140rpx;
+  margin-top: 35rpx;
   right: 32rpx;
 }
 
