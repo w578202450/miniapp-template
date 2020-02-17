@@ -11,7 +11,7 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
-		"nodeModules": false,
+		"nodeModules": true,
 		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
 		"scopeDataCheck": false,
@@ -224,12 +224,6 @@
 					"name": "视频聊天",
 					"pathName": "pages/online-inquiry/inquiry/video/room",
 					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/login/login",
-					"pathName": "pages/login/login",
 					"scene": null
 				}
 			]
