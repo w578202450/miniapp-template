@@ -1,5 +1,5 @@
 const HTTP = require('../../../utils/http-util')
-
+const commonFun = require('../../../utils/common')
 let app = getApp()
 
 Page({
@@ -414,6 +414,10 @@ Page({
       }
 
     })
+  },
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
   }
 
 })

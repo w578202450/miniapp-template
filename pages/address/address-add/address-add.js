@@ -2,6 +2,7 @@
 var addressData = require("../address.js");
 const HTTP = require('../../../utils/http-util')
 const Common = require('../../../common/common')
+const commonFun = require('../../../utils/common')
 
 /**
  * count=0表示当前创建地址为默认地址 
@@ -161,7 +162,7 @@ Page({
     return {
       value: value
     }
-    
+
   },
   /**
    * 保存地址
@@ -367,8 +368,9 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
+  },
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
   }
-
-
-
 })

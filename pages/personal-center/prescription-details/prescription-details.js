@@ -1,5 +1,5 @@
 const HTTP = require('../../../utils/http-util')
-
+const commonFun = require('../../../utils/common')
 let app = getApp()
 /**
  * 处方详情界面
@@ -22,7 +22,11 @@ Page({
     this.data.inquiryID = e.inquiryID
     this.data.rpID = e.rpID
     this.loadDatas();
+  },
 
+  //右上角分享功能
+  onShareAppMessage: function (res) {
+    return commonFun.onShareAppMessageFun();
   },
 
   loadDatas(){

@@ -1,4 +1,5 @@
 const app = getApp()
+const commonFun = require('../../utils/common')
 
 Page({
   data: {
@@ -27,4 +28,8 @@ Page({
       userInfo: app.globalData.userInfo
     })
   },
+  //右上角分享功能
+  onShareAppMessage: function (res) {
+    return commonFun.onShareAppMessageFun();
+  }
 })

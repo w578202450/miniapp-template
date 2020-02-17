@@ -3,6 +3,7 @@
 
 const HTTP = require('../../utils/http-util')
 const app = getApp()
+const commonFun = require('../../utils/common.js')
 
 Page({
   data: {
@@ -17,7 +18,7 @@ Page({
     this.fetchDoctorInfo()
     this.fetchAssistantDoctorInfo()
   },
-  
+
   doctorDetailTap: function(e) {
     var index = e.currentTarget.dataset.index
     var staffID = index == '0' ? app.globalData.personInfo.doctorStaffID : app.globalData.personInfo.assistantStaffID
@@ -28,15 +29,15 @@ Page({
       complete: function(res) {},
     })
   },
-  userInfoHandler:function(){
-    
+  userInfoHandler: function() {
+
   },
   // 获取主治医师信息
   fetchDoctorInfo() {
     var that = this;
     HTTP.getDoctorInfo({
-      staffID: app.globalData.personInfo.doctorStaffID
-    })
+        staffID: app.globalData.personInfo.doctorStaffID
+      })
       .then(res => {
         wx.hideLoading()
         if (res.code == 0) {
@@ -49,7 +50,7 @@ Page({
               orgName: app.globalData.orgName
             })
           }
-        } 
+        }
       }).catch(e => {
         wx.hideLoading()
         that.setData({
@@ -62,8 +63,8 @@ Page({
   fetchAssistantDoctorInfo() {
     var that = this;
     HTTP.getDoctorInfo({
-      staffID: app.globalData.personInfo.assistantStaffID
-    })
+        staffID: app.globalData.personInfo.assistantStaffID
+      })
       .then(res => {
         if (res.code == 0) {
           if (res.data) {
@@ -85,9 +86,9 @@ Page({
   fetchDoctorQualification(doctorID) {
     var that = this;
     HTTP.getDoctorQualification({
-      doctorID: doctorID,
-      certifyCode: 'PROFESSION'
-    })
+        doctorID: doctorID,
+        certifyCode: 'PROFESSION'
+      })
       .then(res => {
         if (res.code == 0) {
           that.setData({
@@ -100,4 +101,9 @@ Page({
         })
       })
   },
+
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
+  }
 })

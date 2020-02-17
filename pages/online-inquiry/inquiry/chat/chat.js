@@ -1,6 +1,7 @@
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
 var HTTP = require('../../../../utils/http-util');
+const commonFun = require('../../../../utils/common.js')
 var msgStorage = require("../../../../utils/msgstorage");
 var tim = app.globalData.tim;
 var TIM = app.globalData.TIM;
@@ -321,7 +322,7 @@ Page({
         conversationID: "GROUP" + that.data.inquiryInfo.keyID,
         nextReqMessageID: that.data.nextReqMessageID,
         count: count
-      }).then(function (imResponse) {
+      }).then(function(imResponse) {
         let spliceNum = 0;
         let imResponseArr = [];
         imResponse.data.messageList.forEach(item => {
@@ -372,7 +373,7 @@ Page({
         conversationID: "GROUP" + that.data.inquiryInfo.keyID,
         nextReqMessageID: that.data.nextReqMessageID,
         count: 15
-      }).then(function (imResponse) {
+      }).then(function(imResponse) {
         imResponse.data.messageList.forEach(item => {
           if (item.type == "TIMSoundElem") {
             item.recordStatus = false; // 播放状态
@@ -383,7 +384,7 @@ Page({
             }
           }
         })
-        setTimeout(function () {
+        setTimeout(function() {
           that.setData({
             currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
             nextReqMessageID: imResponse.data.nextReqMessageID,
@@ -408,7 +409,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    return commonFun.onShareAppMessageFun();
   },
 
   /*从storage中获取患者信息 */

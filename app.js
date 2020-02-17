@@ -36,6 +36,9 @@ App({
 
   },
 
+  //右上角分享功能
+  onShareAppMessage: function(res) {},
+
   /**
    * IM配置
    */

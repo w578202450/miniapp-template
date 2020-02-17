@@ -1,5 +1,6 @@
 const HTTP = require('../../../utils/http-util')
 const Common = require('../../../common/common')
+const commonFun = require('../../../utils/common')
 let app = getApp()
 
 Page({
@@ -341,7 +342,7 @@ Page({
       isHiddenMedicalList: (e.detail == "无") ? true : false
     })
   },
-  
+
   /**
    * 选择既往病史列表
    */
@@ -442,7 +443,7 @@ Page({
   },
   /**
    *弹框保存
-   */ 
+   */
   confirmDialog: function() {
 
     var value = this.data.dialogInput;
@@ -494,7 +495,7 @@ Page({
     return {
       value: value
     }
-    
+
   },
 
   /**
@@ -504,7 +505,7 @@ Page({
     let that = this
     wx.showNavigationBarLoading()
     HTTP.getPatientDoc({
-      orgID: app.globalData.orgID,
+        orgID: app.globalData.orgID,
         keyID: this.data.patientID
       })
       .then(res => {
@@ -585,7 +586,7 @@ Page({
       // 既往病史
     } else if (item.docGroupCode === this.data.historyOfSicknessInfo.docGroupCode &&
       item.docItemCode === this.data.historyOfSicknessInfo.docItemCode) {
-   
+
       this.data.historyOfSicknessInfo.docItemValue = item.docItemValue;
       for (var index in this.data.medicalItems) {
         if (this.data.medicalItems[index].name == item.docItemValue) {
@@ -813,5 +814,10 @@ Page({
           duration: 2000
         })
       })
+  },
+
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
   }
 })

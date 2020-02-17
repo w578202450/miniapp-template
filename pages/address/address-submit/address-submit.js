@@ -1,24 +1,26 @@
 const HTTP = require('../../../utils/http-util')
 const Common = require('../../../common/common')
+const commonFun = require('../../../utils/common')
+
 let app = getApp()
 
 Page({
   data: {
-    addressInfo:null,
-    orderID:'',
-    modifyUser:''
+    addressInfo: null,
+    orderID: '',
+    modifyUser: ''
   },
-  
-  onLoad: function (e) {
+
+  onLoad: function(e) {
     console.log('e--------', e)
     console.log('e.orderID--------', e.orderID)
-    if (e.orderID){
+    if (e.orderID) {
       this.data.orderID = e.orderID
     }
-    if (e.modifyUser){
+    if (e.modifyUser) {
       this.data.modifyUser = e.modifyUser
     }
-    if (e.addressInfo){
+    if (e.addressInfo) {
       this.data.addressInfo = JSON.parse(e.addressInfo)
       this.setData({
         addressInfo: this.data.addressInfo
@@ -41,16 +43,16 @@ Page({
       return;
     }
     HTTP.getAddress({
-      personID: app.globalData.personID
-    })
+        personID: app.globalData.personID
+      })
       .then(res => {
         wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
         if (res.code == 0) {
-          if (res.data){
-            for (var index in res.data){
+          if (res.data) {
+            for (var index in res.data) {
               let item = res.data[index]
-              if (item.isDefault == 1){
+              if (item.isDefault == 1) {
                 this.data.addressInfo = {
                   name: item.receiverName,
                   phone: item.receiverPhone,
@@ -69,7 +71,7 @@ Page({
               addressInfo: this.data.addressInfo
             })
           }
-          
+
           this.data.list = res.data
           this.setData({
             list: res.data,
@@ -96,7 +98,7 @@ Page({
   /**
    * 备注
    */
-  remarksInput(e){
+  remarksInput(e) {
     let value = Common.filterEmoji(e.detail.value)
     this.data.addressInfo.remarks = value;
     return {
@@ -106,8 +108,8 @@ Page({
   /**
    * 设置订单配送地址
    */
-  submitOption(){
-    console.log('submitOption=====',this.data.addressInfo)
+  submitOption() {
+    console.log('submitOption=====', this.data.addressInfo)
     let that = this
     wx.showLoading({
       title: '确认收货地址...',
@@ -116,34 +118,34 @@ Page({
       !this.data.addressInfo.phone ||
       !this.data.addressInfo.province ||
       !this.data.addressInfo.city ||
-      !this.data.addressInfo.area || 
-      !this.data.addressInfo.address){
-        wx.showToast({
-          title: '请选择收货地址',
-          icon:'none'
-        })
+      !this.data.addressInfo.area ||
+      !this.data.addressInfo.address) {
+      wx.showToast({
+        title: '请选择收货地址',
+        icon: 'none'
+      })
 
-        return;
+      return;
     }
 
     HTTP.fillDeliveryAddr({
-      orgID: app.globalData.orgID,
-      orderID: this.data.orderID,
-      receiverName: this.data.addressInfo.name,
-      receiverPhone: this.data.addressInfo.phone,
-      province: this.data.addressInfo.province,
-      city: this.data.addressInfo.city,
-      area: this.data.addressInfo.area,
-      address: this.data.addressInfo.address,
-      remarks: this.data.addressInfo.remarks ? this.data.addressInfo.remarks : '',
-      modifyUser: this.data.modifyUser
-    })
+        orgID: app.globalData.orgID,
+        orderID: this.data.orderID,
+        receiverName: this.data.addressInfo.name,
+        receiverPhone: this.data.addressInfo.phone,
+        province: this.data.addressInfo.province,
+        city: this.data.addressInfo.city,
+        area: this.data.addressInfo.area,
+        address: this.data.addressInfo.address,
+        remarks: this.data.addressInfo.remarks ? this.data.addressInfo.remarks : '',
+        modifyUser: this.data.modifyUser
+      })
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
           wx.showToast({
             title: '地址绑定完成',
-            success:function(){
+            success: function() {
               that.navigateBack()
             }
           })
@@ -157,7 +159,7 @@ Page({
    * 返回
    */
   navigateBack() {
-    let currentPage = null;   //当前页面
+    let currentPage = null; //当前页面
     let prevPage = null; //上一个页面
     let pages = getCurrentPages();
     if (pages.length >= 2) {
@@ -170,6 +172,10 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
+  },
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
   }
 
 })

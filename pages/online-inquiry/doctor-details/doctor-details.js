@@ -1,19 +1,18 @@
 const HTTP = require('../../../utils/http-util')
+const commonFun = require('../../../utils/common')
 let app = getApp()
 
 Page({
   data: {
     screenWidth: app.globalData.systemInfo.screenWidth,
-    list: [
-      {
-        name: '张**',
-        leve: '2',
-        content: '医生的回答很好的解决了我的问题，很不错。'
-      }
-    ]
+    list: [{
+      name: '张**',
+      leve: '2',
+      content: '医生的回答很好的解决了我的问题，很不错。'
+    }]
   },
 
-  onLoad: function (e) {
+  onLoad: function(e) {
     var staffID = e.staffID
     this.fetchDoctorInfo(staffID)
   },
@@ -24,8 +23,8 @@ Page({
   fetchDoctorInfo(doctorId) {
     var that = this;
     HTTP.getDoctorInfo({
-      staffID: doctorId
-    })
+        staffID: doctorId
+      })
       .then(res => {
         if (res.code == 0) {
           if (res.data) {
@@ -37,7 +36,7 @@ Page({
         } else {
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon: 'none'
           })
         }
       }).catch(e => {
@@ -47,22 +46,22 @@ Page({
         })
       })
   },
-  
+
   /**
    * 获取专治病
    */
-  getDoctorDiseaseByDoctorID(doctorId){
+  getDoctorDiseaseByDoctorID(doctorId) {
     var that = this;
     HTTP.getDoctorDiseaseByDoctorID({
-      doctorID: doctorId
-    })
+        doctorID: doctorId
+      })
       .then(res => {
-        console.log('getDoctorDiseaseByDoctorID-----',res)
+        console.log('getDoctorDiseaseByDoctorID-----', res)
         if (res.code == 0) {
           if (res.data) {
             var disease = []
             for (var index in res.data) {
-              disease.push(res.data[index].diseaseName) 
+              disease.push(res.data[index].diseaseName)
             }
             this.setData({
               disease: disease.join(',')
@@ -80,5 +79,9 @@ Page({
           icon: 'none'
         })
       })
+  },
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
   }
 })

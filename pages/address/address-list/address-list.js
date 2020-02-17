@@ -1,4 +1,5 @@
 const HTTP = require('../../../utils/http-util')
+const commonFun = require('../../../utils/common')
 
 let app = getApp()
 /**
@@ -16,7 +17,7 @@ Page({
     this.loadDatas()
   },
 
-  onPullDownRefresh(){
+  onPullDownRefresh() {
     this.loadDatas()
   },
   /**
@@ -24,15 +25,15 @@ Page({
    */
   loadDatas() {
     wx.showNavigationBarLoading()
-    if (!app.globalData.personID){
+    if (!app.globalData.personID) {
       wx.showToast({
         title: 'personID为空',
-        icon:'none'
+        icon: 'none'
       })
       return;
     }
     HTTP.getAddress({
-      personID: app.globalData.personID
+        personID: app.globalData.personID
       })
       .then(res => {
         wx.hideNavigationBarLoading()
@@ -41,7 +42,7 @@ Page({
           this.data.list = res.data
           this.setData({
             list: res.data,
-            noNetwork:false
+            noNetwork: false
           })
         } else {
           this.setData({
@@ -49,7 +50,7 @@ Page({
           })
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon: 'none'
           })
         }
 
@@ -211,5 +212,9 @@ Page({
 
   noNetworkOption() {
     this.loadDatas()
+  },
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
   }
 })

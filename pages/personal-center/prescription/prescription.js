@@ -1,5 +1,5 @@
-
 const HTTP = require('../../../utils/http-util')
+const commonFun = require('../../../utils/common')
 let app = getApp()
 
 Page({
@@ -12,8 +12,8 @@ Page({
   onLoad: function() {
     this.loadDatas()
   },
-  
-  onPullDownRefresh(){
+
+  onPullDownRefresh() {
     this.loadDatas()
   },
   /**
@@ -24,9 +24,9 @@ Page({
     var that = this;
     wx.showNavigationBarLoading()
     HTTP.getRpListByPerson({
-      orgID: app.globalData.orgID,
-      patientID: app.globalData.patientID
-    })
+        orgID: app.globalData.orgID,
+        patientID: app.globalData.patientID
+      })
       .then(res => {
         wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
@@ -47,19 +47,19 @@ Page({
         } else {
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon: 'none'
           })
         }
       }).catch(e => {
         wx.hideNavigationBarLoading()
         wx.stopPullDownRefresh()
         that.setData({
-          noNetwork:true
+          noNetwork: true
         })
       })
   },
   // 加载更多数据
-  moreDatas:function(){
+  moreDatas: function() {
 
   },
   // 无数据
@@ -72,8 +72,12 @@ Page({
     })
   },
 
-  noNetworkOption(){
+  noNetworkOption() {
     this.loadDatas()
-  }
+  },
 
+  //右上角分享功能
+  onShareAppMessage: function(res) {
+    return commonFun.onShareAppMessageFun();
+  }
 })

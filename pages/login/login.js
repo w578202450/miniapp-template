@@ -1,6 +1,7 @@
 const app = getApp()
 const AUTH = require('../../utils/auth')
-var HTTP = require('../../utils/http-util.js');
+var HTTP = require('../../utils/http-util');
+const commonFun = require('../../utils/common');
 import {
   genTestUserSig
 } from '../../utils/GenerateTestUserSig';
@@ -128,6 +129,10 @@ Page({
         })
       }
     })
+  },
+  //右上角分享功能
+  onShareAppMessage: function (res) {
+    return commonFun.onShareAppMessageFun();
   },
   /**
    * IM登录
