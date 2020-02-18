@@ -1147,8 +1147,16 @@ Page({
     let inquiryID = e.currentTarget.dataset.rpid;
     if (inquiryID) {
       wx.navigateTo({
-        url: '../../../personal-center/prescription-details/prescription-details?&inquiryID=' + inquiryID,
+        url: '../../../personal-center/prescription-details/prescription-details?&inquiryID=' + inquiryID
       });
     }
+  },
+
+  /*查找：点击素材卡片消息，跳转到对应网址链接*/
+  toMaterialFun: function(e) {
+    let materialUrl = e.currentTarget.dataset.materialurl;
+    wx.navigateTo({
+      url: materialUrl
+    });
   }
 })
