@@ -56,7 +56,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
@@ -115,9 +115,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "测试",
-					"pathName": "pages/cheshi/cheshi",
+					"id": 8,
+					"name": "视频素材展示页",
+					"pathName": "pages/online-inquiry/inquiry/videoPlay/videoPlay",
 					"query": "",
 					"scene": null
 				},
@@ -139,13 +139,6 @@
 					"id": 11,
 					"name": "视频",
 					"pathName": "pages/online-inquiry/inquiry/video/room",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 12,
-					"name": "测试上传图片",
-					"pathName": "pages/online-inquiry/inquiry/index/index",
 					"query": "",
 					"scene": null
 				},

@@ -1,0 +1,9 @@
+<!--pages/online-inquiry/inquiry/videoPlay/videoPlay.wxml-->
+<view>
+  <!-- 视频素材： materialType = 2 -->
+  <view wx:if="{{materialType == 2}}" class="videoPlayBox">
+    <video class="videoLabel" src="{{videoMaterialSrc}}" poster="{{posterSrc}}"></video>
+  </view>
+  <!-- 图文素材： materialType = 0 -->
+  <web-view wx:elif="{{materialType == 0}}" src="{{videoMaterialSrc}}"></web-view>
+</view>
