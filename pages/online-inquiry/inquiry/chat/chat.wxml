@@ -98,21 +98,21 @@
             <!-- 自定义的素材消息： materialType 0:图文 1:图片 2:视频-->
             <view wx:elif="{{filter.formatJSON(item.payload.data).childType == 'tmcMaterial'}}">
               <!-- 图文素材、视频素材 -->
-              <view wx:if="{{filter.formatJSON(item.payload.data).materialType == 0 || filter.formatJSON(item.payload.data).materialType == 2}}" class="materialCard" bindtap="toMaterialFun" data-materialdata="{{filter.formatJSON(item.payload.data).data}}">
+              <view wx:if="{{filter.formatJSON(item.payload.data).data.materialType == 0 || filter.formatJSON(item.payload.data).data.materialType == 2}}" class="materialCard" bindtap="toMaterialFun" data-materialdata="{{filter.formatJSON(item.payload.data).data}}">
                 <view>
-                  <text class="materialTitle">{{filter.formatJSON(item.payload.data).title}}</text>
+                  <text class="materialTitle">{{filter.formatJSON(item.payload.data).data.title}}</text>
                 </view>
                 <view class="materialInfo">
-                  <view class="materialDescribe">{{filter.formatJSON(item.payload.data).descrip}}</view>
+                  <view class="materialDescribe">{{filter.formatJSON(item.payload.data).data.descrip}}</view>
                   <view class="materialImgBox">
-                    <image class="materialImg" src="{{filter.formatJSON(item.payload.data).logoUrl}}" />
-                    <image wx:if="{{filter.formatJSON(item.payload.data).materialType == 2}}" class="videoPlayIcon" src="../../../../images/chat/videoPlayIcon.png" />
+                    <image class="materialImg" src="{{filter.formatJSON(item.payload.data).data.logoUrl}}" />
+                    <image wx:if="{{filter.formatJSON(item.payload.data).data.materialType == 2}}" class="videoPlayIcon" src="../../../../images/chat/videoPlayIcon.png" />
                   </view>
                 </view>
               </view>
               <!-- 图片素材 -->
-              <view wx:elif="{{filter.formatJSON(item.payload.data).materialType == 1}}" bindtap="toMaterialFun" data-materialdata="{{filter.formatJSON(item.payload.data).data}}">
-                <image class="materialImageAll" src="{{filter.formatJSON(item.payload.data).logoUrl}}" mode="widthFix" />
+              <view wx:elif="{{filter.formatJSON(item.payload.data).data.materialType == 1}}" bindtap="toMaterialFun" data-materialdata="{{filter.formatJSON(item.payload.data).data}}">
+                <image class="materialImageAll" src="{{filter.formatJSON(item.payload.data).data.logoUrl}}" mode="widthFix" />
               </view>
             </view>
             <!-- 自定义的视频聊天消息 -->

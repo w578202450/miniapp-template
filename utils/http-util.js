@@ -157,23 +157,33 @@ module.exports = {
   getOrderByPerson: function getOrderByPerson(parmas) {
     return request('api/tmc/goodsOrder/getOrderByPerson', true, 'get', parmas);
   },
+
   /*
    *批量获取处方详情
    */
   getRpByList: function getRpByList(parmas) {
     return request('api/tmc/rp/getRpByList', true, 'post', parmas);
   },
+
   /*
    *订单详情页
    */
   goodsOrder: function goodsOrder(parmas) {
     return request('api/tmc/goodsOrder/detail', true, 'get', parmas);
   },
+
   /*
    *根据处方id获取处方详情
    */
   getRp: function getRp(parmas) {
     return request('api/tmc/rp/get', true, 'get', parmas);
+  },
+
+  /**
+   * 无登录缓存信息时，查询默认推荐的医生信息
+   */
+  getDefaultDocInfo: function getDefaultDocInfo(parmas) {
+    return request('api/tmc/patient/getDefaultPatientInfo', true, 'get', parmas);
   },
 
   /*
@@ -302,8 +312,8 @@ module.exports = {
   },
 
   /**
-  * 结束问诊（挂断视频）
-  */
+   * 结束问诊（挂断视频）
+   */
   endVideoInquiry: function endVideoInquiry(parmas) {
     return request('api/rp/inquiry/end', true, 'post', parmas);
   },

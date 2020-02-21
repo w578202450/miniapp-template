@@ -4,18 +4,21 @@
     <view class="userinfo-body">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
       <view>
-      <button class="button-auth" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" style="font-size: 32rpx;font-family: PingFangSC-Medium, PingFang SC;font-weight: 500;background-color: rgb(0,0,0,0);color: rgba(255, 255, 255, 1)" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-        <text wx:else class="userinfo-nikename">{{userInfo.nickName}}</text>
+        <!-- <button class="button-auth" wx:if="{{!userInfo.nickName}}" open-type="getUserInfo" style="font-size: 32rpx;font-family: PingFangSC-Medium, PingFang SC;font-weight: 500;background-color: rgb(0,0,0,0);color: rgba(255, 255, 255, 1);border-bottom: 1px solid white;" bindtap="toLoginFun">未登录</button>
+        <text wx:else class="userinfo-nikename">{{userInfo.nickName}}</text> -->
+        <text class="userinfo-nikename">{{userInfo.nickName}}</text>
       </view>
     </view>
   </view>
 
   <view class="weui-cells weui-cells_after-title">
     <block wx:for="{{list}}" wx:key="*this">
-      <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+      <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="toToolFun" data-toolurl="{{item.url}}">
+        <!-- <navigator url="{{item.url}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active"> -->
         <view class="weui-cell__bd">{{item.title}}</view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-      </navigator>
+        <!-- </navigator> -->
+      </view>
     </block>
   </view>
 </view>

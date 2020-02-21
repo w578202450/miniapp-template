@@ -144,6 +144,7 @@ App({
   globalData: {
     tim: null,
     TIM: null,
+    isInitInfo: false,
     userInfo: {},
     personInfo: {},
     doctorInfo: {},

@@ -282,65 +282,65 @@ Page({
   },
 
   onLoad: function() {
-    let that = this
-    this.data.patientID = app.globalData.patientID
-    this.loadDatas()
+    let that = this;
+    this.data.patientID = app.globalData.patientID;
+    this.loadDatas();
   },
   //methods
   /**
    * 高度输入
    */
   heightInput: function(e) {
-    this.data.heightInfo.docItemValue = e.detail.value
+    this.data.heightInfo.docItemValue = e.detail.value;
   },
   /**
    * 体重输入
    */
   weightInput: function(e) {
-    this.data.weightInfo.docItemValue = e.detail.value
+    this.data.weightInfo.docItemValue = e.detail.value;
   },
   /**
    * 烟龄
    */
   smokeInput: function(e) {
-    this.data.smokeInfo.docItemDesc = e.detail.value
+    this.data.smokeInfo.docItemDesc = e.detail.value;
   },
   /***
    * 烟龄
    */
   drinkInput: function(e) {
-    this.data.drinkInfo.docItemDesc = e.detail.value
+    this.data.drinkInfo.docItemDesc = e.detail.value;
   },
   /**
    * 选择吸烟
    */
   smokingAction: function(e) {
     console.log('------------吸烟史：', e.detail);
-    this.data.smokeInfo.docItemValue = e.detail
+    this.data.smokeInfo.docItemValue = e.detail;
     this.setData({
       hiddenSmokeInput: e.detail == "不吸烟" ? true : false,
       smoked: e.detail == "不吸烟" ? "" : e.value
-    })
+    });
   },
   /**
    * 选择饮酒
    */
   drinkingAction: function(e) {
     console.log('------------饮酒史：', e.detail);
-    this.data.drinkInfo.docItemValue = e.detail
+    this.data.drinkInfo.docItemValue = e.detail;
     this.setData({
       hiddenDrinkInput: e.detail == "不饮酒" ? true : false,
       drink: e.detail == "不吸烟" ? "" : e.value
-    })
+    });
   },
   /**
    * 选择既往病史
    */
   medicalAction: function(e) {
-    this.data.historyOfSicknessInfo.docItemValue = e.detail
+    this.data.historyOfSicknessInfo.docItemValue = e.detail;
     this.setData({
       isHiddenMedicalList: (e.detail == "无") ? true : false
-    })
+    });
   },
 
   /**
@@ -349,15 +349,15 @@ Page({
   medicalGridsChange: function(e) {
     var index = e.detail;
     var item = this.data.medicalList[e.detail];
-    item.checked = !item.checked
-    var selectedData = []
+    item.checked = !item.checked;
+    var selectedData = [];
     for (var i = 0; i < this.data.medicalList.length; i++) {
       if (this.data.medicalList[i].checked) {
         selectedData.push(this.data.medicalList[i].name)
       }
     }
     this.data.medicalSendList = selectedData;
-    console.log("既往病史-------", e.detail)
+    console.log("既往病史-------", e.detail);
   },
   /**
    * 过敏史选择
@@ -365,16 +365,16 @@ Page({
   allergyGridsChange: function(e) {
     var index = e.detail;
     var item = this.data.allergyList[e.detail];
-    item.checked = !item.checked
-    var selectedData = []
+    item.checked = !item.checked;
+    var selectedData = [];
     for (var i = 0; i < this.data.allergyList.length; i++) {
       if (this.data.allergyList[i].checked) {
-        selectedData.push(this.data.allergyList[i].name)
+        selectedData.push(this.data.allergyList[i].name);
       }
     }
     this.data.allergySendList = selectedData;
-    console.log("过敏史选择-------", e.detail)
-    console.log("this.data.allergySendList-------", this.data.allergySendList)
+    console.log("过敏史选择-------", e.detail);
+    console.log("this.data.allergySendList-------", this.data.allergySendList);
   },
   /**
    * 添加既往病史
@@ -392,12 +392,12 @@ Page({
    * 选择过敏史
    */
   allergyAction: function(e) {
-    console.log("------------", e.detail)
-    this.data.historyOfAllergyInfo.docItemValue = e.detail
-    console.log("------------", this.data.historyOfAllergyInfo.docItemValue)
+    console.log("------------", e.detail);
+    this.data.historyOfAllergyInfo.docItemValue = e.detail;
+    console.log("------------", this.data.historyOfAllergyInfo.docItemValue);
     this.setData({
       isHiddenAllergyList: (e.detail == "无") ? true : false
-    })
+    });
   },
   /**
    * 添加过敏史
@@ -408,28 +408,28 @@ Page({
       dialogInput: "",
       dialogTarget: "过敏史",
       isHiddenDialog: false
-    })
+    });
   },
   /**
    * 选择肝功能
    */
   liverAction: function(e) {
     console.log('------------肝功能：', e.detail);
-    this.data.liverInfo.docItemValue = e.detail
+    this.data.liverInfo.docItemValue = e.detail;
   },
   /**
    * 选择肾功能
    */
   kidneyAction: function(e) {
     console.log('------------肾功能：', e.detail);
-    this.data.renalInfo.docItemValue = e.detail
+    this.data.renalInfo.docItemValue = e.detail;
   },
   /**
    * 选择妊娠哺乳
    */
   gestationAction: function(e) {
     console.log('------------妊娠哺乳：', e.detail);
-    this.data.pregnancyInfo.docItemValue = e.detail
+    this.data.pregnancyInfo.docItemValue = e.detail;
   },
 
   /***
@@ -439,13 +439,12 @@ Page({
     this.setData({
       isHiddenDialog: true,
       dialogTarget: ""
-    })
+    });
   },
   /**
    *弹框保存
    */
   confirmDialog: function() {
-
     var value = this.data.dialogInput;
     if (!value) {
       wx.showToast({
@@ -454,33 +453,33 @@ Page({
       })
       return;
     }
-    console.log("------sss", this.data.dialogInput, this.data.dialogTarget)
+    console.log("------sss", this.data.dialogInput, this.data.dialogTarget);
     if (this.data.dialogTarget == "既往病史") {
-      this.data.medicalSendList.push(this.data.dialogInput)
-      var list = this.data.medicalList
+      this.data.medicalSendList.push(this.data.dialogInput);
+      var list = this.data.medicalList;
       list.push({
         name: this.data.dialogInput,
         id: "1",
         checked: true
-      })
+      });
       this.setData({
         isHiddenDialog: true,
         dialogTarget: "",
         medicalList: list
-      })
+      });
     } else if (this.data.dialogTarget == "过敏史") {
-      this.data.allergySendList.push(this.data.dialogInput)
-      var list = this.data.allergyList
+      this.data.allergySendList.push(this.data.dialogInput);
+      var list = this.data.allergyList;
       list.push({
         name: this.data.dialogInput,
         id: "1",
         checked: true
-      })
+      });
       this.setData({
         isHiddenDialog: true,
         dialogTarget: "",
         allergyList: list,
-      })
+      });
     }
 
   },
@@ -488,10 +487,10 @@ Page({
    * 获取弹框中输入框的值
    */
   fetchInput: function(e) {
-    let value = Common.filterEmoji(e.detail.value)
+    let value = Common.filterEmoji(e.detail.value);
     this.setData({
       dialogInput: value
-    })
+    });
     return {
       value: value
     }
@@ -502,33 +501,33 @@ Page({
    * 查询健康信息
    */
   loadDatas() {
-    let that = this
-    wx.showNavigationBarLoading()
+    let that = this;
+    wx.showNavigationBarLoading();
     HTTP.getPatientDoc({
         orgID: app.globalData.orgID,
         keyID: this.data.patientID
       })
       .then(res => {
-        wx.hideNavigationBarLoading()
+        wx.hideNavigationBarLoading();
         if (res.data) {
           for (var index in res.data) {
-            that.handleQueryInfo(res.data[index])
+            that.handleQueryInfo(res.data[index]);
           }
         } else {
           wx.showToast({
             title: res.message,
             icon: 'none'
-          })
+          });
         }
 
       }).catch(e => {
-        wx.hideNavigationBarLoading()
+        wx.hideNavigationBarLoading();
         wx.hideLoading();
         wx.showToast({
           title: '获取信息失败',
           icon: 'none',
           duration: 2000
-        })
+        });
       })
   },
   /**
