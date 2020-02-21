@@ -1,7 +1,6 @@
 /* pages/online-inquiry/inquiry/videoPlay/videoPlay.wxss */
 .videoPlayBox {
   width: 100%;
-  height: auto;
 }
 .videoLabel {
   width:750rpx;

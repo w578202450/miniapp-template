@@ -30,7 +30,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    // this.videoContext = wx.createVideoContext("myVideo");
+    this.videoContext = wx.createVideoContext("myVideo");
     // console.log(this.videoContext);
   },
 
@@ -85,11 +85,11 @@ Page({
     console.log(acceptOptions);
     if (acceptOptions.materialType || acceptOptions.materialType == 0) {
       let setDataInfo = {
-        materialType: acceptOptions.materialType,
         title: acceptOptions.title,
         descrip: acceptOptions.descrip,
         videoMaterialSrc: acceptOptions.url,
-        posterSrc: acceptOptions.logoUrl
+        posterSrc: acceptOptions.logoUrl,
+        materialType: acceptOptions.materialType
       }
       that.setData({
         materialInfo: { ...setDataInfo }
@@ -114,5 +114,8 @@ Page({
         duration: 3000
       });
     }
+  },
+  errorFun:function(e) {
+    console.log("视频播放错误" + JSON.stringify(e));
   }
 })

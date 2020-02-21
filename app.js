@@ -19,11 +19,11 @@ App({
   onLaunch: function() {
     this.globalData.systemInfo = systemInfo
     this.globalData.navBarHeight = navBarHeight
-    AUTH.getSetting()
+    // AUTH.getSetting()
     AUTH.upDataApp()
     AUTH.getNetworkType()
     AUTH.onNetworkStatusChange()
-    this.imSetting()
+    this.imSetting();
   },
 
   onUnload: function() {

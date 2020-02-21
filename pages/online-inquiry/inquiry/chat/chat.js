@@ -942,12 +942,6 @@ Page({
   /*操作：开始长按录音按钮 */
   handleTouchStart: function(e) {
     let that = this;
-    that.startRecordMsg();
-    that.setData({
-      startPoint: e.touches[0],
-      recordingTxt: "松开 结束",
-      sendRecordLock: true
-    });
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.record']) {
@@ -958,6 +952,13 @@ Page({
             title: "您未允许本小程序语音授权，无法发送语音",
             icon: "none",
             duration: 3000
+          });
+        } else {
+          that.startRecordMsg();
+          that.setData({
+            startPoint: e.touches[0],
+            recordingTxt: "松开 结束",
+            sendRecordLock: true
           });
         }
       }

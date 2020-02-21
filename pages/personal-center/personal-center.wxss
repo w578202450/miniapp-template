@@ -38,12 +38,20 @@
   margin-left: 32rpx;
   font-size: 32rpx;
   font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
+  font-weight: bold;
   color: rgba(255, 255, 255, 1);
   line-height: 32rpx;
-  
 }
 
+.getUserInfoBtn {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(0,0,0,0);
+  border: 1rpx solid white;
+  border-radius: 40rpx;
+}
 
 .weui-cell__bd {
   font-size: 32rpx;

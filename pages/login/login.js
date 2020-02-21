@@ -184,21 +184,21 @@ Page({
           key: 'orgName',
           data: res.data.orgName
         });
-        // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
-        wx.getSetting({
-            success(res) {
-              if (!res.authSetting['scope.record']) {
-                wx.authorize({
-                  scope: 'scope.record',
-                  success() {
-                    // wx.startRecord()
-                  }
-                })
-              }
-            }
-          }),
-          // 获取userSig
-          that.getUserSig(res.data.keyID);
+        // // 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
+        // wx.getSetting({
+        //     success(res) {
+        //       if (!res.authSetting['scope.record']) {
+        //         wx.authorize({
+        //           scope: 'scope.record',
+        //           success() {
+        //             // wx.startRecord()
+        //           }
+        //         })
+        //       }
+        //     }
+        //   }),
+        // 获取userSig
+        that.getUserSig(res.data.keyID);
       } else {
         wx.hideLoading()
         wx.showToast({

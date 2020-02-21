@@ -169,16 +169,16 @@
     <view class="reply">
       <view class="opration-area">
         <!-- 切换键盘 -->
-        <!-- <image wx:if="{{isSendRecord}}" src="../../../../images/chat/jianpan.png" class="voiceIcon" bindtap="openKeyboardFun" /> -->
+        <image wx:if="{{isSendRecord}}" src="../../../../images/chat/jianpan.png" class="voiceIcon" bindtap="openKeyboardFun" />
         <!-- 切换语音 -->
-        <!-- <image wx:else src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="willSendRecordMsg" /> -->
+        <image wx:else src="../../../../images/chat/voiceIcon.png" class="voiceIcon" bindtap="willSendRecordMsg" />
         <!-- 录音按钮 -->
-        <!-- <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text> -->
+        <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框：无表情按钮时 -->
-        <!-- <input wx:else class="msgInput" type="text" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" value="{{maySendContent}}" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"/> -->
+        <input wx:else class="msgInput" type="text" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" value="{{maySendContent}}" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"/>
 
         <!-- 文本输入框：无表情按钮时 -->
-        <input class="msgInput" type="text" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" value="{{maySendContent}}" style="width: {{!isSendRecord && maySendContentSure ? '515': '560'}}rpx;" />
+        <!-- <input class="msgInput" type="text" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" value="{{maySendContent}}" style="width: {{!isSendRecord && maySendContentSure ? '515': '560'}}rpx;" /> -->
 
         <!-- 文本输入框：有表情按钮时 -->
         <!-- <input wx:else class="msgInput" type="text" value="{{maySendContent}}" confirm-type="send"  bindtap="inputClickedFun" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" bindblur="menusInputBlurFun"

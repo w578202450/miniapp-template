@@ -18,7 +18,7 @@ Page({
   },
 
   onLoad: function(options) {
-    console.log(options);
+    console.log("进入首页携带的参数：" + JSON.stringify(options));
     if (options.orgID) {
       that.setData({
         orgID: options.orgID
@@ -30,6 +30,10 @@ Page({
       });
     }
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
+    let sendOptionsData = {
+      isHaveData: true
+    };
+    commonFun.startLoginFun(sendOptionsData);
     this.initDocInfoFun();
   },
 
@@ -155,13 +159,35 @@ Page({
     }
   },
 
-  /**操作：开始问诊 */
-  toOnlineInqueryFun: function() {
-    let that = this;
-    wx.navigateTo({
-      url: '/pages/login/login?pageName=' + 'online-inquiry'
-    });
+  /**
+   * 操作：开始问诊
+   * 1.已登录，直接到问诊页
+   * 2.未登录，授权你登录
+   *  */
+  getUserInfo: function(e) {
+    if (app.globalData.isInitInfo) {
+      wx.navigateTo({
+        url: '/pages/online-inquiry/inquiry/chat/chat'
+      });
+    } else {
+      let sendE = {
+        ...e,
+        nextPageName: "chat"
+      }
+      commonFun.getUserInfo(sendE);
+    }
   },
+
+  /**操作：开始问诊 */
+  // toOnlineInqueryFun: function() {
+  //   if (app.globalData.isInitInfo) {
+  //     wx.navigateTo({
+  //       url: '/pages/online-inquiry/inquiry/chat/chat'
+  //     });
+  //   } else {
+  //     commonFun.startLoginFun();
+  //   }
+  // },
 
   /**查询：无缓存患者信息时，查询默认推荐医生信息 */
   getDefaultDocInfoFun: function() {
