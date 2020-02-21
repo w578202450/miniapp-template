@@ -39,7 +39,7 @@ Page({
     wx.getStorage({
       key: 'userInfo',
       success: function(res) {
-        console.log(res);
+        console.log("userInfo:" + JSON.stringify(res));
         that.setData({
           userInfo: res.data
         });

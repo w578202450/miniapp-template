@@ -16,7 +16,7 @@ Page({
   },
 
   onLoad: function() {
-    console.log('systemInfo--', app.globalData.systemInfo);
+    // console.log('---用户端系统信息---', app.globalData.systemInfo);
     this.initDocInfoFun();
   },
 
@@ -166,11 +166,11 @@ Page({
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
         }
       }).catch(e => {
-        wx.showToast({
-          title: '数据异常，请重新进入小程序',
-          icon: none,
-          duration: 3000
-        });
+        // wx.showToast({
+        //   title: '数据异常，请重新进入小程序',
+        //   icon: none,
+        //   duration: 3000
+        // });
       })
   }
 })

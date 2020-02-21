@@ -43,7 +43,7 @@
   <!-- 空置盒子1 -->
   <view class="marginBoxOne"></view>
   <view id="viewCommunicationBody" bindtap="clickViewCommunicationFun">
-    <view wx:if="{{filter.formatJSON(item.payload.data).childType != 'video'}}" class="row" wx:for="{{currentMessageList}}" wx:key="{{index}}" id="item{{index}}">
+    <view wx:if="{{filter.formatJSON(item.payload.data).childType != 'video'}}" class="row" wx:for="{{currentMessageList}}" wx:key="index" id="item{{index}}">
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 系统消息：自定义结束问诊的提示 -->
@@ -111,7 +111,7 @@
                 </view>
               </view>
               <!-- 图片素材 -->
-              <view wx:elif="{{filter.formatJSON(item.payload.data).data.materialType == 1}}" bindtap="toMaterialFun" data-materialdata="{{filter.formatJSON(item.payload.data).data}}">
+              <view wx:elif="{{filter.formatJSON(item.payload.data).data.materialType == 1}}" bindtap="previewImage" data-imagesrc="{{filter.formatJSON(item.payload.data).data.logoUrl}}">
                 <image class="materialImageAll" src="{{filter.formatJSON(item.payload.data).data.logoUrl}}" mode="widthFix" />
               </view>
             </view>

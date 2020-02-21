@@ -20,7 +20,6 @@ Page({
 
   onLoad: function(e) {
     let that = this;
-    console.log(e);
     if (e.pageName) {
       that.setData({
         lastPageName: e.pageName
@@ -80,11 +79,11 @@ Page({
     let that = this;
     console.log("手动授权信息：" + JSON.stringify(e.detail));
     if (!e.detail.encryptedData) {
-      // 返回首页
+      // 拒绝授权 =》 都返回首页
       // wx.switchTab({
       //   url: '/pages/online-inquiry/online-inquiry',
       // });
-      // 返回对应的tab页
+      // 拒绝授权 =》 返回对应的tab页
       if (that.data.lastPageName == "online-inquiry") {
         // 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
         wx.switchTab({
@@ -290,7 +289,7 @@ Page({
       //   });
       // }
     }).catch(function(imError) {
-      console.warn("===登录失败===", imError); // 登录失败的相关信息
+      console.warn("===IM登录失败===", imError); // 登录失败的相关信息
       wx.hideLoading();
       wx.showToast({
         title: 'IM登录失败'

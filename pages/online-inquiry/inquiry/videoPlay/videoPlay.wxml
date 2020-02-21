@@ -1,9 +1,9 @@
 <!--pages/online-inquiry/inquiry/videoPlay/videoPlay.wxml-->
 <view>
-  <!-- 视频素材： materialType = 2 -->
-  <view wx:if="{{materialType == 2}}" class="videoPlayBox">
-    <video class="videoLabel" src="{{videoMaterialSrc}}" poster="{{posterSrc}}"></video>
+  <!-- 视频素材： materialType = 2 objectFit="cover" autoplay="{{false}}"-->
+  <view wx:if="{{materialInfo.materialType == 2}}" class="videoPlayBox">
+    <video class="videoLabel" src="{{materialInfo.videoMaterialSrc}}" poster="{{materialInfo.posterSrc}}" controls ></video>
   </view>
   <!-- 图文素材： materialType = 0 -->
-  <web-view wx:elif="{{materialType == 0}}" src="{{videoMaterialSrc}}"></web-view>
+  <web-view wx:elif="{{materialInfo.materialType == 0}}" src="{{materialInfo.videoMaterialSrc}}"></web-view>
 </view>
