@@ -196,7 +196,7 @@
     </view>
     <!-- 功能区 -->
     <view wx:if="{{isOpenBottomBoolbar}}" class="toolbarBox">
-      <view wx:for="{{toolbarMenus}}" wx:key="{{item.keyID}}" class="{{item.isFifth ? 'toolbarDivFifth' : 'toolbarDiv'}}" bindtap="toolbarMenusFun" data-clickFun="{{item.clickFun}}">
+      <view wx:for="{{toolbarMenus}}" wx:key="index" class="{{item.isFifth ? 'toolbarDivFifth' : 'toolbarDiv'}}" bindtap="toolbarMenusFun" data-clickFun="{{item.clickFun}}">
         <image src="{{item.iconUrl}}" class="toolbarIcon" />
         <view class="toolbarTitile">{{item.title}}</view>
       </view>

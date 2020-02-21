@@ -12,10 +12,23 @@ Page({
     screenHeight: app.globalData.systemInfo.screenHeight,
     screenWidth: app.globalData.systemInfo.screenWidth,
     pixelRatio: app.globalData.systemInfo.pixelRatio,
-    isSearchState: false // 是否第一次加载
+    isSearchState: false, // 是否第一次加载
+    orgID: "",
+    assistantStaffID: ""
   },
 
-  onLoad: function() {
+  onLoad: function(options) {
+    console.log(options);
+    if (options.orgID) {
+      that.setData({
+        orgID: options.orgID
+      });
+    }
+    if (options.assistantStaffID) {
+      that.setData({
+        assistantStaffID: options.assistantStaffID
+      });
+    }
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
     this.initDocInfoFun();
   },
@@ -154,8 +167,8 @@ Page({
   getDefaultDocInfoFun: function() {
     let that = this;
     HTTP.getDefaultDocInfo({
-        orgID: "",
-        assistantStaffID: "",
+        orgID: that.data.orgID,
+        assistantStaffID: that.data.assistantStaffID,
         entryType: ""
       })
       .then(res => {

@@ -11,9 +11,9 @@ Page({
       title: "", // 标题
       descrip: "", // 描述
       // videoMaterialSrc: "", // 视频文件路径
-      // posterSrc: "", // 视频封面图路径
+      posterSrc: "", // 视频封面图路径
       videoMaterialSrc: "https://1256993030.vod2.myqcloud.com/d520582dvodtransgzp1256993030/7732bd367447398157015849771/v.f30.mp4", // 视频路径
-      posterSrc: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg" // 视频封面图路径
+      // posterSrc: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg" // 视频封面图路径
     }
     // seeUrl: "https://apph5.100cbc.com/doctor/agreementRegister.html", // 医生注册协议地址
   },

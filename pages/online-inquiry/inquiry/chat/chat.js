@@ -408,7 +408,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
   },
 
@@ -1161,19 +1161,19 @@ Page({
         url: "/pages/online-inquiry/inquiry/videoPlay/videoPlay?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要在赋值处转换为字符窜
       });
     }
-  },
+  }
 
   /**模拟跳转到素材 */
-  simulationToMatFun: function() {
-    let materialData = {
-      materialType: 0,
-      title: "图文",
-      descripm: "描述",
-      url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // 医生注册协议地址
-      logoUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg" // 唐老鸭封面图片
-    };
-    wx.navigateTo({
-      url: "/pages/online-inquiry/inquiry/videoPlay/videoPlay?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
-    });
-  }
+  // simulationToMatFun: function() {
+  //   let materialData = {
+  //     materialType: 0,
+  //     title: "图文",
+  //     descripm: "描述",
+  //     url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // 医生注册协议地址
+  //     logoUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg" // 唐老鸭封面图片
+  //   };
+  //   wx.navigateTo({
+  //     url: "/pages/online-inquiry/inquiry/videoPlay/videoPlay?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
+  //   });
+  // }
 })
