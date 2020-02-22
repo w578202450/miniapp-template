@@ -69,11 +69,9 @@
   </view>
 
   <view class="inquiry-view">
-    <image src="../../images/home/home_inquiry.png" mode="widthFix" />
-    <button class='getUserInfoBtn' open-type="getUserInfo" bindgetuserinfo="getUserInfo"></button>
-    <!-- <navigator url="/pages/online-inquiry/inquiry/chat/chat">
-      <image src="../../images/home/home_inquiry.png" mode="widthFix"></image>
-    </navigator> -->
+    <image src="../../images/home/home_inquiry.png" mode="widthFix" bindtap="toOnlineInqueryFun"/>
   </view>
-
+   <view>
+    <login-dialog id="loginDialog" bind:error="_error" bind:success="_success"/>
+  </view>
 </view>

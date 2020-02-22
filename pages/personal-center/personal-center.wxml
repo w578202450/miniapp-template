@@ -5,11 +5,11 @@
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
       <view>
         <text wx:if="{{userInfo.nickName}}" class="userinfo-nikename">{{userInfo.nickName}}</text>
-        <button wx:else class="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="margin-left: 32rpx;">点击登录账户</button>
+        <!-- <button wx:else class="getUserInfoBtn" open-type="getUserInfo" bindgetuserinfo="getUserInfo" style="margin-left: 32rpx;">点击登录账户</button> -->
+        <button wx:else class="getUserInfoBtn" bindtap="showPopup" style="margin-left: 32rpx;">点击登录账户</button>
       </view>
     </view>
   </view>
-
   <view class="weui-cells weui-cells_after-title">
     <block wx:for="{{list}}" wx:key="index">
       <view class="weui-cell weui-cell_access" hover-class="weui-cell_active" bindtap="toToolFun" data-toolurl="{{item.url}}">
@@ -17,5 +17,8 @@
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
     </block>
+  </view>
+  <view>
+    <login-dialog id="loginDialog" bind:error="_error" bind:success="_success"/>
   </view>
 </view>

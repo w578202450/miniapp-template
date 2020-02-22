@@ -39,7 +39,8 @@ function startLoginFun(options) {
   optionsData = {};
   nextPageName = "";
   if (options.isHaveData) {
-    optionsData = { ...options };
+    optionsData = { ...options
+    };
   }
   console.log("开始IM登录");
   app.globalData.unionid = wx.getStorageSync('unionid');
@@ -195,6 +196,7 @@ function getounionid(isLoginStatus) {
  */
 function fetchTempCode() {
   AUTH.fetchTempCode().then(function(res) {
+    console.log(res);
     if (res.code) {
       wx.setStorageSync('code', res.code);
     }

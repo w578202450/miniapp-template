@@ -15,7 +15,8 @@
     "pages/address/address-list/address-list",
     "pages/address/address-add/address-add",
     "pages/order/order-details/order-details",
-    "pages/order/drug-orders/drug-orders"
+    "pages/order/drug-orders/drug-orders",
+    "components/loginDialog/loginDialog"
   ],
   "window": {
     "backgroundTextStyle": "dark",

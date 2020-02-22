@@ -109,8 +109,8 @@ function fetchTempCode() {
     })
     wx.login({
       success(res) {
-        wx.hideLoading()
-        resolve(res)
+        wx.hideLoading();
+        resolve(res);
       },
       fail() {
         wx.hideLoading()
@@ -132,8 +132,8 @@ function fetchTempCode() {
    */
 function getounionid(isLoginStatus) {
   wx.showLoading({
-    title: '登录中...',
-  })
+    title: '加载中...',
+  });
   let params = {
     code: wx.getStorageSync('code') ? wx.getStorageSync('code') : '',
     encryptedData: wx.getStorageSync('encryptedData') ? wx.getStorageSync('encryptedData') : '',

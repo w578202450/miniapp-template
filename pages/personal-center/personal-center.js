@@ -1,5 +1,5 @@
-const app = getApp()
-const commonFun = require('../../utils/common')
+const app = getApp();
+const commonFun = require('../../utils/common');
 
 Page({
   data: {
@@ -25,27 +25,33 @@ Page({
 
   onLoad: function(e) {
     let that = this;
-    if (app.globalData.isInitInfo) {
-      that.getUserInfoByStorge();
-    }
+    that.getUserInfoByStorge();
   },
 
   onShow: function(e) {
     let that = this;
-    wx.getStorage({
-      key: 'userInfo',
-      success: function(res) {
-        that.setData({
-          userInfo: res.data
-        });
-      },
-      fail: function(err) {
-        that.setData({
-          userInfo: {}
-        });
-        console.log("获取用户缓存信息失败：" + JSON.stringify(err));
-      }
-    });
+    if (that.data.isSearchState) {
+      wx.getStorage({
+        key: 'userInfo',
+        success: function(res) {
+          that.setData({
+            userInfo: res.data
+          });
+          console.log("获取用户缓存信息成功：" + JSON.stringify(that.data.userInfo));
+        },
+        fail: function(err) {
+          that.setData({
+            userInfo: {}
+          });
+          console.log("获取用户缓存信息失败：" + JSON.stringify(err));
+        }
+      });
+    }
+  },
+
+  onReady: function() {
+    //获得popup组件：登录确认框
+    this.popup = this.selectComponent("#loginDialog");
   },
 
   /**
@@ -55,34 +61,19 @@ Page({
     return commonFun.onShareAppMessageFun();
   },
 
-  /**
-   * 操作：登录
-   */
-  getUserInfo: function (e) {
-    let that = this;
-    if (!e.detail.encryptedData) {
-      return
-    };
-    wx.setStorageSync('encryptedData', e.detail.encryptedData);
-    wx.setStorageSync('iv', e.detail.iv);
-    wx.setStorageSync('userInfo', e.detail.userInfo);
-    app.globalData.userInfo = e.detail.userInfo;
-    if (app.globalData.unionid && app.globalData.openid) {
-      commonFun.getPatientInfo(app.globalData.unionid);
-    } else {
-      // 检查登录态是否过期
-      wx.checkSession({
-        success(res) {
-          commonFun.getounionid(true);
-        },
-        fail(err) {
-          commonFun.getounionid(false);
-        }
-      })
-    }
-    that.setData({
-      userInfo: e.detail.userInfo
-    });
+  /**显示登录确认框 */
+  showPopup() {
+    this.popup.showPopup();
+  },
+
+  /**取消事件 */
+  _error() {
+    this.popup.hidePopup();
+  },
+
+  /**确认事件 */
+  _success() {
+    this.popup.hidePopup();
   },
 
   /**获取用户缓存信息 */
@@ -121,7 +112,7 @@ Page({
       });
     } else {
       wx.showToast({
-        title: '若要使用该功能，请先进行微信授权登录',
+        title: '若要使用该功能，请先进行登录',
         icon: "none",
         duration: 3000
       })

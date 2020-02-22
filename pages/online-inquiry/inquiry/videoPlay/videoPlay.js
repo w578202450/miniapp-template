@@ -7,15 +7,12 @@ Page({
    */
   data: {
     materialInfo: {
-      materialType: "", // 0:图文 1:图片 2:视频
+      materialType: -1, // 0:图文 1:图片 2:视频
       title: "", // 标题
       descrip: "", // 描述
-      // videoMaterialSrc: "", // 视频文件路径
-      posterSrc: "", // 视频封面图路径
-      videoMaterialSrc: "https://1256993030.vod2.myqcloud.com/d520582dvodtransgzp1256993030/7732bd367447398157015849771/v.f30.mp4", // 视频路径
-      // posterSrc: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg" // 视频封面图路径
+      videoMaterialSrc: "", // 视频文件路径
+      posterSrc: "" // 视频封面图路径
     }
-    // seeUrl: "https://apph5.100cbc.com/doctor/agreementRegister.html", // 医生注册协议地址
   },
 
   /**
@@ -23,7 +20,39 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    that.initInfoFun(options);
+    let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
+    console.log(acceptOptions);
+    if (acceptOptions.materialType || acceptOptions.materialType == 0) {
+      that.setData({
+        materialInfo: {
+          title: acceptOptions.title,
+          descrip: acceptOptions.descrip,
+          videoMaterialSrc: acceptOptions.url,
+          posterSrc: acceptOptions.logoUrl,
+          materialType: acceptOptions.materialType
+        }
+      });
+      console.log("素材信息：" + JSON.stringify(that.data));
+      console.log(that.data);
+      if (acceptOptions.materialType == 0) {
+        // 图文素材
+      } else if (acceptOptions.materialType == 2) {
+        // 视频素材
+        if (!acceptOptions.url) {
+          wx.showToast({
+            title: "视频素材异常，无法正常播放",
+            icon: "none",
+            duration: 3000
+          });
+        }
+      }
+    } else {
+      wx.showToast({
+        title: "素材数据异常，无法正常展示",
+        icon: "none",
+        duration: 3000
+      });
+    }
   },
 
   /**
@@ -76,45 +105,6 @@ Page({
     return commonFun.onShareAppMessageFun(); // 调用公共的分享配置
   },
 
-  /**
-   * 初始化信息
-   */
-  initInfoFun: function(options) {
-    let that = this;
-    let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
-    console.log(acceptOptions);
-    if (acceptOptions.materialType || acceptOptions.materialType == 0) {
-      let setDataInfo = {
-        title: acceptOptions.title,
-        descrip: acceptOptions.descrip,
-        videoMaterialSrc: acceptOptions.url,
-        posterSrc: acceptOptions.logoUrl,
-        materialType: acceptOptions.materialType
-      }
-      that.setData({
-        materialInfo: { ...setDataInfo }
-      });
-      console.log("素材信息：" + JSON.stringify(that.data));
-      if (acceptOptions.materialType == 0) {
-        // 图文素材
-      } else if (acceptOptions.materialType == 2) {
-        // 视频素材
-        if (!acceptOptions.url) {
-          wx.showToast({
-            title: "视频素材异常，无法正常播放",
-            icon: "none",
-            duration: 3000
-          });
-        }
-      }
-    } else {
-      wx.showToast({
-        title: "素材数据异常，无法正常展示",
-        icon: "none",
-        duration: 3000
-      });
-    }
-  },
   errorFun:function(e) {
     console.log("视频播放错误" + JSON.stringify(e));
   }

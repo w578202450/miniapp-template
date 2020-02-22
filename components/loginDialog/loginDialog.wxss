@@ -1,0 +1,70 @@
+/* components/loginDialog/loginDialog.wxss */
+
+.loginDialogBox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.popup-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 80%;
+  max-width: 600rpx;
+  border: 2rpx solid #ccc;
+  border-radius: 10rpx;
+  box-sizing: bordre-box;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  background: #fff;
+}
+
+.wx-popup-title {
+  width: 100%;
+  padding: 40rpx 0 20rpx 0;
+  text-align: center;
+  font-size: 35rpx;
+  font-weight: bold;
+  color: #242526;
+}
+
+.wx-popup-content {
+  text-align: center;
+  color: #555658;
+}
+
+.wx-popup-image {
+  margin: 20rpx 0 40rpx 0;
+  width: 380rpx;
+  height: 380rpx;
+}
+
+.wx-popup-btn {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40rpx;
+}
+
+.wx-popup-btn button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250rpx;
+  border-radius: 88rpx;
+  font-weight: normal;
+}
+
+.wx-popup-btn .btn-no {
+  border: 1rpx solid #438bef;
+  color: #438bef;
+  background-color: white;
+}
+
+.wx-popup-btn .btn-ok {
+  background-color: #438bef;
+  color: white;
+}

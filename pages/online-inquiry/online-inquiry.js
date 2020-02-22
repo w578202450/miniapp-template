@@ -18,23 +18,26 @@ Page({
   },
 
   onLoad: function(options) {
-    console.log("进入首页携带的参数：" + JSON.stringify(options));
-    if (options.orgID) {
-      that.setData({
-        orgID: options.orgID
-      });
-    }
-    if (options.assistantStaffID) {
-      that.setData({
-        assistantStaffID: options.assistantStaffID
-      });
-    }
-    // console.log('---用户端系统信息---', app.globalData.systemInfo);
+    let that = this;
+    // console.log("进入首页携带的参数：" + JSON.stringify(options));
     let sendOptionsData = {
       isHaveData: true
     };
     commonFun.startLoginFun(sendOptionsData);
-    this.initDocInfoFun();
+    if (options) {
+      if (options.orgID) {
+        that.setData({
+          orgID: options.orgID
+        });
+      }
+      if (options.assistantStaffID) {
+        that.setData({
+          assistantStaffID: options.assistantStaffID
+        });
+      }
+    }
+    // console.log('---用户端系统信息---', app.globalData.systemInfo);
+    that.initDocInfoFun();
   },
 
   // 返回页面时，刷新数据
@@ -43,6 +46,11 @@ Page({
     if (that.data.isSearchState) {
       that.initDocInfoFun();
     }
+  },
+
+  onReady: function() {
+    //获得popup组件：登录确认框
+    this.popup = this.selectComponent("#loginDialog");
   },
 
   //右上角分享功能
@@ -82,16 +90,16 @@ Page({
         staffID: staffID
       })
       .then(res => {
-        wx.hideLoading()
+        wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
-            app.globalData.doctorInfo = res.data;
-            wx.setStorageSync('doctorInfo', res.data);
-            // that.fetchDoctorQualification(res.data.doctorID); // 获取医生资质编号
             that.setData({
               doctorInfo: res.data,
               orgName: app.globalData.orgName
             });
+            app.globalData.doctorInfo = res.data;
+            wx.setStorageSync('doctorInfo', res.data);
+            // that.fetchDoctorQualification(res.data.doctorID); // 获取医生资质编号
           }
         }
       }).catch(e => {
@@ -111,11 +119,11 @@ Page({
       .then(res => {
         if (res.code == 0) {
           if (res.data) {
-            wx.setStorageSync('assistantInfo', res.data);
-            app.globalData.assistantInfo = res.data;
             that.setData({
               assistantDoctorInfo: res.data
             });
+            wx.setStorageSync('assistantInfo', res.data);
+            app.globalData.assistantInfo = res.data;
           }
         }
       }).catch(e => {
@@ -162,32 +170,18 @@ Page({
   /**
    * 操作：开始问诊
    * 1.已登录，直接到问诊页
-   * 2.未登录，授权你登录
+   * 2.未登录，授权登录
    *  */
-  getUserInfo: function(e) {
+  toOnlineInqueryFun: function() {
     if (app.globalData.isInitInfo) {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });
     } else {
-      let sendE = {
-        ...e,
-        nextPageName: "chat"
-      }
-      commonFun.getUserInfo(sendE);
+      let nextPageName = "chat";
+      this.popup.showPopup(nextPageName); // 显示登录确认框
     }
   },
-
-  /**操作：开始问诊 */
-  // toOnlineInqueryFun: function() {
-  //   if (app.globalData.isInitInfo) {
-  //     wx.navigateTo({
-  //       url: '/pages/online-inquiry/inquiry/chat/chat'
-  //     });
-  //   } else {
-  //     commonFun.startLoginFun();
-  //   }
-  // },
 
   /**查询：无缓存患者信息时，查询默认推荐医生信息 */
   getDefaultDocInfoFun: function() {
@@ -211,5 +205,15 @@ Page({
         //   duration: 3000
         // });
       })
+  },
+
+  /**取消事件 */
+  _error() {
+    this.popup.hidePopup();
+  },
+
+  /**确认事件 */
+  _success() {
+    this.popup.hidePopup();
   }
 })

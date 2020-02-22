@@ -586,6 +586,7 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
+      console.log(JSON.stringify(that.data.currentMessageList));
       if (spliceNum && !that.data.isCompleted) {
         that.onPullDownRefresh(spliceNum);
       } else {

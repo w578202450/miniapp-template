@@ -1,0 +1,16 @@
+<!--components/loginDialog/loginDialog.wxml-->
+<view class="loginDialogBox" hidden="{{isHiddenDialog}}">
+  <view class='popup-container'>
+    <view class="wx-popup-title">{{title}}</view>
+    <view class="wx-popup-content">
+      <text>{{content}}</text>
+      <view>
+        <image class="wx-popup-image" src="{{content_image}}" />
+      </view>
+    </view>
+    <view class="wx-popup-btn">
+      <button class="btn-no" bindtap='_error'>{{btn_no}}</button>
+      <button class="btn-ok" open-type="getUserInfo" bindgetuserinfo="getUserInfo" bindtap='_success'>{{btn_ok}}</button>
+    </view>
+  </view>
+</view>
