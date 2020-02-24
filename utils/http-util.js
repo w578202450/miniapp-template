@@ -37,13 +37,7 @@ var request = function request(url, needDomain, method, data) {
       data: data,
       success: function success(request) {
         resolve(request.data);
-        console.log("数据请求成功:", url, request.data)
-        if (request.data.code != 0) {
-          // wx.showToast({
-          //   title: request.data.message,
-          //   icon: "none"
-          // })
-        }
+        console.log("数据请求成功:", url, request.data);
       },
       fail: function fail(error) {
         reject(error);

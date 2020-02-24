@@ -108,7 +108,7 @@ Page({
 
     let myUsername = wx.getStorageSync("myUsername");
     msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
-      console.log(JSON.stringify(renderableMsg));
+      console.log("收到新消息：" + JSON.stringify(renderableMsg));
       if (renderableMsg && renderableMsg.type) {
         let msgType = renderableMsg.type;
         if (msgType == "TIMSoundElem") { // 语音消息
@@ -694,7 +694,7 @@ Page({
     tim.sendMessage(message).then(function(imResponse) {
       console.log("发送文本消息成功");
     }).catch(function(imError) {
-      console.warn('imError-------', imError);
+      console.log('发送文本消息失败：', imError);
       wx.showToast({
         title: "发送消息： '" + oldmaySendContent + "' 失败",
         icon: "warn",
@@ -833,7 +833,7 @@ Page({
       });
       console.log("发送图片消息成功");
     }).catch(function(imError) {
-      console.warn("发送图片失败" + JSON.stringify(imError));
+      console.log("发送图片失败" + JSON.stringify(imError));
       that.setData({
         httpLoading: false, // 关闭隐性加载过程
         isShowLoading: true // 隐藏发送中
@@ -1027,7 +1027,12 @@ Page({
           console.log("发送语音消息成功");
         }).catch(function(imError) {
           // 发送失败
-          console.log(imError);
+          console.log("发送语音消息失败" + imError);
+          wx.showToast({
+            title: "发送语音消息失败",
+            icon: "warn",
+            duration: 2000
+          });
         });
       }
     });

@@ -49,8 +49,10 @@
   font-weight: bold;
   color: white;
   background-color: rgba(0,0,0,0);
-  border: 1rpx solid white;
   border-radius: 40rpx;
+  max-width: 270rpx;
+  text-align: left;
+  padding-left: 0;
 }
 
 .weui-cell__bd {

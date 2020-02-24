@@ -32,7 +32,7 @@ let nextPageName = ""; // 下一页的名字
  * 2.不存在unionid 进行微信登录
  */
 function startLoginFun(options) {
-  console.log(options);
+  console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
   userSig = "";
   selctedIndex = 0;
   logined = false;
@@ -248,12 +248,6 @@ function onShareAppMessageFun() {
     // -----------------------------------------------------------------
   }
 }
-
-// 测试用方法
-function testFun(a) {
-  console.log(a);
-}
-
 
 module.exports = {
   startLoginFun: startLoginFun,

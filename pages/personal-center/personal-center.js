@@ -20,7 +20,8 @@ Page({
         title: '收货地址'
       }
     ],
-    isSearchState: false // 是否查询了一次
+    isSearchState: false, // 是否查询了一次
+    isSelfLogin: false // 是否主动登录
   },
 
   onLoad: function(e) {
@@ -29,8 +30,9 @@ Page({
     // 监听isInitInfo值的变化
     app.watch((value) => {
       // value为app.js中传入的值
-      console.log('授权登录后是否已成功获取用户授权信息：' + value);
+      console.log("授权登录后是否已成功获取用户授权信息：", value);
       if (value) {
+        that.data.isSelfLogin = true;
         that.getUserInfoByStorge();
       }
     }, "isInitInfo");
@@ -45,13 +47,13 @@ Page({
           that.setData({
             userInfo: res.data
           });
-          console.log("获取用户缓存信息成功：" + JSON.stringify(that.data.userInfo));
+          console.log("获取用户缓存授权信息成功：" + JSON.stringify(that.data.userInfo));
         },
         fail: function(err) {
           that.setData({
             userInfo: {}
           });
-          console.log("获取用户缓存信息失败：" + JSON.stringify(err));
+          console.log("获取用户缓存授权信息失败：" + JSON.stringify(err));
         }
       });
     }
@@ -71,6 +73,8 @@ Page({
 
   /**显示登录确认框 */
   showPopup() {
+    wx.hideLoading();
+    wx.hideToast();
     this.popup.showPopup();
   },
 
@@ -90,13 +94,20 @@ Page({
     wx.getStorage({
       key: 'userInfo',
       success: function(res) {
-        console.log("获取用户缓存信息成功" + JSON.stringify(res));
+        console.log("获取用户缓存授权信息成功" + JSON.stringify(res));
         that.setData({
           userInfo: res.data
         });
+        if (that.data.isSelfLogin) {
+          wx.showToast({
+            title: '登陆成功',
+            icon: "none",
+            duration: 2000
+          });
+        }
       },
       fail: function(res) {
-        console.log("获取用户缓存信息失败");
+        console.log("获取用户缓存授权信息失败");
       },
       complete: function(e) {
         that.setData({

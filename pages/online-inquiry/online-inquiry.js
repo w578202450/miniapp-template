@@ -1,9 +1,9 @@
 //index.js
 //获取应用实例
 
-const HTTP = require('../../utils/http-util')
-const app = getApp()
-const commonFun = require('../../utils/common.js')
+const HTTP = require('../../utils/http-util');
+const app = getApp();
+const commonFun = require('../../utils/common.js');
 
 Page({
   data: {
@@ -19,7 +19,7 @@ Page({
 
   onLoad: function(options) {
     let that = this;
-    // console.log("进入首页携带的参数：" + JSON.stringify(options));
+    console.log("进入首页携带的参数：" + JSON.stringify(options));
     let sendOptionsData = {
       isHaveData: true
     };
@@ -67,12 +67,12 @@ Page({
     wx.getStorage({
       key: 'personInfo',
       success: function(res) {
-        console.log("获取用户缓存信息成功：" + JSON.stringify(res));
+        console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
         that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
         that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
       },
       fail: function(err) {
-        console.log("获取用户缓存信息失败：" + JSON.stringify(err));
+        console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
         that.getDefaultDocInfoFun();
       },
       complete: function(e) {
@@ -95,7 +95,6 @@ Page({
           if (res.data) {
             that.setData({
               doctorInfo: res.data,
-              // orgName: app.globalData.orgName
               orgName: res.data.workPlace
             });
             app.globalData.doctorInfo = res.data;
