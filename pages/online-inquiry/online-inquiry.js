@@ -95,7 +95,8 @@ Page({
           if (res.data) {
             that.setData({
               doctorInfo: res.data,
-              orgName: app.globalData.orgName
+              // orgName: app.globalData.orgName
+              orgName: res.data.workPlace
             });
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);

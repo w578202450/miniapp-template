@@ -25,7 +25,15 @@ Page({
 
   onLoad: function(e) {
     let that = this;
-    that.getUserInfoByStorge();
+    that.getUserInfoByStorge(); // 获取用户授权信息
+    // 监听isInitInfo值的变化
+    app.watch((value) => {
+      // value为app.js中传入的值
+      console.log('授权登录后是否已成功获取用户授权信息：' + value);
+      if (value) {
+        that.getUserInfoByStorge();
+      }
+    }, "isInitInfo");
   },
 
   onShow: function(e) {
@@ -115,7 +123,7 @@ Page({
         title: '若要使用该功能，请先进行登录',
         icon: "none",
         duration: 3000
-      })
+      });
     }
   }
 })

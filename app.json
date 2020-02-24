@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/online-inquiry/online-inquiry",
-    "pages/login/login",
     "pages/online-inquiry/doctor-details/doctor-details",
     "pages/logs/logs",
     "pages/personal-center/personal-center",
