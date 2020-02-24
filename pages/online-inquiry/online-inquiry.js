@@ -12,7 +12,9 @@ Page({
     screenHeight: app.globalData.systemInfo.screenHeight,
     screenWidth: app.globalData.systemInfo.screenWidth,
     pixelRatio: app.globalData.systemInfo.pixelRatio,
-    isSearchState: false // 是否第一次加载
+    isSearchState: false, // 是否第一次加载
+    shareOrgID: "", // 进入页面携带的orgID
+    shareAssistantStaffID: "" // 进入页面携带的医助ID
   },
 
   onLoad: function(options) {
@@ -28,11 +30,13 @@ Page({
       //   content: JSON.stringify(options),
       // });
       if (options.orgID) {
-        app.globalData.shareOrgID = options.orgID
+        that.data.shareOrgID = options.orgID;
+        wx.setStorageSync("shareOrgID", options.orgID);
       }
       if (options.assistantStaffID) {
-        app.globalData.shareAssistantStaffID = options.assistantStaffID
-      }
+        that.data.shareAssistantStaffID = options.assistantStaffID;
+        wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
+      } 
     }
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
     that.initDocInfoFun();
@@ -185,8 +189,8 @@ Page({
   getDefaultDocInfoFun: function() {
     let that = this;
     HTTP.getDefaultDocInfo({
-        orgID: app.globalData.shareOrgID,
-        assistantStaffID: app.globalData.shareAssistantStaffID,
+        orgID: that.data.shareOrgID,
+        assistantStaffID: that.data.shareAssistantStaffID,
         entryType: ""
       })
       .then(res => {
