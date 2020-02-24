@@ -12,9 +12,7 @@ Page({
     screenHeight: app.globalData.systemInfo.screenHeight,
     screenWidth: app.globalData.systemInfo.screenWidth,
     pixelRatio: app.globalData.systemInfo.pixelRatio,
-    isSearchState: false, // 是否第一次加载
-    orgID: "",
-    assistantStaffID: ""
+    isSearchState: false // 是否第一次加载
   },
 
   onLoad: function(options) {
@@ -25,15 +23,15 @@ Page({
     };
     commonFun.startLoginFun(sendOptionsData);
     if (options) {
+      // wx.showModal({
+      //   title: '传入的参数',
+      //   content: JSON.stringify(options),
+      // });
       if (options.orgID) {
-        that.setData({
-          orgID: options.orgID
-        });
+        app.globalData.shareOrgID = options.orgID
       }
       if (options.assistantStaffID) {
-        that.setData({
-          assistantStaffID: options.assistantStaffID
-        });
+        app.globalData.shareAssistantStaffID = options.assistantStaffID
       }
     }
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
@@ -187,8 +185,8 @@ Page({
   getDefaultDocInfoFun: function() {
     let that = this;
     HTTP.getDefaultDocInfo({
-        orgID: that.data.orgID,
-        assistantStaffID: that.data.assistantStaffID,
+        orgID: app.globalData.shareOrgID,
+        assistantStaffID: app.globalData.shareAssistantStaffID,
         entryType: ""
       })
       .then(res => {

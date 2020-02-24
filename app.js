@@ -161,6 +161,8 @@ App({
     tim: null,
     TIM: null,
     isInitInfo: false,
+    shareOrgID: "", // 进入小程序时，携带的orgID
+    shareAssistantStaffID: "", // 进入小程序时，携带的医生ID
     userInfo: {},
     personInfo: {},
     doctorInfo: {},

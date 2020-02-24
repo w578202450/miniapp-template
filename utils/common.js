@@ -42,6 +42,9 @@ function startLoginFun(options) {
     optionsData = { ...options
     };
   }
+  if (options.selctedIndex == 0 || options.selctedIndex) {
+    selctedIndex = options.selctedIndex;
+  }
   console.log("开始IM登录");
   app.globalData.unionid = wx.getStorageSync('unionid');
   app.globalData.openid = wx.getStorageSync('openID');
@@ -240,7 +243,7 @@ function getUserInfo(e) {
 function onShareAppMessageFun() {
   return {
     // title: "",    // 转发的标题，默认是小程序的名称(可以写slogan等)
-    path: '/pages/online-inquiry/online-inquiry', // 默认是当前页面，必须是以‘/'开头的完整路径
+    path: '/pages/online-inquiry/online-inquiry?orgID=' + app.globalData.shareOrgID + '&&assistantStaffID=' + app.globalData.shareAssistantStaffID, // 默认是当前页面，必须是以‘/'开头的完整路径
     // imageUrl: '',   //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
     // -------------基础库 2.0.8版本起，不在获取分享结果的回调了-----------
     // success: function (res) {},
