@@ -29,14 +29,24 @@ Page({
       //   title: '传入的参数',
       //   content: JSON.stringify(options),
       // });
-      if (options.orgID) {
-        that.data.shareOrgID = options.orgID;
-        wx.setStorageSync("shareOrgID", options.orgID);
+      if (options.q) {
+        var scan_url = decodeURIComponent(options.q);
+        let shareOrgID = that.initOptionsFun(scan_url, "orgID");
+        let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
+        that.data.shareOrgID = shareOrgID;
+        wx.setStorageSync("shareOrgID", shareOrgID);
+        that.data.shareAssistantStaffID = shareAssistantStaffID;
+        wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
+      } else {
+        if (options.orgID) {
+          that.data.shareOrgID = options.orgID;
+          wx.setStorageSync("shareOrgID", options.orgID);
+        }
+        if (options.assistantStaffID) {
+          that.data.shareAssistantStaffID = options.assistantStaffID;
+          wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
+        }
       }
-      if (options.assistantStaffID) {
-        that.data.shareAssistantStaffID = options.assistantStaffID;
-        wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
-      } 
     }
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
     that.initDocInfoFun();
@@ -58,6 +68,17 @@ Page({
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
+  },
+
+  /**转换传递的url参数 q */
+  initOptionsFun: function (scan_url, name) {
+    var reg = new RegExp("[^\?&]?" + encodeURI(name) + "=[^&]+");
+    var arr = scan_url.match(reg);
+    if (arr != null) {
+      return decodeURI(arr[0].substring(arr[0].search("=") + 1));
+    } else {
+      return "";
+    }
   },
 
   userInfoHandler: function() {
