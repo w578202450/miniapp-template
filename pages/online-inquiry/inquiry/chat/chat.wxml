@@ -1,5 +1,7 @@
 <view class="page">
+  <!-- 引入wxs脚本 -->
   <wxs src="./filter.wxs" module="filter" />
+  <wxs src="../../../../wxs/wxsCommon.wxs" module="comTools" />
   <!-- 顶部 -->
   <view class="body-view">
     <loading hidden="{{hidden}}" bindchange="loadingChange">
@@ -62,18 +64,18 @@
         <view class="avatar-container">
           <!-- 患者头像 -->
           <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="personHeadImgDiv">
-            <image wx:if="{{!wexinInfo.avatarUrl}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" />
-            <image ex:else src="{{wexinInfo.avatarUrl}}" class="avatarTwo" />
+            <image wx:if="{{!wexinInfo.avatarUrl}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" mode="aspectFill"/>
+            <image ex:else src="{{wexinInfo.avatarUrl}}" class="avatarTwo" mode="aspectFill"/>
           </view>
           <!-- 医生头像 -->
           <view wx:elif="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.doctorInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" />
-            <image src="{{talkInfo.doctorInfo.faceImage}}" class="avatarOne" />
+            <image wx:if="{{!talkInfo.doctorInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" mode="aspectFill"/>
+            <image src="{{talkInfo.doctorInfo.faceImage}}" class="avatarOne" mode="aspectFill"/>
           </view>
           <!-- 医助头像 -->
           <view wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.assistantInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" />
-            <image src="{{talkInfo.assistantInfo.faceImage}}" class="avatarOne" />
+            <image wx:if="{{!talkInfo.assistantInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" mode="aspectFill"/>
+            <image src="{{talkInfo.assistantInfo.faceImage}}" class="avatarOne" mode="aspectFill"/>
           </view>
         </view>
         <!-- 画对话框 -->
@@ -97,20 +99,20 @@
             </view>
             <!-- 自定义的素材消息： materialType 0:图文 1:图片 2:视频-->
             <view wx:elif="{{filter.formatJSON(item.payload.data).childType == 'tmcMaterial'}}">
-              <!-- 图文素材、视频素材 -->
+              <!-- 素材消息：图文素材、视频素材 -->
               <view wx:if="{{filter.formatJSON(item.payload.data).data.materialType == 0 || filter.formatJSON(item.payload.data).data.materialType == 2}}" class="materialCard" bindtap="toMaterialFun" data-materialdata="{{filter.formatJSON(item.payload.data).data}}">
                 <view>
-                  <text class="materialTitle">{{filter.formatJSON(item.payload.data).data.title}}</text>
+                  <text class="materialTitle">{{comTools.subStrTitle(filter.formatJSON(item.payload.data).data.title)}}</text>
                 </view>
                 <view class="materialInfo">
-                  <view class="materialDescribe">{{filter.formatJSON(item.payload.data).data.descrip}}</view>
+                  <view class="materialDescribe">{{comTools.subStr(filter.formatJSON(item.payload.data).data.descrip)}}</view>
                   <view class="materialImgBox">
                     <image class="materialImg" src="{{filter.formatJSON(item.payload.data).data.logoUrl}}" />
                     <image wx:if="{{filter.formatJSON(item.payload.data).data.materialType == 2}}" class="videoPlayIcon" src="../../../../images/chat/videoPlayIcon.png" />
                   </view>
                 </view>
               </view>
-              <!-- 图片素材 -->
+              <!-- 素材消息：图片素材 -->
               <view wx:elif="{{filter.formatJSON(item.payload.data).data.materialType == 1}}" bindtap="previewImage" data-imagesrc="{{filter.formatJSON(item.payload.data).data.logoUrl}}">
                 <image class="materialImageAll" src="{{filter.formatJSON(item.payload.data).data.logoUrl}}" mode="widthFix" />
               </view>
@@ -175,7 +177,8 @@
         <!-- 录音按钮 -->
         <text wx:if="{{isSendRecord}}" class="recordBtn" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" bindlongpress="handleLongPress" bindtouchmove="handleMove" bindtap="handleClick">{{recordingTxt}}</text>
         <!-- 文本输入框：无表情按钮时 -->
-        <input wx:else class="msgInput" type="text" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" value="{{maySendContent}}" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"/>
+        <input wx:else class="msgInput" type="text" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" value="{{maySendContent}}" style="width: {{!isSendRecord && maySendContentSure ? '460': '505'}}rpx;"
+        />
 
         <!-- 文本输入框：无表情按钮时 -->
         <!-- <input class="msgInput" type="text" confirm-type="send" bindinput="adInputChange" bindconfirm="sendContentMsg" bindfocus="menusInputFocusFun" value="{{maySendContent}}" style="width: {{!isSendRecord && maySendContentSure ? '515': '560'}}rpx;" /> -->

@@ -1,0 +1,28 @@
+/*配置WXML中可直接使用的过滤方法*/
+// 过滤素材消息的标题，大于32个字符的，加以省略
+var subStrTitle = function (val) {
+  if (val.length == 0 || val == undefined) {
+    return;
+  }
+  if (val.length > 33) {
+    return val.substring(0, 32) + "...";
+  } else {
+    return val;
+  }
+}
+
+// 过滤素材消息的描述，大于35个字符的，加以省略
+var subStr = function (val) {
+  if (val.length == 0 || val == undefined) {
+    return;
+  }
+  if (val.length > 38) {
+    return val.substring(0, 37) + "...";
+  } else {
+    return val;
+  }
+}
+module.exports = {
+  subStrTitle: subStrTitle,
+  subStr: subStr
+};

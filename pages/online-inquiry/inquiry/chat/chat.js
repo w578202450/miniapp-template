@@ -125,56 +125,13 @@ Page({
             let jsonData = JSON.parse(renderableMsg.payload.data);
             let customType = jsonData.customType;
             let childType = jsonData.childType;
-            console.log("收到的自定义消息的payload.data.{childType}:" + childType);
             // 视频问诊的消息类型处理
             if (childType == "video") {
               // 医生发起(接收视频)
-              console.log("---------接收视频-------");
               if (jsonData.data.requestRole == 1 && jsonData.data.inquiryId) {
                 let inquiryType = jsonData.data.type;
-                console.log("医生发起(接收视频)inquiryID:" + jsonData.data.inquiryId);
                 that.videoWxFun(jsonData.data.inquiryId);
               };
-
-              //   console.log("payload.data.data.{type}:" + isaccept);
-              //   if (isaccept == "reject") { // 对方拒绝
-              //     // 退出房间
-              //     wx.showToast({
-              //       title: '医生已拒绝...'
-              //     });
-              //     this.exitRoom();
-              //     this.goBack();
-              //   } else if (isaccept == "busy") { // 对方忙碌
-              //     // 退出房间
-              //     wx.showToast({
-              //       title: '医生忙碌中...'
-              //     });
-              //     this.exitRoom();
-              //     this.goBack();
-              //   } else if (isaccept == "accept") { // 对方接收
-              //     that.setData({
-              //       isInCalling: true
-              //     });
-              //     // 进入房间
-              //     wx.showToast({
-              //       title: '医生已接听...'
-              //     });
-              //     // 房间号
-              //     let roomid = jsonData.data.roomId;
-              //     console.log("payload.data.data.{roomId}:" + roomid);
-              //     that.setData({
-              //       roomID: roomid
-              //     });
-              //     // 进入房间
-              //     that.joinRoom();
-              //   } else if (isaccept == "hangUp") { // 对方挂断
-              //     // 退出房间
-              //     wx.showToast({
-              //       title: '医生已挂断...'
-              //     });
-              //     this.exitRoom();
-              //     this.goBack();
-              //   }
             }
             // 结束问诊、创建问诊
             if (customType == "sys" && jsonData.data.talkID == that.data.talkInfo.multiTalkInfo.keyID) {
@@ -421,7 +378,6 @@ Page({
         that.setData({
           userInfo: res.data
         });
-        // console.log("患者信息:" + JSON.stringify(res.data));
         if (that.data.userInfo.keyID) {
           that.getPatientMultiTalk(); // 查询患者的多方对话
         }
@@ -586,11 +542,10 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
-      console.log(JSON.stringify(that.data.currentMessageList));
+      console.log(that.data.currentMessageList);
       if (spliceNum && !that.data.isCompleted) {
         that.onPullDownRefresh(spliceNum);
       } else {
-        console.log(that.data.currentMessageList);
         that.toViewBottomFun();
       }
     }).catch(function(imError) {
