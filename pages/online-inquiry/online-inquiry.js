@@ -113,7 +113,7 @@ Page({
         staffID: staffID
       })
       .then(res => {
-        wx.hideLoading();
+        // wx.hideLoading();
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -126,7 +126,7 @@ Page({
           }
         }
       }).catch(e => {
-        wx.hideLoading();
+        // wx.hideLoading();
         that.setData({
           noNetwork: true
         });

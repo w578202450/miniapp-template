@@ -66,6 +66,8 @@ function getPatientInfo(unionID) {
   wx.showLoading({
     title: '登录中...',
   });
+  let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+  let orgID = wx.getStorageSync("shareOrgID");
   let prams = {
     unionID: unionID,
     nickName: app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '',
@@ -73,6 +75,8 @@ function getPatientInfo(unionID) {
     sex: app.globalData.userInfo.sex ? app.globalData.userInfo.sex : '',
     city: app.globalData.userInfo.city ? app.globalData.userInfo.city : '',
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
+    assistantStaffID: assistantStaffID ? assistantStaffID: "",
+    orgID: orgID ? orgID: ""
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
