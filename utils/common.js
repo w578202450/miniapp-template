@@ -12,7 +12,6 @@ let TIM = getApp().globalData.TIM;
 let userSig = ""; // [必选]身份签名，需要从自行搭建的签名服务获取
 let selctedIndex = 0; //公众号跳转带参数  0在线问诊 1个人中心
 let logined = false; //是否处于登录状态
-let optionsData = {}; // 传递的参数
 let nextPageName = ""; // 下一页的名字
 
 // 方法
@@ -32,18 +31,15 @@ let nextPageName = ""; // 下一页的名字
  * 2.不存在unionid 进行微信登录
  */
 function startLoginFun(options) {
-  console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
+  // console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
   userSig = "";
   selctedIndex = 0;
   logined = false;
-  optionsData = {};
   nextPageName = "";
-  if (options.isHaveData) {
-    optionsData = { ...options
-    };
-  }
-  if (options.selctedIndex == 0 || options.selctedIndex) {
-    selctedIndex = options.selctedIndex;
+  if (options) {
+    if (options.selctedIndex == 0 || options.selctedIndex) {
+      selctedIndex = options.selctedIndex;
+    }
   }
   console.log("开始IM登录");
   app.globalData.unionid = wx.getStorageSync('unionid');
@@ -80,6 +76,7 @@ function getPatientInfo(unionID) {
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
+      console.log("登录后拿到的患者对话信息：" + JSON.stringify(res.data));
       app.globalData.orgName = res.data.orgName;
       app.globalData.personID = res.data.personID;
       app.globalData.patientID = res.data.keyID;
@@ -108,6 +105,14 @@ function getPatientInfo(unionID) {
       wx.setStorage({
         key: 'orgName',
         data: res.data.orgName
+      });
+      wx.setStorage({
+        key: 'shareOrgID',
+        data: res.data.orgID
+      });
+      wx.setStorage({
+        key: 'shareAssistantStaffID',
+        data: res.data.assistantStaffID
       });
       // 获取userSig
       getUserSig(res.data.keyID);
@@ -143,7 +148,6 @@ function getUserSig(userId) {
         key: 'userSig',
         data: res.data.userSig
       });
-      // console.log("获取userSig：" + userSig);
       if (userSig) {
         loginIM(userId); // IM登录
       }
@@ -175,7 +179,7 @@ function loginIM(userId) {
       });
     }
   }).catch(function(imError) {
-    console.warn("===IM登录失败===", imError); // 登录失败的相关信息
+    console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
     wx.hideLoading();
     wx.showToast({
       title: 'IM登录失败'
@@ -226,6 +230,9 @@ function getUserInfo(e) {
   wx.setStorageSync('iv', e.detail.iv);
   wx.setStorageSync('userInfo', e.detail.userInfo);
   app.globalData.userInfo = e.detail.userInfo;
+  app.globalData.unionid = wx.getStorageSync('unionid');
+  app.globalData.openid = wx.getStorageSync('openID');
+  logined = app.globalData.unionid && app.globalData.openid;
   if (logined) {
     getPatientInfo(app.globalData.unionid);
   } else {

@@ -17,27 +17,26 @@ Page({
     shareAssistantStaffID: "" // 进入页面携带的医助ID
   },
 
+  /**
+   * 1.options无参
+   *   （1）通过搜索小程序进入时
+   * 2.options有参
+   *   （1）通过扫码进入时： "q" 的值为url带参
+   *   （2）通过分享的小程序进入时：直接带参
+   */
   onLoad: function(options) {
     let that = this;
     console.log("进入首页携带的参数：" + JSON.stringify(options));
-    let sendOptionsData = {
-      isHaveData: true
-    };
-    commonFun.startLoginFun(sendOptionsData);
     if (options) {
-      // wx.showModal({
-      //   title: '传入的参数',
-      //   content: JSON.stringify(options),
-      // });
-      if (options.q) {
+      if (options.q) { // 通过扫码进入时：q的值为url带参
         var scan_url = decodeURIComponent(options.q);
         let shareOrgID = that.initOptionsFun(scan_url, "orgID");
         let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-        that.data.shareOrgID = shareOrgID;
+        that.data.shareOrgID = shareOrgID ? shareOrgID: "";
         wx.setStorageSync("shareOrgID", shareOrgID);
-        that.data.shareAssistantStaffID = shareAssistantStaffID;
+        that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID: "";
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
-      } else {
+      } else if (options.assistantStaffID) { // 通过分享的小程序进入时：直接带参
         if (options.orgID) {
           that.data.shareOrgID = options.orgID;
           wx.setStorageSync("shareOrgID", options.orgID);
@@ -48,6 +47,8 @@ Page({
         }
       }
     }
+    let sendOptions = { ...options };
+    commonFun.startLoginFun(sendOptions);
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
     that.initDocInfoFun();
   },
@@ -81,29 +82,30 @@ Page({
     }
   },
 
-  userInfoHandler: function() {
-
-  },
-
+  /**初始化数据 */
   initDocInfoFun: function() {
     let that = this;
-    wx.getStorage({
-      key: 'personInfo',
-      success: function(res) {
-        console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
-        that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
-        that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-      },
-      fail: function(err) {
-        console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
-        that.getDefaultDocInfoFun();
-      },
-      complete: function(e) {
-        that.setData({
-          isSearchState: true
-        });
-      }
-    });
+    if (that.data.shareAssistantStaffID) {
+      that.getDefaultDocInfoFun();
+    } else {
+      wx.getStorage({
+        key: 'personInfo',
+        success: function (res) {
+          // console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
+          that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
+          that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
+        },
+        fail: function (err) {
+          // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
+          that.getDefaultDocInfoFun();
+        },
+        complete: function (e) {
+          that.setData({
+            isSearchState: true
+          });
+        }
+      });
+    }
   },
 
   /**获取主治医师信息*/
@@ -215,8 +217,10 @@ Page({
         entryType: ""
       })
       .then(res => {
-        console.log("获取临时推荐医生信息成功：" + JSON.stringify(res));
+        // console.log("获取临时推荐医生信息成功：" + JSON.stringify(res));
         if (res.code == 0) {
+          wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
+          wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync('personInfo', res.data);
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
