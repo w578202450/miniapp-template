@@ -64,6 +64,13 @@
 					"pathName": "pages/index/service-index/ht/patient-evaluate/patient-evaluate",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/service-index/ht/module-title/module-title",
+					"pathName": "pages/index/service-index/ht/module-title/module-title",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

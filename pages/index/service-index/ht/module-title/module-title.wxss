@@ -2,13 +2,19 @@
 
 .module-title-box {
   width: 100%;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #dbdee3;
   background-color:#fff; 
 }
 
-.module-title-padding {
-  padding: 0 30rpx;
+.border-botttom {
+  border-bottom: 1rpx solid #dbdee3;
+}
+
+.border-top {
+  border-top: 1rpx solid #dbdee3;
+}
+
+.module-title-view {
+  padding: 20rpx 20rpx;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -27,4 +33,10 @@
 
 .module-title-num {
   color: #555658;
+}
+
+.moreBtnView {
+  width: 100%;
+  text-align: center;
+  color: #438BEF;
 }

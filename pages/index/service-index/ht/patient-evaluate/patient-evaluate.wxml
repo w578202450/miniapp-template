@@ -1,5 +1,6 @@
 <!--pages/index/service-index/ht/patient-evaluate/patient-evaluate.wxml-->
 <view>
-  <module-title/>
-  <view>下面是内容了</view>
+  <module-title title="患者评价：" isHaveNum="{{true}}" num="235" moreBtnName="查看更多患者评价" moreBtnUrl="{{moreBtnUrl}}">
+    <view slot="content-body">这里是内容了</view>
+  </module-title>
 </view>

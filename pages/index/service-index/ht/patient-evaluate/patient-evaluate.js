@@ -4,7 +4,11 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    // 查看更多的h5链接
+    moreBtnUrl: {
+      type: String,
+      value: ""
+    }
   },
 
   /**

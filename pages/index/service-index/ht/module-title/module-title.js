@@ -1,5 +1,9 @@
 // pages/index/service-index/ht/module-title/module-title.js
 Component({
+  /**启用插槽 */
+  options: {
+    multipleSlots: true
+  },
   /**
    * 组件的属性列表
    */
@@ -9,7 +13,7 @@ Component({
       type: String,
       value: "标题"
     },
-    // 字体大小
+    // 字体大小，默认34rpx
     fontSize: {
       type: String,
       value: "34rpx"
@@ -19,17 +23,33 @@ Component({
       type: String,
       value: "#242526"
     },
-    // 加粗成都
+    // 加粗程度
     fontWeight: {
       type: String,
       value: "bold"
     },
-    // 是否有数量
+    // 是否有数量，默认无
     isHaveNum: {
       type: Boolean,
       value: false
     },
+    // 数量
     num: {
+      type: String || Number,
+      value: ""
+    },
+    // 是否有查看更多按钮，默认有
+    isHaveMoreBtn: {
+      type: Boolean,
+      value: true
+    },
+    // 查看更多按钮名字
+    moreBtnName: {
+      type: String,
+      value: "查看更多"
+    },
+    // 查看更多的h5链接
+    moreBtnUrl: {
       type: String,
       value: ""
     }
@@ -46,6 +66,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    toH5PageFun: function() {
+      let that = this;
+      if (!that.data.moreBtnUrl) {
+        wx.showToast({
+          title: '无链接地址，无法查看更多',
+          icon: "none",
+          duration: 3000
+        });
+        return
+      }
+      console.log("查看更多的h5链接地址：" + that.data.moreBtnUrl);
+      // wx.navigateTo({
+      //   url: '',
+      // });
+    }
   }
 })
