@@ -19,6 +19,7 @@ var subStr = function (val) {
   if (val.length > 38) {
     return val.substring(0, 37) + "...";
   } else {
+    console.log(1);
     return val;
   }
 }
