@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "module-title": "/pages/index/service-index/ht/module-title/module-title"
+  }
+}

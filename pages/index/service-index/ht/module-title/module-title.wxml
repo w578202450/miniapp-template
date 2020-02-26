@@ -1,0 +1,8 @@
+<!--pages/index/service-index/ht/module-title/module-title.wxml-->
+<view class="module-title-box">
+  <view class="module-title-padding">
+    <view class="module-title-icon"></view>
+    <text class="module-title-txt" style="font-size:{{fontSize}};color:{{color}};font-weight:{{fontWeight}}">{{title}}</text>
+    <text wx:if="{{isHaveNum}}" class="module-title-num">（{{num}}）</text>
+  </view>
+</view>

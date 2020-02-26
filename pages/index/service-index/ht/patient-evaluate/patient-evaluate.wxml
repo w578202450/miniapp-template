@@ -1,0 +1,5 @@
+<!--pages/index/service-index/ht/patient-evaluate/patient-evaluate.wxml-->
+<view>
+  <module-title/>
+  <view>下面是内容了</view>
+</view>

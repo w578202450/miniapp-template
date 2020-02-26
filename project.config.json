@@ -60,8 +60,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "医生手记",
-					"pathName": "components/docNotes/docNotes",
+					"name": "患者评价",
+					"pathName": "pages/index/service-index/ht/patient-evaluate/patient-evaluate",
 					"query": "",
 					"scene": null
 				}
