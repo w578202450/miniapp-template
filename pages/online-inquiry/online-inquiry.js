@@ -26,9 +26,15 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    // options = {
+    //   assistantStaffID: "20021416340304125070514240",
+    //   orgID: "20012119021236503500511240"
+    // };
     console.log("进入首页携带的参数：" + JSON.stringify(options));
+    app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
+        app.globalData.isHaveOptions = true; // 进入小程序携带有参数
         var scan_url = decodeURIComponent(options.q);
         let shareOrgID = that.initOptionsFun(scan_url, "orgID");
         let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
@@ -37,6 +43,7 @@ Page({
         that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID: "";
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
       } else if (options.assistantStaffID) { // 通过分享的小程序进入时：直接带参
+        app.globalData.isHaveOptions = true; // 进入小程序携带有参数
         if (options.orgID) {
           that.data.shareOrgID = options.orgID;
           wx.setStorageSync("shareOrgID", options.orgID);

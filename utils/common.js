@@ -31,7 +31,7 @@ let nextPageName = ""; // 下一页的名字
  * 2.不存在unionid 进行微信登录
  */
 function startLoginFun(options) {
-  // console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
+  console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
   userSig = "";
   selctedIndex = 0;
   logined = false;
@@ -71,8 +71,8 @@ function getPatientInfo(unionID) {
     sex: app.globalData.userInfo.sex ? app.globalData.userInfo.sex : '',
     city: app.globalData.userInfo.city ? app.globalData.userInfo.city : '',
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
-    assistantStaffID: assistantStaffID ? assistantStaffID: "",
-    orgID: orgID ? orgID: ""
+    assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID: "",
+    orgID: (orgID && app.globalData.isHaveOptions) ? orgID: ""
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
@@ -171,12 +171,17 @@ function loginIM(userId) {
   }).then(function(imResponse) {
     console.log("===IM登录成功==="); // 登录成功
     wx.setStorageSync('myUsername', userId);
-    wx.hideLoading();
-    app.globalData.isInitInfo = true;
     if (nextPageName == "chat") {
-      wx.navigateTo({
-        url: '/pages/online-inquiry/inquiry/chat/chat',
-      });
+      setTimeout(()=> {
+        wx.hideLoading();
+        app.globalData.isInitInfo = true;
+        wx.navigateTo({
+          url: '/pages/online-inquiry/inquiry/chat/chat',
+        });
+      }, 2000);
+    } else {
+      wx.hideLoading();
+      app.globalData.isInitInfo = true;
     }
   }).catch(function(imError) {
     console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
