@@ -1,4 +1,4 @@
-// pages/newModule/index/index.js
+// pages/inquiry-index/inquiry-index.js
 Page({
 
   /**

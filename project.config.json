@@ -57,7 +57,15 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": 0,
+					"name": "医生手记",
+					"pathName": "components/docNotes/docNotes",
+					"query": "",
+					"scene": null
+				}
+			]
 		}
 	}
 }

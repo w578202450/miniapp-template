@@ -1,0 +1,4 @@
+<!--pages/index/index.wxml-->
+<view style="background: red;">
+  <view bindtap="toServiceIndexFun">立即进入专家门诊</view>
+</view>

@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/index/service-index/service-index",
+    "pages/inquiry-index/inquiry-index",
     "pages/online-inquiry/online-inquiry",
     "pages/online-inquiry/doctor-details/doctor-details",
     "pages/logs/logs",
@@ -14,8 +17,7 @@
     "pages/address/address-list/address-list",
     "pages/address/address-add/address-add",
     "pages/order/order-details/order-details",
-    "pages/order/drug-orders/drug-orders",
-    "pages/newModule/index/index"
+    "pages/order/drug-orders/drug-orders"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -40,10 +42,13 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/online-inquiry/online-inquiry",
-        "text": "在线问诊"
-      }
-      ,
+        "pagePath": "pages/index/service-index/service-index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/inquiry-index/inquiry-index",
+        "text": "问诊"
+      },
       {
         "pagePath": "pages/personal-center/personal-center",
         "text": "个人中心"

@@ -27,8 +27,8 @@ Page({
   onLoad: function(options) {
     let that = this;
     // options = {
-    //   assistantStaffID: "20021416340304125070514240",
-    //   orgID: "20012119021236503500511240"
+    //   assistantStaffID: "20020509480115486460514001",
+    //   orgID: "19101017081245502880511001"
     // };
     console.log("进入首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
