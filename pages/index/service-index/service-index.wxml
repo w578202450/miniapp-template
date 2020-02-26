@@ -1,4 +1,5 @@
 <!--pages/index/service-index/service-index.wxml-->
 <view>
-  pages/index/service-index/service-index.wxml
+  <!-- 患者评价 -->
+  <patient-evaluate doctorID="{{doctorID}}" />
 </view>

@@ -46,7 +46,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/inquiry-index/inquiry-index",
+        "pagePath": "pages/online-inquiry/online-inquiry",
         "text": "问诊"
       },
       {

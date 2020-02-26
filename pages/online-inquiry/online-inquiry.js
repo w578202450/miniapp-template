@@ -26,6 +26,12 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    // 默认
+    // options = {
+    //   assistantStaffID: "20011109080410712390514001",
+    //   orgID: "19101017081245502880511001"
+    // };
+    // ht
     // options = {
     //   assistantStaffID: "20020509480115486460514001",
     //   orgID: "19101017081245502880511001"

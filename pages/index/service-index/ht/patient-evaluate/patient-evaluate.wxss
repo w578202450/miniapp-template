@@ -1,1 +1,135 @@
 /* pages/index/service-index/ht/patient-evaluate/patient-evaluate.wxss */
+
+.evaluateContentBox {
+  width: 100%;
+  /* border:  1rpx solid red; */
+  overflow: hidden;
+}
+
+.levelBox {
+  padding: 20rpx 20rpx 10rpx 20rpx;
+}
+
+.flexRowBetweenCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexRowStartCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.effect {
+  color: #242526;
+  font-size: 30rpx;
+}
+
+.levelIconImg {
+  width: 100rpx;
+  margin-right: 10rpx;
+}
+
+.satisfaction {
+  color: #ffb10b;
+  font-size: 27rpx;
+}
+
+.verticalLine {
+  height: 30rpx;
+  width: 1rpx;
+  background-color: #dbdee3;
+}
+
+.illnessList {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20rpx;
+}
+
+.illnessView {
+  margin: 0 20rpx 20rpx 0;
+  border: 1rpx solid rgb(200, 200, 200);
+  border-radius: 5rpx;
+  padding: 0 15rpx;
+  font-size: 28rpx;
+  color: #555658;
+}
+
+.intervalView {
+  width: 100%;
+  height: 20rpx;
+  background-color: #f7f5f6;
+}
+
+.evaluateBox {
+  padding: 20rpx 20rpx;
+}
+
+.diseaseTitle {
+  color: #555658;
+}
+
+.diseaseTxt {
+  color: #242526;
+  font-size: 31rpx;
+  font-weight: bold;
+}
+
+.unfoldTxt {
+  font-size: 30rpx;
+  color: #86888b;
+}
+
+.unfoldIcon {
+  width: 25rpx;
+  margin-left: 15rpx;
+}
+
+.curativeEffect {
+  color: #555658;
+  font-size: 32rpx;
+}
+
+.curativeEffectTxt {
+  color: #ffb10b;
+  font-size: 32rpx;
+}
+
+.evaluateContent {
+  margin-top: 15rpx;
+  width: 100%;
+  word-break:  break-all; /* 强制换行 */
+  font-size: 30rpx;
+}
+
+.patientInfoBox {
+  margin: 20rpx 0 10rpx 0;
+  padding: 10rpx 15rpx;
+  background-color: #f6f6f6;
+  border-radius: 60rpx;
+}
+
+.patientFace {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 40rpx;
+  margin-right: 15rpx;
+}
+
+.patientNameTxt {
+  font-size: 28rpx;
+  color: #555658;
+}
+
+.addTime {
+  color: #86888b;
+  font-size: 28rpx;
+}

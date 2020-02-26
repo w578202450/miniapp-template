@@ -106,10 +106,10 @@
               <!-- 素材消息：图文素材、视频素材 -->
               <view wx:if="{{filter.formatJSON(item.payload.data).data.materialType == 0 || filter.formatJSON(item.payload.data).data.materialType == 2}}" class="materialCard" bindtap="toMaterialFun" data-materialdata="{{filter.formatJSON(item.payload.data).data}}">
                 <view>
-                  <text class="materialTitle">{{comTools.subStrTitle(filter.formatJSON(item.payload.data).data.title)}}</text>
+                  <text class="materialTitle">{{comTools.subStrTxt(filter.formatJSON(item.payload.data).data.title, 32)}}</text>
                 </view>
                 <view class="materialInfo">
-                  <view class="materialDescribe">{{comTools.subStr(filter.formatJSON(item.payload.data).data.descrip)}}</view>
+                  <view class="materialDescribe">{{comTools.subStrTxt(filter.formatJSON(item.payload.data).data.descrip, 38)}}</view>
                   <view class="materialImgBox">
                     <image class="materialImg" src="{{filter.formatJSON(item.payload.data).data.logoUrl}}" />
                     <image wx:if="{{filter.formatJSON(item.payload.data).data.materialType == 2}}" class="videoPlayIcon" src="../../../../images/chat/videoPlayIcon.png" />

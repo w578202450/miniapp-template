@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate"
+  },
   "navigationBarTitleText": "专家门诊"
 }
