@@ -1,5 +1,5 @@
 <!--pages/index/service-index/fzm/service-specialistinfo/service-specialistinfo.wxml-->
-<view class="main">
+<view class="main" style="{{pageStyle}}">
   <view class="title-box" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
     <text class="title-name">张关栋</text>
     <text class="title-other" style="margin-left:16rpx">主任医师 教授 博士生导师</text>

@@ -1,0 +1,8 @@
+<view class="page" style="{{pageStyle}}">
+  <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+    <view class="title-box" bindtap="selectedAction" data-index="{{index}}">
+      <text class="{{index==selectedIndex ? 'selected' : 'normal'}}">{{item.name}}</text>
+      <view class="subscriptStyle" hidden="{{index!=selectedIndex}}"></view>
+    </view>
+  </block>
+</view>

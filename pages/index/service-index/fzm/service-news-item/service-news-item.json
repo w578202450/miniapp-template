@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "service-tabs": "/pages/index/service-index/fzm/service-tabs/service-tabs"
+  }
+}

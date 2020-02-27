@@ -1,11 +1,7 @@
 /* pages/index/service-index/fzm/service-news/service-news.wxss */
-.page {
-  margin-top: 20rpx
-}
 
 .content {
   background: rgba(255, 255, 255, 1);
-  padding: 30rpx;
   display: flex;
   flex-direction: column;
 }
