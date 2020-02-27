@@ -1,4 +1,4 @@
-// pages/index/service-index/fzm/doc-basics-info/doc-basics-info.js
+// pages/index/service-index/fzm/servie-physicianTeam/service-physicianTeam.js
 Component({
   /**
    * 组件的属性列表

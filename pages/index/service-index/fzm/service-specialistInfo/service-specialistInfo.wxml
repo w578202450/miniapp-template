@@ -1,0 +1,51 @@
+<!--pages/index/service-index/fzm/service-specialistinfo/service-specialistinfo.wxml-->
+<view class="main">
+  <view class="title-box" style="margin-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
+    <text class="title-name">张关栋</text>
+    <text class="title-other" style="margin-left:16rpx">主任医师 教授 博士生导师</text>
+  </view>
+
+  <view class="button-box">
+    <text class="button-text">立即问诊</text>
+  </view>
+
+  <view class="title-image-box">
+    <image style="width: 100%" src="{{serviceBg}}" mode="widthFix" />
+  </view>
+
+  <view class="specialist-box">
+    <view class="specialist-header-box">
+      <image src="/images/chat/personBacImg.png"></image>
+      <view class="specialist-header-middle-box">
+        <text class="title-name" style="font-size:32rpx">张关栋</text>
+        <text class="title-other" style="margin-top:20rpx">主任医师 教授 博士生导师</text>
+        <text class="title-other" style="margin-top:20rpx">候丽萍风湿骨病中医医院 风湿科</text>
+      </view>
+      <text class="title-other" style="color:rgba(67,139,239,1);width:125rpx;margin-left:10rpx">查看介绍 ></text>
+    </view>
+    <view class="specialist-middle-box">
+      <block wx:for="{{goodAts}}" wx:for-item="item">
+        <view class="specialist-middle-goodAt-box title-other" style="color:rgba(46,127,241,1)">{{item}}</view>
+      </block>
+    </view>
+    <view style="height:2rpx;background:rgba(0,0,0,0.1);margin-top:16rpx"></view>
+    <view class="specialist-bottom-box">
+      <view class="specialist-bottom-left">
+        <image src="/images/chat/personBacImg.png"></image>
+        <text>好评率：</text>
+        <text style="color:rgba(0,0,0,0.85)">99</text>
+      </view>
+      <view style="width:2rpx;height:48rpx;background:rgba(0,0,0,0.1)"></view>
+      <view class="specialist-bottom-left">
+        <image src="/images/chat/personBacImg.png"></image>
+        <text>好评率：</text>
+        <text style="color:rgba(0,0,0,0.85)">99</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="licensed-box">
+    <text>医师执业许可证：</text>
+    <text style="color: rgba(255, 177, 11, 0.85)">12313456DFGHJJJKN</text>
+  </view>
+</view>

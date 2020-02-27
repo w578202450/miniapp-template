@@ -64,6 +64,19 @@
 					"pathName": "components/docNotes/docNotes",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/service-index/service-index",
+					"pathName": "pages/index/service-index/service-index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/service-index/service-index",
+					"pathName": "pages/index/service-index/service-index",
+					"scene": null
 				}
 			]
 		}

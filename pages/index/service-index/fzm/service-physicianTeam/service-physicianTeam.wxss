@@ -1,0 +1,5 @@
+/* pages/index/service-index/fzm/servie-physicianTeam/service-physicianTeam.wxss */
+.main {
+  background: rgba(255, 255, 255, 1);
+  padding: 0 40rpx 40rpx 40rpx;
+}

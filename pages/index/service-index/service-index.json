@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "专家门诊"
+  "usingComponents": {
+    "service-specialistInfo": "../fzm/service-specialistInfo/service-specialistInfo",
+    "service-physicianTeam": "../fzm/service-physicianTeam/service-physicianTeam"
+  },
+  "navigationStyle": "custom"
 }

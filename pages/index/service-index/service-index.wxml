@@ -1,4 +1,6 @@
 <!--pages/index/service-index/service-index.wxml-->
 <view>
-  pages/index/service-index/service-index.wxml
+  <service-specialistInfo></service-specialistInfo>
+  <view style="height:20rpx;background:rgba(246,246,246,1)"></view>
+  <service-physicianTeam></service-physicianTeam>
 </view>
