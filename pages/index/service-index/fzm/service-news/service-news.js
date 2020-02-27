@@ -33,25 +33,25 @@ Component({
         title: "带你了解主动脉疾病的杂交手术治疗",
         content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
         tags: ["典型病例", "专家推荐"],
-        image: "/images/chat/personBacImg.png",
+        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
         id: "0"
       }, {
         title: "带你了解主动脉疾病的杂交手术治疗",
         content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
         tags: ["典型病例", "专家推荐"],
-        image: "/images/chat/personBacImg.png",
+          image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
         id: "1"
       }, {
         title: "带你了解主动脉疾病的杂交手术治疗",
         content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
         tags: ["典型病例", "专家推荐"],
-        image: "/images/chat/personBacImg.png",
+          image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
         id: "2"
       }, {
         title: "带你了解主动脉疾病的杂交手术治疗",
         content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
         tags: ["典型病例", "专家推荐"],
-        image: "/images/chat/personBacImg.png",
+          image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
         id: "3"
       }]
     }

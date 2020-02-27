@@ -28,15 +28,15 @@
     <view style="height:2rpx;background:rgba(0,0,0,0.1);margin-top:16rpx"></view>
     <view class="specialist-bottom-box">
       <view class="specialist-bottom-left">
-        <image src="/images/chat/personBacImg.png"></image>
+        <image src="/images/home/home_service_love.png"></image>
         <text>好评率：</text>
-        <text style="color:rgba(0,0,0,0.85)">99</text>
+        <text style="color:rgba(0,0,0,0.85)">99%</text>
       </view>
       <view style="width:2rpx;height:48rpx;background:rgba(0,0,0,0.1)"></view>
       <view class="specialist-bottom-left">
-        <image src="/images/chat/personBacImg.png"></image>
-        <text>好评率：</text>
-        <text style="color:rgba(0,0,0,0.85)">99</text>
+        <image src="/images/home/home_service_num.png"></image>
+        <text>服务人数：</text>
+        <text style="color:rgba(0,0,0,0.85)">99人</text>
       </view>
     </view>
   </view>
