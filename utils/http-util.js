@@ -311,4 +311,6 @@ module.exports = {
   endVideoInquiry: function endVideoInquiry(parmas) {
     return request('api/rp/inquiry/end', true, 'post', parmas);
   },
+
+  
 }

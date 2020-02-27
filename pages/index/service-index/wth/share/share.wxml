@@ -1,0 +1,7 @@
+<!--pages/index/service-index/wth/share/share.wxml-->
+<view>
+  <doc-notes title="患友分享" moreBtnUrl="{{moreBtnUrl}}" 
+  moreBtnName="查看更多案例" paersonInfo="{{paersonInfo}}"
+  contentText="{{contentText}}" bind:toDetail="toDetail"
+  ></doc-notes>
+</view>
