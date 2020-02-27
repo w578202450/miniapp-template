@@ -7,7 +7,7 @@
   <view class="tip" style="height:20rpx;background:rgba(246,246,246,1)"></view>
 </block>
 <view class="header">
-  <image src="../../../images/profile/profile_company_seal.png"></image>
+  <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/profile/profile_company_seal.png"></image>
   <view class="header-content">
   <text class="header-title">桃子互联网医院</text>
     <text class="header-title" style="margin-top:32rpx">电子处方笺</text>
@@ -55,14 +55,14 @@
     <text class="bottom-doctor-name" style="width: 100%">开方医生：{{rpData.doctorName}}</text>
     <view class="bottom-seal-box">
       <text class="bottom-doctor-sealname">{{rpData.doctorName}}</text>
-      <image src="../../../images/profile/profile_doctor_seal.png"></image>
+      <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/profile/profile_doctor_seal.png"></image>
     </view>
   </view>
   <view class="bottom-doctor-right">
     <text class="bottom-doctor-name" style="width: 100%">审方药师：{{rpData.pharmacistName}}</text>
     <view class="bottom-seal-box" hidden="{{rpData.pharmacistName ? false : true}}">
       <text class="bottom-doctor-sealname">{{rpData.pharmacistName}}</text>
-      <image src="../../../images/profile/profile_doctor_seal.png"></image>
+      <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/profile/profile_doctor_seal.png"></image>
     </view>
   </view>
 </view>

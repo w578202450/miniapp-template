@@ -1,6 +1,6 @@
 <view class="page">
   <view class="header-containner">
-    <image class="header-cover" src="../../images/profile/profile_navigation_bg.png"></image>
+    <image class="header-cover" src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/profile/profile_navigation_bg.png"></image>
     <view class="userinfo-body">
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
       <view>

@@ -37,7 +37,7 @@ Component({
    */
   data: {
     isHiddenDialog: true, // 是否隐藏
-    content_image: "/images/home/loginImg.png", // 宣传图片
+    content_image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/loginImg.png", // 宣传图片
     nextPageName: "" // 登录后需要跳转的上一级页面的名字
   },
 

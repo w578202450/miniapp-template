@@ -16,10 +16,10 @@ Component({
    * 组件的初始数据
    */
   data: {
-    levelIconSrc: "/images/home/levelIcon.png", // 星级图标
+    levelIconSrc: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/levelIcon.png", // 星级图标
     unfoldIconSrc: "/images/home/unfoldIcon.png", // 展开图标
     packUpIconSrc: "/images/home/packUpIcon.png", // 收起图标
-    materialImgBac: "/images/home/imgNone.png", // 评论内容中的背景图片
+    materialImgBac: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png", // 评论内容中的背景图片
     videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
     isShowAllContent: false, // 是否展开显示所有评价内容
     unfoldTxt: "展开", // 展开、收起字样
@@ -33,9 +33,9 @@ Component({
     let that = this;
     // if (that.data.evaluateAllData) {
     //   that.setData({
-    //     evaluateData: alldData.evaluateData,
-    //     illnessSumList: alldData.illnessSumList,
-    //     moreBtnUrl: alldData.moreBtnUrl
+    //     evaluateData: that.data.evaluateAllData.evaluateData,
+    //     illnessSumList: that.data.evaluateAllData.illnessSumList,
+    //     moreBtnUrl: that.data.evaluateAllData.moreBtnUrl
     //   });
     // }
 
@@ -153,7 +153,39 @@ Component({
 
     /**操作：点击某张图片或者某个视频 */
     toDetailFun: function(e) {
+      let that = this;
       console.log(e);
+      let index = e.currentTarget.dataset.index; // 点击的评论（即item）所在下标
+      let indexs = e.currentTarget.dataset.indexs; // 点击的图片所在评论的materialData中的（即items）下标
+      let materialItem = { ...e.currentTarget.dataset.material }; // 点击的items
+      // materialType： 0图片 1视频
+      if (materialItem.materialType == 0) {
+        let allMaterial = that.data.evaluateData[index].materialData; // 临时存储点击的评论的所有图片、视频素材
+        let previewImgArr = [];  // 要展示的图片集合
+        allMaterial.forEach((item) => {
+          if (item.materialType == 0) {
+            previewImgArr.push(item.materialUrl);
+          }
+        });
+        let currentIndex = 0;
+        previewImgArr.forEach((item, index) =>{
+          if (materialItem.keyID == item.keyID) {
+            currentIndex = index;
+          }
+        });
+        wx.previewImage({
+          current: currentIndex, // 当前图片地址 必须是---线上---的图片
+          urls: previewImgArr, // 所有要预览的图片的地址集合 数组形式
+          success: function(res) {},
+          fail: function(res) {},
+          complete: function(res) {}
+        });
+      } else if (materialItem.materialType == 1) {
+        console.log("点击的视频，需要跳转到视频播放页");
+        // wx.navigateTo({
+        //   url: ''
+        // });
+      }
     }
   }
 })

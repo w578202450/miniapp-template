@@ -1,6 +1,6 @@
 <view class="page">
   <view class="header">
-    <image class="header-bgImage" src="../../../images/public/public_order_bg.png"></image>
+    <image class="header-bgImage" src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_order_bg.png"></image>
     <tmcnavbar titleText="订单详情"></tmcnavbar>
     <view class="paySuccess" style="margin-top: 50rpx">
       <!-- 已支付 -->

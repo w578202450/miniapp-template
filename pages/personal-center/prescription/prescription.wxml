@@ -1,6 +1,6 @@
 
 <block wx:if="{{noData}}">
-  <tmcTipsView icon="/images/public/public_no_prescription.png" title="暂无处方" message="您暂无处方信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
+  <tmcTipsView icon="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_no_prescription.png" title="暂无处方" message="您暂无处方信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>
 <block wx:elif="{{noNetwork}}">
   <tmcTipsView icon="/images/public/public_no_internet.png" title="网络连接异常" message="网络不太好，刷新一下吧～" buttonTitle="刷新" bind:buttonOption="noNetworkOption"></tmcTipsView>
