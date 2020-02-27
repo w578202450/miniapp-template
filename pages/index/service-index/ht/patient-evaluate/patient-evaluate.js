@@ -38,10 +38,10 @@ Component({
     ] // 患者评价的内容
   },
 
-  attached: {
-
+  attached: function() {
+    this.getEvaluateDataFun();
   },
-  
+
   /**
    * 组件的方法列表
    */
@@ -52,9 +52,10 @@ Component({
       let params = {
         doctorID: that.data.doctorID
       }
-      HTTP.getEvaluateData(params).then(res => {
+      console.log(params);
+      // HTTP.getEvaluateData(params).then(res => {
 
-      });
+      // });
     },
 
     /**操作：展开、收起评论内容 */
