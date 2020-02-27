@@ -52,7 +52,7 @@
         <view class="evaluateContent">{{isShowAllContent ? item.content : comTools.subStrTxt(item.content, 48)}}</view>
         <!-- 评价内容的图片或者视频 -->
         <view wx:if="{{isShowAllContent}}" class="materialDataBox">
-          <view class="materialItemView" wx:for="{{item.materialData}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}" data-indexs="{{indexs}}">
+          <view class="materialItemView {{comTools.isDivisible(indexs+1, 3) ? '': 'materialItemViewMargin'}}" wx:for="{{item.materialData}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}" data-indexs="{{indexs}}">
             <image class="materialImg" src="{{items.materialUrl}}" mode="widthFix" style="background: url({{materialImgBac}});background-size: contain;">
             </image>
             <image wx:if="{{items.materialType == 1}}" class="videoIconImg" src="{{videoIconSrc}}"/>

@@ -117,7 +117,7 @@
 .materialDataBox {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -126,9 +126,12 @@
   width: 223rpx;
   height: 223rpx;
   margin-top: 20rpx;
-  background-color: #999;
   overflow: hidden;
   position: relative;
+}
+
+.materialItemViewMargin {
+  margin-right: 20rpx;
 }
 
 .materialImg {

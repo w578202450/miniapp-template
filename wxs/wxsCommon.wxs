@@ -66,7 +66,6 @@ var formateDate = function (val) {
 
 // 过滤第一个数能否被第二个数整除
 var isDivisible = function (dividend, divisor) {
-  console.log(dividend % divisor === 0)
   return dividend % divisor === 0;
 }
 
