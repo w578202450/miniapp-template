@@ -19,6 +19,7 @@ Component({
     levelIconSrc: "/images/home/levelIcon.png", // 星级图标
     unfoldIconSrc: "/images/home/unfoldIcon.png", // 展开图标
     packUpIconSrc: "/images/home/packUpIcon.png", // 收起图标
+    materialImgBac: "/images/home/imgNone.png", // 评论内容中的背景图片
     isShowAllContent: false, // 是否展开显示所有评价内容
     unfoldTxt: "展开", // 展开、收起字样
     illnessSumList: [], // 患者评价的统计星级数据
@@ -48,7 +49,7 @@ Component({
     //     patientName: "张三三",
     //     content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
     //     addTime: "2020-02-20 00:15:00"
-    //   }], // 文字
+    //   }]; // 文字
 
     let evaData = [{
       keyID: "11",
@@ -96,7 +97,7 @@ Component({
         materialType: 0,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }]
-    }] // 图文
+    }]; // 图文
 
     // let evaData = [{
     //   keyID: "11",
@@ -112,7 +113,7 @@ Component({
     //     materialType: 0,
     //     materialUrl: ""
     //   }]
-    // }] // 文字、视频
+    // }]; // 文字、视频
 
     let illList = [{
       keyID: "1",
@@ -163,6 +164,11 @@ Component({
           unfoldTxt: "收起"
         });
       }
+    },
+
+    /**操作：点击某张图片或者某个视频 */
+    toDetailFun: function(e) {
+      console.log(e);
     }
   }
 })

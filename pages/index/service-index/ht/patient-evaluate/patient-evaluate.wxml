@@ -19,14 +19,14 @@
             <text class="satisfaction">100%满意</text>
           </view>
         </view>
-        <view class="illnessSumList">
-          <view class="illnessView" wx:for="{{illnessData}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}} {{item.num}}</view>
+        <view class="illnessList">
+          <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}} {{item.num}}</view>
         </view>
       </view>
       <!-- 灰色间隔区 -->
       <view class="intervalView"></view>
-      <!-- 评论内容区 -->
-      <view class="evaluateBox" wx:for="{{evaluateData}}" wx:key="index" data-id="{{item.keyID}}">
+      <!-- 单条评价区 -->
+      <view class="evaluateBox" wx:for="{{evaluateData}}" wx:key="index" wx:for-index='index' wx:for-item='item' data-id="{{item.keyID}}">
         <view class="flexRowBetweenCenter">
           <view class="flexRowStartCenter">
             <text class="diseaseTitle">所患疾病：</text>
@@ -48,8 +48,16 @@
             <text class="curativeEffectTxt">{{item.doctorAttitudeName}}</text>
           </view>
         </view>
-        <!-- 评价内容 -->
+        <!-- 评价内容的文字 -->
         <view class="evaluateContent">{{isShowAllContent ? item.content : comTools.subStrTxt(item.content, 48)}}</view>
+        <!-- 评价内容的图片或者视频 -->
+        <view class="materialDataBox">
+          <view class="materialItemView" wx:for="{{item.materialData}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}">
+            <image class="materialImg" src="{{items.materialUrl}}" mode="widthFix" style="background: url({{materialImgBac}});background-size: contain;">
+              <image wx:if="{{item.materialType == 1}}" class="videoIconImg" src="{{videoIconSrc}}"/>
+            </image>
+          </view>
+        </view>
         <!-- 患者个人信息 -->
         <view class="patientInfoBox flexRowBetweenCenter">
           <view class="flexRowStartCenter">
