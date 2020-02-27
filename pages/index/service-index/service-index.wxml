@@ -1,5 +1,5 @@
 <!--pages/index/service-index/service-index.wxml-->
 <view>
   <!-- 患者评价 -->
-  <patient-evaluate id="patientEvaluateModule" doctorID="{{doctorID}}" bind:unfold="unfoldContentFun"/>
+  <patient-evaluate id="patientEvaluateModule" evaluateAllData="{{evaluateAllData}}"/>
 </view>

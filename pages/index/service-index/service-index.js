@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    doctorID: "" // 问诊医生的ID
+    evaluateAllData: {} // 患者评价相关的所有数据
   },
 
   /**
@@ -24,7 +24,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.patientEvaluateModule = this.selectComponent("#patientEvaluateModule"); //获得患者评价组件
+
   },
 
   /**
@@ -67,10 +67,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  /**操作：展开、收起患者评价 */
-  unfoldContentFun: function() {
-    this.patientEvaluateModule.unfoldContentFun();
   }
 })
