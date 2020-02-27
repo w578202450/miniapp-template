@@ -1,2 +1,72 @@
 <!--pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.wxml-->
-<text>pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.wxml</text>
+<view>
+  <!-- 引入wxs脚本 -->
+  <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
+  <view class="evaluateContentBox">
+    <!-- 灰色间隔区 -->
+    <view class="intervalView"></view>
+    <!-- 星级、标签区 -->
+    <view class="levelBox">
+      <view class="flexRowBetweenCenter">
+        <view class="flexRowStartCenter">
+          <text class="effect">疗效：</text>
+          <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
+          <text class="satisfaction">100%满意</text>
+        </view>
+        <view class="verticalLine"></view>
+        <view class="flexRowStartCenter">
+          <text class="effect">服务：</text>
+          <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
+          <text class="satisfaction">100%满意</text>
+        </view>
+      </view>
+      <view class="illnessList">
+        <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}} {{item.num}}</view>
+      </view>
+    </view>
+    <view wx:for="{{evaluateListData}}" wx:key="index" wx:for-index='index' wx:for-item='item' data-id="{{item.keyID}}">
+      <!-- 灰色间隔区 -->
+      <view class="intervalView"></view>
+      <!-- 单条评价区 -->
+      <view class="evaluateBox">
+        <view class="flexRowBetweenCenter">
+          <view class="flexRowStartCenter">
+            <text class="diseaseTitle">所患疾病：</text>
+            <text class="diseaseTxt">{{item.disease}}</text>
+          </view>
+        </view>
+        <view class="flexRowStartCenter">
+          <view class="flexRowStartCenter">
+            <text class="curativeEffect">患者主观疗效：</text>
+            <text class="curativeEffectTxt">{{item.curativeEffectName}}</text>
+          </view>
+          <view class="verticalLine marginLeftRightLine"></view>
+          <view class="flexRowStartCenter">
+            <text class="curativeEffect">服务：</text>
+            <text class="curativeEffectTxt">{{item.doctorAttitudeName}}</text>
+          </view>
+        </view>
+        <!-- 评价内容的文字 -->
+        <view class="evaluateContent">{{item.content}}</view>
+        <!-- 评价内容的图片或者视频 -->
+        <view class="materialDataBox">
+          <view class="materialItemView {{comTools.isDivisible(indexs+1, 3) ? '': 'materialItemViewMargin'}}" wx:for="{{item.materialData}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}"
+            data-indexs="{{indexs}}">
+            <image class="materialImg" src="{{items.materialUrl}}" mode="widthFix" style="background: url({{materialImgBac}});background-size: contain;">
+            </image>
+            <image wx:if="{{items.materialType == 1}}" class="videoIconImg" src="{{videoIconSrc}}" />
+          </view>
+        </view>
+        <!-- 患者信息条 -->
+        <view class="patientInfoBox flexRowBetweenCenter">
+          <view class="flexRowStartCenter">
+            <image class="patientFace" src="{{item.patientFace}}" mode="widthFix" />
+            <text class="patientNameTxt">患者： {{comTools.subName(item.patientName)}}</text>
+          </view>
+          <view class="addTime">{{comTools.formateDate(item.addTime)}}</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>

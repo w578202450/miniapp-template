@@ -16,7 +16,7 @@ Page({
    */
   onLoad: function (options) {
     let that = this;
-    let sendOptions = { ...options };
+    // let sendOptions = { ...options };
     // commonFun.startLoginFun(sendOptions); // 尝试自动登录
   },
 

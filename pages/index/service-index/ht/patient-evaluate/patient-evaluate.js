@@ -25,23 +25,26 @@ Component({
     unfoldTxt: "展开", // 展开、收起字样
     illnessSumList: [], // 患者评价的统计星级数据
     evaluateData: [], // 患者评价的内容
-    httpParams: {}, // 查看更多数据的请求参数
-    detailH5Url: "" // 查看详情的h5链接
+    httpParams: {} // 查看更多数据的请求参数
   },
 
-/**attached：节点树完成，可以用setData渲染节点，但无法操作节点 */
+  /**attached：节点树完成，可以用setData渲染节点，但无法操作节点 */
   attached: function() {
-    let that = this;
+    // let that = this;
     // if (that.data.evaluateAllData) {
+    //   let httpParamsData = {
+    //     nextPage: "/pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
+    //     doctorID: that.data.evaluateAllData.doctorID
+    //   }
     //   that.setData({
     //     evaluateData: that.data.evaluateAllData.evaluateData[0] ? that.data.evaluateAllData.evaluateData[0]: [],
     //     illnessSumList: that.data.evaluateAllData.illnessSumList ? that.data.evaluateAllData.illnessSumList: [],
-    //     moreBtnUrl: that.data.evaluateAllData.moreBtnUrl ? that.data.evaluateAllData.moreBtnUrl: ""
+    //     httpParams: httpParamsData
     //   });
     // }
 
-
-   // 拟定假数据
+    let that = this;
+    // 拟定假数据
     let evaData = [{
       keyID: "11",
       disease: "类风湿关节炎",
@@ -91,33 +94,38 @@ Component({
     }]; // 图文视频
 
     let illList = [{
-      keyID: "1",
-      illnessName: "风湿骨病",
-      num: 60
-    },
-    {
-      keyID: "2",
-      illnessName: "类风湿关节炎",
-      num: 40
-    },
-    {
-      keyID: "3",
-      illnessName: "肌肉萎缩",
-      num: 36
-    },
-    {
-      keyID: "4",
-      illnessName: "痛风",
-      num: 24
-    },
-    {
-      keyID: "5",
-      illnessName: "关节肿痛",
-      num: 60
-    }];
+        keyID: "1",
+        illnessName: "风湿骨病",
+        num: 60
+      },
+      {
+        keyID: "2",
+        illnessName: "类风湿关节炎",
+        num: 40
+      },
+      {
+        keyID: "3",
+        illnessName: "肌肉萎缩",
+        num: 36
+      },
+      {
+        keyID: "4",
+        illnessName: "痛风",
+        num: 24
+      },
+      {
+        keyID: "5",
+        illnessName: "关节肿痛",
+        num: 60
+      }
+    ];
     this.setData({
       evaluateData: evaData,
-      illnessSumList: illList
+      illnessSumList: illList,
+      httpParams: {
+        nextPage: "/pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
+        doctorID: "1000"
+      }
     });
   },
 
@@ -147,24 +155,19 @@ Component({
       console.log(e);
       let index = e.currentTarget.dataset.index; // 点击的评论（即item）所在下标
       let indexs = e.currentTarget.dataset.indexs; // 点击的图片所在评论的materialData中的（即items）下标
-      let materialItem = { ...e.currentTarget.dataset.material }; // 点击的items
+      let materialItem = { ...e.currentTarget.dataset.material
+      }; // 点击的items
       // materialType： 0图片 1视频
       if (materialItem.materialType == 0) {
         let allMaterial = that.data.evaluateData[index].materialData; // 临时存储点击的评论的所有图片、视频素材
-        let previewImgArr = [];  // 要展示的图片集合
+        let previewImgArr = []; // 要展示的图片集合
         allMaterial.forEach((item) => {
           if (item.materialType == 0) {
             previewImgArr.push(item.materialUrl);
           }
         });
-        let currentIndex = 0;
-        previewImgArr.forEach((item, index) =>{
-          if (materialItem.keyID == item.keyID) {
-            currentIndex = index;
-          }
-        });
         wx.previewImage({
-          current: currentIndex, // 当前图片地址 必须是---线上---的图片
+          current: materialItem.materialUrl, // 当前图片地址 必须是---线上---的图片
           urls: previewImgArr, // 所有要预览的图片的地址集合 数组形式
           success: function(res) {},
           fail: function(res) {},

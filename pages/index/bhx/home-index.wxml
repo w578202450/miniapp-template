@@ -60,7 +60,7 @@
   </view>
 
   <!-- 立即进入专家门诊 -->
-  <view class="enter-inquiry">
+  <view class="enter-inquiry" bindtap="toServiceIndexFun">
     <text class="enter-name">立即进入专家门诊</text>
     <view class="black-rectangle">
     </view>
