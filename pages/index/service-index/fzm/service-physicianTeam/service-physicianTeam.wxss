@@ -1,0 +1,46 @@
+/* pages/index/service-index/fzm/servie-physicianTeam/service-physicianTeam.wxss */
+.content {
+  background: rgba(255, 255, 255, 1);
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-team-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.doctor-team-box image {
+  height: 84rpx;
+  width: 84rpx;
+}
+
+.doctorinfo-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 30rpx;
+}
+
+.doctorinfo-top-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.title-name {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
+.title-other {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
+}

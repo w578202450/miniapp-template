@@ -1,0 +1,16 @@
+<view style="{{pageStyle}}">
+  <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
+  <view class="content">
+    <view class="doctor-team-box">
+      <image src="/images/chat/personBacImg.png"></image>
+      <view class="doctorinfo-box">
+        <view class="doctorinfo-top-box">
+          <text class="title-name" style="font-size:32rpx">王淼淼</text>
+          <text class="title-other" style="margin-left:16rpx;font-size:28rpx">医师助理</text>
+        </view>
+        <text class="title-other" style="margin-top:20rpx">候丽萍风湿骨病中医医院 风湿科</text>
+      </view>
+    </view>
+    <service-tabs list="{{goodAts}}" pageStyle="margin-left:114rpx;margin-top:24rpx"></service-tabs>
+  </view>
+</view>

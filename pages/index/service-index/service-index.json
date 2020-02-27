@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate"
+    "service-specialistInfo": "/pages/index/service-index/fzm/service-specialistInfo/service-specialistInfo",
+    "service-physicianTeam": "/pages/index/service-index/fzm/service-physicianTeam/service-physicianTeam",
+    "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate",
+    "service-news": "/pages/index/service-index/fzm/service-news/service-news"
   },
-  "navigationBarTitleText": "专家门诊"
+  "navigationStyle": "custom"
 }
