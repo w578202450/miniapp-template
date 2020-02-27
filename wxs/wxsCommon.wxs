@@ -1,28 +1,72 @@
 /*配置WXML中可直接使用的过滤方法*/
-// 过滤素材消息的标题，大于32个字符的，加以省略
-var subStrTitle = function (val) {
+
+// 过滤超过字数的加以省略，传递字符窜val，以及限制的字数num
+var subStrTxt = function(val, num) {
   if (val.length == 0 || val == undefined) {
     return;
   }
-  if (val.length > 33) {
-    return val.substring(0, 32) + "...";
+  if (val.length > num) {
+    return val.substring(0, num - 1) + "...";
   } else {
     return val;
   }
 }
 
-// 过滤素材消息的描述，大于35个字符的，加以省略
-var subStr = function (val) {
+// 过滤人的名字为 张*  王**
+var subName = function(val) {
+  var value = val;
+  if (value.length == 0 || value == undefined) {
+    return;
+  } else if (value.length == 1) {
+    return value;
+  } else if (value.length == 2){
+    return value.substring(0, 1) + "*";
+  } else if (value.length == 3) {
+    return value.substring(0, 1) + "**";
+  } else if (value.length >= 4) {
+    return value.substring(0, 1) + "***";
+  }
+}
+
+// 过滤时间为 年-月-日 时:分:秒
+var formateDateTime = function(val) {
   if (val.length == 0 || val == undefined) {
     return;
   }
-  if (val.length > 38) {
-    return val.substring(0, 37) + "...";
-  } else {
-    return val;
-  }
+  var dateTime = getDate(val);
+  var y = dateTime.getFullYear();
+  var m = dateTime.getMonth() + 1;
+  m = m < 10 ? ("0" + m) : m;
+  var d = dateTime.getDate();
+  d = d < 10 ? ("0" + d) : d;
+  var h = dateTime.getHours();
+  h = h < 10 ? ("0" + h) : h;
+  var minute = dateTime.getMinutes();
+  minute = minute < 10 ? ("0" + minute) : minute;
+  var seconds = dateTime.getSeconds();
+  seconds = seconds < 10 ? ("0" + seconds) : seconds;
+  var dateTimes = y + "-" + m + "-" + d + " " + h + ":" + minute + ":" + seconds;
+  return dateTimes;
 }
+
+// 过滤时间为 年-月-日
+var formateDate = function (val) {
+  if (val.length == 0 || val == undefined) {
+    return;
+  }
+  var date = getDate(val);
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? ("0" + m) : m;
+  var d = date.getDate();
+  d = d < 10 ? ("0" + d) : d;
+  var dates = y + "-" + m + "-" + d;
+  return dates;
+}
+
 module.exports = {
-  subStrTitle: subStrTitle,
-  subStr: subStr
+  subStrTxt: subStrTxt,
+  subName: subName,
+  formateDateTime: formateDateTime,
+  formateDate: formateDate
 };

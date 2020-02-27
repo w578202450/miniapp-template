@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "service-specialistInfo": "../fzm/service-specialistInfo/service-specialistInfo",
-    "service-physicianTeam": "../fzm/service-physicianTeam/service-physicianTeam"
+    "service-physicianTeam": "../fzm/service-physicianTeam/service-physicianTeam",
+    "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate"
   },
   "navigationStyle": "custom"
 }

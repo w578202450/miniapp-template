@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    evaluateAllData: {} // 患者评价相关的所有数据
   },
 
   /**
@@ -17,7 +17,7 @@ Page({
   onLoad: function (options) {
     let that = this;
     let sendOptions = { ...options };
-    commonFun.startLoginFun(sendOptions); // 尝试自动登录
+    // commonFun.startLoginFun(sendOptions); // 尝试自动登录
   },
 
   /**

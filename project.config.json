@@ -60,8 +60,15 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "医生手记",
-					"pathName": "components/docNotes/docNotes",
+					"name": "患者评价",
+					"pathName": "pages/index/service-index/ht/patient-evaluate/patient-evaluate",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/service-index/ht/module-title/module-title",
+					"pathName": "pages/index/service-index/ht/module-title/module-title",
 					"query": "",
 					"scene": null
 				},

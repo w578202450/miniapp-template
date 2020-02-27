@@ -1,0 +1,43 @@
+/* pages/index/service-index/ht/module-title/module-title.wxss */
+
+.module-title-box {
+  width: 100%;
+  background-color:#fff; 
+}
+
+.border-botttom {
+  border-bottom: 1rpx solid #dbdee3;
+}
+
+.border-top {
+  border-top: 1rpx solid #dbdee3;
+}
+
+.module-title-view {
+  padding: 20rpx 20rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.module-title-icon {
+  height: 35rpx;
+  width: 6rpx;
+  background: linear-gradient(#EDFBFF, #0091FF);
+  margin-right: 6rpx;
+}
+
+.module-title-txt {
+  margin-right: 10rpx;
+}
+
+.module-title-num {
+  color: #555658;
+}
+
+.moreBtnView {
+  width: 100%;
+  text-align: center;
+  color: #438BEF;
+  font-size: 30rpx;
+}
