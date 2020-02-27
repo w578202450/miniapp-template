@@ -25,7 +25,7 @@
   <view class="hospital-dean">
     <view class="specialist-box">
       <view class="specialist-header-box">
-        <image src="/images/chat/docBacImg.png"></image>
+        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
         <view class="specialist-header-middle-box">
           <text class="title-name" style="font-size:32rpx">候丽萍</text>
           <text class="title-other" style="margin-top:20rpx">主任医师 山西名中医 博士生导师</text>
@@ -42,7 +42,7 @@
     <module-title title="医院介绍" isHaveMoreBtn="{{false}}"></module-title>
     <view class="module-item-box">
       <view class="specialist-header-box">
-        <image src="/images/chat/docBacImg.png"></image>
+        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
         <view class="specialist-header-middle-box">
           <text class="title-name" style="font-size:32rpx">候丽萍风湿骨病中医医院</text>
           <text class="title-other" style="margin-top:30rpx">中医治风湿骨病</text>
