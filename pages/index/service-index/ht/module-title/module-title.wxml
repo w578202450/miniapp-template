@@ -1,15 +1,18 @@
 <!--pages/index/service-index/ht/module-title/module-title.wxml-->
 <view class="module-title-box">
   <!-- 标题栏 -->
-  <view class="module-title-view border-botttom">
-    <view class="module-title-icon"></view>
-    <text class="module-title-txt" style="font-size:{{fontSize}};color:{{color}};font-weight:{{fontWeight}}">{{title}}</text>
-    <text wx:if="{{isHaveRemark}}" class="module-title-num">{{remarkInfo}}</text>
+  <view class="border-botttom">
+    <view class="module-title-view">
+      <view class="module-title-icon"></view>
+      <text class="module-title-txt" style="font-size:{{fontSize}};color:{{color}};font-weight:{{fontWeight}}">{{title}}</text>
+      <text wx:if="{{isHaveRemark}}" class="module-title-num">{{remarkInfo}}</text>
+    </view>
+    <view wx:if="{{isHaveLittleTitle}}" class="littleTitle">{{littleTitle}}</view>
   </view>
   <!-- 内容插槽（内容样式自己设置） -->
   <slot name="content-body"></slot>
   <!-- 查看更多 -->
-  <view wx:if="{{isHaveMoreBtn}}" class="module-title-view border-top" bindtap="toH5PageFun">
+  <view wx:if="{{isHaveMoreBtn}}" class="module-title-view border-top" bindtap="toListPageFun">
     <text class="moreBtnView">{{moreBtnName}}</text>
   </view>
 </view>

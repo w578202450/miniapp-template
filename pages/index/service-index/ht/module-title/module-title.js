@@ -48,8 +48,25 @@ Component({
       type: String,
       value: "查看更多"
     },
-    // 查看更多的h5链接
-    moreBtnUrl: {
+    // 查看更多请求列表数据所需要的参数
+    httpParams: {
+      type: Object,
+      value: {
+        nextPage: "" // 要跳转的页面的路径
+      }
+    },
+    // 查看详情的H5链接
+    detailH5Url: {
+      type: String,
+      value: ""
+    },
+    // 时候标题下有小标题
+    isHaveLittleTitle: {
+      type: Boolean,
+      value: false
+    },
+    // 小标题内容
+    littleTitle: {
       type: String,
       value: ""
     }
@@ -66,19 +83,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    toH5PageFun: function() {
+    /**操作：查看更多 */
+    toListPageFun: function() {
       let that = this;
-      if (!that.data.moreBtnUrl) {
+      if (!that.data.httpParams) {
         wx.showToast({
-          title: '无链接地址，无法查看更多',
+          title: '未传递参数，无法查看更多',
           icon: "none",
           duration: 3000
         });
         return
       }
-      console.log("查看更多的h5链接地址：" + that.data.moreBtnUrl);
+      console.log("传递的参数：" + that.data.httpParams);
       // wx.navigateTo({
-      //   url: '',
+      //   url: that.data.httpParams.nextPage,
       // });
     }
   }

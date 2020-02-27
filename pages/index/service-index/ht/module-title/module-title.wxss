@@ -6,15 +6,16 @@
 }
 
 .border-botttom {
+  padding: 20rpx 20rpx;
   border-bottom: 1rpx solid #dbdee3;
 }
 
 .border-top {
   border-top: 1rpx solid #dbdee3;
+  padding: 20rpx 20rpx;
 }
 
 .module-title-view {
-  padding: 20rpx 20rpx;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -32,6 +33,13 @@
 }
 
 .module-title-num {
+  color: #555658;
+}
+
+.littleTitle {
+  padding-left: 12rpx;
+  margin-top: 10rpx;
+  font-size: 28rpx;
   color: #555658;
 }
 
