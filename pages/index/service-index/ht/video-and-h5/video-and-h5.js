@@ -1,25 +1,60 @@
 // pages/index/service-index/ht/video-and-h5/video-and-h5.js
+const commonFun = require('../../../../../utils/common.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    materialInfo: {
+      materialType: -1, // 0:图文 1:视频
+      title: "", // 标题
+      videoMaterialSrc: "", // 图文、视频文件网络地址路径
+      posterSrc: "" // 视频封面图路径
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let that = this;
+    let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
+    if (acceptOptions.materialType || acceptOptions.materialType == 0) {
+      that.setData({
+        materialInfo: {
+          title: acceptOptions.title,
+          videoMaterialSrc: acceptOptions.url,
+          posterSrc: acceptOptions.logoUrl,
+          materialType: acceptOptions.materialType
+        }
+      });
+      if (acceptOptions.materialType == 0) {
+        // 图文素材
+      } else if (acceptOptions.materialType == 1) {
+        // 视频素材
+        if (!acceptOptions.url) {
+          wx.showToast({
+            title: "视频素材链接地址异常，无法正常播放",
+            icon: "warn",
+            duration: 3000
+          });
+        }
+      }
+    } else {
+      wx.showToast({
+        title: "素材数据异常，无法正常展示",
+        icon: "warn",
+        duration: 3000
+      });
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.videoContext = wx.createVideoContext("myVideos");
   },
 
   /**
@@ -61,6 +96,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    return commonFun.onShareAppMessageFun(); // 调用公共的分享配置
+  },
 
+  errorFun: function (e) {
+    console.log("视频播放错误" + JSON.stringify(e));
   }
 })

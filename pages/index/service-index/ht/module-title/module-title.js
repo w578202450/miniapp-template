@@ -55,11 +55,6 @@ Component({
         nextPage: "" // 要跳转的页面的路径
       }
     },
-    // 查看详情的H5链接
-    detailH5Url: {
-      type: String,
-      value: ""
-    },
     // 是否标题下有小标题
     isHaveLittleTitle: {
       type: Boolean,

@@ -12,8 +12,7 @@ Page({
     videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
     illnessSumList: [], // 患者评价的统计星级数据
     evaluateListData: [], // 患者评价的内容
-    httpParams: {}, // 查看更多数据的请求参数
-    detailH5Url: "" // 查看详情的h5链接
+    httpParams: {} // 查看更多数据的请求参数
   },
 
   /**

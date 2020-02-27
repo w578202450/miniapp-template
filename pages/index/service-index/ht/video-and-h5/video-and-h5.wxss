@@ -1,1 +1,8 @@
 /* pages/index/service-index/ht/video-and-h5/video-and-h5.wxss */
+.videoPlayBox {
+  width: 100%;
+}
+.videoLabel {
+  width:750rpx;
+  height: 464rpx;
+}
