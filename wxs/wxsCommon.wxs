@@ -12,11 +12,19 @@ var subStrTxt = function(val, num) {
   }
 }
 
+// 过滤人的名字为 张*  王**
 var subName = function(val) {
-  if (val.length == 0 || val == undefined) {
+  var value = val;
+  if (value.length == 0 || value == undefined) {
     return;
-  } else {
-    return val.substring(0, 1) + "**";
+  } else if (value.length == 1) {
+    return value;
+  } else if (value.length == 2){
+    return value.substring(0, 1) + "*";
+  } else if (value.length == 3) {
+    return value.substring(0, 1) + "**";
+  } else if (value.length >= 4) {
+    return value.substring(0, 1) + "***";
   }
 }
 

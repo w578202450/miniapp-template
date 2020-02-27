@@ -4,7 +4,7 @@
   <view class="module-title-view border-botttom">
     <view class="module-title-icon"></view>
     <text class="module-title-txt" style="font-size:{{fontSize}};color:{{color}};font-weight:{{fontWeight}}">{{title}}</text>
-    <text wx:if="{{isHaveNum}}" class="module-title-num">（{{num}}）</text>
+    <text wx:if="{{isHaveRemark}}" class="module-title-num">{{remarkInfo}}</text>
   </view>
   <!-- 内容插槽（内容样式自己设置） -->
   <slot name="content-body"></slot>

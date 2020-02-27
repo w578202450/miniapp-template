@@ -404,13 +404,13 @@ Page({
   /*查询患者的多方对话 */
   getPatientMultiTalk: function() {
     let that = this;
-    let prams = {
+    let params = {
       orgID: that.data.userInfo.orgID,
       patientID: that.data.userInfo.keyID,
       doctorStaffID: that.data.userInfo.doctorStaffID,
       assistantStaffID: that.data.userInfo.assistantStaffID
     };
-    HTTP.getPatientMultiTalk(prams).then(res => {
+    HTTP.getPatientMultiTalk(params).then(res => {
       let resData = res.data;
       that.setData({
         talkInfo: {
@@ -433,7 +433,7 @@ Page({
   /*创建问诊 */
   createInquiry: function() {
     let that = this;
-    let prams = {
+    let params = {
       orgID: that.data.userInfo.orgID,
       patientID: that.data.userInfo.keyID,
       doctorStaffID: that.data.userInfo.doctorStaffID,
@@ -442,7 +442,7 @@ Page({
       assistantName: that.data.talkInfo.assistantInfo.doctorName,
       talkID: that.data.talkInfo.multiTalkInfo.keyID
     };
-    HTTP.createInquiry(prams).then(res => {
+    HTTP.createInquiry(params).then(res => {
       that.setData({
         inquiryInfo: res.data
       });
@@ -463,7 +463,7 @@ Page({
   // 操作：结束问诊后，患者主动发消息时，创建问诊
   createInquirySelf: function(type) {
     let that = this;
-    let prams = {
+    let params = {
       orgID: that.data.userInfo.orgID,
       patientID: that.data.userInfo.keyID,
       doctorStaffID: that.data.userInfo.doctorStaffID,
@@ -472,7 +472,7 @@ Page({
       assistantName: that.data.talkInfo.assistantInfo.doctorName,
       talkID: that.data.talkInfo.multiTalkInfo.keyID
     };
-    HTTP.createInquiry(prams).then(res => {
+    HTTP.createInquiry(params).then(res => {
       that.setData({
         inquiryInfo: res.data
       });

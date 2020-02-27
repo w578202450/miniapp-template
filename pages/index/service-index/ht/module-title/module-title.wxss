@@ -21,14 +21,14 @@
 }
 
 .module-title-icon {
-  height: 40rpx;
-  width: 4px;
+  height: 35rpx;
+  width: 6rpx;
   background: linear-gradient(#EDFBFF, #0091FF);
   margin-right: 6rpx;
 }
 
 .module-title-txt {
-  margin-right: 15rpx;
+  margin-right: 10rpx;
 }
 
 .module-title-num {
@@ -39,4 +39,5 @@
   width: 100%;
   text-align: center;
   color: #438BEF;
+  font-size: 30rpx;
 }

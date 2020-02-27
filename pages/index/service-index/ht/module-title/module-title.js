@@ -28,14 +28,14 @@ Component({
       type: String,
       value: "bold"
     },
-    // 是否有数量，默认无
-    isHaveNum: {
+    // 是否有标题后的信息，默认无
+    isHaveRemark: {
       type: Boolean,
       value: false
     },
-    // 数量
-    num: {
-      type: String || Number,
+    // 标题后的信息
+    remarkInfo: {
+      type: String,
       value: ""
     },
     // 是否有查看更多按钮，默认有

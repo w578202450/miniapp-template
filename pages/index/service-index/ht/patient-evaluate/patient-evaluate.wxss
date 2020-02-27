@@ -45,6 +45,10 @@
   background-color: #dbdee3;
 }
 
+.marginLeftRightLine {
+  margin: 0 60rpx;
+}
+
 .illnessList {
   display: flex;
   flex-direction: row;

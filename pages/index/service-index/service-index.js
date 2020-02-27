@@ -17,14 +17,14 @@ Page({
   onLoad: function (options) {
     let that = this;
     let sendOptions = { ...options };
-    commonFun.startLoginFun(sendOptions); // 尝试自动登录
+    // commonFun.startLoginFun(sendOptions); // 尝试自动登录
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.patientEvaluateModule = this.selectComponent("#patientEvaluateModule"); //获得患者评价组件
   },
 
   /**
@@ -67,5 +67,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**操作：展开、收起患者评价 */
+  unfoldContentFun: function() {
+    this.patientEvaluateModule.unfoldContentFun();
   }
 })

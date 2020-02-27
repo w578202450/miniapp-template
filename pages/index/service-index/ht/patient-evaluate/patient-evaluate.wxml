@@ -2,7 +2,7 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <module-title title="患者评价：" isHaveNum="{{true}}" num="235" moreBtnName="查看更多患者评价" moreBtnUrl="{{moreBtnUrl}}">
+  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="（235）" moreBtnName="查看更多患者评价" moreBtnUrl="{{moreBtnUrl}}">
     <view slot="content-body" class="evaluateContentBox">
       <!-- 星级、标签区 -->
       <view class="levelBox">
@@ -32,26 +32,28 @@
             <text class="diseaseTitle">所患疾病：</text>
             <text class="diseaseTxt">{{item.disease}}</text>
           </view>
-          <view class="flexRowStartCenter">
-            <text class="unfoldTxt">展开</text>
-            <image class="unfoldIcon" src="{{xiaIconSrc}}" mode="widthFix"></image>
+          <view class="flexRowStartCenter" bindtap="unfoldContentFun">
+            <text class="unfoldTxt">{{unfoldTxt}}</text>
+            <image class="unfoldIcon" src="{{isShowAllContent ? packUpIconSrc: unfoldIconSrc}}" mode="widthFix" />
           </view>
         </view>
-        <view class="flexRowBetweenCenter">
+        <view class="flexRowStartCenter">
           <view class="flexRowStartCenter">
             <text class="curativeEffect">患者主观疗效：</text>
             <text class="curativeEffectTxt">{{item.curativeEffectName}}</text>
           </view>
-          <view class="verticalLine"></view>
+          <view class="verticalLine marginLeftRightLine"></view>
           <view class="flexRowStartCenter">
             <text class="curativeEffect">服务：</text>
             <text class="curativeEffectTxt">{{item.doctorAttitudeName}}</text>
           </view>
         </view>
-        <view class="evaluateContent">{{comTools.subStrTxt(item.content, 48)}}</view>
+        <!-- 评价内容 -->
+        <view class="evaluateContent">{{isShowAllContent ? item.content : comTools.subStrTxt(item.content, 48)}}</view>
+        <!-- 患者个人信息 -->
         <view class="patientInfoBox flexRowBetweenCenter">
           <view class="flexRowStartCenter">
-            <image class="patientFace" src="{{item.patientFace}}" mode="widthFix"/>
+            <image class="patientFace" src="{{item.patientFace}}" mode="widthFix" />
             <text class="patientNameTxt">患者： {{comTools.subName(item.patientName)}}</text>
           </view>
           <view class="addTime">{{comTools.formateDate(item.addTime)}}</view>
