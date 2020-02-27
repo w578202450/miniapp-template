@@ -74,26 +74,6 @@
   margin-left: 30rpx;
 }
 
-.specialist-middle-box {
-  display: flex;
-  flex-direction: row;
-  margin-top: 24rpx;
-  margin-left: 154rpx;
-  flex-wrap: wrap;
-}
-
-.specialist-middle-goodAt-box {
-  display: flex;
-  background: rgba(67, 139, 239, 0.15);
-  border-radius: 4rpx;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
-  margin-right: 16rpx;
-  margin-bottom: 16rpx;
-  align-items: center;
-  height: 40rpx;
-}
-
 .specialist-bottom-box {
   height: 48rpx;
   margin-top: 24rpx;

@@ -3,7 +3,8 @@
   <!-- 专家门诊专家信息 -->
   <service-specialistInfo></service-specialistInfo>
   <!-- 医生团队 -->
-  <service-physicianTeam></service-physicianTeam>
+  <service-physicianTeam pageStyle="margin-top:20rpx"></service-physicianTeam>
   <!-- 患者评价 -->
-  <patient-evaluate id="patientEvaluateModule" evaluateAllData="{{evaluateAllData}}"/>
+  <patient-evaluate id="patientEvaluateModule" evaluateAllData="{{evaluateAllData}}" />
+  <service-news></service-news>
 </view>

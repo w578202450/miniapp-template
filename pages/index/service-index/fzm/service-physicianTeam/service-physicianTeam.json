@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "module-title": "/pages/index/service-index/ht/module-title/module-title",
+    "service-tabs": "/pages/index/service-index/fzm/service-tabs/service-tabs"
+  }
 }

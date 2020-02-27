@@ -1,4 +1,4 @@
-// pages/index/service-index/fzm/servie-physicianTeam/service-physicianTeam.js
+// pages/index/service-index/fzm/service-tabs/service-tabs.js
 Component({
   /**
    * 组件的属性列表
@@ -7,6 +7,14 @@ Component({
     pageStyle: {
       type: String,
       value: ''
+    },
+    tabStyle: {
+      type: String,
+      value: ''
+    },
+    list:{
+      type: Array,
+      value: []
     }
   },
 
@@ -14,7 +22,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    goodAts: ["风湿骨病", "类风湿关节炎", "类风湿关节炎"]
+
   },
 
   /**
