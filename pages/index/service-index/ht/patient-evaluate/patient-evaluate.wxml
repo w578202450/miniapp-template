@@ -51,11 +51,11 @@
         <!-- 评价内容的文字 -->
         <view class="evaluateContent">{{isShowAllContent ? item.content : comTools.subStrTxt(item.content, 48)}}</view>
         <!-- 评价内容的图片或者视频 -->
-        <view class="materialDataBox">
+        <view wx:if="{{isShowAllContent}}" class="materialDataBox">
           <view class="materialItemView" wx:for="{{item.materialData}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}">
             <image class="materialImg" src="{{items.materialUrl}}" mode="widthFix" style="background: url({{materialImgBac}});background-size: contain;">
-              <image wx:if="{{item.materialType == 1}}" class="videoIconImg" src="{{videoIconSrc}}"/>
             </image>
+            <image wx:if="{{items.materialType == 1}}" class="videoIconImg" src="{{videoIconSrc}}"/>
           </view>
         </view>
         <!-- 患者个人信息 -->

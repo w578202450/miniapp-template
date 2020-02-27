@@ -20,6 +20,7 @@ Component({
     unfoldIconSrc: "/images/home/unfoldIcon.png", // 展开图标
     packUpIconSrc: "/images/home/packUpIcon.png", // 收起图标
     materialImgBac: "/images/home/imgNone.png", // 评论内容中的背景图片
+    videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
     isShowAllContent: false, // 是否展开显示所有评价内容
     unfoldTxt: "展开", // 展开、收起字样
     illnessSumList: [], // 患者评价的统计星级数据
@@ -74,7 +75,7 @@ Component({
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1104",
-        materialType: 0,
+        materialType: 1,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1105",
@@ -82,7 +83,7 @@ Component({
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1106",
-        materialType: 0,
+        materialType: 1,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1107",
@@ -94,26 +95,10 @@ Component({
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1109",
-        materialType: 0,
+        materialType: 1,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }]
-    }]; // 图文
-
-    // let evaData = [{
-    //   keyID: "11",
-    //   disease: "类风湿关节炎",
-    //   curativeEffectName: "满意",
-    //   doctorAttitudeName: "满意",
-    //   patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
-    //   patientName: "张三三",
-    //   content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
-    //   addTime: "2020-02-20 00:15:00",
-    //   materialData: [{
-    //     keyID: "1101",
-    //     materialType: 0,
-    //     materialUrl: ""
-    //   }]
-    // }]; // 文字、视频
+    }]; // 图文视频
 
     let illList = [{
       keyID: "1",
