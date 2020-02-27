@@ -1,0 +1,40 @@
+/* pages/index/service-index/fzm/service-titles-page/service-titles-page.wxss */
+
+.page {
+  padding: 32rpx 32rpx 12rpx 32rpx;
+  background-color: white;
+  display: flex;
+  flex-direction: row
+}
+
+.title-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 48rpx;
+}
+
+.selected {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
+.normal {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 36rpx;
+}
+
+.subscriptStyle {
+  width: 64rpx;
+  height: 4rpx;
+  background: linear-gradient(270deg, rgba(237, 251, 255, 1) 0%, rgba(0, 145, 255, 1) 100%);
+  border-radius: 4rpx;
+  margin-top: 12rpx;
+}

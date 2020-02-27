@@ -1,5 +1,9 @@
-<view class="page">
+<view style="{{pageStyle}}">
   <view class="content">
-    
+    <service-titles-page list="{{titles}}" bind:selectedIndex="selectedIndex"></service-titles-page>
+    <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
+    <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+      <service-news-item itemData="{{item}}"></service-news-item>
+    </block>
   </view>
 </view>

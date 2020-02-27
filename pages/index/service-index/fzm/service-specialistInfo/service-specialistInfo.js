@@ -7,7 +7,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    pageStyle: {
+      type: String,
+      value: ''
+    },
   },
 
   /**
@@ -16,7 +19,7 @@ Component({
   data: {
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
     navBarHeight: app.globalData.navBarHeight,
-    serviceBg: '/images/home/home_service_bg.png',
+    serviceBg: '/images/home/home_service_banner.png',
     goodAts: ["风湿骨病", "类风湿关节炎", "类风湿关节炎"]
   },
 

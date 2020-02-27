@@ -1,0 +1,44 @@
+.page {
+  background-color: orange;
+  margin-bottom: 1rpx;
+}
+.content {
+  background-color: white;
+  padding: 32rpx 20rpx 32rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.content image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-left: 48rpx;
+  flex-shrink: 0;
+}
+
+.left-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.details {
+  margin-top: 24rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+  color: rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

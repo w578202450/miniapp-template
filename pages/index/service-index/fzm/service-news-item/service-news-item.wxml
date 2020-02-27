@@ -1,0 +1,11 @@
+<view>
+  <view class="content">
+    <view class="left-box">
+      <text class="title">{{itemData.title}}</text>
+      <text class="details">{{itemData.content}}</text>
+      <service-tabs list="{{itemData.tags}}" pageStyle="{{servicTabsPageStyle}}" tabStyle="{{serviceTabsTabStyle}}">></service-tabs>
+    </view>
+    <image src="{{itemData.image}}"></image>
+  </view>
+  <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
+</view>
