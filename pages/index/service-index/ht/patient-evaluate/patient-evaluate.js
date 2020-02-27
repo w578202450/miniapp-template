@@ -33,25 +33,14 @@ Component({
     let that = this;
     // if (that.data.evaluateAllData) {
     //   that.setData({
-    //     evaluateData: that.data.evaluateAllData.evaluateData,
-    //     illnessSumList: that.data.evaluateAllData.illnessSumList,
-    //     moreBtnUrl: that.data.evaluateAllData.moreBtnUrl
+    //     evaluateData: that.data.evaluateAllData.evaluateData[0] ? that.data.evaluateAllData.evaluateData[0]: [],
+    //     illnessSumList: that.data.evaluateAllData.illnessSumList ? that.data.evaluateAllData.illnessSumList: [],
+    //     moreBtnUrl: that.data.evaluateAllData.moreBtnUrl ? that.data.evaluateAllData.moreBtnUrl: ""
     //   });
     // }
 
 
    // 拟定假数据
-    // let evaData = [{
-    //     keyID: "11",
-    //     disease: "类风湿关节炎",
-    //     curativeEffectName: "满意",
-    //     doctorAttitudeName: "满意",
-    //     patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
-    //     patientName: "张三三",
-    //     content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
-    //     addTime: "2020-02-20 00:15:00"
-    //   }]; // 文字
-
     let evaData = [{
       keyID: "11",
       disease: "类风湿关节炎",
@@ -67,7 +56,7 @@ Component({
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1102",
-        materialType: 0,
+        materialType: 1,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1103",
@@ -79,7 +68,7 @@ Component({
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1105",
-        materialType: 0,
+        materialType: 1,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1106",
@@ -91,11 +80,11 @@ Component({
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1108",
-        materialType: 0,
+        materialType: 1,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }, {
         keyID: "1109",
-        materialType: 1,
+        materialType: 0,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
       }]
     }]; // 图文视频
@@ -181,7 +170,14 @@ Component({
           complete: function(res) {}
         });
       } else if (materialItem.materialType == 1) {
+        if (materialItem.materialUrl.length == 0 || !materialItem.materialUrl) {
+          wx.showToast({
+            title: '视频链接地址错误，无法查看',
+          });
+          return;
+        }
         console.log("点击的视频，需要跳转到视频播放页");
+        // let materialUrl = materialItem.materialUrl;
         // wx.navigateTo({
         //   url: ''
         // });
