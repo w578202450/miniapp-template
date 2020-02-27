@@ -1,8 +1,11 @@
-<view class="page" style="{{pageStyle}}">
+<scroll-view class="page" scroll-x="true" enable-flex="true">
   <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="id">
     <view class="title-box" bindtap="selectedAction" data-index="{{index}}">
       <text class="{{index==selectedIndex ? 'selected' : 'normal'}}">{{item.name}}</text>
+      <view class="subscript-box">
       <view class="subscriptStyle" hidden="{{index!=selectedIndex}}"></view>
+      </view>
+      
     </view>
   </block>
-</view>
+</scroll-view>
