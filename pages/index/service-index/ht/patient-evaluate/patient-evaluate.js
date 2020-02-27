@@ -25,7 +25,8 @@ Component({
     unfoldTxt: "展开", // 展开、收起字样
     illnessSumList: [], // 患者评价的统计星级数据
     evaluateData: [], // 患者评价的内容
-    moreBtnUrl: "" // 查看更多的h5链接
+    httpParams: {}, // 查看更多数据的请求参数
+    detailH5Url: "" // 查看详情的h5链接
   },
 
 /**attached：节点树完成，可以用setData渲染节点，但无法操作节点 */
