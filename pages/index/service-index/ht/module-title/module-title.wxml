@@ -7,7 +7,7 @@
       <text class="module-title-txt" style="font-size:{{fontSize}};color:{{color}};font-weight:{{fontWeight}}">{{title}}</text>
       <text wx:if="{{isHaveRemark}}" class="module-title-num">{{remarkInfo}}</text>
     </view>
-    <view wx:if="{{!isHaveLittleTitle}}" class="littleTitle">哈哈哈哈哈哈哈{{littleTitle}}</view>
+    <view wx:if="{{isHaveLittleTitle}}" class="littleTitle">{{littleTitle}}</view>
   </view>
   <!-- 内容插槽（内容样式自己设置） -->
   <slot name="content-body"></slot>
