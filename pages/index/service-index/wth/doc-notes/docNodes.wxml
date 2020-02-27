@@ -1,2 +1,21 @@
-<!--pages/index/service-index/wth/docNotes/docNodes.wxml-->
-<text>pages/index/service-index/wth/docNotes/docNodes.wxml</text>
+<!--pages/index/service-index/wth/doc-notes/docNodes.wxml-->
+<view>
+  <!-- 引入wxs脚本 -->
+  <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
+   <module-title title="{{title}}" moreBtnName="{{moreBtnName}}" moreBtnUrl="{{moreBtnUrl}}">
+    <view slot="content-body" class="box" bindtap="toDetail">
+    <view class="contain">
+    <view class="personInfo">
+     <cover-image class="img" src="{{paersonInfo.imgSrc}}" style="background: url({{materialImgBac}});background-size: contain;"></cover-image>
+     <text class="name">患者：{{paersonInfo.name}} {{paersonInfo.address}}</text>
+    </view>
+    <view>
+     <text class="date">{{paersonInfo.date}}</text>
+    </view>
+    </view>
+    <view>
+     <text class="content">{{comTools.subStrTxt(contentText,50)}}</text>
+    </view>
+   </view>
+  </module-title>
+</view>
