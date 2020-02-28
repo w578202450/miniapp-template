@@ -3,7 +3,6 @@ const app = getApp();
 const commonFun = require('../../../utils/common.js');
 const HTTP = require('../../../utils/http-util');
 Page({
-
   /**
    * 页面的初始数据
    */
