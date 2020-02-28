@@ -6,7 +6,7 @@
     <view slot="content-body" class="box" bindtap="toDetail">
     <view class="contain">
     <view class="personInfo">
-     <cover-image class="img" src="{{paersonInfo.imgSrc}}" style="background: url({{materialImgBac}});background-size: contain;"></cover-image>
+     <image class="img" src="{{paersonInfo.imgSrc}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
      <text class="name">患者：{{paersonInfo.name}} {{paersonInfo.address}}</text>
     </view>
     <view>
