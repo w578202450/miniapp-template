@@ -11,7 +11,10 @@ Page({
     orderID: "", // 评价的订单ID
     orgID: "", // 订单所属 医院ID
     orderDetailData: {}, // 订单详情
-    rpDetailData: [] // 处方详情
+    rpDetailData: [
+      { productBrand: "康森", medicineName: "藿香正气水霍香正气水防暑霍香正气液少时诵诗书", productSpec: "10ml/支*10", imgUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png" },
+      { }
+    ] // 处方详情
   },
 
   /**

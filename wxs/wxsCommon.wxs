@@ -2,7 +2,7 @@
 
 // 过滤超过字数的加以省略，传递字符窜val，以及限制的字数num
 var subStrTxt = function(val, num) {
-  if (val.length == 0 || val == undefined) {
+  if (val == undefined || val.length == 0) {
     return;
   }
   if (val.length > num) {
@@ -15,7 +15,7 @@ var subStrTxt = function(val, num) {
 // 过滤人的名字为 张*  王**
 var subName = function(val) {
   var value = val;
-  if (value.length == 0 || value == undefined) {
+  if (value == undefined || value.length == 0) {
     return;
   } else if (value.length == 1) {
     return value;
@@ -30,7 +30,7 @@ var subName = function(val) {
 
 // 过滤时间为 年-月-日 时:分:秒
 var formateDateTime = function(val) {
-  if (val.length == 0 || val == undefined) {
+  if (val == undefined || val.length == 0) {
     return;
   }
   var dateTime = getDate(val);
@@ -51,7 +51,7 @@ var formateDateTime = function(val) {
 
 // 过滤时间为 年-月-日
 var formateDate = function (val) {
-  if (val.length == 0 || val == undefined) {
+  if (val == undefined || val.length == 0) {
     return;
   }
   var date = getDate(val);
