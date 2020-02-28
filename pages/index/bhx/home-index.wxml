@@ -59,20 +59,18 @@
   </view>
 
    <!-- 客服电话和地址 -->
-  <view class="address-tel">
+  <!-- <view class="address-tel">
     <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
     <text class="middle-titleLabel">医疗机构许可证：</text>
     <view class="middle-detailLabel">45081134X51012213A1002</view>
-  </view>
+  </view> -->
+  
   <!-- 分享按钮 -->
   <!-- <view bindtap="shareMore" class="share-box">
     <text class="share-text">分享给更多需要的人</text>
   </view> -->
 
   <button bindtap="shareMore" class="share-box">分享给更多需要的人</button>
-
-
-
 
   <!-- 立即进入专家门诊 -->
   <view class="enter-inquiry" bindtap="toServiceIndexFun">
