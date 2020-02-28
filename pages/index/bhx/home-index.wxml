@@ -53,24 +53,43 @@
     </view>
   </view>
 
-  <!-- 医师团队 -->
-  <view class="hospital-dean">
-    <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
+  <!-- 底部模块(医师团队，电话和地址，分享) -->
+  <view class="home-bottom">
+    <!-- 医师团队 -->
+    <view class="physician-team">
+      <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
+    </view>
+
+
+    <view class="address-tel">
+      <!-- 客服电话 -->
+      <view class="address-tel-header-box">
+        <image src="../../../images/home/home_phone.png"></image>
+        <view class="address-tel-left">
+          <text class="title-other">健康热线：</text>
+        </view>
+        <view class="address-tel-right">
+          <text class="title-other">0351-2713002</text>
+        </view>
+      </view>
+      <!-- 地址 -->
+      <view class="address-tel-header-box">
+        <image src="../../../images/home/home_address.png"></image>
+        <view class="address-tel-left">
+          <text class="title-other">地址：</text>
+        </view>
+        <view class="address-tel-right">
+          <text class="title-other">太原市小店区并州南路489号（太航加油站南侧）</text>
+        </view>
+      </view>
+
+      <button bindtap="shareMore" class="share-box">分享给更多需要的人</button>
+    </view>
+
   </view>
 
-   <!-- 客服电话和地址 -->
-  <!-- <view class="address-tel">
-    <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
-    <text class="middle-titleLabel">医疗机构许可证：</text>
-    <view class="middle-detailLabel">45081134X51012213A1002</view>
-  </view> -->
-  
-  <!-- 分享按钮 -->
-  <!-- <view bindtap="shareMore" class="share-box">
-    <text class="share-text">分享给更多需要的人</text>
-  </view> -->
 
-  <button bindtap="shareMore" class="share-box">分享给更多需要的人</button>
+
 
   <!-- 立即进入专家门诊 -->
   <view class="enter-inquiry" bindtap="toServiceIndexFun">
