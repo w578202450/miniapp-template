@@ -60,10 +60,9 @@
     <!-- 底部模块(医师团队，电话和地址，分享) -->
     <view class="home-bottom">
       <!-- 医师团队 -->
-      <view class="physician-team">
+      <!-- <view class="physician-team">
         <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
-      </view>
-
+      </view> -->
 
       <view class="address-tel">
         <!-- 客服电话 -->
@@ -75,6 +74,7 @@
           <view class="address-tel-right">
             <text class="title-other">0351-2713002</text>
           </view>
+
         </view>
         <!-- 地址 -->
         <view class="address-tel-header-box">
@@ -87,15 +87,18 @@
           </view>
         </view>
 
-        <button bindtap="shareMore" class="share-box">分享给更多需要的人</button>
-      </view>
-    </view>
-
-    <!-- 立即进入专家门诊 -->
-    <view class="enter-inquiry" bindtap="toServiceIndexFun">
-      <text class="enter-name">立即进入专家门诊</text>
-      <view class="black-rectangle">
-      </view>
+      <!-- <button bindtap="shareMore" class="share-box">分享给更多需要的人</button> -->
     </view>
   </view>
+
+  <!-- 立即进入专家门诊 -->
+  <view class="enter-box">
+  <view class="enter-inquiry">
+    <button type="primary" bindtap="toServiceIndexFun">立即进入专家门诊</button>
+    <!-- <text class="enter-name">立即进入专家门诊</text>
+    <view class="black-rectangle">
+    </view> -->
+  </view>
+  </view>
+ </view>
 </view>
