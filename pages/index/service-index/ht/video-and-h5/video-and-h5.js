@@ -20,6 +20,15 @@ Page({
   onLoad: function (options) {
     let that = this;
     let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
+    if (acceptOptions.title && acceptOptions.title.length > 0) {
+      wx.setNavigationBarTitle({
+        title: acceptOptions.title
+      });
+    } else {
+      wx.setNavigationBarTitle({
+        title: "素材展示"
+      });
+    }
     if (acceptOptions.materialType || acceptOptions.materialType == 0) {
       that.setData({
         materialInfo: {
@@ -36,7 +45,7 @@ Page({
         if (!acceptOptions.url) {
           wx.showToast({
             title: "视频素材链接地址异常，无法正常播放",
-            icon: "warn",
+            icon: "none",
             duration: 3000
           });
         }
@@ -44,7 +53,7 @@ Page({
     } else {
       wx.showToast({
         title: "素材数据异常，无法正常展示",
-        icon: "warn",
+        icon: "none",
         duration: 3000
       });
     }
@@ -101,5 +110,10 @@ Page({
 
   errorFun: function (e) {
     console.log("视频播放错误" + JSON.stringify(e));
+    wx.showToast({
+      title: "视频异常，无法正常播放",
+      icon: "none",
+      duration: 3000
+    });
   }
 })

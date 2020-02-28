@@ -104,5 +104,10 @@ Page({
 
   errorFun:function(e) {
     console.log("视频播放错误" + JSON.stringify(e));
+    wx.showToast({
+      title: "视频异常，无法正常播放",
+      icon: "none",
+      duration: 3000
+    });
   }
 })

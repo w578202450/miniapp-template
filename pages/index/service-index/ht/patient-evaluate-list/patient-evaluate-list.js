@@ -12,7 +12,11 @@ Page({
     videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
     illnessSumList: [], // 患者评价的统计星级数据
     evaluateListData: [], // 患者评价的内容
-    httpParams: {} // 查看更多数据的请求参数
+    httpParams: {}, // 查看更多数据的请求参数
+    pageInfo: {
+      pageIndex: 1,
+      pageSize: 20
+    }
   },
 
   /**
@@ -24,7 +28,7 @@ Page({
     });
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);
-    console.log(that.data.httpParams);
+    console.log("进入患者评价列表页拿到的参数：" + JSON.stringify(that.data.httpParams));
     // that.getPatientEvaluateListFun(); // 查询：患者评价列表数据
     that.initNoRealyData(); // 拟定假数据
   },
@@ -82,12 +86,14 @@ Page({
   getPatientEvaluateListFun: function() {
     let that = this;
     let params = {
-      doctorID: that.data.httpParams.doctorID
+      orgID: that.data.httpParams.orgID,
+      pageIndex: that.data.pageInfo.pageIndex,
+      pageSize: that.data.pageInfo.pageSize
     };
-    HTTP.getPatientEvaluateList(params).then(res => {
+    HTTP.orderCommentList(params).then(res => {
       if (res.data) {
         that.setData({
-          evaluateListData: res.data.evaluateListData ? res.data.evaluateListData: [],
+          evaluateListData: res.data.evaluateList ? res.data.evaluateList : [],
           illnessSumList: res.data.illnessSumList ? res.data.illnessSumList : []
         });
       }
@@ -126,11 +132,15 @@ Page({
         });
         return;
       }
-      console.log("点击了视频，需要跳转到视频播放页");
-      // let materialUrl = materialItem.materialUrl;
-      // wx.navigateTo({
-      //   url: ''
-      // });
+      let materialData = {
+        materialType: 1, // （必传）要查看的素材类型 0图文 1视频
+        title: "患者评价相关素材", // 待确认，可先不传
+        url: materialItem.materialUrl, // （必传）图文、视频 的网络地址链接
+        logoUrl: "" // 视频的封面图片(没有就传空字符窜)
+      };
+      wx.navigateTo({
+        url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
+      });
     }
   },
 
@@ -145,44 +155,10 @@ Page({
         content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
         addTime: "2020-02-20 00:15:00",
         materialData: [{
-            keyID: "1101",
-            materialType: 0,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1102",
-            materialType: 1,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1103",
-            materialType: 0,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1104",
-            materialType: 1,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1105",
-            materialType: 1,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1106",
-            materialType: 1,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1107",
-            materialType: 0,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1108",
-            materialType: 1,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          }, {
-            keyID: "1109",
-            materialType: 0,
-            materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-          },
-
-        ]
+          keyID: "1101",
+          materialType: 0,
+          materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
+        }]
       },
       {
         keyID: "11",
@@ -191,15 +167,11 @@ Page({
         doctorAttitudeName: "满意",
         patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
         patientName: "张三三",
-        content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
+        content: "张医生对待病人认真负责，问诊细心",
         addTime: "2020-02-20 00:15:00",
         materialData: [{
           keyID: "1201",
-          materialType: 0,
-          materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-        }, {
-          keyID: "1202",
-          materialType: 0,
+          materialType: 1,
           materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
         }]
       }

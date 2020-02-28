@@ -502,7 +502,7 @@ Page({
       });
       wx.showToast({
         title: "发起问诊失败",
-        icon: "warn",
+        icon: "none",
         duration: 2000
       });
     })
@@ -697,7 +697,7 @@ Page({
       console.log('发送文本消息失败：', imError);
       wx.showToast({
         title: "发送消息： '" + oldmaySendContent + "' 失败",
-        icon: "warn",
+        icon: "none",
         duration: 2000
       });
       let nowData = [...that.data.currentMessageList];
@@ -840,7 +840,7 @@ Page({
       });
       wx.showToast({
         title: "发送图片失败",
-        icon: "warn",
+        icon: "none",
         duration: 2000
       });
       let nowData = [...that.data.currentMessageList];
@@ -1030,7 +1030,7 @@ Page({
           console.log("发送语音消息失败" + imError);
           wx.showToast({
             title: "发送语音消息失败",
-            icon: "warn",
+            icon: "none",
             duration: 2000
           });
         });
