@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/index/bhx/home-index",
     "pages/index/service-index/service-index",
     "pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
+    "pages/index/service-index/ht/video-and-h5/video-and-h5",
     "pages/index/service-index/wth/notes-list/notes-list",
     "pages/index/service-index/wth/share-list/share-list",
     "pages/inquiry-index/inquiry-index",

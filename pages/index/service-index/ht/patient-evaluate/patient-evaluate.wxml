@@ -2,8 +2,8 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="（235）" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}" detailH5Url="{{detailH5Url}}">
-    <view slot="content-body" class="evaluateContentBox">
+  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="（235）" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}">
+    <view slot="content-body" class="evaluateContentBox" bindtap="simulationToMatFun">
       <!-- 星级、标签区 -->
       <view class="levelBox">
         <view class="flexRowBetweenCenter">

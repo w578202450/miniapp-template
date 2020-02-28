@@ -1,15 +1,24 @@
-// pages/index/index.js
+// pages/index/bhx/home-index.js
 const app = getApp();
-const commonFun = require('../../utils/common.js');
-const HTTP = require('../../utils/http-util');
+const commonFun = require('../../../utils/common.js');
+const HTTP = require('../../../utils/http-util');
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
     houShiOrgID: "", // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "", // 进入页面携带的orgID
-    shareAssistantStaffID: "" // 进入页面携带的医助ID
+    shareAssistantStaffID: "", // 进入页面携带的医助ID
+    // 首页banner
+    home_houlipin_hospital_banner:"/images/home/home_houlipin_hospital_banner.png",
+    serviceBg: '/images/home/home_service_bg.png',
+    goodAts: ["风湿骨科", "针灸"],
+    isShowAllContent: false, 
+    evaluateData: [], // 院长介绍
+    deanContent: "太原侯丽萍风湿骨病中医医院院长，北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科…",
+    hospitalContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…",
   },
 
   /**
@@ -99,7 +108,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function () {
     return commonFun.onShareAppMessageFun();
   },
 
@@ -115,7 +124,7 @@ Page({
   },
 
   /**操作：立即进入专家门诊 */
-  toServiceIndexFun: function() {
+  toServiceIndexFun: function () {
     wx.switchTab({
       url: '/pages/index/service-index/service-index'
     });

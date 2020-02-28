@@ -55,12 +55,7 @@ Component({
         nextPage: "" // 要跳转的页面的路径
       }
     },
-    // 查看详情的H5链接
-    detailH5Url: {
-      type: String,
-      value: ""
-    },
-    // 时候标题下有小标题
+    // 是否标题下有小标题
     isHaveLittleTitle: {
       type: Boolean,
       value: false
@@ -86,7 +81,7 @@ Component({
     /**操作：查看更多 */
     toListPageFun: function() {
       let that = this;
-      if (!that.data.httpParams) {
+      if (!that.data.httpParams || !that.data.httpParams.nextPage) {
         wx.showToast({
           title: '未传递参数，无法查看更多',
           icon: "none",
@@ -94,10 +89,11 @@ Component({
         });
         return
       }
-      console.log("传递的参数：" + that.data.httpParams);
-      // wx.navigateTo({
-      //   url: that.data.httpParams.nextPage,
-      // });
+      console.log("传递的参数：" + JSON.stringify(that.data.httpParams));
+      let params = JSON.stringify(that.data.httpParams);
+      wx.navigateTo({
+        url: that.data.httpParams.nextPage + "?httpParams=" + params
+      });
     }
   }
 })

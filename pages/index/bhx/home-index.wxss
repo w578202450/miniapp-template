@@ -1,0 +1,194 @@
+/* pages/index/bhx/home-index.wxss */
+
+page {
+  background-color: white;
+}
+
+.header {
+  position: relative;
+  background: white;
+  z-index: -1;
+}
+
+.header image {
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  position: absolute;
+}
+
+.middle {
+  margin-top: 20rpx;
+  height: 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+
+.middle-titleLabel {
+  height: 28rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 28rpx;
+}
+
+.middle-detailLabel {
+  height: 28rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 177, 11, 1);
+  line-height: 28rpx;
+}
+
+.bottom {
+  margin-top: 10rpx;
+  height: 60rpx;
+  background: rgba(246, 246, 246, 1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.bottom-left {
+  margin-top: 10rpx;
+  height: 60rpx;
+  background: rgba(246, 246, 246, 1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 32rpx;
+}
+
+.bottom-right {
+  margin-top: 10rpx;
+  height: 60rpx;
+  margin-left: 10rpx;
+  background: rgba(246, 246, 246, 1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 32rpx;
+}
+
+.bottom-numberLabel {
+  height: 28rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #438bef;
+  line-height: 28rpx;
+}
+
+.bottom-titleLabel {
+  height: 28rpx;
+  font-size: 24rpx;
+  margin-left: 10rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 28rpx;
+}
+
+.hospital-dean {
+  margin-top: 20rpx;
+  background: rgba(255, 255, 255, 1);
+}
+
+.specialist-box {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 2px 32rpx 0px rgba(0, 0, 0, 0.15);
+  border-radius: 10rpx;
+  margin-top: 20rpx;
+  padding: 30rpx 30rpx 24rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.specialist-header-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.specialist-header-box image {
+  height: 124rpx;
+  width: 124rpx;
+}
+
+.specialist-header-middle-box {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30rpx;
+}
+
+.title-name {
+  font-size: 36rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
+.title-other {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
+}
+
+.evaluateContent {
+  margin-top: 10rpx;
+  width: 100%;
+  word-break:  break-all; /* 强制换行 */
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 24rpx;
+}
+
+.module-item-box {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 2px 32rpx 0px rgba(0, 0, 0, 0.15);
+  border-radius: 10rpx;
+  padding: 30rpx 30rpx 24rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.enter-inquiry {
+  margin-top: 200rpx;
+  width: 100%;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(67, 139, 239, 1);
+  text-align: center;
+}
+
+.enter-name {
+  margin-top: 60rpx;
+  display: flex;
+  font-size: 36rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 18rpx;
+}
+
+.black-rectangle {
+  width: 260rpx;
+  margin-top: 60rpx;
+  display: flex;
+  height: 10rpx;
+  border-radius: 0px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 13px;
+  background: rgba(0, 0, 0, 0.8);
+}
