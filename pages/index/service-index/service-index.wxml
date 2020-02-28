@@ -7,8 +7,8 @@
   <!-- 患者评价 -->
   <patient-evaluate id="patientEvaluateModule" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
-  <notes pageStyle="margin-top:20rpx;"></notes>
+  <notes></notes>
   <!-- 患者分享 -->
-  <share pageStyle="margin-bottom:20rpx;"></share>
+  <share></share>
   <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx;"></service-news>
 </view>

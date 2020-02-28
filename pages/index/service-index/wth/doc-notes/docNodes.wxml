@@ -2,6 +2,7 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
+  <view style="margin-bottom:20rpx;"></view>
    <module-title title="{{title}}" moreBtnName="{{moreBtnName}}" httpParams="{{httpParams.nextPage}}" >
     <view slot="content-body" class="box" bindtap="toDetail">
     <view class="contain">
