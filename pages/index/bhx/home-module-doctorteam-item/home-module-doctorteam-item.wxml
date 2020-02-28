@@ -1,4 +1,4 @@
-<view class="page" style="{{pageStyle}}">
+<view class="page" style="{{pageStyle}}" bindtap="clickItem">
   <image src="/images/chat/personBacImg.png"></image>
   <view class="midlle-box">
     <text class="name-text">冯文全</text>
