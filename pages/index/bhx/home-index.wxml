@@ -56,7 +56,9 @@
   <!-- 医师团队 -->
   <view class="hospital-dean">
     <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
+    <home-module-doctorteam></home-module-doctorteam>
   </view>
+  
 
    <!-- 客服电话和地址 -->
   <!-- <view class="address-tel">

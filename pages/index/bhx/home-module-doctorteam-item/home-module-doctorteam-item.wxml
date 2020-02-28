@@ -1,2 +1,10 @@
-<!--pages/index/bhx/home-module-doctorteam-item/home-module-doctorteam-item.wxml-->
-<text>pages/index/bhx/home-module-doctorteam-item/home-module-doctorteam-item.wxml</text>
+<view class="page" style="{{pageStyle}}">
+  <image src="/images/chat/personBacImg.png"></image>
+  <view class="midlle-box">
+    <text class="name-text">冯文全</text>
+    <text class="other-text" style="margin-left:16rpx;line-height: 34rpx">主治医师</text>
+  </view>
+  <text class="other-text" style="margin-top:16rpx">侯丽萍风湿骨病中医医院</text>
+  <text class="other-text">风湿科</text>
+  <service-tabs list="{{goodAts}}" pageStyle="margin-top: 40rpx" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
+</view>

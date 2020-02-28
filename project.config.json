@@ -92,6 +92,12 @@
 					"pathName": "pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页界面",
+					"pathName": "pages/index/bhx/home-index",
+					"scene": null
 				}
 			]
 		}

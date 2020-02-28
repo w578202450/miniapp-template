@@ -1,1 +1,43 @@
-/* pages/index/bhx/home-module-doctorteam-item/home-module-doctorteam-item.wxss */
+.page {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 8rpx 20rpx 0px rgba(139, 163, 198, 0.5);
+  border-radius: 10rpx;
+  padding: 40rpx 20rpx 40rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 370rpx;
+  width: 320rpx;
+}
+
+image {
+  width: 120rpx;
+  height: 120rpx;
+  flex-shrink: 0
+}
+
+.midlle-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  margin-top: 40rpx;
+}
+
+.name-text {
+  height: 28rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 28rpx;
+}
+
+.other-text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 40rpx;
+  text-align: center;
+}
