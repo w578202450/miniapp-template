@@ -28,13 +28,14 @@ Component({
       patientAddress: "",
       contentSummary: "",
       detailUrl: "",
-      publishDate: ""
+      publishDate: "",
+      authorName: ""
       }
     },
     // 评价内容
-    contentText: {
+    type: {
       type: String,
-      value: "暂无评价"
+      value: "患者"
     },
   },
 

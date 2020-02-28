@@ -325,7 +325,7 @@ Page({
       if (res.data) {
         that.setData({
           ["inquiryCaseData.keyID"]: res.data.keyID,
-          ["inquiryCaseData.patientName"]: res.data.patientName,
+          ["inquiryCaseData.authorName"]: res.data.authorName,
           ["inquiryCaseData.patientFace"]: res.data.patientFace,
           ["inquiryCaseData.patientAddress"]: res.data.patientAddress,
           ["inquiryCaseData.contentSummary"]: res.data.contentSummary,

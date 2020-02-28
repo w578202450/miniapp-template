@@ -24,12 +24,6 @@ paersonInfo: {
    */
   data: {
     moreBtnUrl: "",
-    paersonInfo: {
-        imgSrc: "/images/chat/personBacImg.png",
-        name: "匿名用户",
-        address: "****",
-        date: "2020-01-01"
-    },
     contentText: "asd",
     httpParams: {
       nextPage: "/pages/index/service-index/wth/notes-list/notes-list",
