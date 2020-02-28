@@ -21,7 +21,8 @@ Component({
     },
     contentText: "asd",
     httpParams: {
-      nextPage: ""
+      nextPage: "/pages/index/service-index/wth/notes-list/notes-list",
+      doctorID: "1"
      }
   },
   /**

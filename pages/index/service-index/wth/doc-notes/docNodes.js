@@ -7,9 +7,7 @@ Component({
      // 查看更多
      httpParams: {
        type: Object,
-       value: {
-        nextPage: ""
-       }
+       value: {}
      },
      // 主题
      title: {

@@ -16,7 +16,8 @@ Component({
     paersonInfo: {},
     contentText: "",
     httpParams: {
-      nextPage: ""
+      nextPage: "/pages/index/service-index/wth/share-list/share-list",
+      doctorID: "2"
      }
   },
   /**
