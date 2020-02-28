@@ -1,0 +1,11 @@
+<view class="page">
+  <text style="margin-left:32rpx">侯氏团队在线亲诊解决风湿骨病疑难问题</text>
+  <swiper class='swiper' display-multiple-items="1.8" previous-margin="32rpx" >
+    <block wx:for="{{list}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="id">
+      <swiper-item>
+        <home-module-doctorteam-item pageStyle="margin-top:20rpx;"></home-module-doctorteam-item>
+      </swiper-item>
+    </block>
+  </swiper>
+  
+</view>
