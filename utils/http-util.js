@@ -312,50 +312,64 @@ module.exports = {
     return request('api/rp/inquiry/end', true, 'post', params);
   },
 
-  /**
-   * 展示医生
-   */
   /**展示医生列表
    */
-  doctorShowOrderCommentList: function doctorShowOrderCommentList(params) {
+  doctorShowList: function doctorShowList(params) {
+    return request('api/tmc/doctorShow/list', true, 'get', params);
+  },
+
+  /**
+   * 获取患者评价
+   */
+  orderCommentGet: function orderCommentGet(params) {
     return request('api/tmc/orderComment/get', true, 'get', params);
   },
 
   /**
-   * 医师新增
- */
-  // doctorShowOrderCommentList: function doctorShowOrderCommentList(params) {
-  //   return request('api/tmc/orderComment/get', true, 'get', params);
-  // },
+   * 获取患者评价列表
+   */
+  orderCommentList: function orderCommentList(params) {
+    return request('api/tmc/orderComment/list', true, 'get', params);
+  },
 
-  // : function(params) {
-  //   return request('api/hospital/doctorShow/add', true, 'get', params);
-  // },
+  /**
+   * 保存评价
+   */
+  orderCommentSave: function orderCommentSave(params) {
+    return request('api/tmc/orderComment/save', true, 'post', params);
+  },
 
-  // : function(params) {
-  //   return request('', true, 'get', params);
-  // },
+  /**
+   * 医生手记
+   */
+  /**
+   * 获取医生手记
+   */
+  inquiryCaseGet: function inquiryCaseGet(params) {
+    return request('api/tmc/inquiryCase/get', true, 'get', params);
+  },
 
-  // : function (params) {
-  //   return request('', true, 'get', params);
-  // },
+  /**
+   * 获取医生手记列表
+   */
+  inquiryCaseList: function inquiryCaseList(params) {
+    return request('api/tmc/inquiryCase/list', true, 'get', params);
+  },
 
-  // : function(params) {
-  //   return request('', true, 'get', params);
-  // },
-  // : function(params) {
-  //   return request('', true, 'get', params);
-  // },
-  // : function(params) {
-  //   return request('', true, 'get', params);
-  // },
-  // : function(params) {
-  //   return request('', true, 'get', params);
-  // },
-  // : function(params) {
-  //   return request('', true, 'get', params);
-  // },
-  // : function(params) {
-  //   return request('', true, 'get', params);
-  // },
+  /**
+   * 文章
+   */
+  /**
+   * 文章列表查询 
+   * */
+  articleList: function articleList(params) {
+    return request('api/hospital/article/list', true, 'get', params);
+  },
+
+  /**
+   * 患者分享查询
+   */
+  patientShareList: function patientShareList(params) {
+    return request('api/hospital/patientShare/list', true, 'get', params);
+  }
 }
