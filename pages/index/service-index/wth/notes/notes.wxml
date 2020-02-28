@@ -1,6 +1,6 @@
 <!--pages/index/service-index/wth/notes/notes.wxml-->
 <view>
-  <doc-notes title="医生手记" moreBtnUrl="{{moreBtnUrl}}" 
+  <doc-notes title="医生手记" httpParams="{{httpParams}}"
   moreBtnName="查看更多案例" paersonInfo="{{paersonInfo}}"
   contentText="{{contentText}}" bind:toDetail="toDetail"
   ></doc-notes>

@@ -2,6 +2,7 @@
 .box{
   padding-left: 20rpx;
   padding-right: 20rpx;
+  margin-bottom: 20rpx;
 }
 .contain{
   display: flex;

@@ -14,7 +14,11 @@ Component({
   data: {
     moreBtnUrl: "",
     paersonInfo: {},
-    contentText: ""
+    contentText: "",
+    httpParams: {
+      nextPage: "/pages/index/service-index/wth/share-list/share-list",
+      doctorID: "2"
+     }
   },
   /**
    * 生命周期函数--监听页面加载
