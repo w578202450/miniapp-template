@@ -2,6 +2,7 @@
   background-color: orange;
   margin-bottom: 1rpx;
 }
+
 .content {
   background-color: white;
   padding: 32rpx 20rpx 32rpx 20rpx;

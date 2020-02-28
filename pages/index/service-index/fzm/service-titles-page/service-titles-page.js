@@ -24,19 +24,18 @@ Component({
   data: {
 
   },
-
   /**
    * 组件的方法列表
    */
   methods: {
     // 返回事件   
-    selectedAction: function (e) {
+    selectedAction: function(e) {
       console.log("dssss", e.currentTarget.dataset.index);
       var index = e.currentTarget.dataset.index;
       this.triggerEvent('selectedIndex', index);
       this.setData({
-        selectedIndex:index
+        selectedIndex: index
       });
-    },
+    }
   }
 })

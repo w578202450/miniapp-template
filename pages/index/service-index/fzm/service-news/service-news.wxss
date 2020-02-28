@@ -1,7 +1,66 @@
-/* pages/index/service-index/fzm/service-news/service-news.wxss */
-
-.content {
-  background: rgba(255, 255, 255, 1);
+.container {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+}
+
+.swiper-tabs-box {
+  width: 100%;
+  height: 52rpx;
+  background: white;
+  display: flex;
+  align-items: center;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 32rpx;
+  padding-bottom: 16rpx;
+}
+
+.selected {
+  transition: 0.3s;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
+.normal {
+  transition: 0.3s;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 36rpx;
+}
+
+.swiper-tabs-title-box {
+  display: flex;
+  flex-direction: column;
+  height: 100rpx;
+  justify-content: center;
+  align-items: center;
+  margin-right: 64rpx;
+}
+
+.swiper {
+  width: 100%;
+  flex: 1;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.swiper-tabs-line-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 4rpx;
+}
+
+.swiper-tabs-line {
+  margin-top: 8rpx;
+  width: 64rpx;
+  height: 4rpx;
+  background: linear-gradient(270deg, rgba(237, 251, 255, 1) 0%, rgba(0, 145, 255, 1) 100%);
+  border-radius: 4rpx;
 }

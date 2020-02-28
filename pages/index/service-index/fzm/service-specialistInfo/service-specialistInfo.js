@@ -27,6 +27,18 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    /**
+     * 立即问诊
+     */
+    goToInquiryOption() {
 
+    },
+
+    /**
+     * 查看介绍(预览门诊医生详情)
+     */
+    previewDoctorInfo() {
+
+    }
   }
 })

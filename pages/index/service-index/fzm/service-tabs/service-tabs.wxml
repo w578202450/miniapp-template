@@ -1,5 +1,5 @@
 <view class="tabs-box" style="{{pageStyle}}">
-  <block wx:for="{{list}}" wx:for-item="item">
+  <block wx:for="{{list}}" wx:for-item="item" wx:key="index">
     <view class="tab" style="{{tabStyle}}">{{item}}</view>
   </block>
 </view>
