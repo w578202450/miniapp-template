@@ -8,10 +8,10 @@
     <view class="contain">
     <view class="personInfo">
      <image class="img" src="{{paersonInfo.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
-     <text class="name">患者：{{paersonInfo.patientName}} {{paersonInfo.patientAddress}}</text>
+     <text class="name">{{type}}：{{paersonInfo.patientName?comTools.subName(paersonInfo.patientName):paersonInfo.authorName}} {{paersonInfo.patientAddress}}</text>
     </view>
     <view>
-     <text class="date">{{paersonInfo.publishDate}}</text>
+     <text class="date">{{comTools.formateDate(paersonInfo.publishDate)}}</text>
     </view>
     </view>
     <view>

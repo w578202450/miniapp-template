@@ -2,7 +2,11 @@
 .box{
   padding-left: 20rpx;
   padding-right: 20rpx;
-  border-bottom: 1rpx solid RGBA(187, 187, 187, 1);
+  /* border-bottom: 1rpx solid RGBA(187, 187, 187, 1); */
+  background-color: RGBA(255, 255, 255, 1);
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .contain{
   display: flex;

@@ -5,10 +5,10 @@
     <view class="contain">
     <view class="personInfo">
      <cover-image class="img" src="{{item.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></cover-image>
-     <text class="name">患者：{{item.patientName}} {{item.patientAddress}}</text>
+     <text class="name">医生：{{item.authorName}} {{item.patientAddress}}</text>
     </view>
     <view>
-     <text class="date">{{item.publishDate}}</text>
+     <text class="date">{{comTools.formateDate(item.publishDate)}}</text>
     </view>
     </view>
     <view>
