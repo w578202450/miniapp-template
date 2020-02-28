@@ -23,16 +23,17 @@ Page({
 
   /**
    * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    let that = this;
-    /**
+   *  /**
    * 1.options无参
    *   （1）通过搜索小程序进入时
    * 2.options有参
    *   （1）通过扫码进入时： "q" 的值为url带参
    *   （2）通过分享的小程序进入时：直接带参
+   *
    */
+  onLoad: function (options) {
+    let that = this;
+    console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -58,7 +59,7 @@ Page({
     // 如果orgID不等于侯丽萍医院的orgID，则直接跳转到专家问诊页
     if (that.data.shareOrgID != that.data.houShiOrgID) {
       wx.switchTab({
-        url: '/pages/index/service-index/service-index'
+        url: '/pages/index/service-index/service-index?orgID=' + that.data.shareOrgID + '&assistantStaffID=' + that.data.shareAssistantStaffID
       });
     }
   },

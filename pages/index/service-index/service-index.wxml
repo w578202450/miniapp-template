@@ -5,7 +5,7 @@
   <!-- 医生团队 -->
   <service-physicianTeam pageStyle="margin-bottom:20rpx;"></service-physicianTeam>
   <!-- 患者评价 -->
-  <patient-evaluate id="patientEvaluateModule" evaluateAllData="{{evaluateAllData}}" />
+  <patient-evaluate evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
   <notes></notes>
   <!-- 患者分享 -->
