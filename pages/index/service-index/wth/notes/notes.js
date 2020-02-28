@@ -14,25 +14,15 @@ Component({
   data: {
     moreBtnUrl: "",
     paersonInfo: {
-      imgSrc: "/images/chat/personBacImg.png",
+        imgSrc: "/images/chat/personBacImg.png",
         name: "匿名用户",
         address: "****",
         date: "2020-01-01"
     },
-    contentText: ""
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+    contentText: "asd",
+    httpParams: {
+      nextPage: ""
+     }
   },
   /**
    * 组件的方法列表

@@ -4,10 +4,12 @@ Component({
    * 组件的属性列表
    */
   properties: {
-     // 查看更多的h5链接
-     moreBtnUrl: {
-       type: String,
-       value: ""
+     // 查看更多
+     httpParams: {
+       type: Object,
+       value: {
+        nextPage: ""
+       }
      },
      // 主题
      title: {
@@ -33,7 +35,7 @@ Component({
     contentText: {
       type: String,
       value: "暂无评价"
-    }
+    },
   },
 
   /**
@@ -47,11 +49,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    // getImgSrcDefault: function(event) {
-    //   let self = this;
-    //   // self.data.paersonInfo.imgSrc = self.data.imgSrcDefault;
-    //   console.log(self.data.paersonInfo.imgSrc);
-    // }
     toDetail: function() {
       let that = this;
       that.triggerEvent('toDetail');

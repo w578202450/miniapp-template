@@ -3,7 +3,9 @@
     "service-specialistInfo": "/pages/index/service-index/fzm/service-specialistInfo/service-specialistInfo",
     "service-physicianTeam": "/pages/index/service-index/fzm/service-physicianTeam/service-physicianTeam",
     "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate",
-    "service-news": "/pages/index/service-index/fzm/service-news/service-news"
+    "service-news": "/pages/index/service-index/fzm/service-news/service-news",
+    "notes": "/pages/index/service-index/wth/notes/notes",
+    "share": "/pages/index/service-index/wth/share/share"
   },
   "navigationStyle": "custom"
 }

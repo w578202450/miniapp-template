@@ -6,5 +6,9 @@
   <service-physicianTeam pageStyle="margin-bottom:20rpx"></service-physicianTeam>
   <!-- 患者评价 -->
   <patient-evaluate id="patientEvaluateModule" evaluateAllData="{{evaluateAllData}}" />
+  <!-- 医生手记 -->
+  <notes pageStyle="margin-bottom:20rpx"></notes>
+  <!-- 患者分享 -->
+  <share pageStyle="margin-bottom:20rpx"></share>
   <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx"></service-news>
 </view>

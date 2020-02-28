@@ -5,7 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    moreBtnUrl: "",
+    paersonInfo: {
+        imgSrc: "/images/chat/personBacImg.png",
+        name: "匿名用户",
+        address: "****",
+        date: "2020-01-01"
+    },
+    contentText: "asdasd",
+    arry: [{},{}]
   },
 
   /**
@@ -62,5 +70,9 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  toDetail: function() {
+    let that = this;
+    console.log(333);
   }
 })

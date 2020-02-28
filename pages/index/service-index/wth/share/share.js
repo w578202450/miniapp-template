@@ -14,7 +14,10 @@ Component({
   data: {
     moreBtnUrl: "",
     paersonInfo: {},
-    contentText: ""
+    contentText: "",
+    httpParams: {
+      nextPage: ""
+     }
   },
   /**
    * 生命周期函数--监听页面加载
