@@ -193,19 +193,6 @@ Component({
           url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
         });
       }
-    },
-
-    /**模拟跳转到H5素材 */
-    simulationToMatFun: function() {
-      let materialData = {
-        materialType: 0, // （必传）要查看的素材类型 0图文 1视频
-        title: "患者评价相关素材", // 待确认，可先不传
-        url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // （必传）图文、视频 的网络地址链接
-        logoUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg" // 视频的封面图片(没有就传空字符窜)
-      };
-      wx.navigateTo({
-        url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
-      });
     }
   }
 })
