@@ -97,6 +97,21 @@
 					"id": -1,
 					"name": "首页界面",
 					"pathName": "pages/index/bhx/home-index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "支付成功",
+					"pathName": "pages/order/order-success/order-success",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价页面",
+					"pathName": "pages/order/order-evaluate/order-evaluate",
+					"query": "",
 					"scene": null
 				}
 			]

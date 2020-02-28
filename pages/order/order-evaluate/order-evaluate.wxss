@@ -1,1 +1,16 @@
 /* pages/order/order-evaluate/order-evaluate.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.evabody {
+  padding: 0 20rpx;
+}
+
+.medicineListBox {
+  padding-top: 20rpx;
+}
+.medicineListView {
+  margin-bottom: 20rpx;
+}

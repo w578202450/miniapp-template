@@ -398,8 +398,11 @@ Page({
                 wx.showToast({
                   title: '收货成功',
                   success: function() {
-                    that.loadDatas()
-                    that.refreshPrePage()
+                    that.loadDatas();
+                    that.refreshPrePage();
+                    wx.navigateTo({
+                      url: '/pages/order/order-success/order-success?orderID=' + this.data.orderInfo.keyID
+                    });
                   }
                 })
               }
