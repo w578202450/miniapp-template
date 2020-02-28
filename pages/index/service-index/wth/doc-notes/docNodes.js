@@ -23,10 +23,12 @@ Component({
     paersonInfo: {
       type: Object,
       value: {
-        imgSrc: "/images/chat/personBacImg.png",
-        name: "匿名用户",
-        address: "****",
-        date: "2020-01-01"
+      patientName: "",
+      patientFace: "",
+      patientAddress: "",
+      contentSummary: "",
+      detailUrl: "",
+      publishDate: ""
       }
     },
     // 评价内容

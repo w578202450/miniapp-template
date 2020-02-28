@@ -7,15 +7,15 @@
     <view slot="content-body" class="box" bindtap="toDetail">
     <view class="contain">
     <view class="personInfo">
-     <image class="img" src="{{paersonInfo.imgSrc}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
-     <text class="name">患者：{{paersonInfo.name}} {{paersonInfo.address}}</text>
+     <image class="img" src="{{paersonInfo.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
+     <text class="name">患者：{{paersonInfo.patientName}} {{paersonInfo.patientAddress}}</text>
     </view>
     <view>
-     <text class="date">{{paersonInfo.date}}</text>
+     <text class="date">{{paersonInfo.publishDate}}</text>
     </view>
     </view>
     <view>
-     <text class="content">{{comTools.subStrTxt(contentText,50)}}</text>
+     <text class="content">{{comTools.subStrTxt(paersonInfo.contentSummary,50)}}</text>
     </view>
    </view>
   </module-title>
