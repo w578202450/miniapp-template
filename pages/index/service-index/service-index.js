@@ -326,7 +326,7 @@ Page({
         that.setData({
           ["inquiryCaseData.keyID"]: res.data.keyID,
           ["inquiryCaseData.authorName"]: res.data.authorName,
-          ["inquiryCaseData.patientFace"]: res.data.patientFace,
+          ["inquiryCaseData.photoUrl"]: res.data.photoUrl,
           ["inquiryCaseData.patientAddress"]: res.data.patientAddress,
           ["inquiryCaseData.contentSummary"]: res.data.contentSummary,
           ["inquiryCaseData.detailUrl"]: res.data.detailUrl,

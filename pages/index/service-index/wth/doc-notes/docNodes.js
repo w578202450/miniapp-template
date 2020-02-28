@@ -29,7 +29,8 @@ Component({
       contentSummary: "",
       detailUrl: "",
       publishDate: "",
-      authorName: ""
+      authorName: "",
+      photoUrl: ""
       }
     },
     // 评价内容

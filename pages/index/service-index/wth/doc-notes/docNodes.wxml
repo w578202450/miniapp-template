@@ -7,7 +7,7 @@
     <view slot="content-body" class="box" bindtap="toDetail">
     <view class="contain">
     <view class="personInfo">
-     <image class="img" src="{{paersonInfo.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
+     <image class="img" src="{{paersonInfo.patientFace?paersonInfo.patientFace:paersonInfo.photoUrl}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
      <text class="name">{{type}}：{{paersonInfo.patientName?comTools.subName(paersonInfo.patientName):paersonInfo.authorName}} {{paersonInfo.patientAddress}}</text>
     </view>
     <view>

@@ -14,7 +14,8 @@ paersonInfo: {
   patientAddress: "",
   contentSummary: "",
   detailUrl: "",
-  publishDate: ""
+  publishDate: "",
+  photoUrl: ""
   }
 },
   },
