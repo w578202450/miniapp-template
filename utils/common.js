@@ -10,7 +10,7 @@ let TIM = getApp().globalData.TIM;
 
 // 变量
 let userSig = ""; // [必选]身份签名，需要从自行搭建的签名服务获取
-let selctedIndex = 0; //公众号跳转带参数  0在线问诊 1个人中心
+// let selctedIndex = 0; //公众号跳转带参数  0在线问诊 1个人中心
 let logined = false; //是否处于登录状态
 let nextPageName = ""; // 下一页的名字
 
@@ -33,14 +33,14 @@ let nextPageName = ""; // 下一页的名字
 function startLoginFun(options) {
   console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
   userSig = "";
-  selctedIndex = 0;
+  // selctedIndex = 0;
   logined = false;
   nextPageName = "";
-  if (options) {
-    if (options.selctedIndex == 0 || options.selctedIndex) {
-      selctedIndex = options.selctedIndex;
-    }
-  }
+  // if (options) {
+  //   if (options.selctedIndex == 0 || options.selctedIndex) {
+  //     selctedIndex = options.selctedIndex;
+  //   }
+  // }
   console.log("开始IM登录");
   app.globalData.unionid = wx.getStorageSync('unionid');
   app.globalData.openid = wx.getStorageSync('openID');
