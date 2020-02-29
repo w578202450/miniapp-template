@@ -86,7 +86,13 @@
           </view>
         </view>
         <!-- 分享 -->
-        <button bindtap="shareMore" class="address-tel-share-button">分享给更多需要的人</button>
+        <view class="share-box" bindtap="shareMore">
+          <view class="share-box-view">
+            <image src="../../../images/home/home_share.png"></image>
+            <text>分享给更多需要的人</text>
+          </view>
+        </view>
+
       </view>
     </view>
 

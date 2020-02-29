@@ -19,6 +19,10 @@
         <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="id">
           <service-news-item itemData="{{item}}"></service-news-item>
         </block>
+        <view>
+          <view>加载更多...</view>
+          <view>刷新中...</view>
+        </view>
       </scroll-view>
     </swiper-item>
   </swiper>
