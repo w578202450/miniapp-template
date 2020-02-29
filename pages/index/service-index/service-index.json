@@ -5,7 +5,8 @@
     "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate",
     "service-news": "/pages/index/service-index/fzm/service-news/service-news",
     "notes": "/pages/index/service-index/wth/notes/notes",
-    "share": "/pages/index/service-index/wth/share/share"
+    "share": "/pages/index/service-index/wth/share/share",
+    "service-nav-title":"/pages/index/service-index/fzm/service-nav-title/service-nav-title"
   },
   "navigationStyle": "custom"
 }

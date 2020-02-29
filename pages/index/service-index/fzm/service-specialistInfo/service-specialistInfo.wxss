@@ -2,12 +2,13 @@
 
 .main {
   background: rgba(255, 255, 255, 1);
-  padding: 0 20rpx 40rpx 20rpx;
+  padding-bottom: 40rpx;
 }
 
-.title-box {
-  display: flex;
-  align-items: center;
+
+.banner-box {
+  margin-left: 20rpx;
+  margin-right: 20rpx;
 }
 
 .title-name {
@@ -26,33 +27,13 @@
   line-height: 24rpx;
 }
 
-.button-box {
-  width: 160rpx;
-  height: 48rpx;
-  background: rgba(254, 83, 97, 0.99);
-  box-shadow: 0px 2rpx 32rpx 0px rgba(0, 0, 0, 0.15);
-  border-radius: 24rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.button-text {
-  font-size: 24rpx;
-  font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 1);
-}
-
-.title-image-box {
-  margin-top: 34rpx;
-}
-
 .specialist-box {
+  margin-top: 24rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 2px 32rpx 0px rgba(0, 0, 0, 0.15);
   border-radius: 10rpx;
-  margin-top: 24rpx;
   padding: 30rpx 30rpx 24rpx 30rpx;
   display: flex;
   flex-direction: column;
@@ -66,12 +47,20 @@
 .specialist-header-box image {
   height: 124rpx;
   width: 124rpx;
+  flex-shrink: 0;
 }
 
 .specialist-header-middle-box {
   display: flex;
   flex-direction: column;
   margin-left: 30rpx;
+}
+
+.specialist-header-right-box {
+  color: rgba(67, 139, 239, 1);
+  width: 125rpx;
+  margin-left: 10rpx;
+  flex-shrink: 0;
 }
 
 .specialist-bottom-box {
@@ -105,6 +94,8 @@
 
 .licensed-box {
   margin-top: 32rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
   height: 28rpx;
   display: flex;
   flex-direction: row;

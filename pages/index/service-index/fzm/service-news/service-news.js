@@ -1,15 +1,11 @@
+var appBehavior = require('../behaviors/fzm-behaviors')
+
 Component({
+  behaviors: [appBehavior],
   /**
    * 组件的属性列表
    */
   properties: {
-    /**
-     * 容器样式
-     */
-    pageStyle: {
-      type: String,
-      value: ''
-    },
     /**
      * 默认选项卡index
      */

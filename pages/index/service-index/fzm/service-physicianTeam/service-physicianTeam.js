@@ -1,4 +1,3 @@
-// pages/index/service-index/fzm/servie-physicianTeam/service-physicianTeam.js
 Component({
   /**
    * 组件的属性列表
@@ -7,7 +6,12 @@ Component({
     pageStyle: {
       type: String,
       value: ''
-    }
+    },
+
+    doctorInfo: {
+      type: Object,
+      value: null
+    },
   },
 
   /**

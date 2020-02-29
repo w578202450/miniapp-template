@@ -11,14 +11,16 @@ Page({
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     doctorInfo: {}, // 医师的信息
-    certifyInfo: {}, // 医师资质许可证等信息
+    certifyInfo: {}, // ;;;;;;医师资质许可证等信息
     assistantDoctorInfo: {}, // 助理医师的信息
     evaluateAllData: {
       evaluateData: [],
       illnessSumList: [],
       doctorID: "",
       orgID: ""
-    } // 患者评价相关的所有数据
+    }, // 患者评价相关的所有数据
+    doctorStaffID: "", // 门诊医生staffId
+    scrollTop: 0
   },
 
   /**
@@ -129,6 +131,7 @@ Page({
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
           that.getOrderCommentData(res.data.orgID); // 获取患者评价信息
+          that.data.doctorStaffID = res.data.doctorStaffID;
         },
         fail: function(err) {
           // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
@@ -262,5 +265,24 @@ Page({
         });
       }
     });
-  }
+  },
+
+  //------------------------------fzm-------------------------------
+  /**
+   * 查看门诊医生介绍
+   */
+  previewDoctorInfo() {
+
+  },
+
+  /**
+   * 监听屏幕滚动 判断上下滚动
+   */
+  onPageScroll: function(ev) {
+    this.setData({
+      scrollTop: ev.scrollTop
+    })
+
+  },
+  //------------------------------fzm-------------------------------
 })

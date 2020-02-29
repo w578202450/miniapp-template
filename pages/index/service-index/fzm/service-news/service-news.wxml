@@ -1,5 +1,6 @@
 <view class='container' style="{{pageStyle}}">
-  <view class='swiper-tabs-box'>
+  <view class="swiper-tabs-sticky-box" style="top: {{statusBarHeight + navBarHeight + 34}}px">
+    <view class='swiper-tabs-box'>
     <block wx:for="{{titles}}" wx:for-item="item" wx:for-index="index" wx:key="id">
       <view class='swiper-tabs-title-box' bindtap='titleClick' data-idx='{{index}}'>
         <text class="{{index==currentIndex ? 'selected' : 'normal'}}">{{item.name}}</text>
@@ -9,6 +10,8 @@
       </view>
     </block>
   </view>
+  </view>
+  
   <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
   <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}'>
     <block wx:for="{{titles}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="id">
