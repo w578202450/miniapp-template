@@ -6,7 +6,7 @@
 
 .swiper-tabs-sticky-box {
   position: sticky;
-  z-index: 10
+  z-index: 10;
 }
 
 .swiper-tabs-box {
@@ -68,4 +68,19 @@
   height: 4rpx;
   background: linear-gradient(270deg, rgba(237, 251, 255, 1) 0%, rgba(0, 145, 255, 1) 100%);
   border-radius: 4rpx;
+}
+
+.loading-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.loading-box text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.35);
+  line-height: 36rpx;
 }
