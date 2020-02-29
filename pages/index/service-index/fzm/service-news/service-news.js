@@ -107,6 +107,10 @@ Component({
           currentIndex: index
         });
       }
+    },
+
+    ddddddddddd: function (e) {
+      console.log('dddddddddd------',e)
     }
   }
 })

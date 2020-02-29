@@ -11,6 +11,8 @@ module.exports = Behavior({
   },
   data: {
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
-    navBarHeight: app.globalData.navBarHeight
+    navBarHeight: app.globalData.navBarHeight,
+    windowH: wx.getSystemInfoSync().windowHeight,
+
   }
 })
