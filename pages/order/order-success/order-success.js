@@ -7,7 +7,7 @@ Page({
    */
   data: {
     paySuccessIconSrc: "/images/order/paySuccessIcon.png",
-    orderID: ""
+    paramsData: ""  // 字符窜形式的数据
   },
 
   /**
@@ -16,8 +16,7 @@ Page({
   onLoad: function(options) {
     console.log("进入订单完成页的参数：" + JSON.stringify(options));
     this.setData({
-      orderID: options.orderID,
-      orgID: options.orgID
+      paramsData: options.paramsData
     });
   },
 
@@ -80,7 +79,7 @@ Page({
   /**操作：立即评价 */
   toEvaluateFun: function() {
     wx.navigateTo({
-      url: '/pages/order/order-evaluate/order-evaluate?orderID=' + this.data.orderID + '&orgID=' + this.data.orgID
+      url: '/pages/order/order-evaluate/order-evaluate?paramsData=' + this.data.paramsData
     });
   }
 })

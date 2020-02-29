@@ -421,6 +421,13 @@ Page({
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
+  },
+
+  /**操作：立即评价 */
+  toEvaluateFun: function () {
+    wx.navigateTo({
+      url: '/pages/order/order-evaluate/order-evaluate?paramsData=' + this.data.paramsData
+    });
   }
 
 })
