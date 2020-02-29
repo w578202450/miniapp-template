@@ -1,0 +1,23 @@
+<!--pages/order/order-evaluate/order-evaluate.wxml-->
+<view>
+<!-- 引入wxs脚本 -->
+  <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
+  <view class="evabody">
+    <!-- 药品列表 -->
+    <view class="medicineListBox">
+      <view class="medicineListView" wx:for="{{rpDetailData}}" wx:key="index">
+        <view>
+          <image class="medicineImg" src="{{item.imgUrl}}" />
+        </view>
+        <view class="medicineParameter">
+          <view class="medicineNameTxt">{{item.productBrand}} {{comTools.subStrTxt(item.medicineName, 16)}}</view>
+          <view class="productSpecTxt">规格：{{item.productSpec}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 评分 -->
+    <view></view>
+    <!-- 评价 -->
+    <view></view>
+  </view>
+</view>

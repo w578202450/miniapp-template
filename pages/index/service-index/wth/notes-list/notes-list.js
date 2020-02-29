@@ -1,4 +1,5 @@
 // pages/index/service-index/wth/notes-list/notes-list.js
+const HTTP = require('../../../../../utils/http-util');
 Page({
 
   /**
@@ -6,14 +7,8 @@ Page({
    */
   data: {
     moreBtnUrl: "",
-    paersonInfo: {
-        imgSrc: "/images/chat/personBacImg.png",
-        name: "匿名用户",
-        address: "****",
-        date: "2020-01-01"
-    },
-    contentText: "asdasd",
-    arry: [{},{}]
+    contentText: "",
+    inquiryCaseData: []
   },
 
   /**
@@ -25,7 +20,9 @@ Page({
     });
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);
-    console.log(that.data.httpParams);
+    // console.log(that.data.httpParams);
+    that.inquiryCaseList();
+    
   },
 
   /**
@@ -76,8 +73,37 @@ Page({
   onShareAppMessage: function () {
 
   },
-  toDetail: function() {
+  // 进入详情
+  toDetail: function(e) {
     let that = this;
-    console.log(123);
+    // console.log(e.currentTarget.dataset.detailurl);
+    let materialData = {
+      materialType: 0, // （必传）要查看的素材类型 0图文 1视频
+      title: "标题", // 待确认，可先不传
+      url: e.currentTarget.dataset.detailurl, // （必传）图文、视频 的网络地址链接
+      logoUrl: "" // 视频的封面图片(没有就传空字符窜)
+    };
+    wx.navigateTo({
+      url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
+    });
+  },
+  // 获取手记列表
+  inquiryCaseList: function(orgID,sectionID,doctorStaffID) {
+    let that = this;
+    HTTP.inquiryCaseList({
+      orgID: "19101610315474350800511001",
+      sectionID: "20021811095450646230521001",
+      doctorStaffID: "19101610315474330040514001",
+      pageIndex: 1,
+      pageSize: 100
+    }).then(res => {
+      // console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
+      if (res.data) {
+        that.setData({
+          ["inquiryCaseData"]: res.data.datas
+        });
+        // console.log(this.data.patientShareGetData);
+      }
+    });
   }
 })

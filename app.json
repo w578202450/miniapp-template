@@ -21,7 +21,9 @@
     "pages/address/address-list/address-list",
     "pages/address/address-add/address-add",
     "pages/order/order-details/order-details",
-    "pages/order/drug-orders/drug-orders"
+    "pages/order/drug-orders/drug-orders",
+    "pages/order/order-success/order-success",
+    "pages/order/order-evaluate/order-evaluate"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -13,6 +13,7 @@ Page({
     doctorInfo: {}, // 医师的信息
     certifyInfo: {}, // ;;;;;;医师资质许可证等信息
     assistantDoctorInfo: {}, // 助理医师的信息
+     // 患者评价相关的所有数据
     evaluateAllData: {
       evaluateData: [],
       illnessSumList: [],
@@ -20,7 +21,27 @@ Page({
       orgID: ""
     }, // 患者评价相关的所有数据
     doctorStaffID: "", // 门诊医生staffId
-    scrollTop: 0
+    scrollTop: 0,
+    // 患者分享相关数据
+    patientShareGetData: {
+      keyID: "",
+      patientName: "",
+      patientFace: "",
+      patientAddress: "",
+      contentSummary: "",
+      detailUrl: "",
+      publishDate: ""
+    },
+    // 患者手记相关数据
+    inquiryCaseData: {
+      keyID: "",
+      patientName: "",
+      patientFace: "",
+      patientAddress: "",
+      contentSummary: "",
+      detailUrl: "",
+      publishDate: ""
+    },
   },
 
   /**
@@ -56,6 +77,8 @@ Page({
     };
     commonFun.startLoginFun(sendOptions); // 尝试自动登录 
     that.initDocInfoFun();
+    that.patientShareGet();
+    that.inquiryCaseGet();                   
   },
 
   /**
@@ -285,4 +308,54 @@ Page({
 
   },
   //------------------------------fzm-------------------------------
+  /**
+   * 查询：患者分享信息
+   */
+  patientShareGet: function(orgID,sectionID,doctorStaffID) {
+    let that = this;
+    HTTP.patientShareGet({
+      orgID: "19101610315474350800511001",
+      sectionID: "20021811095450646230521001",
+      doctorStaffID: "19101610315474330040514001",
+    }).then(res => {
+      console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
+      if (res.data) {
+        that.setData({
+          ["patientShareGetData.keyID"]: res.data.keyID,
+          ["patientShareGetData.patientName"]: res.data.patientName,
+          ["patientShareGetData.patientFace"]: res.data.patientFace,
+          ["patientShareGetData.patientAddress"]: res.data.patientAddress,
+          ["patientShareGetData.contentSummary"]: res.data.contentSummary,
+          ["patientShareGetData.detailUrl"]: res.data.detailUrl,
+          ["patientShareGetData.publishDate"]: res.data.publishDate
+        });
+        // console.log(this.data.patientShareGetData);
+      }
+    });
+  },
+  /**
+   * 查询：患者手记信息
+   */
+  inquiryCaseGet: function(orgID,sectionID,doctorStaffID) {
+    let that = this;
+    HTTP.inquiryCaseGet({
+      orgID: "19101610315474350800511001",
+      sectionID: "20021811095450646230521001",
+      doctorStaffID: "19101610315474330040514001",
+    }).then(res => {
+      // console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
+      if (res.data) {
+        that.setData({
+          ["inquiryCaseData.keyID"]: res.data.keyID,
+          ["inquiryCaseData.authorName"]: res.data.authorName,
+          ["inquiryCaseData.photoUrl"]: res.data.photoUrl,
+          ["inquiryCaseData.patientAddress"]: res.data.patientAddress,
+          ["inquiryCaseData.contentSummary"]: res.data.contentSummary,
+          ["inquiryCaseData.detailUrl"]: res.data.detailUrl,
+          ["inquiryCaseData.publishDate"]: res.data.publishDate
+        });
+        // console.log(this.data.patientShareGetData);
+      }
+    });
+  }
 })

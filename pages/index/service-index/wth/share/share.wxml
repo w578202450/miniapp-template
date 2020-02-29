@@ -3,5 +3,6 @@
   <doc-notes title="患友分享" httpParams="{{httpParams}}"
   moreBtnName="查看更多案例" paersonInfo="{{paersonInfo}}"
   contentText="{{contentText}}" bind:toDetail="toDetail"
+  type="患者"
   ></doc-notes>
 </view>

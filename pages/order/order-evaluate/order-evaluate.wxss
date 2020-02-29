@@ -1,0 +1,44 @@
+/* pages/order/order-evaluate/order-evaluate.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.evabody {
+  padding: 0 20rpx;
+}
+
+.medicineListBox {
+  padding-top: 20rpx;
+  width: 100%;
+}
+
+.medicineListView {
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.medicineImg {
+  width: 120rpx;
+  height: 120rpx;
+  border: 1rpx solid #F6F6F6;
+}
+
+.medicineParameter{
+  width: 570rpx;
+  margin-left: 20rpx;
+}
+
+.medicineNameTxt{
+  font-size: 30rpx;
+  color: #555658;
+  margin-bottom: 10rpx;
+}
+
+.productSpecTxt {
+  font-size: 28rpx;
+  color: #999;
+}

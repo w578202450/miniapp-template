@@ -369,7 +369,14 @@ module.exports = {
   /**
    * 患者分享查询
    */
+  patientShareGet: function patientShareGet(params) {
+    return request('api/tmc/patientShare/get', true, 'get', params);
+  },
+
+  /**
+   * 患者分享列表查询
+   */
   patientShareList: function patientShareList(params) {
-    return request('api/hospital/patientShare/list', true, 'get', params);
+    return request('api/tmc/patientShare/list', true, 'get', params);
   }
 }

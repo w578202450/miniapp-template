@@ -9,8 +9,8 @@
   <!-- 患者评价 -->
   <patient-evaluate evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
-  <notes></notes>
+  <notes paersonInfo="{{inquiryCaseData}}"></notes>
   <!-- 患者分享 -->
-  <share></share>
-  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx"></service-news>
+  <share paersonInfo="{{patientShareGetData}}"></share>
+  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx;"></service-news>
 </view>

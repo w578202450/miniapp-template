@@ -1,0 +1,14 @@
+<!--pages/order/order-success/order-success.wxml-->
+<view class="paySuccess">
+  <view class="paySuccessIconBox">
+    <image class="paySuccessIcon" src="{{paySuccessIconSrc}}" mode="widthFix" />
+  </view>
+  <view class="successInfoBox">
+    <view class="title">交易成功</view>
+    <view class="titleTxt">您的订单交易成功，去评价一下～</view>
+    <view class="sucBtnBox">
+      <button class="sucBtnBac" bindtap="navBackToIndex">返回首页</button>
+      <button class="sucBtnEva" bindtap="toEvaluateFun">立即评价</button>
+    </view>
+  </view>
+</view>

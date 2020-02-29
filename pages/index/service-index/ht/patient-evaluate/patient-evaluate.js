@@ -34,7 +34,8 @@ Component({
     // if (that.data.evaluateAllData) {
     //   let httpParamsData = {
     //     nextPage: "/pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
-    //     doctorID: that.data.evaluateAllData.doctorID
+    //     doctorID: that.data.evaluateAllData.doctorID,
+    //     orgID: that.data.evaluateAllData.orgID
     //   }
     //   that.setData({
     //     evaluateData: that.data.evaluateAllData.evaluateData[0] ? that.data.evaluateAllData.evaluateData[0]: [],
@@ -54,7 +55,7 @@ Component({
       patientName: "张三三",
       content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
       addTime: "2020-02-20 00:15:00",
-      materialData: [{
+      materialList: [{
         keyID: "1101",
         materialType: 0,
         materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
@@ -124,7 +125,8 @@ Component({
       illnessSumList: illList,
       httpParams: {
         nextPage: "/pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
-        doctorID: "1000"
+        doctorID: "1000",
+        orgID: "1223"
       }
     });
   },
@@ -154,12 +156,12 @@ Component({
       let that = this;
       console.log(e);
       let index = e.currentTarget.dataset.index; // 点击的评论（即item）所在下标
-      let indexs = e.currentTarget.dataset.indexs; // 点击的图片所在评论的materialData中的（即items）下标
+      let indexs = e.currentTarget.dataset.indexs; // 点击的图片所在评论的materialList中的（即items）下标
       let materialItem = { ...e.currentTarget.dataset.material
       }; // 点击的items
       // materialType： 0图片 1视频
       if (materialItem.materialType == 0) {
-        let allMaterial = that.data.evaluateData[index].materialData; // 临时存储点击的评论的所有图片、视频素材
+        let allMaterial = that.data.evaluateData[index].materialList; // 临时存储点击的评论的所有图片、视频素材
         let previewImgArr = []; // 要展示的图片集合
         allMaterial.forEach((item) => {
           if (item.materialType == 0) {
@@ -181,24 +183,16 @@ Component({
           return;
         }
         console.log("点击的视频，需要跳转到视频播放页");
-        // let materialUrl = materialItem.materialUrl;
-        // wx.navigateTo({
-        //   url: ''
-        // });
+        let materialData = {
+          materialType: 1, // （必传）要查看的素材类型 0图文 1视频
+          title: "患者评价相关素材", // 待确认，可先不传
+          url: materialItem.materialUrl, // （必传）图文、视频 的网络地址链接
+          logoUrl: "" // 视频的封面图片(没有就传空字符窜)
+        };
+        wx.navigateTo({
+          url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
+        });
       }
-    },
-
-    /**模拟跳转到素材 */
-    simulationToMatFun: function() {
-      let materialData = {
-        materialType: 0, // （必传）要查看的素材类型 0图文 1视频
-        title: "标题", // 待确认，可先不传
-        url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // （必传）图文、视频 的网络地址链接
-        logoUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg" // 视频的封面图片(没有就传空字符窜)
-      };
-      wx.navigateTo({
-        url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
-      });
     }
   }
 })

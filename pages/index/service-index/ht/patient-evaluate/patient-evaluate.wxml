@@ -3,7 +3,7 @@
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="（235）" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}">
-    <view slot="content-body" class="evaluateContentBox" bindtap="simulationToMatFun">
+    <view slot="content-body" class="evaluateContentBox">
       <!-- 星级、标签区 -->
       <view class="levelBox">
         <view class="flexRowBetweenCenter">
@@ -52,7 +52,7 @@
         <view class="evaluateContent">{{isShowAllContent ? item.content : comTools.subStrTxt(item.content, 48)}}</view>
         <!-- 评价内容的图片或者视频 -->
         <view wx:if="{{isShowAllContent}}" class="materialDataBox">
-          <view class="materialItemView {{comTools.isDivisible(indexs+1, 3) ? '': 'materialItemViewMargin'}}" wx:for="{{item.materialData}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}" data-indexs="{{indexs}}">
+          <view class="materialItemView {{comTools.isDivisible(indexs+1, 3) ? '': 'materialItemViewMargin'}}" wx:for="{{item.materialList}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}" data-indexs="{{indexs}}">
             <image class="materialImg" src="{{items.materialUrl}}" mode="widthFix" style="background: url({{materialImgBac}});background-size: contain;">
             </image>
             <image wx:if="{{items.materialType == 1}}" class="videoIconImg" src="{{videoIconSrc}}"/>
