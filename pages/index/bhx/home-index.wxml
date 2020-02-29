@@ -85,19 +85,20 @@
             <text class="title-other">太原市小店区并州南路489号（太航加油站南侧）</text>
           </view>
         </view>
-
-       <!-- 分享 -->
-      <button bindtap="shareMore" class="address-tel-share-button">分享给更多需要的人</button>
+        <!-- 分享 -->
+        <button bindtap="shareMore" class="address-tel-share-button">分享给更多需要的人</button>
+      </view>
     </view>
-  </view>
 
-  <!-- 立即进入专家门诊 -->
-  <view class="enter-box" bindtap="toServiceIndexFun">
-    <!-- <button type="primary" class="" bindtap="toServiceIndexFun">立即进入专家门诊</button> -->
-    <text class="enter-name">立即进入专家门诊</text>
-    <view class="black-rectangle">
+    <!-- 灰色间隔区 -->
+    <view class="intervalView"></view>
+    <!-- 立即进入专家门诊 -->
+    <view class="enter-box" bindtap="toServiceIndexFun">
+      <!-- <button type="primary" class="" bindtap="toServiceIndexFun">立即进入专家门诊</button> -->
+      <text class="enter-name">立即进入专家门诊</text>
+      <view class="black-rectangle">
+      </view>
     </view>
-  </view>
 
- </view>
+  </view>
 </view>
