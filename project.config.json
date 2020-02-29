@@ -80,8 +80,8 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/index/service-index/service-index",
+					"id": 3,
+					"name": "专家门诊",
 					"pathName": "pages/index/service-index/service-index",
 					"query": "",
 					"scene": null
@@ -97,6 +97,7 @@
 					"id": -1,
 					"name": "首页界面",
 					"pathName": "pages/index/bhx/home-index",
+					"query": "",
 					"scene": null
 				}
 			]
