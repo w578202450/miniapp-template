@@ -322,21 +322,21 @@ module.exports = {
    * 获取患者评价
    */
   orderCommentGet: function orderCommentGet(params) {
-    return request('api/tmc/orderComment/get', true, 'get', params);
+    return request('api/tmc/commentReview/get', true, 'get', params);
   },
 
   /**
    * 获取患者评价列表
    */
   orderCommentList: function orderCommentList(params) {
-    return request('api/tmc/orderComment/list', true, 'get', params);
+    return request('api/tmc/commentReview/list', true, 'get', params);
   },
 
   /**
    * 保存评价
    */
   orderCommentSave: function orderCommentSave(params) {
-    return request('api/tmc/orderComment/save', true, 'post', params);
+    return request('api/tmc/commentReview/save', true, 'post', params);
   },
 
   /**

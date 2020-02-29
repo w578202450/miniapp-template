@@ -92,13 +92,9 @@ Page({
     if (options && options.paramsData) {
       let paramsD = JSON.parse(options.paramsData);
       this.data.paramsData.orderID = paramsD.orderID;
-      this.data.paramsData.orgID = paramsDorgID;
+      this.data.paramsData.orgID = paramsD.orgID;
       that.getOrderDetailFun(); // 查询订单详情
     }
-    this.data.paramsData.orderID = "20022817184493183873016001";
-    this.data.paramsData.orgID = "19101017081245502880511001";
-    that.getOrderDetailFun(); // 查询订单详情
-    console.log(that.data);
   },
 
   /**
@@ -160,7 +156,6 @@ Page({
       orgID: that.data.paramsData.orgID
     };
     HTTP.goodsOrder(params).then(res => {
-      console.log(res);
       if (res.data) {
         that.getRpDetailFun(res.data.rpID);
       }
@@ -172,13 +167,11 @@ Page({
    * */
   getRpDetailFun: function (rpID) {
     let that = this;
-    console.log(rpID);
     let params = {
       rpID: rpID,
       orgID: that.data.paramsData.orgID
     };
     HTTP.getRp(params).then(res => {
-      console.log(res);
       if (res.data) {
         this.data.paramsData.doctorStaffID = res.data.doctorStaffID;
         this.data.paramsData.disease = res.data.diagnosis;
@@ -308,12 +301,12 @@ Page({
       patientFace: app.globalData.userInfo.avatarUrl, // 患者头像
       orderCommentMaterial: this.data.orderCommentMaterial // 要保存的图片信息
     };
-    console.log(params);
     HTTP.orderCommentSave(params).then(res => {
-      console.log(res);
-      wx.navigateTo({
-        url: '',
-      })
+      if (res.code == 0) {
+        wx.navigateTo({
+          url: '/pages/order/order-evaluate-success/order-evaluate-success',
+        });
+      }
     });
   }
 })

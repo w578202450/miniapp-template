@@ -400,8 +400,12 @@ Page({
                   success: function() {
                     that.loadDatas();
                     that.refreshPrePage();
+                    let paramsData = {
+                      orderID: this.data.orderInfo.keyID,
+                      orgID: app.globalData.orgID
+                    };
                     wx.navigateTo({
-                      url: '/pages/order/order-success/order-success?orderID=' + this.data.orderInfo.keyID
+                      url: '/pages/order/order-success/order-success?paramsData=' + JSON.stringify(paramsData)
                     });
                   }
                 })
@@ -425,8 +429,12 @@ Page({
 
   /**操作：立即评价 */
   toEvaluateFun: function () {
+    let paramsData = {
+      orderID: this.data.orderInfo.keyID,
+      orgID: app.globalData.orgID
+    }
     wx.navigateTo({
-      url: '/pages/order/order-evaluate/order-evaluate?paramsData=' + this.data.paramsData
+      url: '/pages/order/order-evaluate/order-evaluate?paramsData=' + JSON.stringify(paramsData)
     });
   }
 

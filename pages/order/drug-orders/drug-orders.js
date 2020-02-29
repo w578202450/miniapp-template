@@ -152,7 +152,7 @@ Page({
     this.data.currentIndex = index;
     if (!this.data.list[index].keyID) {
       wx.showToast({
-        title: '缺少订单id',
+        title: '缺少订单ID',
         icon: 'none'
       })
       return;
@@ -181,6 +181,24 @@ Page({
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
-  }
+  },
 
+  /**操作：立即评价 */
+  toEvaluateFun: function (e) {
+    let index = e.currentTarget.dataset.index;
+    if (!this.data.list[index].keyID) {
+      wx.showToast({
+        title: '缺少订单ID',
+        icon: 'none'
+      })
+      return;
+    }
+    let paramsData = {
+      orderID: this.data.list[index].keyID,
+      orgID: app.globalData.orgID
+    }
+    wx.navigateTo({
+      url: '/pages/order/order-evaluate/order-evaluate?paramsData=' + JSON.stringify(paramsData)
+    });
+  }
 })
