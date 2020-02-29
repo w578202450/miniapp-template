@@ -207,10 +207,5 @@ Page({
       evaluateListData: evaData,
       illnessSumList: illList
     });
-  },
-  toAAA:function() {
-    wx.navigateTo({
-      url: '/pages/order/order-success/order-success?orderID=' + "11111" + '&orgID=' + "2222",
-    });
   }
 })

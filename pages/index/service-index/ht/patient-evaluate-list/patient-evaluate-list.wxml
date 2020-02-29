@@ -5,8 +5,8 @@
   <view class="evaluateContentBox">
     <!-- 灰色间隔区 -->
     <view class="intervalView"></view>
-    <!-- 星级、标签区 -->
-    <view class="levelBox" bindtap="toAAA">
+    <!-- 星级、标签区  -->
+    <view class="levelBox">
       <view class="flexRowBetweenCenter">
         <view class="flexRowStartCenter">
           <text class="effect">疗效：</text>
