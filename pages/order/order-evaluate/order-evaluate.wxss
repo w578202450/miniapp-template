@@ -8,7 +8,7 @@ page {
   padding: 0 20rpx;
 }
 
-.medicineListBox {
+/* .medicineListBox {
   padding-top: 20rpx;
   width: 100%;
 }
@@ -24,15 +24,15 @@ page {
 .medicineImg {
   width: 120rpx;
   height: 120rpx;
-  border: 1rpx solid #F6F6F6;
+  border: 1rpx solid #f6f6f6;
 }
 
-.medicineParameter{
+.medicineParameter {
   width: 570rpx;
   margin-left: 20rpx;
 }
 
-.medicineNameTxt{
+.medicineNameTxt {
   font-size: 30rpx;
   color: #555658;
   margin-bottom: 10rpx;
@@ -41,4 +41,168 @@ page {
 .productSpecTxt {
   font-size: 28rpx;
   color: #999;
+} */
+
+/* 满意选择、疗效、服务 */
+.markSecBox {
+  margin-bottom: 20rpx;
+}
+
+.markTitle {
+  color: #2a2c30;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.flexRowBetweenCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.marginBottom {
+  margin-bottom: 15rpx;
+}
+
+.satisfactionView {
+  width: 230rpx;
+  padding: 0 40rpx;
+}
+
+.satisfactionSureBac {
+  background-color: #FEF8E6;
+}
+
+.satisfactionNotBac {
+  background-color: #EFEEEF;
+}
+
+.satisfactionTxtSure{
+  color: #FFB10B;
+}
+
+.satisfactionTxtNot {
+  color: #B7B9BE;
+}
+
+.satisfactionViewMarginRight {
+  margin-right: 40rpx;
+}
+
+.satisfaction {
+  width: 90rpx;
+  height: 90rpx;
+  margin-right: 20rpx;
+}
+
+.flexRowStartCenter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.standardTitle {
+  font-size: 30rpx;
+  color: #242526;
+  margin-right: 10rpx;
+}
+
+.standardImgView {
+  width: 200rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.standardIcon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 5rpx;
+}
+
+/* 评价及图片 */
+
+.commentArea {
+  margin-top: 40rpx;
+  background-color: #f7f5f6;
+  padding: 20rpx 20rpx;
+}
+
+.commentInput {
+  height: 210rpx;
+  line-height: normal;
+}
+
+.imagesArea {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.addedImages {
+  width: 210rpx;
+  height: 210rpx;
+  margin-top: 20rpx;
+  position: relative;
+}
+
+.addedImagesMargin {
+  margin-right: 20rpx;
+}
+
+.deleteImagesView {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: -8rpx;
+  top: -8rpx;
+  z-index: 4;
+}
+
+.deleteImages {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.addImagesBtn {
+  margin-top: 20rpx;
+  width: 210rpx;
+  height: 210rpx;
+  border: 1rpx #888 dashed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.addImages {
+  width: 50rpx;
+  height: 40rpx;
+}
+
+.addImagesTxt {
+  margin-top: 5rpx;
+  color: #86888b;
+  font-size: 30rpx;
+}
+
+/* 提交按钮 */
+
+.submitEvaluateBox {
+  width: 100%;
+  background-color: #438BEF;
+  height: 140rpx;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  line-height: 150rpx;
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: bold;
 }
