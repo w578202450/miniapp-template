@@ -28,12 +28,14 @@
 	"libVersion": "2.9.4",
 	"appid": "wx534804f044235de5",
 	"projectname": "TMC%E5%B0%8F%E7%A8%8B%E5%BA%8F",
+	"cloudfunctionTemplateRoot": "",
+	"watchOptions": {
+		"ignore": []
+	},
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -48,7 +50,6 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"gamePlugin": {
@@ -80,54 +81,24 @@
 					"scene": null
 				},
 				{
-					"id": 3,
-					"name": "专家门诊",
-					"pathName": "pages/index/service-index/service-index",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
-					"name": "患者评价列表",
-					"pathName": "pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "首页界面",
+					"name": "首页",
 					"pathName": "pages/index/bhx/home-index",
 					"query": "",
-<<<<<<< HEAD
-=======
 					"scene": null
 				},
 				{
-					"id": 6,
-					"name": "支付成功",
-					"pathName": "pages/order/order-success/order-success",
+					"id": 4,
+					"name": "service-physicianTeam",
+					"pathName": "pages/index/service-index/fzm/service-physicianTeam/service-physicianTeam",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "评价页面",
-					"pathName": "pages/order/order-evaluate/order-evaluate",
+					"name": "service-specialistInfo",
+					"pathName": "pages/index/service-index/fzm/service-specialistInfo/service-specialistInfo",
 					"query": "",
->>>>>>> f87085876b02f8e0bc4c11252662ef0e0a74d318
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "评价成功",
-					"pathName": "pages/order/order-evaluate-success/order-evaluate-success",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "评价页面",
-					"pathName": "pages/order/order-evaluate/order-evaluate",
 					"scene": null
 				}
 			]
