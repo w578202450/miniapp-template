@@ -6,6 +6,13 @@ const version = 0; //0开发、1测试 2发布
 //     return "1400283798"
 //   }
 // })();
+let UPLOAD_FILE_URL = (function() {
+  if (version == 0 || version == 1) {
+    return 'https://file-cs.jk.100cbc.com'
+  } else if (version == 2) {
+    return 'https://file.jk.100cbc.com'
+  }
+});
 let API_BASE_URL = (function() {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'

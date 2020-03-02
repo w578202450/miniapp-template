@@ -165,7 +165,7 @@ Page({
   /**
    * 查询：处方详情 
    * */
-  getRpDetailFun: function (rpID) {
+  getRpDetailFun: function(rpID) {
     let that = this;
     let params = {
       rpID: rpID,
@@ -251,6 +251,9 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: [type],
       success: function(res) {
+        wx.showLoading({
+          title: "上传中, 请稍等…"
+        });
         // 选择图片后的完成确认操作
         let remainNum = that.data.countIndex - res.tempFilePaths.length;
         if (remainNum < 1) {
@@ -260,6 +263,35 @@ Page({
           imageData: [...that.data.imageData, ...res.tempFilePaths],
           countIndex: remainNum
         });
+        let uploadImgIsOver = false;
+        res.tempFilePaths.forEach((item, index) =>{
+          // 上传图片到服务器
+          wx.uploadFile({
+            url: '',
+            url: 'https://file.jk.100cbc.com',
+            filePath: item,
+            name: 'file',
+            formData: {
+              systeomCode: "TMC",
+              belongCode: "CONTENT",
+              // belongID: that.data.paramsData.orgID //取当前用户的医院ID
+              belongID: "19101017081245502880511001"
+            },
+            success(res) {
+              console.log(res);
+              //do something
+            },
+            fail(err) {
+              console.log(err);
+            }
+          });
+          if (res.tempFilePaths.length - 1 == index) {
+            uploadImgIsOver: true
+          }
+        });
+        if (uploadImgIsOver) {
+          wx.hideLoading();
+        }
       }
     })
   },
