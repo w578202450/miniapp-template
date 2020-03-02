@@ -5,8 +5,11 @@
   background-color:#fff; 
 }
 
-.border-botttom {
+.padd {
   padding: 20rpx 20rpx;
+}
+
+.border-botttom {
   border-bottom: 1rpx solid #dbdee3;
 }
 
