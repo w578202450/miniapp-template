@@ -6,13 +6,6 @@ const version = 0; //0开发、1测试 2发布
 //     return "1400283798"
 //   }
 // })();
-let UPLOAD_FILE_URL = (function() {
-  if (version == 0 || version == 1) {
-    return 'https://file-cs.jk.100cbc.com'
-  } else if (version == 2) {
-    return 'https://file.jk.100cbc.com'
-  }
-});
 let API_BASE_URL = (function() {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
@@ -75,6 +68,19 @@ Promise.prototype.finally = function(callback) {
 
 // 1.通过module.exports方式提供给外部调用
 module.exports = {
+
+  /**上传文件的路径（图片） */
+  uploadFileUrl: function uploadFileUrl() {
+    if (version == 0) {
+      return 'https://file-cs.jk.100cbc.com/api/sys/file'
+      // return 'http://10.0.0.210:6104/api/sys/file'
+    } else if (version == 1) {
+      return 'https://file-cs.jk.100cbc.com/api/sys/file'
+    } else if (version == 2) {
+      return 'https://file.jk.100cbc.com/api/sys/file'
+    }
+  },
+
   /*
    *获取测试数据
    */
@@ -343,7 +349,7 @@ module.exports = {
    * 保存评价
    */
   orderCommentSave: function orderCommentSave(params) {
-    return request('api/tmc/commentReview/save', true, 'post', params);
+    return request('api/tmc/orderComment/save', true, 'post', params);
   },
 
   /**
@@ -392,7 +398,7 @@ module.exports = {
    */
   getToolClassifyById: function getToolClassify(params) {
     return request('http://10.0.0.99:6112/api/tmc/classify/getToolClassifyById', false, 'get', params);
-  }, 
+  },
 
   /**
    * 首页
@@ -404,14 +410,14 @@ module.exports = {
     return request('api/peachUser/orgPara/queryOrgPara', true, 'get', params);
   },
 
-   /**
+  /**
    * 获取用户浏览数和分享数
    */
   getBrowseShareCount: function getReadShareCount(params) {
     return request('/api/peachUser/orgVar/queryOrgVar', true, 'get', params);
   },
 
-   /**
+  /**
    * 获取医师团队列表
    */
   physicianTeamList: function physicianTeamList(params) {

@@ -8,41 +8,6 @@ page {
   padding: 0 20rpx;
 }
 
-/* .medicineListBox {
-  padding-top: 20rpx;
-  width: 100%;
-}
-
-.medicineListView {
-  margin-bottom: 20rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.medicineImg {
-  width: 120rpx;
-  height: 120rpx;
-  border: 1rpx solid #f6f6f6;
-}
-
-.medicineParameter {
-  width: 570rpx;
-  margin-left: 20rpx;
-}
-
-.medicineNameTxt {
-  font-size: 30rpx;
-  color: #555658;
-  margin-bottom: 10rpx;
-}
-
-.productSpecTxt {
-  font-size: 28rpx;
-  color: #999;
-} */
-
 /* 满意选择、疗效、服务 */
 .markSecBox {
   margin-bottom: 20rpx;
@@ -142,12 +107,13 @@ page {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 20rpx;
 }
 
 .addedImages {
   width: 210rpx;
   height: 210rpx;
-  margin-top: 20rpx;
+  margin-bottom: 20rpx;
   position: relative;
 }
 
@@ -170,9 +136,9 @@ page {
 }
 
 .addImagesBtn {
-  margin-top: 20rpx;
-  width: 210rpx;
-  height: 210rpx;
+  margin-bottom: 20rpx;
+  width: 208rpx;
+  height: 208rpx;
   border: 1rpx #888 dashed;
   display: flex;
   flex-direction: column;
@@ -196,12 +162,12 @@ page {
 .submitEvaluateBox {
   width: 100%;
   background-color: #438BEF;
-  height: 140rpx;
+  height: 120rpx;
   position: absolute;
   left: 0;
   bottom: 0;
   text-align: center;
-  line-height: 150rpx;
+  line-height: 120rpx;
   font-size: 36rpx;
   color: #fff;
   font-weight: bold;

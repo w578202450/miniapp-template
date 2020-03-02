@@ -2,7 +2,8 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
-  <view class="evabody">
+  <scroll-view scroll-y="{{true}}" style="height: {{windowHeightNum - 60}}px;">
+    <view class="evabody">
     <!-- 评分 -->
     <view>
       <view class="markSecBox">
@@ -33,10 +34,10 @@
     </view>
     <!-- 评价 -->
     <view class="commentArea">
-      <textarea class="commentInput" value="{{content}}" placeholder="请您对本次问诊服务做出评价" maxlength="200"></textarea>
+      <textarea class="commentInput" value="{{content}}" placeholder="请您对本次问诊服务做出评价" maxlength="200" bindinput="onInputValue"></textarea>
       <view class="imagesArea">
         <view wx:for="{{imageData}}" wx:key="index" class="addedImages {{comTools.isDivisible(index+1, 3) ? '' : 'addedImagesMargin'}}">
-          <image class="addedImages" src="{{item}}" bindtap="previewImgFun" data-index="index" />
+          <image class="addedImages" src="{{item.materialUrl}}" bindtap="previewImgFun" data-index="index" data-url="{{item.materialUrl}}"/>
           <view class="deleteImagesView" bindtap="deleteAddedImgFun" data-index="index">
             <image class="deleteImages" src="/images/order/delete.png" />
           </view>
@@ -48,6 +49,7 @@
       </view>
     </view>
   </view>
+  </scroll-view>
   <!-- 提交按钮 -->
   <view class="submitEvaluateBox" bindtap="submitEvaluateFun">确认提交</view>
 </view>
