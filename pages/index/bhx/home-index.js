@@ -12,13 +12,27 @@ Page({
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     // 首页banner
-    home_houlipin_hospital_banner:"/images/home/home_houlipin_hospital_banner.png",
+    bannerImage:"",
+    // 医疗机构许可证
+    certifyNo: "45081134X51012213A1002",
+    // 用户浏览数
+    browseCount: "0",
+    // 用户分享数
+    shareCount: "0",
+    // 院长信息
+    deanInfo: {},
+    // 医院信息
+    hospitalInfo: {},
     serviceBg: '/images/home/home_service_bg.png',
     goodAts: ["风湿骨科", "针灸"],
     isShowAllContent: false, 
-    evaluateData: [], // 院长介绍
-    deanContent: "太原侯丽萍风湿骨病中医医院院长，北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科…",
-    hospitalContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…",
+    deanIntroduceData: [], // 院长介绍
+    // 院长详细介绍
+    deanDetailContent: "太原侯丽萍风湿骨病中医医院院长，北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科…",
+    hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…",
+    // 医师团队介绍
+    // doctorTeamIntroduce:"侯氏团队在线亲诊解决风湿骨病疑难问题"
+    doctorTeamIntroduce: ""
   },
 
   /**
@@ -54,7 +68,8 @@ Page({
           that.data.shareAssistantStaffID = options.assistantStaffID;
           wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
         }
-      }
+      };
+      that.initHomeData();
     }
     // 如果orgID不等于侯丽萍医院的orgID，则直接跳转到专家问诊页
     if (that.data.shareOrgID != that.data.houShiOrgID) {
@@ -62,6 +77,114 @@ Page({
         url: '/pages/index/service-index/service-index?orgID=' + that.data.shareOrgID + '&assistantStaffID=' + that.data.shareAssistantStaffID
       });
     }
+  },
+
+  /** 初始化数据 */
+  initHomeData: function () {
+    let that = this;
+    that.getBanner(that.data.houShiOrgID); // 获取首页banner
+    that.getTeamIntroduce(); // 获取医师团队介绍
+    that.getBrowseCount(); // 获取用户浏览数
+    that.getShareCount(); // 获取用户分享数
+  },
+
+  /** 获取首页banner */
+  getBanner(houShiOrgID) {
+    let that = this;
+    HTTP.getBannerTeamIntroduce({
+      // orgID: that.data.houShiOrgID,
+      orgID: "19072514430966516270514001",
+      groupCode: "OP_TMC_ORG",
+      paraCode: "OP_TMC_ORG_BANNER"
+    })
+      .then(res => {
+        // console.log("===首页banner===" + JSON.stringify(res));
+        if (res.code == 0) {
+          if (res.data) {
+            that.setData({
+              bannerImage: res.data.paraValue
+            });
+          }
+        }
+      }).catch(e => {
+        that.setData({
+          noNetwork: true
+        });
+      })
+  },
+
+  /** 获取医师团队介绍 */
+  getTeamIntroduce(houShiOrgID) {
+    let that = this;
+    HTTP.getBannerTeamIntroduce({
+      // orgID: that.data.houShiOrgID,
+      orgID: "19072514430966516270514001",
+      groupCode: "OP_TMC_ORG",
+      paraCode: "OP_TMC_ORG_GROUPDESC"
+    })
+      .then(res => {
+        // console.log("===用户浏览数===" + JSON.stringify(res));
+        if (res.code == 0) {
+          if (res.data) {
+            that.setData({
+              doctorTeamIntroduce: res.data.paraValue
+            });
+          }
+        }
+      }).catch(e => {
+        that.setData({
+          noNetwork: true
+        });
+      })
+  },
+
+  /** 获取用户浏览数 */
+  getBrowseCount(houShiOrgID) {
+    let that = this;
+    HTTP.getBrowseShareCount({
+      // orgID: that.data.houShiOrgID,
+      orgID: "19072514430966516270514001",
+      groupCode: "OV_TMC_USER",
+      paraCode: "OV_TMC_USER_VIEWS"
+    })
+      .then(res => {
+        // console.log("===用户分享数===" + JSON.stringify(res));
+        if (res.code == 0) {
+          if (res.data) {
+            that.setData({
+              browseCount: res.data.paraValue
+            });
+          }
+        }
+      }).catch(e => {
+        that.setData({
+          noNetwork: true
+        });
+      })
+  },
+
+  /** 获取用户分享数 */
+  getShareCount(houShiOrgID) {
+    let that = this;
+    HTTP.getBrowseShareCount({
+      // orgID: that.data.houShiOrgID,
+      orgID: "19072514430966516270514001",
+      groupCode: "OV_TMC_USER",
+      paraCode: "OV_TMC_USER_SHARES"
+    })
+      .then(res => {
+        if (res.code == 0) {
+          if (res.data) {
+            that.setData({
+              shareCount: res.data.paraValue
+            });
+          }
+        }
+      }).catch(e => {
+        that.setData({
+          noNetwork: true
+        });
+      })
   },
 
   /**

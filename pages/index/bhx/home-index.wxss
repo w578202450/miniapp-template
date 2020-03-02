@@ -207,36 +207,6 @@ page {
   height: 40rox;
 }
 
-/* 取消默认边框 */
-
-button::after {
-  border: none;
-}
-
-button {
-  margin-top: 20px;
-  border-radius: 30px;
-}
-
-.address-tel-share-button {
-  width: 400rpx;
-  margin-bottom: 10rpx;
-  text-align: center;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 1);
-  background: rgba(67, 139, 239, 1);
-  line-height: 14px;
-}
-
-.share-text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  color: rgba(255, 255, 255, 1);
-}
-
 .enter-box {
   width: 100%;
   height: 180rpx;
@@ -275,7 +245,7 @@ button {
 
 .intervalView {
   width: 100%;
-  height: 20rpx;
+  height: 25rpx;
   background-color: rgba(246, 246, 246, 1);
 }
 
@@ -292,18 +262,22 @@ button {
   justify-content: center;
   align-items: center;
   width: 348rpx;
-  height: 56rpx;
+  height: 60rpx;
   background: rgba(255, 255, 255, 1);
   border-radius: 28rpx;
   opacity: 0.6;
   border: 2rpx solid rgba(67, 139, 239, 1);
-  margin-top: 48rpx;
+  margin-top: 40rpx;
   margin-bottom: 40rpx;
 }
 
 .share-box image {
-  width: 24rpx;
-  height: 24rpx;
+  width: 26rpx;
+  height: 26rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .share-box text {

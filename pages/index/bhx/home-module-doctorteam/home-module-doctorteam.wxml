@@ -1,5 +1,5 @@
 <view class="page">
-  <text style="margin-left:32rpx">侯氏团队在线亲诊解决风湿骨病疑难问题</text>
+  <text style="margin-left:28rpx;margin-top:10rpx;text-overflow:-o-ellipsis-lastline; overflow: hidden;text-overflow: ellipsis; display: -webkit-box;-webkit-line-clamp: 2;">{{doctorTeamIntroduce}}</text>
   <swiper class='swiper' display-multiple-items="2">
     <block wx:for="{{list}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="id">
       <swiper-item>
@@ -7,5 +7,4 @@
       </swiper-item>
     </block>
   </swiper>
-  
 </view>
