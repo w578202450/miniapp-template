@@ -8,7 +8,8 @@ Page({
   data: {
     moreBtnUrl: "",
     contentText: "",
-    inquiryCaseData: []
+    inquiryCaseData: [],
+    materialImgBac: "/images/chat/personBacImg.png"
   },
 
   /**
@@ -22,7 +23,6 @@ Page({
     that.data.httpParams = JSON.parse(options.httpParams);
     // console.log(that.data.httpParams);
     that.inquiryCaseList();
-    
   },
 
   /**
