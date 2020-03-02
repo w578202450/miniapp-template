@@ -4,16 +4,23 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    doctorinfo:{
+    /**
+     * 医师团队item
+     */
+    pageItem: {
       type:Object,
       value:{}
+    },
+    diseaseName: {
+      type: Object,
+      value: []
     },
     /**
      * 容器样式
      */
     pageStyle: {
       type: String,
-      value: ''
+      value: ""
     },
   },
 
@@ -21,7 +28,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    goodAts: ["风湿骨病", "痛风"]
+    diseaseName: "风湿骨病,痛风,wewewewe"
   },
 
   /**
