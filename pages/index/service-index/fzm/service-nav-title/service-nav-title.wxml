@@ -2,7 +2,7 @@
 
 <view class="title-box">
     <!-- 问诊标题 -->
-    <view hidden="{{!isCustomTitle}}" style="height:{{statusBarHeight + navBarHeight + 34}}px">
+    <view hidden="{{!isInquiryNav}}" style="height:{{statusBarHeight + navBarHeight + 34}}px">
       <view class="title-custom-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
         <text class="title-name">{{doctorInfo.doctorName}}</text>
         <text class="title-other" style="margin-left:16rpx">{{doctorInfo.titleName}} 教授 博士生导师</text>
@@ -12,7 +12,7 @@
       </view>
     </view>
       
-      <view hidden="{{isCustomTitle}}" class="title-default-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
+      <view hidden="{{isInquiryNav}}" class="title-default-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
         <text class="title-name" style="color:rgba(0,0,0,1)">{{navTitle}}</text>
       </view>
   </view>

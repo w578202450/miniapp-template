@@ -11,7 +11,7 @@ Component({
       type: Object,
       value: {}
     },
-    isCustomTitle: {
+    isInquiryNav: {
       type: Boolean,
       value: false
     },

@@ -1,11 +1,17 @@
 <view>
+  <!-- 引入wxs脚本 -->
+  <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <view class="content">
     <view class="left-box">
       <text class="title">{{itemData.title}}</text>
-      <text class="details">{{itemData.content}}</text>
-      <service-tabs list="{{itemData.tags}}" pageStyle="{{servicTabsPageStyle}}" tabStyle="{{serviceTabsTabStyle}}">></service-tabs>
+      <text class="details">{{itemData.summary}}</text>
+      <service-tabs list="{{comTools.strSplit(itemData.tag,',')}}" pageStyle="{{servicTabsPageStyle}}" tabStyle="{{serviceTabsTabStyle}}">></service-tabs>
     </view>
-    <image src="{{itemData.image}}"></image>
+    <view class="image-box">
+      <image src="{{itemData.articleType==0 ? itemData.logoUrl : itemData.videoUrl}}" style="width: 120rpx;height: 120rpx"></image>
+      <image class="videoIconImg" wx:if="{{itemData.articleType==1}}" src="{{videoIconSrc}}"></image>
+    </view>
+
   </view>
   <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
 </view>

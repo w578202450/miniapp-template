@@ -7,21 +7,27 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    // 医生信息
     doctorInfo: {
       type: Object,
       value: null
     },
-
+    // 医生专治疾病
+    doctorDisease: {
+      type: Object,
+      value: null
+    },
+    // 执业许可证信息
     certifyInfo: {
       type: Object,
       value: {}
     },
-
-    isCustomTitle: {
+    // 自定义标题 true:问诊导航栏 false:普通导航栏
+    isInquiryNav: {
       type: Boolean,
       value: false
     },
-
+    // 普通导航栏标题
     navTitle: {
       type: String,
       value: "专家门诊"

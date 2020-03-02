@@ -1,16 +1,17 @@
 <!--pages/index/service-index/service-index.wxml-->
 <view>
   <!-- 标题 -->
-  <service-nav-title isCustomTitle="{{scrollTop == 0 ? false : true}}" doctorInfo="{{doctorInfo}}"></service-nav-title>
+  <service-nav-title isInquiryNav="{{scrollTop == 0 ? false : true}}" doctorInfo="{{doctorInfo}}"></service-nav-title>
   <!-- 专家门诊专家信息 -->
-  <service-specialistInfo pageStyle="margin-bottom:20rpx" doctorInfo="{{doctorInfo}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo"></service-specialistInfo>
+  <service-specialistInfo pageStyle="margin-bottom:20rpx" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo"></service-specialistInfo>
   <!-- 医生团队 -->
-  <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}"></service-physicianTeam>
+  <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}"></service-physicianTeam>
   <!-- 患者评价 -->
   <patient-evaluate evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
   <notes paersonInfo="{{inquiryCaseData}}"></notes>
   <!-- 患者分享 -->
   <share paersonInfo="{{patientShareGetData}}"></share>
-  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx;"></service-news>
+  <!-- 文章模块 -->
+  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}"></service-news>
 </view>

@@ -13,6 +13,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    videoIconSrc: "/images/chat/videoPlayIcon.png",
     servicTabsPageStyle: "margin-top: 16rpx",
     serviceTabsTabStyle: "background: rgba(67, 139, 239, 0.15);color: rgba(46, 127, 241, 1); border: 0rpx"
   },

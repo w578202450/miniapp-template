@@ -384,5 +384,11 @@ module.exports = {
    */
   getToolClassifyById: function getToolClassify(params) {
     return request('http://10.0.0.99:6112/api/tmc/classify/getToolClassifyById', false, 'get', params);
+  },
+  /**
+   * 分类获取文章列表
+   */
+  articleByClassifyId: function articleByClassifyId(params) {
+    return request('http://10.0.0.210:6112/api/tmc/article/list', false, 'get', params);
   }
 }

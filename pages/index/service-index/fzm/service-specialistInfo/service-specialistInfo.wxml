@@ -1,6 +1,8 @@
 <view class="main" style="{{pageStyle}}">
+  <!-- 引入wxs脚本 -->
+  <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <!-- banner -->
-  <block wx:if="{{isCustomTitle}}">
+  <block wx:if="{{isInquiryNav}}">
     <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight + 34}}px">
       <image style="width: 100%" hidden="{{!doctorInfo.banner}}" src="{{doctorInfo.banner}}" mode="widthFix" />
     </view>
@@ -23,20 +25,20 @@
       <text class="title-other specialist-header-right-box" bindtap="previewDoctorInfo">查看介绍 ></text>
     </view>
     <!-- 擅长标签 -->
-    <service-tabs list="{{goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
+    <service-tabs list="{{doctorDisease}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
     <view style="height:2rpx;background:rgba(0,0,0,0.1);margin-top:16rpx"></view>
     <!-- 好评率 服务人数 -->
     <view class="specialist-bottom-box">
       <view class="specialist-bottom-left">
         <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_commentNums.png"></image>
         <text>好评率：</text>
-        <text style="color:rgba(0,0,0,0.85)">99%</text>
+        <text style="color:rgba(0,0,0,0.85)">100%</text>
       </view>
       <view style="width:2rpx;height:48rpx;background:rgba(0,0,0,0.1)"></view>
       <view class="specialist-bottom-left">
         <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_serverNums.png"></image>
         <text>服务人数：</text>
-        <text style="color:rgba(0,0,0,0.85)">99人</text>
+        <text style="color:rgba(0,0,0,0.85)">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
       </view>
     </view>
   </view>

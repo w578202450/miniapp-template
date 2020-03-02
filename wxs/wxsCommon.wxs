@@ -68,11 +68,36 @@ var formateDate = function (val) {
 var isDivisible = function (dividend, divisor) {
   return dividend % divisor === 0;
 }
+// 根据医生id取3位作为服务人数
+var serviceNum = function (doctorID) {
+  if (!doctorID) {
+    return 100
+  }
+  return doctorID.slice(16, 19) | 100
+}
+// 字符串转数组
+var strSplit = function (str, separator) {
+  if (!str || !separator) {
+    return []
+  }
+  return str.split(separator)
+}
+
+// 根据key获取对象的值
+var value = function (dic, key) {
+  if (!dic || !key) {
+    return []
+  }
+  return dic[key]
+}
 
 module.exports = {
   subStrTxt: subStrTxt,
   subName: subName,
   formateDateTime: formateDateTime,
   formateDate: formateDate,
-  isDivisible: isDivisible
+  isDivisible: isDivisible,
+  serviceNum: serviceNum,
+  strSplit: strSplit,
+  value: value
 };
