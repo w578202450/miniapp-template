@@ -22,9 +22,17 @@
           <block wx:for="{{comTools.value(articleDatas,navItem.classifyID).datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
             <service-news-item itemData="{{item}}"></service-news-item>
           </block>
-          <view class="loading-box">
-            <text>{{currentCategoryData.noMore  ? '-----底线在这呢-----' : '加载更多...'}}</text>
-          </view>
+          <block wx:if="{{currentCategoryData.noMore && currentCategoryData.noData}}">
+            <view class="noData-box">
+              <text>没有数据</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="loading-box">
+              <text>{{currentCategoryData.noMore  ? '-----底线在这呢-----' : '加载更多...'}}</text>
+            </view>
+          </block>
+
         </scroll-view>
       </swiper-item>
     </block>

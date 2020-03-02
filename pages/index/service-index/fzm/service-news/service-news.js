@@ -94,12 +94,16 @@ Component({
           this.data.currentCategoryData = res.data;
           if (!res.data) {
             this.data.currentCategoryData["noMore"] = true
+            this.data.currentCategoryData["noData"] = true
           } else if (res.data.datas.length == 0) {
             this.data.currentCategoryData["noMore"] = true
+            this.data.currentCategoryData["noData"] = true
           } else if (res.data.datas.length < res.data.pageSize) {
             this.data.currentCategoryData["noMore"] = true
+            this.data.currentCategoryData["noData"] = false
           } else {
             this.data.currentCategoryData["noMore"] = false
+            this.data.currentCategoryData["noData"] = false
           }
 
           this.setData({

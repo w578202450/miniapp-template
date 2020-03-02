@@ -421,12 +421,16 @@ Page({
         let currentCategoryData = res.data;
         if (!res.data) {
           currentCategoryData["noMore"] = true
+          currentCategoryData["noData"] = true
         } else if (res.data.datas.length == 0) {
           currentCategoryData["noMore"] = true
+          currentCategoryData["noData"] = true
         } else if (res.data.datas.length < res.data.pageSize) {
           currentCategoryData["noMore"] = true
+          currentCategoryData["noData"] = false
         } else {
           currentCategoryData["noMore"] = false
+          currentCategoryData["noData"] = false
         }
 
         this.setData({
