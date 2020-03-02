@@ -1,4 +1,5 @@
 var appBehavior = require('../behaviors/fzm-behaviors')
+const HTTP = require('../../../../../utils/http-util');
 
 Component({
   behaviors: [appBehavior],
@@ -13,78 +14,31 @@ Component({
       type: Number,
       value: 0
     },
-    titles: {
+    // 文章导航
+    articleTitles: {
       type: Array,
-      value: [{
-          "name": "专家文章",
-          "id": "33",
-          "noMore":false
-        },
-        {
-          "name": "民医讲堂",
-          "id": "34",
-          "noMore": true
-        }, {
-          "name": "精选科普",
-          "id": "35",
-          "noMore": false
-        }
-      ]
+      value: []
     },
-    list: {
-      type: Array,
-      value: [{
-        title: "带你了解主动脉疾病的杂交手术治疗",
-        content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-        tags: ["典型病例", "专家推荐"],
-        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-        id: "0"
-      }, {
-        title: "带你了解主动脉疾病的杂交手术治疗",
-        content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-        tags: ["典型病例", "专家推荐"],
-        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-        id: "1"
-      }, {
-        title: "带你了解主动脉疾病的杂交手术治疗",
-        content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-        tags: ["典型病例", "专家推荐"],
-        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-        id: "2"
-      }, {
-        title: "带你了解主动脉疾病的杂交手术治疗",
-        content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-        tags: ["典型病例", "专家推荐"],
-        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-        id: "3"
-      }, {
-        title: "带你了解主动脉疾病的杂交手术治疗",
-        content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-        tags: ["典型病例", "专家推荐"],
-        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-        id: "4"
-      }, {
-        title: "带你了解主动脉疾病的杂交手术治疗",
-        content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-        tags: ["典型病例", "专家推荐"],
-        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-        id: "5"
-      }, {
-        title: "带你了解主动脉疾病的杂交手术治疗",
-        content: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-        tags: ["典型病例", "专家推荐"],
-        image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-        id: "6"
-      }]
-    }
+    // 文章
+    articleDatas:{
+      type:{String:Object},
+      value:{}
+    },
+    
+    currentCategoryData: {
+      type: { String: Object },
+      value: {}
+    },
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    newsDatas:{String:Array},// 文章列表{模块id:文章列表}}
-    currentClassifyID:''// 当前模块id
+    newsDatas: {
+      String: Array
+    }, // 文章列表{模块id:文章列表}}
+    currentClassifyID: '' // 当前模块id
   },
 
   /**
@@ -97,6 +51,17 @@ Component({
     pagechange: function(e) {
       this.data.currentClassifyID = e.detail.currentItemId;
       this.data.currentIndex = e.detail.current;
+      // 当前模块没有数据就进行网络加载请求
+      let tempCurrentData = this.data.articleDatas[this.data.currentClassifyID];
+      if (!tempCurrentData ||
+        tempCurrentData.datas.length == 0){
+        this.loadDatas(this.data.currentClassifyID)
+      } else {
+        this.data.currentCategoryData = tempCurrentData;
+        this.setData({
+          currentCategoryData: this.data.currentCategoryData
+        })
+      }
       this.setData({
         currentIndex: e.detail.current
       })
@@ -117,30 +82,75 @@ Component({
     /**
      * 根据文章id获取文章的列表
      */
-    loadDatas(classifyID){
-      let data = []
-      let currentNews = this.data.newsDatas.classifyID;
-      let titleItem = this.data.titles[this.data.currentIndex];
-      if (data.length < currentNews.pageSize) {
-        titleItem.noMore = true;
-      } else {
-        currentNews.pageIndex += 1
-        titleItem.noMore = false;
-      }
+    loadDatas(classifyID) {
+      HTTP.articleByClassifyId({
+        "orgID": "32132132132",
+        "pageSize": 10,
+        "pageIndex": 1,
+        "classifyID": classifyID
+      }).then(res => {
+        if (res.data) {
+          this.data.articleDatas[classifyID] = res.data;
+          this.data.currentCategoryData = res.data;
+          if (!res.data) {
+            this.data.currentCategoryData["noMore"] = true
+            this.data.currentCategoryData["noData"] = true
+          } else if (res.data.datas.length == 0) {
+            this.data.currentCategoryData["noMore"] = true
+            this.data.currentCategoryData["noData"] = true
+          } else if (res.data.datas.length < res.data.pageSize) {
+            this.data.currentCategoryData["noMore"] = true
+            this.data.currentCategoryData["noData"] = false
+          } else {
+            this.data.currentCategoryData["noMore"] = false
+            this.data.currentCategoryData["noData"] = false
+          }
+
+          this.setData({
+            currentCategoryData: this.data.currentCategoryData
+          })
+        }
+      });
     },
     /**
      * 上拉加载获取更多的数据
      */
     uploadMoreDatas(e) {
-      console.log('dddddd----',e)
-      // var classifyID = e.currentTarget.id;
-      // let currentNews = this.data.newsDatas.classifyID;
-      // let pageSize = currentNews.pageSize;
-      // let pageIndex = currentNews.pageIndex;
+      let classifyID = e.currentTarget.id;
       let index = e.currentTarget.dataset.index;
+      var tempCurrentData = this.data.articleDatas[classifyID];
+      if (tempCurrentData.noMore) {return}
+      HTTP.articleByClassifyId({
+        "orgID": "32132132132",
+        "pageSize": 10,
+        "pageIndex": tempCurrentData.pageIndex+1,
+        "classifyID": this.currentClassifyID
+      }).then(res => {
+        if (res.data) {
+           if (res.data.datas.length == 0) {
+             tempCurrentData["noMore"] = true
+             this.data.currentCategoryData = tempCurrentData;
+             this.setData({
+               currentCategoryData: this.data.currentCategoryData
+             })
+             return;
+          } 
 
-      
+          if (res.data.datas.length < res.data.pageSize) {
+             tempCurrentData["noMore"] = true
+          } else {
+             tempCurrentData["noMore"] = false
+          }
+          
+          res.data.datas = tempCurrentData.datas.push(res.data.datas)
+          this.data.currentCategoryData = res.data.datas;
+
+          this.setData({
+            currentCategoryData: this.data.currentCategoryData
+          })
+        }
+      });
     },
-    
+
   }
 })

@@ -32,7 +32,9 @@ Page({
     hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…",
     // 医师团队介绍
     // doctorTeamIntroduce:"侯氏团队在线亲诊解决风湿骨病疑难问题"
-    doctorTeamIntroduce: ""
+    doctorTeamIntroduce: "",
+    // 医师团队列表
+    doctorTeamList:[]
   },
 
   /**
@@ -86,6 +88,7 @@ Page({
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
+    that.getPhysicianTeamList(); // 获取医师团队列表
   },
 
   /** 获取首页banner */
@@ -98,7 +101,7 @@ Page({
       paraCode: "OP_TMC_ORG_BANNER"
     })
       .then(res => {
-        // console.log("===首页banner===" + JSON.stringify(res));
+        console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -123,7 +126,7 @@ Page({
       paraCode: "OP_TMC_ORG_GROUPDESC"
     })
       .then(res => {
-        // console.log("===用户浏览数===" + JSON.stringify(res));
+        // console.log("===获取医师团队介绍===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -148,7 +151,7 @@ Page({
       paraCode: "OV_TMC_USER_VIEWS"
     })
       .then(res => {
-        // console.log("===用户分享数===" + JSON.stringify(res));
+        // console.log("===获取用户浏览数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -173,12 +176,40 @@ Page({
       paraCode: "OV_TMC_USER_SHARES"
     })
       .then(res => {
+        // console.log("===获取用户分享数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
               shareCount: res.data.paraValue
             });
           }
+        }
+      }).catch(e => {
+        that.setData({
+          noNetwork: true
+        });
+      })
+  },
+
+  /** 获取医师团队列表 */
+  getPhysicianTeamList(houShiOrgID) {
+    let that = this;
+    HTTP.getPhysicianTeamList({
+      // orgID: that.data.houShiOrgID,
+      orgId: "19072514430966516270514001"
+    })
+      .then(res => {
+        console.log("===获取医师团队列表===" + JSON.stringify(res));
+        if (res.code == 0) {
+          if (res.data) {
+            that.setData({
+              doctorTeamList: res.data
+            });
+          }
+        } else {
+          that.setData({
+            doctorTeamList: ""
+          });
         }
       }).catch(e => {
         that.setData({

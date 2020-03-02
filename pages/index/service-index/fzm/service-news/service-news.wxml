@@ -1,7 +1,9 @@
 <view class='container' style="{{pageStyle}}">
+  <!-- 引入wxs脚本 -->
+  <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <view class="swiper-tabs-sticky-box" style="top: {{statusBarHeight + navBarHeight + 34}}px">
     <view class='swiper-tabs-box'>
-      <block wx:for="{{titles}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+      <block wx:for="{{articleTitles}}" wx:for-item="item" wx:for-index="index" wx:key="id">
         <view class='swiper-tabs-title-box' bindtap='titleClick' data-idx='{{index}}'>
           <text class="{{index==currentIndex ? 'selected' : 'normal'}}">{{item.name}}</text>
           <view class="swiper-tabs-line-box">
@@ -14,15 +16,23 @@
 
   <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
   <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}' style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px">
-    <block wx:for="{{titles}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="id">
-      <swiper-item item-id="{{pageItem.id}}">
-        <scroll-view id="{{pageItem.id}}" data-index="{{pageIndex}}" bindscrolltolower="uploadMoreDatas" style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
-          <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+    <block wx:for="{{articleTitles}}" wx:for-item="navItem" wx:for-index="navIndex" wx:key="classifyID">
+      <swiper-item item-id="{{navItem.classifyID}}">
+        <scroll-view id="{{navItem.classifyID}}" data-index="{{navIndex}}" bindscrolltolower="uploadMoreDatas" style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
+          <block wx:for="{{comTools.value(articleDatas,navItem.classifyID).datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
             <service-news-item itemData="{{item}}"></service-news-item>
           </block>
-          <view class="loading-box">
-            <text>{{pageItem.noMore  ? '-----底线在这呢-----' : '加载更多...'}}</text>
-          </view>
+          <block wx:if="{{currentCategoryData.noMore && currentCategoryData.noData}}">
+            <view class="noData-box">
+              <text>没有数据</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="loading-box">
+              <text>{{currentCategoryData.noMore  ? '-----底线在这呢-----' : '加载更多...'}}</text>
+            </view>
+          </block>
+
         </scroll-view>
       </swiper-item>
     </block>

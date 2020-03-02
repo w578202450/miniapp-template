@@ -11,6 +11,6 @@
         <text class="title-other" style="margin-top:20rpx">{{doctorInfo.workPlace}} {{doctorInfo.sectionName}}</text>
       </view>
     </view>
-    <service-tabs list="{{goodAts}}" pageStyle="margin-left:114rpx;margin-top:24rpx"></service-tabs>
+    <service-tabs list="{{doctorDisease}}" pageStyle="margin-left:114rpx;margin-top:24rpx"></service-tabs>
   </view>
 </view>

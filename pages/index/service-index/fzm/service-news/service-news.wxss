@@ -83,3 +83,18 @@
   color: rgba(0, 0, 0, 0.35);
   line-height: 36rpx;
 }
+
+.noData-box{
+  margin-top: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.noData-box text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.35);
+  line-height: 36rpx;
+}

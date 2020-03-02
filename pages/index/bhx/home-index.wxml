@@ -56,7 +56,7 @@
   <!-- 医师团队 -->
   <view class="physician-team">
     <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
-    <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}"></home-module-doctorteam>
+    <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}" doctorTeamList="{{doctorTeamList}}"></home-module-doctorteam>
     <!-- 底部模块(医师团队，电话和地址，分享) -->
     <view class="home-bottom">
       <view class="address-tel">

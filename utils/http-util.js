@@ -398,7 +398,12 @@ module.exports = {
   getToolClassifyById: function getToolClassify(params) {
     return request('http://10.0.0.99:6112/api/tmc/classify/getToolClassifyById', false, 'get', params);
   },
-
+  /**
+   * 分类获取文章列表
+   */
+  articleByClassifyId: function articleByClassifyId(params) {
+    return request('http://10.0.0.210:6112/api/tmc/article/list', false, 'get', params);
+  },
   /**
    * 首页
    */
@@ -421,8 +426,9 @@ module.exports = {
   /**
    * 获取医师团队列表
    */
-  physicianTeamList: function physicianTeamList(params) {
-    return request('api/tmc/doctorShow/list', true, 'get', params);
+  getPhysicianTeamList: function getPhysicianTeamList(params) {
+    // return request('api/tmc/doctorShow/list', true, 'get', params);
+    return request('http://10.0.0.233:6215/doctorShow/list', false, 'get', params);
   }
 
 }
