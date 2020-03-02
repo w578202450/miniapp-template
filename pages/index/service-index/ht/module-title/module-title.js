@@ -36,7 +36,7 @@ Component({
     // 是否有标题后的信息，默认无
     isHaveRemark: {
       type: Boolean,
-      value: false
+      value: true
     },
     // 标题后的信息
     remarkInfo: {
