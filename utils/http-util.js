@@ -378,5 +378,11 @@ module.exports = {
    */
   patientShareList: function patientShareList(params) {
     return request('api/tmc/patientShare/list', true, 'get', params);
+  },
+  /**
+   * 文章模块分类
+   */
+  getToolClassifyById: function getToolClassify(params) {
+    return request('http://10.0.0.99:6112/api/tmc/classify/getToolClassifyById', false, 'get', params);
   }
 }

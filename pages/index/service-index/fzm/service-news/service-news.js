@@ -17,14 +17,17 @@ Component({
       type: Array,
       value: [{
           "name": "专家文章",
-          "id": "0"
+          "id": "33",
+          "noMore":false
         },
         {
           "name": "民医讲堂",
-          "id": "1"
+          "id": "34",
+          "noMore": true
         }, {
           "name": "精选科普",
-          "id": "2"
+          "id": "35",
+          "noMore": false
         }
       ]
     },
@@ -80,7 +83,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    newsDatas:{String:Array},// 文章列表{模块id:文章列表}}
+    currentClassifyID:''// 当前模块id
   },
 
   /**
@@ -91,6 +95,8 @@ Component({
      * swiper切换
      */
     pagechange: function(e) {
+      this.data.currentClassifyID = e.detail.currentItemId;
+      this.data.currentIndex = e.detail.current;
       this.setData({
         currentIndex: e.detail.current
       })
@@ -108,9 +114,33 @@ Component({
         });
       }
     },
+    /**
+     * 根据文章id获取文章的列表
+     */
+    loadDatas(classifyID){
+      let data = []
+      let currentNews = this.data.newsDatas.classifyID;
+      let titleItem = this.data.titles[this.data.currentIndex];
+      if (data.length < currentNews.pageSize) {
+        titleItem.noMore = true;
+      } else {
+        currentNews.pageIndex += 1
+        titleItem.noMore = false;
+      }
+    },
+    /**
+     * 上拉加载获取更多的数据
+     */
+    uploadMoreDatas(e) {
+      console.log('dddddd----',e)
+      // var classifyID = e.currentTarget.id;
+      // let currentNews = this.data.newsDatas.classifyID;
+      // let pageSize = currentNews.pageSize;
+      // let pageIndex = currentNews.pageIndex;
+      let index = e.currentTarget.dataset.index;
 
-    ddddddddddd: function (e) {
-      console.log('dddddddddd------',e)
-    }
+      
+    },
+    
   }
 })

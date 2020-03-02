@@ -2,12 +2,12 @@
   <!-- banner -->
   <block wx:if="{{isCustomTitle}}">
     <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight + 34}}px">
-      <image style="width: 100%" src="/images/home/home_service_banner.png" mode="widthFix" />
+      <image style="width: 100%" hidden="{{!doctorInfo.banner}}" src="{{doctorInfo.banner}}" mode="widthFix" />
     </view>
   </block>
   <block wx:else>
     <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight}}px">
-      <image style="width: 100%" src="/images/home/home_service_banner.png" mode="widthFix" />
+      <image style="width: 100%" hidden="{{!doctorInfo.banner}}" src="{{doctorInfo.banner}}" mode="widthFix" />
     </view>
   </block>
   <!-- 医生卡片 -->

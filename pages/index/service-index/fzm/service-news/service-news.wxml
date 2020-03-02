@@ -14,16 +14,17 @@
 
   <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
   <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}' style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px">
-    <swiper-item wx:for="{{titles}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="id">
-      <scroll-view bindscrolltolower="ddddddddddd" style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
-        <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-          <service-news-item itemData="{{item}}"></service-news-item>
-        </block>
-        <view class="loading-box">
-          <!-- <text>加载更多...</text> -->
-          <text>-----底线在这呢-----</text>
-        </view>
-      </scroll-view>
-    </swiper-item>
+    <block wx:for="{{titles}}" wx:for-item="pageItem" wx:for-index="pageIndex" wx:key="id">
+      <swiper-item item-id="{{pageItem.id}}">
+        <scroll-view id="{{pageItem.id}}" data-index="{{pageIndex}}" bindscrolltolower="uploadMoreDatas" style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
+          <block wx:for="{{list}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+            <service-news-item itemData="{{item}}"></service-news-item>
+          </block>
+          <view class="loading-box">
+            <text>{{pageItem.noMore  ? '-----底线在这呢-----' : '加载更多...'}}</text>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </block>
   </swiper>
 </view>

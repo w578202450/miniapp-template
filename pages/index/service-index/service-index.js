@@ -78,7 +78,7 @@ Page({
     commonFun.startLoginFun(sendOptions); // 尝试自动登录 
     that.initDocInfoFun();
     that.patientShareGet();
-    that.inquiryCaseGet();                   
+    that.inquiryCaseGet();               
   },
 
   /**
@@ -155,6 +155,7 @@ Page({
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
           that.getOrderCommentData(res.data.orgID); // 获取患者评价信息
           that.data.doctorStaffID = res.data.doctorStaffID;
+          that.getToolClassifyById(res.data.orgID);// 文章模块分类获取
         },
         fail: function(err) {
           // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
@@ -305,7 +306,18 @@ Page({
     this.setData({
       scrollTop: ev.scrollTop
     })
-
+  },
+  /**
+   * 获取文章模块的分类
+   */
+  getToolClassifyById(orgID) {
+    HTTP.getToolClassifyById({
+      classifyType:2,
+      orgID: orgID
+    }).then(res => {
+      if (res.data) {
+      }
+    });
   },
   //------------------------------fzm-------------------------------
   /**

@@ -10,7 +10,6 @@
 }
 
 .swiper-tabs-box {
-  width: 100%;
   height: 52rpx;
   background: white;
   display: flex;
