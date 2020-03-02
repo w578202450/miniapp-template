@@ -41,6 +41,8 @@
   margin-top: 10rpx;
   font-size: 28rpx;
   color: #555658;
+  word-break: break-all; /* 强制换行 */
+  word-wrap: break-word;
 }
 
 .moreBtnView {
