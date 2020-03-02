@@ -1,11 +1,12 @@
 // pages/order/order-evaluate-success/order-evaluate-success.js
+const commonFun = require('../../../utils/common.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    paySuccessIconSrc: "/images/order/paySuccessIcon.png"
   },
 
   /**
@@ -61,6 +62,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    return commonFun.onShareAppMessageFun();
+  },
 
-  }
+  /**操作：返回首页 */
+  navBackToIndex: function () {
+    wx.switchTab({
+      url: '/pages/index/service-index/service-index'
+    });
+  },
 })

@@ -131,11 +131,11 @@
         </view>
       </block>
       <!-- 确认收货 -->
-      <!-- <block>
+      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.deliveryStatusID == 3}}'>
         <view class="options-view" style="border:1px solid rgba(254,88,83,1)" bindtap="toEvaluateFun">
           <text style="color:rgba(254, 88, 83, 1)">立即评价</text>
         </view>
-      </block> -->
+      </block>
     </view>
 
   </view>

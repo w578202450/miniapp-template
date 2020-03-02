@@ -116,6 +116,19 @@
 					"query": "",
 >>>>>>> f87085876b02f8e0bc4c11252662ef0e0a74d318
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价成功",
+					"pathName": "pages/order/order-evaluate-success/order-evaluate-success",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价页面",
+					"pathName": "pages/order/order-evaluate/order-evaluate",
+					"scene": null
 				}
 			]
 		}

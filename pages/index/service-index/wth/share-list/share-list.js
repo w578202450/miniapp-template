@@ -7,7 +7,8 @@ Page({
    */
   data: {
     moreBtnUrl: "",
-    shareData: []
+    shareData: [],
+    materialImgBac: "/images/chat/personBacImg.png"
   },
 
   /**

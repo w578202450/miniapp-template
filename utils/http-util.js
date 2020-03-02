@@ -336,7 +336,7 @@ module.exports = {
    * 保存评价
    */
   orderCommentSave: function orderCommentSave(params) {
-    return request('api/tmc/orderComment/save', true, 'post', params);
+    return request('api/tmc/commentReview/save', true, 'post', params);
   },
 
   /**

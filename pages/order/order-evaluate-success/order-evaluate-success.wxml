@@ -1,2 +1,12 @@
 <!--pages/order/order-evaluate-success/order-evaluate-success.wxml-->
-<text>pages/order/order-evaluate-success/order-evaluate-success.wxml</text>
+<view class="paySuccess">
+  <view class="paySuccessIconBox">
+    <image class="paySuccessIcon" src="{{paySuccessIconSrc}}" mode="widthFix" />
+  </view>
+  <view class="successInfoBox">
+    <view class="title">评价成功</view>
+    <view class="sucBtnBox">
+      <button class="sucBtnEva" bindtap="navBackToIndex">返回首页</button>
+    </view>
+  </view>
+</view>

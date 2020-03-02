@@ -4,7 +4,7 @@
 <view class="box" bindtap="toDetail" wx:for="{{shareData}}" data-detailUrl='{{item.detailUrl}}' wx:key="index">
     <view class="contain">
     <view class="personInfo">
-     <cover-image class="img" src="{{item.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></cover-image>
+     <image class="img" src="{{item.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
      <text class="name">患者：{{comTools.subName(item.patientName)}} {{item.patientAddress}}</text>
     </view>
     <view>
