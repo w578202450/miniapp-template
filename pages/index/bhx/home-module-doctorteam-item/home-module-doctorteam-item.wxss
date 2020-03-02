@@ -8,7 +8,9 @@
   align-items: center;
   height: 370rpx;
   width: 300rpx;
-  margin: 20rpx 20rpx 10rpx 20rpx
+  margin: 20rpx 20rpx 10rpx 20rpx;
+  overflow: hidden;
+  
 }
 
 image {
