@@ -55,7 +55,7 @@
 
   <!-- 医师团队 -->
   <view class="physician-team">
-    <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
+    <module-title title="医师团队" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}" doctorTeamList="{{doctorTeamList}}"></home-module-doctorteam>
     <!-- 底部模块(医师团队，电话和地址，分享) -->
     <view class="home-bottom">
@@ -67,7 +67,7 @@
             <text class="title-other">健康热线：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">0351-2713002</text>
+            <text class="title-other">{{healthline}}</text>
           </view>
         </view>
         <!-- 地址 -->
@@ -77,7 +77,7 @@
             <text class="title-other">地址：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">太原市小店区并州南路489号（太航加油站南侧）</text>
+            <text class="title-other">{{hospitalAddress}}</text>
           </view>
         </view>
         <!-- 分享 -->
