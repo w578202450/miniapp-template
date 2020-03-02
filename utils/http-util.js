@@ -68,6 +68,19 @@ Promise.prototype.finally = function(callback) {
 
 // 1.通过module.exports方式提供给外部调用
 module.exports = {
+
+  /**上传文件的路径（图片） */
+  uploadFileUrl: function uploadFileUrl() {
+    if (version == 0) {
+      return 'https://file-cs.jk.100cbc.com/api/sys/file'
+      // return 'http://10.0.0.210:6104/api/sys/file'
+    } else if (version == 1) {
+      return 'https://file-cs.jk.100cbc.com/api/sys/file'
+    } else if (version == 2) {
+      return 'https://file.jk.100cbc.com/api/sys/file'
+    }
+  },
+
   /*
    *获取测试数据
    */
@@ -336,7 +349,7 @@ module.exports = {
    * 保存评价
    */
   orderCommentSave: function orderCommentSave(params) {
-    return request('api/tmc/commentReview/save', true, 'post', params);
+    return request('api/tmc/orderComment/save', true, 'post', params);
   },
 
   /**
@@ -379,6 +392,7 @@ module.exports = {
   patientShareList: function patientShareList(params) {
     return request('api/tmc/patientShare/list', true, 'get', params);
   },
+
   /**
    * 文章模块分类
    */
@@ -390,5 +404,31 @@ module.exports = {
    */
   articleByClassifyId: function articleByClassifyId(params) {
     return request('http://10.0.0.210:6112/api/tmc/article/list', false, 'get', params);
+  },
+  /**
+   * 首页
+   */
+  /**
+   * 获取首页banner和医师团队介绍
+   */
+  getBannerTeamIntroduce: function getBannerTeamIntroduce(params) {
+    // return request('api/peachUser/orgPara/queryOrgPara', true, 'get', params);
+    return request('http://10.0.0.99:6216/orgPara/queryOrgPara', false, 'get', params);
+  },
+
+  /**
+   * 获取用户浏览数和分享数
+   */
+  getBrowseShareCount: function getBrowseShareCount(params) {
+    // return request('/api/peachUser/orgVar/queryOrgVar', true, 'get', params);
+    return request('http://10.0.0.99:6216/orgVar/queryOrgVar', false, 'get', params);
+  },
+
+  /**
+   * 获取医师团队列表
+   */
+  physicianTeamList: function physicianTeamList(params) {
+    return request('api/tmc/doctorShow/list', true, 'get', params);
   }
+
 }

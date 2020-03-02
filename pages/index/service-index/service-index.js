@@ -20,7 +20,7 @@ Page({
       doctorID: "",
       orgID: ""
     }, // 患者评价相关的所有数据
-    doctorStaffID: "", // 门诊医生staffId
+    // doctorStaffID: "", // 门诊医生staffId
     scrollTop: 0,
     // 患者分享相关数据
     patientShareGetData: {
@@ -153,9 +153,9 @@ Page({
           // console.log("获取的用户缓存问诊信息：" + JSON.stringify(res));
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-          that.getOrderCommentData(res.data.orgID); // 获取患者评价信息
-          that.data.doctorStaffID = res.data.doctorStaffID;
-          that.getToolClassifyById(res.data.orgID); // 文章模块分类获取
+          that.getOrderCommentData(res.data.orgID, res.data.doctorStaffID); // 获取患者评价信息
+          // that.data.doctorStaffID = res.data.doctorStaffID;
+          that.getToolClassifyById(res.data.orgID);// 文章模块分类获取
         },
         fail: function(err) {
           // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
@@ -273,14 +273,14 @@ Page({
         entryType: ""
       })
       .then(res => {
-        // console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
+        console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
         if (res.code == 0) {
           wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
           wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync('personInfo', res.data);
+          that.getOrderCommentData(res.data.orgID, res.data.doctorStaffID); // 获取患者评价信息
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-          that.getOrderCommentData(res.data.orgID); // 获取患者评价信息
         }
       });
   },
@@ -288,7 +288,7 @@ Page({
   /**
    * 查询：患者评价信息
    */
-  getOrderCommentData: function(orgID) {
+  getOrderCommentData: function (orgID, doctorStaffID) {
     let that = this;
     HTTP.orderCommentGet({
       orgID: orgID
@@ -297,8 +297,8 @@ Page({
       if (res.data) {
         that.setData({
           ["evaluateAllData.evaluateData"]: res.data,
-          ["evaluateAllData.orgID"]: orgID,
-          ["evaluateAllData.doctorID"]: that.doctorInfo.keyID
+          ["evaluateAllData.doctorID"]: doctorStaffID,
+          ["evaluateAllData.orgID"]: orgID
         });
       }
     });

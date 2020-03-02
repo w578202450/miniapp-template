@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    windowHeightNum: "", // 屏幕高度
     personInfo: {}, // 患者个人信息
     paramsData: {
       orderID: "", // 评价的订单ID
@@ -72,15 +73,10 @@ Page({
     ], // 服务星级列表初始数据
     content: "", // 评价的文本内容，最长200字符
     countIndex: 9, // 可选图片剩余的数量
-    imageData: [], // 所选上传的图片数据，每个下标元素即字符窜的url路径
-    orderCommentMaterial: [] // 上传到服务器中，且要保存的图片信息
+    imageData: [], // 所选上传成功后的图片数据
+    orderStatusID: 10, // 订单的状态
+    isSearched: false // 是否查询过了
   },
-  // 存储图片信息的格式
-  // {
-  //   materialType: "",
-  //   materialID: "",
-  //   materialUrl: ""
-  // }
 
   /**
    * 生命周期函数--监听页面加载
@@ -95,13 +91,22 @@ Page({
       this.data.paramsData.orgID = paramsD.orgID;
       that.getOrderDetailFun(); // 查询订单详情
     }
+    wx.getSystemInfo({
+      success: function(res) {
+        that.setData({
+          windowHeightNum: res.windowHeight // 保存屏幕高度
+        });
+      },
+    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    if (this.data.isSearched) {
+      this.getOrderDetailFun(); // 再次查询订单详情
+    }
   },
 
   /**
@@ -157,6 +162,9 @@ Page({
     };
     HTTP.goodsOrder(params).then(res => {
       if (res.data) {
+        that.setData({
+          orderStatusID: res.data.orderStatusID
+        })
         that.getRpDetailFun(res.data.rpID);
       }
     });
@@ -165,7 +173,7 @@ Page({
   /**
    * 查询：处方详情 
    * */
-  getRpDetailFun: function (rpID) {
+  getRpDetailFun: function(rpID) {
     let that = this;
     let params = {
       rpID: rpID,
@@ -175,6 +183,7 @@ Page({
       if (res.data) {
         this.data.paramsData.doctorStaffID = res.data.doctorStaffID;
         this.data.paramsData.disease = res.data.diagnosis;
+        this.data.isSearched = true;
       }
     });
   },
@@ -224,6 +233,14 @@ Page({
     }
   },
 
+  /**输入评价内容 */
+  onInputValue: function(e) {
+    this.setData({
+      content: e.detail.value
+    });
+    console.log(e);
+  },
+
   /**操作：添加图片 */
   /*1.图片浏览及上传 */
   browseImgFun: function(e) {
@@ -251,26 +268,81 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: [type],
       success: function(res) {
+        wx.showLoading({
+          title: "上传中, 请稍等…"
+        });
         // 选择图片后的完成确认操作
         let remainNum = that.data.countIndex - res.tempFilePaths.length;
         if (remainNum < 1) {
           remainNum = 0;
         }
-        that.setData({
-          imageData: [...that.data.imageData, ...res.tempFilePaths],
-          countIndex: remainNum
-        });
+        // 遍历数组，上传图片到服务器
+        let tempFilePathsData = res.tempFilePaths;
+        that.upLoadImgFun(tempFilePathsData, remainNum); // 上传图片到服务器
       }
     })
+  },
+
+  /**上传：图片到服务器 */
+  upLoadImgFun: function (tempFilePathsData, remainNum) {
+    let that = this;
+    let orderCommentMaterial = []; // 每次选择添加的图片并上传到服务器后的图片信息
+    tempFilePathsData.forEach((item, index) => {
+      wx.uploadFile({
+        url: HTTP.uploadFileUrl(),
+        filePath: item,
+        name: 'file',
+        header: {
+          'content-Type': 'multipart/form-data'
+        },
+        formData: {
+          "systemCode": "TMC",
+          "belongCode": "CONTENT",
+          // "systemCode": "DOCTOR",
+          // "belongCode": "CERTIFY",
+          "belongID": that.data.paramsData.orgID
+        },
+        success(res) {
+          if (res.data) {
+            let successData = JSON.parse(res.data);
+            if (successData.code == 0) {
+              let obj = {
+                materialType: 0, // 0图片 1 视频
+                materialID: successData.data.keyID,
+                materialUrl: successData.data.remoteAddress
+              }; // 存储图片信息的参数格式
+              orderCommentMaterial.push(obj);
+            }
+          }
+        },
+        fail(err) {
+          console.log(err);
+        },
+        complete(res) {
+          if (tempFilePathsData.length - 1 == index) {
+            setTimeout(() => {
+              that.setData({
+                imageData: [...that.data.imageData, ...orderCommentMaterial],
+                countIndex: remainNum
+              });
+              wx.hideLoading();
+            }, 500)
+          }
+        }
+      });
+    });
   },
 
   /**操作：查看大图 */
   previewImgFun: function(e) {
     let index = e.currentTarget.dataset.index; // 点击的图片所在下标
-    let allMaterial = this.data.imageData; // 临时存储点击的评论的所有图片
+    let previewArr = [];
+    this.data.imageData.forEach(item => {
+      previewArr.push(item.materialUrl);
+    });
     wx.previewImage({
-      current: this.data.imageData[index], // 当前图片地址 必须是---线上---的图片
-      urls: this.data.imageData, // 所有要预览的图片的地址集合 数组形式
+      current: e.currentTarget.dataset.url, // 当前图片地址 必须是---线上---的图片
+      urls: previewArr, // 所有要预览的图片的地址集合 数组形式
       success: function(res) {},
       fail: function(res) {},
       complete: function(res) {}
@@ -290,6 +362,12 @@ Page({
 
   /**操作：确认提交 */
   submitEvaluateFun: function() {
+    if (this.data.orderStatusID != 10) {
+      wx.showToast({
+        title: '订单已经评价过了，无法再次评价',
+      });
+      return
+    }
     let params = {
       ...this.data.paramsData,
       generalCommentID: this.data.isSatisfaction ? 0 : 1, // 总评ID 0:满意 1：不满意
@@ -299,7 +377,7 @@ Page({
       patientID: this.data.personInfo.keyID, // TMC的患者ID
       patientName: this.data.personInfo.patientName,
       patientFace: app.globalData.userInfo.avatarUrl, // 患者头像
-      orderCommentMaterial: this.data.orderCommentMaterial // 要保存的图片信息
+      orderCommentMaterial: this.data.imageData // 要保存的图片信息
     };
     HTTP.orderCommentSave(params).then(res => {
       if (res.code == 0) {

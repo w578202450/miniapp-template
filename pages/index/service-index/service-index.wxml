@@ -7,7 +7,7 @@
   <!-- 医生团队 -->
   <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}"></service-physicianTeam>
   <!-- 患者评价 -->
-  <patient-evaluate evaluateAllData="{{evaluateAllData}}" />
+  <patient-evaluate wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
   <notes paersonInfo="{{inquiryCaseData}}"></notes>
   <!-- 患者分享 -->

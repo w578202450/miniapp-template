@@ -29,7 +29,7 @@ Page({
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);
     console.log("进入患者评价列表页拿到的参数：" + JSON.stringify(that.data.httpParams));
-    // that.getPatientEvaluateListFun(); // 查询：患者评价列表数据
+    that.getPatientEvaluateListFun(); // 查询：患者评价列表数据
     that.initNoRealyData(); // 拟定假数据
   },
 
@@ -93,8 +93,8 @@ Page({
     HTTP.orderCommentList(params).then(res => {
       if (res.data) {
         that.setData({
-          evaluateListData: res.data.evaluateList ? res.data.evaluateList : [],
-          illnessSumList: res.data.illnessSumList ? res.data.illnessSumList : []
+          evaluateListData: res.data.datas ? res.data.datas : []
+          // illnessSumList: []
         });
       }
     });
@@ -145,37 +145,37 @@ Page({
   },
 
   initNoRealyData: function() {
-    let evaData = [{
-        keyID: "11",
-        disease: "类风湿关节炎",
-        curativeEffectName: "满意",
-        doctorAttitudeName: "满意",
-        patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
-        patientName: "张三三",
-        content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
-        addTime: "2020-02-20 00:15:00",
-        materialData: [{
-          keyID: "1101",
-          materialType: 0,
-          materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-        }]
-      },
-      {
-        keyID: "11",
-        disease: "类风湿关节炎",
-        curativeEffectName: "满意",
-        doctorAttitudeName: "满意",
-        patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
-        patientName: "张三三",
-        content: "张医生对待病人认真负责，问诊细心",
-        addTime: "2020-02-20 00:15:00",
-        materialData: [{
-          keyID: "1201",
-          materialType: 1,
-          materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-        }]
-      }
-    ]; // 图文视频
+    // let evaData = [{
+    //     keyID: "11",
+    //     disease: "类风湿关节炎",
+    //     curativeEffectName: "满意",
+    //     doctorAttitudeName: "满意",
+    //     patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
+    //     patientName: "张三三",
+    //     content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
+    //     addTime: "2020-02-20 00:15:00",
+    //     materialData: [{
+    //       keyID: "1101",
+    //       materialType: 0,
+    //       materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
+    //     }]
+    //   },
+    //   {
+    //     keyID: "11",
+    //     disease: "类风湿关节炎",
+    //     curativeEffectName: "满意",
+    //     doctorAttitudeName: "满意",
+    //     patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
+    //     patientName: "张三三",
+    //     content: "张医生对待病人认真负责，问诊细心",
+    //     addTime: "2020-02-20 00:15:00",
+    //     materialData: [{
+    //       keyID: "1201",
+    //       materialType: 1,
+    //       materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
+    //     }]
+    //   }
+    // ]; // 图文视频
 
     let illList = [{
         keyID: "1",
@@ -204,7 +204,7 @@ Page({
       }
     ];
     this.setData({
-      evaluateListData: evaData,
+      // evaluateListData: evaData,
       illnessSumList: illList
     });
   }

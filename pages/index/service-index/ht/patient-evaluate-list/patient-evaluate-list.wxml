@@ -24,7 +24,7 @@
         <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}} {{item.num}}</view>
       </view>
     </view>
-    <view wx:for="{{evaluateListData}}" wx:key="index" wx:for-index='index' wx:for-item='item' data-id="{{item.keyID}}">
+    <view wx:for="{{evaluateListData}}" wx:key="index" data-id="{{item.keyID}}">
       <!-- 灰色间隔区 -->
       <view class="intervalView"></view>
       <!-- 单条评价区 -->
@@ -50,7 +50,7 @@
         <view class="evaluateContent">{{item.content}}</view>
         <!-- 评价内容的图片或者视频 -->
         <view class="materialDataBox">
-          <view class="materialItemView {{comTools.isDivisible(indexs+1, 3) ? '': 'materialItemViewMargin'}}" wx:for="{{item.materialData}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}"
+          <view class="materialItemView {{comTools.isDivisible(indexs+1, 3) ? '': 'materialItemViewMargin'}}" wx:for="{{item.orderCommentMaterial}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}"
             data-indexs="{{indexs}}">
             <image class="materialImg" src="{{items.materialUrl}}" mode="widthFix" style="background: url({{materialImgBac}});background-size: contain;">
             </image>

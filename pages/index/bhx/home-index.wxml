@@ -2,22 +2,22 @@
   <!-- 引入wxs脚本 -->
   <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
   <view class="banner-header" style="width: 100%;height: 350rpx;">
-    <image mode="widthFix" style="width: 92%;" src="{{home_houlipin_hospital_banner}}"></image>
+    <image mode="widthFix" style="width: 92%;" src="{{bannerImage}}"></image>
   </view>
 
   <view class="banner-middle">
     <text class="banner-middle-titleLabel">医疗机构许可证：</text>
-    <view class="banner-middle-detailLabel">45081134X51012213A1002</view>
+    <view class="banner-middle-detailLabel">{{certifyNo}}</view>
   </view>
 
   <view class="banner-bottom">
     <view class="bottom-left">
-      <text class="bottom-numberLabel">299868</text>
+      <text class="bottom-numberLabel">{{browseCount}}</text>
       <view class="bottom-titleLabel"> 人次已浏览，</view>
     </view>
 
     <view class="bottom-right">
-      <text class="bottom-numberLabel">19240</text>
+      <text class="bottom-numberLabel">{{shareCount}}</text>
       <view class="bottom-titleLabel"> 人次已转发给有需要的人</view>
     </view>
   </view>
@@ -33,8 +33,8 @@
         </view>
       </view>
       <service-tabs list="{{goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
-      <!-- 详情简介 -->
-      <view class="detailIntroduction">{{isShowAllContent ? deanContent : comTools.subStrTxt(deanContent, 49)}}</view>
+      <!-- 院长详情简介 -->
+      <view class="detailIntroduction">{{isShowAllContent ? deanDetailContent : comTools.subStrTxt(deanDetailContent, 49)}}</view>
     </view>
   </view>
   <!-- 医院介绍 -->
@@ -49,21 +49,16 @@
         </view>
       </view>
       <!-- 详情简介 -->
-      <view class="detailIntroduction">{{isShowAllContent ? hospitalContent : comTools.subStrTxt(hospitalContent, 50)}}</view>
+      <view class="detailIntroduction">{{isShowAllContent ? hospitalDetailContent : comTools.subStrTxt(hospitalDetailContent, 50)}}</view>
     </view>
   </view>
 
   <!-- 医师团队 -->
   <view class="physician-team">
     <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
-    <home-module-doctorteam></home-module-doctorteam>
+    <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}"></home-module-doctorteam>
     <!-- 底部模块(医师团队，电话和地址，分享) -->
     <view class="home-bottom">
-      <!-- 医师团队 -->
-      <!-- <view class="physician-team">
-        <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
-      </view> -->
-
       <view class="address-tel">
         <!-- 客服电话 -->
         <view class="address-tel-header-box">
