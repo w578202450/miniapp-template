@@ -407,14 +407,16 @@ module.exports = {
    * 获取首页banner和医师团队介绍
    */
   getBannerTeamIntroduce: function getBannerTeamIntroduce(params) {
-    return request('api/peachUser/orgPara/queryOrgPara', true, 'get', params);
+    // return request('api/peachUser/orgPara/queryOrgPara', true, 'get', params);
+    return request('http://10.0.0.99:6216/orgPara/queryOrgPara', false, 'get', params);
   },
 
   /**
    * 获取用户浏览数和分享数
    */
-  getBrowseShareCount: function getReadShareCount(params) {
-    return request('/api/peachUser/orgVar/queryOrgVar', true, 'get', params);
+  getBrowseShareCount: function getBrowseShareCount(params) {
+    // return request('/api/peachUser/orgVar/queryOrgVar', true, 'get', params);
+    return request('http://10.0.0.99:6216/orgVar/queryOrgVar', false, 'get', params);
   },
 
   /**

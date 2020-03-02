@@ -4,6 +4,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    doctorTeamIntroduce:{
+      type:String,
+      value:""
+    },
     list: {
       type: Array,
       value: [{
