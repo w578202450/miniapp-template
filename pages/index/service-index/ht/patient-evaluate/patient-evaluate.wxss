@@ -102,6 +102,20 @@
   font-size: 32rpx;
 }
 
+.standardImgView {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 10rpx;
+}
+
+.standardIcon {
+  width: 27rpx;
+  height: 27rpx;
+  margin-right: 5rpx;
+}
+
 .curativeEffectTxt {
   color: #ffb10b;
   font-size: 32rpx;
@@ -123,11 +137,12 @@
 }
 
 .materialItemView {
-  width: 223rpx;
-  height: 223rpx;
+  width: 221rpx;
+  height: 221rpx;
   margin-top: 20rpx;
   overflow: hidden;
   position: relative;
+  border: 1rpx dashed #f6f6f6;
 }
 
 .materialItemViewMargin {
@@ -135,8 +150,8 @@
 }
 
 .materialImg {
-  width: 223rpx;
-  height: 223rpx;
+  width: 221rpx;
+  height: 221rpx;
 }
 
 .videoIconImg {

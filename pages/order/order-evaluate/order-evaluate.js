@@ -298,8 +298,6 @@ Page({
         formData: {
           "systemCode": "TMC",
           "belongCode": "CONTENT",
-          // "systemCode": "DOCTOR",
-          // "belongCode": "CERTIFY",
           "belongID": that.data.paramsData.orgID
         },
         success(res) {
