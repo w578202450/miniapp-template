@@ -6,7 +6,6 @@
     "service-news": "/pages/index/service-index/fzm/service-news/service-news",
     "notes": "/pages/index/service-index/wth/notes/notes",
     "share": "/pages/index/service-index/wth/share/share",
-    "service-nav-title":"/pages/index/service-index/fzm/service-nav-title/service-nav-title",
     "login-dialog": "/components/loginDialog/loginDialog"
   },
   "navigationStyle": "custom"

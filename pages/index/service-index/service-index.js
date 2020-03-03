@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    statusBarHeight: app.globalData.systemInfo.statusBarHeight,
+    navBarHeight: app.globalData.navBarHeight,
     isSearchState: false, // 是否第一次加载
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID

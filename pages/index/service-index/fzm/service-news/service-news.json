@@ -1,7 +1,6 @@
 {
   "component": true,
   "usingComponents": {
-    "service-titles-page": "/pages/index/service-index/fzm/service-titles-page/service-titles-page",
     "service-news-item": "/pages/index/service-index/fzm/service-news-item/service-news-item"
   }
 }
