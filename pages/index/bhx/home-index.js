@@ -200,7 +200,7 @@ Page({
   getPhysicianTeamList() {
     let that = this;
     HTTP.getPhysicianTeamList({
-        orgID: that.data.houShiOrgID
+        orgId: that.data.houShiOrgID
       })
       .then(res => {
         // console.log("===获取医师团队列表===" + JSON.stringify(res));
