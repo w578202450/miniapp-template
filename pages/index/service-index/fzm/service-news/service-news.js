@@ -1,5 +1,6 @@
 var appBehavior = require('../behaviors/fzm-behaviors')
 const HTTP = require('../../../../../utils/http-util');
+const app = getApp()
 
 Component({
   behaviors: [appBehavior],
@@ -15,19 +16,23 @@ Component({
       value: 0
     },
     // 文章导航
-    articleTitles: {
-      type: Array,
-      value: []
-    },
+    articleTitles: Array,
     // 文章
-    articleDatas:{
-      type:{String:Object},
-      value:{}
-    },
-    
-    currentCategoryData: {
-      type: { String: Object },
+    articleDatas: {
+      type: {
+        String: Object
+      },
       value: {}
+    },
+
+    currentCategoryData: {
+      type: {
+        String: Object
+      },
+      value: {
+        'hasMore': false,
+        'hasData': false
+      }
     },
   },
 
@@ -49,19 +54,18 @@ Component({
      * swiper切换
      */
     pagechange: function(e) {
-      this.data.currentClassifyID = e.detail.currentItemId;
-      this.data.currentIndex = e.detail.current;
-      // 当前模块没有数据就进行网络加载请求
-      let tempCurrentData = this.data.articleDatas[this.data.currentClassifyID];
-      if (!tempCurrentData ||
-        tempCurrentData.datas.length == 0){
-        this.loadDatas(this.data.currentClassifyID)
-      } else {
-        this.data.currentCategoryData = tempCurrentData;
+      let currentIndex = e.detail.current
+      let navitem = this.data.articleTitles[currentIndex]
+      let currentClassifyID = e.detail.currentItemId
+      let currentCategoryData = this.data.articleDatas[currentClassifyID]
+      if (currentCategoryData.datas && currentCategoryData.datas.length > 0) {
         this.setData({
-          currentCategoryData: this.data.currentCategoryData
+          currentCategoryData: currentCategoryData
         })
+      } else {
+        this.loadDatas(currentClassifyID, currentCategoryData, navitem.orgID)
       }
+
       this.setData({
         currentIndex: e.detail.current
       })
@@ -82,33 +86,33 @@ Component({
     /**
      * 根据文章id获取文章的列表
      */
-    loadDatas(classifyID) {
+    loadDatas(currentClassifyID, currentCategoryData, orgID) {
       HTTP.articleByClassifyId({
-        "orgID": "32132132132",
-        "pageSize": 10,
-        "pageIndex": 1,
-        "classifyID": classifyID
+        "orgID": orgID,
+        "pageSize": currentCategoryData.pageSize,
+        "pageIndex": currentCategoryData.pageIndex,
+        "classifyID": currentClassifyID
       }).then(res => {
-        if (res.data) {
-          this.data.articleDatas[classifyID] = res.data;
-          this.data.currentCategoryData = res.data;
-          if (!res.data) {
-            this.data.currentCategoryData["noMore"] = true
-            this.data.currentCategoryData["noData"] = true
-          } else if (res.data.datas.length == 0) {
-            this.data.currentCategoryData["noMore"] = true
-            this.data.currentCategoryData["noData"] = true
-          } else if (res.data.datas.length < res.data.pageSize) {
-            this.data.currentCategoryData["noMore"] = true
-            this.data.currentCategoryData["noData"] = false
-          } else {
-            this.data.currentCategoryData["noMore"] = false
-            this.data.currentCategoryData["noData"] = false
+        let list = res.data
+        if (list.datas) {
+          if (list.datas.length > 0) {
+            currentCategoryData["hasData"] = true
+            currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true
+            currentCategoryData.datas = list.datas
+            this.data.articleDatas[currentClassifyID] = currentCategoryData
+            this.setData({
+              currentCategoryData: currentCategoryData,
+              articleDatas: this.data.articleDatas
+            })
+          } else if (list.datas.length == 0){
+            currentCategoryData["hasData"] = false
+            this.setData({
+              currentCategoryData: currentCategoryData
+            })
           }
 
-          this.setData({
-            currentCategoryData: this.data.currentCategoryData
-          })
+        } else {
+          // 不许渲染数据
         }
       });
     },
@@ -116,41 +120,56 @@ Component({
      * 上拉加载获取更多的数据
      */
     uploadMoreDatas(e) {
-      let classifyID = e.currentTarget.id;
-      let index = e.currentTarget.dataset.index;
-      var tempCurrentData = this.data.articleDatas[classifyID];
-      if (tempCurrentData.noMore) {return}
+      let currentClassifyID = e.currentTarget.dataset.navitem.keyID
+      let orgID = e.currentTarget.dataset.navitem.orgID
+      let currentCategoryData = this.data.articleDatas[currentClassifyID]
+      if (!currentCategoryData.hasMore) {
+        return
+      }
       HTTP.articleByClassifyId({
-        "orgID": "32132132132",
-        "pageSize": 10,
-        "pageIndex": tempCurrentData.pageIndex+1,
-        "classifyID": this.currentClassifyID
+        "orgID": orgID,
+        "pageSize": currentCategoryData.pageSize,
+        "pageIndex": currentCategoryData.pageIndex + 1,
+        "classifyID": currentClassifyID
       }).then(res => {
-        if (res.data) {
-           if (res.data.datas.length == 0) {
-             tempCurrentData["noMore"] = true
-             this.data.currentCategoryData = tempCurrentData;
-             this.setData({
-               currentCategoryData: this.data.currentCategoryData
-             })
-             return;
-          } 
+        let list = res.data
+        if (list.datas) {
+          if (list.datas.length > 0) {
+            currentCategoryData["hasData"] = true
+            currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true
+            currentCategoryData.datas.push(list.datas)
+            this.setData({
+              currentCategoryData: currentCategoryData
+            })
 
-          if (res.data.datas.length < res.data.pageSize) {
-             tempCurrentData["noMore"] = true
-          } else {
-             tempCurrentData["noMore"] = false
+          } else if (list.datas.length == 0) {
+            currentCategoryData["hasMore"] = false
+            this.setData({
+              currentCategoryData: currentCategoryData
+            })
           }
-          
-          res.data.datas = tempCurrentData.datas.push(res.data.datas)
-          this.data.currentCategoryData = res.data.datas;
-
-          this.setData({
-            currentCategoryData: this.data.currentCategoryData
-          })
+        } else {
+          // 不许渲染数据
         }
-      });
+      })
     },
+    /**
+     * 详情查看
+     */
+    itemDetails(e){
+      let title = e.currentTarget.dataset.navTitle
+      let item = e.currentTarget.dataset.item
+      let materialData = {
+        materialType: item.articleType, // （必传）要查看的素材类型 0图文 1视频
+        title: title, // 待确认，可先不传
+        url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // （必传）图文、视频 的网络地址链接
+        logoUrl: item.logoUrl // 视频的封面图片(没有就传空字符窜)
+      };
+      wx.navigateTo({
+        url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
+      });
+
+    }
 
   }
 })

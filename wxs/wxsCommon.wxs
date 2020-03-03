@@ -77,7 +77,10 @@ var serviceNum = function (doctorID) {
 }
 // 字符串转数组
 var strSplit = function (str, separator) {
+<<<<<<< HEAD
+=======
   // console.log("===========" + str + ",--------" + separator);
+>>>>>>> b66e8cf2d7a02c34efe56a5ed20858a95df80e9b
   if (!str || !separator) {
     return []
   }
@@ -88,7 +91,7 @@ var strSplit = function (str, separator) {
 
 // 根据key获取对象的值
 var value = function (dic, key) {
-  if (!dic || !key) {
+  if (!dic || !key || !dic[key]) {
     return []
   }
   return dic[key]

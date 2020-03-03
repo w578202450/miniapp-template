@@ -3,7 +3,7 @@
   <!-- 标题 -->
   <service-nav-title isInquiryNav="{{scrollTop == 0 ? false : true}}" doctorInfo="{{doctorInfo}}"></service-nav-title>
   <!-- 专家门诊专家信息 -->
-  <service-specialistInfo pageStyle="margin-bottom:20rpx" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo"></service-specialistInfo>
+  <service-specialistInfo pageStyle="margin-bottom:20rpx" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"></service-specialistInfo>
   <!-- 医生团队 -->
   <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}"></service-physicianTeam>
   <!-- 患者评价 -->

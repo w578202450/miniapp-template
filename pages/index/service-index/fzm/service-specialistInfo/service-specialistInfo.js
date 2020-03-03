@@ -39,7 +39,7 @@ Component({
    */
   data: {
     inquiryBoxHeight: 34,
-    serviceBg: '/images/home/home_service_banner.png',
+    serviceBg: 'https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314263775883480201210.png',
     goodAts: ["风湿骨病", "类风湿关节炎", "类风湿关节炎"]
   },
 
@@ -52,6 +52,7 @@ Component({
      * 立即问诊
      */
     goToInquiryOption() {
+      this.triggerEvent('toOnlineInqueryFun')
       console.log("this.data.doctorInfo-------",this.data.doctorInfo);
     },
 
