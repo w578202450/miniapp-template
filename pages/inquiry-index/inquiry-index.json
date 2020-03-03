@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "login-dialog": "/components/loginDialog/loginDialog"
+  },
+  "navigationBarTitleText": "问诊"
 }
