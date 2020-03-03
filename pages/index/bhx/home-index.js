@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    houShiOrgID: "", // 太原侯丽萍风湿骨病医院的机构ID
-    shareOrgID: "", // 进入页面携带的orgID
+    houShiOrgID: "19072514430966516270514001", // 太原侯丽萍风湿骨病医院的机构ID
+    shareOrgID: "19072514430966516270514001", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     // 首页banner
     bannerImage: "",
@@ -53,6 +53,11 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    // options = {
+    //   orgID: "19072514430966516270514001",
+    //   assistantStaffID: ""
+
+    // };
     console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
@@ -64,7 +69,7 @@ Page({
         wx.setStorageSync("shareOrgID", shareOrgID);
         that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID : "";
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
-      } else if (options.assistantStaffID) { // 通过分享的小程序进入时：直接带参
+      } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
         if (options.orgID) {
           that.data.shareOrgID = options.orgID;
@@ -88,7 +93,7 @@ Page({
   /** 初始化数据 */
   initHomeData: function() {
     let that = this;
-    that.getBanner(that.data.houShiOrgID); // 获取首页banner
+    that.getBanner(); // 获取首页banner
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
@@ -96,11 +101,10 @@ Page({
   },
 
   /** 获取首页banner */
-  getBanner(houShiOrgID) {
+  getBanner() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        // orgID: that.data.houShiOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.houShiOrgID,
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_BANNER"
       })
@@ -121,11 +125,10 @@ Page({
   },
 
   /** 获取医师团队介绍 */
-  getTeamIntroduce(houShiOrgID) {
+  getTeamIntroduce() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        // orgID: that.data.houShiOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.houShiOrgID,
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_GROUPDESC"
       })
@@ -146,11 +149,10 @@ Page({
   },
 
   /** 获取用户浏览数 */
-  getBrowseCount(houShiOrgID) {
+  getBrowseCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        // orgID: that.data.houShiOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.houShiOrgID,
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_VIEWS"
       })
@@ -171,11 +173,10 @@ Page({
   },
 
   /** 获取用户分享数 */
-  getShareCount(houShiOrgID) {
+  getShareCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        // orgID: that.data.houShiOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.houShiOrgID,
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_SHARES"
       })
@@ -196,11 +197,10 @@ Page({
   },
 
   /** 获取医师团队列表 */
-  getPhysicianTeamList(houShiOrgID) {
+  getPhysicianTeamList() {
     let that = this;
     HTTP.getPhysicianTeamList({
-        // orgID: that.data.houShiOrgID,
-        orgId: "19072514430966516270514001"
+        orgID: that.data.houShiOrgID
       })
       .then(res => {
         // console.log("===获取医师团队列表===" + JSON.stringify(res));
