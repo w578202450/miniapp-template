@@ -111,9 +111,7 @@
       <text class="other-text">物流单号：{{orderInfo.deliveryNo}}</text>
       <text class="other-text">发货备注：{{orderInfo.deliveryRemarks}}</text>
     </view>
-
     <view class="separator" style="height:24rpx"></view>
-
     <view style="display: flex;flex-direction: row;justify-content: space-between;padding:32rpx 32rpx 32rpx 0rpx">
       <view class="options-view" style="border:1px solid rgba(0,0,0,0.25)" bindtap="contactDoctorOption">
         <text style="color:rgba(0, 0, 0, 0.45)">咨询医生</text>
@@ -130,13 +128,12 @@
           <text style="color:rgba(255,255,255,1)">确认收货</text>
         </view>
       </block>
-      <!-- 确认收货 -->
+      <!-- 已确认收货 -->
       <block wx:if='{{orderInfo.orderStatusID == 30 && orderInfo.deliveryStatusID == 3}}'>
         <view class="options-view" style="border:1px solid rgba(254,88,83,1)" bindtap="toEvaluateFun">
           <text style="color:rgba(254, 88, 83, 1)">立即评价</text>
         </view>
       </block>
     </view>
-
   </view>
 </view>

@@ -199,10 +199,10 @@ Page({
       })
       return;
     }
-    var that = this
+    var that = this;
     wx.showLoading({
       title: '支付中...'
-    })
+    });
     HTTP.tradeOrder({
         body: '医护上门',
         detail: '医护上门PICC换药',
@@ -213,10 +213,7 @@ Page({
       .then(res => {
         wx.hideLoading();
         if (res.code == 0) {
-          // wx.showToast({
-          //   title: '支付校验成功',
-          // })
-          that.wxPayOptions(res.data)
+          that.wxPayOptions(res.data);
         } else {
           wx.showToast({
             title: res.message,
@@ -245,19 +242,14 @@ Page({
       'signType': 'MD5',
       'paySign': payInfo.sign,
       'success': function(res) {
-        console.log('微信支付成功----', res)
-        // wx.showToast({
-        //   title: '支付成功',
-        //   icon: 'none',
-        //   duration: 2000
-        // })
+        console.log('微信支付成功----', res);
         that.orderPaySuccess();
       },
       'fail': function(res) {
         wx.showToast({
           title: '支付失败',
-        })
-        console.log('微信支付失败----', res)
+        });
+        console.log('微信支付失败----', res);
       },
       'complete': function(res) {}
     })
@@ -281,17 +273,6 @@ Page({
         wx.hideLoading();
         console.log('支付回调------', res)
         if (res.code == 0) {
-          // wx.showToast({
-          //   title: '支付成功',
-          //   success: function() {
-          //     console.log('支付回调成功')
-          //     //1.刷新上一个界面的状态和当前界面数据
-          //     that.loadDatas()
-          //     that.refreshPrePage()
-          //     //2.跳转到地址管理界面
-          //     that.skipAddressSubmit()
-          //   }
-          // })
           wx.showToast({
             title: "支付成功",
             icon: 'none',
@@ -367,7 +348,6 @@ Page({
     } else {
       navigateToUrl = '../../address/address-submit/address-submit?orderID=' + this.data.orderID + '&modifyUser=' + modifyUser
     }
-
     wx.navigateTo({
       url: navigateToUrl,
       success: function(res) {},
@@ -375,6 +355,7 @@ Page({
       complete: function(res) {},
     })
   },
+
   /**
    * 确认收货
    */
@@ -384,51 +365,47 @@ Page({
       success(res) {
         if (res.confirm) {
           wx.showLoading({
-            title: '请稍等...',
+            title: '请稍等... ',
           });
-          HTTP.deleteAddress({
-              orgID: app.globalData.orgID,
-              deliveryStatusID: '3',
-              modifyUser: this.data.orderInfo.modifyUser ? this.data.orderInfo.modifyUser : '',
-              orderID: this.data.orderInfo.keyID
-            })
-            .then(res => {
-              wx.hideLoading();
-              if (res.code == 0) {
-                wx.showToast({
-                  title: '收货成功',
-                  success: function() {
-                    that.loadDatas();
-                    that.refreshPrePage();
-                    let paramsData = {
-                      orderID: this.data.orderInfo.keyID,
-                      orgID: app.globalData.orgID
-                    };
-                    wx.navigateTo({
-                      url: '/pages/order/order-success/order-success?paramsData=' + JSON.stringify(paramsData)
-                    });
-                  }
-                })
-              }
-
-            }).catch(e => {
-              wx.hideLoading();
-            })
-
-        } else if (res.cancel) {
-
+          let params = {
+            orgID: app.globalData.orgID,
+            deliveryStatusID: '3', // 1待发货,2已发货,3确认收货,4已退货
+            modifyUser: this.data.orderInfo.modifyUser ? this.data.orderInfo.modifyUser : '',
+            orderID: this.data.orderInfo.keyID
+          }
+          HTTP.sureSuccessDelivery(params).then(res => {
+            wx.hideLoading();
+            if (res.code == 0) {
+              wx.showToast({
+                title: '收货成功',
+                success: function() {
+                  that.loadDatas();
+                  that.refreshPrePage();
+                  let paramsData = {
+                    orderID: this.data.orderInfo.keyID,
+                    orgID: app.globalData.orgID
+                  };
+                  wx.navigateTo({
+                    url: '/pages/order/order-success/order-success?paramsData=' + JSON.stringify(paramsData)
+                  });
+                }
+              })
+            }
+          }).catch(e => {
+            wx.hideLoading();
+          });
         }
       }
-
     })
   },
+  
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
   },
 
   /**操作：立即评价 */
-  toEvaluateFun: function () {
+  toEvaluateFun: function() {
     let paramsData = {
       orderID: this.data.orderInfo.keyID,
       orgID: app.globalData.orgID

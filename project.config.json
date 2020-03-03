@@ -109,6 +109,13 @@
 					"pathName": "pages/inquiry-index/inquiry-index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "pages/order/order-evaluate-success/order-evaluate-success",
+					"pathName": "pages/order/order-evaluate-success/order-evaluate-success",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
