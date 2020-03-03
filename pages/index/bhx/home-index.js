@@ -20,11 +20,18 @@ Page({
     // 用户分享数
     shareCount: "0",
     // 院长信息
-    deanInfo: {},
+    deanInfo: {
+      deanName: "候丽萍", // 院长名称
+      deanDuty: "主任医师 山西名中医 博士生导师", // 职称
+      deanFamous: "侯氏三焦气化疗法创始人", // 专长
+      goodAts: ["风湿骨科", "针灸"], //擅长
+    },
     // 医院信息
-    hospitalInfo: {},
+    hospitalInfo: {
+
+    },
     serviceBg: '/images/home/home_service_bg.png',
-    goodAts: ["风湿骨科", "针灸"],
+
     isShowAllContent: false,
     deanIntroduceData: [], // 院长介绍
     // 院长详细介绍
@@ -291,7 +298,7 @@ Page({
   /**操作：立即进入专家门诊 */
   toServiceIndexFun: function() {
     wx.switchTab({
-      url: '/pages/index/service-index/service-index'
+      url: '/pages/index/service-index/service-index?orgID=' + that.data.shareOrgID + '&assistantStaffID=' + that.data.shareAssistantStaffID
     });
   }
 })

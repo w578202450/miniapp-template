@@ -27,12 +27,12 @@
       <view class="specialist-header-box">
         <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
         <view class="specialist-header-middle-box">
-          <text class="title-name" style="font-size:32rpx">候丽萍</text>
-          <text class="title-other" style="margin-top:20rpx">主任医师 山西名中医 博士生导师</text>
-          <text class="title-other" style="margin-top:20rpx">侯氏三焦气化疗法创始人</text>
+          <text class="title-name" style="font-size:32rpx">{{deanInfo.deanName}}</text>
+          <text class="title-other" style="margin-top:20rpx">{{deanInfo.deanDuty}}</text>
+          <text class="title-other" style="margin-top:20rpx">{{deanInfo.deanFamous}}</text>
         </view>
       </view>
-      <service-tabs list="{{goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
+      <service-tabs list="{{deanInfo.goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
       <!-- 院长详情简介 -->
       <view class="detailIntroduction">{{isShowAllContent ? deanDetailContent : comTools.subStrTxt(deanDetailContent, 49)}}</view>
     </view>
