@@ -14,7 +14,6 @@
   <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" />
   <!-- 文章模块 -->
   <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
-  <view bindtap="toOnlineInqueryFun">按钮</view>
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
 </view>
