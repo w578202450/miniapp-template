@@ -155,7 +155,7 @@ Page({
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
           that.getOrderCommentData(res.data.orgID, res.data.doctorStaffID); // 获取患者评价信息
           // that.data.doctorStaffID = res.data.doctorStaffID;
-          that.getToolClassifyById(res.data.orgID);// 文章模块分类获取
+          that.getToolClassifyById(res.data.orgID); // 文章模块分类获取
         },
         fail: function(err) {
           // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
@@ -288,7 +288,7 @@ Page({
   /**
    * 查询：患者评价信息
    */
-  getOrderCommentData: function (orgID, doctorStaffID) {
+  getOrderCommentData: function(orgID, doctorStaffID) {
     let that = this;
     HTTP.orderCommentGet({
       orgID: orgID
@@ -328,117 +328,56 @@ Page({
       classifyType: 2,
       orgID: orgID
     }).then(res => {
-      let tempTitles = [{
-          "name": "专家文章",
-          "classifyID": "1"
-        },
-        {
-          "name": "民医讲堂",
-          "classifyID": "2"
-        }, {
-          "name": "精选科普",
-          "classifyID": "3"
-        }
-      ];
-      this.setData({
-        articleTitles: tempTitles
+      let tempTitles = res.data
+      // 初始化组件数据源
+      let articleDatas = {};
+      tempTitles.forEach((item) => {
+        let currentCategoryData = {};
+        currentCategoryData["hasMore"] = false
+        currentCategoryData["hasData"] = false
+        currentCategoryData["pageSize"] = 4
+        currentCategoryData["pageIndex"] = 1
+        articleDatas[item.keyID] = currentCategoryData;
       })
+      this.setData({
+        articleTitles: tempTitles,
+        articleDatas: articleDatas
+      })
+
       // 初始化文章模块第一栏的数据
-      if (tempTitles.length > 0 && tempTitles[0].classifyID) {
-        this.articleByClassifyId(tempTitles[0].classifyID)
+      if (tempTitles.length > 0) {
+        this.articleByClassifyId(tempTitles, articleDatas)
       }
     });
   },
   /**
    * 根据分类id获取文章列表
    */
-  articleByClassifyId(classifyID) {
+  articleByClassifyId(tempTitles, articleDatas) {
+    // 初始化第一条数据
+    let classifyID = tempTitles[0].keyID
+    let orgID = tempTitles[0].orgID
+    let currentCategoryData = articleDatas[classifyID]
     HTTP.articleByClassifyId({
-      "orgID": "32132132132",
+      "orgID": orgID,
       "pageSize": 10,
       "pageIndex": 1,
       "classifyID": classifyID
     }).then(res => {
-      if (res.data) {
-        res.data = {
-          "datas": [{
-            title: "带你了解主动脉疾病的杂交手术治疗",
-            summary: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-            tag: "典型病例, 专家推荐",
-            videoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-            articleType: 1,
-            id: "0"
-          }, {
-            title: "带你了解主动脉疾病的杂交手术治疗",
-            summary: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-            tag: "典型病例, 专家推荐",
-            logoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-            articleType: 0,
-            id: "1"
-          }, {
-            title: "带你了解主动脉疾病的杂交手术治疗",
-            summary: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-            tag: "典型病例, 专家推荐",
-            logoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-            articleType: 0,
-            id: "2"
-          }, {
-            title: "带你了解主动脉疾病的杂交手术治疗",
-            summary: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-            tag: "典型病例, 专家推荐",
-            logoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-            articleType: 0,
-            id: "3"
-          }, {
-            title: "带你了解主动脉疾病的杂交手术治疗",
-            summary: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-            tag: "典型病例, 专家推荐",
-            logoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-            articleType: 0,
-            id: "4"
-          }, {
-            title: "带你了解主动脉疾病的杂交手术治疗",
-            summary: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-            tag: "典型病例, 专家推荐",
-            logoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-            articleType: 0,
-            id: "5"
-          }, {
-            title: "带你了解主动脉疾病的杂交手术治疗",
-            summary: "所谓杂交手术，又称复合技术，是近几年兴起的心脏领域前沿技术，就是心内介入与外科两种…",
-            tag: "典型病例, 专家推荐",
-            logoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",
-            articleType: 0,
-            id: "6"
-          }],
-          "pageSize": 4,
-          "pageIndex": 0
-        }
-        var dic = {
-          "fzm": 'fzm'
-        }
-        dic[classifyID] = res.data
-        let currentCategoryData = res.data;
-        if (!res.data) {
-          currentCategoryData["noMore"] = true
-          currentCategoryData["noData"] = true
-        } else if (res.data.datas.length == 0) {
-          currentCategoryData["noMore"] = true
-          currentCategoryData["noData"] = true
-        } else if (res.data.datas.length < res.data.pageSize) {
-          currentCategoryData["noMore"] = true
-          currentCategoryData["noData"] = false
-        } else {
-          currentCategoryData["noMore"] = false
-          currentCategoryData["noData"] = false
-        }
-
+      let list = res.data
+      if (list.datas && list.datas.length > 0) {
+        currentCategoryData["hasData"] = true
+        currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true
+        currentCategoryData.datas = list.datas
+        articleDatas[classifyID] = currentCategoryData
         this.setData({
-          articleDatas: dic,
-          currentCategoryData: currentCategoryData
+          currentCategoryData: currentCategoryData,
+          articleDatas: articleDatas
         })
+      } else {
+        // 不许渲染数据
       }
-    });
+    })
   },
 
   /**
@@ -451,7 +390,6 @@ Page({
           doctorID: doctorId
         })
         .then(res => {
-          console.log('getDoctorDiseaseByDoctorID-----', res)
           if (res.code == 0) {
             if (res.data) {
               var disease = []
@@ -478,6 +416,17 @@ Page({
     return promise;
 
   },
+  /**
+   * 立即问诊
+   */
+  toOnlineInqueryFun: function() {
+    if (app.globalData.isInitInfo) {
+      wx.navigateTo({
+        url: '/pages/online-inquiry/inquiry/chat/chat'
+      });
+    }
+  },
+
   //------------------------------fzm-------------------------------
   /**
    * 查询：患者分享信息

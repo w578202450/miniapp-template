@@ -56,7 +56,6 @@ Page({
         doctorID: doctorId
       })
       .then(res => {
-        console.log('getDoctorDiseaseByDoctorID-----', res)
         if (res.code == 0) {
           if (res.data) {
             var disease = []

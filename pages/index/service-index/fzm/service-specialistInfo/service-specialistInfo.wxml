@@ -4,12 +4,12 @@
   <!-- banner -->
   <block wx:if="{{isInquiryNav}}">
     <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight + 34}}px">
-      <image style="width: 100%" hidden="{{!doctorInfo.banner}}" src="{{doctorInfo.banner}}" mode="widthFix" />
+      <image style="width: 100%" hidden="{{!serviceBg}}" src="{{serviceBg}}" mode="widthFix" />
     </view>
   </block>
   <block wx:else>
     <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight}}px">
-      <image style="width: 100%" hidden="{{!doctorInfo.banner}}" src="{{doctorInfo.banner}}" mode="widthFix" />
+      <image style="width: 100%" hidden="{{!serviceBg}}" src="{{serviceBg}}" mode="widthFix" />
     </view>
   </block>
   <!-- 医生卡片 -->

@@ -74,9 +74,6 @@
   justify-content: center;
   align-items: center;
   margin-top: 20rpx;
-}
-
-.loading-box text {
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
@@ -89,9 +86,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.noData-box text {
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
