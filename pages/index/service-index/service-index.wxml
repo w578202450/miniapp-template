@@ -1,17 +1,19 @@
 <!--pages/index/service-index/service-index.wxml-->
 <view>
   <!-- 标题 -->
-  <service-nav-title isInquiryNav="{{scrollTop == 0 ? false : true}}" doctorInfo="{{doctorInfo}}"></service-nav-title>
+  <service-nav-title isInquiryNav="{{scrollTop == 0 ? false : true}}" doctorInfo="{{doctorInfo}}" />
   <!-- 专家门诊专家信息 -->
-  <service-specialistInfo pageStyle="margin-bottom:20rpx" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"></service-specialistInfo>
+  <service-specialistInfo pageStyle="margin-bottom:20rpx" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun" />
   <!-- 医生团队 -->
-  <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}"></service-physicianTeam>
+  <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" />
   <!-- 患者评价 -->
   <patient-evaluate wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
-  <notes paersonInfo="{{inquiryCaseData}}" wx:if="{{inquiryCaseData.keyID}}"></notes>
+  <notes paersonInfo="{{inquiryCaseData}}" wx:if="{{inquiryCaseData.keyID}}" />
   <!-- 患者分享 -->
-  <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}"></share>
+  <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" />
   <!-- 文章模块 -->
-  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}"></service-news>
+  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
+  <!-- 登录弹框 -->
+  <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
 </view>

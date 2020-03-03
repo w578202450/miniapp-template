@@ -48,56 +48,6 @@ Component({
       });
     }
 
-    // let that = this;
-    // // 拟定假数据
-    // let evaData = [{
-    //   keyID: "11",
-    //   disease: "类风湿关节炎",
-    //   curativeEffectName: "满意",
-    //   doctorAttitudeName: "满意",
-    //   patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
-    //   patientName: "张三三",
-    //   content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
-    //   addTime: "2020-02-20 00:15:00",
-    //   orderCommentMaterial: [{
-    //     keyID: "1101",
-    //     materialType: 0,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1102",
-    //     materialType: 1,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1103",
-    //     materialType: 0,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1104",
-    //     materialType: 1,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1105",
-    //     materialType: 1,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1106",
-    //     materialType: 1,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1107",
-    //     materialType: 0,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1108",
-    //     materialType: 1,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }, {
-    //     keyID: "1109",
-    //     materialType: 0,
-    //     materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //   }]
-    // }]; // 图文视频
-
     let illList = [{
         keyID: "1",
         illnessName: "风湿骨病",
@@ -125,13 +75,7 @@ Component({
       }
     ];
     this.setData({
-      // evaluateData: evaData,
       illnessSumList: illList,
-      // httpParams: {
-      //   nextPage: "/pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
-      //   doctorID: "1000",
-      //   orgID: "1223"
-      // }
     });
   },
 
