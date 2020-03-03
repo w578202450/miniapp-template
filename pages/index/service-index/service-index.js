@@ -14,7 +14,7 @@ Page({
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     doctorInfo: {}, // 医师的信息
     certifyInfo: {}, // 医师资质许可证等信息
-    assistantDoctorInfo: {}, // 助理医师的信息
+    assistantDoctorInfo: {}, // 助理医师的信息 
     // 患者评价相关的所有数据
     evaluateAllData: {
       evaluateData: [],
