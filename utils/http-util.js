@@ -267,6 +267,13 @@ module.exports = {
   deleteAddress: function deleteAddress(params) {
     return request('api/peachUser/personDeliveryAddr/delete', true, 'post', params);
   },
+
+  /**
+   * 确认收货
+   */
+  sureSuccessDelivery: function sureSuccessDelivery(params) {
+    return request('', true, 'post', params);
+  },
   /*
    *设置订单配送地址
    */
