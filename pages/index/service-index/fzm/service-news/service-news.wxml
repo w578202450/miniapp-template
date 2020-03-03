@@ -1,4 +1,4 @@
-<view class='container' style="{{pageStyle}}">
+<view class='container' style="{{pageStyle}}" hidden="{{articleTitles.length == 0}}">
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <view class="swiper-tabs-sticky-box" style="top: {{statusBarHeight + navBarHeight + 34}}px">
