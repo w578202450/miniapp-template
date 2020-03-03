@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    houShiOrgID: "19072514430966516270514001", // 太原侯丽萍风湿骨病医院的机构ID
-    shareOrgID: "19072514430966516270514001", // 进入页面携带的orgID
+    houShiOrgID: "19101017081245518100511001", // 太原侯丽萍风湿骨病医院的机构ID
+    shareOrgID: "19101017081245518100511001", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     // 首页banner
     bannerImage: "",
@@ -21,10 +21,13 @@ Page({
     shareCount: "0",
     // 院长信息
     deanInfo: {
+      deanPhotoUrl: "https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314092085694750201210.png",
       deanName: "候丽萍", // 院长名称
       deanDuty: "主任医师 山西名中医 博士生导师", // 职称
       deanFamous: "侯氏三焦气化疗法创始人", // 专长
       goodAts: ["风湿骨科", "针灸"], //擅长
+      // 院长详细介绍
+      deanDetailContent: "太原侯丽萍风湿骨病中医医院院长，北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科…",
     },
     // 医院信息
     hospitalInfo: {
@@ -34,8 +37,6 @@ Page({
 
     isShowAllContent: false,
     deanIntroduceData: [], // 院长介绍
-    // 院长详细介绍
-    deanDetailContent: "太原侯丽萍风湿骨病中医医院院长，北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科…",
     hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…",
     // 医师团队介绍
     // doctorTeamIntroduce:"侯氏团队在线亲诊解决风湿骨病疑难问题"
@@ -66,6 +67,7 @@ Page({
 
     // };
     console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
+    app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -91,9 +93,7 @@ Page({
     }
     // 如果orgID不等于侯丽萍医院的orgID，则直接跳转到专家问诊页
     if (that.data.shareOrgID != that.data.houShiOrgID) {
-      wx.switchTab({
-        url: '/pages/index/service-index/service-index?orgID=' + that.data.shareOrgID + '&assistantStaffID=' + that.data.shareAssistantStaffID
-      });
+      that.toServiceIndexFun();
     }
   },
 
@@ -111,7 +111,8 @@ Page({
   getBanner() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        orgID: that.data.houShiOrgID,
+        // orgID: that.data.houShiOrgID,
+        orgID: "19072514430966516270514001",
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_BANNER"
       })
@@ -135,7 +136,8 @@ Page({
   getTeamIntroduce() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        orgID: that.data.houShiOrgID,
+        // orgID: that.data.houShiOrgID,
+        orgID: "19072514430966516270514001",
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_GROUPDESC"
       })
@@ -159,7 +161,8 @@ Page({
   getBrowseCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        orgID: that.data.houShiOrgID,
+        // orgID: that.data.houShiOrgID,
+        orgID: "19072514430966516270514001",
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_VIEWS"
       })
@@ -183,7 +186,8 @@ Page({
   getShareCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        orgID: that.data.houShiOrgID,
+        // orgID: that.data.houShiOrgID,
+        orgID: "19072514430966516270514001",
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_SHARES"
       })
@@ -207,7 +211,7 @@ Page({
   getPhysicianTeamList() {
     let that = this;
     HTTP.getPhysicianTeamList({
-        orgId: that.data.houShiOrgID
+       orgId: that.data.houShiOrgID
       })
       .then(res => {
         // console.log("===获取医师团队列表===" + JSON.stringify(res));
@@ -216,6 +220,7 @@ Page({
             that.setData({
               doctorTeamList: res.data
             });
+            app.globalData.orgName = res.data[0].doctorDTOForTMC.workPlace; // 医院名称
           }
         } else {
           that.setData({
@@ -298,7 +303,7 @@ Page({
   /**操作：立即进入专家门诊 */
   toServiceIndexFun: function() {
     wx.switchTab({
-      url: '/pages/index/service-index/service-index?orgID=' + that.data.shareOrgID + '&assistantStaffID=' + that.data.shareAssistantStaffID
+      url: '/pages/index/service-index/service-index?orgID=' + this.data.shareOrgID + '&assistantStaffID=' + this.data.shareAssistantStaffID
     });
   }
 })

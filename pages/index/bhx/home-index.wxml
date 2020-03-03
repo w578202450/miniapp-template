@@ -25,7 +25,7 @@
   <view class="hospital-dean">
     <view class="specialist-box">
       <view class="specialist-header-box">
-        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
+        <image src="{{deanInfo.deanPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
           <text class="title-name" style="font-size:32rpx">{{deanInfo.deanName}}</text>
           <text class="title-other" style="margin-top:20rpx">{{deanInfo.deanDuty}}</text>
@@ -34,7 +34,7 @@
       </view>
       <service-tabs list="{{deanInfo.goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
       <!-- 院长详情简介 -->
-      <view class="detailIntroduction">{{isShowAllContent ? deanDetailContent : comTools.subStrTxt(deanDetailContent, 49)}}</view>
+      <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : comTools.subStrTxt(deanInfo.deanDetailContent, 49)}}</view>
     </view>
   </view>
   <!-- 医院介绍 -->
