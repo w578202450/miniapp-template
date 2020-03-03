@@ -23,14 +23,14 @@ Page({
       deanFamous: "侯氏三焦气化疗法创始人", // 专长
       goodAts: ["风湿骨科", "针灸"], //擅长
       // 院长详细介绍
-      deanDetailContent: "太原侯丽萍风湿骨病中医医院院长，第三方第三方第三方第三方第三方士大夫士大夫的所发生的发送到发送到发送到发送到发送到发送到发送到m,北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科…            ",
+      deanDetailContent: "太原侯丽萍风湿骨病中医医院院长，北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科…",
     },
     // 医院信息
     hospitalInfo: {
-      hospitalPhotoUrl: "https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314541664857580201210.png",
-      hospitalName: "候丽萍风湿骨病中医医院",
-      hospitalIntroduce: "中医治风湿骨病",
-      hospitalDetailContent: "地方建档立卡剪短发垃圾分类国际法的离开国际法的离开国际法的离开国际法的快乐感觉对方立刻感觉到付款了感觉科技股份的快乐感觉到付款了国际法的考虑过解放东路,太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…       "
+      hospitalPhotoUrl:"https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314541664857580201210.png",
+      hospitalName:"候丽萍风湿骨病中医医院",
+      hospitalIntroduce:"中医治风湿骨病",
+      hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…"
     },
     serviceBg: '/images/home/home_service_bg.png',
     isShowAllContent: false,
