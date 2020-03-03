@@ -41,14 +41,14 @@
           <view class="flexRowStartCenter">
             <text class="curativeEffect">疗效：</text>
             <view class="standardImgView">
-              <image class="standardIcon" src="{{ind < evaluateAllData.evaluateData.curativeEffect ? iconSrc : iconBacSrc}}" wx:for="{{curativeEffectList}}" wx:key="ind" wx:for-index='ind'/>
+              <image class="standardIcon" src="{{ind < evaluateAllData.evaluateData.curativeEffect ? iconSrc : iconBacSrc}}" wx:for="{{curativeEffectList}}" wx:key="ind" wx:for-index='ind' />
             </view>
             <text class="curativeEffectTxt">{{item.curativeEffect < 3 ? '不满意' : '满意'}}</text>
           </view>
           <view class="flexRowStartCenter">
             <text class="curativeEffect">服务：</text>
             <view class="standardImgView">
-              <image class="standardIcon" src="{{ind < evaluateAllData.evaluateData.doctorAttitude ? iconSrc : iconBacSrc}}" wx:for="{{doctorAttitudeList}}" wx:key="ind" wx:for-index='ind'/>
+              <image class="standardIcon" src="{{ind < evaluateAllData.evaluateData.doctorAttitude ? iconSrc : iconBacSrc}}" wx:for="{{doctorAttitudeList}}" wx:key="ind" wx:for-index='ind' />
             </view>
             <text class="curativeEffectTxt">{{item.doctorAttitude < 3 ? '不满意' : '满意'}}</text>
           </view>

@@ -80,7 +80,7 @@
             <text class="title-other">健康热线：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">{{healthline}}</text>
+            <text class="title-other">{{hospitalDetail.servicePhone}}</text>
           </view>
         </view>
         <!-- 地址 -->
@@ -90,7 +90,7 @@
             <text class="title-other">地址：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">{{hospitalAddress}}</text>
+            <text class="title-other">{{hospitalDetail.province}}{{hospitalDetail.city}}{{hospitalDetail.area}}{{hospitalDetail.address}}</text>
           </view>
         </view>
         <!-- 分享 -->

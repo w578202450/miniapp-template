@@ -1,74 +1,74 @@
-.tmc-container{
+.tmc-container {
   padding-top: 20rpx;
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
 }
-.cell{
+
+.cell {
   display: flex;
   flex-direction: column;
   padding: 32rpx;
   margin-bottom: 20rpx;
-  background-color: white
-  
+  background-color: white;
 }
 
-.cell-top{
+.cell-top {
   display: flex;
   flex-direction: row;
 }
 
-.cell-bottom{
+.cell-bottom {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
 
-.content-box{
+.content-box {
   margin-left: 16rpx;
   display: flex;
   flex-flow: column wrap;
   flex-grow: 1;
 }
 
-image{
+image {
   width: 80rpx;
   height: 80rpx;
   flex-shrink: 0;
 }
 
-.content-title{
-  font-size:28rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(0,0,0,0.85);
-  line-height:28rpx;
+.content-title {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 28rpx;
 }
 
-.content-details{
-  font-size:24rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(80,85,93,1);
+.content-details {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(80, 85, 93, 1);
   margin-top: 24rpx;
 }
 
-.content-date{
-  font-size:24rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(0,0,0,0.45);
-  line-height:24rpx;
+.content-date {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
+  line-height: 24rpx;
   margin-top: 34rpx;
 }
 
-.right-status{
-  font-size:24rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(0,0,0,0.65);
-  flex-grow: 1
+.right-status {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  flex-grow: 1;
 }
 
-.right-box{
+.right-box {
   width: 160rpx;
   margin-left: 16rpx;
   flex-shrink: 0;
@@ -79,25 +79,24 @@ image{
   flex-grow: 0;
 }
 
-.right-status{
+.right-status {
   text-align: right;
 }
 
-.option-view{
-  height:52rpx;
-  border-radius:26rpx;
+.option-view {
+  height: 52rpx;
+  border-radius: 26rpx;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-left: 32rpx;
   width: 160rpx;
-
 }
 
-.option-view text{
-  font-size:28rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(0,0,0,0.65);
-  line-height:28rpx;
+.option-view text {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 28rpx;
 }

@@ -4,13 +4,13 @@ Component({
    * 组件的属性列表
    */
   properties: {
-     // 查看更多
-     httpParams: {
-       type: Object,
-       value: {}
-     },
-     // 主题
-     title: {
+    // 查看更多
+    httpParams: {
+      type: Object,
+      value: {}
+    },
+    // 主题
+    title: {
       type: String,
       value: "标题"
     },
@@ -23,14 +23,14 @@ Component({
     paersonInfo: {
       type: Object,
       value: {
-      patientName: "",
-      patientFace: "",
-      patientAddress: "",
-      contentSummary: "",
-      detailUrl: "",
-      publishDate: "",
-      authorName: "",
-      photoUrl: ""
+        patientName: "",
+        patientFace: "",
+        patientAddress: "",
+        contentSummary: "",
+        detailUrl: "",
+        publishDate: "",
+        authorName: "",
+        photoUrl: ""
       }
     },
     // 评价内容
@@ -44,7 +44,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-   materialImgBac: "/images/chat/personBacImg.png"
+    materialImgBac: "/images/chat/personBacImg.png"
   },
 
   /**

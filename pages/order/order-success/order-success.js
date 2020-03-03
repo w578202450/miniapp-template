@@ -7,7 +7,7 @@ Page({
    */
   data: {
     paySuccessIconSrc: "/images/order/paySuccessIcon.png",
-    paramsData: ""  // 字符窜形式的数据
+    paramsData: "" // 字符窜形式的数据
   },
 
   /**

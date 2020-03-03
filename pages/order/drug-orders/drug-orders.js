@@ -184,7 +184,7 @@ Page({
   },
 
   /**操作：立即评价 */
-  toEvaluateFun: function (e) {
+  toEvaluateFun: function(e) {
     let index = e.currentTarget.dataset.index;
     if (!this.data.list[index].keyID) {
       wx.showToast({

@@ -95,7 +95,7 @@ Page({
       pageSize: that.data.pageInfo.pageSize
     };
     HTTP.orderCommentList(params).then(res => {
-      if (res.data) {
+      if (res.code == 0 && res.data) {
         that.setData({
           evaluateListData: res.data.datas ? res.data.datas : []
         });

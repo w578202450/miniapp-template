@@ -1,17 +1,17 @@
 <!--pages/index/service-index/wth/share-list/share-list.wxml-->
 <!-- 引入wxs脚本 -->
-  <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
+<wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
 <view class="box" bindtap="toDetail" wx:for="{{shareData}}" data-detailUrl='{{item.detailUrl}}' wx:key="index">
-    <view class="contain">
+  <view class="contain">
     <view class="personInfo">
-     <image class="img" src="{{item.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
-     <text class="name">患者：{{comTools.subName(item.patientName)}} {{item.patientAddress}}</text>
+      <image class="img" src="{{item.patientFace}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
+      <text class="name">患者：{{comTools.subName(item.patientName)}} {{item.patientAddress}}</text>
     </view>
     <view>
-     <text class="date">{{comTools.formateDate(item.publishDate)}}</text>
+      <text class="date">{{comTools.formateDate(item.publishDate)}}</text>
     </view>
-    </view>
-    <view>
-     <text class="content">{{comTools.subStrTxt(item.contentSummary,50)}}</text>
-    </view>
+  </view>
+  <view>
+    <text class="content">{{comTools.subStrTxt(item.contentSummary,50)}}</text>
+  </view>
 </view>

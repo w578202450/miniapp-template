@@ -1,34 +1,41 @@
 /* pages/index/service-index/wth/docNotes/docNodes.wxss */
-.box{
+
+.box {
   padding-left: 20rpx;
   padding-right: 20rpx;
   margin-bottom: 20rpx;
 }
-.contain{
+
+.contain {
   display: flex;
   margin-top: 20rpx;
   justify-content: space-between;
   height: 100rpx;
 }
-.img{
-  width:70rpx;
-  height:70rpx;
+
+.img {
+  width: 70rpx;
+  height: 70rpx;
   border-radius: 50%;
 }
-.personInfo{
+
+.personInfo {
   display: flex;
 }
-.name{
+
+.name {
   margin-left: 20rpx;
   line-height: 65rpx;
   font-size: 30rpx;
-  color:rgba(0,0,0,0.65);
+  color: rgba(0, 0, 0, 0.65);
 }
-.date{
+
+.date {
   font-size: 30rpx;
   line-height: 65rpx;
-  color:rgba(0,0,0,0.65);
+  color: rgba(0, 0, 0, 0.65);
 }
-.content{
+
+.content {
   font-size: 30rpx;
 }
