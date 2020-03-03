@@ -62,13 +62,6 @@
 			"current": -1,
 			"list": [
 				{
-					"id": 0,
-					"name": "患者评价",
-					"pathName": "pages/index/service-index/ht/patient-evaluate/patient-evaluate",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "pages/index/service-index/ht/module-title/module-title",
 					"pathName": "pages/index/service-index/ht/module-title/module-title",
@@ -100,6 +93,13 @@
 					"id": -1,
 					"name": "service-specialistInfo",
 					"pathName": "pages/index/service-index/fzm/service-specialistInfo/service-specialistInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "患者评价",
+					"pathName": "pages/order/order-evaluate/order-evaluate",
 					"query": "",
 					"scene": null
 				}

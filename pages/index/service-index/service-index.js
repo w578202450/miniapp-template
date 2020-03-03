@@ -19,7 +19,7 @@ Page({
       illnessSumList: [],
       doctorID: "",
       orgID: ""
-    }, // 患者评价相关的所有数据
+    },
     // doctorStaffID: "", // 门诊医生staffId
     scrollTop: 0,
     // 患者分享相关数据
