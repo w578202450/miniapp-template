@@ -223,7 +223,8 @@ Page({
   },
 
   // 分享给更多需要的人
-  shareMore: function(e) {
+  shareMore() {
+    let that = this;
     commonFun.onShareAppMessageFun();
   },
 
