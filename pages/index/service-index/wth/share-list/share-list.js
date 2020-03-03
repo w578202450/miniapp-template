@@ -72,7 +72,7 @@ Page({
   onShareAppMessage: function() {
 
   },
-  toDetail: function() {
+  toDetail: function(e) {
     let that = this;
     // console.log(e.currentTarget.dataset.detailurl);
     let materialData = {
