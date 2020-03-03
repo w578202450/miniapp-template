@@ -104,7 +104,7 @@ Component({
               articleDatas: this.data.articleDatas
             })
           } else if (list.datas.length == 0){
-            currentCategoryData["hasData"] = true
+            currentCategoryData["hasData"] = false
             this.setData({
               articleDatas: this.data.articleDatas
             })
@@ -112,10 +112,6 @@ Component({
 
         } else {
           // 不许渲染数据
-          currentCategoryData["hasData"] = true
-          this.setData({
-            articleDatas: this.data.articleDatas
-          })
         }
       });
     },
