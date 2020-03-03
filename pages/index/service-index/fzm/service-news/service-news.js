@@ -101,19 +101,21 @@ Component({
             currentCategoryData.datas = list.datas
             this.data.articleDatas[currentClassifyID] = currentCategoryData
             this.setData({
-              // currentCategoryData: currentCategoryData,
               articleDatas: this.data.articleDatas
             })
           } else if (list.datas.length == 0){
-            currentCategoryData["hasData"] = false
+            currentCategoryData["hasData"] = true
             this.setData({
-              // currentCategoryData: currentCategoryData
               articleDatas: this.data.articleDatas
             })
           }
 
         } else {
           // 不许渲染数据
+          currentCategoryData["hasData"] = true
+          this.setData({
+            articleDatas: this.data.articleDatas
+          })
         }
       });
     },
@@ -141,13 +143,11 @@ Component({
             currentCategoryData.datas.push(list.datas)
             this.setData({
               articleDatas: this.data.articleDatas
-              // currentCategoryData: currentCategoryData
             })
 
           } else if (list.datas.length == 0) {
             currentCategoryData["hasMore"] = false
             this.setData({
-              // currentCategoryData: currentCategoryData
               articleDatas: this.data.articleDatas
             })
           }
