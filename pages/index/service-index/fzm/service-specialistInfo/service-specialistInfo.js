@@ -60,8 +60,15 @@ Component({
      * 查看介绍(预览门诊医生详情)
      */
     previewDoctorInfo() {
-      this.triggerEvent('previewDoctorInfo')
-      console.log("this.data.doctorInfo-------", this.data.doctorInfo);
+      let staffID = this.data.doctorInfo.keyID
+      if (staffID) {
+        wx.navigateTo({
+          url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + staffID,
+          success: function (res) { },
+          fail: function (res) { },
+          complete: function (res) { },
+        });
+      }
     }
   }
 })
