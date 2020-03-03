@@ -15,6 +15,7 @@
 .doctor-team-box image {
   height: 84rpx;
   width: 84rpx;
+  border-radius: 50%
 }
 
 .doctorinfo-box {
