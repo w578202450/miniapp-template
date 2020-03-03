@@ -27,8 +27,12 @@
           <view wx:if="{{item.orderStatusID== 10 && item.deliveryStatusID==0}}" style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction" data-index="{{index}}">
             <text style="color:rgba(0,0,0,0.65)">填写地址</text>
           </view>
-          <view wx:if="{{item.orderStatusID== 30 && item.deliveryStatusID==3}}" style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="toEvaluateFun" data-index="{{index}}">
-            <text style="color:rgba(0,0,0,0.65)">立即评价</text>
+          <view wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 1 && orderInfo.deliveryStatusID == 2}}' class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
+            <text class="blueBtnTxt">确认收货</text>
+          </view>
+
+          <view wx:if="{{item.orderStatusID== 30 && item.deliveryStatusID==3}}"  class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
+            <text class="blueBtnTxt">立即评价</text>
           </view>
         </view>
 

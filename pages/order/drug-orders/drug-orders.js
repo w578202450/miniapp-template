@@ -164,14 +164,12 @@ Page({
       complete: function(res) {},
     })
   },
-  // 无数据
+
+  // 无数据,去咨询
   noDataOption: function(e) {
     wx.navigateTo({
-      url: '/pages/online-inquiry/inquiry/chat/chat',
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
-    })
+      url: '/pages/online-inquiry/inquiry/chat/chat'
+    });
   },
 
   noNetworkOption() {
@@ -181,6 +179,24 @@ Page({
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
+  },
+
+  /**
+   * 确认收货
+   */
+  confirmGoods(e) {
+    var index = e.currentTarget.dataset.index;
+    this.data.currentIndex = index;
+    if (!this.data.list[index].keyID) {
+      wx.showToast({
+        title: '缺少订单ID',
+        icon: 'none'
+      });
+      return;
+    }
+    wx.navigateTo({
+      url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID
+    });
   },
 
   /**操作：立即评价 */

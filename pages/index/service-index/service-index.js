@@ -92,11 +92,10 @@ Page({
         }
       }
     }
-    let sendOptions = { ...options
-    };
-    commonFun.startLoginFun(sendOptions); // 尝试自动登录 
+    // let sendOptions = { ...options
+    // };
+    // commonFun.startLoginFun(sendOptions); // 尝试自动登录 
     that.initDocInfoFun();
-
   },
 
   /**

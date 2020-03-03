@@ -355,6 +355,7 @@ Page({
       complete: function(res) {},
     })
   },
+
   /**
    * 确认收货
    */
@@ -367,36 +368,37 @@ Page({
             title: '请稍等... ',
           });
           let params = {
-            // orgID: app.globalData.orgID,
-            // deliveryStatusID: '3',
-            // modifyUser: this.data.orderInfo.modifyUser ? this.data.orderInfo.modifyUser : '',
-            // orderID: this.data.orderInfo.keyID
+            orgID: app.globalData.orgID,
+            deliveryStatusID: '3', // 1待发货,2已发货,3确认收货,4已退货
+            modifyUser: this.data.orderInfo.modifyUser ? this.data.orderInfo.modifyUser : '',
+            orderID: this.data.orderInfo.keyID
           }
           HTTP.sureSuccessDelivery(params).then(res => {
-            // wx.hideLoading();
-            // if (res.code == 0) {
-            //   wx.showToast({
-            //     title: '收货成功',
-            //     success: function() {
-            //       that.loadDatas();
-            //       that.refreshPrePage();
-            //       let paramsData = {
-            //         orderID: this.data.orderInfo.keyID,
-            //         orgID: app.globalData.orgID
-            //       };
-            //       wx.navigateTo({
-            //         url: '/pages/order/order-success/order-success?paramsData=' + JSON.stringify(paramsData)
-            //       });
-            //     }
-            //   })
-            // }
+            wx.hideLoading();
+            if (res.code == 0) {
+              wx.showToast({
+                title: '收货成功',
+                success: function() {
+                  that.loadDatas();
+                  that.refreshPrePage();
+                  let paramsData = {
+                    orderID: this.data.orderInfo.keyID,
+                    orgID: app.globalData.orgID
+                  };
+                  wx.navigateTo({
+                    url: '/pages/order/order-success/order-success?paramsData=' + JSON.stringify(paramsData)
+                  });
+                }
+              })
+            }
           }).catch(e => {
             wx.hideLoading();
           });
-        } else if (res.cancel) {}
+        }
       }
     })
   },
+  
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();

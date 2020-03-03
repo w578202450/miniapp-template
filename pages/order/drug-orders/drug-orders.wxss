@@ -100,3 +100,22 @@ image {
   color: rgba(0, 0, 0, 0.65);
   line-height: 28rpx;
 }
+
+.blueBtn {
+  height: 52rpx;
+  border-radius: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 32rpx;
+  width: 160rpx;
+  border: 1rpx solid #438BEF;
+  margin-top: 32rpx;
+}
+.blueBtnTxt {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #438BEF;
+  line-height: 28rpx;
+}

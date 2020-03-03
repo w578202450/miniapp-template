@@ -82,8 +82,12 @@ Page({
           wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
         }
       }
-      that.initHomeData();
     }
+    let sendOptions = {
+      ...options
+    };
+    commonFun.startLoginFun(sendOptions); // 尝试自动登录
+    that.initHomeData(); // 初始化数据
   },
 
   /**
@@ -145,14 +149,6 @@ Page({
       return "";
     }
   },
-
-  /**操作：立即进入专家门诊 */
-  toServiceIndexFun: function() {
-    wx.switchTab({
-      url: '/pages/index/service-index/service-index?orgID=' + this.data.shareOrgID + '&assistantStaffID=' + this.data.shareAssistantStaffID
-    });
-  },
-
 
   /** 初始化数据 */
   initHomeData: function() {
@@ -320,5 +316,12 @@ Page({
   shareMore() {
     let that = this;
     commonFun.onShareAppMessageFun();
+  },
+
+  /**操作：立即进入专家门诊 */
+  toServiceIndexFun: function () {
+    wx.switchTab({
+      url: '/pages/index/service-index/service-index?orgID=' + this.data.shareOrgID + '&assistantStaffID=' + this.data.shareAssistantStaffID
+    });
   }
 })

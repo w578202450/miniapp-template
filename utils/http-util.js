@@ -272,7 +272,7 @@ module.exports = {
    * 确认收货
    */
   sureSuccessDelivery: function sureSuccessDelivery(params) {
-    return request('', true, 'post', params);
+    return request('api/tmc/goodsOrder/updateDeliveryStatus', true, 'post', params);
   },
   /*
    *设置订单配送地址
