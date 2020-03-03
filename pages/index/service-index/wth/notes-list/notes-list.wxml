@@ -14,4 +14,5 @@
     <view>
      <text class="content">{{comTools.subStrTxt(item.contentSummary,50)}}</text>
     </view>
+
 </view>

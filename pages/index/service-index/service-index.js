@@ -32,7 +32,13 @@ Page({
       patientAddress: "",
       contentSummary: "",
       detailUrl: "",
-      publishDate: ""
+      publishDate: "",
+    httpParams: {
+      nextPage: "/pages/index/service-index/wth/share-list/share-list",
+      sectionID: "",
+      orgID: "", 
+      doctorStaffID: ""
+     }
     },
     // 患者手记相关数据
     inquiryCaseData: {
@@ -42,7 +48,13 @@ Page({
       patientAddress: "",
       contentSummary: "",
       detailUrl: "",
-      publishDate: ""
+      publishDate: "",
+      httpParams: {
+        nextPage: "/pages/index/service-index/wth/notes-list/notes-list",
+        sectionID: "",
+        orgID: "", 
+        doctorStaffID: ""
+       }
     },
   },
 
@@ -79,8 +91,7 @@ Page({
     };
     commonFun.startLoginFun(sendOptions); // 尝试自动登录 
     that.initDocInfoFun();
-    that.patientShareGet();
-    that.inquiryCaseGet();
+
   },
 
   /**
@@ -97,8 +108,6 @@ Page({
   onShow: function() {
     if (this.data.isSearchState) {
       this.initDocInfoFun();
-      this.patientShareGet();
-      this.inquiryCaseGet();
     }
   },
 
@@ -198,7 +207,8 @@ Page({
                 doctorDisease: res
               })
             })
-
+            that.patientShareGet(that.data.doctorInfo.sectionID,that.data.doctorInfo.orgID,staffID);
+            that.inquiryCaseGet(that.data.doctorInfo.sectionID,that.data.doctorInfo.orgID,staffID);
           }
         }
       }).catch(e => {
@@ -454,12 +464,15 @@ Page({
   /**
    * 查询：患者分享信息
    */
-  patientShareGet: function(orgID, sectionID, doctorStaffID) {
+  patientShareGet: function(sectionID, orgID, doctorStaffID) {
     let that = this;
     HTTP.patientShareGet({
-      orgID: "19101610315474350800511001",
-      sectionID: "20021811095450646230521001",
-      doctorStaffID: "19101610315474330040514001",
+      // orgID: "19101610315474350800511001",
+      // sectionID: "20021811095450646230521001",
+      // doctorStaffID: "19101610315474330040514001",
+      orgID: orgID,
+      sectionID: sectionID,
+      doctorStaffID: doctorStaffID
     }).then(res => {
       console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
       if (res.data) {
@@ -470,7 +483,10 @@ Page({
           ["patientShareGetData.patientAddress"]: res.data.patientAddress,
           ["patientShareGetData.contentSummary"]: res.data.contentSummary,
           ["patientShareGetData.detailUrl"]: res.data.detailUrl,
-          ["patientShareGetData.publishDate"]: res.data.publishDate
+          ["patientShareGetData.publishDate"]: res.data.publishDate,
+          ["patientShareGetData.httpParams.sectionID"]: sectionID,
+          ["patientShareGetData.httpParams.orgID"]: orgID,
+          ["patientShareGetData.httpParams.doctorStaffID"]: doctorStaffID
         });
         // console.log(this.data.patientShareGetData);
       }
@@ -479,12 +495,12 @@ Page({
   /**
    * 查询：患者手记信息
    */
-  inquiryCaseGet: function(orgID, sectionID, doctorStaffID) {
+  inquiryCaseGet: function(sectionID, orgID, doctorStaffID) {
     let that = this;
     HTTP.inquiryCaseGet({
-      orgID: "19101610315474350800511001",
-      sectionID: "20021811095450646230521001",
-      doctorStaffID: "19101610315474330040514001",
+      orgID: orgID,
+      sectionID: sectionID,
+      doctorStaffID: doctorStaffID
     }).then(res => {
       // console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
       if (res.data) {
@@ -495,7 +511,10 @@ Page({
           ["inquiryCaseData.patientAddress"]: res.data.patientAddress,
           ["inquiryCaseData.contentSummary"]: res.data.contentSummary,
           ["inquiryCaseData.detailUrl"]: res.data.detailUrl,
-          ["inquiryCaseData.publishDate"]: res.data.publishDate
+          ["inquiryCaseData.httpParams.sectionID"]: sectionID,
+          ["inquiryCaseData.httpParams.orgID"]: orgID,
+          ["inquiryCaseData.publishDate"]: res.data.publishDate,
+          ["inquiryCaseData.httpParams.doctorStaffID"]: doctorStaffID
         });
         // console.log(this.data.patientShareGetData);
       }

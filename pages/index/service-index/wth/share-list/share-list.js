@@ -20,7 +20,8 @@ Page({
     });
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);
-    that.patientShareList();
+    let a = that.data.httpParams;
+    that.patientShareList(a.orgID,a.sectionID,a.doctorStaffID);
   },
 
   /**
@@ -88,9 +89,9 @@ Page({
   patientShareList: function(orgID,sectionID,doctorStaffID) {
     let that = this;
     HTTP.patientShareList({
-      orgID: "19101610315474350800511001",
-      sectionID: "20021811095450646230521001",
-      doctorStaffID: "19101610315474330040514001",
+      orgID: orgID,
+      sectionID: sectionID,
+      doctorStaffID: doctorStaffID,
       pageIndex: 1,
       pageSize: 100
     }).then(res => {

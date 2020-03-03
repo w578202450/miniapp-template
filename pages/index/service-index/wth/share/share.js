@@ -15,7 +15,16 @@ paersonInfo: {
   contentSummary: "",
   detailUrl: "",
   publishDate: ""
-  }
+  },
+    httpParams: {
+      type: Object,
+      value: {
+      nextPage: "/pages/index/service-index/wth/share-list/share-list",
+      sectionID: "",
+      orgID: "", 
+      doctorStaffID: ""
+      }
+     }
 },
   },
 
@@ -25,11 +34,7 @@ paersonInfo: {
   data: {
     moreBtnUrl: "",
     paersonInfo: {},
-    contentText: "",
-    httpParams: {
-      nextPage: "/pages/index/service-index/wth/share-list/share-list",
-      doctorID: "2"
-     }
+    contentText: ""
   },
   /**
    * 生命周期函数--监听页面加载
