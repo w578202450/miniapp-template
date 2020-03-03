@@ -99,10 +99,9 @@ page {
 
 .specialist-box {
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 2px 32rpx 0px rgba(0, 0, 0, 0.15);
   border-radius: 10rpx;
   margin-top: 20rpx;
-  padding: 30rpx 30rpx 24rpx 30rpx;
+  padding: 30rpx 30rpx 20rpx 30rpx;
   display: flex;
   flex-direction: column;
 }
@@ -139,12 +138,25 @@ page {
   line-height: 24rpx;
 }
 
+.dean-introduce-box {
+  display: flex;
+  flex-direction: column;
+}
+
 .detailIntroduction {
   margin-top: 10rpx;
   width: 100%;
   word-break:  break-all; /* 强制换行 */
   color: rgba(0, 0, 0, 0.65);
   font-size: 24rpx;
+  line-height: 48rpx;
+}
+
+.introduce-box-image {
+   display: flex;
+   justify-content: flex-end;
+   bottom: 10rpx;
+   width: 100%;
 }
 
 .home-bottom {
@@ -160,9 +172,8 @@ page {
 
 .module-item-box {
   background: rgba(255, 255, 255, 1);
-  box-shadow: 0px 2px 32rpx 0px rgba(0, 0, 0, 0.15);
   border-radius: 10rpx;
-  padding: 30rpx 30rpx 24rpx 30rpx;
+  padding: 30rpx 30rpx 20rpx 30rpx;
   display: flex;
   flex-direction: column;
 }
@@ -209,7 +220,7 @@ page {
 
 .enter-box {
   width: 100%;
-  height: 180rpx;
+  height: 100rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -220,7 +231,7 @@ page {
 
 .enter-name {
   display: flex;
-  margin-top: 50rpx;
+  justify-content: center;
   font-size: 36rpx;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;

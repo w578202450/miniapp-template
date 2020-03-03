@@ -18,6 +18,15 @@ paersonInfo: {
   photoUrl: ""
   }
 },
+    httpParams: {
+      type: Object,
+      value: {
+      nextPage: "/pages/index/service-index/wth/notes-list/notes-list",
+      sectionID: "",
+      orgID: "", 
+      doctorStaffID: ""
+      }
+     }
   },
 
   /**
@@ -25,11 +34,7 @@ paersonInfo: {
    */
   data: {
     moreBtnUrl: "",
-    contentText: "asd",
-    httpParams: {
-      nextPage: "/pages/index/service-index/wth/notes-list/notes-list",
-      doctorID: "1"
-     }
+    contentText: ""
   },
   /**
    * 组件的方法列表

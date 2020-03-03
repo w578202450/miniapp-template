@@ -1,4 +1,4 @@
-<view class='container' style="{{pageStyle}}">
+<view class='container' style="{{pageStyle}}" hidden="{{articleTitles.length == 0}}">
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <view class="swiper-tabs-sticky-box" style="top: {{statusBarHeight + navBarHeight + 34}}px">
@@ -22,11 +22,11 @@
           <block wx:for="{{comTools.value(articleDatas,navItem.keyID).datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
             <service-news-item bindtap="itemDetails" data-item="{{item}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
           </block>
-          <block wx:if="{{currentCategoryData.hasMore}}">
+          <block wx:if="{{comTools.value(articleDatas,navItem.keyID).hasMore}}">
             <text class="loading-box">加载更多...</text>
           </block>
           <block wx:else>
-            <text wx:if="{{currentCategoryData.hasData}}" class="loading-box">-----底线在这呢-----</text>
+            <text wx:if="{{comTools.value(articleDatas,navItem.keyID).hasData}}" class="loading-box">-----底线在这呢-----</text>
             <text class="noData-box" wx:else>没有数据</text>
           </block>
         </scroll-view>
