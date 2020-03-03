@@ -429,6 +429,13 @@ module.exports = {
   getPhysicianTeamList: function getPhysicianTeamList(params) {
     // return request('api/tmc/doctorShow/list', true, 'get', params);
     return request('http://10.0.0.233:6215/doctorShow/list', false, 'get', params);
+  },
+
+  /**
+   * 查询医院详情信息
+   */
+  getHospitalInfo: function getHospitalInfo(params) {
+    return request('api/peachUser/hospitalMng/getHospital', true, 'get', params);
   }
 
 }

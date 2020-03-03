@@ -9,7 +9,7 @@ Page({
    */
   data: {
     houShiOrgID: "19101017081245518100511001", // 太原侯丽萍风湿骨病医院的机构ID
-    shareOrgID: "19101017081245518100511001", // 进入页面携带的orgID
+    shareOrgID: "19072514430966516270514001", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     // 首页banner
     bannerImage: "",
@@ -42,10 +42,12 @@ Page({
     doctorTeamIntroduce: "",
     // 医师团队列表
     doctorTeamList: [],
-    // 健康热线
-    healthline: "0351-2713002",
-    // 医院地址
-    hospitalAddress: "太原市小店区并州南路489号（太航加油站南侧）"
+    // // 健康热线
+    // healthline: "0351-2713002",
+    // // 医院地址
+    // hospitalAddress: "太原市小店区并州南路489号（太航加油站南侧）",
+    // 医院信息
+    hospitalInfo:{}
   },
 
   /**
@@ -91,9 +93,9 @@ Page({
       that.initHomeData();
     }
     // 如果orgID不等于侯丽萍医院的orgID，则直接跳转到专家问诊页
-    if (that.data.shareOrgID != that.data.houShiOrgID) {
-      that.toServiceIndexFun();
-    }
+    // if (that.data.shareOrgID != that.data.houShiOrgID) {
+    //   that.toServiceIndexFun();
+    // }
   },
 
   /** 初始化数据 */
@@ -104,13 +106,14 @@ Page({
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
     that.getPhysicianTeamList(); // 获取医师团队列表
+    that.getHospitalInfo(); //查询医院详情信息
   },
 
   /** 获取首页banner */
   getBanner() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        // orgID: that.data.houShiOrgID,
+        // orgID: that.data.shareOrgID,
         orgID: "19072514430966516270514001",
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_BANNER"
@@ -135,7 +138,7 @@ Page({
   getTeamIntroduce() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        // orgID: that.data.houShiOrgID,
+        // orgID: that.data.shareOrgID,
         orgID: "19072514430966516270514001",
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_GROUPDESC"
@@ -160,7 +163,7 @@ Page({
   getBrowseCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        // orgID: that.data.houShiOrgID,
+        // orgID: that.data.shareOrgID,
         orgID: "19072514430966516270514001",
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_VIEWS"
@@ -185,7 +188,7 @@ Page({
   getShareCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        // orgID: that.data.houShiOrgID,
+        // orgID: that.data.shareOrgID,
         orgID: "19072514430966516270514001",
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_SHARES"
@@ -210,7 +213,8 @@ Page({
   getPhysicianTeamList() {
     let that = this;
     HTTP.getPhysicianTeamList({
-       orgId: that.data.houShiOrgID
+       orgId: "19101017081245518100511001"
+      // orgId: that.data.shareOrgID
       })
       .then(res => {
         // console.log("===获取医师团队列表===" + JSON.stringify(res));
@@ -231,6 +235,31 @@ Page({
           noNetwork: true
         });
       })
+  },
+
+  /** 获取医院信息 */
+  getHospitalInfo() {
+    let that = this;
+    HTTP.getHospitalInfo({
+      orgID: that.data.shareOrgID
+    })
+      .then(res => {
+        console.log("===获取医院信息===" + JSON.stringify(res));
+        if (res.code == 0) {
+          if (res.data) {
+            that.setData({
+              hospitalInfo: res.data
+            });
+          }
+        }
+      }).catch(e => {
+        that.setData({
+          noNetwork: true
+        });
+      })
+    
+    ;
+
   },
 
   /** 跳转到院长详情 */

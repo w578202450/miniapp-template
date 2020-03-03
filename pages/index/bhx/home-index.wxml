@@ -22,7 +22,7 @@
     </view>
   </view>
   <!-- 院长简介 -->
-  <view class="hospital-dean">
+  <view wx:if="{{shareOrgID==houShiOrgID}}" class="hospital-dean">
     <view class="specialist-box">
       <view class="specialist-header-box">
         <image src="{{deanInfo.deanPhotoUrl}}"></image>
@@ -38,14 +38,14 @@
         <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : comTools.subStrTxt(deanInfo.deanDetailContent, 60)}}</view>
       </view>
       <view class="introduce-box-image" bindtap="toDeanDetail">
-       <image mode="widthFix" style="width:110rpx;height:40rpx;margin-right:10rpx;"  src="../../../images/home/home_detail.png"></image>
-       </view>
+        <image mode="widthFix" style="width:110rpx;height:40rpx;margin-right:10rpx;" src="../../../images/home/home_detail.png"></image>
+      </view>
     </view>
   </view>
-    <!-- 灰色间隔区 -->
-    <view class="intervalView"></view>
+  <!-- 灰色间隔区 -->
+  <view wx:if="{{shareOrgID==houShiOrgID}}" class="intervalView"></view>
   <!-- 医院介绍 -->
-  <view class="hospital-dean">
+  <view wx:if="{{shareOrgID==houShiOrgID}}" class="hospital-dean">
     <module-title title="医院介绍" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     <view class="module-item-box">
       <view class="specialist-header-box">
@@ -59,13 +59,13 @@
       <view class="dean-introduce-box">
         <view class="detailIntroduction">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : comTools.subStrTxt(hospitalInfo.hospitalDetailContent, 60)}}</view>
       </view>
-       <view class="introduce-box-image"  bindtap="toHospitalDetail">
-       <image mode="widthFix" style="width:110rpx;height:40rpx;margin-right:10rpx;"src="../../../images/home/home_detail.png"></image>
-        </view>
+      <view class="introduce-box-image" bindtap="toHospitalDetail">
+        <image mode="widthFix" style="width:110rpx;height:40rpx;margin-right:10rpx;" src="../../../images/home/home_detail.png"></image>
+      </view>
     </view>
   </view>
   <!-- 灰色间隔区 -->
-    <view class="intervalView"></view>
+  <view wx:if="{{shareOrgID==houShiOrgID}}" class="intervalView"></view>
   <!-- 医师团队 -->
   <view class="physician-team">
     <module-title title="医师团队" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
@@ -97,6 +97,8 @@
         <view class="share-box">
           <button class="share-box-button" open-type="share" bindtap="shareMore">分享给更多需要的人</button>
         </view>
+        <!-- 灰色间隔区 -->
+        <view class="share-intervalView"></view>
         <!-- <view class="share-box" bindtap="shareMore">
           <view class="share-box-view">
             <image src="../../../images/home/home_share.png"></image>
@@ -105,9 +107,7 @@
         </view> -->
       </view>
     </view>
-
-    <!-- 灰色间隔区 -->
-    <view class="intervalView"></view>
+    
     <!-- 立即进入专家门诊 -->
     <view class="enter-box" bindtap="toServiceIndexFun">
       <text class="enter-name">立即进入专家门诊</text>
