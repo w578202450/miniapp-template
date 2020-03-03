@@ -9,9 +9,9 @@
   <!-- 患者评价 -->
   <patient-evaluate wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
-  <notes paersonInfo="{{inquiryCaseData}}"></notes>
+  <notes paersonInfo="{{inquiryCaseData}}" wx:if="{{inquiryCaseData.keyID}}"></notes>
   <!-- 患者分享 -->
-  <share paersonInfo="{{patientShareGetData}}"></share>
+  <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}"></share>
   <!-- 文章模块 -->
   <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}"></service-news>
 </view>
