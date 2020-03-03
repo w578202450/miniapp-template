@@ -101,13 +101,14 @@ Component({
             currentCategoryData.datas = list.datas
             this.data.articleDatas[currentClassifyID] = currentCategoryData
             this.setData({
-              currentCategoryData: currentCategoryData,
+              // currentCategoryData: currentCategoryData,
               articleDatas: this.data.articleDatas
             })
           } else if (list.datas.length == 0){
             currentCategoryData["hasData"] = false
             this.setData({
-              currentCategoryData: currentCategoryData
+              // currentCategoryData: currentCategoryData
+              articleDatas: this.data.articleDatas
             })
           }
 
@@ -139,13 +140,15 @@ Component({
             currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true
             currentCategoryData.datas.push(list.datas)
             this.setData({
-              currentCategoryData: currentCategoryData
+              articleDatas: this.data.articleDatas
+              // currentCategoryData: currentCategoryData
             })
 
           } else if (list.datas.length == 0) {
             currentCategoryData["hasMore"] = false
             this.setData({
-              currentCategoryData: currentCategoryData
+              // currentCategoryData: currentCategoryData
+              articleDatas: this.data.articleDatas
             })
           }
         } else {

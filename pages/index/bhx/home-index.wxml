@@ -82,7 +82,7 @@
         </view>
         <!-- 分享 -->
         <view class="share-box">
-        <button class="share-box-button" open-type="share" bindtap="shareMore">分享给更多需要的人</button>
+          <button class="share-box-button" open-type="share" bindtap="shareMore">分享给更多需要的人</button>
         </view>
         <!-- <view class="share-box" bindtap="shareMore">
           <view class="share-box-view">
