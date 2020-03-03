@@ -28,7 +28,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    diseaseName: "风湿骨病,痛风,wewewewe"
+    // diseaseName: []
   },
 
   /**

@@ -48,7 +48,7 @@ Page({
         wx.setStorageSync("shareOrgID", shareOrgID);
         that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID: "";
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
-      } else if (options.assistantStaffID) { // 通过分享的小程序进入时：直接带参
+      } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
         if (options.orgID) {
           that.data.shareOrgID = options.orgID;

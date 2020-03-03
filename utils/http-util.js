@@ -72,8 +72,7 @@ module.exports = {
   /**上传文件的路径（图片） */
   uploadFileUrl: function uploadFileUrl() {
     if (version == 0) {
-      return 'https://file-cs.jk.100cbc.com/api/sys/file'
-      // return 'http://10.0.0.210:6104/api/sys/file'
+      return 'http://10.0.0.210:6104/api/sys/file'
     } else if (version == 1) {
       return 'https://file-cs.jk.100cbc.com/api/sys/file'
     } else if (version == 2) {

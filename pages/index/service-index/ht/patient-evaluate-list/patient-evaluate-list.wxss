@@ -2,7 +2,6 @@
 
 .evaluateContentBox {
   width: 100%;
-  /* border:  1rpx solid red; */
   overflow: hidden;
   background-color: #fff;
 }
@@ -46,10 +45,6 @@
   background-color: #dbdee3;
 }
 
-.marginLeftRightLine {
-  margin: 0 60rpx;
-}
-
 .illnessList {
   display: flex;
   flex-direction: row;
@@ -88,16 +83,6 @@
   font-weight: bold;
 }
 
-.unfoldTxt {
-  font-size: 30rpx;
-  color: #86888b;
-}
-
-.unfoldIcon {
-  width: 25rpx;
-  margin-left: 15rpx;
-}
-
 .curativeEffect {
   color: #555658;
   font-size: 32rpx;
@@ -108,11 +93,30 @@
   font-size: 32rpx;
 }
 
+.standardImgView {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-right: 10rpx;
+}
+
+.standardIcon {
+  width: 27rpx;
+  height: 27rpx;
+  margin-right: 5rpx;
+}
+
+.curativeEffectTxt {
+  color: #ffb10b;
+  font-size: 32rpx;
+}
+
 .evaluateContent {
   margin-top: 15rpx;
-  width: 100%;
-  word-break:  break-all; /* 强制换行 */
+  word-break: break-all; /* 强制换行 */
   font-size: 30rpx;
+  word-wrap: break-word;
 }
 
 .materialDataBox {
@@ -124,11 +128,12 @@
 }
 
 .materialItemView {
-  width: 223rpx;
-  height: 223rpx;
+  width: 221rpx;
+  height: 221rpx;
   margin-top: 20rpx;
   overflow: hidden;
   position: relative;
+  border: 1rpx dashed #f6f6f6;
 }
 
 .materialItemViewMargin {
@@ -136,8 +141,8 @@
 }
 
 .materialImg {
-  width: 223rpx;
-  height: 223rpx;
+  width: 221rpx;
+  height: 221rpx;
 }
 
 .videoIconImg {

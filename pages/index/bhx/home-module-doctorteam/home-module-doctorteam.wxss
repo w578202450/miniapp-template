@@ -12,7 +12,8 @@ text {
 
 .introduce {
   margin-left: 28rpx;
-  margin-top: 10rpx;
+  margin-right: 28rpx;
+  margin-top: 5rpx;
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;

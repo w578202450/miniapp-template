@@ -28,10 +28,15 @@ Component({
       type: String,
       value: "bold"
     },
+    // 是否有标题下的底部线条
+    isHaveBorderBottom: {
+      type: Boolean,
+      value: true
+    },
     // 是否有标题后的信息，默认无
     isHaveRemark: {
       type: Boolean,
-      value: false
+      value: true
     },
     // 标题后的信息
     remarkInfo: {

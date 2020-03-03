@@ -10,7 +10,11 @@ Page({
     levelIconSrc: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/levelIcon.png", // 星级图标
     materialImgBac: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png", // 评论内容中的背景图片
     videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
-    illnessSumList: [], // 患者评价的统计星级数据
+    iconSrc: "/images/order/xingIcon.png", // 亮色星星
+    iconBacSrc: "/images/order/xingIconBot.png", // 暗色星星
+    curativeEffectList: [{}, {}, {}, {}, {}], // 疗效星级列表初始数据
+    doctorAttitudeList: [{}, {}, {}, {}, {}], // 服务星级列表初始数据
+    illnessSumList: [], // 患者评价的统计数据
     evaluateListData: [], // 患者评价的内容
     httpParams: {}, // 查看更多数据的请求参数
     pageInfo: {
@@ -94,7 +98,6 @@ Page({
       if (res.data) {
         that.setData({
           evaluateListData: res.data.datas ? res.data.datas : []
-          // illnessSumList: []
         });
       }
     });
@@ -103,15 +106,14 @@ Page({
   /**操作：点击某张图片或者某个视频 */
   toDetailFun: function(e) {
     let that = this;
-    console.log(e);
     let index = e.currentTarget.dataset.index; // 点击的评论（即item）所在下标
-    let indexs = e.currentTarget.dataset.indexs; // 点击的图片所在评论的materialData中的（即items）下标
+    let indexs = e.currentTarget.dataset.indexs; // 点击的图片所在评论的orderCommentMaterial中的（即items）下标
     let materialItem = {
       ...e.currentTarget.dataset.material
     }; // 点击的items
     // materialType： 0图片 1视频
     if (materialItem.materialType == 0) {
-      let allMaterial = that.data.evaluateListData[index].materialData; // 临时存储点击的评论的所有图片、视频素材
+      let allMaterial = that.data.evaluateListData[index].orderCommentMaterial; // 临时存储点击的评论的所有图片、视频素材
       let previewImgArr = []; // 要展示的图片集合
       allMaterial.forEach((item) => {
         if (item.materialType == 0) {
@@ -119,7 +121,7 @@ Page({
         }
       });
       wx.previewImage({
-        current: materialItem.materialUrl, // 当前图片地址 必须是---线上---的图片
+        current: e.currentTarget.dataset.material.materialUrl, // 当前图片地址 必须是---线上---的图片
         urls: previewImgArr, // 所有要预览的图片的地址集合 数组形式
         success: function(res) {},
         fail: function(res) {},
@@ -145,38 +147,6 @@ Page({
   },
 
   initNoRealyData: function() {
-    // let evaData = [{
-    //     keyID: "11",
-    //     disease: "类风湿关节炎",
-    //     curativeEffectName: "满意",
-    //     doctorAttitudeName: "满意",
-    //     patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
-    //     patientName: "张三三",
-    //     content: "张医生对待病人认真负责，问诊细心，真的非常感谢！也庆幸自己能遇到这么好的医生，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了，现在我的情况吃了药好多了",
-    //     addTime: "2020-02-20 00:15:00",
-    //     materialData: [{
-    //       keyID: "1101",
-    //       materialType: 0,
-    //       materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //     }]
-    //   },
-    //   {
-    //     keyID: "11",
-    //     disease: "类风湿关节炎",
-    //     curativeEffectName: "满意",
-    //     doctorAttitudeName: "满意",
-    //     patientFace: "https://wx.qlogo.cn/mmopen/vi_32/nibb7W6bx5xlU6A10icFLGnNr7KpftYFiaqNpciccwWlt2Ps657yq4jHwdCQTXribHBxdEiangOq9VrzAicZ6dBhvicPvA/132",
-    //     patientName: "张三三",
-    //     content: "张医生对待病人认真负责，问诊细心",
-    //     addTime: "2020-02-20 00:15:00",
-    //     materialData: [{
-    //       keyID: "1201",
-    //       materialType: 1,
-    //       materialUrl: "https://com-shuibei-peach-hospital-cs.100cbc.com/res/19122116554357936820511001/20011909031475771110201210.jpg"
-    //     }]
-    //   }
-    // ]; // 图文视频
-
     let illList = [{
         keyID: "1",
         illnessName: "风湿骨病",
@@ -204,7 +174,6 @@ Page({
       }
     ];
     this.setData({
-      // evaluateListData: evaData,
       illnessSumList: illList
     });
   }

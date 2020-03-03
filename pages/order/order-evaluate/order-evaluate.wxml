@@ -32,7 +32,7 @@
         </view>
       </view>
     </view>
-    <!-- 评价 -->
+    <!-- 评价  -->
     <view class="commentArea">
       <textarea class="commentInput" value="{{content}}" placeholder="请您对本次问诊服务做出评价" maxlength="200" bindinput="onInputValue"></textarea>
       <view class="imagesArea">

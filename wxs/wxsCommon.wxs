@@ -77,9 +77,15 @@ var serviceNum = function (doctorID) {
 }
 // 字符串转数组
 var strSplit = function (str, separator) {
+<<<<<<< HEAD
+=======
+  // console.log("===========" + str + ",--------" + separator);
+>>>>>>> b66e8cf2d7a02c34efe56a5ed20858a95df80e9b
   if (!str || !separator) {
     return []
   }
+  // 去掉中括号
+  str = str.replace("[", "").replace("]", "");
   return str.split(separator)
 }
 

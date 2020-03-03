@@ -25,16 +25,16 @@
   <view class="hospital-dean">
     <view class="specialist-box">
       <view class="specialist-header-box">
-        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
+        <image src="{{deanInfo.deanPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
-          <text class="title-name" style="font-size:32rpx">候丽萍</text>
-          <text class="title-other" style="margin-top:20rpx">主任医师 山西名中医 博士生导师</text>
-          <text class="title-other" style="margin-top:20rpx">侯氏三焦气化疗法创始人</text>
+          <text class="title-name" style="font-size:32rpx">{{deanInfo.deanName}}</text>
+          <text class="title-other" style="margin-top:20rpx">{{deanInfo.deanDuty}}</text>
+          <text class="title-other" style="margin-top:20rpx">{{deanInfo.deanFamous}}</text>
         </view>
       </view>
-      <service-tabs list="{{goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
+      <service-tabs list="{{deanInfo.goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
       <!-- 院长详情简介 -->
-      <view class="detailIntroduction">{{isShowAllContent ? deanDetailContent : comTools.subStrTxt(deanDetailContent, 49)}}</view>
+      <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : comTools.subStrTxt(deanInfo.deanDetailContent, 49)}}</view>
     </view>
   </view>
   <!-- 医院介绍 -->
@@ -42,20 +42,20 @@
     <module-title title="医院介绍" isHaveMoreBtn="{{false}}"></module-title>
     <view class="module-item-box">
       <view class="specialist-header-box">
-        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
+        <image src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
-          <text class="title-name" style="font-size:32rpx">候丽萍风湿骨病中医医院</text>
-          <text class="title-other" style="margin-top:30rpx">中医治风湿骨病</text>
+          <text class="title-name" style="font-size:32rpx">{{hospitalInfo.hospitalName}}</text>
+          <text class="title-other" style="margin-top:30rpx">{{hospitalInfo.hospitalIntroduce}}</text>
         </view>
       </view>
       <!-- 详情简介 -->
-      <view class="detailIntroduction">{{isShowAllContent ? hospitalDetailContent : comTools.subStrTxt(hospitalDetailContent, 50)}}</view>
+      <view class="detailIntroduction">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : comTools.subStrTxt(hospitalInfo.hospitalDetailContent, 50)}}</view>
     </view>
   </view>
 
   <!-- 医师团队 -->
   <view class="physician-team">
-    <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
+    <module-title title="医师团队" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}" doctorTeamList="{{doctorTeamList}}"></home-module-doctorteam>
     <!-- 底部模块(医师团队，电话和地址，分享) -->
     <view class="home-bottom">
@@ -67,7 +67,7 @@
             <text class="title-other">健康热线：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">0351-2713002</text>
+            <text class="title-other">{{healthline}}</text>
           </view>
         </view>
         <!-- 地址 -->
@@ -77,16 +77,19 @@
             <text class="title-other">地址：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">太原市小店区并州南路489号（太航加油站南侧）</text>
+            <text class="title-other">{{hospitalAddress}}</text>
           </view>
         </view>
         <!-- 分享 -->
-        <view class="share-box" bindtap="shareMore">
+        <view class="share-box">
+        <button class="share-box-button" open-type="share" bindtap="shareMore">分享给更多需要的人</button>
+        </view>
+        <!-- <view class="share-box" bindtap="shareMore">
           <view class="share-box-view">
             <image src="../../../images/home/home_share.png"></image>
             <text>分享给更多需要的人</text>
           </view>
-        </view>
+        </view> -->
 
       </view>
     </view>
