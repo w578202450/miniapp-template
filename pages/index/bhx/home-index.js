@@ -31,15 +31,14 @@ Page({
     },
     // 医院信息
     hospitalInfo: {
-
+      hospitalPhotoUrl:"https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314541664857580201210.png",
+      hospitalName:"候丽萍风湿骨病中医医院",
+      hospitalIntroduce:"中医治风湿骨病",
+      hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…"
     },
     serviceBg: '/images/home/home_service_bg.png',
-
     isShowAllContent: false,
-    deanIntroduceData: [], // 院长介绍
-    hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…",
     // 医师团队介绍
-    // doctorTeamIntroduce:"侯氏团队在线亲诊解决风湿骨病疑难问题"
     doctorTeamIntroduce: "",
     // 医师团队列表
     doctorTeamList: [],

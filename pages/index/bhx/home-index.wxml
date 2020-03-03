@@ -42,14 +42,14 @@
     <module-title title="医院介绍" isHaveMoreBtn="{{false}}"></module-title>
     <view class="module-item-box">
       <view class="specialist-header-box">
-        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"></image>
+        <image src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
-          <text class="title-name" style="font-size:32rpx">候丽萍风湿骨病中医医院</text>
-          <text class="title-other" style="margin-top:30rpx">中医治风湿骨病</text>
+          <text class="title-name" style="font-size:32rpx">{{hospitalInfo.hospitalName}}</text>
+          <text class="title-other" style="margin-top:30rpx">{{hospitalInfo.hospitalIntroduce}}</text>
         </view>
       </view>
       <!-- 详情简介 -->
-      <view class="detailIntroduction">{{isShowAllContent ? hospitalDetailContent : comTools.subStrTxt(hospitalDetailContent, 50)}}</view>
+      <view class="detailIntroduction">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : comTools.subStrTxt(hospitalInfo.hospitalDetailContent, 50)}}</view>
     </view>
   </view>
 
