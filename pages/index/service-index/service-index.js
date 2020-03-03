@@ -33,12 +33,12 @@ Page({
       contentSummary: "",
       detailUrl: "",
       publishDate: "",
-    httpParams: {
-      nextPage: "/pages/index/service-index/wth/share-list/share-list",
-      sectionID: "",
-      orgID: "", 
-      doctorStaffID: ""
-     }
+      httpParams: {
+        nextPage: "/pages/index/service-index/wth/share-list/share-list",
+        sectionID: "",
+        orgID: "",
+        doctorStaffID: ""
+      }
     },
     // 患者手记相关数据
     inquiryCaseData: {
@@ -52,9 +52,9 @@ Page({
       httpParams: {
         nextPage: "/pages/index/service-index/wth/notes-list/notes-list",
         sectionID: "",
-        orgID: "", 
+        orgID: "",
         doctorStaffID: ""
-       }
+      }
     },
   },
 
@@ -207,8 +207,8 @@ Page({
                 doctorDisease: res
               })
             })
-            that.patientShareGet(that.data.doctorInfo.sectionID,that.data.doctorInfo.orgID,staffID);
-            that.inquiryCaseGet(that.data.doctorInfo.sectionID,that.data.doctorInfo.orgID,staffID);
+            that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
+            that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
           }
         }
       }).catch(e => {
