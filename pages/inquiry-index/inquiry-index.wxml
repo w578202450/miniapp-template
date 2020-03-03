@@ -1,2 +1,11 @@
 <!--pages/inquiry-index/inquiry-index.wxml-->
-<text>pages/inquiry-index/inquiry-index.wxml</text>
+<view>
+  <view class="logoImgView">
+    <image class="wx-popup-image" src="{{content_image}}" />
+  </view>
+  <view class="titleTxt">{{titleTxt}}</view>
+  <view class="toInquiryView">
+    <view class="toInquiryBtn" bindtap="toOnlineInqueryFun">{{btnTxt}}</view>
+  </view>
+  <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
+</view>

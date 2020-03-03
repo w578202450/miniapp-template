@@ -48,7 +48,7 @@
         <view class="drugs-list-lineView"></view>
         <view class="drugs-list-source">药品由{{orgName}}为您提供</view>
       </view>
-      <view class="drugs-cell" wx:for="{{rpMedicines}}" wx:for-item="item">
+      <view class="drugs-cell" wx:for="{{rpMedicines}}" wx:key="index" wx:for-item="item">
         <view class="drugs-cell-content">
           <view class="drugs-cell-middle">
             <text class="drugs-cell-name">{{item.medicineName}}</text>

@@ -261,7 +261,7 @@ function onShareAppMessageFun() {
   let shaAssId = wx.getStorageSync("shareAssistantStaffID");
   let orgID = shaOrgId ? shaOrgId : "";
   let assistantStaffID = shaAssId ? shaAssId: "";
-  let orgName = wx.getStorageSync("doctorInfo").workPlace;
+  let orgName = (app.globalData.orgName && app.globalData.orgName.length > 0) ? app.globalData.orgName : wx.getStorageSync("doctorInfo").workPlace;
   return {
     title: orgName,    // 转发的标题，默认是小程序的名称(可以写slogan等)
     path: '/pages/online-inquiry/online-inquiry?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID // 默认是当前页面，必须是以‘/'开头的完整路径
