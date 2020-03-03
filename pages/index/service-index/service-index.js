@@ -85,7 +85,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    //获得popup组件：登录确认框
+    this.popup = this.selectComponent("#loginDialog");
   },
 
   /**
@@ -355,25 +356,25 @@ Page({
    */
   articleByClassifyId(tempTitles, articleDatas) {
     // 初始化第一条数据
-    let classifyID = tempTitles[0].keyID
-    let orgID = tempTitles[0].orgID
-    let currentCategoryData = articleDatas[classifyID]
+    let classifyID = tempTitles[0].keyID;
+    let orgID = tempTitles[0].orgID;
+    let currentCategoryData = articleDatas[classifyID];
     HTTP.articleByClassifyId({
       "orgID": orgID,
       "pageSize": 10,
       "pageIndex": 1,
       "classifyID": classifyID
     }).then(res => {
-      let list = res.data
-      if (list.datas && list.datas.length > 0) {
-        currentCategoryData["hasData"] = true
-        currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true
-        currentCategoryData.datas = list.datas
-        articleDatas[classifyID] = currentCategoryData
+      let list = res.data;
+      if (list && list.datas && list.datas.length > 0) {
+        currentCategoryData["hasData"] = true;
+        currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true;
+        currentCategoryData.datas = list.datas;
+        articleDatas[classifyID] = currentCategoryData;
         this.setData({
           currentCategoryData: currentCategoryData,
           articleDatas: articleDatas
-        })
+        });
       } else {
         // 不许渲染数据
       }
@@ -416,15 +417,31 @@ Page({
     return promise;
 
   },
+
   /**
-   * 立即问诊
-   */
+   * 操作：开始问诊
+   * 1.已登录，直接到问诊页
+   * 2.未登录，授权登录
+   *  */
   toOnlineInqueryFun: function() {
     if (app.globalData.isInitInfo) {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });
+    } else {
+      let nextPageName = "chat";
+      this.popup.showPopup(nextPageName); // 显示登录确认框
     }
+  },
+
+  /**取消事件 */
+  _error() {
+    this.popup.hidePopup();
+  },
+
+  /**确认事件 */
+  _success() {
+    this.popup.hidePopup();
   },
 
   //------------------------------fzm-------------------------------

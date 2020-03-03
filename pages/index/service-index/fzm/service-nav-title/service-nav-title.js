@@ -1,4 +1,3 @@
-
 var appBehavior = require('../behaviors/fzm-behaviors')
 
 Component({
@@ -20,12 +19,12 @@ Component({
       value: "专家门诊"
     }
   },
-  
+
   /**
    * 组件的初始数据
    */
   data: {
-    
+
   },
 
   /**

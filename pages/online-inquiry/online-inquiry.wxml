@@ -70,9 +70,9 @@
   </view>
 
   <view class="inquiry-view">
-    <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_inquiry.png" mode="widthFix" bindtap="toOnlineInqueryFun"/>
+    <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_inquiry.png" mode="widthFix" bindtap="toOnlineInqueryFun" />
   </view>
-   <view>
-    <login-dialog id="loginDialog" bind:error="_error" bind:success="_success"/>
+  <view>
+    <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   </view>
 </view>

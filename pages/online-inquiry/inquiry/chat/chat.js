@@ -36,21 +36,21 @@ Page({
     maySendContent: "", // 输入的聊天内容
     maySendContentSure: false, // 是否允许发送的内容格式
     isOpenBottomBoolbar: false, // 是否打开工具栏
-    // 底部菜单栏
+    // 底部菜单栏 
     toolbarMenus: [{
         title: "图片",
-        iconUrl: "../../../../images/chat/m-image.png",
+        iconUrl: "/images/chat/m-image.png",
         clickFun: "chooseWxImage",
         isFifth: false
       },
       {
         title: "拍照",
-        iconUrl: "../../../../images/chat/m-camera.png",
+        iconUrl: "/images/chat/m-camera.png",
         clickFun: "cameraWxFun",
         isFifth: false
       }, {
         title: "视频问诊",
-        iconUrl: "../../../../images/chat/m-video.png",
+        iconUrl: "/images/chat/m-video.png",
         clickFun: "videoWxFun",
         isFifth: false
       }
