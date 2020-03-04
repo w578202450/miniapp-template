@@ -1,10 +1,10 @@
 <view class="page" style="{{pageStyle}}" bindtap="clickItem">
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <image style="display:block;border-radius:50%;width:120rpx;height:120rpx;background:url({{defaultPhotoUrl}});background-size: contain;" src="{{pageItem.doctorDTOForTMC.photoUrl}}"></image>
+  <image style="display:block;border-radius:50%;width:120rpx;height:120rpx;background-size: contain;" src="{{pageItem.doctorDTOForTMC.photoUrl || defaultPhotoUrl}}"></image>
   <view class="midlle-box">
     <!-- 医生名称 -->
-    <text class="name-text">{{pageItem.doctorDTOForTMC.doctorName}}</text>
+    <text class="name-text">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.doctorName,8)}}</text>
     <!-- 医生职称 -->
     <text class="other-text" style="margin-left:16rpx;line-height: 34rpx">{{pageItem.doctorDTOForTMC.duty}}</text>
   </view>
