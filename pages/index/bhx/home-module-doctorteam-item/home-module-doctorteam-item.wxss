@@ -10,13 +10,12 @@
   width: 300rpx;
   margin: 20rpx 20rpx 10rpx 20rpx;
   overflow: hidden;
-  
 }
 
 image {
   width: 120rpx;
   height: 120rpx;
-  flex-shrink: 0
+  flex-shrink: 0;
 }
 
 .midlle-box {
@@ -34,6 +33,13 @@ image {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
   line-height: 28rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  text-align: center;
+  display: block;
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 加上省略号 */
 }
 
 .other-text {
@@ -42,5 +48,23 @@ image {
   font-weight: 400;
   color: rgba(0, 0, 0, 0.65);
   line-height: 40rpx;
+  display: block;
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 加上省略号 */
+}
+
+.text-singleline {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 40rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
   text-align: center;
+  display: block;
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 加上省略号 */
 }

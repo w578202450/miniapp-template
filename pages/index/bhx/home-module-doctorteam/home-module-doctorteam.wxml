@@ -1,6 +1,6 @@
 <view class="page">
   <text class="introduce">{{doctorTeamIntroduce}}</text>
-  <swiper hidden="{{!doctorTeamList.length === 0}}" class='swiper' display-multiple-items="2">
+  <swiper class='swiper' display-multiple-items="2">
     <block wx:for="{{doctorTeamList}}" wx:for-item="pageItem" wx:for-index="sortNo" wx:key="keyID">
       <swiper-item>
         <home-module-doctorteam-item pageItem="{{pageItem}}" bind:clickItem="clickItem"></home-module-doctorteam-item>

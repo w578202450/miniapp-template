@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    houShiOrgID: "19101017081245518100511001", // 太原侯丽萍风湿骨病医院的机构ID
-    shareOrgID: "19101017081245518100511001", // 进入页面携带的orgID
+    houShiOrgID: "19122116554357936820511001", // 太原侯丽萍风湿骨病医院的机构ID
+    shareOrgID: "19122116554357936820511001", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     bannerImage: "", // 首页banner
     certifyNo: "45081134X51012213A1002", // 医疗机构许可证
@@ -165,8 +165,7 @@ Page({
   getBanner() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        // orgID: that.data.shareOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.shareOrgID,
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_BANNER"
       })
@@ -186,8 +185,7 @@ Page({
   getTeamIntroduce() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
-        // orgID: that.data.shareOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.shareOrgID,
         groupCode: "OP_TMC_ORG",
         paraCode: "OP_TMC_ORG_GROUPDESC"
       })
@@ -207,8 +205,7 @@ Page({
   getBrowseCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        // orgID: that.data.shareOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.shareOrgID,
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_VIEWS"
       })
@@ -228,8 +225,7 @@ Page({
   getShareCount() {
     let that = this;
     HTTP.getBrowseShareCount({
-        // orgID: that.data.shareOrgID,
-        orgID: "19072514430966516270514001",
+        orgID: that.data.shareOrgID,
         groupCode: "OV_TMC_USER",
         paraCode: "OV_TMC_USER_SHARES"
       })
@@ -249,8 +245,7 @@ Page({
   getPhysicianTeamList() {
     let that = this;
     HTTP.getPhysicianTeamList({
-        orgId: "19101017081245518100511001"
-        // orgId: that.data.shareOrgID
+        orgId: that.data.shareOrgID
       })
       .then(res => {
         // console.log("===获取医师团队列表===" + JSON.stringify(res));
@@ -269,8 +264,7 @@ Page({
   getHospitalInfo() {
     let that = this;
     let params = {
-      // orgID: that.data.shareOrgID
-      orgID: "19101017081245502880511001"
+      orgID: that.data.shareOrgID
     }
     HTTP.getHospitalInfo(params).then(res => {
       // console.log("===获取医院信息===" + JSON.stringify(res));
@@ -286,7 +280,6 @@ Page({
 
   /** 跳转到院长详情 */
   toDeanDetail() {
-    console.log("跳转到院长详情");
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "侯丽萍的医生主页", // 待确认，可先不传
@@ -300,7 +293,6 @@ Page({
 
   /** 跳转到医院详情 */
   toHospitalDetail() {
-    console.log("跳转到医院详情");
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "医院主页", // 待确认，可先不传

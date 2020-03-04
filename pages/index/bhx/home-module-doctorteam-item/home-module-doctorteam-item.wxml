@@ -6,7 +6,7 @@
     <text class="name-text">{{pageItem.doctorDTOForTMC.doctorName}}</text>
     <text class="other-text" style="margin-left:16rpx;line-height: 34rpx">{{pageItem.doctorDTOForTMC.duty}}</text>
   </view>
-  <text class="other-text" style="margin-top:16rpx">{{pageItem.doctorDTOForTMC.workPlace}}</text>
+  <text class="text-singleline" style="margin-top:16rpx;">{{pageItem.doctorDTOForTMC.workPlace}}</text>
   <text class="other-text">{{pageItem.doctorDTOForTMC.sectionName}}</text>
   <service-tabs list="{{comTools.strSplit(pageItem.doctorDTOForTMC.diseaseName,',')}}" pageStyle="margin-top: 40rpx;margin-left: 40rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;"></service-tabs>
 </view>
