@@ -19,9 +19,9 @@
       <image src="{{doctorInfo.faceImage}}" mode="aspectFill"></image>
       <view class="specialist-header-middle-box">
         <text class="title-name" style="font-size:32rpx">{{doctorInfo.doctorName}}</text>
-        <text class="title-other" style="margin-top:20rpx">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
+        <text class="title-other" style="margin-top:20rpx;line-height: 36rpx">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
       </view>
-      <text class="title-other specialist-header-right-box" bindtap="previewDoctorInfo">查看介绍 ></text>
+      <text class="title-other specialist-header-right-box" style="line-height: 36rpx"  bindtap="previewDoctorInfo">查看介绍 ></text>
     </view>
     <!-- 擅长标签 -->
     <service-tabs list="{{doctorDisease}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>

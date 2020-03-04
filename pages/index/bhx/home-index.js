@@ -32,17 +32,17 @@ Page({
     },
     // 医院信息
     hospitalInfo: {
-      hospitalPhotoUrl:"https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314541664857580201210.png",
-      hospitalName:"候丽萍风湿骨病中医医院",
-      hospitalIntroduce:"中医治风湿骨病",
+      hospitalPhotoUrl: "https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314541664857580201210.png",
+      hospitalName: "候丽萍风湿骨病中医医院",
+      hospitalIntroduce: "中医治风湿骨病",
       hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…"
     },
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     doctorTeamList: [], // 医师团队列表
     hospitalDetail: {}, // 医院信息
-    // defaultPhotoUrl: "/images/chat/personBacImg.png" // 默认头像
-    defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
+    // defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
+    homeBannerDefaultUrl: "/images/home/home_banner_default.png"
   },
 
   /**
@@ -251,6 +251,7 @@ Page({
   getPhysicianTeamList() {
     let that = this;
     HTTP.getPhysicianTeamList({
+      // orgId: "19101017081245502880511001"
         orgId: that.data.shareOrgID
       })
       .then(res => {
@@ -260,7 +261,10 @@ Page({
             that.setData({
               doctorTeamList: res.data
             });
-            app.globalData.orgName = res.data[0].doctorDTOForTMC.workPlace; // 医院名称
+            if (res.data[0].doctorDTOForTMC && res.data[0].doctorDTOForTMC.workPlace) {
+              app.globalData.orgName = res.data[0].doctorDTOForTMC.workPlace; // 医院名称
+            }
+            // app.globalData.orgName = res.data[0].doctorDTOForTMC.workPlace; // 医院名称
           }
         }
       });
@@ -317,7 +321,7 @@ Page({
   },
 
   /**操作：立即进入专家门诊 */
-  toServiceIndexFun: function () {
+  toServiceIndexFun: function() {
     wx.switchTab({
       url: '/pages/index/service-index/service-index?orgID=' + this.data.shareOrgID + '&assistantStaffID=' + this.data.shareAssistantStaffID
     });
