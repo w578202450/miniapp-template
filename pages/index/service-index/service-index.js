@@ -432,7 +432,6 @@ Page({
         keyID: this.data.doctorInfo.sectionID
       })
       .then(res => {
-        console.log('sectionBanner------', res)
         this.setData({
           sectionBanner: res.data.sectionBanner
         })
