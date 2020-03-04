@@ -265,10 +265,6 @@ Page({
             that.setData({
               doctorTeamList: res.data
             });
-            if (res.data[0].doctorDTOForTMC && res.data[0].doctorDTOForTMC.workPlace) {
-              app.globalData.orgName = res.data[0].doctorDTOForTMC.workPlace; // 医院名称
-            }
-            // app.globalData.orgName = res.data[0].doctorDTOForTMC.workPlace; // 医院名称
           }
         }
       });
@@ -287,6 +283,9 @@ Page({
           that.setData({
             hospitalDetail: res.data
           });
+          if (res.data.orgName) {
+            app.globalData.orgName = res.data.orgName; // 医院名称
+          }
         }
       }
     });

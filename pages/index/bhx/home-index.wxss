@@ -160,6 +160,7 @@ page {
 .introduce-box-image {
    display: flex;
    justify-content: flex-end;
+   margin-top:5rpx;
    bottom: 10rpx;
    width: 100%;
 }
