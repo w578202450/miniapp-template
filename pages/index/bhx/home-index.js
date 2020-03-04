@@ -8,6 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    /**
+     * 测试数据：
+     * 侯丽萍医院 19122116554357936820511001
+     *  默认医院  19101017081245502880511001
+     */
     houShiOrgID: "19122116554357936820511001", // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "19122116554357936820511001", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
@@ -36,7 +41,8 @@ Page({
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     doctorTeamList: [], // 医师团队列表
-    hospitalDetail: {} // 医院信息
+    hospitalDetail: {}, // 医院信息
+    defaultPhotoUrl: "/images/chat/personBacImg.png" // 默认头像
   },
 
   /**
