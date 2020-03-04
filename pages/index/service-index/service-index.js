@@ -264,6 +264,7 @@ Page({
           that.getOrderCommentData(res.data.orgID, res.data.doctorStaffID); // 获取患者评价信息
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
+          that.getToolClassifyById(that.data.shareOrgID);
         }
       });
   },
@@ -307,7 +308,9 @@ Page({
   /**
    * 获取文章模块的分类
    */
-  getToolClassifyById(orgID) {
+  getToolClassifyById(defaultOrgID) {
+    
+    let orgID = wx.getStorageSync("shareOrgID") || defaultOrgID;
     HTTP.getToolClassifyById({
       classifyType: 2,
       orgID: orgID
