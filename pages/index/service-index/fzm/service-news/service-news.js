@@ -43,7 +43,11 @@ Component({
     newsDatas: {
       String: Array
     }, // 文章列表{模块id:文章列表}}
-    currentClassifyID: '' // 当前模块id
+    currentClassifyID: '', // 当前模块id
+    loadingText:"正在加载中...",
+    noDataText:"没有数据",
+    noMoreDataText:"已经到底了",
+    loadMoreDataText:"点击加载更多"
   },
 
   /**
@@ -88,6 +92,9 @@ Component({
      */
     loadDatas(currentClassifyID, currentCategoryData, orgID) {
       currentCategoryData["loading"] = true
+      this.setData({
+        articleDatas: this.data.articleDatas
+      })
       HTTP.articleByClassifyId({
         "orgID": orgID,
         "pageSize": currentCategoryData.pageSize,
