@@ -1,6 +1,7 @@
 <!--pages/index/service-index/wth/share-list/share-list.wxml-->
 <!-- 引入wxs脚本 -->
 <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
+<navigation-bar navbarTitle="患者分享"/>
 <view class="box" bindtap="toDetail" wx:for="{{shareData}}" data-detailUrl='{{item.detailUrl}}' wx:key="index">
   <view class="contain">
     <view class="personInfo">

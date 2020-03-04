@@ -1,5 +1,6 @@
 <!--pages/index/service-index/wth/notes-list/notes-list.wxml-->
 <!-- 引入wxs脚本 -->
+<navigation-bar navbarTitle="侯丽萍医生的手记"/>
 <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
 <view class="box" bindtap="toDetail" data-detailUrl='{{item.detailUrl}}' wx:for="{{inquiryCaseData}}" wx:key="index">
   <view class="contain">

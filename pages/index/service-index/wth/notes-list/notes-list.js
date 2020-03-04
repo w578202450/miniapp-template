@@ -16,9 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: "侯丽萍医生的手记"
-    });
+    // wx.setNavigationBarTitle({
+    //   title: "侯丽萍医生的手记"
+    // });
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);
     console.log(that.data.httpParams);
