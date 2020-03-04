@@ -342,9 +342,9 @@ Page({
         let articleDatas = {};
         tempTitles.forEach((item) => {
           let currentCategoryData = {};
-          currentCategoryData["hasMore"] = false// 是否显示没有更多数据
-          currentCategoryData["hasData"] = false// 是否显示空数据占位
-          currentCategoryData["loading"] = false// 是否显示正在加载提示
+          currentCategoryData["noMore"] = false // 是否显示没有更多数据
+          currentCategoryData["noData"] = false // 是否显示空数据占位
+          currentCategoryData["loading"] = false // 是否显示正在加载提示
           currentCategoryData["pageSize"] = 5 //每页显示数据
           currentCategoryData["pageIndex"] = 1 //当前页数
           articleDatas[item.keyID] = currentCategoryData;
@@ -368,17 +368,22 @@ Page({
     let classifyID = tempTitles[0].keyID;
     let orgID = tempTitles[0].orgID;
     let currentCategoryData = articleDatas[classifyID];
+    currentCategoryData["loading"] = true;
     HTTP.articleByClassifyId({
       "orgID": orgID,
       "pageSize": 10,
       "pageIndex": 1,
       "classifyID": classifyID
     }).then(res => {
+      currentCategoryData["loading"] = false;
       if (res.code == 0 && res.data) {
         let list = res.data;
-        if (list && list.datas && list.datas.length > 0) {
-          currentCategoryData["hasData"] = true;
-          currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true;
+        if (list.datas) {
+          currentCategoryData["noData"] = list.datas.length === 0 ? true : false
+          currentCategoryData["noMore"] = list.pageIndex < list.totalPage ? false : true
+          if (list.pageIndex < list.totalPage) {
+            currentCategoryData["pageIndex"] += 1;
+          }
           currentCategoryData.datas = list.datas;
           articleDatas[classifyID] = currentCategoryData;
           this.setData({
@@ -414,10 +419,6 @@ Page({
             resolve([]);
           }
         }).catch(e => {
-          wx.showToast({
-            title: '连接失败',
-            icon: 'none'
-          })
           resolve([]);
         });
     })
@@ -426,21 +427,16 @@ Page({
   /**
    * 获取门诊logo
    */
-  getSectionByKeyID(){
+  getSectionByKeyID() {
     HTTP.getSectionByKeyID({
-      keyID: this.data.doctorInfo.sectionID
-    })
+        keyID: this.data.doctorInfo.sectionID
+      })
       .then(res => {
         console.log('sectionBanner------', res)
         this.setData({
           sectionBanner: res.data.sectionBanner
         })
       }).catch(e => {
-        wx.showToast({
-          title: '连接失败',
-          icon: 'none'
-        })
-        resolve([]);
       });
   },
 

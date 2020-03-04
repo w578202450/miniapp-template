@@ -18,16 +18,15 @@
   <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}' style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px">
     <block wx:for="{{articleTitles}}" wx:for-item="navItem" wx:for-index="navIndex" wx:key="classifyID">
       <swiper-item item-id="{{navItem.keyID}}">
-        <scroll-view data-index="{{navIndex}}" data-navitem="{{navItem}}" bindscrolltolower="uploadMoreDatas" style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
+        <scroll-view  style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
           <block wx:for="{{comTools.value(articleDatas,navItem.keyID).datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
             <service-news-item bindtap="itemDetails" data-item="{{item}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
           </block>
-          <block wx:if="{{comTools.value(articleDatas,navItem.keyID).hasMore}}">
-            <text class="loading-box">加载更多...</text>
-          </block>
+          <text wx:if="{{comTools.value(articleDatas,navItem.keyID).loading}}" class="loading-box">>正在加载中...</text>
+          <text wx:elif="{{comTools.value(articleDatas,navItem.keyID).noData}}" class="noData-box">没有数据</text>
           <block wx:else>
-            <text wx:if="{{comTools.value(articleDatas,navItem.keyID).hasData}}" class="loading-box">-----底线在这呢-----</text>
-            <text class="noData-box" wx:else>没有数据</text>
+            <text wx:if="{{comTools.value(articleDatas,navItem.keyID).noMore}}" class="loading-box">已经到底了</text>
+            <text wx:else class="loading-box" bindtap="uploadMoreDatas" data-index="{{navIndex}}" data-navitem="{{navItem}}">点击加载更多</text>
           </block>
         </scroll-view>
       </swiper-item>
