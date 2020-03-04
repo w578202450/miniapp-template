@@ -265,7 +265,7 @@ page {
 
 .share-box {
   margin-top: 20rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 80rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -276,7 +276,7 @@ page {
   width: 400rpx;
   height: 70rpx;
   margin-top: 20rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 40rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
