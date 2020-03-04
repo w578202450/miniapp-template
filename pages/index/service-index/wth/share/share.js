@@ -5,27 +5,27 @@ Component({
    * 组件的属性列表
    */
   properties: {
-// 患者信息
-paersonInfo: {
-  type: Object,
-  value: {
-  patientName: "",
-  patientFace: "",
-  patientAddress: "",
-  contentSummary: "",
-  detailUrl: "",
-  publishDate: ""
-  },
-    httpParams: {
+    // 患者信息
+    paersonInfo: {
       type: Object,
       value: {
-      nextPage: "/pages/index/service-index/wth/share-list/share-list",
-      sectionID: "",
-      orgID: "", 
-      doctorStaffID: ""
+        patientName: "",
+        patientFace: "",
+        patientAddress: "",
+        contentSummary: "",
+        detailUrl: "",
+        publishDate: ""
+      },
+      httpParams: {
+        type: Object,
+        value: {
+          nextPage: "/pages/index/service-index/wth/share-list/share-list",
+          sectionID: "",
+          orgID: "",
+          doctorStaffID: ""
+        }
       }
-     }
-},
+    },
   },
 
   /**
@@ -39,21 +39,21 @@ paersonInfo: {
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    toDetail:function() {
+    toDetail: function() {
       let materialData = {
         materialType: 0, // （必传）要查看的素材类型 0图文 1视频
         title: "标题", // 待确认，可先不传

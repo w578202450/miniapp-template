@@ -3,20 +3,20 @@
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <view style="margin-bottom:20rpx;"></view>
-   <module-title title="{{title}}" moreBtnName="{{moreBtnName}}" httpParams="{{httpParams}}" >
+  <module-title title="{{title}}" moreBtnName="{{moreBtnName}}" httpParams="{{httpParams}}">
     <view slot="content-body" class="box" bindtap="toDetail">
-    <view class="contain">
-    <view class="personInfo">
-     <image class="img" src="{{paersonInfo.patientFace?paersonInfo.patientFace:paersonInfo.photoUrl}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
-     <text class="name">{{type}}：{{paersonInfo.patientName?comTools.subName(paersonInfo.patientName):paersonInfo.authorName}} {{paersonInfo.patientAddress}}</text>
+      <view class="contain">
+        <view class="personInfo">
+          <image class="img" src="{{paersonInfo.patientFace?paersonInfo.patientFace:paersonInfo.photoUrl}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
+          <text class="name">{{type}}：{{paersonInfo.patientName?comTools.subName(paersonInfo.patientName):paersonInfo.authorName}} {{paersonInfo.patientAddress}}</text>
+        </view>
+        <view>
+          <text class="date">{{comTools.formateDate(paersonInfo.publishDate)}}</text>
+        </view>
+      </view>
+      <view>
+        <text class="content">{{comTools.subStrTxt(paersonInfo.contentSummary,50)}}</text>
+      </view>
     </view>
-    <view>
-     <text class="date">{{comTools.formateDate(paersonInfo.publishDate)}}</text>
-    </view>
-    </view>
-    <view>
-     <text class="content">{{comTools.subStrTxt(paersonInfo.contentSummary,50)}}</text>
-    </view>
-   </view>
   </module-title>
 </view>

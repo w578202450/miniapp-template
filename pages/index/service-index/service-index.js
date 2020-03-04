@@ -33,12 +33,12 @@ Page({
       contentSummary: "",
       detailUrl: "",
       publishDate: "",
-    httpParams: {
-      nextPage: "/pages/index/service-index/wth/share-list/share-list",
-      sectionID: "",
-      orgID: "", 
-      doctorStaffID: ""
-     }
+      httpParams: {
+        nextPage: "/pages/index/service-index/wth/share-list/share-list",
+        sectionID: "",
+        orgID: "",
+        doctorStaffID: ""
+      }
     },
     // 患者手记相关数据
     inquiryCaseData: {
@@ -52,9 +52,9 @@ Page({
       httpParams: {
         nextPage: "/pages/index/service-index/wth/notes-list/notes-list",
         sectionID: "",
-        orgID: "", 
+        orgID: "",
         doctorStaffID: ""
-       }
+      }
     },
   },
 
@@ -67,31 +67,35 @@ Page({
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
-        app.globalData.isHaveOptions = true; // 进入小程序携带有参数，状态改为true
-        var scan_url = decodeURIComponent(options.q); // 赋值q参数
-        let shareOrgID = that.initOptionsFun(scan_url, "orgID"); // 解析q的值中的orgID
-        let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID"); // 解析q的值中的assistantStaffID
-        that.data.shareOrgID = shareOrgID ? shareOrgID : "";
-        wx.setStorageSync("shareOrgID", shareOrgID);
-        that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID : "";
-        wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
-      } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-        if (options.orgID) {
+        var scan_url = decodeURIComponent(options.q);
+        let shareOrgID = that.initOptionsFun(scan_url, "orgID");
+        let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
+        if (shareOrgID && shareOrgID.length > 0) {
+          that.data.shareOrgID = shareOrgID;
+          wx.setStorageSync("shareOrgID", shareOrgID);
+        }
+        if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
+          that.data.shareAssistantStaffID = shareAssistantStaffID;
+          wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
+        }
+      } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
+        if (options.orgID && options.orgID.length > 0) {
+          app.globalData.isHaveOptions = true; // 进入小程序携带有参数
           that.data.shareOrgID = options.orgID;
           wx.setStorageSync("shareOrgID", options.orgID);
         }
-        if (options.assistantStaffID) {
+        if (options.assistantStaffID && options.assistantStaffID.length > 0) {
+          app.globalData.isHaveOptions = true; // 进入小程序携带有参数
           that.data.shareAssistantStaffID = options.assistantStaffID;
           wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
         }
       }
     }
-    let sendOptions = { ...options
-    };
-    commonFun.startLoginFun(sendOptions); // 尝试自动登录 
+    // let sendOptions = { ...options
+    // };
+    // commonFun.startLoginFun(sendOptions); // 尝试自动登录 
     that.initDocInfoFun();
-
   },
 
   /**
@@ -207,15 +211,11 @@ Page({
                 doctorDisease: res
               })
             })
-            that.patientShareGet(that.data.doctorInfo.sectionID,that.data.doctorInfo.orgID,staffID);
-            that.inquiryCaseGet(that.data.doctorInfo.sectionID,that.data.doctorInfo.orgID,staffID);
+            that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
+            that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
           }
         }
-      }).catch(e => {
-        that.setData({
-          noNetwork: true
-        });
-      })
+      });
   },
 
   /**获取助理医生信息 */
@@ -240,10 +240,6 @@ Page({
             })
           }
         }
-      }).catch(e => {
-        that.setData({
-          noNetwork: true
-        });
       })
   },
 
@@ -260,11 +256,7 @@ Page({
             certifyInfo: res.data
           })
         }
-      }).catch(e => {
-        that.setData({
-          noNetwork: true
-        })
-      })
+      });
   },
 
   /**操作：点击查看医生详情 */
@@ -273,10 +265,7 @@ Page({
     let staffID = index == '0' ? app.globalData.personInfo.doctorStaffID : app.globalData.personInfo.assistantStaffID;
     if (staffID) {
       wx.navigateTo({
-        url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + staffID,
-        success: function(res) {},
-        fail: function(res) {},
-        complete: function(res) {},
+        url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + staffID
       });
     }
   },
@@ -307,11 +296,12 @@ Page({
    */
   getOrderCommentData: function(orgID, doctorStaffID) {
     let that = this;
-    HTTP.orderCommentGet({
+    let params = {
       orgID: orgID
-    }).then(res => {
-      console.log("获取的患者评价信息：" + JSON.stringify(res.data));
-      if (res.data) {
+    };
+    HTTP.orderCommentGet(params).then(res => {
+      // console.log("获取的患者评价信息：" + JSON.stringify(res.data));
+      if (res.code == 0 && res.data) {
         that.setData({
           ["evaluateAllData.evaluateData"]: res.data,
           ["evaluateAllData.doctorID"]: doctorStaffID,
@@ -345,25 +335,26 @@ Page({
       classifyType: 2,
       orgID: orgID
     }).then(res => {
-      let tempTitles = res.data
-      // 初始化组件数据源
-      let articleDatas = {};
-      tempTitles.forEach((item) => {
-        let currentCategoryData = {};
-        currentCategoryData["hasMore"] = false
-        currentCategoryData["hasData"] = false
-        currentCategoryData["pageSize"] = 4
-        currentCategoryData["pageIndex"] = 1
-        articleDatas[item.keyID] = currentCategoryData;
-      })
-      this.setData({
-        articleTitles: tempTitles,
-        articleDatas: articleDatas
-      })
-
-      // 初始化文章模块第一栏的数据
-      if (tempTitles.length > 0) {
-        this.articleByClassifyId(tempTitles, articleDatas)
+      if (res.code == 0 && res.data) {
+        let tempTitles = res.data
+        // 初始化组件数据源
+        let articleDatas = {};
+        tempTitles.forEach((item) => {
+          let currentCategoryData = {};
+          currentCategoryData["hasMore"] = false
+          currentCategoryData["hasData"] = false
+          currentCategoryData["pageSize"] = 4
+          currentCategoryData["pageIndex"] = 1
+          articleDatas[item.keyID] = currentCategoryData;
+        })
+        this.setData({
+          articleTitles: tempTitles,
+          articleDatas: articleDatas
+        });
+        // 初始化文章模块第一栏的数据
+        if (tempTitles.length > 0) {
+          this.articleByClassifyId(tempTitles, articleDatas);
+        }
       }
     });
   },
@@ -381,18 +372,18 @@ Page({
       "pageIndex": 1,
       "classifyID": classifyID
     }).then(res => {
-      let list = res.data;
-      if (list && list.datas && list.datas.length > 0) {
-        currentCategoryData["hasData"] = true;
-        currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true;
-        currentCategoryData.datas = list.datas;
-        articleDatas[classifyID] = currentCategoryData;
-        this.setData({
-          currentCategoryData: currentCategoryData,
-          articleDatas: articleDatas
-        });
-      } else {
-        // 不许渲染数据
+      if (res.code == 0 && res.data) {
+        let list = res.data;
+        if (list && list.datas && list.datas.length > 0) {
+          currentCategoryData["hasData"] = true;
+          currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true;
+          currentCategoryData.datas = list.datas;
+          articleDatas[classifyID] = currentCategoryData;
+          this.setData({
+            currentCategoryData: currentCategoryData,
+            articleDatas: articleDatas
+          });
+        }
       }
     })
   },
@@ -407,14 +398,12 @@ Page({
           doctorID: doctorId
         })
         .then(res => {
-          if (res.code == 0) {
-            if (res.data) {
-              var disease = []
-              for (var index in res.data) {
-                disease.push(res.data[index].diseaseName)
-              }
-              resolve(disease)
+          if (res.code == 0 && res.data) {
+            var disease = []
+            for (var index in res.data) {
+              disease.push(res.data[index].diseaseName)
             }
+            resolve(disease);
           } else {
             wx.showToast({
               title: res.message,
@@ -428,10 +417,9 @@ Page({
             icon: 'none'
           })
           resolve([]);
-        })
+        });
     })
     return promise;
-
   },
 
   /**
@@ -475,7 +463,7 @@ Page({
       doctorStaffID: doctorStaffID
     }).then(res => {
       console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
-      if (res.data) {
+      if (res.code == 0 && res.data) {
         that.setData({
           ["patientShareGetData.keyID"]: res.data.keyID,
           ["patientShareGetData.patientName"]: res.data.patientName,
@@ -503,7 +491,7 @@ Page({
       doctorStaffID: doctorStaffID
     }).then(res => {
       // console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
-      if (res.data) {
+      if (res.code == 0 && res.data) {
         that.setData({
           ["inquiryCaseData.keyID"]: res.data.keyID,
           ["inquiryCaseData.authorName"]: res.data.authorName,

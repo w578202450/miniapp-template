@@ -2,7 +2,7 @@
 
 .module-title-box {
   width: 100%;
-  background-color:#fff; 
+  background-color: #fff;
 }
 
 .padd {
@@ -27,7 +27,7 @@
 .module-title-icon {
   height: 35rpx;
   width: 6rpx;
-  background: linear-gradient(#EDFBFF, #0091FF);
+  background: linear-gradient(#edfbff, #0091ff);
   margin-right: 6rpx;
 }
 
@@ -51,6 +51,6 @@
 .moreBtnView {
   width: 100%;
   text-align: center;
-  color: #438BEF;
+  color: #438bef;
   font-size: 30rpx;
 }

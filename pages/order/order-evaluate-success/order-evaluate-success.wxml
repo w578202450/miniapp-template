@@ -6,7 +6,7 @@
   <view class="successInfoBox">
     <view class="title">评价成功</view>
     <view class="sucBtnBox">
-      <button class="sucBtnEva" bindtap="navBackToIndex">返回首页</button>
+      <view class="sucBtnEva" bindtap="navBackToIndex">返回首页</view>
     </view>
   </view>
 </view>

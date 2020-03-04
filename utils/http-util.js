@@ -267,6 +267,13 @@ module.exports = {
   deleteAddress: function deleteAddress(params) {
     return request('api/peachUser/personDeliveryAddr/delete', true, 'post', params);
   },
+
+  /**
+   * 确认收货
+   */
+  sureSuccessDelivery: function sureSuccessDelivery(params) {
+    return request('api/tmc/goodsOrder/updateDeliveryStatus', true, 'post', params);
+  },
   /*
    *设置订单配送地址
    */
@@ -396,13 +403,13 @@ module.exports = {
    * 文章模块分类
    */
   getToolClassifyById: function getToolClassify(params) {
-    return request('http://10.0.0.99:6112/api/tmc/classify/getToolClassifyById', false, 'get', params);
+    return request('api/tmc/classify/getToolClassifyById', true, 'get', params);
   },
   /**
    * 分类获取文章列表
    */
   articleByClassifyId: function articleByClassifyId(params) {
-    return request('http://10.0.0.210:6112/api/tmc/article/list', false, 'get', params);
+    return request('api/tmc/article/list', true, 'get', params);
   },
   /**
    * 首页
@@ -411,24 +418,31 @@ module.exports = {
    * 获取首页banner和医师团队介绍
    */
   getBannerTeamIntroduce: function getBannerTeamIntroduce(params) {
-    // return request('api/peachUser/orgPara/queryOrgPara', true, 'get', params);
-    return request('http://10.0.0.99:6216/orgPara/queryOrgPara', false, 'get', params);
+    return request('api/hospitalUser/orgPara/queryOrgPara', true, 'get', params);
+    // return request('http://10.0.0.99:6216/orgPara/queryOrgPara', false, 'get', params);
   },
 
   /**
    * 获取用户浏览数和分享数
    */
   getBrowseShareCount: function getBrowseShareCount(params) {
-    // return request('/api/peachUser/orgVar/queryOrgVar', true, 'get', params);
-    return request('http://10.0.0.99:6216/orgVar/queryOrgVar', false, 'get', params);
+    return request('api/hospitalUser/orgVar/queryOrgVar', true, 'get', params);
+    // return request('http://10.0.0.99:6216/orgVar/queryOrgVar', false, 'get', params);
   },
 
   /**
    * 获取医师团队列表
    */
   getPhysicianTeamList: function getPhysicianTeamList(params) {
-    // return request('api/tmc/doctorShow/list', true, 'get', params);
-    return request('http://10.0.0.233:6215/doctorShow/list', false, 'get', params);
+    return request('api/tmc/doctorShow/list', true, 'get', params);
+    // return request('http://10.0.0.233:6215/doctorShow/list', false, 'get', params);
+  },
+
+  /**
+   * 查询医院详情信息
+   */
+  getHospitalInfo: function getHospitalInfo(params) {
+    return request('api/peachUser/hospitalMng/getHospital', true, 'get', params);
   }
 
 }

@@ -9,6 +9,7 @@ page {
 }
 
 /* 满意选择、疗效、服务 */
+
 .markSecBox {
   margin-bottom: 20rpx;
 }
@@ -36,19 +37,19 @@ page {
 }
 
 .satisfactionSureBac {
-  background-color: #FEF8E6;
+  background-color: #fef8e6;
 }
 
 .satisfactionNotBac {
-  background-color: #EFEEEF;
+  background-color: #efeeef;
 }
 
-.satisfactionTxtSure{
-  color: #FFB10B;
+.satisfactionTxtSure {
+  color: #ffb10b;
 }
 
 .satisfactionTxtNot {
-  color: #B7B9BE;
+  color: #b7b9be;
 }
 
 .satisfactionViewMarginRight {
@@ -161,7 +162,7 @@ page {
 
 .submitEvaluateBox {
   width: 100%;
-  background-color: #438BEF;
+  background-color: #438bef;
   height: 120rpx;
   position: absolute;
   left: 0;

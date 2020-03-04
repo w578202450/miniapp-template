@@ -284,7 +284,7 @@ Page({
   },
 
   /**上传：图片到服务器 */
-  upLoadImgFun: function (tempFilePathsData, remainNum) {
+  upLoadImgFun: function(tempFilePathsData, remainNum) {
     let that = this;
     let orderCommentMaterial = []; // 每次选择添加的图片并上传到服务器后的图片信息
     tempFilePathsData.forEach((item, index) => {
