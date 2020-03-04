@@ -60,6 +60,10 @@ Page({
     //   orgID: "19072514430966516270514001",
     //   assistantStaffID: ""
     // };
+    // wx.showModal({
+    //   title: '',
+    //   content: JSON.stringify(options),
+    // })
     console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
