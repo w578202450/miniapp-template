@@ -41,8 +41,8 @@ Page({
     doctorTeamIntroduce: "", // 医师团队介绍
     doctorTeamList: [], // 医师团队列表
     hospitalDetail: {}, // 医院信息
-    // defaultPhotoUrl: "/images/chat/personBacImg.png" // 默认头像
-    defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
+    // defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
+    homeBannerDefaultUrl: "/images/home/home_banner_default.png"
   },
 
   /**
