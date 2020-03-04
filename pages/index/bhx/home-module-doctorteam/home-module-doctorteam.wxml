@@ -1,6 +1,7 @@
 <view class="page">
   <text class="introduce">{{doctorTeamIntroduce}}</text>
-  <swiper class='swiper' display-multiple-items="2">
+  <text class="nodata-text" wx:if="{{doctorTeamList.length === 0}}">没有更多数据了~</text>
+  <swiper class='swiper' wx:else display-multiple-items="2">
     <block wx:for="{{doctorTeamList}}" wx:for-item="pageItem" wx:for-index="sortNo" wx:key="keyID">
       <swiper-item>
         <home-module-doctorteam-item pageItem="{{pageItem}}" bind:clickItem="clickItem"></home-module-doctorteam-item>

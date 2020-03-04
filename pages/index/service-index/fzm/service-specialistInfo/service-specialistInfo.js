@@ -7,6 +7,10 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    sectionBanner:{
+      type:String,
+      value:null
+    },
     // 医生信息
     doctorInfo: {
       type: Object,
@@ -38,9 +42,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    inquiryBoxHeight: 34,
-    serviceBg: 'https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314263775883480201210.png',
-    goodAts: ["风湿骨病", "类风湿关节炎", "类风湿关节炎"]
+    inquiryBoxHeight: 34
   },
 
   /**

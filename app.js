@@ -36,16 +36,16 @@ App({
 
   },
 
-  watch: function (method, globalDataName) {
+  watch: function(method, globalDataName) {
     var obj = this.globalData;
     Object.defineProperty(obj, globalDataName, {
       configurable: true,
       enumerable: true,
-      set: function (value) {
+      set: function(value) {
         this._name = value;
         method(value); // 传递值，执行传入的方法
       },
-      get: function () {
+      get: function() {
         // 可以在这里打印一些东西，然后在其他界面调用getApp().globalData.globalDataName的时候，这里就会执行。
         return this._name
       }
@@ -174,7 +174,8 @@ App({
     personID: '',
     orgID: '',
     systemInfo: {}, //小程序系统信息
-    navBarHeight: '' //导航栏高度
+    navBarHeight: '', //导航栏高度
+    imagePlaceholder: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png"// 图片占位
   },
 
 })

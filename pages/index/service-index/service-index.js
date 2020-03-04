@@ -213,6 +213,7 @@ Page({
             })
             that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
             that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
+            that.getSectionByKeyID();
           }
         }
       });
@@ -341,10 +342,11 @@ Page({
         let articleDatas = {};
         tempTitles.forEach((item) => {
           let currentCategoryData = {};
-          currentCategoryData["hasMore"] = false
-          currentCategoryData["hasData"] = false
-          currentCategoryData["pageSize"] = 4
-          currentCategoryData["pageIndex"] = 1
+          currentCategoryData["hasMore"] = false// 是否显示没有更多数据
+          currentCategoryData["hasData"] = false// 是否显示空数据占位
+          currentCategoryData["loading"] = false// 是否显示正在加载提示
+          currentCategoryData["pageSize"] = 5 //每页显示数据
+          currentCategoryData["pageIndex"] = 1 //当前页数
           articleDatas[item.keyID] = currentCategoryData;
         })
         this.setData({
@@ -420,6 +422,26 @@ Page({
         });
     })
     return promise;
+  },
+  /**
+   * 获取门诊logo
+   */
+  getSectionByKeyID(){
+    HTTP.getSectionByKeyID({
+      keyID: this.data.doctorInfo.sectionID
+    })
+      .then(res => {
+        console.log('sectionBanner------', res)
+        this.setData({
+          sectionBanner: res.data.sectionBanner
+        })
+      }).catch(e => {
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none'
+        })
+        resolve([]);
+      });
   },
 
   /**

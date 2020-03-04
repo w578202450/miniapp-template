@@ -6,6 +6,15 @@ text {
   line-height: 24rpx;
 }
 
+.team-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .swiper {
   height: 500rpx;
 }
@@ -24,4 +33,16 @@ text {
   display: -webkit-box;
   -webkit-line-clamp: 2; /* 设置要显示省略号的行数 */
   -webkit-box-orient: vertical;
+}
+
+.nodata-text {
+  height: 500rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
