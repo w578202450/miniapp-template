@@ -1,8 +1,10 @@
 {
   "usingComponents": {
-    "weui-loading": "../loading/loading"
+    "weui-loading": "../loading/loading",
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
   },
   "navigationBarTitleText": "在线问诊",
   "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "backgroundTextStyle": "dark",
+  "navigationStyle": "custom"
 }

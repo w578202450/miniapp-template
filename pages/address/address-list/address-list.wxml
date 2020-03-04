@@ -1,3 +1,4 @@
+<navigation-bar navbarTitle="收货地址"/>
 <block wx:if="{{noNetwork}}">
   <tmcTipsView icon="/images/public/public_no_internet.png" title="网络连接异常" message="网络不太好，刷新一下吧～" buttonTitle="刷新" bind:buttonOption="noNetworkOption"></tmcTipsView>
 </block>

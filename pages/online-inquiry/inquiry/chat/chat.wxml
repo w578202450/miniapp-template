@@ -2,7 +2,6 @@
   <!-- 引入wxs脚本 -->
   <wxs src="./filter.wxs" module="filter" />
   <wxs src="../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <!-- 顶部 -->
   <view class="body-view">
     <loading hidden="{{hidden}}" bindchange="loadingChange">
       加载中...
@@ -11,9 +10,11 @@
       发送中...
     </loading>
   </view>
+  <!-- 顶部 -->
+  <navigation-bar navbarTitle="在线问诊"/>
   <!-- 顶部医生医助信息栏 -->
-  <!-- <view class="middle-one" style="top: {{docInfoBoxTop}}rpx;"> -->
-  <view class="middle-one">
+  <!-- <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;"> -->
+  <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;">
     <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap" data-index="0">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" mode="aspectFill" />

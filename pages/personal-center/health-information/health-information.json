@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "tmcRadioView": "/components/tmc-radio/tmc-radio",
-    "tmcGridView": "/components/tmc-grid/tmc-grid"
+    "tmcGridView": "/components/tmc-grid/tmc-grid",
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
   },
-  "navigationBarTitleText": "健康信息"
+  "navigationBarTitleText": "健康信息",
+  "navigationStyle": "custom"
 }

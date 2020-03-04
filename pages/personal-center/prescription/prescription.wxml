@@ -1,4 +1,4 @@
-
+<navigation-bar navbarTitle="我的处方"/>
 <block wx:if="{{noData}}">
   <tmcTipsView icon="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_no_prescription.png" title="暂无处方" message="您暂无处方信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>

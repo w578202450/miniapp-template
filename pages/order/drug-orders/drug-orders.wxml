@@ -1,4 +1,6 @@
-<block wx:if="{{noData}}">
+<view>
+  <navigation-bar navbarTitle="药品订单"/>
+  <block wx:if="{{noData}}">
   <tmcTipsView icon="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_no_order.png" title="暂无订单" message="您暂无订单信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>
 <block wx:elif="{{noNetwork}}">
@@ -39,3 +41,4 @@
 
   </view>
 </block>
+</view>

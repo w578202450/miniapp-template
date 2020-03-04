@@ -125,9 +125,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "评价列表",
-					"pathName": "pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
+					"id": 9,
+					"name": "pages/order/order-success/order-success",
+					"pathName": "pages/order/order-success/order-success",
 					"query": "",
 					"scene": null
 				}

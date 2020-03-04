@@ -20,16 +20,17 @@ Page({
     pageInfo: {
       pageIndex: 1,
       pageSize: 20
-    }
+    },
+    navbarTitle: "侯丽萍医生的评价" // 传递的页面标题
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.setNavigationBarTitle({
-      title: "侯丽萍医生的评价"
-    });
+    // wx.setNavigationBarTitle({
+    //   title: "侯丽萍医生的评价"
+    // });
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);
     console.log("进入患者评价列表页拿到的参数：" + JSON.stringify(that.data.httpParams));

@@ -19,6 +19,7 @@ App({
   onLaunch: function() {
     this.globalData.systemInfo = systemInfo;
     this.globalData.navBarHeight = navBarHeight;
+    this.globalData.menuButtonBoundingClientRect = rect;
     // AUTH.getSetting()
     AUTH.upDataApp();
     AUTH.getNetworkType();
@@ -173,6 +174,7 @@ App({
     orgName: '',
     personID: '',
     orgID: '',
+    menuButtonBoundingClientRect: {}, //右上角胶囊的信息
     systemInfo: {}, //小程序系统信息
     navBarHeight: '', //导航栏高度
     imagePlaceholder: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png"// 图片占位

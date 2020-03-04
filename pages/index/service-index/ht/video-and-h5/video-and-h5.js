@@ -20,19 +20,19 @@ Page({
   onLoad: function(options) {
     let that = this;
     let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
-    if (acceptOptions.title && acceptOptions.title.length > 0) {
-      wx.setNavigationBarTitle({
-        title: acceptOptions.title
-      });
-    } else {
-      wx.setNavigationBarTitle({
-        title: "素材展示"
-      });
-    }
+    // if (acceptOptions.title && acceptOptions.title.length > 0) {
+    //   wx.setNavigationBarTitle({
+    //     title: acceptOptions.title
+    //   });
+    // } else {
+    //   wx.setNavigationBarTitle({
+    //     title: "素材展示"
+    //   });
+    // }
     if (acceptOptions.materialType || acceptOptions.materialType == 0) {
       that.setData({
         materialInfo: {
-          title: acceptOptions.title,
+          title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "素材展示",
           videoMaterialSrc: acceptOptions.url,
           posterSrc: acceptOptions.logoUrl,
           materialType: acceptOptions.materialType

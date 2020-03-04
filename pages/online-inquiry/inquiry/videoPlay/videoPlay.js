@@ -21,10 +21,19 @@ Page({
   onLoad: function(options) {
     let that = this;
     let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
+    // if (acceptOptions.title && acceptOptions.title.length > 0) {
+    //   wx.setNavigationBarTitle({
+    //     title: acceptOptions.title
+    //   });
+    // } else {
+    //   wx.setNavigationBarTitle({
+    //     title: "素材展示"
+    //   });
+    // }
     if (acceptOptions.materialType || acceptOptions.materialType == 0) {
       that.setData({
         materialInfo: {
-          title: acceptOptions.title,
+          title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "素材展示",
           descrip: acceptOptions.descrip,
           videoMaterialSrc: acceptOptions.url,
           posterSrc: acceptOptions.logoUrl,
@@ -102,7 +111,7 @@ Page({
     return commonFun.onShareAppMessageFun(); // 调用公共的分享配置
   },
 
-  errorFun:function(e) {
+  errorFun: function(e) {
     console.log("视频播放错误" + JSON.stringify(e));
     wx.showToast({
       title: "视频异常，无法正常播放",

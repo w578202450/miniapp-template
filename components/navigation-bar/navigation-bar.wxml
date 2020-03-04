@@ -1,7 +1,15 @@
 <!--components/navigation-bar/navigation-bar.wxml-->
 <view style="height:{{statusBarHeight + navBarHeight}}px">
-  <view class="navbarBox" style="top:0px;height:{{statusBarHeight + navBarHeight}}px;background: {{bgColor}};">
-    <image class="navHomeIcon" src="/images/public/navHome.png" style="position: absolute;left: 100rpx;bottom: {{(statusBarHeight + navBarHeight)/2}}rpx;"></image>
-    <text class="title-name-text">{{pageName}}</text>
+  <view class="navbarBox" style="height:{{statusBarHeight + navBarHeight}}px;background: {{bgColor}};">
+    <!-- 标题 -->
+    <view class="navbarTitleBox" style="bottom:{{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px;height:{{menuBBCRect.height}}px;line-height:{{menuBBCRect.height}}px;">
+      <text class="navbarTitleTxt" style="color: {{navbarTextStyle}}">{{navbarTitle}}</text>
+    </view>
+     <!-- 返回、首页 -->
+    <view class="navbarBtn" style="bottom: {{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px;border: 1rpx solid #D6D6D6;">
+      <image class="navBackIcon" src="{{navbarTextStyle == 'white' ? navBackIconWhite : navBackIconBlack}}" bindtap="navBack"/>
+      <view class="linear" style="background-color: #D6D6D6;"></view>
+      <image class="navHomeIcon" src="{{navbarTextStyle == 'white' ? navHomeIconWhite :navHomeIconBlack}}" bindtap="toIndex"/>
+    </view>
   </view>
 </view>

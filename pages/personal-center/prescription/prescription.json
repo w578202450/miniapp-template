@@ -1,7 +1,9 @@
 {
   "usingComponents": {
-    "tmcTipsView": "/components/tmc-tips/tmc-tips"
+    "tmcTipsView": "/components/tmc-tips/tmc-tips",
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
   },
   "navigationBarTitleText": "我的处方",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "navigationStyle": "custom"
 }

@@ -1,4 +1,5 @@
 <import src="../../../template/template.wxml" />
+<navigation-bar navbarTitle="健康信息"/>
 <view style="height:20rpx;background-color: rgba(246, 246, 246, 1)"></view>
 <view class="page-container" style="margin-bottom:144rpx">
   <view class="box-flex-row">

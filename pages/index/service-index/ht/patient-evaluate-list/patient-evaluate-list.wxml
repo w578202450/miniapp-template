@@ -1,8 +1,8 @@
 <!--pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.wxml-->
 <view>
+  <navigation-bar navbarTitle="{{navbarTitle}}" />
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <navigation-bar />
   <view class="evaluateContentBox">
     <!-- 灰色间隔区 -->
     <view class="intervalView"></view>

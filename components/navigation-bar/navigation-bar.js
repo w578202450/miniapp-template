@@ -8,25 +8,25 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    // 页面标题文字
-    pageName: {
+    // 页面标题文字（10个字以内）
+    navbarTitle: {
       type: String,
       value: "标题"
     },
-    // 页面标题文字颜色（只支持black / white）
+    // 页面标题文字颜色（只允许black，white）
     navbarTextStyle: {
       type: String,
       value: "black"
     },
-    // 是否显示房子按钮
-    showHome: {
-      type: Boolean,
-      value: true
-    },
+    // 是否显示房子按钮（true，false）
+    // showHome: {
+    //   type: Boolean,
+    //   value: true
+    // },
     // 导航栏背景色
     bgColor: {
       type: String,
-      value: "yellow"
+      value: "#fff"
     }
   },
 
@@ -35,7 +35,12 @@ Component({
    */
   data: {
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
-    navBarHeight: app.globalData.navBarHeight
+    navBarHeight: app.globalData.navBarHeight,
+    menuBBCRect: app.globalData.menuButtonBoundingClientRect,
+    navBackIconWhite: "/images/public/public_left_white.png", // 返回按钮：白色
+    navBackIconBlack: "/images/public/public_left.png", // 返回按钮：黑色
+    navHomeIconWhite: "/images/public/navHome_white.png", // 房子按钮：白色
+    navHomeIconBlack: "/images/public/navHome.png", // 房子按钮：黑色
   },
 
   /**

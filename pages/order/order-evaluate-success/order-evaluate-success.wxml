@@ -1,5 +1,6 @@
 <!--pages/order/order-evaluate-success/order-evaluate-success.wxml-->
 <view class="paySuccess">
+  <navigation-bar navbarTitle="评价成功" />
   <view class="paySuccessIconBox">
     <image class="paySuccessIcon" src="{{paySuccessIconSrc}}" mode="widthFix" />
   </view>

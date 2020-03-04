@@ -72,7 +72,9 @@ Page({
     recordIconUrlOthers: "../../../../images/chat/audio.png", // 语音消息的图标 => 他人发的
     recordIconClickedUrlSelf: "../../../../images/chat/audioGifSelf.gif", // 播放语音时的GIF => 自己发的
     recordIconClickedUrlOthers: "../../../../images/chat/audioGif.gif", // 播放语音时的GIF => 他人发的
-    isOverChat: false // 是否结束了问诊
+    isOverChat: false, // 是否结束了问诊
+    statusBarHeight: app.globalData.systemInfo.statusBarHeight,
+    navBarHeight: app.globalData.navBarHeight,
     // bottomMenusDistance: 0, // 底部工具栏距离底部的距离
     // inputShowed: false, // 输入框是否获取焦点
     // docInfoBoxTop: 0, // 医生医助信息栏与顶部的距离
