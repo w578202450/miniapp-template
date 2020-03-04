@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    capsuleRect: app.globalData.menuButtonBoundingClientRect,
+    systemInfo: app.globalData.systemInfo,
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
     navBarHeight: app.globalData.navBarHeight,
     isSearchState: false, // 是否第一次加载

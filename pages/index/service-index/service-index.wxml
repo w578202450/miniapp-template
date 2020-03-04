@@ -8,7 +8,7 @@
     <view hidden="{{scrollTop == 0}}" style="height:{{statusBarHeight + navBarHeight + 34}}px">
       <view class="title-custom-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
         <text class="title-name-text">{{doctorInfo.doctorName}}</text>
-        <text class="title-defalut-text" style="margin-left:16rpx">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
+        <text class="title-defalut-text" style="margin-right:{{systemInfo.windowWidth - capsuleRect.left + 10}}px">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
       </view>
       <view class="button-box" bindtap="toOnlineInqueryFun">
         <text class="button-text">立即问诊</text>
