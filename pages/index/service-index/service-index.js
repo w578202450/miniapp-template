@@ -22,7 +22,6 @@ Page({
       doctorID: "",
       orgID: ""
     },
-    // doctorStaffID: "", // 门诊医生staffId
     scrollTop: 0,
     // 患者分享相关数据
     patientShareGetData: {
@@ -62,41 +61,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null;
-    console.log('app.systemInfo--------', rect);
     let that = this;
-    console.log("进入小程序首页携带的参数：" + JSON.stringify(options));
-    app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
-    if (options) {
-      if (options.q) { // 通过扫码进入时：q的值为url带参
-        app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-        var scan_url = decodeURIComponent(options.q);
-        let shareOrgID = that.initOptionsFun(scan_url, "orgID");
-        let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-        if (shareOrgID && shareOrgID.length > 0) {
-          that.data.shareOrgID = shareOrgID;
-          wx.setStorageSync("shareOrgID", shareOrgID);
-        }
-        if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
-          that.data.shareAssistantStaffID = shareAssistantStaffID;
-          wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
-        }
-      } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
-        if (options.orgID && options.orgID.length > 0) {
-          app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-          that.data.shareOrgID = options.orgID;
-          wx.setStorageSync("shareOrgID", options.orgID);
-        }
-        if (options.assistantStaffID && options.assistantStaffID.length > 0) {
-          app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-          that.data.shareAssistantStaffID = options.assistantStaffID;
-          wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
-        }
-      }
+    if (app.globalData.isHaveOptions) {
+      that.data.shareOrgID = wx.getStorageSync("shareOrgID");
+      that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     }
-    // let sendOptions = { ...options
-    // };
-    // commonFun.startLoginFun(sendOptions); // 尝试自动登录 
+    console.log("进入小程序首页初始参数：" + JSON.stringify({
+      shareOrgID: that.data.shareOrgID,
+      shareAssistantStaffID: that.data.shareAssistantStaffID
+    }));
     that.initDocInfoFun();
   },
 
@@ -176,7 +149,6 @@ Page({
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
           that.getOrderCommentData(res.data.orgID, res.data.doctorStaffID); // 获取患者评价信息
-          // that.data.doctorStaffID = res.data.doctorStaffID;
           that.getToolClassifyById(res.data.orgID); // 文章模块分类获取
         },
         fail: function(err) {
@@ -211,7 +183,7 @@ Page({
             that.getDoctorDiseaseByDoctorID(res.data.doctorID).then(function(res) {
               that.setData({
                 doctorDisease: res
-              })
+              });
             })
             that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
             that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
@@ -437,8 +409,7 @@ Page({
         this.setData({
           sectionBanner: res.data.sectionBanner
         })
-      }).catch(e => {
-      });
+      }).catch(e => {});
   },
 
   /**
@@ -495,7 +466,7 @@ Page({
           ["patientShareGetData.httpParams.orgID"]: orgID,
           ["patientShareGetData.httpParams.doctorStaffID"]: doctorStaffID
         });
-        // console.log(this.data.patientShareGetData);
+        // console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
       }
     });
   },
@@ -509,7 +480,6 @@ Page({
       sectionID: sectionID,
       doctorStaffID: doctorStaffID
     }).then(res => {
-      // console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           ["inquiryCaseData.keyID"]: res.data.keyID,
@@ -523,7 +493,7 @@ Page({
           ["inquiryCaseData.publishDate"]: res.data.publishDate,
           ["inquiryCaseData.httpParams.doctorStaffID"]: doctorStaffID
         });
-        // console.log(this.data.patientShareGetData);
+        // console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
       }
     });
   }
