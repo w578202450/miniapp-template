@@ -29,7 +29,7 @@ Component({
    */
   data: {
     // diseaseName: []
-    defaultPhotoUrl:"/images/chat/personBacImg.png"
+    defaultPhotoUrl:"../../../../images/chat/personBacImg.png"
   },
 
   /**

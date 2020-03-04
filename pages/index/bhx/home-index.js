@@ -37,12 +37,12 @@ Page({
       hospitalIntroduce:"中医治风湿骨病",
       hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”、“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风…"
     },
-    serviceBg: '/images/home/home_service_bg.png',
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     doctorTeamList: [], // 医师团队列表
     hospitalDetail: {}, // 医院信息
-    defaultPhotoUrl: "/images/chat/personBacImg.png" // 默认头像
+    // defaultPhotoUrl: "/images/chat/personBacImg.png" // 默认头像
+    defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
   },
 
   /**
@@ -289,7 +289,7 @@ Page({
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "侯丽萍的医生主页", // 待确认，可先不传
-      url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // （必传）图文、视频 的网络地址链接
+      url: "", // （必传）图文、视频 的网络地址链接
       logoUrl: "" // 视频的封面图片(没有就传空字符窜)
     };
     wx.navigateTo({
@@ -302,7 +302,7 @@ Page({
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "医院主页", // 待确认，可先不传
-      url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // （必传）图文、视频 的网络地址链接
+      url: "", // （必传）图文、视频 的网络地址链接
       logoUrl: "" // 视频的封面图片(没有就传空字符窜)
     };
     wx.navigateTo({
