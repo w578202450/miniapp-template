@@ -60,6 +60,7 @@ Page({
         }
       }
     }
+    orgName: app.globalData.orgName;
     let sendOptions = { ...options };
     commonFun.startLoginFun(sendOptions);
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
@@ -132,8 +133,7 @@ Page({
         if (res.code == 0) {
           if (res.data) {
             that.setData({
-              doctorInfo: res.data,
-              orgName: res.data.workPlace
+              doctorInfo: res.data
             });
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);

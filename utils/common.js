@@ -77,7 +77,7 @@ function getPatientInfo(unionID) {
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
       console.log("登录后拿到的患者对话信息：" + JSON.stringify(res.data));
-      app.globalData.orgName = res.data.orgName;
+      // app.globalData.orgName = res.data.orgName;
       app.globalData.personID = res.data.personID;
       app.globalData.patientID = res.data.keyID;
       app.globalData.orgID = res.data.orgID;
@@ -102,10 +102,10 @@ function getPatientInfo(unionID) {
         key: 'patientID',
         data: res.data.keyID
       });
-      wx.setStorage({
-        key: 'orgName',
-        data: res.data.orgName
-      });
+      // wx.setStorage({
+      //   key: 'orgName',
+      //   data: res.data.orgName
+      // });
       wx.setStorage({
         key: 'shareOrgID',
         data: res.data.orgID
