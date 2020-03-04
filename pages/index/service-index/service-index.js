@@ -371,8 +371,8 @@ Page({
     currentCategoryData["loading"] = true;
     HTTP.articleByClassifyId({
       "orgID": orgID,
-      "pageSize": 10,
-      "pageIndex": 1,
+      "pageSize": currentCategoryData.pageSize,
+      "pageIndex": currentCategoryData.pageIndex,
       "classifyID": classifyID
     }).then(res => {
       currentCategoryData["loading"] = false;
@@ -432,7 +432,6 @@ Page({
         keyID: this.data.doctorInfo.sectionID
       })
       .then(res => {
-        console.log('sectionBanner------', res)
         this.setData({
           sectionBanner: res.data.sectionBanner
         })
