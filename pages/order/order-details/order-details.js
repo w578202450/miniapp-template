@@ -9,7 +9,7 @@ Page({
     orderInfo: null
   },
   onReady: function() {
-    this.tmcnavbar = this.selectComponent("#tmcnavbar");
+    // this.tmcnavbar = this.selectComponent("#tmcnavbar");
   },
 
   onLoad: function(e) {
