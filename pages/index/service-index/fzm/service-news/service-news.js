@@ -87,37 +87,31 @@ Component({
      * 根据文章id获取文章的列表
      */
     loadDatas(currentClassifyID, currentCategoryData, orgID) {
+      currentCategoryData["loading"] = true
       HTTP.articleByClassifyId({
         "orgID": orgID,
         "pageSize": currentCategoryData.pageSize,
         "pageIndex": currentCategoryData.pageIndex,
         "classifyID": currentClassifyID
       }).then(res => {
+        currentCategoryData["loading"] = false
         let list = res.data
         if (list.datas) {
-          if (list.datas.length > 0) {
-            currentCategoryData["hasData"] = true
-            if (list.datas.length < currentCategoryData.pageSize) {
-              currentCategoryData["hasMore"] = false
-            } else {
-              currentCategoryData["hasMore"] = true
-              currentCategoryData["pageIndex"] = currentCategoryData.pageIndex + 1
-            }
-            currentCategoryData.datas = list.datas
-            this.data.articleDatas[currentClassifyID] = currentCategoryData
-            this.setData({
-              articleDatas: this.data.articleDatas
-            })
-          } else if (list.datas.length == 0){
-            currentCategoryData["hasData"] = false
-            this.setData({
-              articleDatas: this.data.articleDatas
-            })
+          currentCategoryData["noData"] = list.datas.length === 0 ? true : false
+          currentCategoryData["noMore"] = list.pageIndex < list.totalPage ? false : true
+          if (list.pageIndex < list.totalPage) {
+            currentCategoryData["pageIndex"] += 1
           }
+          currentCategoryData.datas = list.datas
+          this.data.articleDatas[currentClassifyID] = currentCategoryData
+          this.setData({
+            articleDatas: this.data.articleDatas
+          })
 
         } else {
           // 不许渲染数据
         }
+      }).catch({
       });
     },
     /**
@@ -127,36 +121,34 @@ Component({
       let currentClassifyID = e.currentTarget.dataset.navitem.keyID
       let orgID = e.currentTarget.dataset.navitem.orgID
       let currentCategoryData = this.data.articleDatas[currentClassifyID]
-      if (!currentCategoryData.hasMore) {
+      if (currentCategoryData.loading || currentCategoryData.noMore) {
         return
       }
+      currentCategoryData["loading"] = true;
+      this.setData({
+        articleDatas: this.data.articleDatas
+      })
       HTTP.articleByClassifyId({
         "orgID": orgID,
         "pageSize": currentCategoryData.pageSize,
-        "pageIndex": currentCategoryData.pageIndex + 1,
+        "pageIndex": currentCategoryData.pageIndex,
         "classifyID": currentClassifyID
       }).then(res => {
+        currentCategoryData["loading"] = false
         let list = res.data
+        
         if (list.datas) {
-          if (list.datas.length > 0) {
-            currentCategoryData["hasData"] = true
-            if (list.datas.length < currentCategoryData.pageSize) {
-              currentCategoryData["hasMore"] = false
-            } else {
-              currentCategoryData["hasMore"] = true
-              currentCategoryData["pageIndex"] = currentCategoryData["pageIndex"] + 1
-            }
-            currentCategoryData.datas.push(list.datas)
-            this.setData({
-              articleDatas: this.data.articleDatas
-            })
-            
-          } else if (list.datas.length == 0) {
-            currentCategoryData["hasMore"] = false
-            this.setData({
-              articleDatas: this.data.articleDatas
-            })
+          
+          currentCategoryData["noData"] = list.datas.length === 0 ? true : false
+          currentCategoryData["noMore"] = list.pageIndex < list.totalPage ? false : true
+          if (list.pageIndex < list.totalPage) {
+            currentCategoryData["pageIndex"] += 1
           }
+          currentCategoryData.datas = [...currentCategoryData.datas, ...list.datas]
+          this.setData({
+            articleDatas: this.data.articleDatas
+          })
+          
         } else {
           // 不许渲染数据
         }
