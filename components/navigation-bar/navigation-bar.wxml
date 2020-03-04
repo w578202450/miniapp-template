@@ -1,0 +1,7 @@
+<!--components/navigation-bar/navigation-bar.wxml-->
+<view style="height:{{statusBarHeight + navBarHeight}}px">
+  <view class="navbarBox" style="top:0px;height:{{statusBarHeight + navBarHeight}}px;background: {{bgColor}};">
+    <image class="navHomeIcon" src="/images/public/navHome.png" style="position: absolute;left: 100rpx;bottom: {{(statusBarHeight + navBarHeight)/2}}rpx;"></image>
+    <text class="title-name-text">{{pageName}}</text>
+  </view>
+</view>

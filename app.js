@@ -17,12 +17,12 @@ let navBarHeight = (function() { //导航栏高度
 
 App({
   onLaunch: function() {
-    this.globalData.systemInfo = systemInfo
-    this.globalData.navBarHeight = navBarHeight
+    this.globalData.systemInfo = systemInfo;
+    this.globalData.navBarHeight = navBarHeight;
     // AUTH.getSetting()
-    AUTH.upDataApp()
-    AUTH.getNetworkType()
-    AUTH.onNetworkStatusChange()
+    AUTH.upDataApp();
+    AUTH.getNetworkType();
+    AUTH.onNetworkStatusChange();
     this.imSetting();
   },
 

@@ -116,6 +116,20 @@
 					"pathName": "pages/order/order-evaluate-success/order-evaluate-success",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "导航",
+					"pathName": "components/navigation-bar/navigation-bar",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价列表",
+					"pathName": "pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

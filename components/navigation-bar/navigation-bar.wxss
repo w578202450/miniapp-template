@@ -1,0 +1,19 @@
+/* components/navigation-bar/navigation-bar.wxss */
+.navbarBox{
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  border: 1rpx solid red;
+  text-align: center;
+}
+
+.navHomeIcon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.title-name-text {
+  font-size: 32rpx;
+  text-align: center;
+}
