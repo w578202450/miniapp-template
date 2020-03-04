@@ -1,6 +1,6 @@
-<view style="{{pageStyle}}">
+<view style="{{pageStyle}}" hidden="{{!doctorInfo.doctorName}}">
   <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
-  <view class="content" hidden="{{!doctorInfo.doctorName}}">
+  <view class="content">
     <view class="doctor-team-box">
       <image src="{{doctorInfo.faceImage}}" mode="aspectFill"></image>
       <view class="doctorinfo-box">
