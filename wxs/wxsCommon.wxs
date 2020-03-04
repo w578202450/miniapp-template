@@ -85,6 +85,15 @@ var strSplit = function (str, separator) {
   return str.split(separator)
 }
 
+// 字符空格替换
+var strReplce = function (str, object, replace) {
+  if (!str) {
+    return [];
+  }
+
+  return str.replace(getRegExp(',', 'g'), ' ');
+}
+
 // 根据key获取对象的值
 var value = function (dic, key) {
   if (!dic || !key || !dic[key]) {
@@ -101,5 +110,6 @@ module.exports = {
   isDivisible: isDivisible,
   serviceNum: serviceNum,
   strSplit: strSplit,
-  value: value
+  value: value,
+  strReplce: strReplce
 };

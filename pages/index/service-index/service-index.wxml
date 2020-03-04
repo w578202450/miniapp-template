@@ -1,12 +1,14 @@
 <!--pages/index/service-index/service-index.wxml-->
 <view>
+  <!-- 引入wxs脚本 -->
+  <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
   <!-- 标题 -->
   <view class="title-box">
     <!-- 问诊标题 -->
     <view hidden="{{scrollTop == 0}}" style="height:{{statusBarHeight + navBarHeight + 34}}px">
       <view class="title-custom-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
         <text class="title-name-text">{{doctorInfo.doctorName}}</text>
-        <text class="title-defalut-text" style="margin-left:16rpx">{{doctorInfo.titleName}} 教授 博士生导师</text>
+        <text class="title-defalut-text" style="margin-left:16rpx">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
       </view>
       <view class="button-box" bindtap="toOnlineInqueryFun">
         <text class="button-text">立即问诊</text>
@@ -17,7 +19,7 @@
     </view>
   </view>
   <!-- 专家门诊专家信息 -->
-  <service-specialistInfo pageStyle="margin-bottom:20rpx" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"
+  <service-specialistInfo pageStyle="margin-bottom:20rpx" sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"
   />
   <!-- 医生团队 -->
   <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" />
@@ -28,7 +30,7 @@
   <!-- 患者分享 -->
   <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" />
   <!-- 文章模块 -->
-  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}"  articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
+  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
 </view>

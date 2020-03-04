@@ -443,6 +443,14 @@ module.exports = {
    */
   getHospitalInfo: function getHospitalInfo(params) {
     return request('api/peachUser/hospitalMng/getHospital', true, 'get', params);
+  },
+
+  /**
+   * 获取科室信息
+   */
+  getSectionByKeyID: function getSectionByKeyID(params) {
+    return request('api/peachUser/hospitalSection/getSectionByKeyID', true, 'get', params);
   }
+
 
 }

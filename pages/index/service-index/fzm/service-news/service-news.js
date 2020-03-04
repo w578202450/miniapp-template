@@ -97,7 +97,12 @@ Component({
         if (list.datas) {
           if (list.datas.length > 0) {
             currentCategoryData["hasData"] = true
-            currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true
+            if (list.datas.length < currentCategoryData.pageSize) {
+              currentCategoryData["hasMore"] = false
+            } else {
+              currentCategoryData["hasMore"] = true
+              currentCategoryData["pageIndex"] = currentCategoryData.pageIndex + 1
+            }
             currentCategoryData.datas = list.datas
             this.data.articleDatas[currentClassifyID] = currentCategoryData
             this.setData({
@@ -135,12 +140,17 @@ Component({
         if (list.datas) {
           if (list.datas.length > 0) {
             currentCategoryData["hasData"] = true
-            currentCategoryData["hasMore"] = list.datas.length < currentCategoryData.pageSize ? false : true
+            if (list.datas.length < currentCategoryData.pageSize) {
+              currentCategoryData["hasMore"] = false
+            } else {
+              currentCategoryData["hasMore"] = true
+              currentCategoryData["pageIndex"] = currentCategoryData["pageIndex"] + 1
+            }
             currentCategoryData.datas.push(list.datas)
             this.setData({
               articleDatas: this.data.articleDatas
             })
-
+            
           } else if (list.datas.length == 0) {
             currentCategoryData["hasMore"] = false
             this.setData({
@@ -161,7 +171,7 @@ Component({
       let materialData = {
         materialType: item.articleType, // （必传）要查看的素材类型 0图文 1视频
         title: title, // 待确认，可先不传
-        url: "https://apph5.100cbc.com/doctor/agreementRegister.html", // （必传）图文、视频 的网络地址链接
+        url: item.articleUrl, // （必传）图文、视频 的网络地址链接
         logoUrl: item.logoUrl // 视频的封面图片(没有就传空字符窜)
       };
       wx.navigateTo({

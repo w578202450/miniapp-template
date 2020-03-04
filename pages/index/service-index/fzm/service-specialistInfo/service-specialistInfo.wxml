@@ -4,12 +4,12 @@
   <!-- banner -->
   <block wx:if="{{isInquiryNav}}">
     <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight + 34}}px">
-      <image style="width: 100%" hidden="{{!serviceBg}}" src="{{serviceBg}}" mode="widthFix" />
+      <image style="width: 100%" hidden="{{!sectionBanner}}" src="{{sectionBanner}}" mode="widthFix" />
     </view>
   </block>
   <block wx:else>
     <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight}}px">
-      <image style="width: 100%" hidden="{{!serviceBg}}" src="{{serviceBg}}" mode="widthFix" />
+      <image style="width: 100%" hidden="{{!sectionBanner}}" src="{{sectionBanner}}" mode="widthFix" />
     </view>
   </block>
   <!-- 医生卡片 -->
@@ -19,8 +19,7 @@
       <image src="{{doctorInfo.faceImage}}" mode="aspectFill"></image>
       <view class="specialist-header-middle-box">
         <text class="title-name" style="font-size:32rpx">{{doctorInfo.doctorName}}</text>
-        <text class="title-other" style="margin-top:20rpx">{{doctorInfo.titleName}} 教授 博士生导师</text>
-        <text class="title-other" style="margin-top:20rpx;line-height: 36rpx">{{doctorInfo.workPlace}} {{doctorInfo.sectionName}}</text>
+        <text class="title-other" style="margin-top:20rpx">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
       </view>
       <text class="title-other specialist-header-right-box" bindtap="previewDoctorInfo">查看介绍 ></text>
     </view>
