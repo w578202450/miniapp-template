@@ -125,6 +125,9 @@ Component({
         return
       }
       currentCategoryData["loading"] = true;
+      this.setData({
+        articleDatas: this.data.articleDatas
+      })
       HTTP.articleByClassifyId({
         "orgID": orgID,
         "pageSize": currentCategoryData.pageSize,
@@ -142,7 +145,6 @@ Component({
             currentCategoryData["pageIndex"] += 1
           }
           currentCategoryData.datas = [...currentCategoryData.datas, ...list.datas]
-          this.data.articleDatas[currentClassifyID] = currentCategoryData
           this.setData({
             articleDatas: this.data.articleDatas
           })

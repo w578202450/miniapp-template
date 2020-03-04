@@ -344,8 +344,8 @@ Page({
           let currentCategoryData = {};
           currentCategoryData["noMore"] = false // 是否显示没有更多数据
           currentCategoryData["noData"] = false // 是否显示空数据占位
-          currentCategoryData["loading"] = false // 是否显示正在加载提示
-          currentCategoryData["pageSize"] = 5 //每页显示数据
+          currentCategoryData["loading"] = true // 是否显示正在加载提示
+          currentCategoryData["pageSize"] = 10 //每页显示数据
           currentCategoryData["pageIndex"] = 1 //当前页数
           articleDatas[item.keyID] = currentCategoryData;
         })
