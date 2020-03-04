@@ -35,7 +35,7 @@
       <service-tabs list="{{deanInfo.goodAts}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
       <!-- 院长详情简介 -->
       <view class="dean-introduce-box">
-        <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : comTools.subStrTxt(deanInfo.deanDetailContent, 60)}}</view>
+        <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : deanInfo.deanDetailContent}}</view>
       </view>
       <view class="introduce-box-image" bindtap="toDeanDetail">
         <image mode="widthFix" style="width:110rpx;height:40rpx;margin-right:10rpx;" src="../../../images/home/home_detail.png"></image>
@@ -57,7 +57,7 @@
       </view>
       <!-- 医院详情简介 -->
       <view class="dean-introduce-box">
-        <view class="detailIntroduction">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : comTools.subStrTxt(hospitalInfo.hospitalDetailContent, 60)}}</view>
+        <view class="detailIntroduction">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : hospitalInfo.hospitalDetailContent}}</view>
       </view>
       <view class="introduce-box-image" bindtap="toHospitalDetail">
         <image mode="widthFix" style="width:110rpx;height:40rpx;margin-right:10rpx;" src="../../../images/home/home_detail.png"></image>

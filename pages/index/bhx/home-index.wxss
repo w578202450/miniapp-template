@@ -150,6 +150,11 @@ page {
   color: rgba(0, 0, 0, 0.65);
   font-size: 24rpx;
   line-height: 48rpx;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-line-clamp:3;   /* 设置要显示省略号的行数 */
+  -webkit-box-orient:vertical;
 }
 
 .introduce-box-image {
