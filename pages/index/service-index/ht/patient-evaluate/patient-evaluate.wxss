@@ -26,12 +26,11 @@
 
 .effect {
   color: #242526;
-  font-size: 30rpx;
+  font-size: 28rpx;
 }
 
 .levelIconImg {
-  width: 100rpx;
-  margin-right: 10rpx;
+  width: 120rpx;
 }
 
 .satisfaction {
@@ -97,9 +96,19 @@
   margin-left: 15rpx;
 }
 
+.generalComment {
+  font-size: 28rpx;
+  color: #555658;
+}
+
+.generalCommentTxt {
+  color: #ffb10b;
+  font-size: 28rpx;
+}
+
 .curativeEffect {
   color: #555658;
-  font-size: 32rpx;
+  font-size: 28rpx;
 }
 
 .standardImgView {
@@ -111,14 +120,9 @@
 }
 
 .standardIcon {
-  width: 27rpx;
-  height: 27rpx;
-  margin-right: 5rpx;
-}
-
-.curativeEffectTxt {
-  color: #ffb10b;
-  font-size: 32rpx;
+  width: 22rpx;
+  height: 22rpx;
+  margin-right: 4rpx;
 }
 
 .evaluateContent {

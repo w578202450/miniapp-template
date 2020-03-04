@@ -9,16 +9,21 @@
     <view class="levelBox">
       <view class="flexRowBetweenCenter">
         <view class="flexRowStartCenter">
-          <text class="effect">疗效：</text>
-          <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
-          <text class="satisfaction">99%满意</text>
+          <text class="generalComment">患者主观：</text>
+          <text class="generalCommentTxt">99%满意</text>
         </view>
-        <view class="verticalLine"></view>
         <view class="flexRowStartCenter">
-          <text class="effect">服务：</text>
-          <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
-          <text class="satisfaction">99%满意</text>
+          <view class="flexRowStartCenter" style="margin-right: 10rpx;">
+            <text class="effect">疗效：</text>
+            <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
+          </view>
+          <view class="verticalLine"></view>
+          <view class="flexRowStartCenter">
+            <text class="effect">服务：</text>
+            <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
+          </view>
         </view>
+
       </view>
       <view class="illnessList">
         <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}} {{item.num}}</view>
@@ -37,19 +42,23 @@
         </view>
         <view class="flexRowBetweenCenter">
           <view class="flexRowStartCenter">
-            <text class="curativeEffect">疗效：</text>
-            <view class="standardImgView">
-              <!-- {{item.curativeEffectList}} -->
-              <image class="standardIcon" src="{{ind < item.curativeEffect ? iconSrc : iconBacSrc}}" wx:for="{{curativeEffectList}}" wx:key="ind" wx:for-index='ind' wx:for-item="items" />
-            </view>
-            <text class="curativeEffectTxt">{{item.curativeEffect < 3 ? '不满意' : '满意'}}</text>
+            <text class="generalComment">患者主观：</text>
+            <text class="generalCommentTxt">{{item.generalCommentID ? '不满意' : '满意'}}</text>
           </view>
           <view class="flexRowStartCenter">
-            <text class="curativeEffect">服务：</text>
-            <view class="standardImgView">
-              <image class="standardIcon" src="{{ind < item.doctorAttitude ? iconSrc : iconBacSrc}}" wx:for="{{doctorAttitudeList}}" wx:key="ind" wx:for-index='ind' wx:for-item="items" />
+            <view class="flexRowStartCenter">
+              <text class="curativeEffect">疗效：</text>
+              <view class="standardImgView">
+                <!-- {{item.curativeEffectList}} -->
+                <image class="standardIcon" src="{{ind < item.curativeEffect ? iconSrc : iconBacSrc}}" wx:for="{{curativeEffectList}}" wx:key="ind" wx:for-index='ind' wx:for-item="items" />
+              </view>
             </view>
-            <text class="curativeEffectTxt">{{item.doctorAttitude < 3 ? '不满意' : '满意'}}</text>
+            <view class="flexRowStartCenter">
+              <text class="curativeEffect">服务：</text>
+              <view class="standardImgView">
+                <image class="standardIcon" src="{{ind < item.doctorAttitude ? iconSrc : iconBacSrc}}" wx:for="{{doctorAttitudeList}}" wx:key="ind" wx:for-index='ind' wx:for-item="items" />
+              </view>
+            </view>
           </view>
         </view>
         <!-- 评价内容的文字 -->
