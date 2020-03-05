@@ -123,13 +123,6 @@
 					"pathName": "components/navigation-bar/navigation-bar",
 					"query": "",
 					"scene": null
-				},
-				{
-					"id": 9,
-					"name": "pages/order/order-success/order-success",
-					"pathName": "pages/order/order-success/order-success",
-					"query": "",
-					"scene": null
 				}
 			]
 		}
