@@ -9,7 +9,7 @@
       <text class="name">患者：{{comTools.subName(item.patientName)}} {{item.patientAddress}}</text>
     </view>
     <view>
-      <text class="date">{{comTools.formateDate(item.publishDate)}}</text>
+      <text class="date">{{comTools.formateDate2(item.publishDate)}}</text>
     </view>
   </view>
   <view>

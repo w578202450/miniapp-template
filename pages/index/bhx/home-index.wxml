@@ -25,7 +25,7 @@
   <view wx:if="{{shareOrgID==houShiOrgID}}" class="hospital-dean">
     <view class="specialist-box">
       <view class="specialist-header-box">
-        <image src="{{deanInfo.deanPhotoUrl}}"></image>
+        <image style="width:120rpx;height:120rpx;mode:widthFix;" src="{{deanInfo.deanPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
           <text class="title-name" style="font-size:32rpx">{{deanInfo.deanName}}</text>
           <text class="title-other" style="margin-top:20rpx">{{deanInfo.deanDuty}}</text>
@@ -49,7 +49,7 @@
     <module-title title="医院介绍" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     <view class="module-item-box">
       <view class="specialist-header-box">
-        <image src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
+        <image style="width:160rpx;height:120rpx;mode:widthFix;" src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
           <text class="title-name" style="font-size:32rpx">{{hospitalInfo.hospitalName}}</text>
           <text class="title-other" style="margin-top:30rpx">{{hospitalInfo.hospitalIntroduce}}</text>

@@ -296,7 +296,7 @@ Page({
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "侯丽萍的医生主页", // 待确认，可先不传
-      url: "", // （必传）图文、视频 的网络地址链接
+      url: "https://res.100cbc.com/tmc/hospital/2381/docDetail.html", // （必传）图文、视频 的网络地址链接
       logoUrl: "" // 视频的封面图片(没有就传空字符窜)
     };
     wx.navigateTo({
@@ -309,7 +309,7 @@ Page({
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "医院主页", // 待确认，可先不传
-      url: "", // （必传）图文、视频 的网络地址链接
+      url: "https://res.100cbc.com/tmc/hospital/2381/hosDetail.html", // （必传）图文、视频 的网络地址链接
       logoUrl: "" // 视频的封面图片(没有就传空字符窜)
     };
     wx.navigateTo({

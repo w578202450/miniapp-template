@@ -1,0 +1,22 @@
+.tabs-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  word-break: break-all; 
+  word-wrap: break-word;
+}
+
+.tab {
+  display: flex;
+  border-radius: 4rpx;
+  padding: 5rpx 5rpx 5rpx 5rpx;
+  margin-right: 10rpx;
+  margin-bottom: 10rpx;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  line-height: 36rpx;
+}

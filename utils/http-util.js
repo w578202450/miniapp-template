@@ -438,6 +438,15 @@ module.exports = {
     // return request('http://10.0.0.210:6215/doctorShow/list', false, 'get', params);
   },
 
+
+  /**
+   * 通过医助查询到的签约医生
+   */
+  getSignedDoctor: function getSignedDoctor(params) {
+    // return request('api/tmc/doctorShow/getDoctorShowByAssistantStaffID', true, 'get', params);
+    return request('http://10.0.0.210:6112/api/tmc/doctorShow/getDoctorShowByAssistantStaffID', false, 'get', params);
+  },
+
   /**
    * 查询医院详情信息
    */
@@ -450,7 +459,6 @@ module.exports = {
    */
   getSectionByKeyID: function getSectionByKeyID(params) {
     return request('api/peachUser/hospitalSection/getSectionByKeyID', true, 'get', params);
-  }
-
+  },
 
 }
