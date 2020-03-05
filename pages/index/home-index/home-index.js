@@ -14,7 +14,7 @@ Page({
      * 默认医院  19101017081245502880511001
      */
     houShiOrgID: "19121923373037086560511253", // 太原侯丽萍风湿骨病医院的机构ID
-    shareOrgID: "19121923373037086560511253", // 进入页面携带的orgID
+    shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     bannerImage: "", // 首页banner
     certifyNo: "45081134X51012213A1002", // 医疗机构许可证
@@ -40,6 +40,7 @@ Page({
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     doctorTeamList: [], // 医师团队列表
+    newArrayDoctorList: [], // 组合的新数组
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     // defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
@@ -75,7 +76,7 @@ Page({
           that.data.shareAssistantStaffID = shareAssistantStaffID;
           wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
         }
-      } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
+      } else if ((options.assistantStaffID && options.assistantStaffID.length > 0) || (options.orgID && options.orgID.length > 0)) { // 通过分享的小程序进入时：直接带参
         if (options.orgID && options.orgID.length > 0) {
           app.globalData.isHaveOptions = true; // 进入小程序携带有参数
           that.data.shareOrgID = options.orgID;
@@ -88,13 +89,17 @@ Page({
         }
       }
     }
+    if (app.globalData.isHaveOptions) {
+      that.initHomeData();
+    } else {
+      that.getDefaulShowInfo(); // 获取默认展示信息
+    }
     if (!app.globalData.isInitInfo)  {
       let sendOptions = {
         ...options
       };
       commonFun.startLoginFun(sendOptions); // 尝试自动登录  
     }
-    that.initHomeData(); // 初始化数据
   },
 
   /**
@@ -263,7 +268,56 @@ Page({
             that.setData({
               signedDoctor: res.data
             });
+            // wx.setStorageSync('signedDoctorInfo', res.data);
+            HTTP.getPhysicianTeamList({
+                // orgId: "19101017081245502880511001"
+                orgId: that.data.shareOrgID
+              })
+              .then(res => {
+                console.log("===获取医师团队列表===" + JSON.stringify(res));
+                if (res.code == 0) {
+                  if (res.data) {
+                    that.setData({
+                      doctorTeamList: res.data
+                    });
+                    // 医师团队列表里是否存在签约那个医生
+                    const physicianTeam = that.data.doctorTeamList.find(
+                      it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
+                    );
+                    // A.存在
+                    if (physicianTeam && res.data.doctorDTOForTMC && res.data.doctorDTOForTMC.staffId) {
+                      for (let i = 0; i < res.data.length; i++) {
+                        let id = res.data.doctorDTOForTMC.staffId;
+                        if (id != signedDoctor.doctorDTOForTMC.staffId) {
+                          let arraySignedDoctor = new Array(this.data.signedDoctor);
+                          arraySignedDoctor.push(res.data[i]);
+                        }
+                      }
+
+                      // B.不存在
+                    } else {
+
+                    }
+
+                  }
+                }
+              });
           }
+        } else { // 如果通过医助查询到的签约医生没有的话
+          // 无签约医生 
+          HTTP.getPhysicianTeamList({
+              // orgId: "19101017081245502880511001"
+              orgId: that.data.shareOrgID
+            })
+            .then(res => {
+              if (res.code == 0) {
+                if (res.data) {
+                  that.setData({
+                    doctorTeamList: res.data
+                  });
+                }
+              }
+            });
         }
       });
   },
@@ -276,12 +330,13 @@ Page({
         orgId: that.data.shareOrgID
       })
       .then(res => {
-        // console.log("===获取医师团队列表===" + JSON.stringify(res));
+        console.log("===获取医师团队列表===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
               doctorTeamList: res.data
             });
+
           }
         }
       });
@@ -300,12 +355,36 @@ Page({
           that.setData({
             hospitalDetail: res.data
           });
+
           if (res.data.orgName) {
             app.globalData.orgName = res.data.orgName; // 医院名称
           }
         }
       }
     });
+  },
+
+  /** 获取默认进小程序显示信息 */
+  getDefaulShowInfo() {
+    let that = this;
+    HTTP.getDefaultDocInfo({
+        // orgID: that.data.shareOrgID,
+        // assistantStaffID: that.data.shareAssistantStaffID,
+        orgID: "",
+        assistantStaffID: "",
+        entryType: ""
+      })
+      .then(res => {
+        console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
+        if (res.code == 0) {
+          that.data.shareOrgID = res.data.orgID;
+          that.data.shareAssistantStaffID = res.data.assistantStaffID;
+          wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
+          wx.setStorageSync("shareOrgID", res.data.orgID);
+          wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
+          that.initHomeData(); // 初始化数据
+        }
+      });
   },
 
   /** 跳转到院长详情 */
