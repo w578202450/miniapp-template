@@ -150,8 +150,6 @@ Page({
           // console.log("获取的用户缓存问诊信息：" + JSON.stringify(res));
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-          that.getOrderCommentData(res.data.orgID, res.data.doctorStaffID); // 获取患者评价信息
-          that.getToolClassifyById(res.data.orgID); // 文章模块分类获取
         },
         fail: function(err) {
           // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
@@ -180,15 +178,17 @@ Page({
             });
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);
+            that.getHospitalInfo(res.data.orgID); //查询医院详情信息
+            that.getOrderCommentData(res.data.orgID, staffID); // 获取患者评价信息
+            that.getToolClassifyById(res.data.orgID); // 文章模块分类获取
             that.fetchDoctorQualification(res.data.doctorID); // 获取医生资质编号
-            // 获取主治医生的专治疾病
             that.getDoctorDiseaseByDoctorID(res.data.doctorID).then(function(res) {
               that.setData({
                 doctorDisease: res
               });
-            })
-            that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
-            that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID);
+            }); // 获取主治医生的专治疾病
+            that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 患者分享
+            that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 医生手记
             that.getSectionByKeyID();
           }
         }
@@ -209,12 +209,12 @@ Page({
             });
             wx.setStorageSync('assistantInfo', res.data);
             app.globalData.assistantInfo = res.data;
-            // 获取主治医生的专治疾病
+            // 获取助理医生的专治疾病
             that.getDoctorDiseaseByDoctorID(res.data.doctorID).then(function(res) {
               that.setData({
                 assistantdoctorDisease: res
-              })
-            })
+              });
+            });
           }
         }
       })
@@ -231,7 +231,7 @@ Page({
         if (res.code == 0) {
           that.setData({
             certifyInfo: res.data
-          })
+          });
         }
       });
   },
@@ -256,15 +256,13 @@ Page({
         entryType: ""
       })
       .then(res => {
-        console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
+        // console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
         if (res.code == 0) {
           wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
           wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync('personInfo', res.data);
-          that.getOrderCommentData(res.data.orgID, res.data.doctorStaffID); // 获取患者评价信息
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-          that.getToolClassifyById(that.data.shareOrgID);
         }
       });
   },
@@ -443,6 +441,27 @@ Page({
     this.popup.hidePopup();
   },
 
+  /** 获取医院详情信息 */
+  getHospitalInfo(orgID) {
+    let that = this;
+    let params = {
+      orgID: orgID
+    }
+    HTTP.getHospitalInfo(params).then(res => {
+      // console.log("===获取医院信息===" + JSON.stringify(res));
+      if (res.code == 0) {
+        if (res.data) {
+          that.setData({
+            hospitalDetail: res.data
+          });
+          if (res.data.orgName) {
+            app.globalData.orgName = res.data.orgName; // 医院名称
+          }
+        }
+      }
+    });
+  },
+
   //------------------------------fzm-------------------------------
   /**
    * 查询：患者分享信息
@@ -450,14 +469,11 @@ Page({
   patientShareGet: function(sectionID, orgID, doctorStaffID) {
     let that = this;
     HTTP.patientShareGet({
-      // orgID: "19101610315474350800511001",
-      // sectionID: "20021811095450646230521001",
-      // doctorStaffID: "19101610315474330040514001",
       orgID: orgID,
       sectionID: sectionID,
       doctorStaffID: doctorStaffID
     }).then(res => {
-      console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
+      // console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           ["patientShareGetData.keyID"]: res.data.keyID,
