@@ -21,7 +21,7 @@
    -->
 
    <view class="tabs-box">
-  <block wx:for="{{comTools.stringSplit('地方个,哈哈哈广告费和共和国和规范和规范化',',')}}" wx:for-item="item" wx:key="index">
+  <block wx:for="{{comTools.stringSplit(pageItem.doctorDTOForTMC.diseaseName,'，')}}" wx:for-item="item" wx:key="index">
     <view class="tab" style="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;">{{comTools.subStrTxt(item,10)}}</view>
   </block>
 </view>

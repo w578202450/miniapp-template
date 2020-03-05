@@ -40,6 +40,7 @@ Page({
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     doctorTeamList: [], // 医师团队列表
+    signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     // defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
     homeBannerDefaultUrl: "/images/home/home_banner_default.png"
@@ -169,6 +170,7 @@ Page({
     that.getShareCount(); // 获取用户分享数
     that.getPhysicianTeamList(); // 获取医师团队列表
     that.getHospitalInfo(); //查询医院详情信息
+    that.getSignedDoctor(); // 通过医助查询到的签约医生
   },
 
   /** 获取首页banner */
@@ -245,6 +247,25 @@ Page({
           if (res.data) {
             that.setData({
               shareCount: res.data.paraValue
+            });
+          }
+        }
+      });
+  },
+
+  /** 通过医助查询到的签约医生 */
+  getSignedDoctor() {
+    let that = this;
+    HTTP.getSignedDoctor({
+      assistantStaffID: "20020509480115486460514001",
+      orgID: "19101017081245502880511001"
+    })
+      .then(res => {
+        console.log("===通过医助查询到的签约医生===" + JSON.stringify(res));
+        if (res.code == 0) {
+          if (res.data) {
+            that.setData({
+              signedDoctor: res.data
             });
           }
         }
