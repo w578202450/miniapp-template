@@ -443,8 +443,8 @@ module.exports = {
    * 通过医助查询到的签约医生
    */
   getSignedDoctor: function getSignedDoctor(params) {
-    // return request('api/tmc/doctorShow/getDoctorShowByAssistantStaffID', true, 'get', params);
-    return request('http://10.0.0.210:6112/api/tmc/doctorShow/getDoctorShowByAssistantStaffID', false, 'get', params);
+    return request('api/tmc/doctorShow/getDoctorShowByAssistantStaffID', true, 'get', params);
+    // return request('http://10.0.0.210:6112/api/tmc/doctorShow/getDoctorShowByAssistantStaffID', false, 'get', params);
   },
 
   /**
