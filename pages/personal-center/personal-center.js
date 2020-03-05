@@ -26,36 +26,28 @@ Page({
 
   onLoad: function(e) {
     let that = this;
-    that.getUserInfoByStorge(); // 获取用户授权信息
-    // 监听isInitInfo值的变化
-    app.watch((value) => {
-      // value为app.js中传入的值
-      console.log("授权登录后是否已成功获取用户授权信息：", value);
-      if (value) {
-        that.data.isSelfLogin = true;
-        that.getUserInfoByStorge();
-      }
-    }, "isInitInfo");
+    if (app.globalData.isInitInfo) {
+      that.getUserInfoByStorge(); // 获取用户授权信息
+    } else {
+      // 监听isInitInfo值的变化
+      app.watch((value) => {
+        // value为app.js中传入的值
+        console.log("授权登录后是否已成功获取用户授权信息：", value);
+        if (value) {
+          that.data.isSelfLogin = true;
+          that.getUserInfoByStorge();
+        }
+      }, "isInitInfo");
+    }
   },
 
   onShow: function(e) {
     let that = this;
     if (that.data.isSearchState) {
-      wx.getStorage({
-        key: 'userInfo',
-        success: function(res) {
-          that.setData({
-            userInfo: res.data
-          });
-          console.log("获取用户缓存授权信息成功：" + JSON.stringify(that.data.userInfo));
-        },
-        fail: function(err) {
-          that.setData({
-            userInfo: {}
-          });
-          console.log("获取用户缓存授权信息失败：" + JSON.stringify(err));
-        }
+      that.setData({
+        userInfo: app.globalData.userInfo ? app.globalData.userInfo : {}
       });
+      console.log("获取用户缓存授权信息成功：" + JSON.stringify(that.data.userInfo));
     }
   },
 
