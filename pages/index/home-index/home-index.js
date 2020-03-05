@@ -319,7 +319,6 @@ Page({
                 if (res.code == 0) {
                   if (res.data) {
                     doctorTeamList = res.data;
-
                     // 医师团队列表里是否存在签约那个医生
                     // const physicianTeam = that.data.doctorTeamList.find(
                     //   it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
@@ -335,26 +334,6 @@ Page({
                     if (doctorTeamList.length == 1) {
                       doctorTeamList.push({});
                     }
-                    // console.log("---" + JSON.stringify(that.data.doctorTeamList));
-                    // // A.存在
-                    // if (physicianTeam && res.data.doctorDTOForTMC && res.data.doctorDTOForTMC.staffId) {
-                    //   let arraySignedDoctor = new Array(this.data.signedDoctor);
-                    //   console.log("!!!!!4444444!!!!!" + JSON.stringify(arraySignedDoctor));
-                    //   for (let i = 0; i < res.data.length; i++) {
-                    //     let id = res.data.doctorDTOForTMC.staffId;
-                    //     if (id != signedDoctor.doctorDTOForTMC.staffId) {
-                    //       arraySignedDoctor.push(res.data[i]);
-                    //     }
-                    //   }
-                    //   console.log("!!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
-                    //   // B.不存在
-                    // } else {
-                    //   const arraySignedDoctor = new Array(this.data.signedDoctor);
-                    //   for (let i = 0; i < res.data.length; i++) {
-                    //     arraySignedDoctor.push(res.data[i]);
-                    //   }
-                    //   console.log("!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
-                    // }
                     that.setData({
                       newArrayDoctorList: doctorTeamList
                     });
