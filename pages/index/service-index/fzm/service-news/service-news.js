@@ -96,9 +96,6 @@ Component({
      */
     loadDatas(currentClassifyID, currentCategoryData, orgID) {
       currentCategoryData["loading"] = true
-      // this.setData({
-      //   articleDatas: this.data.articleDatas
-      // })
       this.setData({
         articleDatas: this.data.articleDatas
       })
@@ -123,9 +120,22 @@ Component({
           })
 
         } else {
+          console.log('res--------------------dddd',res)
           // 不许渲染数据
+          this.setData({
+            articleDatas: this.data.articleDatas
+          })
         }
-      }).catch({
+      }).catch(error =>{
+        currentCategoryData["noMore"] = false;
+        currentCategoryData["noData"] = false;
+        currentCategoryData["loading"] = false;
+        this.setData({
+          articleDatas: this.data.articleDatas
+        })
+        wx.showToast({
+          title: '网络连接失败',
+        })
       });
     },
     /**
@@ -166,6 +176,16 @@ Component({
         } else {
           // 不许渲染数据
         }
+      }).catch(error =>{
+        currentCategoryData["noMore"] = false;
+        currentCategoryData["noData"] = false;
+        currentCategoryData["loading"] = false;
+        this.setData({
+          articleDatas: this.data.articleDatas
+        })
+        wx.showToast({
+          title: '网络连接失败',
+        })
       })
     },
     /**
