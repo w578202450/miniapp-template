@@ -28,7 +28,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 15rpx 30rpx;
+  padding: 12rpx 30rpx;
   border-radius: 50rpx;
   margin-left: 20rpx;
 }

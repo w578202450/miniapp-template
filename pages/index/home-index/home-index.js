@@ -16,13 +16,13 @@ Page({
     houShiOrgID: "19121923373037086560511253", // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
-    bannerImage: "", // 首页banner
+    homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
     certifyNo: "45081134X51012213A1002", // 医疗机构许可证
     browseCount: 0, // 用户浏览数
     shareCount: 0, // 用户分享数
     // 院长信息
     deanInfo: {
-      deanPhotoUrl: "https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314092085694750201210.png",
+      deanPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/houliping.png",
       deanName: "候丽萍", // 院长名称
       deanDuty: "主任医师 山西名中医 博士生导师", // 职称
       deanFamous: "侯氏三焦气化疗法创始人", // 专长
@@ -32,7 +32,7 @@ Page({
     },
     // 医院信息
     hospitalInfo: {
-      hospitalPhotoUrl: "https://com-shuibei-peach-tmc-cs.100cbc.com/content/20030314541664857580201210.png",
+      hospitalPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/yiyuan.png",
       hospitalName: "候丽萍风湿骨病中医医院",
       hospitalIntroduce: "中医治风湿骨病",
       hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风湿病医疗中心。本院始建于1987年，在侯丽萍院长的领导下，大力开展科学研究和临床实践，博取中医传统医学之精华与现代科学技术之长，创立了中医治疗风湿、类风湿的系统综合疗法--- 侯氏中医风湿三焦气化疗法，在治疗类风湿、强直性脊柱炎、红斑狼疮、骨关节病等各种关节疾病的诊治方面，取得了良好的疗效，已在全国二十多各省市推广使用，并与北美、日本、东南亚等国建立了长期合作关系。"
@@ -44,7 +44,6 @@ Page({
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     // defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
-    homeBannerDefaultUrl: "/images/home/home_banner_default.png"
   },
 
   /**
@@ -58,8 +57,6 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    this.data.shareOrgID = wx.getStorageInfoSync("shareOrgID");
-    this.data.shareAssistantStaffID = wx.getStorageInfoSync("shareAssistantStaffID");
     console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
@@ -114,7 +111,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    let that = this;
+    that.initHomeData();
   },
 
   /**
@@ -170,7 +168,7 @@ Page({
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
-    that.getPhysicianTeamList(); // 获取医师团队列表
+    // that.getPhysicianTeamList(); // 获取医师团队列表
     that.getHospitalInfo(); //查询医院详情信息
     that.getSignedDoctor(); // 通过医助查询到的签约医生
   },
@@ -184,11 +182,11 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        // console.log("===首页banner===" + JSON.stringify(res));
+        console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
-              bannerImage: res.data.paraValue
+              homeBannerDefaultUrl: res.data.paraValue
             });
           }
         }
@@ -204,7 +202,7 @@ Page({
         paraCode: "OP_TMC_ORG_GROUPDESC"
       })
       .then(res => {
-        // console.log("===获取医师团队介绍===" + JSON.stringify(res));
+        console.log("===获取医师团队介绍===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -224,7 +222,7 @@ Page({
         paraCode: "OV_TMC_USER_VIEWS"
       })
       .then(res => {
-        // console.log("===获取用户浏览数===" + JSON.stringify(res));
+        console.log("===获取用户浏览数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -244,7 +242,7 @@ Page({
         paraCode: "OV_TMC_USER_SHARES"
       })
       .then(res => {
-        // console.log("===获取用户分享数===" + JSON.stringify(res));
+        console.log("===获取用户分享数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -259,11 +257,13 @@ Page({
   getSignedDoctor() {
     let that = this;
     HTTP.getSignedDoctor({
-        assistantStaffID: "20020509480115486460514001",
-        orgID: "19101017081245502880511001"
+      assistantStaffID: that.data.shareAssistantStaffID,
+      orgID: that.data.shareOrgID
+      // assistantStaffID: "20020509480115486460514001",
+      // orgID: "19101017081245502880511001"
       })
       .then(res => {
-        console.log("===通过医助查询到的签约医生===" + JSON.stringify(res));
+        console.log("!!!!!通过医助查询到的签约医生!!!!!" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -274,7 +274,7 @@ Page({
                 orgId: that.data.shareOrgID
               })
               .then(res => {
-                console.log("===获取医师团队列表===" + JSON.stringify(res));
+                console.log("!!!!!获取医师团队列表!!!!!" + JSON.stringify(res));
                 if (res.code == 0) {
                   if (res.data) {
                     that.setData({
@@ -293,12 +293,18 @@ Page({
                           arraySignedDoctor.push(res.data[i]);
                         }
                       }
-                      console.log("===新组合的医师团队列表===" + JSON.stringify(res));
+                      console.log("!!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
                       // B.不存在
                     } else {
-
+                      var arraySignedDoctor = new Array(this.data.signedDoctor);
+                      for (let i = 0; i < res.data.length; i++) {
+                        arraySignedDoctor.push(res.data[i]);
+                      }
+                      console.log("!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
                     }
-
+                    that.setData({
+                      newArrayDoctorList: arraySignedDoctor
+                    });
                   }
                 }
               });
@@ -310,10 +316,11 @@ Page({
               orgId: that.data.shareOrgID
             })
             .then(res => {
+              console.log("!!!!!无签约医生获取医师团队列表!!!!!" + JSON.stringify(res));
               if (res.code == 0) {
                 if (res.data) {
                   that.setData({
-                    doctorTeamList: res.data
+                    newArrayDoctorList: res.data
                   });
                 }
               }
@@ -342,14 +349,14 @@ Page({
       });
   },
 
-  /** 获取医院详情信息 */
+  /** 获取医院详情简介信息 */
   getHospitalInfo() {
     let that = this;
     let params = {
       orgID: that.data.shareOrgID
     }
     HTTP.getHospitalInfo(params).then(res => {
-      // console.log("===获取医院信息===" + JSON.stringify(res));
+      console.log("===获取医院详情简介信息===" + JSON.stringify(res));
       if (res.code == 0) {
         if (res.data) {
           that.setData({
@@ -375,7 +382,7 @@ Page({
         entryType: ""
       })
       .then(res => {
-        console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
+        console.log("获取默认的首页信息：" + JSON.stringify(res.data));
         if (res.code == 0) {
           that.data.shareOrgID = res.data.orgID;
           that.data.shareAssistantStaffID = res.data.assistantStaffID;
@@ -422,7 +429,7 @@ Page({
   /**操作：立即进入专家门诊 */
   toServiceIndexFun: function() {
     wx.switchTab({
-      url: '/pages/index/service-index/service-index?orgID=' + this.data.shareOrgID + '&assistantStaffID=' + this.data.shareAssistantStaffID
+      url: '/pages/index/service-index/service-index'
     });
   }
 })

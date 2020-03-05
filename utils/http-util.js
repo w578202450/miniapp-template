@@ -1,4 +1,4 @@
-const version = 0; //0开发、1测试 2发布  
+const version = 1; //0开发、1测试 2发布  
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
 //     return "1400200900"
@@ -443,8 +443,8 @@ module.exports = {
    * 通过医助查询到的签约医生
    */
   getSignedDoctor: function getSignedDoctor(params) {
-    // return request('api/tmc/doctorShow/getDoctorShowByAssistantStaffID', true, 'get', params);
-    return request('http://10.0.0.210:6112/api/tmc/doctorShow/getDoctorShowByAssistantStaffID', false, 'get', params);
+    return request('api/tmc/doctorShow/getDoctorShowByAssistantStaffID', true, 'get', params);
+    // return request('http://10.0.0.210:6112/api/tmc/doctorShow/getDoctorShowByAssistantStaffID', false, 'get', params);
   },
 
   /**

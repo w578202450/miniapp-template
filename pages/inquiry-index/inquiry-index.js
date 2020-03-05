@@ -70,6 +70,7 @@ Page({
   },
 
   initFun: function() {
+    console.log(app.globalData.isInitInfo);
     if (app.globalData.isInitInfo) {
       this.setData({
         titleTxt: "点击去问诊，立即开始在线问诊～",
@@ -89,7 +90,7 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (this.data.isIn) {
+    if (app.globalData.isInitInfo) {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });
