@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    navHomeIconBlack: "/images/public/navHome.png", // 房子按钮：黑色
     capsuleRect: app.globalData.menuButtonBoundingClientRect,
     systemInfo: app.globalData.systemInfo,
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
@@ -461,6 +462,13 @@ Page({
           }
         }
       }
+    });
+  },
+
+  //回主页
+  goToBackHome: function () {
+    wx.reLaunch({
+      url: '/pages/index/bhx/home-index'
     });
   },
 

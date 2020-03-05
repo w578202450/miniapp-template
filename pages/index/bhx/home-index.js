@@ -65,6 +65,8 @@ Page({
     //   title: '',
     //   content: JSON.stringify(options),
     // })
+    this.data.shareOrgID = wx.getStorageInfoSync("shareOrgID");
+    this.data.shareAssistantStaffID = wx.getStorageInfoSync("shareAssistantStaffID");
     console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {

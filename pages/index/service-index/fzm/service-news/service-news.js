@@ -79,7 +79,7 @@ Component({
       }
     },
     /**
-     * 点击tab
+     * 点击tab\
      */
     titleClick: function(e) {
       var index = e.currentTarget.dataset.idx;
