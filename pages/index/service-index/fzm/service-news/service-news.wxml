@@ -18,14 +18,16 @@
   <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}' style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px">
     <block wx:for="{{articleTitles}}" wx:for-item="navItem" wx:for-index="navIndex" wx:key="classifyID">
       <swiper-item item-id="{{navItem.keyID}}">
-        <scroll-view  style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
+        <scroll-view style="height:{{windowH-statusBarHeight - navBarHeight - 34}}px" scroll-y>
           <block wx:for="{{comTools.value(articleDatas,navItem.keyID).datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
             <service-news-item bindtap="itemDetails" data-item="{{item}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
           </block>
           <text wx:if="{{comTools.value(articleDatas,navItem.keyID).loading}}" class="loading-box">{{loadingText}}</text>
           <text wx:elif="{{comTools.value(articleDatas,navItem.keyID).noData}}" class="noData-box">{{noDataText}}</text>
           <block wx:else>
-            <text wx:if="{{comTools.value(articleDatas,navItem.keyID).noMore}}" class="loading-box">{{comTools.value(articleDatas,navItem.keyID).noOnePage ? "" : noMoreDataText}}</text>
+            <block wx:if="{{comTools.value(articleDatas,navItem.keyID).noMore}}">
+              <text wx:if="{{!comTools.value(articleDatas,navItem.keyID).noOnePage}}" class="loading-box">{{noMoreDataText}}</text>
+            </block>
             <text wx:else class="loading-box" bindtap="uploadMoreDatas" data-index="{{navIndex}}" data-navitem="{{navItem}}">{{loadMoreDataText}}</text>
           </block>
         </scroll-view>
