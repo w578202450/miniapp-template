@@ -57,10 +57,15 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    
+    // 包
     // options ={
     //   orgID: "19121923373037086560511253",
     //   assistantStaffID: "20011320532175746910514253"
+    // }
+    // 徐
+    // options = {
+    //   assistantStaffID: "20011514000045118050514253",
+    //   orgID: "19101017081245502880511001"
     // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
