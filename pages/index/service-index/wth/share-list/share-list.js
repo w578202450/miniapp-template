@@ -15,9 +15,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // wx.setNavigationBarTitle({
-    //   title: "患者分享"
-    // });
+    wx.setNavigationBarTitle({
+      title: "患友分享"
+    });
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);
     let a = that.data.httpParams;
