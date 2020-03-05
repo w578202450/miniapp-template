@@ -123,6 +123,13 @@
 					"pathName": "components/navigation-bar/navigation-bar",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "登录",
+					"pathName": "components/loginDialog/loginDialog",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

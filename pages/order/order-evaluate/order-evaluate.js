@@ -362,7 +362,7 @@ Page({
 
   /**操作：确认提交 */
   submitEvaluateFun: function() {
-    if (this.data.orderStatusID != 10) {
+    if (this.data.orderStatusID != 30) {
       wx.showToast({
         title: '订单已经评价过了，无法再次评价',
       });

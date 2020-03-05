@@ -24,7 +24,8 @@
     "pages/order/drug-orders/drug-orders",
     "pages/order/order-success/order-success",
     "pages/order/order-evaluate/order-evaluate",
-    "pages/order/order-evaluate-success/order-evaluate-success"
+    "pages/order/order-evaluate-success/order-evaluate-success",
+    "components/loginDialog/loginDialog"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -55,16 +55,17 @@
 
 .wx-popup-btn {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   margin-bottom: 40rpx;
+  margin-top: 40rpx;
 }
 
 .wx-popup-btn button {
-  /* display: flex;
+  display: flex;
   align-items: center;
-  justify-content: center; */
-  width: 500rpx;
+  justify-content: center;
+  width: 250rpx;
   border-radius: 88rpx;
   font-weight: normal;
 }
@@ -73,10 +74,10 @@
   border: 1rpx solid #438bef;
   color: #438bef;
   background-color: white;
-  margin-top: 40rpx;
 }
 
 .wx-popup-btn .btn-ok {
+  width: 250rpx;
   background-color: #438bef;
   color: white;
 }
