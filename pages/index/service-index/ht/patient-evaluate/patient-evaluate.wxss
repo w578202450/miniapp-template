@@ -81,9 +81,7 @@
 }
 
 .diseaseTxt {
-  color: #242526;
-  font-size: 31rpx;
-  font-weight: bold;
+  font-size: 32rpx;
 }
 
 .unfoldTxt {

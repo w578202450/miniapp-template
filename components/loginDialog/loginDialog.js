@@ -18,17 +18,17 @@ Component({
     // 弹窗内容
     content: {
       type: String,
-      value: '请先登录再进行操作'
+      value: '根据国家条例，请您确认已在线下医院进行初诊。'
     },
     // 弹窗取消按钮文字
     btn_no: {
       type: String,
-      value: '暂不登录'
+      value: '未初诊 暂不登录'
     },
     // 弹窗确认按钮文字
     btn_ok: {
       type: String,
-      value: '立即登录'
+      value: '确认已初诊 立即登录'
     }
   },
 
