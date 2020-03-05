@@ -53,7 +53,7 @@ Component({
     },
     //回主页
     toIndex: function() {
-      wx.navigateTo({
+      wx.reLaunch({
         url: '/pages/index/bhx/home-index'
       });
     }
