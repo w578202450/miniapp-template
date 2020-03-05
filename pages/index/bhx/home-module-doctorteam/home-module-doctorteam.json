@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "home-module-doctorteam-item": "/pages/index/bhx/home-module-doctorteam-item/home-module-doctorteam-item"
-  }
-}

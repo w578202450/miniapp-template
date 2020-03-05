@@ -78,7 +78,7 @@
 				{
 					"id": -1,
 					"name": "首页",
-					"pathName": "pages/index/bhx/home-index",
+					"pathName": "pages/index/home-index/home-index",
 					"query": "",
 					"scene": null
 				},

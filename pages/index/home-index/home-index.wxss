@@ -1,4 +1,4 @@
-/* pages/index/bhx/home-index.wxss */
+/* pages/index/home-index/home-index.wxss */
 
 page {
   background-color: white;

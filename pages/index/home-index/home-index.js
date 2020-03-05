@@ -1,4 +1,4 @@
-// pages/index/bhx/home-index.js
+// pages/index/home-index/home-index.js
 const app = getApp();
 const commonFun = require('../../../utils/common.js');
 const HTTP = require('../../../utils/http-util');
@@ -57,14 +57,6 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    // options = {
-    //   orgID: "19072514430966516270514001",
-    //   assistantStaffID: ""
-    // };
-    // wx.showModal({
-    //   title: '',
-    //   content: JSON.stringify(options),
-    // })
     this.data.shareOrgID = wx.getStorageInfoSync("shareOrgID");
     this.data.shareAssistantStaffID = wx.getStorageInfoSync("shareAssistantStaffID");
     console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
