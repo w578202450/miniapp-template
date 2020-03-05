@@ -58,8 +58,6 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    this.data.shareOrgID = wx.getStorageInfoSync("shareOrgID");
-    this.data.shareAssistantStaffID = wx.getStorageInfoSync("shareAssistantStaffID");
     console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
@@ -263,7 +261,7 @@ Page({
         orgID: "19101017081245502880511001"
       })
       .then(res => {
-        console.log("===通过医助查询到的签约医生===" + JSON.stringify(res));
+        console.log("!!!!!通过医助查询到的签约医生!!!!!" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -274,7 +272,7 @@ Page({
                 orgId: that.data.shareOrgID
               })
               .then(res => {
-                console.log("===获取医师团队列表===" + JSON.stringify(res));
+                console.log("!!!!!获取医师团队列表!!!!!" + JSON.stringify(res));
                 if (res.code == 0) {
                   if (res.data) {
                     that.setData({
@@ -293,12 +291,18 @@ Page({
                           arraySignedDoctor.push(res.data[i]);
                         }
                       }
-                      console.log("===新组合的医师团队列表===" + JSON.stringify(res));
+                      console.log("!!!!!arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
                       // B.不存在
                     } else {
-
+                      var arraySignedDoctor = new Array(this.data.signedDoctor);
+                      for (let i = 0; i < res.data.length; i++) {
+                        arraySignedDoctor.push(res.data[i]);
+                      }
+                      console.log("!!!!arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
                     }
-
+                    that.setData({
+                      newArrayDoctorList: arraySignedDoctor
+                    });
                   }
                 }
               });
@@ -313,7 +317,7 @@ Page({
               if (res.code == 0) {
                 if (res.data) {
                   that.setData({
-                    doctorTeamList: res.data
+                    newArrayDoctorList: res.data
                   });
                 }
               }
@@ -375,7 +379,7 @@ Page({
         entryType: ""
       })
       .then(res => {
-        console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
+        console.log("获取默认的首页信息：" + JSON.stringify(res.data));
         if (res.code == 0) {
           that.data.shareOrgID = res.data.orgID;
           that.data.shareAssistantStaffID = res.data.assistantStaffID;
