@@ -40,7 +40,6 @@ Page({
     },
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
-    doctorTeamList: [], // 医师团队列表
     newArrayDoctorList: [], // 组合的新数组
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
@@ -92,7 +91,6 @@ Page({
         }
       }
     }
-    console.log("=======isHaveOptions=========" + app.globalData.isHaveOptions);
     // if (app.globalData.isHaveOptions) {
     //   that.initHomeData();
     // } else {
@@ -219,7 +217,7 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        console.log("===首页banner===" + JSON.stringify(res));
+        // console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -239,7 +237,7 @@ Page({
         paraCode: "OP_TMC_ORG_GROUPDESC"
       })
       .then(res => {
-        console.log("===获取医师团队介绍===" + JSON.stringify(res));
+        // console.log("===获取医师团队介绍===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -259,7 +257,7 @@ Page({
         paraCode: "OV_TMC_USER_VIEWS"
       })
       .then(res => {
-        console.log("===获取用户浏览数===" + JSON.stringify(res));
+        // console.log("===获取用户浏览数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -279,7 +277,7 @@ Page({
         paraCode: "OV_TMC_USER_SHARES"
       })
       .then(res => {
-        console.log("===获取用户分享数===" + JSON.stringify(res));
+        // console.log("===获取用户分享数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -293,6 +291,7 @@ Page({
   /** 通过医助查询到的签约医生 */
   getSignedDoctor() {
     let that = this;
+    let doctorTeamList = [];
     HTTP.getSignedDoctor({
         assistantStaffID: that.data.shareAssistantStaffID,
         orgID: that.data.shareOrgID
@@ -300,7 +299,7 @@ Page({
         // orgID: "19101017081245502880511001"
       })
       .then(res => {
-        console.log("!!!!!通过医助查询到的签约医生!!!!!" + JSON.stringify(res));
+        // console.log("!!!!!通过医助查询到的签约医生!!!!!" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -311,29 +310,27 @@ Page({
                 orgId: that.data.shareOrgID
               })
               .then(res => {
-                console.log("!!!!!获取医师团队列表!!!!!" + JSON.stringify(res));
+                // console.log("!!!!!获取医师团队列表!!!!!" + JSON.stringify(res));
                 if (res.code == 0) {
                   if (res.data) {
-                    that.setData({
-                      doctorTeamList: res.data
-                    });
+                    doctorTeamList = res.data;
+
                     // 医师团队列表里是否存在签约那个医生
                     // const physicianTeam = that.data.doctorTeamList.find(
                     //   it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
                     // );
-                    for (let i = 0; i < that.data.doctorTeamList.length; i++) {
-                      let temp = that.data.doctorTeamList[i];
-                      if (temp.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId) {
-                        that.data.doctorTeamList.splice(i, 1);
+                    for (let i = 0; i < doctorTeamList.length; i++) {
+                      let temp = doctorTeamList[i];
+                      if (temp.doctorStaffID === this.data.signedDoctor.doctorStaffID) {
+                        doctorTeamList.splice(i, 1);
                         break;
                       }
                     }
-                    if (that.data.doctorTeamList.length == 0) {
-                      that.data.doctorTeamList.push({});
+                    doctorTeamList.unshift(this.data.signedDoctor);
+                    if (doctorTeamList.length == 1) {
+                      doctorTeamList.push({});
                     }
-                    that.data.doctorTeamList.unshift(this.data.signedDoctor);
-                    console.log("---" + JSON.stringify(that.data.doctorTeamList));
-                    // console.log("qqqqqqqqqq" + physicianTeam);
+                    // console.log("---" + JSON.stringify(that.data.doctorTeamList));
                     // // A.存在
                     // if (physicianTeam && res.data.doctorDTOForTMC && res.data.doctorDTOForTMC.staffId) {
                     //   let arraySignedDoctor = new Array(this.data.signedDoctor);
@@ -354,7 +351,7 @@ Page({
                     //   console.log("!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
                     // }
                     that.setData({
-                      newArrayDoctorList: that.data.doctorTeamList
+                      newArrayDoctorList: doctorTeamList
                     });
                   }
                 }
@@ -367,7 +364,7 @@ Page({
               orgId: that.data.shareOrgID
             })
             .then(res => {
-              console.log("!!!!!无签约医生获取医师团队列表!!!!!" + JSON.stringify(res));
+              // console.log("!!!!!无签约医生获取医师团队列表!!!!!" + JSON.stringify(res));
               if (res.code == 0) {
                 if (res.data) {
                   that.setData({
@@ -388,7 +385,7 @@ Page({
         orgId: that.data.shareOrgID
       })
       .then(res => {
-        console.log("===获取医师团队列表===" + JSON.stringify(res));
+        // console.log("===获取医师团队列表===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -407,7 +404,7 @@ Page({
       orgID: that.data.shareOrgID
     }
     HTTP.getHospitalInfo(params).then(res => {
-      console.log("===获取医院详情简介信息===" + JSON.stringify(res));
+      // console.log("===获取医院详情简介信息===" + JSON.stringify(res));
       if (res.code == 0) {
         if (res.data) {
           that.setData({
@@ -431,7 +428,7 @@ Page({
         entryType: ""
       })
       .then(res => {
-        console.log("获取默认的首页信息：" + JSON.stringify(res.data));
+        // console.log("获取默认的首页信息：" + JSON.stringify(res.data));
         if (res.code == 0) {
           that.data.shareOrgID = res.data.orgID;
           that.data.shareAssistantStaffID = res.data.assistantStaffID;
