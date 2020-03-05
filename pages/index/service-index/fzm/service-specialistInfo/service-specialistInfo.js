@@ -7,9 +7,9 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    sectionBanner:{
-      type:String,
-      value:null
+    sectionBanner: {
+      type: String,
+      value: null
     },
     // 医生信息
     doctorInfo: {
@@ -42,20 +42,24 @@ Component({
    * 组件的初始数据
    */
   data: {
-    inquiryBoxHeight: 34
+    inquiryBoxHeight: 34,
+    // 好评率图标
+    comment_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_commentNums.png",
+    // 服务人数图标
+    sever_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_serverNums.png"
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    
+
     /**
      * 立即问诊
      */
     goToInquiryOption() {
       this.triggerEvent('toOnlineInqueryFun')
-      console.log("this.data.doctorInfo-------",this.data.doctorInfo);
+      console.log("this.data.doctorInfo-------", this.data.doctorInfo);
     },
 
     /**

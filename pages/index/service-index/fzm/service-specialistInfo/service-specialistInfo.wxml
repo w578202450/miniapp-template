@@ -1,48 +1,48 @@
-<view class="main" style="{{pageStyle}}">
+<view class="main" style="{{ pageStyle }}">
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <!-- banner -->
-  <block wx:if="{{isInquiryNav}}">
-    <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight + 34}}px">
-      <image style="width: 100%" hidden="{{!sectionBanner}}" src="{{sectionBanner}}" mode="widthFix" />
+  <block wx:if="{{ isInquiryNav }}">
+    <view class="banner-box" style="padding-top: {{ statusBarHeight + navBarHeight + 34 }}px">
+      <image style="width: 100%" hidden="{{ !sectionBanner }}" src="{{ sectionBanner }}" mode="top" />
     </view>
   </block>
   <block wx:else>
-    <view class="banner-box" style="padding-top: {{statusBarHeight + navBarHeight}}px">
-      <image style="width: 100%" hidden="{{!sectionBanner}}" src="{{sectionBanner}}" mode="widthFix" />
+    <view class="banner-box" style="padding-top: {{ statusBarHeight + navBarHeight }}px">
+      <image style="width: 100%" hidden="{{ !sectionBanner }}" src="{{ sectionBanner }}" mode="widthFix" />
     </view>
   </block>
   <!-- 医生卡片 -->
-  <view class="specialist-box" hidden="{{!doctorInfo.doctorName}}">
+  <view class="specialist-box" hidden="{{ !doctorInfo.doctorName }}">
     <!-- 基本信息 -->
     <view class="specialist-header-box">
-      <image src="{{doctorInfo.faceImage}}" mode="aspectFill"></image>
+      <image src="{{ doctorInfo.faceImage }}" mode="aspectFill"></image>
       <view class="specialist-header-middle-box">
-        <text class="title-name" style="font-size:32rpx">{{doctorInfo.doctorName}}</text>
-        <text class="title-other" style="margin-top:20rpx;line-height: 36rpx">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
+        <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
+        <text class="title-other doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
       </view>
-      <text class="title-other specialist-header-right-box" style="line-height: 36rpx"  bindtap="previewDoctorInfo">查看介绍 ></text>
+      <text class="title-other specialist-header-right-box" style="line-height: 36rpx" bindtap="previewDoctorInfo">查看介绍 ></text>
     </view>
     <!-- 擅长标签 -->
-    <service-tabs list="{{doctorDisease}}" pageStyle="margin-top: 24rpx;margin-left: 154rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
-    <view style="height:2rpx;background:rgba(0,0,0,0.1);margin-top:16rpx"></view>
+    <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs>
+    <view class="{{ cutting-line1 }}"></view>
     <!-- 好评率 服务人数 -->
     <view class="specialist-bottom-box">
       <view class="specialist-bottom-left">
-        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_commentNums.png"></image>
+        <image src="{{ comment_icon }}"></image>
         <text>好评率：</text>
-        <text style="color:rgba(0,0,0,0.85)">100%</text>
+        <text style="color: rgba(0,0,0,0.85)">100%</text>
       </view>
-      <view style="width:2rpx;height:48rpx;background:rgba(0,0,0,0.1)"></view>
+      <view class="{{ cutting-line2 }}"></view>
       <view class="specialist-bottom-left">
-        <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_serverNums.png"></image>
+        <image src="{{ sever_icon }}"></image>
         <text>服务人数：</text>
-        <text style="color:rgba(0,0,0,0.85)">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
+        <text style="color: rgba(0,0,0,0.85)">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
       </view>
     </view>
   </view>
   <!-- 执业许可信息 -->
-  <view class="licensed-box" hidden="{{!certifyInfo.certifyNo}}">
+  <view class="licensed-box" hidden="{{ !certifyInfo.certifyNo }}">
     <text>医师执业许可证：</text>
     <text style="color: rgba(255, 177, 11, 0.85)">{{certifyInfo.certifyNo}}</text>
   </view>

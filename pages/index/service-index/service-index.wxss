@@ -4,7 +4,7 @@
   background: rgba(255, 255, 255, 1);
   position: fixed;
   width: 100%;
-  z-index: 10;
+  z-index: 11;
 }
 
 .title-default-box {
@@ -63,4 +63,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   margin-left: 16rpx;
+}
+
+.cutting-line {
+  height: 2rpx;
+  background: rgba(0, 0, 0, 0.1);
+  margin-top: 16rpx;
 }

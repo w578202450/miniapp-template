@@ -49,11 +49,21 @@
   -webkit-box-orient: vertical;
 }
 
-.videoIconImg {
+.video-icon {
   position: absolute;
   left: 30rpx;
   top: 30rpx;
   width: 60rpx;
   height: 60rpx;
   z-index: 3;
+}
+
+.cutting-line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.cover {
+  width: 120rpx;
+  height: 120rpx;
 }

@@ -1,16 +1,16 @@
-<view style="{{pageStyle}}" hidden="{{!doctorInfo.doctorName}}">
+<view style="{{ pageStyle }}" hidden="{{ !doctorInfo.doctorName }}">
   <module-title title="医师团队" isHaveMoreBtn="{{false}}"></module-title>
   <view class="content">
     <view class="doctor-team-box">
-      <image src="{{doctorInfo.faceImage}}" mode="aspectFill"></image>
+      <image src="{{ doctorInfo.faceImage }}" mode="aspectFill"></image>
       <view class="doctorinfo-box">
         <view class="doctorinfo-top-box">
           <text class="title-name" style="font-size:32rpx">{{doctorInfo.doctorName}}</text>
-          <text class="title-other" style="margin-left:16rpx;font-size:28rpx">{{doctorInfo.titleName}}</text>
+          <text class="title-other doctor-title">{{ doctorInfo.titleName }}</text>
         </view>
-        <text class="title-other" style="margin-top:20rpx">{{doctorInfo.workPlace}} {{doctorInfo.sectionName}}</text>
+        <text class="title-other" style="margin-top:20rpx">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
       </view>
     </view>
-    <service-tabs list="{{doctorDisease}}" pageStyle="margin-left:114rpx;margin-top:24rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
+    <service-tabs list="{{ doctorDisease }}" pageStyle="margin-left:114rpx;margin-top:24rpx"></service-tabs>
   </view>
 </view>

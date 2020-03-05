@@ -63,16 +63,20 @@ Component({
       let currentClassifyID = e.detail.currentItemId
       let currentCategoryData = this.data.articleDatas[currentClassifyID]
       if (currentCategoryData.datas && currentCategoryData.datas.length > 0) {
+        // 这里先渲染再切换界面
         this.setData({
           currentCategoryData: currentCategoryData
+        },function(){
+          this.setData({
+            currentIndex: e.detail.current
+          })
         })
       } else {
+        this.setData({
+          currentIndex: e.detail.current
+        })
         this.loadDatas(currentClassifyID, currentCategoryData, navitem.orgID)
       }
-
-      this.setData({
-        currentIndex: e.detail.current
-      })
     },
     /**
      * 点击tab
@@ -92,6 +96,9 @@ Component({
      */
     loadDatas(currentClassifyID, currentCategoryData, orgID) {
       currentCategoryData["loading"] = true
+      // this.setData({
+      //   articleDatas: this.data.articleDatas
+      // })
       this.setData({
         articleDatas: this.data.articleDatas
       })

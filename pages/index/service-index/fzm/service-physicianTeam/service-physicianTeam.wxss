@@ -15,7 +15,7 @@
 .doctor-team-box image {
   height: 84rpx;
   width: 84rpx;
-  border-radius: 50%
+  border-radius: 50%;
 }
 
 .doctorinfo-box {
@@ -45,4 +45,9 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.65);
   line-height: 24rpx;
+}
+
+.doctor-title {
+  margin-left: 16rpx;
+  font-size: 28rpx;
 }

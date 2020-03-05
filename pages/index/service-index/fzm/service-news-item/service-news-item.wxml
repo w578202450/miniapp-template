@@ -5,20 +5,20 @@
     <view class="left-box">
       <text class="title">{{itemData.title}}</text>
       <text class="details">{{itemData.summary}}</text>
-      <service-tabs list="{{comTools.strSplit(itemData.tag,',')}}" pageStyle="color: rgba(46, 127, 241, 1); border: 0rpx" tabStyle="margin-top: 16rpx;background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx">></service-tabs>
+      <service-tabs list="{{comTools.strSplit(itemData.tag,',')}}" pageStyle="color: rgba(46, 127, 241, 1); border: 0rpx" tabStyle="margin-top: 16rpx"></service-tabs>
     </view>
     <block wx:if="{{itemData.articleType==0}}">
       <view class="image-box">
-        <image src="{{itemData.logoUrl || imagePlaceholder}}" style="width: 120rpx;height: 120rpx"></image>
+        <image class="cover" src="{{itemData.logoUrl || imagePlaceholder}}"></image>
       </view>
     </block>
     <block wx:else>
       <view class="image-box">
-        <image src="{{itemData.videoUrl || imagePlaceholder}}" style="width: 120rpx;height: 120rpx"></image>
-        <image class="videoIconImg" src="{{videoIconSrc}}"></image>
+        <image class="cover" src="{{itemData.videoUrl || imagePlaceholder}}"></image>
+        <image class="video-icon" src="{{videoIconSrc}}"></image>
       </view>
     </block>
 
   </view>
-  <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
+  <view class="cutting-line"></view>
 </view>
