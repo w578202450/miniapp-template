@@ -128,7 +128,7 @@ function fetchTempCode() {
    * 1.unionid请求成功：缓存临时session_key和unionid 并进行后台用户数据请求
    * 1.1缓存session_key：避免多次点击造成的登录态失效，出现的微信授权失败问题
    * 1.2缓存unionid：用于直接登录
-  
+   *isLoginStatus true为登录状态有效 可以直接用以前的sessionKey 直接获取
    */
 function getounionid(isLoginStatus) {
   wx.showLoading({
@@ -138,7 +138,7 @@ function getounionid(isLoginStatus) {
     code: wx.getStorageSync('code') ? wx.getStorageSync('code') : '',
     encryptedData: wx.getStorageSync('encryptedData') ? wx.getStorageSync('encryptedData') : '',
     iv: wx.getStorageSync('iv') ? wx.getStorageSync('iv') : '',
-    sessionKey: isLoginStatus ? '' : (wx.getStorageSync('sessionKey') ? wx.getStorageSync('sessionKey') : '')
+    // sessionKey: isLoginStatus ? '' : (wx.getStorageSync('sessionKey') ? wx.getStorageSync('sessionKey') : '')
   }
   return new Promise((resolve,reject)=>{
     HTTP.getWXAuth(params).then(res => {

@@ -30,6 +30,12 @@ let nextPageName = ""; // 下一页的名字
  * 1.存在unionid 直接进行用户数据请求
  * 2.不存在unionid 进行微信登录
  */
+
+/**
+ * 新增 开始自动登录前 先检查登录态
+ * 1.false 重新获取临时code
+ * 2.succes 直接获取用户信息 getPatientInfo
+ */
 function startLoginFun(options) {
   console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
   userSig = "";
@@ -53,7 +59,33 @@ function startLoginFun(options) {
     app.globalData.isInitInfo = false;
     fetchTempCode();
   }
+  
 }
+
+// function checkSuccessStartLoginFun(options) {
+//   console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
+//   userSig = "";
+//   // selctedIndex = 0;
+//   logined = false;
+//   nextPageName = "";
+//   // if (options) {
+//   //   if (options.selctedIndex == 0 || options.selctedIndex) {
+//   //     selctedIndex = options.selctedIndex;
+//   //   }
+//   // }
+//   console.log("开始IM登录");
+//   app.globalData.unionid = wx.getStorageSync('unionid');
+//   app.globalData.openid = wx.getStorageSync('openID');
+//   logined = app.globalData.unionid && app.globalData.openid;
+//   if (logined) {
+//     app.globalData.userInfo = wx.getStorageSync('userInfo');
+//     getPatientInfo(app.globalData.unionid);
+//   } else {
+//     console.log("IM登录失败：logined不存在");
+//     app.globalData.isInitInfo = false;
+//     fetchTempCode();
+//   }
+// }
 
 /**
  * 获取基础数据
@@ -71,8 +103,8 @@ function getPatientInfo(unionID) {
     sex: app.globalData.userInfo.sex ? app.globalData.userInfo.sex : '',
     city: app.globalData.userInfo.city ? app.globalData.userInfo.city : '',
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
-    assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID: "",
-    orgID: (orgID && app.globalData.isHaveOptions) ? orgID: ""
+    assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID : "",
+    orgID: (orgID && app.globalData.isHaveOptions) ? orgID : ""
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
@@ -172,7 +204,7 @@ function loginIM(userId) {
     console.log("===IM登录成功==="); // 登录成功
     wx.setStorageSync('myUsername', userId);
     if (nextPageName == "chat") {
-      setTimeout(()=> {
+      setTimeout(() => {
         wx.hideLoading();
         app.globalData.isInitInfo = true;
         wx.navigateTo({
@@ -234,23 +266,46 @@ function getUserInfo(e) {
   wx.setStorageSync('encryptedData', e.detail.encryptedData);
   wx.setStorageSync('iv', e.detail.iv);
   wx.setStorageSync('userInfo', e.detail.userInfo);
-  app.globalData.userInfo = e.detail.userInfo;
-  app.globalData.unionid = wx.getStorageSync('unionid');
-  app.globalData.openid = wx.getStorageSync('openID');
-  logined = app.globalData.unionid && app.globalData.openid;
-  if (logined) {
-    getPatientInfo(app.globalData.unionid);
-  } else {
-    // 检查登录态是否过期
-    wx.checkSession({
-      success(res) {
-        getounionid(true);
-      },
-      fail(err) {
-        getounionid(false);
+
+  // 检查登录态是否过期
+  wx.checkSession({
+    success(res) {
+      // getounionid(true);
+      app.globalData.userInfo = e.detail.userInfo;
+      app.globalData.unionid = wx.getStorageSync('unionid');
+      app.globalData.openid = wx.getStorageSync('openID');
+      logined = app.globalData.unionid && app.globalData.openid;
+      if (logined) {
+        getPatientInfo(app.globalData.unionid);
+      } else {
+        getounionid();
+        // // 检查登录态是否过期
+        // wx.checkSession({
+        //   success(res) {
+        //     getounionid(true);
+        //   },
+        //   fail(err) {
+        //     getounionid(false);
+        //   }
+        // })
       }
-    })
-  }
+    },
+    fail(err) {
+      wx.removeStorageSync("sessionKey");
+      wx.removeStorageSync("code");
+      AUTH.fetchTempCode().then(function (res) {
+        console.log(res);
+        if (res.code) {
+          wx.setStorageSync('code', res.code);
+          getounionid();
+        }
+      })
+      // getounionid(false);
+      // 重新获取code
+    }
+  })
+
+  
 }
 
 /**
@@ -260,10 +315,10 @@ function onShareAppMessageFun() {
   let shaOrgId = wx.getStorageSync("shareOrgID");
   let shaAssId = wx.getStorageSync("shareAssistantStaffID");
   let orgID = shaOrgId ? shaOrgId : "";
-  let assistantStaffID = shaAssId ? shaAssId: "";
+  let assistantStaffID = shaAssId ? shaAssId : "";
   let orgName = (app.globalData.orgName && app.globalData.orgName.length > 0) ? app.globalData.orgName : wx.getStorageSync("doctorInfo").workPlace;
   return {
-    title: orgName,    // 转发的标题，默认是小程序的名称(可以写slogan等)
+    title: orgName, // 转发的标题，默认是小程序的名称(可以写slogan等)
     path: '/pages/index/bhx/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID // 默认是当前页面，必须是以‘/'开头的完整路径
     // imageUrl: '',   //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
     // -------------基础库 2.0.8版本起，不在获取分享结果的回调了-----------
