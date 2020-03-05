@@ -72,12 +72,12 @@ Page({
   initFun: function() {
     if (app.globalData.isInitInfo) {
       this.setData({
-        titleTxt: "点击去问诊，立即开始在线问诊~",
+        titleTxt: "点击去问诊，立即开始在线问诊～",
         btnTxt: "去问诊"
       });
     } else {
       this.setData({
-        titleTxt: "登录后开始在线问诊~",
+        titleTxt: "请先登录后使用相应的小程序功能～",
         btnTxt: "立即登录"
       });
     }
