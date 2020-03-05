@@ -322,6 +322,7 @@ Page({
           currentCategoryData["noMore"] = false // 是否显示没有更多数据
           currentCategoryData["noData"] = false // 是否显示空数据占位
           currentCategoryData["loading"] = true // 是否显示正在加载提示
+          currentCategoryData["noOnePage"] = true // 是否满一页数据
           currentCategoryData["pageSize"] = 10 //每页显示数据
           currentCategoryData["pageIndex"] = 1 //当前页数
           articleDatas[item.keyID] = currentCategoryData;
@@ -358,6 +359,7 @@ Page({
         if (list.datas) {
           currentCategoryData["noData"] = list.datas.length === 0 ? true : false
           currentCategoryData["noMore"] = list.pageIndex < list.totalPage ? false : true
+          currentCategoryData["noOnePage"] = list.datas.length < currentCategoryData.pageSize
           if (list.pageIndex < list.totalPage) {
             currentCategoryData["pageIndex"] += 1;
           }

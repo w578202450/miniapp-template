@@ -25,7 +25,7 @@
           <text wx:if="{{comTools.value(articleDatas,navItem.keyID).loading}}" class="loading-box">{{loadingText}}</text>
           <text wx:elif="{{comTools.value(articleDatas,navItem.keyID).noData}}" class="noData-box">{{noDataText}}</text>
           <block wx:else>
-            <text wx:if="{{comTools.value(articleDatas,navItem.keyID).noMore}}" class="loading-box">{{noMoreDataText}}</text>
+            <text wx:if="{{comTools.value(articleDatas,navItem.keyID).noMore}}" class="loading-box">{{comTools.value(articleDatas,navItem.keyID).noOnePage ? "" : noMoreDataText}}</text>
             <text wx:else class="loading-box" bindtap="uploadMoreDatas" data-index="{{navIndex}}" data-navitem="{{navItem}}">{{loadMoreDataText}}</text>
           </block>
         </scroll-view>

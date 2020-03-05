@@ -110,6 +110,7 @@ Component({
         if (list.datas) {
           currentCategoryData["noData"] = list.datas.length === 0 ? true : false
           currentCategoryData["noMore"] = list.pageIndex < list.totalPage ? false : true
+          currentCategoryData["noOnePage"] = list.datas.length < currentCategoryData.pageSize
           if (list.pageIndex < list.totalPage) {
             currentCategoryData["pageIndex"] += 1
           }
@@ -127,6 +128,7 @@ Component({
           })
         }
       }).catch(error =>{
+        currentCategoryData["noOnePage"] = true
         currentCategoryData["noMore"] = false;
         currentCategoryData["noData"] = false;
         currentCategoryData["loading"] = false;
@@ -162,7 +164,7 @@ Component({
         let list = res.data
         
         if (list.datas) {
-          
+          currentCategoryData["noOnePage"] = false
           currentCategoryData["noData"] = list.datas.length === 0 ? true : false
           currentCategoryData["noMore"] = list.pageIndex < list.totalPage ? false : true
           if (list.pageIndex < list.totalPage) {
@@ -177,6 +179,7 @@ Component({
           // 不许渲染数据
         }
       }).catch(error =>{
+        currentCategoryData["noOnePage"] = false
         currentCategoryData["noMore"] = false;
         currentCategoryData["noData"] = false;
         currentCategoryData["loading"] = false;
