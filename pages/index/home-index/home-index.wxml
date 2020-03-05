@@ -77,20 +77,20 @@
         <view class="address-tel-header-box">
           <image src="../../../images/home/home_phone.png"></image>
           <view class="address-tel-left">
-            <text class="title-other">健康热线：</text>
+            <text class="title-other" style="margin-top:20rpx">健康热线：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">{{hospitalDetail.servicePhone}}</text>
+            <text class="title-other" style="margin-top:20rpx">{{hospitalDetail.servicePhone}}</text>
           </view>
         </view>
         <!-- 地址 -->
         <view class="address-tel-header-box">
           <image src="../../../images/home/home_address.png"></image>
           <view class="address-tel-left">
-            <text class="title-other">地址：</text>
+            <text class="title-other" style="margin-top:20rpx">地址：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other">{{hospitalDetail.province}}{{hospitalDetail.city}}{{hospitalDetail.area}}{{hospitalDetail.address}}</text>
+            <text class="title-other" style="margin-top:20rpx">{{hospitalDetail.province}}{{hospitalDetail.city}}{{hospitalDetail.area}}{{hospitalDetail.address}}</text>
           </view>
         </view>
         <!-- 分享 -->

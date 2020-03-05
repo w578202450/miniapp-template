@@ -89,6 +89,7 @@ Page({
         }
       }
     }
+    console.log("=======isHaveOptions=========" + app.globalData.isHaveOptions);
     if (app.globalData.isHaveOptions) {
       that.initHomeData();
     } else {
@@ -270,7 +271,6 @@ Page({
             });
             // wx.setStorageSync('signedDoctorInfo', res.data);
             HTTP.getPhysicianTeamList({
-                // orgId: "19101017081245502880511001"
                 orgId: that.data.shareOrgID
               })
               .then(res => {
@@ -293,7 +293,7 @@ Page({
                           arraySignedDoctor.push(res.data[i]);
                         }
                       }
-
+                      console.log("===新组合的医师团队列表===" + JSON.stringify(res));
                       // B.不存在
                     } else {
 
