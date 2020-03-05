@@ -266,14 +266,13 @@ function getUserInfo(e) {
   wx.setStorageSync('encryptedData', e.detail.encryptedData);
   wx.setStorageSync('iv', e.detail.iv);
   wx.setStorageSync('userInfo', e.detail.userInfo);
-
+  app.globalData.userInfo = e.detail.userInfo;
+  app.globalData.unionid = wx.getStorageSync('unionid');
+  app.globalData.openid = wx.getStorageSync('openID');
   // 检查登录态是否过期
   wx.checkSession({
     success(res) {
       // getounionid(true);
-      app.globalData.userInfo = e.detail.userInfo;
-      app.globalData.unionid = wx.getStorageSync('unionid');
-      app.globalData.openid = wx.getStorageSync('openID');
       logined = app.globalData.unionid && app.globalData.openid;
       if (logined) {
         getPatientInfo(app.globalData.unionid);
@@ -303,9 +302,7 @@ function getUserInfo(e) {
       // getounionid(false);
       // 重新获取code
     }
-  })
-
-  
+  });
 }
 
 /**

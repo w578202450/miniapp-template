@@ -16,17 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (app.globalData.isInitInfo) {
-      this.setData({
-        titleTxt: "点击去问诊，立即开始在线问诊~",
-        btnTxt: "去问诊"
-      });
-    } else {
-      this.setData({
-        titleTxt: "登录后开始在线问诊~",
-        btnTxt: "立即登录"
-      });
-    }
+    this.initFun();
   },
 
   /**
@@ -41,17 +31,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    if (app.globalData.isInitInfo) {
-      this.setData({
-        titleTxt: "点击去问诊，立即开始在线问诊~",
-        btnTxt: "去问诊"
-      });
-    } else {
-      this.setData({
-        titleTxt: "登录后开始在线问诊~",
-        btnTxt: "立即登录"
-      });
-    }
+    this.initFun();
   },
 
   /**
@@ -89,13 +69,27 @@ Page({
     return commonFun.onShareAppMessageFun();
   },
 
+  initFun: function() {
+    if (app.globalData.isInitInfo) {
+      this.setData({
+        titleTxt: "点击去问诊，立即开始在线问诊~",
+        btnTxt: "去问诊"
+      });
+    } else {
+      this.setData({
+        titleTxt: "登录后开始在线问诊~",
+        btnTxt: "立即登录"
+      });
+    }
+  },
+
   /**
    * 操作：开始问诊
    * 1.已登录，直接到问诊页
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo) {
+    if (this.data.isIn) {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });

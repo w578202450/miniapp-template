@@ -54,6 +54,9 @@ Component({
     toDetail: function() {
       let that = this;
       that.triggerEvent('toDetail');
+    },
+    formateDate: function(v) {
+       return v.slice(0,a.indexOf(" "));
     }
   }
 })

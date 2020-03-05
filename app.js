@@ -45,9 +45,11 @@ App({
       set: function(value) {
         this._name = value;
         method(value); // 传递值，执行传入的方法
+        // console.log("set:" + this._name);
       },
       get: function() {
         // 可以在这里打印一些东西，然后在其他界面调用getApp().globalData.globalDataName的时候，这里就会执行。
+        // console.log("get:" + this._name);
         return this._name
       }
     })
