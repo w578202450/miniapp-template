@@ -87,11 +87,12 @@ Page({
       }
     }
     console.log("=======isHaveOptions=========" + app.globalData.isHaveOptions);
-    if (app.globalData.isHaveOptions) {
-      that.initHomeData();
-    } else {
-      that.getDefaulShowInfo(); // 获取默认展示信息
-    }
+    // if (app.globalData.isHaveOptions) {
+    //   that.initHomeData();
+    // } else {
+    //   that.getDefaulShowInfo(); // 获取默认展示信息
+    // }
+    that.getDefaulShowInfo(); // 获取默认展示信息
     if (!app.globalData.isInitInfo)  {
       let sendOptions = {
         ...options
@@ -257,10 +258,10 @@ Page({
   getSignedDoctor() {
     let that = this;
     HTTP.getSignedDoctor({
-      assistantStaffID: that.data.shareAssistantStaffID,
-      orgID: that.data.shareOrgID
-      // assistantStaffID: "20020509480115486460514001",
-      // orgID: "19101017081245502880511001"
+        assistantStaffID: that.data.shareAssistantStaffID,
+        orgID: that.data.shareOrgID
+        // assistantStaffID: "20020509480115486460514001",
+        // orgID: "19101017081245502880511001"
       })
       .then(res => {
         console.log("!!!!!通过医助查询到的签约医生!!!!!" + JSON.stringify(res));
@@ -281,29 +282,43 @@ Page({
                       doctorTeamList: res.data
                     });
                     // 医师团队列表里是否存在签约那个医生
-                    const physicianTeam = that.data.doctorTeamList.find(
-                      it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
-                    );
-                    // A.存在
-                    if (physicianTeam && res.data.doctorDTOForTMC && res.data.doctorDTOForTMC.staffId) {
-                      for (let i = 0; i < res.data.length; i++) {
-                        let id = res.data.doctorDTOForTMC.staffId;
-                        if (id != signedDoctor.doctorDTOForTMC.staffId) {
-                          let arraySignedDoctor = new Array(this.data.signedDoctor);
-                          arraySignedDoctor.push(res.data[i]);
-                        }
+                    // const physicianTeam = that.data.doctorTeamList.find(
+                    //   it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
+                    // );
+                    for (let i = 0; i < that.data.doctorTeamList.length; i++) {
+                      let temp = that.data.doctorTeamList[i];
+                      if (temp.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId) {
+                        that.data.doctorTeamList.splice(i, 1);
+                        break;
                       }
-                      console.log("!!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
-                      // B.不存在
-                    } else {
-                      var arraySignedDoctor = new Array(this.data.signedDoctor);
-                      for (let i = 0; i < res.data.length; i++) {
-                        arraySignedDoctor.push(res.data[i]);
-                      }
-                      console.log("!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
                     }
+                    if (that.data.doctorTeamList.length == 0) {
+                      that.data.doctorTeamList.push({});
+                    }
+                    that.data.doctorTeamList.unshift(this.data.signedDoctor);
+                    console.log("---" + JSON.stringify(that.data.doctorTeamList));
+                    // console.log("qqqqqqqqqq" + physicianTeam);
+                    // // A.存在
+                    // if (physicianTeam && res.data.doctorDTOForTMC && res.data.doctorDTOForTMC.staffId) {
+                    //   let arraySignedDoctor = new Array(this.data.signedDoctor);
+                    //   console.log("!!!!!4444444!!!!!" + JSON.stringify(arraySignedDoctor));
+                    //   for (let i = 0; i < res.data.length; i++) {
+                    //     let id = res.data.doctorDTOForTMC.staffId;
+                    //     if (id != signedDoctor.doctorDTOForTMC.staffId) {
+                    //       arraySignedDoctor.push(res.data[i]);
+                    //     }
+                    //   }
+                    //   console.log("!!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
+                    //   // B.不存在
+                    // } else {
+                    //   const arraySignedDoctor = new Array(this.data.signedDoctor);
+                    //   for (let i = 0; i < res.data.length; i++) {
+                    //     arraySignedDoctor.push(res.data[i]);
+                    //   }
+                    //   console.log("!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
+                    // }
                     that.setData({
-                      newArrayDoctorList: arraySignedDoctor
+                      newArrayDoctorList: that.data.doctorTeamList
                     });
                   }
                 }
@@ -375,10 +390,10 @@ Page({
   getDefaulShowInfo() {
     let that = this;
     HTTP.getDefaultDocInfo({
-        // orgID: that.data.shareOrgID,
-        // assistantStaffID: that.data.shareAssistantStaffID,
-        orgID: "",
-        assistantStaffID: "",
+        orgID: that.data.shareOrgID,
+        assistantStaffID: that.data.shareAssistantStaffID,
+        // orgID: "",
+        // assistantStaffID: "",
         entryType: ""
       })
       .then(res => {
