@@ -96,10 +96,12 @@ Page({
         }
       }
     }
-    let sendOptions = {
-      ...options
-    };
-    commonFun.startLoginFun(sendOptions); // 尝试自动登录
+    if (!app.globalData.isInitInfo)  {
+      let sendOptions = {
+        ...options
+      };
+      commonFun.startLoginFun(sendOptions); // 尝试自动登录  
+    }
     that.initHomeData(); // 初始化数据
   },
 
@@ -259,9 +261,9 @@ Page({
   getSignedDoctor() {
     let that = this;
     HTTP.getSignedDoctor({
-      assistantStaffID: "20020509480115486460514001",
-      orgID: "19101017081245502880511001"
-    })
+        assistantStaffID: "20020509480115486460514001",
+        orgID: "19101017081245502880511001"
+      })
       .then(res => {
         console.log("===通过医助查询到的签约医生===" + JSON.stringify(res));
         if (res.code == 0) {
@@ -278,7 +280,7 @@ Page({
   getPhysicianTeamList() {
     let that = this;
     HTTP.getPhysicianTeamList({
-      // orgId: "19101017081245502880511001"
+        // orgId: "19101017081245502880511001"
         orgId: that.data.shareOrgID
       })
       .then(res => {

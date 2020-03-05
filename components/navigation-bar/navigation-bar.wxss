@@ -36,7 +36,6 @@
 .navBackIcon {
   width: 35rpx;
   height: 35rpx;
-  cursor: pointer;
 }
 
 .linear {
@@ -48,5 +47,4 @@
 .navHomeIcon {
   width: 35rpx;
   height: 35rpx;
-  cursor: pointer;
 }
