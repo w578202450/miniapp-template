@@ -1,4 +1,4 @@
-// pages/index/bhx/home-module-hospital/home-module-hospital.js
+// pages/index/home-index/home-module-hospital/home-module-hospital.js
 Component({
   /**
    * 组件的属性列表

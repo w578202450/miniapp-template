@@ -1,4 +1,4 @@
-// pages/index/bhx/home-module-doctorteam-item/home-module-doctorteam-item.js
+// pages/index/home-index/home-module-doctorteam-item/home-module-doctorteam-item.js
 Component({
   /**
    * 组件的属性列表

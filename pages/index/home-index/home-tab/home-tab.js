@@ -1,4 +1,4 @@
-// pages/index/bhx/home-module-page-title/home-module-page-title.js
+// pages/index/home-index/home-module-page-title/home-module-page-title.js
 Component({
   /**
     * 组件的属性列表

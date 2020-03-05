@@ -2,7 +2,7 @@
   "usingComponents": {
     "module-title": "/pages/index/service-index/ht/module-title/module-title",
     "service-tabs": "/pages/index/service-index/fzm/service-tabs/service-tabs",
-    "home-module-doctorteam":"/pages/index/bhx/home-module-doctorteam/home-module-doctorteam"
+    "home-module-doctorteam":"/pages/index/home-index/home-module-doctorteam/home-module-doctorteam"
   },
   "navigationBarTitleText": "远程诊疗中心"
 }
