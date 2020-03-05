@@ -32,6 +32,7 @@ Page({
               doctorInfo: res.data
             })
             this.getDoctorDiseaseByDoctorID(res.data.doctorID)
+            this.getOrderCommentData(res.data.orgID, doctorId)
           }
         } else {
           wx.showToast({
@@ -78,6 +79,25 @@ Page({
           icon: 'none'
         })
       })
+  },
+  /**
+   * 查询：患者评价信息
+   */
+  getOrderCommentData: function (orgID, doctorStaffID) {
+    let that = this;
+    let params = {
+      orgID: orgID
+    };
+    HTTP.orderCommentGet(params).then(res => {
+      // console.log("获取的患者评价信息：" + JSON.stringify(res.data));
+      if (res.code == 0 && res.data) {
+        that.setData({
+          ["evaluateAllData.evaluateData"]: res.data,
+          ["evaluateAllData.doctorID"]: doctorStaffID,
+          ["evaluateAllData.orgID"]: orgID
+        });
+      }
+    });
   },
   //右上角分享功能
   onShareAppMessage: function(res) {

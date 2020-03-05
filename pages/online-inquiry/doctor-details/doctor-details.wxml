@@ -59,7 +59,7 @@
     <view class="middle-bottomLine"></view>
   </view>
 
-  <view class="comment">
+  <!-- <view class="comment">
     <view class="middle-header">
       <view class="middle-lineView"></view>
       <text class="middle-title">患者评价</text>
@@ -78,5 +78,7 @@
         <view class="comment-lineView"></view>
       </block>
     </view>
-  </view>
+  </view> -->
+  <!-- 患者评价 -->
+  <patient-evaluate wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" evaluateAllData="{{evaluateAllData}}" />
 </view>
