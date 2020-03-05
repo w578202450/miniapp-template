@@ -74,16 +74,14 @@
 .home-icon-box {
   position: absolute;
   left: 20rpx;
-  width: 60rpx;
-  height: 60rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  border: 1rpx solid #999999
+  border: 0.25rpx solid #e6e1e1
 }
 
 .home-icon-box image {
-  width: 35rpx;
-  height: 35rpx;
+  width: 30rpx;
+  height: 30rpx;
 }

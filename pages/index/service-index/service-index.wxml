@@ -16,7 +16,7 @@
       <view class="cutting-line"></view>
     </view>
     <view hidden="{{scrollTop != 0}}" class="title-default-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
-      <view class="home-icon-box" bindtap="goToBackHome">
+      <view class="home-icon-box" style="height: {{capsuleRect.height}}px;width: {{capsuleRect.height}}px" bindtap="goToBackHome">
         <image  src="{{ navHomeIconBlack }}"></image>
       </view>
       <text class="title-name-text" style="color:rgba(0,0,0,1)">专家门诊</text>
