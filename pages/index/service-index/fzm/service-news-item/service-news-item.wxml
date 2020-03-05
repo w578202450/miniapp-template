@@ -14,7 +14,7 @@
     </block>
     <block wx:else>
       <view class="image-box">
-        <image class="cover" src="{{itemData.videoUrl || imagePlaceholder}}"></image>
+        <image class="cover" src="{{itemData.logoUrl || imagePlaceholder}}"></image>
         <image class="video-icon" src="{{videoIconSrc}}"></image>
       </view>
     </block>
