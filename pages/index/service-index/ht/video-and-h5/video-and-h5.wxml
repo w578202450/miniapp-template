@@ -1,6 +1,7 @@
 <!--pages/index/service-index/ht/video-and-h5/video-and-h5.wxml-->
 <view>
-<navigation-bar navbarTitle="{{materialInfo.title}}"/>
+<!-- <navigation-bar navbarTitle="{{materialInfo.title}}"/> -->
+<navigation-bar navbarTitle="素材展示"/>
   <!-- 视频素材： materialType = 2 objectFit="cover" autoplay="{{false}}"-->
   <video wx:if="{{materialInfo.materialType == 1 && materialInfo.videoMaterialSrc}}" class="videoLabel" src="{{materialInfo.videoMaterialSrc}}" poster="{{materialInfo.posterSrc}}" controls binderror="errorFun" autoplay="{{true}}" custom-cache="{{true}}"></video>
   <!-- 图文素材： materialType = 0 -->
