@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+    articleCurrentOrgID:"",// 当前请求文章模块的orgID 当orgID变化的时候才进行文章模块的刷新
     navHomeIconBlack: "/images/public/navHome.png", // 房子按钮：黑色
     capsuleRect: app.globalData.menuButtonBoundingClientRect,
     systemInfo: app.globalData.systemInfo,
@@ -315,11 +317,17 @@ Page({
   getToolClassifyById(defaultOrgID) {
 
     let orgID = wx.getStorageSync("shareOrgID") || defaultOrgID;
+    console.log('getToolClassifyById----------newOrgID----' + orgID + "oldOrgID----" + this.data.articleCurrentOrgID)
+    // 限制onShow频繁刷新 只有orgID变化的情况下 才进行刷新
+    if (orgID === this.data.articleCurrentOrgID) {
+      return;
+    }
     HTTP.getToolClassifyById({
       classifyType: 2,
       orgID: orgID
     }).then(res => {
       if (res.code == 0 && res.data) {
+        this.data.articleCurrentOrgID = orgID;
         let tempTitles = res.data
         // 初始化组件数据源
         let articleDatas = {};
