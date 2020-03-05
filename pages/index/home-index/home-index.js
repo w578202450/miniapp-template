@@ -182,11 +182,11 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        // console.log("===首页banner===" + JSON.stringify(res));
+        console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
-              bannerImage: res.data.paraValue
+              homeBannerDefaultUrl: res.data.paraValue
             });
           }
         }
@@ -202,7 +202,7 @@ Page({
         paraCode: "OP_TMC_ORG_GROUPDESC"
       })
       .then(res => {
-        // console.log("===获取医师团队介绍===" + JSON.stringify(res));
+        console.log("===获取医师团队介绍===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -222,7 +222,7 @@ Page({
         paraCode: "OV_TMC_USER_VIEWS"
       })
       .then(res => {
-        // console.log("===获取用户浏览数===" + JSON.stringify(res));
+        console.log("===获取用户浏览数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -242,7 +242,7 @@ Page({
         paraCode: "OV_TMC_USER_SHARES"
       })
       .then(res => {
-        // console.log("===获取用户分享数===" + JSON.stringify(res));
+        console.log("===获取用户分享数===" + JSON.stringify(res));
         if (res.code == 0) {
           if (res.data) {
             that.setData({
@@ -356,7 +356,7 @@ Page({
       orgID: that.data.shareOrgID
     }
     HTTP.getHospitalInfo(params).then(res => {
-      // console.log("===获取医院信息===" + JSON.stringify(res));
+      console.log("===获取医院信息===" + JSON.stringify(res));
       if (res.code == 0) {
         if (res.data) {
           that.setData({
