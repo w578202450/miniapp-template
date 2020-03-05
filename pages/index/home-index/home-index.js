@@ -422,7 +422,7 @@ Page({
   /**操作：立即进入专家门诊 */
   toServiceIndexFun: function() {
     wx.switchTab({
-      url: '/pages/index/service-index/service-index?orgID=' + this.data.shareOrgID + '&assistantStaffID=' + this.data.shareAssistantStaffID
+      url: '/pages/index/service-index/service-index'
     });
   }
 })

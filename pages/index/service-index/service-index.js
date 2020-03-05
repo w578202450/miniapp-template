@@ -65,14 +65,16 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    if (app.globalData.isHaveOptions) {
-      that.data.shareOrgID = wx.getStorageSync("shareOrgID");
-      that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
-    }
+    that.data.shareOrgID = wx.getStorageSync("shareOrgID");
+    that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     console.log("进入小程序首页初始参数：" + JSON.stringify({
       shareOrgID: that.data.shareOrgID,
       shareAssistantStaffID: that.data.shareAssistantStaffID
     }));
+    // console.log("进入小程序首页初始参数：" + JSON.stringify({
+    //   shareOrgID: that.data.shareOrgID,
+    //   shareAssistantStaffID: that.data.shareAssistantStaffID
+    // }));
     that.initDocInfoFun();
   },
 
@@ -266,11 +268,11 @@ Page({
     //       that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
     //     }
     //   });
-    let shareOrgID = wx.getStorageSync("shareOrgID");
+    that.data.shareOrgID = wx.getStorageSync("shareOrgID");
+    that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     let shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
-    let shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     that.fetchDoctorInfo(shareDoctorStaffID); // 获取主治医师信息
-    that.fetchAssistantDoctorInfo(shareAssistantStaffID); // 获取助理医生信息
+    that.fetchAssistantDoctorInfo(that.data.shareAssistantStaffID); // 获取助理医生信息
   },
 
   /**
@@ -472,7 +474,7 @@ Page({
 
   //回主页
   goToBackHome: function() {
-    let orgID = wx.getStorageSync("orgID");
+    let orgID = wx.getStorageSync("shareOrgID");
     let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     wx.reLaunch({
       url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
