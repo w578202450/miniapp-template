@@ -89,6 +89,7 @@ Page({
         }
       }
     }
+    console.log("=======isHaveOptions=========" + app.globalData.isHaveOptions);
     if (app.globalData.isHaveOptions) {
       that.initHomeData();
     } else {
@@ -377,12 +378,12 @@ Page({
       .then(res => {
         console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
         if (res.code == 0) {
+          that.initHomeData(); // 初始化数据
           that.data.shareOrgID = res.data.orgID;
           that.data.shareAssistantStaffID = res.data.assistantStaffID;
           wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
           wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
-          that.initHomeData(); // 初始化数据
         }
       });
   },
