@@ -75,7 +75,9 @@ Page({
     countIndex: 9, // 可选图片剩余的数量
     imageData: [], // 所选上传成功后的图片数据
     orderStatusID: 10, // 订单的状态
-    isSearched: false // 是否查询过了
+    isSearched: false, // 是否查询过了
+    statusBarHeight: app.globalData.systemInfo.statusBarHeight,
+    navBarHeight: app.globalData.navBarHeight
   },
 
   /**
