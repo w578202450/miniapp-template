@@ -271,7 +271,6 @@ Page({
             });
             // wx.setStorageSync('signedDoctorInfo', res.data);
             HTTP.getPhysicianTeamList({
-                // orgId: "19101017081245502880511001"
                 orgId: that.data.shareOrgID
               })
               .then(res => {
@@ -294,7 +293,7 @@ Page({
                           arraySignedDoctor.push(res.data[i]);
                         }
                       }
-
+                      console.log("===新组合的医师团队列表===" + JSON.stringify(res));
                       // B.不存在
                     } else {
 
@@ -378,12 +377,12 @@ Page({
       .then(res => {
         console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
         if (res.code == 0) {
-          that.initHomeData(); // 初始化数据
           that.data.shareOrgID = res.data.orgID;
           that.data.shareAssistantStaffID = res.data.assistantStaffID;
           wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
           wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
+          that.initHomeData(); // 初始化数据
         }
       });
   },
