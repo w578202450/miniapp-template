@@ -1,10 +1,10 @@
-<view class="page" style="{{pageStyle}}" bindtap="clickItem">
+<view class="page" style="padding-bottom:10rpx" bindtap="clickItem">
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../wxs/wxsCommon.wxs" module="comTools" />
   <image style="mode:widthFix;display:block;border-radius:50%;background-size:contain;" src="{{pageItem.doctorDTOForTMC.photoUrl || defaultPhotoUrl}}"></image>
   <view class="midlle-box">
     <!-- 医生名称 -->
-    <text class="name-text">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.doctorName,8)}}</text>
+    <text class="name-text">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.doctorName,5)}}</text>
     <!-- 医生职称 -->
     <text class="other-text" style="margin-left:16rpx;line-height: 34rpx">{{pageItem.doctorDTOForTMC.duty}}</text>
   </view>
@@ -12,12 +12,19 @@
   <text class="other-text" style="margin-top:16rpx;">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.workPlace,10)}}</text>
   <!-- 科室 -->
   <text class="other-text">{{pageItem.doctorDTOForTMC.sectionName}}</text>
-  <!-- <view >
-    <block style="block-box" wx:for="{{comTools.strSplit('eeee2222,sssrrs,ffff,eeee2222,sssrrs,ffff',',')}}" wx:for-item="item" wx:key="index">
-    <view style="tab-box">{{item}}</view>
+  <!--
+  <view >
+    <block style="tabs-box" wx:for="{{comTools.stringSplit('eee22,sssrrs,rr,哈哈哈哈',',')}}" wx:for-item="item" wx:key="index">
+    <view style="tab">{{comTools.subStrTxt(item,10)}}</view>
   </block>
-  </view> -->
-  <!-- <service-tabs list="{{comTools.strSplit('eeee,sssrrs,ffff',',')}}" pageStyle="margin-top: 40rpx;margin-left: 40rpx;display: block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;"></service-tabs> -->
+  </view>
+   -->
 
-  <service-tabs list="{{comTools.strSplit(pageItem.doctorDTOForTMC.diseaseName,',')}}" pageStyle="margin-top: 40rpx;margin-left: 40rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;"></service-tabs> 
+   <view class="tabs-box">
+  <block wx:for="{{comTools.stringSplit('地方个,哈哈哈广告费和共和国和规范和规范化',',')}}" wx:for-item="item" wx:key="index">
+    <view class="tab" style="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;">{{comTools.subStrTxt(item,10)}}</view>
+  </block>
+</view>
+
+   <!-- <home-module-tab list="{{comTools.strSplit('eeee发个梵蒂冈梵蒂冈,sssrrs,ffff',',')}}" pageStyle="margin:10rpx;display: block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;"></home-module-tab> -->
 </view>

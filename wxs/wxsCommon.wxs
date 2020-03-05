@@ -68,6 +68,7 @@ var formateDate = function (val) {
 var isDivisible = function (dividend, divisor) {
   return dividend % divisor === 0;
 }
+
 // 根据医生id取3位作为服务人数
 var serviceNum = function (doctorID) {
   if (!doctorID) {
@@ -75,14 +76,28 @@ var serviceNum = function (doctorID) {
   }
   return doctorID.slice(16, 19) | 100
 }
+
 // 字符串转数组
 var strSplit = function (str, separator) {
   if (!str || !separator) {
     return []
   }
-  // 去掉中括号
-  str = str.replace("[", "").replace("]", "");
   return str.split(separator)
+}
+
+// 字符串转数组,截取字符串
+var stringSplit = function (str, separator) {
+  if (!str || !separator) {
+    return []
+  }
+  // 如果有中括号去掉中括号
+  // str = str.replace("[", "").replace("]", "");
+  if (str.split(separator).length > 2) { // 如果有超过1个逗号
+   // 截取前两个逗号的字符
+    return str.substring(0, str.indexOf(separator, str.indexOf(separator) + 1)).split(separator)
+  } else {
+    return str.split(separator)
+  }
 }
 
 // 字符空格替换
@@ -102,6 +117,10 @@ var value = function (dic, key) {
   return dic[key]
 }
 
+var formateDate2 = function (v) {
+  return v.substring(0, 10);
+}
+
 module.exports = {
   subStrTxt: subStrTxt,
   subName: subName,
@@ -111,5 +130,7 @@ module.exports = {
   serviceNum: serviceNum,
   strSplit: strSplit,
   value: value,
-  strReplce: strReplce
+  strReplce: strReplce,
+  stringSplit: stringSplit,
+  formateDate2: formateDate2
 };

@@ -2,19 +2,20 @@
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 8rpx 20rpx 0px rgba(139, 163, 198, 0.5);
   border-radius: 10rpx;
-  padding: 40rpx 20rpx 40rpx 20rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 370rpx;
-  width: 300rpx;
-  margin: 20rpx 20rpx 10rpx 20rpx;
+  height: 420rpx;
+  width: 320rpx;
+  margin: 20rpx 20rpx 20rpx 20rpx;
+  padding: 10rpx 10rpx 10rpx 10rpx;
   overflow: hidden;
 }
 
 image {
-  width: 120rpx;
-  height: 120rpx;
+  margin-top: 20rpx;
+  width: 130rpx;
+  height: 130rpx;
   flex-shrink: 0;
 }
 
@@ -23,7 +24,7 @@ image {
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
-  margin-top: 40rpx;
+  margin-top: 20rpx;
 }
 
 .name-text {
@@ -36,6 +37,9 @@ image {
   margin-left: 20rpx;
   margin-right: 20rpx;
   text-align: center;
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 超出隐藏 */
+  text-overflow: ellipsis; /* 加上省略号 */
 }
 
 .other-text {
@@ -62,9 +66,12 @@ image {
 }
 
 .tabs-box {
+  margin-top: 10rpx;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
   word-break: break-all; 
   word-wrap: break-word;
 }
@@ -76,25 +83,11 @@ image {
   margin-right: 16rpx;
   margin-bottom: 16rpx;
   align-items: center;
-  color: rgba(0, 0, 0, 0.65);
-  border: 1px solid rgba(0, 0, 0, 0.25);
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   line-height: 36rpx;
-}
-
-.block-box {
-  display: flex;
-  flex-direction: row;
-  padding: 8rpx 20rpx 8rpx 20rpx;
-}
-
-.tab-box {
-  display: flex;
-  border-radius: 4rpx;
-  padding: 8rpx 20rpx 8rpx 20rpx;
-  background: red;
+  background: rgba(67, 139, 239, 0.15);
   color:rgba(46,127,241,1);
   border:0rpx;
 }

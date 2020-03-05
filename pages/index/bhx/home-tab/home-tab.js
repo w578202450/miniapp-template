@@ -1,10 +1,21 @@
 // pages/index/bhx/home-module-page-title/home-module-page-title.js
 Component({
   /**
-   * 组件的属性列表
-   */
+    * 组件的属性列表
+    */
   properties: {
-
+    pageStyle: {
+      type: String,
+      value: ''
+    },
+    tabStyle: {
+      type: String,
+      value: ''
+    },
+    list: {
+      type: Array,
+      value: []
+    }
   },
 
   /**
