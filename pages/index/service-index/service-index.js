@@ -251,21 +251,25 @@ Page({
   /**查询：无缓存患者信息时，查询默认推荐医生信息 */
   getDefaultDocInfoFun: function() {
     let that = this;
-    HTTP.getDefaultDocInfo({
-        orgID: that.data.shareOrgID,
-        assistantStaffID: that.data.shareAssistantStaffID,
-        entryType: ""
-      })
-      .then(res => {
-        // console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
-        if (res.code == 0) {
-          wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
-          wx.setStorageSync("shareOrgID", res.data.orgID);
-          wx.setStorageSync('personInfo', res.data);
-          that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
-          that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-        }
-      });
+    // HTTP.getDefaultDocInfo({
+    //     orgID: that.data.shareOrgID,
+    //     assistantStaffID: that.data.shareAssistantStaffID,
+    //     entryType: ""
+    //   })
+    //   .then(res => {
+    //     // console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
+    //     if (res.code == 0) {
+    //       wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
+    //       wx.setStorageSync("shareOrgID", res.data.orgID);
+    //       // wx.setStorageSync('personInfo', res.data);
+    //       that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
+    //       that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
+    //     }
+    //   });
+    let shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+    let shareOrgID = wx.getStorageSync("shareOrgID");
+    that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
+    that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
   },
 
   /**
@@ -308,7 +312,7 @@ Page({
    * 获取文章模块的分类
    */
   getToolClassifyById(defaultOrgID) {
-    
+
     let orgID = wx.getStorageSync("shareOrgID") || defaultOrgID;
     HTTP.getToolClassifyById({
       classifyType: 2,
@@ -466,7 +470,7 @@ Page({
   },
 
   //回主页
-  goToBackHome: function () {
+  goToBackHome: function() {
     let orgID = wx.getStorageSync("orgID");
     let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     wx.reLaunch({
