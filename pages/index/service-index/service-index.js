@@ -266,10 +266,11 @@ Page({
     //       that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
     //     }
     //   });
-    let shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     let shareOrgID = wx.getStorageSync("shareOrgID");
-    that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
-    that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
+    let shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
+    let shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+    that.fetchDoctorInfo(shareDoctorStaffID); // 获取主治医师信息
+    that.fetchAssistantDoctorInfo(shareAssistantStaffID); // 获取助理医生信息
   },
 
   /**
