@@ -179,7 +179,8 @@ Page({
         if (res.code == 0) {
           if (res.data) {
             that.setData({
-              doctorInfo: res.data
+              doctorInfo: res.data,
+              isSearchState: true
             });
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);

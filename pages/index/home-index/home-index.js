@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isSearchState: false, // 是否进行了一次加载
     /**
      * 测试环境
      * 侯丽萍医院 19121923373037086560511253
@@ -57,7 +58,12 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    console.log("进入侯丽萍首页携带的参数：" + JSON.stringify(options));
+    
+    // options ={
+    //   orgID: "19121923373037086560511253",
+    //   assistantStaffID: "20011320532175746910514253"
+    // }
+    console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
@@ -92,13 +98,14 @@ Page({
     // } else {
     //   that.getDefaulShowInfo(); // 获取默认展示信息
     // }
-    that.getDefaulShowInfo(); // 获取默认展示信息
+    // that.getDefaulShowInfo(); // 获取默认展示信息
     if (!app.globalData.isInitInfo)  {
       let sendOptions = {
         ...options
       };
       commonFun.startLoginFun(sendOptions); // 尝试自动登录  
     }
+    that.initHomeData();
   },
 
   /**
@@ -113,7 +120,9 @@ Page({
    */
   onShow: function() {
     let that = this;
-    that.initHomeData();
+    if (that.data.isSearchState) {
+      that.initHomeData();
+    }
   },
 
   /**
@@ -164,6 +173,33 @@ Page({
 
   /** 初始化数据 */
   initHomeData: function() {
+    let that = this;
+    if (that.data.shareAssistantStaffID) {
+      that.getDefaulShowInfo();
+    } else {
+      wx.getStorage({
+        key: 'personInfo',
+        success: function (res) {
+          // console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
+          that.data.shareAssistantStaffID = res.data.assistantStaffID;
+          that.data.shareOrgID = res.data.orgID;
+          that.initFunctionFun();
+        },
+        fail: function (err) {
+          // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
+          that.getDefaulShowInfo();
+        },
+        complete: function (e) {
+          that.setData({
+            isSearchState: true
+          });
+        }
+      });
+    }
+    
+  },
+
+  initFunctionFun: function() {
     let that = this;
     that.getBanner(); // 获取首页banner
     that.getTeamIntroduce(); // 获取医师团队介绍
@@ -392,8 +428,6 @@ Page({
     HTTP.getDefaultDocInfo({
         orgID: that.data.shareOrgID,
         assistantStaffID: that.data.shareAssistantStaffID,
-        // orgID: "",
-        // assistantStaffID: "",
         entryType: ""
       })
       .then(res => {
@@ -404,7 +438,7 @@ Page({
           wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
           wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
-          that.initHomeData(); // 初始化数据
+          that.initFunctionFun();
         }
       });
   },

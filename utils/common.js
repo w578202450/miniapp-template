@@ -139,6 +139,10 @@ function getPatientInfo(unionID) {
       //   data: res.data.orgName
       // });
       wx.setStorage({
+        key: 'shareDoctorStaffID',
+        data: res.data.doctorStaffID
+      });
+      wx.setStorage({
         key: 'shareOrgID',
         data: res.data.orgID
       });
