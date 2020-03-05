@@ -38,7 +38,7 @@
         <textarea class="commentInput" value="{{content}}" placeholder="请您对本次问诊服务做出评价" maxlength="200" bindinput="onInputValue"></textarea>
         <view class="imagesArea">
           <view wx:for="{{imageData}}" wx:key="index" class="addedImages {{comTools.isDivisible(index+1, 3) ? '' : 'addedImagesMargin'}}">
-            <image class="addedImages" src="{{item.materialUrl}}" bindtap="previewImgFun" data-index="index" data-url="{{item.materialUrl}}" />
+            <image class="addedImages" src="{{item.materialUrl}}" bindtap="previewImgFun" data-index="index" data-url="{{item.materialUrl}}" mode="aspectFill"/>
             <view class="deleteImagesView" bindtap="deleteAddedImgFun" data-index="index">
               <image class="deleteImages" src="/images/order/delete.png" />
             </view>

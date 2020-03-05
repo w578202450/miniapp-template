@@ -37,10 +37,8 @@ Component({
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
     navBarHeight: app.globalData.navBarHeight,
     menuBBCRect: app.globalData.menuButtonBoundingClientRect,
-    navBackIconWhite: "/images/public/public_left_white.png", // 返回按钮：白色
-    navBackIconBlack: "/images/public/public_left.png", // 返回按钮：黑色
-    navHomeIconWhite: "/images/public/navHome_white.png", // 房子按钮：白色
-    navHomeIconBlack: "/images/public/navHome.png", // 房子按钮：黑色
+    navBackIconBlack: "/images/public/public_left_black.png", // 返回按钮：黑色
+    navHomeIconBlack: "/images/public/navHome.png" // 房子按钮：黑色
   },
 
   /**

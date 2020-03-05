@@ -1,9 +1,9 @@
 <view class="page">
-
   <view class="header" style="overflow: hidden">
     <image style="position: absolute;width:100%" mode="top" src="{{doctorInfo.faceImage ? doctorInfo.faceImage : '../../../images/chat/personBacImg.png'}}" mode="widthFix"></image>
     <view style="position: absolute;width:100%;height:100%;background:linear-gradient(180deg,rgba(66,66,66,0.11) 0%,rgba(2,7,28,0.67) 100%)"></view>
-    <tmcnavbar titleText="医生资料"></tmcnavbar>
+    <!-- <tmcnavbar titleText="医生资料"></tmcnavbar> -->
+    <navigation-bar navbarTitle="医生资料" navbarTextStyle="white" bgColor="rgba(0,0,0,0)"/>
     <view class="doctor-info">
       <view style="display: flex;flex-direction: column;padding-left: 32rpx;padding-right: 32rpx">
         <view class="info-one" style="height: 32rpx">

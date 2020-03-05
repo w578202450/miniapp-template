@@ -68,7 +68,7 @@
         <view class="materialDataBox">
           <view class="materialItemView {{comTools.isDivisible(indexs+1, 3) ? '': 'materialItemViewMargin'}}" wx:for="{{item.orderCommentMaterial}}" wx:key="indexs" wx:for-index="indexs" wx:for-item="items" bindtap="toDetailFun" data-material="{{items}}" data-index="{{index}}"
             data-indexs="{{indexs}}">
-            <image class="materialImg" src="{{items.materialUrl}}" mode="widthFix" style="background: url({{materialImgBac}});background-size: contain;">
+            <image class="materialImg" src="{{items.materialUrl}}" mode="aspectFill" style="background: url({{materialImgBac}});background-size: contain;">
             </image>
             <image wx:if="{{items.materialType == 1}}" class="videoIconImg" src="{{videoIconSrc}}" />
           </view>
