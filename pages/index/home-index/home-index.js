@@ -16,7 +16,7 @@ Page({
     houShiOrgID: "19121923373037086560511253", // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
-    bannerImage: "", // 首页banner
+    homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
     certifyNo: "45081134X51012213A1002", // 医疗机构许可证
     browseCount: 0, // 用户浏览数
     shareCount: 0, // 用户分享数
@@ -44,7 +44,6 @@ Page({
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     // defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
-    homeBannerDefaultUrl: "/images/home/home_banner_default.png"
   },
 
   /**
