@@ -31,6 +31,8 @@ Page({
     //   });
     // }
     if (acceptOptions.materialType || acceptOptions.materialType == 0) {
+      // let newUrl = decodeURIComponent(acceptOptions.url);
+      // let newLogoUrl = decodeURIComponent(acceptOptions.logoUrl);
       that.setData({
         materialInfo: {
           title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "素材展示",
