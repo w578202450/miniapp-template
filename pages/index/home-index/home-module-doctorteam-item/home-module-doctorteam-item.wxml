@@ -1,7 +1,7 @@
 <view class="page" hidden="{{!pageItem.doctorDTOForTMC.doctorName}}" style="padding-bottom:10rpx" bindtap="clickItem">
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <image style="mode:widthFix;display:block;border-radius:50%;background-size:contain;" src="{{pageItem.doctorDTOForTMC.photoUrl || defaultPhotoUrl}}"></image>
+  <image mode="widthFix" class="image-photo" src="{{pageItem.doctorDTOForTMC.photoUrl || defaultPhotoUrl}}"></image>
   <view class="midlle-box">
     <!-- 医生名称 -->
     <text class="name-text">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.doctorName,5)}}</text>

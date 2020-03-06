@@ -12,10 +12,11 @@
   overflow: hidden;
 }
 
-image {
+.image-photo {
   margin-top: 20rpx;
   width: 130rpx;
   height: 130rpx;
+  border-radius:50%;
   flex-shrink: 0;
 }
 

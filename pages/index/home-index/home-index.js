@@ -208,7 +208,6 @@ Page({
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
-    // that.getPhysicianTeamList(); // 获取医师团队列表
     that.getHospitalInfo(); //查询医院详情信息
     that.getSignedDoctor(); // 通过医助查询到的签约医生
   },
@@ -357,26 +356,6 @@ Page({
                 }
               }
             });
-        }
-      });
-  },
-
-  /** 获取医师团队列表 */
-  getPhysicianTeamList() {
-    let that = this;
-    HTTP.getPhysicianTeamList({
-        // orgId: "19101017081245502880511001"
-        orgId: that.data.shareOrgID
-      })
-      .then(res => {
-        // console.log("===获取医师团队列表===" + JSON.stringify(res));
-        if (res.code == 0) {
-          if (res.data) {
-            that.setData({
-              doctorTeamList: res.data
-            });
-
-          }
         }
       });
   },
