@@ -15,8 +15,9 @@ Page({
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
     navBarHeight: app.globalData.navBarHeight,
     isSearchState: false, // 是否第一次加载
-    shareOrgID: "", // 进入页面携带的orgID
-    shareAssistantStaffID: "", // 进入页面携带的医助ID
+    shareOrgID: "", // 缓存中的orgID
+    shareAssistantStaffID: "", // 缓存中的医助ID
+    shareDoctorStaffID: "", // 缓存中的医生ID
     doctorInfo: {}, // 医师的信息
     certifyInfo: {}, // 医师资质许可证等信息
     assistantDoctorInfo: {}, // 助理医师的信息
@@ -66,18 +67,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let that = this;
-    that.data.shareOrgID = wx.getStorageSync("shareOrgID");
-    that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
-    console.log("进入小程序首页初始参数：" + JSON.stringify({
-      shareOrgID: that.data.shareOrgID,
-      shareAssistantStaffID: that.data.shareAssistantStaffID
-    }));
-    // console.log("进入小程序首页初始参数：" + JSON.stringify({
-    //   shareOrgID: that.data.shareOrgID,
-    //   shareAssistantStaffID: that.data.shareAssistantStaffID
-    // }));
-    that.initDocInfoFun();
+    this.initDocInfoFun();
   },
 
   /**
@@ -146,27 +136,14 @@ Page({
   /**初始化数据 */
   initDocInfoFun: function() {
     let that = this;
-    if (that.data.shareAssistantStaffID) {
-      that.getDefaultDocInfoFun();
-    } else {
-      wx.getStorage({
-        key: 'personInfo',
-        success: function(res) {
-          // console.log("获取的用户缓存问诊信息：" + JSON.stringify(res));
-          that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
-          that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-        },
-        fail: function(err) {
-          // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
-          that.getDefaultDocInfoFun();
-        },
-        complete: function(e) {
-          that.setData({
-            isSearchState: true
-          });
-        }
-      });
-    }
+    that.data.shareOrgID = wx.getStorageSync("shareOrgID");
+    that.data.shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
+    that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+    console.log("-------专家门诊参数-------");
+    console.log(that.data);
+    console.log("-------------------------");
+    that.fetchDoctorInfo(that.data.shareDoctorStaffID); // 获取主治医师信息
+    that.fetchAssistantDoctorInfo(that.data.shareAssistantStaffID); // 获取助理医生信息
   },
 
   /**获取主治医师信息*/
@@ -251,31 +228,6 @@ Page({
         url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + staffID
       });
     }
-  },
-
-  /**查询：无缓存患者信息时，查询默认推荐医生信息 */
-  getDefaultDocInfoFun: function() {
-    let that = this;
-    // HTTP.getDefaultDocInfo({
-    //     orgID: that.data.shareOrgID,
-    //     assistantStaffID: that.data.shareAssistantStaffID,
-    //     entryType: ""
-    //   })
-    //   .then(res => {
-    //     // console.log("获取的临时推荐医生信息：" + JSON.stringify(res.data));
-    //     if (res.code == 0) {
-    //       wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
-    //       wx.setStorageSync("shareOrgID", res.data.orgID);
-    //       // wx.setStorageSync('personInfo', res.data);
-    //       that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
-    //       that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
-    //     }
-    //   });
-    that.data.shareOrgID = wx.getStorageSync("shareOrgID");
-    that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
-    let shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
-    that.fetchDoctorInfo(shareDoctorStaffID); // 获取主治医师信息
-    that.fetchAssistantDoctorInfo(that.data.shareAssistantStaffID); // 获取助理医生信息
   },
 
   /**
@@ -483,10 +435,13 @@ Page({
 
   //回主页
   goToBackHome: function() {
-    let orgID = wx.getStorageSync("shareOrgID");
-    let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+    // let orgID = wx.getStorageSync("shareOrgID");
+    // let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+    // wx.reLaunch({
+    //   url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
+    // });
     wx.reLaunch({
-      url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
+      url: '/pages/index/home-index/home-index'
     });
   },
 

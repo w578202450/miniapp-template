@@ -56,7 +56,8 @@ function startLoginFun(options) {
     getPatientInfo(app.globalData.unionid);
   } else {
     console.log("IM登录失败：logined不存在");
-    app.globalData.isInitInfo = false;
+    app.globalData.isStartLogin = true; // 是否开始了自动登录
+    app.globalData.isInitInfo = false; // 登录初始化用户数据失败
     fetchTempCode();
   }
   
@@ -109,7 +110,6 @@ function getPatientInfo(unionID) {
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
       console.log("登录后拿到的患者对话信息：" + JSON.stringify(res.data));
-      // app.globalData.orgName = res.data.orgName;
       app.globalData.personID = res.data.personID;
       app.globalData.patientID = res.data.keyID;
       app.globalData.orgID = res.data.orgID;
@@ -134,10 +134,6 @@ function getPatientInfo(unionID) {
         key: 'patientID',
         data: res.data.keyID
       });
-      // wx.setStorage({
-      //   key: 'orgName',
-      //   data: res.data.orgName
-      // });
       wx.setStorage({
         key: 'shareDoctorStaffID',
         data: res.data.doctorStaffID
@@ -150,7 +146,6 @@ function getPatientInfo(unionID) {
         key: 'shareAssistantStaffID',
         data: res.data.assistantStaffID
       });
-      app.globalData.isStartLogin = true; // 是否开始了自动登录
       // 获取userSig
       getUserSig(res.data.keyID);
     } else {
@@ -191,6 +186,7 @@ function getUserSig(userId) {
         loginIM(userId); // IM登录
       }
     } else {
+      app.globalData.isStartLogin = true; // 是否开始了自动登录
       wx.hideLoading();
       wx.showToast({
         title: '获取userSig失败'
@@ -213,14 +209,16 @@ function loginIM(userId) {
     if (nextPageName == "chat") {
       setTimeout(() => {
         wx.hideLoading();
-        app.globalData.isInitInfo = true;
+        app.globalData.isInitInfo = true; // 是否登录成功
+        app.globalData.isStartLogin = true; // 是否开始了自动登录
         wx.navigateTo({
           url: '/pages/online-inquiry/inquiry/chat/chat',
         });
       }, 2000);
     } else {
       wx.hideLoading();
-      app.globalData.isInitInfo = true;
+      app.globalData.isInitInfo = true; // 是否登录成功
+      app.globalData.isStartLogin = true; // 是否开始了自动登录
     }
   }).catch(function(imError) {
     console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
@@ -252,7 +250,7 @@ function getounionid(isLoginStatus) {
 function fetchTempCode() {
   AUTH.fetchTempCode().then(function(res) {
     console.log(res);
-    app.globalData.isStartLogin = true; // 是否开始了自动登录
+    wx.hideLoading();
     if (res.code) {
       wx.setStorageSync('code', res.code);
     }

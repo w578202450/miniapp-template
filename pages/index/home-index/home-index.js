@@ -62,6 +62,11 @@ Page({
     //   orgID: "20012118570385423810511240",
     //   assistantStaffID: "20020913491781433700514240"
     // }
+    // 李
+    // options = {
+    //   "orgID": "19101017081245502880511001",
+    //   "assistantStaffID": "20012214121981875310514240"
+    // }
     // 测试
     // 包
     // options ={
@@ -77,58 +82,55 @@ Page({
     that.setData({
       houShiOrgID: HTTP.houShiOrgIDFun() // 获取侯氏医院ID
     });
-    app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
-    if (options) {
-      if (options.q) { // 通过扫码进入时：q的值为url带参
+    // app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
+    if (options.q) { // 通过扫码进入时：q的值为url带参
+      app.globalData.isHaveOptions = true; // 进入小程序携带有参数
+      var scan_url = decodeURIComponent(options.q);
+      let shareOrgID = that.initOptionsFun(scan_url, "orgID");
+      let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
+      if (shareOrgID && shareOrgID.length > 0) {
+        that.setData({
+          shareOrgID: shareOrgID
+        });
+        wx.setStorageSync("shareOrgID", shareOrgID);
+      }
+      if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
+        that.setData({
+          shareAssistantStaffID: shareAssistantStaffID
+        });
+        wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
+      }
+    } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
+      if (options.orgID && options.orgID.length > 0) {
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-        var scan_url = decodeURIComponent(options.q);
-        let shareOrgID = that.initOptionsFun(scan_url, "orgID");
-        let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-        if (shareOrgID && shareOrgID.length > 0) {
-          that.setData({
-            shareOrgID: shareOrgID
-          });
-          wx.setStorageSync("shareOrgID", shareOrgID);
-        }
-        if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
-          that.setData({
-            shareAssistantStaffID: shareAssistantStaffID
-          });
-          wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
-        }
-      } else if ((options.assistantStaffID && options.assistantStaffID.length > 0) || (options.orgID && options.orgID.length > 0)) { // 通过分享的小程序进入时：直接带参
-        if (options.orgID && options.orgID.length > 0) {
-          app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-          that.setData({
-            shareOrgID: options.orgID
-          });
-          wx.setStorageSync("shareOrgID", options.orgID);
-        }
-        if (options.assistantStaffID && options.assistantStaffID.length > 0) {
-          app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-          that.setData({
-            shareAssistantStaffID: options.assistantStaffID
-          });
-          wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
-        }
+        that.setData({
+          shareOrgID: options.orgID
+        });
+        wx.setStorageSync("shareOrgID", options.orgID);
+      }
+      if (options.assistantStaffID && options.assistantStaffID.length > 0) {
+        app.globalData.isHaveOptions = true; // 进入小程序携带有参数
+        that.setData({
+          shareAssistantStaffID: options.assistantStaffID
+        });
+        wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
       }
     }
-    if (!app.globalData.isInitInfo)  {
-      let sendOptions = {
-        ...options
-      };
-      commonFun.startLoginFun(sendOptions); // 尝试自动登录
-      // 监听isInitInfo值的变化
-      app.watch((value) => {
-        // value为app.js中传入的值
-        console.log("是否尝试自动登录了：", value);
-        if (value) {
-          that.initHomeData(); // 初始化数据
+    // 先监听是否尝试了登录：isStartLogin
+    app.watch((value) => {
+      // value为app.js中传入的值
+      console.log("是否尝试自动登录了：", value);
+      if (value) {
+        if (app.globalData.isInitInfo) {
+          console.log("尝试了且成功了");
+          that.initHomeData(); // 初始化参数
+        } else {
+          console.log("尝试了没成功");
+          that.getDefaulShowInfo(); // 初始化调用请求方法
         }
-      }, "isStartLogin");
-    } else {
-      that.initHomeData(); // 初始化数据
-    }
+      }
+    }, "isStartLogin");
+    commonFun.startLoginFun(options); // 尝试自动登录
   },
 
   /**
@@ -144,7 +146,7 @@ Page({
   onShow: function() {
     let that = this;
     if (that.data.isSearchState) {
-      that.initHomeData();
+      that.initHomeData(); // 初始化参数
     }
   },
 
@@ -194,34 +196,17 @@ Page({
     }
   },
 
-  /** 初始化数据 */
+  /** 初始化参数 */
   initHomeData: function() {
     let that = this;
-    if (that.data.shareAssistantStaffID) {
-      that.getDefaulShowInfo();
-    } else {
-      wx.getStorage({
-        key: 'personInfo',
-        success: function(res) {
-          // console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
-          that.setData({
-            shareOrgID: res.data.orgID,
-            shareAssistantStaffID: res.data.assistantStaffID
-          });
-          that.initFunctionFun();
-        },
-        fail: function(err) {
-          // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
-          that.getDefaulShowInfo(); // 初始化调用请求方法
-        },
-        complete: function(e) {
-          that.setData({
-            isSearchState: true
-          });
-        }
-      });
-    }
-
+    wx.showLoading({
+      title: '加载中...',
+    });
+    that.setData({
+      shareOrgID: wx.getStorageSync("shareOrgID"),
+      shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
+    });
+    that.initFunctionFun();
   },
 
   /**初始化调用请求方法 */
@@ -231,8 +216,11 @@ Page({
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
-    that.getHospitalInfo(); //查询医院详情信息
     that.getSignedDoctor(); // 通过医助查询到的签约医生
+    that.getHospitalInfo(); //查询医院详情信息
+    setTimeout(() => {
+      wx.hideLoading();
+    }, 2000)
   },
 
   /** 获取首页banner */
@@ -387,30 +375,30 @@ Page({
   /** 获取默认进小程序显示信息 */
   getDefaulShowInfo() {
     let that = this;
-    HTTP.getDefaultDocInfo({
-        orgID: that.data.shareOrgID,
-        assistantStaffID: that.data.shareAssistantStaffID,
-        entryType: ""
-      })
-      .then(res => {
-        // console.log("获取默认的首页信息：" + JSON.stringify(res.data));
-        if (res.code == 0 && res.data) {
-          that.setData({
-            shareOrgID: res.data.orgID,
-            shareAssistantStaffID: res.data.assistantStaffID
-          });
-          wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
-          wx.setStorageSync("shareOrgID", res.data.orgID);
-          wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
-          that.initFunctionFun();
-        } else {
-          wx.showToast({
-            title: '获取默认数据失败',
-            icon: 'none',
-            duration: 2000
-          });
-        }
-      });
+    let params = {
+      orgID: that.data.shareOrgID,
+      assistantStaffID: that.data.shareAssistantStaffID,
+      entryType: ""
+    }
+    HTTP.getDefaultDocInfo(params).then(res => {
+      console.log("获取默认的首页信息：" + JSON.stringify(res.data));
+      if (res.code == 0 && res.data) {
+        that.setData({
+          shareOrgID: res.data.orgID,
+          shareAssistantStaffID: res.data.assistantStaffID
+        });
+        wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
+        wx.setStorageSync("shareOrgID", res.data.orgID);
+        wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
+        that.initFunctionFun();
+      } else {
+        wx.showToast({
+          title: '获取默认数据失败',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
   },
 
   /** 跳转到院长详情 */
