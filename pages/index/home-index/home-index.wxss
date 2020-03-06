@@ -132,6 +132,14 @@ page {
   line-height: 36rpx;
 }
 
+.title-name-houshi {
+  font-size: 36rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
 .title-other {
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
