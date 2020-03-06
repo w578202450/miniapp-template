@@ -69,13 +69,13 @@
   <!-- 医师团队 -->
   <view class="physician-team">
     <module-title title="医师团队" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
-    <home-module-doctorteam wx:if="{{newArrayDoctorList.length > 0}}" doctorTeamIntroduce="{{doctorTeamIntroduce}}" doctorTeamList="{{newArrayDoctorList}}"></home-module-doctorteam>
+    <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}" doctorTeamList="{{newArrayDoctorList}}"></home-module-doctorteam>
     <!-- 底部模块(医师团队，电话和地址，分享) -->
     <view class="home-bottom">
       <view class="address-tel">
         <!-- 客服电话 -->
         <view class="address-tel-header-box">
-          <image src="../../../images/home/home_phone.png"></image>
+          <image style="margin-top:20rpx" src="../../../images/home/home_phone.png"></image>
           <view class="address-tel-left">
             <text class="title-other" style="margin-top:20rpx">健康热线：</text>
           </view>
@@ -85,12 +85,12 @@
         </view>
         <!-- 地址 -->
         <view class="address-tel-header-box">
-          <image src="../../../images/home/home_address.png"></image>
+          <image style="margin-top:20rpx" src="../../../images/home/home_address.png"></image>
           <view class="address-tel-left">
             <text class="title-other" style="margin-top:20rpx">地址：</text>
           </view>
           <view class="address-tel-right">
-            <text class="title-other" style="margin-top:20rpx">{{hospitalDetail.province}}{{hospitalDetail.city}}{{hospitalDetail.area}}{{hospitalDetail.address}}</text>
+            <text class="title-other">{{hospitalDetail.province}}{{hospitalDetail.city}}{{hospitalDetail.area}}{{hospitalDetail.address}}</text>
           </view>
         </view>
         <!-- 分享 -->

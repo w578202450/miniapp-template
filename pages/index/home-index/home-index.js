@@ -57,10 +57,15 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    
+    // 包
     // options ={
     //   orgID: "19121923373037086560511253",
     //   assistantStaffID: "20011320532175746910514253"
+    // }
+    // 徐
+    // options = {
+    //   assistantStaffID: "20011514000045118050514253",
+    //   orgID: "19101017081245502880511001"
     // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
@@ -203,7 +208,6 @@ Page({
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
-    // that.getPhysicianTeamList(); // 获取医师团队列表
     that.getHospitalInfo(); //查询医院详情信息
     that.getSignedDoctor(); // 通过医助查询到的签约医生
   },
@@ -314,7 +318,6 @@ Page({
                 if (res.code == 0) {
                   if (res.data) {
                     doctorTeamList = res.data;
-
                     // 医师团队列表里是否存在签约那个医生
                     // const physicianTeam = that.data.doctorTeamList.find(
                     //   it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
@@ -330,26 +333,6 @@ Page({
                     if (doctorTeamList.length == 1) {
                       doctorTeamList.push({});
                     }
-                    // console.log("---" + JSON.stringify(that.data.doctorTeamList));
-                    // // A.存在
-                    // if (physicianTeam && res.data.doctorDTOForTMC && res.data.doctorDTOForTMC.staffId) {
-                    //   let arraySignedDoctor = new Array(this.data.signedDoctor);
-                    //   console.log("!!!!!4444444!!!!!" + JSON.stringify(arraySignedDoctor));
-                    //   for (let i = 0; i < res.data.length; i++) {
-                    //     let id = res.data.doctorDTOForTMC.staffId;
-                    //     if (id != signedDoctor.doctorDTOForTMC.staffId) {
-                    //       arraySignedDoctor.push(res.data[i]);
-                    //     }
-                    //   }
-                    //   console.log("!!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
-                    //   // B.不存在
-                    // } else {
-                    //   const arraySignedDoctor = new Array(this.data.signedDoctor);
-                    //   for (let i = 0; i < res.data.length; i++) {
-                    //     arraySignedDoctor.push(res.data[i]);
-                    //   }
-                    //   console.log("!!!!排序后团队arraySignedDoctor!!!!!" + JSON.stringify(arraySignedDoctor));
-                    // }
                     that.setData({
                       newArrayDoctorList: doctorTeamList
                     });
@@ -373,26 +356,6 @@ Page({
                 }
               }
             });
-        }
-      });
-  },
-
-  /** 获取医师团队列表 */
-  getPhysicianTeamList() {
-    let that = this;
-    HTTP.getPhysicianTeamList({
-        // orgId: "19101017081245502880511001"
-        orgId: that.data.shareOrgID
-      })
-      .then(res => {
-        // console.log("===获取医师团队列表===" + JSON.stringify(res));
-        if (res.code == 0) {
-          if (res.data) {
-            that.setData({
-              doctorTeamList: res.data
-            });
-
-          }
         }
       });
   },
