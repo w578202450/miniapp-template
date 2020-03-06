@@ -310,6 +310,17 @@ function getUserInfo(e) {
 }
 
 /**
+ * 提示信息(即wx.showToast)
+ */
+function showToastFun(title, icon, duration) {
+  wx.showToast({
+    title: title,
+    icon: icon ? icon : 'none',
+    duration: duration ? duration : '3000'
+  });
+}
+
+/**
  * 右上角的分享功能
  */
 function onShareAppMessageFun() {
@@ -331,8 +342,9 @@ function onShareAppMessageFun() {
 
 module.exports = {
   startLoginFun: startLoginFun,
-  onShareAppMessageFun: onShareAppMessageFun,
   getUserInfo: getUserInfo,
   getPatientInfo: getPatientInfo,
-  getounionid: getounionid
+  getounionid: getounionid,
+  showToastFun: showToastFun,
+  onShareAppMessageFun: onShareAppMessageFun
 }

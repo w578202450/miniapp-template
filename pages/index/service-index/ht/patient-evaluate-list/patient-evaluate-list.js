@@ -32,10 +32,14 @@ Page({
     //   title: "侯丽萍医生的评价"
     // });
     let that = this;
-    that.data.httpParams = JSON.parse(options.httpParams);
-    console.log("进入患者评价列表页拿到的参数：" + JSON.stringify(that.data.httpParams));
-    that.getPatientEvaluateListFun(); // 查询：患者评价列表数据
-    that.initNoRealyData(); // 拟定假数据
+    if (options.httpParams) {
+      that.data.httpParams = JSON.parse(options.httpParams);
+      console.log("进入患者评价列表页拿到的参数：" + JSON.stringify(that.data.httpParams));
+      that.getPatientEvaluateListFun(); // 查询：患者评价列表数据
+      that.initNoRealyData(); // 拟定假数据
+    } else {
+      commonFun.showToastFun("数据异常，无法正常展示");
+    }
   },
 
   /**
@@ -100,6 +104,8 @@ Page({
         that.setData({
           evaluateListData: res.data.datas ? res.data.datas : []
         });
+      } else {
+        commonFun.showToastFun("获取评价列表数据失败");
       }
     });
   },
@@ -130,9 +136,7 @@ Page({
       });
     } else if (materialItem.materialType == 1) {
       if (materialItem.materialUrl.length == 0 || !materialItem.materialUrl) {
-        wx.showToast({
-          title: '视频链接地址错误，无法查看',
-        });
+        commonFun.showToastFun("视频链接地址错误，无法查看");
         return;
       }
       let materialData = {

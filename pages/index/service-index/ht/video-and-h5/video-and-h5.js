@@ -45,26 +45,14 @@ Page({
         } else if (acceptOptions.materialType == 1) {
           // 视频素材
           if (!acceptOptions.url) {
-            wx.showToast({
-              title: "视频素材链接地址异常，无法正常播放",
-              icon: "none",
-              duration: 3000
-            });
+            commonFun.showToastFun("素材数据异常，无法正常展示");
           }
         }
       } else {
-        wx.showToast({
-          title: "素材数据异常，无法正常展示",
-          icon: "none",
-          duration: 3000
-        });
+        commonFun.showToastFun("素材数据异常，无法正常展示");
       }
     } else {
-      wx.showToast({
-        title: "素材数据异常，无法正常展示",
-        icon: "none",
-        duration: 3000
-      });
+      commonFun.showToastFun("素材数据异常，无法正常展示");
     }
   },
 
