@@ -119,9 +119,6 @@ Page({
       // value为app.js中传入的值
       console.log("是否尝试自动登录了：", value);
       if (value) {
-        wx.showLoading({
-          title: '加载中...',
-        });
         if (app.globalData.isInitInfo) {
           console.log("尝试了且成功了");
           that.initHomeData(); // 初始化参数
@@ -210,6 +207,9 @@ Page({
   /**初始化调用请求方法 */
   initFunctionFun: function() {
     let that = this;
+    wx.showLoading({
+      title: '拼命加载中...',
+    });
     that.setData({
       isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
     });

@@ -67,6 +67,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中...'
+    });
     this.initDocInfoFun();
   },
 
@@ -173,6 +176,7 @@ Page({
             that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 患者分享
             that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 医生手记
             that.getSectionByKeyID();
+            wx.hideLoading();
           }
         }
       });

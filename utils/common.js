@@ -113,10 +113,7 @@ function getPatientInfo(unionID) {
       app.globalData.patientID = res.data.keyID;
       app.globalData.orgID = res.data.orgID;
       app.globalData.personInfo = res.data;
-      wx.setStorage({
-        key: 'personInfo',
-        data: res.data
-      });
+      wx.setStorageSync('personInfo', res.data);
       wx.setStorage({
         key: 'orgID',
         data: res.data.orgID,

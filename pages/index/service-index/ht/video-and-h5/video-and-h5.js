@@ -28,7 +28,7 @@ Page({
         let newLogoUrl = decodeURIComponent(acceptOptions.logoUrl);
         that.setData({
           materialInfo: {
-            title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "素材展示",
+            title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "",
             videoMaterialSrc: newUrl,
             posterSrc: newLogoUrl,
             materialType: acceptOptions.materialType

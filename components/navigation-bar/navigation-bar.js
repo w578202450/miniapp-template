@@ -11,7 +11,7 @@ Component({
     // 页面标题文字（10个字以内）
     navbarTitle: {
       type: String,
-      value: "标题"
+      value: ""
     },
     // 页面标题文字颜色（只允许black，white）
     navbarTextStyle: {
