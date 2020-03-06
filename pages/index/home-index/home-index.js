@@ -15,6 +15,7 @@ Page({
      * 侯氏生产环境ID： 20012118570385423810511240
      * 默认医院  19101017081245502880511001
      */
+    testHoushiOrgID: "20012119021236503500511240", // 测试(指定机构显示侯丽萍和侯丽萍医院简介)
     houShiOrgID: "", // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
@@ -234,7 +235,7 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        // console.log("===首页banner===" + JSON.stringify(res));
+        console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             homeBannerDefaultUrl: res.data.paraValue
