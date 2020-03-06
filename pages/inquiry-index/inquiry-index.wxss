@@ -26,7 +26,7 @@ page {
 
 .toInquiryView {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -38,5 +38,17 @@ page {
   width: 250rpx;
   border-radius: 88rpx;
   color: white;
+  text-align: center;
+}
+
+.tip-box {
+  margin-top: 80rpx;
+  margin-left: 100rpx;
+  margin-right: 100rpx;
+  font-size:22rpx;
+  font-family:PingFangSC-Regular,PingFang SC;
+  font-weight:400;
+  color:rgba(0,0,0,0.45);
+  line-height:40rpx;
   text-align: center;
 }

@@ -9,7 +9,7 @@ Page({
   data: {
     content_image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/loginImg.png", // 宣传图片
     titleTxt: "", // 小标题文字
-    btnTxt: "" // 按钮文字
+    btnTxt: "", // 按钮文字
   },
 
   /**
@@ -74,7 +74,8 @@ Page({
     if (app.globalData.isInitInfo) {
       this.setData({
         titleTxt: "点击去问诊，立即开始在线问诊～",
-        btnTxt: "去问诊"
+        btnTxt: "立即问诊",
+        isInitInfo: true
       });
       // wx.navigateTo({
       //   url: '/pages/online-inquiry/inquiry/chat/chat'
@@ -82,7 +83,8 @@ Page({
     } else {
       this.setData({
         titleTxt: "请先登录后使用相应的小程序功能～",
-        btnTxt: "立即登录"
+        btnTxt: "立即登录",
+        isInitInfo: false
       });
     }
   },
