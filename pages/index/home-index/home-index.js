@@ -15,7 +15,8 @@ Page({
      * 侯氏生产环境ID： 20012118570385423810511240
      * 默认医院  19101017081245502880511001
      */
-    houShiOrgID: "", // 太原侯丽萍风湿骨病医院的机构ID
+    isAboveHouShiID: -1, // 是否显示侯氏信息，默认-1显示
+    houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
@@ -78,9 +79,7 @@ Page({
     //   orgID: "19101017081245502880511001"
     // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
-    that.setData({
-      houShiOrgID: HTTP.houShiOrgIDFun() // 获取侯氏医院ID
-    });
+    that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     // app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options.q) { // 通过扫码进入时：q的值为url带参
       app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -120,6 +119,9 @@ Page({
       // value为app.js中传入的值
       console.log("是否尝试自动登录了：", value);
       if (value) {
+        wx.showLoading({
+          title: '加载中...',
+        });
         if (app.globalData.isInitInfo) {
           console.log("尝试了且成功了");
           that.initHomeData(); // 初始化参数
@@ -198,9 +200,6 @@ Page({
   /** 初始化参数 */
   initHomeData: function() {
     let that = this;
-    wx.showLoading({
-      title: '加载中...',
-    });
     that.setData({
       shareOrgID: wx.getStorageSync("shareOrgID"),
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
@@ -211,6 +210,9 @@ Page({
   /**初始化调用请求方法 */
   initFunctionFun: function() {
     let that = this;
+    that.setData({
+      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
+    });
     that.getBanner(); // 获取首页banner
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
