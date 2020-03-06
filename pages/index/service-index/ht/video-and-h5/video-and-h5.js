@@ -19,36 +19,44 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
-    // if (acceptOptions.title && acceptOptions.title.length > 0) {
-    //   wx.setNavigationBarTitle({
-    //     title: acceptOptions.title
-    //   });
-    // } else {
-    //   wx.setNavigationBarTitle({
-    //     title: "素材展示"
-    //   });
-    // }
-    if (acceptOptions.materialType || acceptOptions.materialType == 0) {
-      that.setData({
-        materialInfo: {
-          title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "素材展示",
-          videoMaterialSrc: acceptOptions.url,
-          posterSrc: acceptOptions.logoUrl,
-          materialType: acceptOptions.materialType
+    if (options.materialData) {
+      let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
+      // if (acceptOptions.title && acceptOptions.title.length > 0) {
+      //   wx.setNavigationBarTitle({
+      //     title: acceptOptions.title
+      //   });
+      // } else {
+      //   wx.setNavigationBarTitle({
+      //     title: "素材展示"
+      //   });
+      // }
+      if (acceptOptions.materialType || acceptOptions.materialType == 0) {
+        that.setData({
+          materialInfo: {
+            title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "素材展示",
+            videoMaterialSrc: acceptOptions.url,
+            posterSrc: acceptOptions.logoUrl,
+            materialType: acceptOptions.materialType
+          }
+        });
+        if (acceptOptions.materialType == 0) {
+          // 图文素材
+        } else if (acceptOptions.materialType == 1) {
+          // 视频素材
+          if (!acceptOptions.url) {
+            wx.showToast({
+              title: "视频素材链接地址异常，无法正常播放",
+              icon: "none",
+              duration: 3000
+            });
+          }
         }
-      });
-      if (acceptOptions.materialType == 0) {
-        // 图文素材
-      } else if (acceptOptions.materialType == 1) {
-        // 视频素材
-        if (!acceptOptions.url) {
-          wx.showToast({
-            title: "视频素材链接地址异常，无法正常播放",
-            icon: "none",
-            duration: 3000
-          });
-        }
+      } else {
+        wx.showToast({
+          title: "素材数据异常，无法正常展示",
+          icon: "none",
+          duration: 3000
+        });
       }
     } else {
       wx.showToast({
