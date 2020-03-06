@@ -1,4 +1,4 @@
-const version = 2; //0开发、1测试 2发布  
+const version = 0; //0开发、1测试 2发布  
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
 //     return "1400200900"
@@ -91,7 +91,7 @@ module.exports = {
     } else if (version == 1) {
       return '19121923373037086560511253'
     } else if (version == 2) {
-      return '20012118570385423810511240'
+      return '20012118570385423810511240,20012119021236503500511240'
     }
   },
 
