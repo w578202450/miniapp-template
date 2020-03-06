@@ -92,9 +92,6 @@ function startLoginFun(options) {
  * 获取基础数据
  */
 function getPatientInfo(unionID) {
-  wx.showLoading({
-    title: '登录中...',
-  });
   let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
   let orgID = wx.getStorageSync("shareOrgID");
   let prams = {
@@ -104,8 +101,10 @@ function getPatientInfo(unionID) {
     sex: app.globalData.userInfo.sex ? app.globalData.userInfo.sex : '',
     city: app.globalData.userInfo.city ? app.globalData.userInfo.city : '',
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
-    assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID : "",
-    orgID: (orgID && app.globalData.isHaveOptions) ? orgID : ""
+    // assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID : "",
+    // orgID: (orgID && app.globalData.isHaveOptions) ? orgID : ""
+    assistantStaffID: assistantStaffID ? assistantStaffID : "",
+    orgID: orgID ? orgID : ""
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
@@ -237,6 +236,9 @@ function loginIM(userId) {
  */
 function getounionid(isLoginStatus) {
   AUTH.getounionid(isLoginStatus).then(function(res) {
+    wx.showLoading({
+      title: '登录中...',
+    });
     getPatientInfo(res);
   }, function(err) {
     console.log(err);
@@ -281,6 +283,9 @@ function getUserInfo(e) {
       // getounionid(true);
       logined = app.globalData.unionid && app.globalData.openid;
       if (logined) {
+        wx.showLoading({
+          title: '登录中...',
+        });
         getPatientInfo(app.globalData.unionid);
       } else {
         getounionid();
