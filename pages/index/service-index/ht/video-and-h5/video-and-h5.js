@@ -19,6 +19,7 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    console.log("进入H5展示的参数：" + JSON.stringify(options));
     if (options.materialData) {
       let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
       // if (acceptOptions.title && acceptOptions.title.length > 0) {
