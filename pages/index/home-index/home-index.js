@@ -10,18 +10,18 @@ Page({
   data: {
     isSearchState: false, // 是否进行了一次加载
     /**
-     * 测试环境
-     * 侯丽萍医院 19121923373037086560511253
+     * 侯丽萍开发环境ID： 19101017081245518100511003
+     * 侯丽萍测试环境ID： 19121923373037086560511253
+     * 侯氏生产环境ID： 20012118570385423810511240
      * 默认医院  19101017081245502880511001
      */
-    houShiOrgID: "19121923373037086560511253", // 太原侯丽萍风湿骨病医院的机构ID
+    houShiOrgID: "", // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
     certifyNo: "45081134X51012213A1002", // 医疗机构许可证
     browseCount: 0, // 用户浏览数
     shareCount: 0, // 用户分享数
-    // 院长信息
     deanInfo: {
       deanPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/houliping.png",
       deanName: "候丽萍", // 院长名称
@@ -30,14 +30,13 @@ Page({
       goodAts: ["风湿骨科", "针灸"], //擅长
       // 院长详细介绍
       deanDetailContent: "北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科风湿病学科带头人，国家中医药管理局重点专科风湿病皮痹协作组组长，全国第六批优秀中医人才指导老师，世界中医药联合会特聘专家；侯氏中医风湿三焦气化诊疗体系主要传承人，侯氏中医风湿三焦气化流派代表传承人.",
-    },
-    // 医院信息
+    }, // 院长信息
     hospitalInfo: {
       hospitalPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/yiyuan.png",
       hospitalName: "候丽萍风湿骨病中医医院",
       hospitalIntroduce: "中医治风湿骨病",
       hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风湿病医疗中心。本院始建于1987年，在侯丽萍院长的领导下，大力开展科学研究和临床实践，博取中医传统医学之精华与现代科学技术之长，创立了中医治疗风湿、类风湿的系统综合疗法--- 侯氏中医风湿三焦气化疗法，在治疗类风湿、强直性脊柱炎、红斑狼疮、骨关节病等各种关节疾病的诊治方面，取得了良好的疗效，已在全国二十多各省市推广使用，并与北美、日本、东南亚等国建立了长期合作关系。"
-    },
+    }, // 医院信息
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     newArrayDoctorList: [], // 组合的新数组
@@ -56,6 +55,13 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    // 生产
+    // 侯
+    // options ={
+    //   orgID: "20012118570385423810511240",
+    //   assistantStaffID: "20020913491781433700514240"
+    // }
+    // 测试
     // 包
     // options ={
     //   orgID: "19121923373037086560511253",
@@ -67,6 +73,9 @@ Page({
     //   orgID: "19101017081245502880511001"
     // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
+    that.setData({
+      houShiOrgID: HTTP.houShiOrgIDFun() // 获取侯氏医院ID
+    });
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
@@ -75,22 +84,30 @@ Page({
         let shareOrgID = that.initOptionsFun(scan_url, "orgID");
         let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
         if (shareOrgID && shareOrgID.length > 0) {
-          that.data.shareOrgID = shareOrgID;
+          that.setData({
+            shareOrgID: shareOrgID
+          });
           wx.setStorageSync("shareOrgID", shareOrgID);
         }
         if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
-          that.data.shareAssistantStaffID = shareAssistantStaffID;
+          that.setData({
+            shareAssistantStaffID: shareAssistantStaffID
+          });
           wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
         }
       } else if ((options.assistantStaffID && options.assistantStaffID.length > 0) || (options.orgID && options.orgID.length > 0)) { // 通过分享的小程序进入时：直接带参
         if (options.orgID && options.orgID.length > 0) {
           app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-          that.data.shareOrgID = options.orgID;
+          that.setData({
+            shareOrgID: options.orgID
+          });
           wx.setStorageSync("shareOrgID", options.orgID);
         }
         if (options.assistantStaffID && options.assistantStaffID.length > 0) {
           app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-          that.data.shareAssistantStaffID = options.assistantStaffID;
+          that.setData({
+            shareAssistantStaffID: options.assistantStaffID
+          });
           wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
         }
       }
@@ -177,8 +194,10 @@ Page({
         key: 'personInfo',
         success: function(res) {
           // console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
-          that.data.shareAssistantStaffID = res.data.assistantStaffID;
-          that.data.shareOrgID = res.data.orgID;
+          that.setData({
+            shareOrgID: res.data.orgID,
+            shareAssistantStaffID: res.data.assistantStaffID
+          });
           that.initFunctionFun();
         },
         fail: function(err) {
@@ -322,7 +341,6 @@ Page({
         } else { // 如果通过医助查询到的签约医生没有的话
           // 无签约医生 
           HTTP.getPhysicianTeamList({
-              // orgId: "19101017081245502880511001"
               orgId: that.data.shareOrgID
             })
             .then(res => {
@@ -367,8 +385,10 @@ Page({
       .then(res => {
         // console.log("获取默认的首页信息：" + JSON.stringify(res.data));
         if (res.code == 0 && res.data) {
-          that.data.shareOrgID = res.data.orgID;
-          that.data.shareAssistantStaffID = res.data.assistantStaffID;
+          that.setData({
+            shareOrgID: res.data.orgID,
+            shareAssistantStaffID: res.data.assistantStaffID
+          });
           wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
           wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);

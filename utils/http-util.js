@@ -80,6 +80,17 @@ module.exports = {
     }
   },
 
+  /**侯氏医院ID */
+  houShiOrgIDFun: function() {
+    if (version == 0) {
+      return '19101017081245518100511003'
+    } else if (version == 1) {
+      return '19121923373037086560511253'
+    } else if (version == 2) {
+      return '20012118570385423810511240'
+    }
+  },
+
   /*
    *获取测试数据
    */
