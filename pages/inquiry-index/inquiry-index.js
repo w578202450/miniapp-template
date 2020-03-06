@@ -76,6 +76,9 @@ Page({
         titleTxt: "点击去问诊，立即开始在线问诊～",
         btnTxt: "去问诊"
       });
+      wx.navigateTo({
+        url: '/pages/online-inquiry/inquiry/chat/chat'
+      });
     } else {
       this.setData({
         titleTxt: "请先登录后使用相应的小程序功能～",
