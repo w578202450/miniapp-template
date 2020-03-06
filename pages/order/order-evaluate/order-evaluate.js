@@ -153,6 +153,15 @@ Page({
     return commonFun.onShareAppMessageFun();
   },
 
+  /**显示toast提示框 */
+  showToast: function(title) {
+    wx.showToast({
+      title: title,
+      icon: 'none',
+      duration: 3000
+    });
+  },
+
   /**
    * 查询：订单详情 
    * */
@@ -163,11 +172,13 @@ Page({
       orgID: that.data.paramsData.orgID
     };
     HTTP.goodsOrder(params).then(res => {
-      if (res.data) {
+      if (res.code == 0 && res.data) {
         that.setData({
           orderStatusID: res.data.orderStatusID
         })
         that.getRpDetailFun(res.data.rpID);
+      } else {
+        this.showToast("查询订单详情失败");
       }
     });
   },
@@ -182,10 +193,13 @@ Page({
       orgID: that.data.paramsData.orgID
     };
     HTTP.getRp(params).then(res => {
-      if (res.data) {
+      if (res.code == 0 && res.data) {
         this.data.paramsData.doctorStaffID = res.data.doctorStaffID;
+        this.data.paramsData.doctorName = res.data.doctorName;
         this.data.paramsData.disease = res.data.diagnosis;
         this.data.isSearched = true;
+      } else {
+        this.showToast("查询处方详情失败");
       }
     });
   },
@@ -240,7 +254,6 @@ Page({
     this.setData({
       content: e.detail.value
     });
-    console.log(e);
   },
 
   /**操作：添加图片 */
@@ -363,9 +376,7 @@ Page({
   /**操作：确认提交 */
   submitEvaluateFun: function() {
     if (this.data.orderStatusID != 30) {
-      wx.showToast({
-        title: '订单已经评价过了，无法再次评价',
-      });
+      this.showToast("订单已经评价过了，无法再次评价");
       return
     }
     let params = {
@@ -384,6 +395,8 @@ Page({
         wx.navigateTo({
           url: '/pages/order/order-evaluate-success/order-evaluate-success',
         });
+      } else {
+        this.showToast("提交订单评价失败");
       }
     });
   }

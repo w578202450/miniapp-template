@@ -1,9 +1,13 @@
-
-.tmc-container{
-  padding-top: 20rpx;
-  background-color: #F6F6F6
+page {
+  background-color: #fff;
 }
-.cell{
+
+.tmc-container {
+  padding-top: 20rpx;
+  background-color: #f6f6f6;
+}
+
+.cell {
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -11,19 +15,19 @@
   margin-bottom: 20rpx;
 }
 
-.content{
-  font-size:28rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(0,0,0,0.85);
-  line-height:28rpx;
+.content {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 28rpx;
 }
 
-.date{
+.date {
   margin-top: 32rpx;
-  font-size:24rpx;
-  font-family:PingFangSC-Regular,PingFang SC;
-  font-weight:400;
-  color:rgba(0,0,0,0.45);
-  line-height:24rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
+  line-height: 24rpx;
 }

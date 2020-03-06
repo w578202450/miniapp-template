@@ -1,10 +1,6 @@
 @import "../../../template/template.wxss";
 @import "../../../common/common.wxss";
 
-page{
-  background-color: white
-}
-
 .page-container{
   padding-left: 32rpx;
   padding-right: 32rpx;

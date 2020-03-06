@@ -6,7 +6,7 @@
       <text class="navbarTitleTxt" style="color: {{navbarTextStyle}}">{{navbarTitle}}</text>
     </view>
      <!-- 返回、首页 -->
-    <view class="navbarBtn" style="bottom: {{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px;border: 1rpx solid #D6D6D6;background-color: {{navbarTextStyle == 'white' ? 'rgba(255,255,255,.65)' : ''}}">
+    <view class="navbarBtn {{navbarTextStyle == 'white' ? '': 'navbarBtnBorder'}}" style="bottom: {{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px;background-color: {{navbarTextStyle == 'white' ? 'rgba(255,255,255,.65)' : ''}}">
       <image class="navBackIcon" src="{{navBackIconBlack}}" bindtap="navBack"/>
       <view class="linear" style="background-color: #D6D6D6;"></view>
       <image class="navHomeIcon" src="{{navHomeIconBlack}}" bindtap="toIndex"/>
