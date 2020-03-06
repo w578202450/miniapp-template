@@ -150,20 +150,23 @@ function getPatientInfo(unionID) {
         key: 'shareAssistantStaffID',
         data: res.data.assistantStaffID
       });
+      app.globalData.isStartLogin = true; // 是否开始了自动登录
       // 获取userSig
       getUserSig(res.data.keyID);
     } else {
-      wx.hideLoading()
+      app.globalData.isStartLogin = true; // 是否开始了自动登录
+      wx.hideLoading();
       wx.showToast({
         title: res.message,
         icon: 'none'
-      })
+      });
     }
   }).catch(e => {
+    app.globalData.isStartLogin = true; // 是否开始了自动登录
     wx.hideLoading();
     wx.showToast({
       title: '网络异常'
-    })
+    });
   })
 }
 
@@ -249,6 +252,7 @@ function getounionid(isLoginStatus) {
 function fetchTempCode() {
   AUTH.fetchTempCode().then(function(res) {
     console.log(res);
+    app.globalData.isStartLogin = true; // 是否开始了自动登录
     if (res.code) {
       wx.setStorageSync('code', res.code);
     }

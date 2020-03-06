@@ -165,6 +165,7 @@ App({
     TIM: null,
     isInitInfo: false,
     isHaveOptions: false, // 进入小程序是否携带参数
+    isStartLogin: false, // 是否尝试了自动登录
     userInfo: {},
     personInfo: {},
     doctorInfo: {},

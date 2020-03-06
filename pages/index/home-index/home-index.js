@@ -117,9 +117,18 @@ Page({
       let sendOptions = {
         ...options
       };
-      commonFun.startLoginFun(sendOptions); // 尝试自动登录  
+      commonFun.startLoginFun(sendOptions); // 尝试自动登录
+      // 监听isInitInfo值的变化
+      app.watch((value) => {
+        // value为app.js中传入的值
+        console.log("是否尝试自动登录了：", value);
+        if (value) {
+          that.initHomeData(); // 初始化数据
+        }
+      }, "isStartLogin");
+    } else {
+      that.initHomeData(); // 初始化数据
     }
-    that.initHomeData(); // 初始化数据
   },
 
   /**
@@ -235,7 +244,7 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        console.log("===首页banner===" + JSON.stringify(res));
+        // console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             homeBannerDefaultUrl: res.data.paraValue
