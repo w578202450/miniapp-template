@@ -43,7 +43,6 @@ Page({
     newArrayDoctorList: [], // 组合的新数组
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
-    // defaultPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/chat/docBacImg.png"
   },
 
   /**
@@ -96,19 +95,13 @@ Page({
         }
       }
     }
-    // if (app.globalData.isHaveOptions) {
-    //   that.initHomeData();
-    // } else {
-    //   that.getDefaulShowInfo(); // 获取默认展示信息
-    // }
-    // that.getDefaulShowInfo(); // 获取默认展示信息
     if (!app.globalData.isInitInfo)  {
       let sendOptions = {
         ...options
       };
       commonFun.startLoginFun(sendOptions); // 尝试自动登录  
     }
-    that.initHomeData();
+    that.initHomeData(); // 初始化数据
   },
 
   /**
@@ -182,26 +175,27 @@ Page({
     } else {
       wx.getStorage({
         key: 'personInfo',
-        success: function (res) {
+        success: function(res) {
           // console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
           that.data.shareAssistantStaffID = res.data.assistantStaffID;
           that.data.shareOrgID = res.data.orgID;
           that.initFunctionFun();
         },
-        fail: function (err) {
+        fail: function(err) {
           // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
-          that.getDefaulShowInfo();
+          that.getDefaulShowInfo(); // 初始化调用请求方法
         },
-        complete: function (e) {
+        complete: function(e) {
           that.setData({
             isSearchState: true
           });
         }
       });
     }
-    
+
   },
 
+  /**初始化调用请求方法 */
   initFunctionFun: function() {
     let that = this;
     that.getBanner(); // 获取首页banner
@@ -222,12 +216,10 @@ Page({
       })
       .then(res => {
         // console.log("===首页banner===" + JSON.stringify(res));
-        if (res.code == 0) {
-          if (res.data) {
-            that.setData({
-              homeBannerDefaultUrl: res.data.paraValue
-            });
-          }
+        if (res.code == 0 && res.data) {
+          that.setData({
+            homeBannerDefaultUrl: res.data.paraValue
+          });
         }
       });
   },
@@ -242,12 +234,10 @@ Page({
       })
       .then(res => {
         // console.log("===获取医师团队介绍===" + JSON.stringify(res));
-        if (res.code == 0) {
-          if (res.data) {
-            that.setData({
-              doctorTeamIntroduce: res.data.paraValue
-            });
-          }
+        if (res.code == 0 && res.data) {
+          that.setData({
+            doctorTeamIntroduce: res.data.paraValue
+          });
         }
       })
   },
@@ -262,12 +252,10 @@ Page({
       })
       .then(res => {
         // console.log("===获取用户浏览数===" + JSON.stringify(res));
-        if (res.code == 0) {
-          if (res.data) {
-            that.setData({
-              browseCount: res.data.paraValue
-            });
-          }
+        if (res.code == 0 && res.data) {
+          that.setData({
+            browseCount: res.data.paraValue
+          });
         }
       })
   },
@@ -282,12 +270,10 @@ Page({
       })
       .then(res => {
         // console.log("===获取用户分享数===" + JSON.stringify(res));
-        if (res.code == 0) {
-          if (res.data) {
-            that.setData({
-              shareCount: res.data.paraValue
-            });
-          }
+        if (res.code == 0 && res.data) {
+          that.setData({
+            shareCount: res.data.paraValue
+          });
         }
       });
   },
@@ -299,47 +285,40 @@ Page({
     HTTP.getSignedDoctor({
         assistantStaffID: that.data.shareAssistantStaffID,
         orgID: that.data.shareOrgID
-        // assistantStaffID: "20020509480115486460514001",
-        // orgID: "19101017081245502880511001"
       })
       .then(res => {
         // console.log("!!!!!通过医助查询到的签约医生!!!!!" + JSON.stringify(res));
-        if (res.code == 0) {
-          if (res.data) {
-            that.setData({
-              signedDoctor: res.data
-            });
-            // wx.setStorageSync('signedDoctorInfo', res.data);
-            HTTP.getPhysicianTeamList({
-                orgId: that.data.shareOrgID
-              })
-              .then(res => {
-                // console.log("!!!!!获取医师团队列表!!!!!" + JSON.stringify(res));
-                if (res.code == 0) {
-                  if (res.data) {
-                    doctorTeamList = res.data;
-                    // 医师团队列表里是否存在签约那个医生
-                    // const physicianTeam = that.data.doctorTeamList.find(
-                    //   it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
-                    // );
-                    for (let i = 0; i < doctorTeamList.length; i++) {
-                      let temp = doctorTeamList[i];
-                      if (temp.doctorStaffID === this.data.signedDoctor.doctorStaffID) {
-                        doctorTeamList.splice(i, 1);
-                        break;
-                      }
-                    }
-                    doctorTeamList.unshift(this.data.signedDoctor);
-                    if (doctorTeamList.length == 1) {
-                      doctorTeamList.push({});
-                    }
-                    that.setData({
-                      newArrayDoctorList: doctorTeamList
-                    });
+        if (res.code == 0 && res.data) {
+          that.setData({
+            signedDoctor: res.data
+          });
+          HTTP.getPhysicianTeamList({
+              orgId: that.data.shareOrgID
+            })
+            .then(res => {
+              // console.log("!!!!!获取医师团队列表!!!!!" + JSON.stringify(res));
+              if (res.code == 0 && res.data) {
+                doctorTeamList = res.data;
+                // 医师团队列表里是否存在签约那个医生
+                // const physicianTeam = that.data.doctorTeamList.find(
+                //   it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
+                // );
+                for (let i = 0; i < doctorTeamList.length; i++) {
+                  let temp = doctorTeamList[i];
+                  if (temp.doctorStaffID === this.data.signedDoctor.doctorStaffID) {
+                    doctorTeamList.splice(i, 1);
+                    break;
                   }
                 }
-              });
-          }
+                doctorTeamList.unshift(this.data.signedDoctor);
+                if (doctorTeamList.length == 1) {
+                  doctorTeamList.push({});
+                }
+                that.setData({
+                  newArrayDoctorList: doctorTeamList
+                });
+              }
+            });
         } else { // 如果通过医助查询到的签约医生没有的话
           // 无签约医生 
           HTTP.getPhysicianTeamList({
@@ -348,12 +327,10 @@ Page({
             })
             .then(res => {
               // console.log("!!!!!无签约医生获取医师团队列表!!!!!" + JSON.stringify(res));
-              if (res.code == 0) {
-                if (res.data) {
-                  that.setData({
-                    newArrayDoctorList: res.data
-                  });
-                }
+              if (res.code == 0 && res.data) {
+                that.setData({
+                  newArrayDoctorList: res.data
+                });
               }
             });
         }
@@ -368,15 +345,12 @@ Page({
     }
     HTTP.getHospitalInfo(params).then(res => {
       // console.log("===获取医院详情简介信息===" + JSON.stringify(res));
-      if (res.code == 0) {
-        if (res.data) {
-          that.setData({
-            hospitalDetail: res.data
-          });
-
-          if (res.data.orgName) {
-            app.globalData.orgName = res.data.orgName; // 医院名称
-          }
+      if (res.code == 0 && res.data) {
+        that.setData({
+          hospitalDetail: res.data
+        });
+        if (res.data.orgName) {
+          app.globalData.orgName = res.data.orgName; // 医院名称
         }
       }
     });
@@ -392,13 +366,19 @@ Page({
       })
       .then(res => {
         // console.log("获取默认的首页信息：" + JSON.stringify(res.data));
-        if (res.code == 0) {
+        if (res.code == 0 && res.data) {
           that.data.shareOrgID = res.data.orgID;
           that.data.shareAssistantStaffID = res.data.assistantStaffID;
           wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
           wx.setStorageSync("shareOrgID", res.data.orgID);
           wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
           that.initFunctionFun();
+        } else {
+          wx.showToast({
+            title: '获取默认数据失败',
+            icon: 'none',
+            duration: 2000
+          });
         }
       });
   },
@@ -431,7 +411,6 @@ Page({
 
   // 分享给更多需要的人
   shareMore() {
-    let that = this;
     commonFun.onShareAppMessageFun();
   },
 
