@@ -44,10 +44,10 @@ Component({
       String: Array
     }, // 文章列表{模块id:文章列表}}
     currentClassifyID: '', // 当前模块id
-    loadingText:"正在加载中...",
-    noDataText:"没有数据",
-    noMoreDataText:"已经到底了",
-    loadMoreDataText:"点击加载更多"
+    loadingText: "正在加载中...",
+    noDataText: "没有数据",
+    noMoreDataText: "已经到底了",
+    loadMoreDataText: "点击加载更多"
   },
 
   /**
@@ -66,7 +66,7 @@ Component({
         // 这里先渲染再切换界面
         this.setData({
           currentCategoryData: currentCategoryData
-        },function(){
+        }, function() {
           this.setData({
             currentIndex: e.detail.current
           })
@@ -121,13 +121,13 @@ Component({
           })
 
         } else {
-          console.log('res--------------------dddd',res)
+          console.log('res--------------------dddd', res)
           // 不许渲染数据
           this.setData({
             articleDatas: this.data.articleDatas
           })
         }
-      }).catch(error =>{
+      }).catch(error => {
         currentCategoryData["noOnePage"] = true
         currentCategoryData["noMore"] = false;
         currentCategoryData["noData"] = false;
@@ -162,7 +162,7 @@ Component({
       }).then(res => {
         currentCategoryData["loading"] = false
         let list = res.data
-        
+
         if (list.datas) {
           currentCategoryData["noOnePage"] = false
           currentCategoryData["noData"] = list.datas.length === 0 ? true : false
@@ -174,11 +174,11 @@ Component({
           this.setData({
             articleDatas: this.data.articleDatas
           })
-          
+
         } else {
           // 不许渲染数据
         }
-      }).catch(error =>{
+      }).catch(error => {
         currentCategoryData["noOnePage"] = false
         currentCategoryData["noMore"] = false;
         currentCategoryData["noData"] = false;
@@ -194,14 +194,14 @@ Component({
     /**
      * 详情查看
      */
-    itemDetails(e){
-      let title = e.currentTarget.dataset.navTitle
+    itemDetails(e) {
+      let title = e.currentTarget.dataset.navtitle
       let item = e.currentTarget.dataset.item
       let materialData = {
         materialType: item.articleType, // （必传）要查看的素材类型 0图文 1视频
         title: title, // 待确认，可先不传
-        url: item.articleUrl, // （必传）图文、视频 的网络地址链接
-        logoUrl: item.logoUrl // 视频的封面图片(没有就传空字符窜)
+        url: encodeURIComponent(item.articleUrl), // （必传）图文、视频 的网络地址链接
+        logoUrl: encodeURIComponent(item.logoUrl) // 视频的封面图片(没有就传空字符窜)
       };
       wx.navigateTo({
         url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
