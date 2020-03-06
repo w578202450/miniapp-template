@@ -19,11 +19,11 @@ let API_BASE_URL = (function() {
 var request = function request(url, needDomain, method, data) {
 
   var _url = needDomain ? (API_BASE_URL + url) : url;
-  console.log("------------------------");
-  console.log("请求地址:" + _url);
-  console.log("请求入参:" + JSON.stringify(data));
-  console.log("请求方式:" + method);
-  console.log("------------------------");
+  // console.log("------------------------");
+  // console.log("请求地址:" + _url);
+  // console.log("请求入参:" + JSON.stringify(data));
+  // console.log("请求方式:" + method);
+  // console.log("------------------------");
 
   return new Promise(function(resolve, reject) {
 
@@ -37,7 +37,11 @@ var request = function request(url, needDomain, method, data) {
       data: data,
       success: function success(request) {
         resolve(request.data);
-        console.log("数据请求成功:", url, request.data);
+        if (request.statusCode == 200) {
+          console.log("数据请求成功:", url, request.data);
+        } else {
+          console.log("数据请求失败:", url, request);
+        }
       },
       fail: function fail(error) {
         reject(error);
@@ -87,7 +91,7 @@ module.exports = {
     } else if (version == 1) {
       return '19121923373037086560511253'
     } else if (version == 2) {
-      return '20012118570385423810511240'
+      return '20012118570385423810511240,20012119021236503500511240'
     }
   },
 

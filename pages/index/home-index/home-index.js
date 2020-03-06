@@ -15,7 +15,6 @@ Page({
      * 侯氏生产环境ID： 20012118570385423810511240
      * 默认医院  19101017081245502880511001
      */
-    testHoushiOrgID: "20012119021236503500511240", // 测试(指定机构显示侯丽萍和侯丽萍医院简介)
     houShiOrgID: "", // 太原侯丽萍风湿骨病医院的机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
@@ -25,7 +24,7 @@ Page({
     shareCount: 0, // 用户分享数
     deanInfo: {
       deanPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/houliping.png",
-      deanName: "候丽萍", // 院长名称
+      deanName: "侯丽萍", // 院长名称
       deanDuty: "主任医师 山西名中医 博士生导师", // 职称
       deanFamous: "侯氏三焦气化疗法创始人", // 专长
       goodAts: ["风湿骨科", "针灸"], //擅长
@@ -34,7 +33,7 @@ Page({
     }, // 院长信息
     hospitalInfo: {
       hospitalPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/yiyuan.png",
-      hospitalName: "候丽萍风湿骨病中医医院",
+      hospitalName: "侯丽萍风湿骨病中医医院",
       hospitalIntroduce: "中医治风湿骨病",
       hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风湿病医疗中心。本院始建于1987年，在侯丽萍院长的领导下，大力开展科学研究和临床实践，博取中医传统医学之精华与现代科学技术之长，创立了中医治疗风湿、类风湿的系统综合疗法--- 侯氏中医风湿三焦气化疗法，在治疗类风湿、强直性脊柱炎、红斑狼疮、骨关节病等各种关节疾病的诊治方面，取得了良好的疗效，已在全国二十多各省市推广使用，并与北美、日本、东南亚等国建立了长期合作关系。"
     }, // 医院信息
@@ -117,9 +116,18 @@ Page({
       let sendOptions = {
         ...options
       };
-      commonFun.startLoginFun(sendOptions); // 尝试自动登录  
+      commonFun.startLoginFun(sendOptions); // 尝试自动登录
+      // 监听isInitInfo值的变化
+      app.watch((value) => {
+        // value为app.js中传入的值
+        console.log("是否尝试自动登录了：", value);
+        if (value) {
+          that.initHomeData(); // 初始化数据
+        }
+      }, "isStartLogin");
+    } else {
+      that.initHomeData(); // 初始化数据
     }
-    that.initHomeData(); // 初始化数据
   },
 
   /**
@@ -235,7 +243,7 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        console.log("===首页banner===" + JSON.stringify(res));
+        // console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             homeBannerDefaultUrl: res.data.paraValue
@@ -409,8 +417,8 @@ Page({
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "侯丽萍的医生主页", // 待确认，可先不传
-      url: "https://res.100cbc.com/tmc/hospital/2381/docDetail.html", // （必传）图文、视频 的网络地址链接
-      logoUrl: "" // 视频的封面图片(没有就传空字符窜)
+      url: encodeURIComponent("https://res.100cbc.com/tmc/hospital/2381/docDetail.html"), // （必传）图文、视频 的网络地址链接,需要加密
+      logoUrl: encodeURIComponent("") // 视频的封面图片(没有就传空字符窜)
     };
     wx.navigateTo({
       url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
@@ -422,8 +430,8 @@ Page({
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "医院主页", // 待确认，可先不传
-      url: "https://res.100cbc.com/tmc/hospital/2381/hosDetail.html", // （必传）图文、视频 的网络地址链接
-      logoUrl: "" // 视频的封面图片(没有就传空字符窜)
+      url: encodeURIComponent("https://res.100cbc.com/tmc/hospital/2381/hosDetail.html"), // （必传）图文、视频 的网络地址链接,需要加密
+      logoUrl: encodeURIComponent("") // 视频的封面图片(没有就传空字符窜)
     };
     wx.navigateTo({
       url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜

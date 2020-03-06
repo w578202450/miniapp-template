@@ -22,32 +22,19 @@ Page({
     console.log("进入H5展示的参数：" + JSON.stringify(options));
     if (options.materialData) {
       let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
-      // if (acceptOptions.title && acceptOptions.title.length > 0) {
-      //   wx.setNavigationBarTitle({
-      //     title: acceptOptions.title
-      //   });
-      // } else {
-      //   wx.setNavigationBarTitle({
-      //     title: "素材展示"
-      //   });
-      // }
+      console.log(acceptOptions);
       if (acceptOptions.materialType || acceptOptions.materialType == 0) {
+        let newUrl = decodeURIComponent(acceptOptions.url);
+        let newLogoUrl = decodeURIComponent(acceptOptions.logoUrl);
         that.setData({
           materialInfo: {
             title: (acceptOptions.title && acceptOptions.title.length > 0) ? acceptOptions.title : "素材展示",
-            videoMaterialSrc: acceptOptions.url,
-            posterSrc: acceptOptions.logoUrl,
+            videoMaterialSrc: newUrl,
+            posterSrc: newLogoUrl,
             materialType: acceptOptions.materialType
           }
         });
-        if (acceptOptions.materialType == 0) {
-          // 图文素材
-        } else if (acceptOptions.materialType == 1) {
-          // 视频素材
-          if (!acceptOptions.url) {
-            commonFun.showToastFun("素材数据异常，无法正常展示");
-          }
-        }
+        console.log(that.data.materialInfo);
       } else {
         commonFun.showToastFun("素材数据异常，无法正常展示");
       }
