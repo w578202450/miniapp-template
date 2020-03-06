@@ -2,34 +2,38 @@
   <view class="header">
     <image class="header-bgImage" src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_order_bg.png"></image>
     <!-- <tmcnavbar titleText="订单详情"></tmcnavbar> -->
-    <navigation-bar navbarTitle="订单详情" navbarTextStyle="white" bgColor="rgba(0,0,0,0)"/>
+    <navigation-bar navbarTitle="订单详情" navbarTextStyle="white" bgColor="rgba(0,0,0,0)" />
     <view class="paySuccess" style="margin-top: 50rpx">
+      <!-- 已支付，已评价 -->
+      <block wx:if='{{orderInfo.orderStatusID == 31}}'>
+        <text>订单已完成</text>
+      </block>
       <!-- 已支付 -->
-      <block wx:if='{{orderInfo.orderStatusID == 10}}'>
+      <block wx:elif='{{orderInfo.orderStatusID == 10}}'>
         <!-- 待发货 -->
         <block wx:if='{{orderInfo.deliveryStatusID == 1}}'>
-          <image style="width:58rpx;height:58rpx" src="../../../images/order/order_wait.png"></image>
+          <image style="width:58rpx;height:58rpx" src="/images/order/order_wait.png"></image>
           <text>订单已支付，等待商家发货</text>
         </block>
         <!-- 已发货 确认收货 -->
         <block wx:elif='{{orderInfo.deliveryStatusID == 2}}'>
-          <image style="width:58rpx;height:58rpx" src="../../../images/order/order_delivery.png"></image>
+          <image style="width:58rpx;height:58rpx" src="/images/order/order_delivery.png"></image>
           <text>订单已发货</text>
         </block>
-        <!-- 确认收货 -->
+        <!-- 确认收货(未评价) -->
         <block wx:if='{{orderInfo.deliveryStatusID == 3}}'>
-          <image style="width:58rpx;height:58rpx" src="../../../images/order/order_delivery.png"></image>
+          <image style="width:58rpx;height:58rpx" src="/images/order/order_delivery.png"></image>
           <text>订单已确认收货</text>
         </block>
         <!-- 已取消 -->
         <block wx:elif='{{orderInfo.orderStatusID == 2}}'>
-          <image style="width:58rpx;height:58rpx" src="../../../images/order/order_cancel.png"></image>
+          <image style="width:58rpx;height:58rpx" src="/images/order/order_cancel.png"></image>
           <text>订单已取消，未收到退款请联系客服</text>
         </block>
       </block>
       <!-- 待支付 -->
       <block wx:elif='{{orderInfo.orderStatusID == 0}}'>
-        <image style="width:58rpx;height:58rpx" src="../../../images/order/order_wait.png"></image>
+        <image style="width:58rpx;height:58rpx" src="/images/order/order_wait.png"></image>
         <text>订单待支付</text>
       </block>
     </view>

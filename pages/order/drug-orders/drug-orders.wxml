@@ -1,44 +1,47 @@
 <view>
-  <navigation-bar navbarTitle="药品订单"/>
+  <navigation-bar navbarTitle="药品订单" />
   <block wx:if="{{noData}}">
-  <tmcTipsView icon="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_no_order.png" title="暂无订单" message="您暂无订单信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
-</block>
-<block wx:elif="{{noNetwork}}">
-  <tmcTipsView icon="/images/public/public_no_internet.png" title="网络连接异常" message="网络不太好，刷新一下吧～" buttonTitle="刷新" bind:buttonOption="noNetworkOption"></tmcTipsView>
-</block>
-<block wx:else>
-  <view class="tmc-container">
+    <tmcTipsView icon="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_no_order.png" title="暂无订单" message="您暂无订单信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
+  </block>
+  <block wx:elif="{{noNetwork}}">
+    <tmcTipsView icon="/images/public/public_no_internet.png" title="网络连接异常" message="网络不太好，刷新一下吧～" buttonTitle="刷新" bind:buttonOption="noNetworkOption"></tmcTipsView>
+  </block>
+  <block wx:else>
+    <view class="tmc-container">
 
-    <navigator wx:for="{{list}}" wx:key="id" wx:for-index="index" wx:for-item="item" url="/pages/order/order-details/order-details?orderID={{item.keyID}}">
-      <view class="cell">
-        <view class="cell-top">
-          <view class="content-box">
-            <text class="content-title">{{item.doctorName}}医生的治疗方案</text>
-            <text class="content-details">{{item.diagnosis}}</text>
-            <text class="content-date">开方时间：{{item.addTime=='1900-01-01 00:00:00' ? '' : item.addTime}}</text>
+      <navigator wx:for="{{list}}" wx:key="id" wx:for-index="index" wx:for-item="item" url="/pages/order/order-details/order-details?orderID={{item.keyID}}">
+        <view class="cell">
+          <view class="cell-top">
+            <view class="content-box">
+              <text class="content-title">{{item.doctorName}}医生的治疗方案</text>
+              <text class="content-details">{{item.diagnosis}}</text>
+              <text class="content-date">开方时间：{{item.addTime=='1900-01-01 00:00:00' ? '' : item.addTime}}</text>
+            </view>
+            <view class="right-box">
+              <text wx:if="{{item.orderStatusID == 31}}" class="right-status">已完成</text>
+              <text wx:elif="{{item.orderStatusID == 30}}" class="right-status">待评价</text>
+              <text wx:elif="{{item.orderStatusID == 10}}" class="right-status">{{item.deliveryStatusName}}</text>
+              <text wx:else class="right-status">{{item.orderStatusName}}</text>
+            </view>
           </view>
-          <view class="right-box">
-            <text class="right-status">{{item.orderStatusID==10 ? item.deliveryStatusName : item.orderStatusName}}</text>
+          <view class="cell-bottom">
+            <view wx:if="{{item.orderStatusID== 0}}" style="border:1px solid rgba(254,88,83,1);margin-top: 32rpx" class="option-view" catchtap="payOrder" data-index="{{index}}">
+              <text style="color:rgba(254,88,83,1)">立即支付</text>
+            </view>
+            <view wx:if="{{item.orderStatusID== 10 && item.deliveryStatusID==0}}" style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction" data-index="{{index}}">
+              <text style="color:rgba(0,0,0,0.65)">填写地址</text>
+            </view>
+            <view wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 1 && orderInfo.deliveryStatusID == 2}}' class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
+              <text class="blueBtnTxt">确认收货</text>
+            </view>
+            <view wx:if="{{item.orderStatusID== 30 && item.deliveryStatusID== 3}}" class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
+              <text class="blueBtnTxt">立即评价</text>
+            </view>
           </view>
+
         </view>
-        <view class="cell-bottom">
-          <view wx:if="{{item.orderStatusID== 0}}" style="border:1px solid rgba(254,88,83,1);margin-top: 32rpx" class="option-view" catchtap="payOrder" data-index="{{index}}">
-            <text style="color:rgba(254,88,83,1)">立即支付</text>
-          </view>
-          <view wx:if="{{item.orderStatusID== 10 && item.deliveryStatusID==0}}" style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction" data-index="{{index}}">
-            <text style="color:rgba(0,0,0,0.65)">填写地址</text>
-          </view>
-          <view wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 1 && orderInfo.deliveryStatusID == 2}}' class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
-            <text class="blueBtnTxt">确认收货</text>
-          </view>
-          <view wx:if="{{item.orderStatusID== 30 && item.deliveryStatusID==3}}" class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
-            <text class="blueBtnTxt">立即评价</text>
-          </view>
-        </view>
+      </navigator>
 
-      </view>
-    </navigator>
-
-  </view>
-</block>
+    </view>
+  </block>
 </view>

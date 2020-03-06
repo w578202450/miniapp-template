@@ -70,7 +70,7 @@ Page({
       })
   },
   /**
-   * 获取对于的诊断结果
+   * 获取订单对应的处方详情
    */
   getRpByList(params) {
     wx.showNavigationBarLoading()
@@ -93,7 +93,8 @@ Page({
         }
         this.setData({
           list: this.data.list
-        })
+        });
+        console.log(this.data.list);
       }).catch(e => {
         wx.hideNavigationBarLoading()
       })

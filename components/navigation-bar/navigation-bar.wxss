@@ -33,6 +33,10 @@
   margin-left: 20rpx;
 }
 
+.navbarBtnBorder {
+  border:1rpx solid #D6D6D6;
+}
+
 .navBackIcon {
   width: 35rpx;
   height: 35rpx;
