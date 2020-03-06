@@ -9,7 +9,7 @@
     </view>
     <block wx:if="{{itemData.articleType==0}}">
       <view class="image-box">
-        <image class="cover" src="{{itemData.logoUrl || imagePlaceholder}}"></image>
+        <image mode="aspectFill" class="cover" src="{{itemData.logoUrl || imagePlaceholder}}"></image>
       </view>
     </block>
     <block wx:else>
