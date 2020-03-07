@@ -64,12 +64,12 @@ Page({
     liverItems: [{
         name: '正常',
         value: '正常',
+        checked: 'true',
         id: "1",
       },
       {
         name: '异常',
         value: '异常',
-        checked: 'true',
         id: "2"
       },
     ],
@@ -77,12 +77,12 @@ Page({
     kidneyItems: [{
         name: '正常',
         value: '正常',
+        checked: 'true',
         id: "1"
       },
       {
         name: '异常',
         value: '异常',
-        checked: 'true',
         id: "2"
       },
     ],
