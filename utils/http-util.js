@@ -476,4 +476,11 @@ module.exports = {
     return request('api/peachUser/hospitalSection/getSectionByKeyID', true, 'get', params);
   },
 
+  /**
+   * 自动进群失败，主动拉入群
+   */
+  addGroupMember: function addGroupMember(parmas) {
+    return request('api/tmc/multiTalk/addGroupMember', true, 'post', parmas);
+  },
+
 }
