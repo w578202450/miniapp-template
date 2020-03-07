@@ -130,6 +130,27 @@
 					"pathName": "components/loginDialog/loginDialog",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/personal-center/personal-center",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "药品订单列表",
+					"pathName": "pages/order/drug-orders/drug-orders",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的处方",
+					"pathName": "pages/personal-center/prescription/prescription",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
