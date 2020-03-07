@@ -154,28 +154,18 @@ Page({
   initNoRealyData: function() {
     let illList = [{
         keyID: "1",
-        illnessName: "风湿骨病",
-        num: 60
+        illnessName: "医生服务好",
+        num: ""
       },
       {
         keyID: "2",
-        illnessName: "类风湿关节炎",
-        num: 40
+        illnessName: "疗效显著",
+        num: ""
       },
       {
         keyID: "3",
-        illnessName: "肌肉萎缩",
-        num: 36
-      },
-      {
-        keyID: "4",
-        illnessName: "痛风",
-        num: 24
-      },
-      {
-        keyID: "5",
-        illnessName: "关节肿痛",
-        num: 60
+        illnessName: "物流快",
+        num: ""
       }
     ];
     this.setData({

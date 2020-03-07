@@ -60,6 +60,6 @@
     </view>
     <view class="middle-bottomLine"></view>
   </view>
-  <!-- 患者评价 -->
-  <patient-evaluate wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" evaluateAllData="{{evaluateAllData}}" />
+  <!-- 患者评价wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" -->
+  <patient-evaluate evaluateAllData="{{evaluateAllData}}" />
 </view>
