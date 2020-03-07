@@ -57,11 +57,27 @@
   flex-grow: 1;
 }
 
+.docFlexRowBetween {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.docFlexRowStart {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.seeDetailIcon {
+}
+
 .specialist-header-right-box {
   color: rgba(67, 139, 239, 1);
-  width: 125rpx;
-  margin-left: 10rpx;
   flex-shrink: 0;
+  margin-right: 5rpx;
 }
 
 .specialist-bottom-box {
@@ -105,6 +121,9 @@
 
 .doctor-title {
   margin-top: 20rpx;
+}
+
+.doctor-title-two {
   line-height: 36rpx;
 }
 
@@ -127,4 +146,3 @@
   height: 48rpx;
   background: rgba(0, 0, 0, 0.1);
 }
-
