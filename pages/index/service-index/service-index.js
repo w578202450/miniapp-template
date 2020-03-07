@@ -449,14 +449,14 @@ Page({
 
   //回主页
   goToBackHome: function() {
-    // let orgID = wx.getStorageSync("shareOrgID");
-    // let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
-    // wx.reLaunch({
-    //   url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
-    // });
+    let orgID = wx.getStorageSync("shareOrgID");
+    let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     wx.reLaunch({
-      url: '/pages/index/home-index/home-index'
+      url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
     });
+    // wx.reLaunch({
+    //   url: '/pages/index/home-index/home-index'
+    // });
   },
 
   //------------------------------fzm-------------------------------
