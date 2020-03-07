@@ -32,7 +32,7 @@
   <!-- 医生手记 -->
   <notes paersonInfo="{{inquiryCaseData}}" wx:if="{{inquiryCaseData.keyID}}" httpParams="{{inquiryCaseData.httpParams}}" />
   <!-- 患者分享 -->
-  <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" />
+  <!-- <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" /> -->
   <!-- 文章模块 -->
   <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
   <!-- 登录弹框 -->
