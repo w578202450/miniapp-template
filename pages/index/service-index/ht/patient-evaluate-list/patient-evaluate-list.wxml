@@ -18,7 +18,7 @@
             <text class="effect">疗效：</text>
             <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
           </view>
-          <view class="verticalLine"></view>
+          <!-- <view class="verticalLine"></view> -->
           <view class="flexRowStartCenter">
             <text class="effect">服务：</text>
             <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
