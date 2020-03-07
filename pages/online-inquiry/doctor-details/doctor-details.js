@@ -13,26 +13,26 @@ Page({
   },
 
   onLoad: function(e) {
-    var staffID = e.staffID
-    this.fetchDoctorInfo(staffID)
+    let doctorStaffID = e.staffID;
+    this.fetchDoctorInfo(doctorStaffID)
   },
 
   /**
    * 医师信息
    */
-  fetchDoctorInfo(doctorId) {
+  fetchDoctorInfo(doctorStaffID) {
     var that = this;
     HTTP.getDoctorInfo({
-        staffID: doctorId
+      staffID: doctorStaffID
       })
       .then(res => {
         if (res.code == 0) {
           if (res.data) {
             this.setData({
               doctorInfo: res.data
-            })
-            this.getDoctorDiseaseByDoctorID(res.data.doctorID)
-            this.getOrderCommentData(res.data.orgID, doctorId)
+            });
+            this.getDoctorDiseaseByDoctorID(res.data.doctorID);
+            this.getOrderCommentData(res.data.orgID, doctorStaffID);
           }
         } else {
           wx.showToast({
@@ -86,13 +86,20 @@ Page({
   getOrderCommentData: function (orgID, doctorStaffID) {
     let that = this;
     let params = {
-      orgID: orgID
+      orgID: orgID,
+      doctorStaffID: doctorStaffID
     };
     HTTP.orderCommentGet(params).then(res => {
       // console.log("获取的患者评价信息：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           ["evaluateAllData.evaluateData"]: res.data,
+          ["evaluateAllData.doctorID"]: doctorStaffID,
+          ["evaluateAllData.orgID"]: orgID
+        });
+      } else {
+        that.setData({
+          ["evaluateAllData.evaluateData"]: [],
           ["evaluateAllData.doctorID"]: doctorStaffID,
           ["evaluateAllData.orgID"]: orgID
         });

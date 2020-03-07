@@ -96,6 +96,7 @@ Page({
     let that = this;
     let params = {
       orgID: that.data.httpParams.orgID,
+      doctorID: that.data.httpParams.doctorID,
       pageIndex: that.data.pageInfo.pageIndex,
       pageSize: that.data.pageInfo.pageSize
     };

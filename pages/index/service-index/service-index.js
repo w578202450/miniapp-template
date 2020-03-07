@@ -23,10 +23,10 @@ Page({
     assistantDoctorInfo: {}, // 助理医师的信息
     // 患者评价相关的所有数据
     evaluateAllData: {
-      evaluateData: [],
+      // evaluateData: [],
       illnessSumList: [],
-      doctorID: "",
-      orgID: ""
+      // doctorID: "",
+      // orgID: ""
     },
     scrollTop: 0,
     // 患者分享相关数据
@@ -240,13 +240,20 @@ Page({
   getOrderCommentData: function(orgID, doctorStaffID) {
     let that = this;
     let params = {
-      orgID: orgID
+      orgID: orgID,
+      doctorStaffID: doctorStaffID
     };
     HTTP.orderCommentGet(params).then(res => {
       // console.log("获取的患者评价信息：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           ["evaluateAllData.evaluateData"]: res.data,
+          ["evaluateAllData.doctorID"]: doctorStaffID,
+          ["evaluateAllData.orgID"]: orgID
+        });
+      } else {
+        that.setData({
+          ["evaluateAllData.evaluateData"]: [],
           ["evaluateAllData.doctorID"]: doctorStaffID,
           ["evaluateAllData.orgID"]: orgID
         });
