@@ -150,14 +150,14 @@ page {
 .bottom-doctor-left {
   display: flex;
   flex-flow: column;
-  justify-content:space-between;
+  justify-content: space-between;
   width: 48%;
 }
 
 .bottom-doctor-right {
   display: flex;
   flex-flow: column;
-  justify-content:space-between;
+  justify-content: space-between;
   width: 48%;
 }
 
@@ -218,4 +218,17 @@ page {
   line-height: 24rpx;
   margin-top: 16rpx;
   width: 96rpx;
+}
+
+.review-box {
+  margin-bottom: 172rpx;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+
+.review-box text {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
 }

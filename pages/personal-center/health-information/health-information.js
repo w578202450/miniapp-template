@@ -88,13 +88,13 @@ Page({
     ],
     //是否有妊娠哺乳
     gestationItems: [{
-        name: '有',
-        value: '有',
+        name: '是',
+        value: '是',
         id: "1"
       },
       {
-        name: '无',
-        value: '无',
+        name: '否',
+        value: '否',
         checked: 'true',
         id: "2"
       },

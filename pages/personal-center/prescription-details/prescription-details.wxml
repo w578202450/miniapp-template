@@ -1,4 +1,4 @@
-<navigation-bar navbarTitle="处方详情"/>
+<navigation-bar navbarTitle="处方详情" />
 <block wx:if="{{payStatus==0 && isPreviewRp == 0}}">
   <view class="tip" style="height:52rpx;background:rgba(67,139,239,0.2);">
     <text style="font-size: 28rpx;font-family: PingFangSC-Regular, PingFang SC;font-weight: 400;color: rgba(67, 139, 239, 1);">过期失效的处方不能支付，有效期3天</text>
@@ -10,7 +10,7 @@
 <view class="header">
   <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/profile/profile_company_seal.png"></image>
   <view class="header-content">
-  <text class="header-title">桃子互联网医院</text>
+    <text class="header-title">桃子互联网医院</text>
     <text class="header-title" style="margin-top:32rpx">电子处方笺</text>
     <view class="header-personinfo">
       <text class="personinfo-details">姓名：{{rpData.patientName}}</text>
@@ -29,7 +29,7 @@
       <text class="personinfo-other" style="flex-shrink: 0;margin-left:32rpx">肾功能：{{rpData.renal}}</text>
     </view>
     <view hidden="{{isHiddenPregnancy}}" class="personinfo-other-box">
-      <text  class="personinfo-other">妊娠哺乳：{{rpData.pregnancy}}</text>
+      <text class="personinfo-other">妊娠哺乳：{{rpData.pregnancy}}</text>
     </view>
     <view class="personinfo-other-box">
       <text class="personinfo-other">开方时间：{{rpData.addTime == '1900-01-01 00:00:00' ? '' : rpData.addTime}}</text>
@@ -51,7 +51,7 @@
   </view>
   <view class="rp-advice">医嘱：{{rpData.rpAdvice}}</view>
 </view>
-<view class="bottom" style="margin-bottom:172rpx">
+<view class="bottom">
   <view class="bottom-doctor-left">
     <text class="bottom-doctor-name" style="width: 100%">开方医生：{{rpData.doctorName}}</text>
     <view class="bottom-seal-box">
@@ -67,7 +67,9 @@
     </view>
   </view>
 </view>
-
+<view hidden="{{rpData.reviewStatusID===0}}" class="review-box">
+  <text >{{rpData.reviewStatusName}} {{rpData.reviewResult}}</text>
+</view>
 <view wx:if="{{payStatus==0 && isPreviewRp == 0}}" class="pay-show" style="position:fixed;bottom:0;left:0;right:0" catchtap="contactDoctorOption">
   <view class="pay-left">
     <image src="../../../images/public/public_contact_doctor.png"></image>

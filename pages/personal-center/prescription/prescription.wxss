@@ -20,7 +20,12 @@ page {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.85);
-  line-height: 28rpx;
+  line-height: 36rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .date {
@@ -30,4 +35,18 @@ page {
   font-weight: 400;
   color: rgba(0, 0, 0, 0.45);
   line-height: 24rpx;
+}
+
+.top-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.status {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  flex-shrink: 0;
+  margin-left: 24rpx;
 }

@@ -1,4 +1,4 @@
-<navigation-bar navbarTitle="我的处方"/>
+<navigation-bar navbarTitle="我的处方" />
 <block wx:if="{{noData}}">
   <tmcTipsView icon="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/public/public_no_prescription.png" title="暂无处方" message="您暂无处方信息，去咨询医生吧～" buttonTitle="咨询医生" bind:buttonOption="noDataOption"></tmcTipsView>
 </block>
@@ -7,11 +7,17 @@
 </block>
 <block wx:else>
   <view class="tmc-container">
-    <navigator wx:key="keyID" wx:for="{{list}}" wx:for-item="item" wx:for-index="index" 
-    url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}&index=0&isPreviewRp=1">
+    <navigator wx:key="keyID" wx:for="{{list}}" wx:for-item="item" wx:for-index="index" url="/pages/personal-center/prescription-details/prescription-details?rpID={{item.keyID}}&index=0&isPreviewRp=1">
       <view class="cell">
-        <view>
+        <view class="top-box">
           <text class="content">诊断结果：{{item.diagnosis}}</text>
+          <block wx:if="{{item.reviewStatusID == 2}}">
+            <text class="status" style="color: rgba(185, 27, 27, 0.45)">{{item.reviewStatusName}}</text>
+          </block>
+          <block wx:else>
+            <text class="status" style="color: rgba(0, 0, 0, 0.45)">{{item.reviewStatusName}}</text>
+          </block>
+
         </view>
         <text class="date">开方时间：{{item.addTime=='1900-01-01 00:00:00' ? '' : item.addTime}}</text>
       </view>
