@@ -15,7 +15,7 @@
             <text class="status" style="color: rgba(185, 27, 27, 0.45)">{{item.reviewStatusName}}</text>
           </block>
           <block wx:else>
-            <text class="status" style="color: rgba(0, 0, 0, 0.45)">{{item.reviewStatusName}}</text>
+            <text class="status" style="color: rgba(0, 0, 0, 0.45)">{{item.payStatus==0 ? '待支付' : item.reviewStatusName}}</text>
           </block>
 
         </view>

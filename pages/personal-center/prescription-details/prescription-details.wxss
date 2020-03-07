@@ -222,8 +222,12 @@ page {
 
 .review-box {
   margin-bottom: 172rpx;
-  margin-left: 32rpx;
-  margin-right: 32rpx;
+  padding-left: 32rpx;
+  padding-right: 32rpx;
+  display: flex;
+  flex-direction: column;
+  /* width: 100%; */
+  background-color: orange;
 }
 
 .review-box text {
@@ -231,4 +235,7 @@ page {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.85);
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-line;
 }
