@@ -103,12 +103,12 @@ var formatNumber = function (n) {
 
 var regYear = getRegExp("(y+)", "i");
 
-/**过滤时间
+/**过滤时间!-----IOS显示有问题，暂时不用，使用dateFormat方法
  * 第一个参数为时间;
  * 第二个参数为转换后的格式，不传，则过滤时间为 年-月-日 时-分-秒。
  * 可传  符合规则的时间条件，如： yyyy-MM-dd  yyyy/MM/dd
  */
-var dateFormat = function (timestamp, format) {
+var dateFormatOld = function (timestamp, format) {
   if (!format) {
     format = "yyyy-MM-dd hh:mm:ss";
   }
@@ -141,6 +141,10 @@ var dateFormat = function (timestamp, format) {
     }
   }
   return format;
+}
+
+var dateFormat = function (val) {
+  return val.substring(0, 10);
 }
 
 module.exports = {
