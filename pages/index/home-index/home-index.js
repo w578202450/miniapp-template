@@ -256,7 +256,7 @@ Page({
       });
   },
 
-  /** 获取医师团队介绍 */
+  /** 获取医师团队介绍  */
   getTeamIntroduce() {
     let that = this;
     HTTP.getBannerTeamIntroduce({

@@ -20,11 +20,11 @@
   </view>
    -->
 
-   <view class="tabs-box">
-  <block wx:for="{{comTools.stringSplit(pageItem.doctorDTOForTMC.diseaseName,'，')}}" wx:for-item="item" wx:key="index">
-    <view class="tab" style="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;">{{comTools.subStrTxt(item,10)}}</view>
-  </block>
-</view>
+  <view class="tabs-box">
+    <block wx:for="{{comTools.stringSplit(pageItem.doctorDTOForTMC.diseaseName,',')}}" wx:for-item="item" wx:key="index">
+      <view class="tab" style="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;">{{comTools.subStrTxt(item,10)}}</view>
+    </block>
+  </view>
 
-   <!-- <home-module-tab list="{{comTools.strSplit('eeee发个梵蒂冈梵蒂冈,sssrrs,ffff',',')}}" pageStyle="margin:10rpx;display: block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;"></home-module-tab> -->
+  <!-- <home-module-tab list="{{comTools.strSplit('eeee发个梵蒂冈梵蒂冈,sssrrs,ffff',',')}}" pageStyle="margin:10rpx;display: block; white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx;"></home-module-tab> -->
 </view>
