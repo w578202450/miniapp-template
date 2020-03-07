@@ -29,7 +29,7 @@
         <text class="title-other doctor-title doctor-title-two">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
       </view>
     </view>
-    <!-- 擅长标签 -->
+    <!-- 擅长标签  -->
     <!-- <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs> -->
     <view class="{{ cutting-line1 }}"></view>
     <!-- 好评率 服务人数 -->
