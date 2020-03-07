@@ -2,14 +2,14 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="{{(evaluateData.length > 0 && evaluateData[0].keyID) ? '（10）' : '0'}}" isHaveMoreBtn="{{evaluateData.length > 1}}" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}">
+  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="{{(evaluateData.length > 0 && evaluateData[0].keyID) ? '' : ''}}" isHaveMoreBtn="{{evaluateData.length > 1}}" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}">
     <view slot="content-body" class="evaluateContentBox">
       <!-- 星级、标签区 -->
       <view class="levelBox">
         <view class="flexRowBetweenCenter">
           <view class="flexRowStartCenter">
             <text class="generalComment">患者主观：</text>
-            <text class="generalCommentTxt">99%满意</text>
+            <text class="generalCommentTxt">100%满意</text>
           </view>
           <view class="flexRowStartCenter">
             <view class="flexRowStartCenter" style="margin-right: 10rpx;">

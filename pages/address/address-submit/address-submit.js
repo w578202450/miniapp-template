@@ -111,23 +111,16 @@ Page({
   submitOption() {
     console.log('submitOption=====', this.data.addressInfo)
     let that = this
-    wx.showLoading({
-      title: '确认收货地址...',
-    });
-    if (!this.data.addressInfo.name ||
-      !this.data.addressInfo.phone ||
-      !this.data.addressInfo.province ||
-      !this.data.addressInfo.city ||
-      !this.data.addressInfo.area ||
-      !this.data.addressInfo.address) {
+    if (!this.data.addressInfo || !this.data.addressInfo.name || !this.data.addressInfo.phone || !this.data.addressInfo.province || !this.data.addressInfo.city || !this.data.addressInfo.area || !this.data.addressInfo.address) {
       wx.showToast({
         title: '请选择收货地址',
         icon: 'none'
-      })
-
+      });
       return;
     }
-
+    wx.showLoading({
+      title: '确认收货地址...',
+    });
     HTTP.fillDeliveryAddr({
         orgID: app.globalData.orgID,
         orderID: this.data.orderID,

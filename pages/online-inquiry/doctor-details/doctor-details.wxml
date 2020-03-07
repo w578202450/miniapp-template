@@ -60,27 +60,6 @@
     </view>
     <view class="middle-bottomLine"></view>
   </view>
-
-  <!-- <view class="comment">
-    <view class="middle-header">
-      <view class="middle-lineView"></view>
-      <text class="middle-title">患者评价</text>
-    </view>
-
-    <view class="weui-cells">
-      <block wx:for="{{list}}" wx:for-item="item" wx:key="*this">
-        <view class="comment-header">
-          <view class="comment-name">{{item.name}}</view>
-          <image src="../../../images/public/public_level.png"></image>
-        </view>
-
-        <view class="comment-content-box">
-          <text class="comment-content">{{item.content}}</text>
-        </view>
-        <view class="comment-lineView"></view>
-      </block>
-    </view>
-  </view> -->
   <!-- 患者评价 -->
   <patient-evaluate wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" evaluateAllData="{{evaluateAllData}}" />
 </view>
