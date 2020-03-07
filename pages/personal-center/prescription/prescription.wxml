@@ -17,7 +17,6 @@
           <block wx:else>
             <text class="status" style="color: rgba(0, 0, 0, 0.45)">{{item.payStatus==0 ? '待支付' : item.reviewStatusName}}</text>
           </block>
-
         </view>
         <text class="date">开方时间：{{item.addTime=='1900-01-01 00:00:00' ? '' : item.addTime}}</text>
       </view>

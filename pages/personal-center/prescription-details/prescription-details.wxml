@@ -69,8 +69,8 @@
 </view>
 
 <view class="review-box">
-  <text>审核结果: {rpData.reviewStatusName}}</text>
-  <text>原   因: {{rpData.reviewResult}}</text>
+  <text>审核结果: {{rpData.reviewStatusName}}</text>
+  <text hidden="{{rpData.reviewStatusID == 0}}">原   因: {{rpData.reviewResult}}</text>
 </view>
 
 <view wx:if="{{payStatus==0 && isPreviewRp == 0}}" class="pay-show" style="position:fixed;bottom:0;left:0;right:0" catchtap="contactDoctorOption">
