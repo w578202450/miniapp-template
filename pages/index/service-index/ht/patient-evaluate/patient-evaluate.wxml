@@ -2,7 +2,7 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="{{(evaluateData.length > 0 && evaluateData[0].keyID) ? '' : ''}}" isHaveMoreBtn="{{evaluateData.length > 0}}" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}">
+  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="{{(evaluateData.length > 0 && evaluateData[0].keyID) ? '' : ''}}" isHaveMoreBtn="{{evaluateData.length > 0 && evaluateData[0].keyID}}" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}">
     <view slot="content-body" class="evaluateContentBox">
       <!-- 星级、标签区 -->
       <view class="levelBox">
@@ -79,7 +79,7 @@
               <image class="patientFace" src="{{item.patientFace}}" mode="widthFix" />
               <text class="patientNameTxt">患者： {{comTools.subName(item.patientName)}}</text>
             </view>
-            <view class="addTime">{{comTools.formateDate(item.addTime)}}</view>
+            <view class="addTime">{{comTools.dateFormat(item.addTime, 'yyyy-MM-dd')}}</view>
           </view>
         </view>
       </view>

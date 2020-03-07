@@ -239,6 +239,9 @@ Page({
    */
   getOrderCommentData: function(orgID, doctorStaffID) {
     let that = this;
+    that.setData({
+      evaluateAllData: null
+    });
     let params = {
       orgID: orgID,
       doctorStaffID: doctorStaffID

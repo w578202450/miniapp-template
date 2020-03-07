@@ -11,7 +11,7 @@
           <text class="name">{{type}}：{{paersonInfo.patientName?comTools.subName(paersonInfo.patientName):paersonInfo.authorName}} {{paersonInfo.patientAddress}}</text>
         </view>
         <view>
-          <text class="date">{{comTools.formateDate2(paersonInfo.publishDate)}}</text>
+          <text class="date">{{comTools.dateFormat(paersonInfo.publishDate, 'yyyy-MM-dd')}}</text>
         </view>
       </view>
       <view>
