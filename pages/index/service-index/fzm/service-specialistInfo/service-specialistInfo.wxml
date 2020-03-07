@@ -20,6 +20,7 @@
       <view class="specialist-header-middle-box">
         <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
         <text class="title-other doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
+        <text class="title-other doctor-title">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
       </view>
       <text class="title-other specialist-header-right-box" style="line-height: 36rpx" bindtap="previewDoctorInfo">查看介绍 ></text>
     </view>
