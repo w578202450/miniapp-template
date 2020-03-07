@@ -21,7 +21,7 @@ Page({
       pageIndex: 1,
       pageSize: 20
     },
-    navbarTitle: "侯丽萍医生的评价" // 传递的页面标题
+    navbarTitle: "患者评价" // 传递的页面标题
   },
 
   /**
@@ -96,7 +96,7 @@ Page({
     let that = this;
     let params = {
       orgID: that.data.httpParams.orgID,
-      doctorID: that.data.httpParams.doctorID,
+      doctorStaffID: that.data.httpParams.doctorID,
       pageIndex: that.data.pageInfo.pageIndex,
       pageSize: that.data.pageInfo.pageSize
     };
