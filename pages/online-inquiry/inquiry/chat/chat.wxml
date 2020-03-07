@@ -38,7 +38,7 @@
           <view class="info_one">{{talkInfo.assistantInfo.doctorName}}</view>
           <text class="info_one_one">医助</text>
         </view>
-        <text class="info_two">{{assistantDoctorInfo.titleName}}</text>
+        <text class="info_two">{{talkInfo.assistTitleName}}</text>
       </view>
     </view>
   </view>

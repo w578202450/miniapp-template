@@ -16,7 +16,6 @@ Page({
     userInfo: {}, // 当前用户信息
     wexinInfo: {}, // 当前用户微信信息
     doctorInfo: {}, // 医生信息<主要是拿到职称>
-    assistantDoctorInfo: {}, // 医助信息详情
     // 多方对话对话信息
     talkInfo: {
       doctorInfo: {}, // 医生信息详情
@@ -75,9 +74,9 @@ Page({
     isOverChat: false, // 是否结束了问诊
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
     navBarHeight: app.globalData.navBarHeight,
-    // bottomMenusDistance: 0, // 底部工具栏距离底部的距离
-    // inputShowed: false, // 输入框是否获取焦点
-    // docInfoBoxTop: 0, // 医生医助信息栏与顶部的距离
+    isInGroup: false, // 是否已入群
+    getGroupListSum: 5, // 检验是否入群循环的最大次数
+    sendType: "" // 消息发送类型
     // systemInfo: {} // 当前手机类型相关信息
   },
 
@@ -148,6 +147,7 @@ Page({
                 wx.hideToast(); // 结束录音、隐藏Toast提示框
                 recorderManager.stop();
               } else if (childType == "createTMCInquiry") {
+                // 创建问诊
                 that.setData({
                   isOverChat: true,
                   inquiryInfo: {
@@ -156,19 +156,11 @@ Page({
                   isSendRecord: false,
                   isOpenBottomBoolbar: false
                 });
-                // 创建问诊
                 that.createInquiry();
               }
             }
           }
         }
-        // let nowData = [...that.data.currentMessageList, renderableMsg];
-        // that.setData({
-        //   currentMessageList: nowData
-        // });
-        // if (msgType != "TIMCustomElem") {
-        //   that.toViewBottomFun();
-        // }
         let nowData = [...that.data.currentMessageList, renderableMsg];
         that.setData({
           currentMessageList: nowData
@@ -183,7 +175,6 @@ Page({
         } else {
           that.toViewBottomFun();
         }
-
         // that.setMessageRead();
       }
     });
@@ -218,7 +209,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    let that = this;
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+    this.data.innerAudioContext.stop();
+    msgStorage.off('newChatMsg')
   },
 
   /**
@@ -247,21 +253,6 @@ Page({
   dealSysVideoMessage: function(data) {
     let that = this;
     let requestRole = data.requestRole;
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-    this.data.innerAudioContext.stop();
-    msgStorage.off('newChatMsg')
   },
 
   /**
@@ -393,14 +384,6 @@ Page({
         });
       }
     });
-    wx.getStorage({
-      key: "assistantInfo",
-      success: function(res) {
-        that.setData({
-          assistantDoctorInfo: res.data
-        });
-      }
-    });
   },
 
   /*查询患者的多方对话 */
@@ -416,16 +399,17 @@ Page({
       let resData = res.data;
       that.setData({
         talkInfo: {
-          doctorTitleName: app.globalData.doctorInfo.titleName,
           doctorInfo: resData.doctor,
           assistantInfo: resData.assistant,
           patientInfo: resData.patient,
           multiTalkInfo: resData.multiTalk
         }
       });
+      that.getFetchDoctorInfo(that.data.userInfo.doctorStaffID); // 查询医生详情
+      that.getFetchAssistantDoctorInfo(that.data.userInfo.assistantStaffID); // 查询医助详情
       wx.setStorageSync('doctorInfo', resData.doctor);
       that.setData({
-        hidden: false,
+        hidden: false, // 开启加载中
         isOverChat: false
       });
       that.createInquiry(); // 创建问诊
@@ -445,21 +429,40 @@ Page({
       talkID: that.data.talkInfo.multiTalkInfo.keyID
     };
     HTTP.createInquiry(params).then(res => {
-      that.setData({
-        inquiryInfo: res.data
-      });
-      wx.setStorage({
-        key: 'inquiryInfo',
-        data: res.data
-      });
-      if (that.data.isOverChat) {
+      if (res.code == 0 && res.data) {
         that.setData({
-          isOverChat: false
+          inquiryInfo: res.data,
+          getGroupListSum: 2, // 检验入群否的最大循环次数
+          sendType: ""
         });
-      } else {
-        that.getHistoryMessage(); // 获取历史消息
+        that.isInGroupFun(); // 检验是否成功入群
       }
-    })
+      // wx.setStorage({
+      //   key: 'inquiryInfo',
+      //   data: res.data
+      // });
+      // if (that.data.isOverChat) {
+      //   that.setData({
+      //     isOverChat: false
+      //   });
+      // } else {
+      //   that.getHistoryMessage(); // 获取历史消息
+      // }
+    }).catch(err => {
+      console.log("创建问诊失败：" + JSON.stringify(err));
+      that.setData({
+        hidden: true,
+        isShowLoading: true,
+        httpLoading: false,
+        sendType: "",
+        isOverChat: true
+      });
+      wx.showToast({
+        title: "发起问诊失败",
+        icon: "none",
+        duration: 2000
+      });
+    });
   },
 
   // 操作：结束问诊后，患者主动发消息时，创建问诊
@@ -476,31 +479,35 @@ Page({
     };
     HTTP.createInquiry(params).then(res => {
       that.setData({
-        inquiryInfo: res.data
+        inquiryInfo: res.data,
+        getGroupListSum: 5, // 检验入群否的最大循环次数
+        sendType: type
       });
-      wx.setStorage({
-        key: 'inquiryInfo',
-        data: res.data
-      });
-      that.setData({
-        isOverChat: false
-      });
-      if (type == "normalFun") {
-        that.setData({
-          hidden: true // 隐藏加载中
-        });
-      } else if (type == "contentMSg") {
-        that.sendMessageFun(); // 发送文本消息
-      } else if (type == "imageFun") {
-        that.sendImageMsgFun(); // 发送图片消息
-      } else if (type == "videoFun") {
-        that.videoWxFun(); // 拨打视频
-      }
+      that.isInGroupFun(type);
+      // wx.setStorage({
+      //   key: 'inquiryInfo',
+      //   data: res.data
+      // });
+      // that.setData({
+      //   isOverChat: false
+      // });
+      // if (type == "normalFun") {
+      //   that.setData({
+      //     hidden: true // 隐藏加载中
+      //   });
+      // } else if (type == "contentMSg") {
+      //   that.sendMessageFun(); // 发送文本消息
+      // } else if (type == "imageFun") {
+      //   that.sendImageMsgFun(); // 发送图片消息
+      // } else if (type == "videoFun") {
+      //   that.videoWxFun(); // 拨打视频
+      // }
     }).catch(() => {
       that.setData({
         hidden: true,
         isShowLoading: true,
-        httpLoading: false
+        httpLoading: false,
+        sendType: ""
       });
       wx.showToast({
         title: "发起问诊失败",
@@ -508,6 +515,86 @@ Page({
         duration: 2000
       });
     })
+  },
+
+  /**检查是否已入群 */
+  isInGroupFun: function(type) {
+    let that = this;
+    if (that.data.getGroupListSum < 1) {
+      console.log("重复检验是否入群次数已用完");
+      that.setData({
+        hidden: true, // 隐藏加载中
+        httpLoading: false, // 关闭隐性加载过程
+        isShowLoading: true, // 隐藏发送中
+        sendType: ""
+      });
+      wx.showToast({
+        title: '进入问诊会话失败，请尝试重新进入当前页面',
+        icon: "none",
+        duration: 3000
+      });
+      return
+    }
+    setTimeout(() => {
+      let info = tim.getGroupList(); // 获取所有群ID
+      info.then(imResponse => {
+        that.setData({
+          isInGroup: false,
+          getGroupListSum: that.data.getGroupListSum - 1
+        });
+        imResponse.data.groupList.forEach((item) => {
+          if (item.groupID == that.data.inquiryInfo.keyID) {
+            that.setData({
+              isInGroup: true
+            });
+          }
+        });
+        if (that.data.isInGroup) {
+          console.log("检验入群结果：入群成功");
+          wx.setStorageSync("inquiryInfo", that.data.inquiryInfo);
+          if (that.data.sendType) {
+            that.setData({
+              isOverChat: false
+            });
+            if (that.data.sendType == "normalFun") {
+              that.setData({
+                hidden: true // 隐藏加载中
+              });
+            } else if (that.data.sendType == "contentMSg") {
+              that.sendMessageFun(); // 发送文本消息
+            } else if (that.data.sendType == "imageFun") {
+              that.sendImageMsgFun(); // 发送图片消息
+            } else if (that.data.sendType == "videoFun") {
+              that.videoWxFun(); // 拨打视频
+            }
+            that.setData({
+              sendType: ""
+            });
+          } else {
+            if (that.data.isOverChat) {
+              that.setData({
+                isOverChat: false
+              });
+            } else {
+              that.getHistoryMessage(); // 获取历史消息
+            }
+          }
+        } else {
+          console.log("检验入群结果：入群失败");
+          let params = {
+            groupID: that.data.inquiryInfo.keyID,
+            doctorStaffID: that.data.userInfo.doctorStaffID,
+            assistantStaffID: that.data.userInfo.assistantStaffID,
+            patientID: that.data.userInfo.keyID
+          }
+          HTTP.addGroupMember(params).then(res => {
+            that.isInGroupFun(); // 检验是否成功入群
+          });
+        }
+      }).catch(err => {
+        console.warn('getGroupList error:', err); // 获取群组列表失败的相关信息
+      })
+    }, 300);
   },
 
   /*打开会话时,获取最近消息列表 */
@@ -554,7 +641,7 @@ Page({
       that.setData({
         hidden: true
       });
-      console.warn(imError);
+      console.log(imError);
     });
   },
 
@@ -581,6 +668,38 @@ Page({
         scrollTop: rect.height - that.data.scrollTop
       });
     }).exec();
+  },
+
+  /**获取主治医师员工信息*/
+  getFetchDoctorInfo(staffID) {
+    let that = this;
+    HTTP.getDoctorInfo({
+        staffID: staffID
+      })
+      .then(res => {
+        if (res.code == 0 && res.data) {
+          that.setData({
+            ["talkInfo.doctorTitleName"]: res.data.titleName
+          });
+          // console.log(res.data);
+        }
+      });
+  },
+
+  /**获取助理医生员工信息 */
+  getFetchAssistantDoctorInfo(staffID) {
+    let that = this;
+    HTTP.getDoctorInfo({
+        staffID: staffID
+      })
+      .then(res => {
+        if (res.code == 0 && res.data) {
+          that.setData({
+            ["talkInfo.assistTitleName"]: res.data.titleName
+          });
+          // console.log(res.data);
+        }
+      })
   },
 
   /*操作： 点击医生查看详情 */

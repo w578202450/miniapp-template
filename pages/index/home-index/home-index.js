@@ -43,6 +43,7 @@ Page({
     newArrayDoctorList: [], // 组合的新数组
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
+    isHaveWatched: false // 是否监听到变化了一次
   },
 
   /**
@@ -80,7 +81,7 @@ Page({
     // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
-    // app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
+    app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options.q) { // 通过扫码进入时：q的值为url带参
       app.globalData.isHaveOptions = true; // 进入小程序携带有参数
       var scan_url = decodeURIComponent(options.q);
@@ -114,17 +115,24 @@ Page({
         wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
       }
     }
+    wx.showLoading({
+      title: '拼命加载中...',
+    });
     // 先监听是否尝试了登录：isStartLogin
     app.watch((value) => {
       // value为app.js中传入的值
       console.log("是否尝试自动登录了：", value);
+      console.log("是否带参进入小程序：", app.globalData.isHaveOptions);
       if (value) {
-        if (app.globalData.isInitInfo) {
-          console.log("尝试了且成功了");
-          that.initHomeData(); // 初始化参数
-        } else {
-          console.log("尝试了没成功");
-          that.getDefaulShowInfo(); // 初始化调用请求方法
+        if (!that.data.isHaveWatched) {
+          that.data.isHaveWatched = true;
+          if (app.globalData.isInitInfo) {
+            console.log("尝试了且成功了");
+            that.initHomeData(); // 初始化参数
+          } else {
+            console.log("尝试了没成功");
+            that.getDefaulShowInfo(); // 初始化调用请求方法
+          }
         }
       }
     }, "isStartLogin");

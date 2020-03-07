@@ -38,6 +38,7 @@ let nextPageName = ""; // 下一页的名字
  */
 function startLoginFun(options) {
   console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
+  tim.logout(); // 登录前先清除（可能在线）登陆的账号
   userSig = "";
   // selctedIndex = 0;
   logined = false;
@@ -60,33 +61,7 @@ function startLoginFun(options) {
     app.globalData.isInitInfo = false; // 登录初始化用户数据失败
     fetchTempCode();
   }
-  
 }
-
-// function checkSuccessStartLoginFun(options) {
-//   console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
-//   userSig = "";
-//   // selctedIndex = 0;
-//   logined = false;
-//   nextPageName = "";
-//   // if (options) {
-//   //   if (options.selctedIndex == 0 || options.selctedIndex) {
-//   //     selctedIndex = options.selctedIndex;
-//   //   }
-//   // }
-//   console.log("开始IM登录");
-//   app.globalData.unionid = wx.getStorageSync('unionid');
-//   app.globalData.openid = wx.getStorageSync('openID');
-//   logined = app.globalData.unionid && app.globalData.openid;
-//   if (logined) {
-//     app.globalData.userInfo = wx.getStorageSync('userInfo');
-//     getPatientInfo(app.globalData.unionid);
-//   } else {
-//     console.log("IM登录失败：logined不存在");
-//     app.globalData.isInitInfo = false;
-//     fetchTempCode();
-//   }
-// }
 
 /**
  * 获取基础数据
@@ -101,10 +76,10 @@ function getPatientInfo(unionID) {
     sex: app.globalData.userInfo.sex ? app.globalData.userInfo.sex : '',
     city: app.globalData.userInfo.city ? app.globalData.userInfo.city : '',
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
-    // assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID : "",
-    // orgID: (orgID && app.globalData.isHaveOptions) ? orgID : ""
-    assistantStaffID: assistantStaffID ? assistantStaffID : "",
-    orgID: orgID ? orgID : ""
+    assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID : "",
+    orgID: (orgID && app.globalData.isHaveOptions) ? orgID : ""
+    // assistantStaffID: assistantStaffID ? assistantStaffID : "",
+    // orgID: orgID ? orgID : ""
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {

@@ -6,7 +6,7 @@
   <view wx:if="{{!isInitInfo}}" class="titleTxt">{{titleTxt}}</view>
   <view class="toInquiryView">
     <view class="toInquiryBtn" bindtap="toOnlineInqueryFun">{{btnTxt}}</view>
-    <text class="tip-box" wx:if="{{isInitInfo}}">根据《互联网诊疗管理办法（试行）》等 相关法律法规，我们仅可针对您在实体医疗机构已确诊的常见病、慢性病提供复诊服务。</text>
+    <text class="tip-box" wx:if="{{isInitInfo}}">根据《互联网诊疗管理办法（试行）》等相关法律法规，我们仅可针对您在实体医疗机构已确诊的常见病、慢性病提供复诊服务。</text>
   </view>
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
 </view>
