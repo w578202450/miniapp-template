@@ -11,7 +11,7 @@
       <view class="flexRowBetweenCenter">
         <view class="flexRowStartCenter">
           <text class="generalComment">患者主观：</text>
-          <text class="generalCommentTxt">100%满意</text>
+          <text class="generalCommentTxt">99%满意</text>
         </view>
         <view class="flexRowStartCenter">
           <view class="flexRowStartCenter" style="margin-right: 10rpx;">
@@ -79,7 +79,7 @@
               <image class="patientFace" src="{{item.patientFace}}" mode="widthFix" />
               <text class="patientNameTxt">患者： {{comTools.subName(item.patientName)}}</text>
             </view>
-            <view class="addTime">{{comTools.formateDate(item.addTime)}}</view>
+            <view class="addTime">{{comTools.dateFormat(item.addTime, 'yyyy-MM-dd')}}</view>
           </view>
         </view>
       </view>

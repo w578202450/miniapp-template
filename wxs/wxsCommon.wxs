@@ -28,31 +28,10 @@ var subName = function(val) {
   }
 }
 
-// 过滤时间为 年-月-日 时:分:秒
-var formateDateTime = function(val) {
-  if (val == undefined || val.length == 0) {
-    return;
-  }
-  var dateTime = getDate(val);
-  var y = dateTime.getFullYear();
-  var m = dateTime.getMonth() + 1;
-  m = m < 10 ? ("0" + m) : m;
-  var d = dateTime.getDate();
-  d = d < 10 ? ("0" + d) : d;
-  var h = dateTime.getHours();
-  h = h < 10 ? ("0" + h) : h;
-  var minute = dateTime.getMinutes();
-  minute = minute < 10 ? ("0" + minute) : minute;
-  var seconds = dateTime.getSeconds();
-  seconds = seconds < 10 ? ("0" + seconds) : seconds;
-  var dateTimes = y + "-" + m + "-" + d + " " + h + ":" + minute + ":" + seconds;
-  return dateTimes;
-}
-
 // 过滤时间为 年-月-日
 var formateDate = function (val) {
   if (val == undefined || val.length == 0) {
-    return;
+    return ""
   }
   var date = getDate(val);
   var y = date.getFullYear();
@@ -117,20 +96,65 @@ var value = function (dic, key) {
   return dic[key]
 }
 
-var formateDate2 = function (v) {
-  return v.substring(0, 10);
+var formatNumber = function (n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+var regYear = getRegExp("(y+)", "i");
+
+/**过滤时间!-----IOS显示有问题，暂时不用，使用dateFormat方法
+ * 第一个参数为时间;
+ * 第二个参数为转换后的格式，不传，则过滤时间为 年-月-日 时-分-秒。
+ * 可传  符合规则的时间条件，如： yyyy-MM-dd  yyyy/MM/dd
+ */
+var dateFormatOld = function (timestamp, format) {
+  if (!format) {
+    format = "yyyy-MM-dd hh:mm:ss";
+  }
+  // timestamp = parseInt(timestamp); // 把时间戳取整
+  // console.log(timestamp);
+  var realDate = getDate(timestamp);
+  function timeFormat(num) {
+    return num < 10 ? '0' + num : num;
+  }
+  var date = [
+    ["M+", timeFormat(realDate.getMonth() + 1)],
+    ["d+", timeFormat(realDate.getDate())],
+    ["h+", timeFormat(realDate.getHours())],
+    ["m+", timeFormat(realDate.getMinutes())],
+    ["s+", timeFormat(realDate.getSeconds())],
+    ["q+", Math.floor((realDate.getMonth() + 3) / 3)],
+    ["S+", realDate.getMilliseconds()],
+  ];
+  var reg1 = regYear.exec(format);
+  if (reg1) {
+    format = format.replace(reg1[1], (realDate.getFullYear() + '').substring(4 - reg1[1].length));
+  }
+  for (var i = 0; i < date.length; i++) {
+    var k = date[i][0];
+    var v = date[i][1];
+    var reg2 = getRegExp("(" + k + ")").exec(format);
+    if (reg2) {
+      format = format.replace(reg2[1], reg2[1].length == 1
+        ? v : ("00" + v).substring(("" + v).length));
+    }
+  }
+  return format;
+}
+
+var dateFormat = function (val) {
+  return val.substring(0, 10);
 }
 
 module.exports = {
   subStrTxt: subStrTxt,
   subName: subName,
-  formateDateTime: formateDateTime,
-  formateDate: formateDate,
   isDivisible: isDivisible,
   serviceNum: serviceNum,
   strSplit: strSplit,
   value: value,
   strReplce: strReplce,
   stringSplit: stringSplit,
-  formateDate2: formateDate2
+  dateFormat: dateFormat
 };

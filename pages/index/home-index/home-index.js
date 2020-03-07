@@ -79,6 +79,11 @@ Page({
     //   assistantStaffID: "20011514000045118050514253",
     //   orgID: "19101017081245502880511001"
     // }
+    // 开发
+    // options = {
+    //   assistantStaffID: "20020509480115486460514001",
+    //   orgID: "19101017081245502880511001"
+    // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
