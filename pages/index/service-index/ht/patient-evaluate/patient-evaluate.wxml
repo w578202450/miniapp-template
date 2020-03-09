@@ -16,7 +16,7 @@
               <text class="effect">疗效：</text>
               <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
             </view>
-            <view class="verticalLine"></view>
+            <!-- <view class="verticalLine"></view> -->
             <view class="flexRowStartCenter">
               <text class="effect">服务：</text>
               <image class="levelIconImg" src="{{levelIconSrc}}" mode="widthFix"></image>
@@ -37,7 +37,7 @@
               <text class="diseaseTitle">所患疾病：</text>
               <text class="diseaseTxt">{{item.disease}}</text>
             </view>
-            <view class="flexRowStartCenter" bindtap="unfoldContentFun">
+            <view wx:if="{{item.content && item.content.length > 47}}" class="flexRowStartCenter" bindtap="unfoldContentFun">
               <text class="unfoldTxt">{{unfoldTxt}}</text>
               <image class="unfoldIcon" src="{{isShowAllContent ? packUpIconSrc: unfoldIconSrc}}" mode="widthFix" />
             </view>

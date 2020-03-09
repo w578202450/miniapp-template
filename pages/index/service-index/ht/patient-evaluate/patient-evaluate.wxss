@@ -38,11 +38,11 @@
   font-size: 27rpx;
 }
 
-.verticalLine {
+/* .verticalLine {
   height: 30rpx;
   width: 1rpx;
   background-color: #dbdee3;
-}
+} */
 
 .marginLeftRightLine {
   margin: 0 60rpx;

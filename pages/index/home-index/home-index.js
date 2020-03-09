@@ -26,17 +26,18 @@ Page({
     deanInfo: {
       deanPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/houliping.png",
       deanName: "侯丽萍", // 院长名称
-      deanDuty: "主任医师 山西名中医 博士生导师", // 职称
+      titleName: "院长", // 职位名称
+      deanDuty: "主任医师 北京中医药大学博士生导师 名中医", // 职称
       deanFamous: "侯氏三焦气化疗法创始人", // 专长
-      goodAts: ["风湿骨科", "针灸"], //擅长
+      goodAts: ["风湿骨病", "疑难杂症"], //擅长
       // 院长详细介绍
-      deanDetailContent: "北京中医药大学博士生导师，山西省名中医，国家中医药管理局重点专科风湿病学科带头人，国家中医药管理局重点专科风湿病皮痹协作组组长，全国第六批优秀中医人才指导老师，世界中医药联合会特聘专家；侯氏中医风湿三焦气化诊疗体系主要传承人，侯氏中医风湿三焦气化流派代表传承人.",
+      deanDetailContent: "御医传人名老中医石广济弟子，全国优秀中医人才指导老师，中国风湿病学专家、学科带头人，日本东洋医学研究院名誉教授，莫斯科第十医院名誉院长。",
     }, // 院长信息
     hospitalInfo: {
       hospitalPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/yiyuan.png",
       hospitalName: "侯丽萍风湿骨病中医医院",
       hospitalIntroduce: "中医治风湿骨病",
-      hospitalDetailContent: "太原侯丽萍风湿骨病中医医院系国家中医药管理局“十五”、“十一五”“十二五”风湿病重点专科医院、太原市二级甲等中医专科医院、山西中医学院教学医院、山西中医类风湿病医疗中心。本院始建于1987年，在侯丽萍院长的领导下，大力开展科学研究和临床实践，博取中医传统医学之精华与现代科学技术之长，创立了中医治疗风湿、类风湿的系统综合疗法--- 侯氏中医风湿三焦气化疗法，在治疗类风湿、强直性脊柱炎、红斑狼疮、骨关节病等各种关节疾病的诊治方面，取得了良好的疗效，已在全国二十多各省市推广使用，并与北美、日本、东南亚等国建立了长期合作关系。"
+      hospitalDetailContent: "国家中医药管理局“十五”、“十一五”“十二五”风湿病重点专科医院，山西省二级甲等中医专科医院，山西中医学院教学医院，山西省中医研究院附属医院，国家级重点专科（专病…"
     }, // 医院信息
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
@@ -255,7 +256,7 @@ Page({
       });
   },
 
-  /** 获取医师团队介绍 */
+  /** 获取医师团队介绍  */
   getTeamIntroduce() {
     let that = this;
     HTTP.getBannerTeamIntroduce({
@@ -386,7 +387,7 @@ Page({
     });
   },
 
-  /** 获取默认进小程序显示信息 */
+  /** 获取默认进小程序显示信息  */
   getDefaulShowInfo() {
     let that = this;
     let params = {

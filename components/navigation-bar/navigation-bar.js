@@ -53,11 +53,11 @@ Component({
     },
     //回主页
     toIndex: function() {
-      // let orgID = wx.getStorageSync("orgID");
-      // let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+      let orgID = wx.getStorageSync("orgID");
+      let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
       wx.reLaunch({
-        // url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
-        url: '/pages/index/home-index/home-index'
+        url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
+        // url: '/pages/index/home-index/home-index'
       });
     }
   }

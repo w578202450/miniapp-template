@@ -129,15 +129,15 @@ page {
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
-  line-height: 36rpx;
+  /* line-height: 36rpx; */
 }
 
 .title-name-houshi {
   font-size: 36rpx;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.85);
-  line-height: 36rpx;
+  color: rgba(0, 0, 0);
+  /* line-height: 36rpx; */
 }
 
 .title-other {
@@ -149,8 +149,9 @@ page {
 }
 
 .dean-introduce-box {
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  position: relative;
 }
 
 .detailIntroduction {
@@ -170,9 +171,10 @@ page {
 .introduce-box-image {
    display: flex;
    justify-content: flex-end;
-   margin-top:5rpx;
+   /* margin-top:5rpx; */
+   top: -20rpx;
    bottom: 10rpx;
-   width: 100%;
+   /* width: 100%; */
 }
 
 .home-bottom {

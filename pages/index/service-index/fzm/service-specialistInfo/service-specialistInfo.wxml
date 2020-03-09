@@ -18,14 +18,19 @@
     <view class="specialist-header-box">
       <image src="{{ doctorInfo.faceImage }}" mode="aspectFill"></image>
       <view class="specialist-header-middle-box">
-        <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
+        <view class="docFlexRowBetween">
+          <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
+          <view class="docFlexRowStart">
+            <view class="title-other specialist-header-right-box" style="line-height: 28rpx" bindtap="previewDoctorInfo">查看介绍</view>
+            <image style="width:28rpx;height:28rpx;" src="/images/home/youBlue.png"></image>
+          </view>
+        </view>
         <text class="title-other doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
-        <text class="title-other doctor-title">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
+        <text class="title-other doctor-title doctor-title-two">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
       </view>
-      <text class="title-other specialist-header-right-box" style="line-height: 36rpx" bindtap="previewDoctorInfo">查看介绍 ></text>
     </view>
-    <!-- 擅长标签 -->
-    <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs>
+    <!-- 擅长标签  -->
+    <!-- <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs> -->
     <view class="{{ cutting-line1 }}"></view>
     <!-- 好评率 服务人数 -->
     <view class="specialist-bottom-box">
