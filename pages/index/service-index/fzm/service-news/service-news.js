@@ -55,30 +55,6 @@ Component({
    */
   methods: {
     /**
-     * swiper切换
-     */
-    pagechange: function(e) {
-      let currentIndex = e.detail.current
-      let navitem = this.data.articleTitles[currentIndex]
-      let currentClassifyID = e.detail.currentItemId
-      let currentCategoryData = this.data.articleDatas[currentClassifyID]
-      if (currentCategoryData.datas && currentCategoryData.datas.length > 0) {
-        // 这里先渲染再切换界面
-        this.setData({
-          currentCategoryData: currentCategoryData
-        }, function() {
-          this.setData({
-            currentIndex: e.detail.current
-          })
-        })
-      } else {
-        this.setData({
-          currentIndex: e.detail.current
-        })
-        this.loadDatas(currentClassifyID, currentCategoryData, navitem.orgID)
-      }
-    },
-    /**
      * 点击tab\
      */
     titleClick: function(e) {
@@ -86,9 +62,25 @@ Component({
       if (this.data.currentIndex == index) {
         return false;
       } else {
-        this.setData({
-          currentIndex: index
-        });
+        let currentIndex = index
+        let navitem = this.data.articleTitles[currentIndex]
+        let currentClassifyID = navitem.keyID
+        let currentCategoryData = this.data.articleDatas[currentClassifyID]
+        if (currentCategoryData.datas && currentCategoryData.datas.length > 0) {
+          // 这里先渲染再切换界面
+          this.setData({
+            currentCategoryData: currentCategoryData
+          }, function () {
+            this.setData({
+              currentIndex: index
+            })
+          })
+        } else {
+          this.setData({
+            currentIndex: index
+          })
+          this.loadDatas(currentClassifyID, currentCategoryData, navitem.orgID)
+        }
       }
     },
     /**
@@ -207,6 +199,10 @@ Component({
         url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
       });
 
+    },
+
+    forbidMove(){
+      return;
     }
 
   }

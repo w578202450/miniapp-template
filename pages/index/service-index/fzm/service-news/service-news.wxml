@@ -13,24 +13,22 @@
       </block>
     </view>
   </view>
-<!-- windowH-statusBarHeight - navBarHeight - 34 -->
   <view style="height:1px;background:rgba(0,0,0,0.1)"></view>
-  <swiper class='swiper' bindchange='pagechange' current='{{currentIndex}}' style="height:{{windowH-statusBarHeight - navBarHeight - 50 - 34}}px">
+  <swiper class='swiper' current="{{currentIndex}}">
     <block wx:for="{{articleTitles}}" wx:for-item="navItem" wx:for-index="navIndex" wx:key="classifyID">
-      <swiper-item item-id="{{navItem.keyID}}">
-        <scroll-view style="height:{{windowH-statusBarHeight - navBarHeight - 50 - 34}}px" scroll-y>
-          <block wx:for="{{comTools.value(articleDatas,navItem.keyID).datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-            <service-news-item bindtap="itemDetails" data-item="{{item}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
+      <swiper-item catchtouchmove="forbidMove" class='swiper'>
+        <block wx:for="{{comTools.value(articleDatas,navItem.keyID).datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
+          <service-news-item bindtap="itemDetails" data-item="{{item}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
+        </block>
+        <!-- 底部状态提示 -->
+        <text wx:if="{{comTools.value(articleDatas,navItem.keyID).loading}}" class="loading-box">{{loadingText}}</text>
+        <text wx:elif="{{comTools.value(articleDatas,navItem.keyID).noData}}" class="noData-box">{{noDataText}}</text>
+        <block wx:else>
+          <block wx:if="{{comTools.value(articleDatas,navItem.keyID).noMore}}">
+            <text wx:if="{{!comTools.value(articleDatas,navItem.keyID).noOnePage}}" class="loading-box">{{noMoreDataText}}</text>
           </block>
-          <text wx:if="{{comTools.value(articleDatas,navItem.keyID).loading}}" class="loading-box">{{loadingText}}</text>
-          <text wx:elif="{{comTools.value(articleDatas,navItem.keyID).noData}}" class="noData-box">{{noDataText}}</text>
-          <block wx:else>
-            <block wx:if="{{comTools.value(articleDatas,navItem.keyID).noMore}}">
-              <text wx:if="{{!comTools.value(articleDatas,navItem.keyID).noOnePage}}" class="loading-box">{{noMoreDataText}}</text>
-            </block>
-            <text wx:else class="loading-box" bindtap="uploadMoreDatas" data-index="{{navIndex}}" data-navitem="{{navItem}}">{{loadMoreDataText}}</text>
-          </block>
-        </scroll-view>
+          <text wx:else class="loading-box" bindtap="uploadMoreDatas" data-index="{{navIndex}}" data-navitem="{{navItem}}">{{loadMoreDataText}}</text>
+        </block>
       </swiper-item>
     </block>
   </swiper>
