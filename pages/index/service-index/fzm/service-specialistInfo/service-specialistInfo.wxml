@@ -1,5 +1,5 @@
 <view class="main" style="{{ pageStyle }}">
-  <!-- 引入wxs脚本 -->
+  <!-- 引入wxs脚本  -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <!-- banner -->
   <block wx:if="{{ isInquiryNav }}">
