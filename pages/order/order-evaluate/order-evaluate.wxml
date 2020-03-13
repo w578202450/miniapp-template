@@ -1,7 +1,7 @@
 <!--pages/order/order-evaluate/order-evaluate.wxml-->
 <view>
   <navigation-bar navbarTitle="发表评价" />
-  <!-- 引入wxs脚本  -->
+  <!-- 引入wxs脚本 -->
   <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
   <scroll-view scroll-y="{{true}}" style="height: {{windowHeightNum - 60 - navBarHeight - statusBarHeight}}px;">
     <view class="evabody">

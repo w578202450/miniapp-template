@@ -9,7 +9,7 @@ const version = 2; //0开发、1测试 2发布
 let API_BASE_URL = (function() {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
-  // } else if (version == 1) {
+  } else if (version == 1) {
     return 'https://tmcpro-cs.jk.100cbc.com/'
   } else {
     return 'https://tmcpro.jk.100cbc.com/'
