@@ -360,6 +360,7 @@ Page({
    * 确认收货
    */
   confirmGoods() {
+    let that = this;
     wx.showModal({
       content: '确定收货？',
       success(res) {
@@ -370,8 +371,8 @@ Page({
           let params = {
             orgID: app.globalData.orgID,
             deliveryStatusID: '3', // 1待发货,2已发货,3确认收货,4已退货
-            modifyUser: this.data.orderInfo.modifyUser ? this.data.orderInfo.modifyUser : '',
-            orderID: this.data.orderInfo.keyID
+            modifyUser: that.data.orderInfo.modifyUser ? that.data.orderInfo.modifyUser : '',
+            orderID: that.data.orderInfo.keyID
           }
           HTTP.sureSuccessDelivery(params).then(res => {
             wx.hideLoading();
@@ -382,7 +383,7 @@ Page({
                   that.loadDatas();
                   that.refreshPrePage();
                   let paramsData = {
-                    orderID: this.data.orderInfo.keyID,
+                    orderID: that.data.orderInfo.keyID,
                     orgID: app.globalData.orgID
                   };
                   wx.navigateTo({

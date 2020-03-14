@@ -47,7 +47,7 @@ Page({
         id: "2"
       },
     ],
-    //是否有过敏史
+    //是否有过敏史 
     allergyItems: [{
         name: '有',
         value: '有',
