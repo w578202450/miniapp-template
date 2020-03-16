@@ -366,7 +366,7 @@ Page({
 
   /**操作：确认提交 */
   submitEvaluateFun: function() {
-    if (this.data.orderStatusID != 30) {
+    if (this.data.commentStatusID == 1) {
       commonFun.showToastFun("订单已经评价过了，无法再次评价");
       return
     }

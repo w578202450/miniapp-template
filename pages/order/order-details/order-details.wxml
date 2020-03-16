@@ -5,7 +5,7 @@
     <navigation-bar navbarTitle="订单详情" navbarTextStyle="white" bgColor="rgba(0,0,0,0)" />
     <view class="paySuccess" style="margin-top: 50rpx">
       <!-- 已支付，已评价 -->
-      <block wx:if='{{orderInfo.orderStatusID == 31}}'>
+      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.commentStatusID == 1}}'>
         <text>订单已完成</text>
       </block>
       <!-- 已支付 -->
@@ -134,7 +134,7 @@
         </view>
       </block>
       <!-- 已确认收货 -->
-      <block wx:if='{{orderInfo.orderStatusID == 30 && orderInfo.deliveryStatusID == 3}}'>
+      <block wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.commentStatusID == 0 && orderInfo.deliveryStatusID == 3}}'>
         <view class="options-view" style="border:1px solid rgba(254,88,83,1)" bindtap="toEvaluateFun">
           <text style="color:rgba(254, 88, 83, 1)">立即评价</text>
         </view>
