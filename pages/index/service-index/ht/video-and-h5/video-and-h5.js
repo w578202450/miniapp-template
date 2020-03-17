@@ -36,10 +36,18 @@ Page({
         });
         console.log(that.data.materialInfo);
       } else {
-        commonFun.showToastFun("素材数据异常，无法正常展示");
+        wx.showToast({
+          title: '素材数据异常，无法正常展示',
+          icon: "none",
+          duration: 3000
+        });
       }
     } else {
-      commonFun.showToastFun("素材数据异常，无法正常展示");
+      wx.showToast({
+        title: '素材数据异常，无法正常展示',
+        icon: "none",
+        duration: 3000
+      });
     }
   },
 

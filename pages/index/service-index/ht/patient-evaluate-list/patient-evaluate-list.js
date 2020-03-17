@@ -38,7 +38,11 @@ Page({
       that.getPatientEvaluateListFun(); // 查询：患者评价列表数据
       that.initNoRealyData(); // 拟定假数据
     } else {
-      commonFun.showToastFun("数据异常，无法正常展示");
+      wx.showToast({
+        title: '数据异常，无法正常展示',
+        icon: "none",
+        duration: 3000
+      });
     }
   },
 
@@ -106,7 +110,11 @@ Page({
           evaluateListData: res.data.datas ? res.data.datas : []
         });
       } else {
-        commonFun.showToastFun("获取评价列表数据失败");
+        wx.showToast({
+          title: '获取评价列表数据失败',
+          icon: "none",
+          duration: 3000
+        });
       }
     });
   },
@@ -137,7 +145,11 @@ Page({
       });
     } else if (materialItem.materialType == 1) {
       if (materialItem.materialUrl.length == 0 || !materialItem.materialUrl) {
-        commonFun.showToastFun("视频链接地址错误，无法查看");
+        wx.showToast({
+          title: '视频链接地址错误，无法查看',
+          icon: "none",
+          duration: 3000
+        });
         return;
       }
       let materialData = {

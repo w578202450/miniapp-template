@@ -75,6 +75,7 @@ Page({
     countIndex: 9, // 可选图片剩余的数量
     imageData: [], // 所选上传成功后的图片数据
     orderStatusID: 10, // 订单的状态
+    commentStatusID: 0, // 评价的状态
     isSearched: false, // 是否查询过了
     statusBarHeight: app.globalData.systemInfo.statusBarHeight,
     navBarHeight: app.globalData.navBarHeight
@@ -165,11 +166,16 @@ Page({
     HTTP.goodsOrder(params).then(res => {
       if (res.code == 0 && res.data) {
         that.setData({
-          orderStatusID: res.data.orderStatusID
+          orderStatusID: res.data.orderStatusID,
+          commentStatusID: res.data.commentStatusID
         })
         that.getRpDetailFun(res.data.rpID);
       } else {
-        commonFun.showToastFun("查询订单详情失败");
+        wx.showToast({
+          title: '查询订单详情失败',
+          icon: "none",
+          duration: 3000
+        });
       }
     });
   },
@@ -185,12 +191,16 @@ Page({
     };
     HTTP.getRp(params).then(res => {
       if (res.code == 0 && res.data) {
-        this.data.paramsData.doctorStaffID = res.data.doctorStaffID;
-        this.data.paramsData.doctorName = res.data.doctorName;
-        this.data.paramsData.disease = res.data.diagnosis;
-        this.data.isSearched = true;
+        that.data.paramsData.doctorStaffID = res.data.doctorStaffID;
+        that.data.paramsData.doctorName = res.data.doctorName;
+        that.data.paramsData.disease = res.data.diagnosis;
+        that.data.isSearched = true;
       } else {
-        commonFun.showToastFun("查询处方详情失败");
+        wx.showToast({
+          title: '查询处方详情失败',
+          icon: "none",
+          duration: 3000
+        });
       }
     });
   },
@@ -366,9 +376,29 @@ Page({
 
   /**操作：确认提交 */
   submitEvaluateFun: function() {
+    if (!this.data.paramsData.orderID) {
+      wx.showToast({
+        title: '订单信息异常，无法进行评价',
+        icon: "none",
+        duration: 2000
+      });
+      return;
+    }
     if (this.data.commentStatusID == 1) {
-      commonFun.showToastFun("订单已经评价过了，无法再次评价");
+      wx.showToast({
+        title: '订单已经评价过了，无法再次评价',
+        icon: "none",
+        duration: 2000
+      });
       return
+    }
+    if (!this.data.content || this.data.content.length === 0) {
+      wx.showToast({
+        title: '请填写评价内容',
+        icon: "none",
+        duration: 2000
+      });
+      return;
     }
     let params = {
       ...this.data.paramsData,
@@ -387,7 +417,11 @@ Page({
           url: '/pages/order/order-evaluate-success/order-evaluate-success',
         });
       } else {
-        commonFun.showToastFun("提交订单评价失败");
+        wx.showToast({
+          title: '提交订单评价失败',
+          icon: "none",
+          duration: 3000
+        });
       }
     });
   }
