@@ -18,7 +18,7 @@
               <text class="content-date">开方时间：{{item.addTime=='1900-01-01 00:00:00' ? '' : item.addTime}}</text>
             </view>
             <view class="right-box">
-              <text wx:if="{{item.orderStatusID == 10 && item.commentStatusID == 1}}" class="right-status">已完成</text>
+              <text wx:if="{{item.orderStatusID == 10 && item.deliveryStatusID > 2}}" class="right-status">已完成</text>
               <text wx:elif="{{item.orderStatusID == 10}}" class="right-status">{{item.deliveryStatusName}}</text>
               <text wx:else class="right-status">{{item.orderStatusName}}</text>
             </view>
@@ -30,7 +30,7 @@
             <view wx:if="{{item.orderStatusID== 10 && item.deliveryStatusID==0}}" style="border:1px solid rgba(0,0,0,0.25);margin-top: 32rpx" class="option-view" catchtap="addressAction" data-index="{{index}}">
               <text style="color:rgba(0,0,0,0.65)">填写地址</text>
             </view>
-            <view wx:if='{{orderInfo.orderStatusID == 10 && orderInfo.payWay == 1 && orderInfo.deliveryStatusID == 2}}' class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
+            <view wx:if='{{item.orderStatusID == 10 && item.payWay == 1 && item.deliveryStatusID == 2}}' class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
               <text class="blueBtnTxt">确认收货</text>
             </view>
             <view wx:if="{{item.orderStatusID == 10 && item.commentStatusID == 0 && item.deliveryStatusID == 3}}" class="blueBtn" catchtap="toEvaluateFun" data-index="{{index}}">
