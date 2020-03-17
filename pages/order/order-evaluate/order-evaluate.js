@@ -392,14 +392,6 @@ Page({
       });
       return
     }
-    if (!this.data.content || this.data.content.length === 0) {
-      wx.showToast({
-        title: '请填写评价内容',
-        icon: "none",
-        duration: 2000
-      });
-      return;
-    }
     let params = {
       ...this.data.paramsData,
       generalCommentID: this.data.isSatisfaction ? 0 : 1, // 总评ID 0:满意 1：不满意
