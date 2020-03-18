@@ -142,7 +142,7 @@
           </view>
           <!-- 文本消息：TIMTextElem -->
           <view wx:elif="{{item.type == 'TIMTextElem'}}" class="contentTxtMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: #B6D1F9' : ''}};min-width: 35rpx;min-height: 45rpx;word-break: break-all;">
-            <text style="word-break:break-all;">{{item.payload.text}}</text>
+            <text style="word-break:break-all;" selectable="true">{{item.payload.text}}</text>
           </view>
           <!-- 图片消息：TIMImageElem -->
           <view wx:elif="{{item.type == 'TIMImageElem'}}" class="contentPictureMsg" style="{{item.from == talkInfo.multiTalkInfo.patientID ? 'background: item.showLoadingState ? #B6D1F9 : #F6F6F6' : ''}}" bindtap="previewImage" data-imagesrc="{{item.payload.imageInfoArray[0].imageUrl}}">
