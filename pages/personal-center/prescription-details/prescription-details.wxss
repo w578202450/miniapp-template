@@ -147,7 +147,7 @@ page {
   flex-flow: row;
   justify-content: space-between;
   background-color: white;
-  padding: 24rpx rpx 32rpx 48rpx 32rpx;
+  padding: 24rpx 32rpx 48rpx 32rpx;
 }
 
 .bottom-doctor-left {
