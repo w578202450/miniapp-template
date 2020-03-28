@@ -8,7 +8,6 @@
   <view class="tip" style="height:20rpx;background:rgba(246,246,246,1)"></view>
 </block>
 <view class="header">
-  <image src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/profile/profile_company_seal.png"></image>
   <view class="header-content">
     <text class="header-title">桃子互联网医院</text>
     <text class="header-title" style="margin-top:32rpx">电子处方笺</text>
@@ -50,6 +49,9 @@
     <text class="rp-methods">用法用量：{{item.takeDose}}{{item.formType}}/次，{{item.takeFrequence}}，{{item.takeDirection}}，{{item.medicationDays}}天</text>
   </view>
   <view class="rp-advice">医嘱：{{rpData.rpAdvice}}</view>
+  <view class="profile_company_box">
+    <image class="profile_company_seal" src="https://com-shuibei-peach-static.100cbc.com/tmcpro/images/profile/profile_company_seal.png"></image>
+  </view>
 </view>
 <view class="bottom">
   <view class="bottom-doctor-left">

@@ -17,12 +17,15 @@ page {
   z-index: 1;
 }
 
-.header image {
-  position: absolute;
+.profile_company_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.profile_company_seal {
   width: 140rpx;
   height: 140rpx;
-  margin-top: 35rpx;
-  right: 32rpx;
 }
 
 .header-content {
@@ -78,7 +81,7 @@ page {
   justify-content: center;
   flex-flow: column;
   background-color: white;
-  padding: 24rpx 32rpx 48rpx 32rpx;
+  padding: 24rpx 32rpx 24rpx 32rpx;
 }
 
 .middle-rp {
@@ -144,7 +147,7 @@ page {
   flex-flow: row;
   justify-content: space-between;
   background-color: white;
-  padding: 64rpx 32rpx 48rpx 32rpx;
+  padding: 24rpx 32rpx 48rpx 32rpx;
 }
 
 .bottom-doctor-left {

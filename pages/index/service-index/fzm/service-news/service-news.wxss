@@ -87,9 +87,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24rpx;
+  font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.35);
   line-height: 36rpx;
+  padding: 20rpx 0;
 }

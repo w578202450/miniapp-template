@@ -45,7 +45,7 @@ Component({
     }, // 文章列表{模块id:文章列表}}
     currentClassifyID: '', // 当前模块id
     loadingText: "正在加载中...",
-    noDataText: "没有数据",
+    noDataText: "暂无数据",
     noMoreDataText: "已经到底了",
     loadMoreDataText: "点击加载更多"
   },
