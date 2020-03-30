@@ -1,0 +1,15 @@
+/* components/tmc-button/tmc-button.wxss */
+
+.button {
+  background: linear-gradient(268deg, rgba(93, 180, 242, 1) 0%, rgba(59, 140, 237, 1) 100%);
+  box-shadow: 0px 0px 4rpx 0px rgba(0, 0, 0, 0.1);
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

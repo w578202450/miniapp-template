@@ -1,4 +1,4 @@
-.page {
+/* .page {
   background-color: orange;
   margin-bottom: 1rpx;
 }
@@ -18,42 +18,19 @@
   margin-left: 48rpx;
   flex-shrink: 0;
   border-radius: 8rpx;
-}
+} */
 
 /* .image-box image {
   
 } */
-
+/* 
 .left-box {
   display: flex;
   flex-direction: column;
 }
 
-.title {
-  font-size: 28rpx;
-  font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.85);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-}
 
-.details {
-  margin-top: 24rpx;
-  font-size: 24rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  line-height: 36rpx;
-  color: rgba(0, 0, 0, 0.65);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
+
 
 .video-icon {
   position: absolute;
@@ -64,13 +41,57 @@
   z-index: 3;
 }
 
-.cutting-line {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.1);
-}
+
 
 .cover {
   width: 160rpx;
   height: 120rpx;
   border-radius: 8rpx;
+} */
+
+.content-box {
+  background-color: white;
+  padding: 32rpx 20rpx 32rpx 20rpx;
+}
+
+.title {
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.details {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+
+.bottom {
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.like-num {
+  color: rgba(67, 139, 239, 1);
+}
+
+.cutting-line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
 }

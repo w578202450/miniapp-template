@@ -109,5 +109,10 @@ Page({
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
+  },
+
+  // 去问诊
+  goInquiry: function () {
+    
   }
 })

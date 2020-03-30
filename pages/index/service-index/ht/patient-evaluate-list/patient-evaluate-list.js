@@ -107,7 +107,8 @@ Page({
     HTTP.orderCommentList(params).then(res => {
       if (res.code == 0 && res.data) {
         that.setData({
-          evaluateListData: res.data.datas ? res.data.datas : []
+          evaluateListData: res.data.datas ? res.data.datas : [],
+          totalRow:res.data.totalRow
         });
       } else {
         wx.showToast({

@@ -2,7 +2,9 @@
   "usingComponents": {
     "tmcnavbar": "/components/tmc-navbar/tmc-navbar",
     "navigation-bar": "/components/navigation-bar/navigation-bar",
-    "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate"
+    "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate",
+    "service-tabs": "/pages/index/service-index/fzm/service-tabs/service-tabs",
+    "tmc-button": "/components/tmc-button/tmc-button"
   },
   "navigationStyle": "custom"
 }

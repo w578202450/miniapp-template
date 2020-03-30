@@ -17,7 +17,7 @@
     </view>
     <view hidden="{{scrollTop != 0}}" class="title-default-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
       <view class="home-icon-box" style="height: {{capsuleRect.height}}px;width: {{capsuleRect.height}}px" bindtap="goToBackHome">
-        <image  src="{{ navHomeIconBlack }}"></image>
+        <image src="{{ navHomeIconBlack }}"></image>
       </view>
       <text class="title-name-text" style="color:rgba(0,0,0,1)">专家门诊</text>
     </view>
@@ -37,4 +37,13 @@
   <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
+  <view class="bottom-box">
+    <view class="bottom-item-one">
+      <text>@2015-2020桃子互联网医院</text>
+      <image style="width: 24rpx;height: 24rpx;margin-left: 16rpx" src="/images/inquiry/inquiry_nationalEmblem.png"></image>
+      <text>蜀ICP备16030538号</text>
+    </view>
+    <text style="margin-top:20rpx">互联网药品信息服务资格证：（川）-经营性-2017-0003</text>
+    <text style="margin-top:20rpx">电信增值业务经营许可证：川B2-20170157</text>
+  </view>
 </view>

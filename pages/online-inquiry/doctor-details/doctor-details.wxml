@@ -1,55 +1,36 @@
 <view class="page">
-  <!-- 引入wxs脚本 -->
-  <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
-  <view class="header" style="overflow: hidden">
-    <image style="position: absolute;width:100%" mode="top" src="{{doctorInfo.faceImage ? doctorInfo.faceImage : '../../../images/chat/personBacImg.png'}}" mode="widthFix"></image>
-    <view style="position: absolute;width:100%;height:100%;background:linear-gradient(180deg,rgba(66,66,66,0.11) 0%,rgba(2,7,28,0.67) 100%)"></view>
-    <!-- <tmcnavbar titleText="医生资料"></tmcnavbar> -->
-    <navigation-bar navbarTitle="医生资料" navbarTextStyle="white" bgColor="rgba(0,0,0,0)" />
-    <view class="doctor-info">
-      <view style="display: flex;flex-direction: column;padding-left: 32rpx;padding-right: 32rpx">
-        <view class="info-one" style="height: 32rpx">
-          <text class="doctorname">{{doctorInfo.doctorName}}</text>
-          <text class="position">{{doctorInfo.titleName}}</text>
+  <view>
+    <!-- wxs引入 -->
+    <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
+    <!-- 导航栏 -->
+    <navigation-bar navbarTitle="{{doctorInfo.doctorName}}的医生主页" navbarTextStyle="black" bgColor="rgba(255,255,255,1)" />
+    <!-- 医生信息 -->
+    <view class="specialist-header-box" style="margin-top:20rpx">
+      <image src="{{ doctorInfo.faceImage }}" mode="aspectFill"></image>
+      <view class="specialist-header-middle-box">
+        <view class="docFlexRowBetween">
+          <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
         </view>
-        <view class="info-two" style="height: 28rpx;margin-top:24rpx">
-          <text class="hospital">{{doctorInfo.workPlace}}</text>
-          <text class="department">{{doctorInfo.sectionName}}</text>
-        </view>
-        <view class="info-three" style="height: 28rpx">
-          <text class="info-three-title">服务人次：</text>
-          <text class="info-three-details">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
-          <view style="width:2rpx;background:rgba(255,255,255,0.5);margin-left:48rpx;height:24rpx"></view>
-          <text class="info-three-title" style="margin-left:48rpx">好评率：</text>
-          <text class="info-three-details">100%</text>
-        </view>
+        <text class="title-other doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
+        <text class="title-other doctor-title doctor-title-two">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
+        <service-tabs list="{{comTools.strSplit(disease,',')}}" pageStyle="color: rgba(46, 127, 241, 1); border: 0rpx" tabStyle="margin-top: 16rpx"></service-tabs>
       </view>
 
     </view>
   </view>
-
+  <view style="height: 20rpx;background: rgba(238, 238, 238, 1)"></view>
+  <!-- 专业擅长 -->
   <view class="middle">
     <view class="middle-header">
       <view class="middle-lineView"></view>
-      <text class="middle-title">专治疾病</text>
-    </view>
-    <view class="middle-cotent-box">
-      <text class="middle-cotent">{{disease}}</text>
-    </view>
-    <view class="middle-bottomLine"></view>
-  </view>
-
-  <view class="middle">
-    <view class="middle-header">
-      <view class="middle-lineView"></view>
-      <text class="middle-title">擅长</text>
+      <text class="middle-title">专业擅长</text>
     </view>
     <view class="middle-cotent-box">
       <text class="middle-cotent">{{doctorInfo.goodAt}}</text>
     </view>
     <view class="middle-bottomLine"></view>
   </view>
-
+  <!-- 医生简介 -->
   <view class="middle">
     <view class="middle-header">
       <view class="middle-lineView"></view>
@@ -60,6 +41,13 @@
     </view>
     <view class="middle-bottomLine"></view>
   </view>
-  <!-- 患者评价wx:if="{{evaluateAllData.orgID && evaluateAllData.orgID.length > 0}}" -->
-  <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
+  <!-- 患者评价 -->
+  <view style="margin-bottom:128rpx">
+    <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
+  </view>
+  <!-- 底部问诊按钮 -->
+  <view class="button-view">
+    <tmc-button pageStyle="height:80rpx;margin-left:30rpx;margin-right:30rpx;margin-top:24rpx;margin-bottom:24rpx" bind:buttonTap="goInquiry" title="立即问诊"></tmc-button>
+  </view>
+
 </view>

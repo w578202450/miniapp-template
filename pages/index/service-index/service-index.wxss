@@ -78,10 +78,33 @@
   align-items: center;
   justify-content: center;
   border-radius: 100%;
-  border: 0.25rpx solid #e6e1e1
+  border: 0.25rpx solid #e6e1e1;
 }
 
 .home-icon-box image {
   width: 30rpx;
   height: 30rpx;
+}
+
+.bottom-box {
+  padding: 0 40rpx 36rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-item-one{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-box text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.15);
+  line-height: 24rpx;
 }

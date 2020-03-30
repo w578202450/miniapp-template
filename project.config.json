@@ -151,6 +151,19 @@
 					"pathName": "pages/personal-center/prescription/prescription",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "医生主页",
+					"pathName": "pages/online-inquiry/doctor-details/doctor-details",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "专家门诊",
+					"pathName": "pages/index/service-index/service-index",
+					"scene": null
 				}
 			]
 		}

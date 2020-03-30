@@ -1,0 +1,3 @@
+<view class="button" style="{{pageStyle}}" bindtap="buttonTap">
+ <text>{{title}}</text>
+</view>
