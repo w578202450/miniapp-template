@@ -1,12 +1,13 @@
 <!--pages/index/service-index/wth/notes-list/notes-list.wxml-->
 <!-- 引入wxs脚本 -->
-<navigation-bar navbarTitle="医生手记"/>
+<navigation-bar navbarTitle="医生手记" />
 <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
 <view class="box" bindtap="toDetail" data-detailUrl='{{item.detailUrl}}' wx:for="{{inquiryCaseData}}" wx:key="index">
   <view class="contain">
     <view class="personInfo">
       <image class="img" src="{{item.photoUrl}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
-      <text class="name">医生：{{item.authorName}} {{item.patientAddress}}</text>
+      <text class="name" style="margin-left: 16rpx">{{item.authorName}} </text>
+      <text class="name" style="margin-left: 16rpx">{{item.patientAddress}}</text>
     </view>
     <view>
       <text class="date">{{comTools.dateFormat(item.publishDate, 'yyyy-MM-dd')}}</text>
@@ -15,5 +16,9 @@
   <view>
     <text class="content">{{comTools.subStrTxt(item.contentSummary,50)}}</text>
   </view>
+  <!-- 底部问诊按钮 -->
 
+</view>
+<view class="button-view">
+  <tmc-button pageStyle="height:80rpx;margin-left:30rpx;margin-right:30rpx;margin-top:24rpx;margin-bottom:24rpx" bind:buttonTap="goInquiry" title="立即问诊"></tmc-button>
 </view>

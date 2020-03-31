@@ -33,6 +33,9 @@
 
 .module-title-txt {
   margin-right: 10rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .module-title-num {
@@ -52,5 +55,22 @@
   width: 100%;
   text-align: center;
   color: #438bef;
-  font-size: 30rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+}
+
+.effectTitle {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.effectValue {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 177, 11, 1);
+  margin-left: 15rpx;
 }

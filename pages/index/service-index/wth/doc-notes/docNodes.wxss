@@ -10,32 +10,65 @@
   display: flex;
   margin-top: 20rpx;
   justify-content: space-between;
+  align-items: center;
   height: 100rpx;
 }
 
 .img {
-  width: 70rpx;
-  height: 70rpx;
+  width: 48rpx;
+  height: 48rpx;
   border-radius: 50%;
 }
 
 .personInfo {
   display: flex;
+  align-items: center;
 }
 
 .name {
-  margin-left: 20rpx;
-  line-height: 65rpx;
-  font-size: 30rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
   color: rgba(0, 0, 0, 0.65);
 }
 
 .date {
-  font-size: 30rpx;
-  line-height: 65rpx;
-  color: rgba(0, 0, 0, 0.65);
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .content {
-  font-size: 30rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.bottom {
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.bottom-item {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.cutting-line {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.details {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
 }

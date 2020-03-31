@@ -11,7 +11,8 @@ Page({
       title: "", // 标题
       videoMaterialSrc: "", // 图文、视频文件网络地址路径
       posterSrc: "" // 视频封面图路径
-    }
+    },
+    htmlStr:"<title>桃子医生端</title>"
   },
 
   /**

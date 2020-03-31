@@ -1,6 +1,6 @@
 <!--pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.wxml-->
 <view>
-  <navigation-bar navbarTitle="{{navbarTitle}}" />
+  <navigation-bar navbarTitle="{{doctorName}}医生的评价" />
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <view class="evaluateContentBox">

@@ -1,32 +1,8 @@
-<!-- <view> -->
-<!-- 引入wxs脚本 -->
-<!-- <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <view class="content">
-    <view class="left-box">
-      <text class="title">{{itemData.title}}</text>
-      <text class="details">{{itemData.summary}}</text>
-      <service-tabs list="{{comTools.strSplit(itemData.tag,',')}}" pageStyle="color: rgba(46, 127, 241, 1); border: 0rpx" tabStyle="margin-top: 16rpx"></service-tabs>
-    </view>
-    <block wx:if="{{itemData.articleType==0}}">
-      <view class="image-box">
-        <image mode="aspectFill" class="cover" src="{{itemData.logoUrl || imagePlaceholder}}"></image>
-      </view>
-    </block>
-    <block wx:else>
-      <view class="image-box">
-        <image class="cover" src="{{itemData.logoUrl || imagePlaceholder}}"></image>
-        <image class="video-icon" src="{{videoIconSrc}}"></image>
-      </view>
-    </block>
-
-  </view>
-  <view class="cutting-line"></view>
-</view> -->
 
 <view class="content-box">
   <text class="title">{{itemData.title}}</text>
   <view class="bottom">
-    <image style="width: 40rpx;height: 40rpx" hidden="{{itemData.articleType==0}}" src="/images/inquiry/inquiry_article_video.png"></image>
+    <image style="width: 40rpx;height: 40rpx" hidden="{{itemData.articleType==0}}" src="{{videoIconSrc}}"></image>
     <view class="bottom-item">
       <view class="like-num details">196人</view>
       <view class="details">觉得有用</view>

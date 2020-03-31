@@ -39,7 +39,8 @@ Component({
       let httpParamsData = {
         nextPage: "/pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
         doctorID: that.data.evaluateAllData.doctorID,
-        orgID: that.data.evaluateAllData.orgID
+        orgID: that.data.evaluateAllData.orgID,
+        doctorName: that.data.evaluateAllData.evaluateData.doctorName
       }
       that.setData({
         evaluateData: [that.data.evaluateAllData.evaluateData] ? [that.data.evaluateAllData.evaluateData] : [],

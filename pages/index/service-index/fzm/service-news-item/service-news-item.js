@@ -15,8 +15,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    videoIconSrc: "/images/chat/videoPlayIcon.png",
-    imagePlaceholder: app.globalData.imagePlaceholder
+    videoIconSrc: "/images/inquiry/inquiry_article_video.png"
   },
 
   /**

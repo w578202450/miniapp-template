@@ -7,13 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    levelIconSrc: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/levelIcon.png", // 星级图标
     materialImgBac: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png", // 评论内容中的背景图片
     videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
-    iconSrc: "/images/order/xingIcon.png", // 亮色星星
-    iconBacSrc: "/images/order/xingIconBot.png", // 暗色星星
-    curativeEffectList: [{}, {}, {}, {}, {}], // 疗效星级列表初始数据
-    doctorAttitudeList: [{}, {}, {}, {}, {}], // 服务星级列表初始数据
     illnessSumList: [], // 患者评价的统计数据
     evaluateListData: [], // 患者评价的内容
     httpParams: {}, // 查看更多数据的请求参数
@@ -108,7 +103,8 @@ Page({
       if (res.code == 0 && res.data) {
         that.setData({
           evaluateListData: res.data.datas ? res.data.datas : [],
-          totalRow:res.data.totalRow
+          totalRow:res.data.totalRow,
+          doctorName: that.data.httpParams.doctorName
         });
       } else {
         wx.showToast({

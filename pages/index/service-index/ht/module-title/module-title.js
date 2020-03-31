@@ -16,7 +16,7 @@ Component({
     // 字体大小，默认34rpx
     fontSize: {
       type: String,
-      value: "34rpx"
+      value: "32rpx"
     },
     // 字体颜色
     color: {
@@ -69,7 +69,18 @@ Component({
     littleTitle: {
       type: String,
       value: ""
+    },
+
+    effect: {
+      type: String,
+      value: ""
+    },
+
+    serve: {
+      type: String,
+      value: ""
     }
+
   },
 
   /**

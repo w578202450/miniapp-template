@@ -8,3 +8,32 @@
   width: 750rpx;
   height: 464rpx;
 }
+
+.button-view-box {
+  padding: 32rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: rgba(67, 139, 239, 0.1);
+  border-radius: 10rpx;
+  width: 48%;
+  height: 56rpx;
+}
+
+.button-box image {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.button-box text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+}

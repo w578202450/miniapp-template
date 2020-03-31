@@ -4,6 +4,7 @@
   width: 100%;
   overflow: hidden;
   background-color: #fff;
+  margin-bottom: 128rpx
 }
 
 .levelBox {
@@ -25,8 +26,10 @@
 }
 
 .effect {
-  color: #242526;
-  font-size: 28rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .levelIconImg {
@@ -58,8 +61,10 @@
   border: 1rpx solid rgb(200, 200, 200);
   border-radius: 5rpx;
   padding: 0 15rpx;
-  font-size: 28rpx;
-  color: #555658;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .intervalView {
@@ -77,17 +82,24 @@
 }
 
 .diseaseTxt {
-  font-size: 32rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .generalComment {
-  font-size: 28rpx;
-  color: #555658;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .generalCommentTxt {
-  color: #ffb10b;
   font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(255, 177, 11, 1);
 }
 
 .curativeEffect {
@@ -112,8 +124,12 @@
 .evaluateContent {
   margin-top: 15rpx;
   word-break: break-all; /* 强制换行 */
-  font-size: 30rpx;
   word-wrap: break-word;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 44rpx;
 }
 
 .materialDataBox {
@@ -162,20 +178,24 @@
 }
 
 .patientFace {
-  width: 60rpx;
-  height: 60rpx;
-  border-radius: 40rpx;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 24rpx;
   margin-right: 15rpx;
 }
 
 .patientNameTxt {
-  font-size: 28rpx;
-  color: #555658;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .addTime {
-  color: #86888b;
-  font-size: 28rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .noDataBox {
@@ -186,7 +206,7 @@
   border-top: 1rpx solid #f6f6f6;
 }
 
-.button-view{
+.button-view {
   background: rgba(255, 255, 255, 1);
   position: fixed;
   width: 100%;

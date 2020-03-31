@@ -62,8 +62,10 @@
   border: 1rpx solid rgb(200, 200, 200);
   border-radius: 5rpx;
   padding: 0 15rpx;
-  font-size: 28rpx;
-  color: #555658;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
 }
 
 .intervalView {
@@ -81,7 +83,10 @@
 }
 
 .diseaseTxt {
-  font-size: 32rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
 }
 
 .unfoldTxt {
@@ -127,7 +132,11 @@
   margin-top: 15rpx;
   width: 100%;
   word-break:  break-all; /* 强制换行 */
-  font-size: 30rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 44rpx;
 }
 
 .materialDataBox {
@@ -176,8 +185,8 @@
 }
 
 .patientFace {
-  width: 60rpx;
-  height: 60rpx;
+  width: 48rpx;
+  height: 48rpx;
   border-radius: 40rpx;
   margin-right: 15rpx;
 }
@@ -188,8 +197,10 @@
 }
 
 .addTime {
-  color: #86888b;
-  font-size: 28rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.45);
 }
 
 .noDataBox {
