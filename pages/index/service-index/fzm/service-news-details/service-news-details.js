@@ -208,5 +208,23 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  /**
+   * 觉得有用
+   */
+  likeOption(){
+
+  },
+  /**
+   * 立即问诊
+   */
+  inquiryOption(){
+
+  },
+  /**
+   * 发表评论
+   */
+  inputoption(){
+
   }
 })
