@@ -26,8 +26,7 @@
     "pages/order/order-evaluate/order-evaluate",
     "pages/order/order-evaluate-success/order-evaluate-success",
     "components/loginDialog/loginDialog",
-    "pages/index/service-index/fzm/service-news-details/service-news-details",
-    "components/tab-bar/tab-bar"
+    "pages/index/service-index/fzm/service-news-details/service-news-details"
   ],
   "window": {
     "backgroundTextStyle": "dark",
