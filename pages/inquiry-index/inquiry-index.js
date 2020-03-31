@@ -16,6 +16,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    app.hideTabBarFun();
     this.initFun();
   },
 
@@ -31,6 +32,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    app.hideTabBarFun();
     this.initFun();
   },
 

@@ -47,4 +47,8 @@
     <text style="margin-top:20rpx">{{copyrightInfo.details_three}}</text>
     <text style="margin-top:20rpx">{{copyrightInfo.details_four}}</text>
   </view>
+  <!-- 底部tab菜单 -->
+  <view style="height: 145rpx;">
+    <tab-bar secIndex="{{0}}"/>
+  </view>
 </view>

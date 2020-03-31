@@ -19,6 +19,10 @@
     </block>
   </view>
   <view>
-    <login-dialog id="loginDialog" bind:error="_error" bind:success="_success"/>
+    <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
+  </view>
+  <!-- 底部tab菜单 -->
+   <view style="height: 145rpx;">
+    <tab-bar secIndex="{{2}}"/>
   </view>
 </view>
