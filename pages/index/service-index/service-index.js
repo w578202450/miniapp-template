@@ -7,8 +7,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-
-    articleCurrentOrgID:"",// 当前请求文章模块的orgID 当orgID变化的时候才进行文章模块的刷新
+    copyrightInfo: {
+      copyrightIcon: "/images/inquiry/inquiry_copyright.png",
+      nationalEmblemIcon: "/images/inquiry/inquiry_nationalEmblem.png",
+      details_one: "2015-2020桃子互联网医院",
+      details_two: "蜀ICP备16030538号",
+      details_three: "互联网药品信息服务资格证：（川）-经营性-2017-0003",
+      details_four: "电信增值业务经营许可证：川B2-20170157"
+    },
+    articleCurrentOrgID: "", // 当前请求文章模块的orgID 当orgID变化的时候才进行文章模块的刷新
     navHomeIconBlack: "/images/public/navHome.png", // 房子按钮：黑色
     capsuleRect: app.globalData.menuButtonBoundingClientRect,
     systemInfo: app.globalData.systemInfo,

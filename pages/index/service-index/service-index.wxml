@@ -39,11 +39,12 @@
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   <view class="bottom-box">
     <view class="bottom-item-one">
-      <text>@2015-2020桃子互联网医院</text>
-      <image style="width: 24rpx;height: 24rpx;margin-left: 16rpx" src="/images/inquiry/inquiry_nationalEmblem.png"></image>
-      <text>蜀ICP备16030538号</text>
+      <image style="width: 24rpx;height: 24rpx" src="{{copyrightInfo.copyrightIcon}}"></image>
+      <text>{{copyrightInfo.details_one}}</text>
+      <image style="width: 24rpx;height: 24rpx;margin-left: 16rpx" src="{{copyrightInfo.nationalEmblemIcon}}"></image>
+      <text>{{copyrightInfo.details_two}}</text>
     </view>
-    <text style="margin-top:20rpx">互联网药品信息服务资格证：（川）-经营性-2017-0003</text>
-    <text style="margin-top:20rpx">电信增值业务经营许可证：川B2-20170157</text>
+    <text style="margin-top:20rpx">{{copyrightInfo.details_three}}</text>
+    <text style="margin-top:20rpx">{{copyrightInfo.details_four}}</text>
   </view>
 </view>

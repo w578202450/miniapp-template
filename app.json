@@ -25,7 +25,8 @@
     "pages/order/order-success/order-success",
     "pages/order/order-evaluate/order-evaluate",
     "pages/order/order-evaluate-success/order-evaluate-success",
-    "components/loginDialog/loginDialog"
+    "components/loginDialog/loginDialog",
+    "pages/index/service-index/fzm/service-news-details/service-news-details"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -48,8 +49,8 @@
     "list": [
       {
         "pagePath": "pages/index/service-index/service-index",
-        "iconPath":"images/tabbar/tabbar-home-normal.png",
-        "selectedIconPath":"images/tabbar/tabbar-home-selected.png",
+        "iconPath": "images/tabbar/tabbar-home-normal.png",
+        "selectedIconPath": "images/tabbar/tabbar-home-selected.png",
         "text": "首页"
       },
       {

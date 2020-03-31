@@ -349,9 +349,12 @@ Component({
         url: encodeURIComponent(item.articleUrl), // （必传）图文、视频 的网络地址链接
         logoUrl: encodeURIComponent(item.logoUrl) // 视频的封面图片(没有就传空字符窜)
       };
+      // wx.navigateTo({
+      //   url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
+      // });
       wx.navigateTo({
-        url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
-      });
+        url: '/pages/index/service-index/fzm/service-news-details/service-news-details',
+      })
 
     },
 
