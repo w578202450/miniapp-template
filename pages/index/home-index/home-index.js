@@ -27,8 +27,8 @@ Page({
       deanPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/houliping.png",
       deanName: "侯丽萍", // 院长名称
       titleName: "院长", // 职位名称
-      deanDuty: "主任医师 北京中医药大学博士生导师 名中医", // 职称
-      deanFamous: "侯氏三焦气化疗法创始人", // 专长
+      deanDuty: "主任医师 北京中医药大学博士生导师", // 职称
+      deanFamous: "名中医 侯氏三焦气化疗法创始人", // 专长
       goodAts: ["风湿骨病", "疑难杂症"], //擅长
       // 院长详细介绍
       deanDetailContent: "御医传人名老中医石广济弟子，全国优秀中医人才指导老师，中国风湿病学专家、学科带头人，日本东洋医学研究院名誉教授，莫斯科第十医院名誉院长。",
@@ -60,10 +60,10 @@ Page({
     let that = this;
     // 生产
     // 侯丽萍
-    // options ={
-    //   orgID: "20012118570385423810511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
+    options ={
+      orgID: "20012118570385423810511240",
+      assistantStaffID: "20020913491781433700514240"
+    }
     // 侯=齐晓红
     // options ={
     //   orgID: "20031709473895879610511240",

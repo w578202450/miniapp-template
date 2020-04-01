@@ -133,11 +133,11 @@ page {
 }
 
 .title-name-houshi {
-  font-size: 36rpx;
+  font-size: 32rpx;
   font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
-  color: rgba(0, 0, 0);
-  /* line-height: 36rpx; */
+  font-weight: 550;
+  color: rgba(0,0,0,0.85);
+  line-height: 32rpx;
 }
 
 .title-other {
@@ -156,7 +156,7 @@ page {
 
 .detailIntroduction {
   margin-top: 10rpx;
-  width: 100%;
+  margin-right: 65rpx;
   word-break:  break-all; /* 强制换行 */
   color: rgba(0, 0, 0, 0.65);
   font-size: 24rpx;
@@ -164,7 +164,7 @@ page {
   text-overflow:ellipsis;
   overflow:hidden;
   display:-webkit-box;
-  -webkit-line-clamp:3;   /* 设置要显示省略号的行数 */
+  -webkit-line-clamp:1;   /* 设置要显示省略号的行数 */
   -webkit-box-orient:vertical;
 }
 
@@ -192,7 +192,7 @@ page {
 .module-item-box {
   background: rgba(255, 255, 255, 1);
   border-radius: 10rpx;
-  padding: 20rpx 30rpx 20rpx 30rpx;
+  padding: 10rpx 30rpx 20rpx 30rpx;
   display: flex;
   flex-direction: column;
 }
