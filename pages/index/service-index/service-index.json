@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "tab-bar": "/components/tab-bar/tab-bar",
     "service-specialistInfo": "/pages/index/service-index/fzm/service-specialistInfo/service-specialistInfo",
     "service-physicianTeam": "/pages/index/service-index/fzm/service-physicianTeam/service-physicianTeam",
     "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate",

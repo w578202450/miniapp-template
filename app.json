@@ -49,21 +49,15 @@
     "list": [
       {
         "pagePath": "pages/index/service-index/service-index",
-        "iconPath": "images/tabbar/tabbar-home-normal.png",
-        "selectedIconPath": "images/tabbar/tabbar-home-selected.png",
-        "text": "首页"
+        "text": ""
       },
       {
         "pagePath": "pages/inquiry-index/inquiry-index",
-        "iconPath": "images/tabbar/tabbar-inquiry-normal.png",
-        "selectedIconPath": "images/tabbar/tabbar-inquiry-selected.png",
-        "text": "问诊"
+        "text": ""
       },
       {
         "pagePath": "pages/personal-center/personal-center",
-        "iconPath": "images/tabbar/tabbar-mine-normal.png",
-        "selectedIconPath": "images/tabbar/tabbar-mine-selected.png",
-        "text": "我的"
+        "text": ""
       }
     ]
   }

@@ -118,13 +118,6 @@
 					"scene": null
 				},
 				{
-					"id": 8,
-					"name": "导航",
-					"pathName": "components/navigation-bar/navigation-bar",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": 9,
 					"name": "登录",
 					"pathName": "components/loginDialog/loginDialog",
@@ -163,6 +156,7 @@
 					"id": -1,
 					"name": "专家门诊",
 					"pathName": "pages/index/service-index/service-index",
+					"query": "",
 					"scene": null
 				}
 			]

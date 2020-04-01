@@ -57,8 +57,8 @@ function startLoginFun(options) {
     getPatientInfo(app.globalData.unionid);
   } else {
     console.log("IM登录失败：logined不存在");
-    app.globalData.isStartLogin = true; // 是否开始了自动登录
-    app.globalData.isInitInfo = false; // 登录初始化用户数据失败
+    app.globalData.isStartLogin = 1; // 是否开始了自动登录
+    app.globalData.isInitInfo = 0; // 登录初始化用户数据失败
     fetchTempCode();
   }
 }
@@ -178,17 +178,17 @@ function loginIM(userId) {
     console.log("===IM登录成功==="); // 登录成功
     wx.setStorageSync('myUsername', userId);
     if (nextPageName == "chat") {
+      app.globalData.isInitInfo = 1; // 是否登录成功
+      app.globalData.isStartLogin = true; // 是否开始了自动登录
       setTimeout(() => {
         wx.hideLoading();
-        app.globalData.isInitInfo = true; // 是否登录成功
-        app.globalData.isStartLogin = true; // 是否开始了自动登录
         wx.navigateTo({
           url: '/pages/online-inquiry/inquiry/chat/chat',
         });
       }, 2000);
     } else {
       wx.hideLoading();
-      app.globalData.isInitInfo = true; // 是否登录成功
+      app.globalData.isInitInfo = 1; // 是否登录成功
       app.globalData.isStartLogin = true; // 是否开始了自动登录
     }
   }).catch(function(imError) {

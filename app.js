@@ -17,6 +17,7 @@ let navBarHeight = (function() { //导航栏高度
 
 App({
   onLaunch: function() {
+    this.hideTabBarFun;
     this.globalData.systemInfo = systemInfo;
     this.globalData.navBarHeight = navBarHeight;
     this.globalData.menuButtonBoundingClientRect = rect;
@@ -160,10 +161,20 @@ App({
     this.globalData.TIM = TIM
   },
 
+  hideTabBarFun: function() {
+    wx.hideTabBar({
+      fail: function () {
+        setTimeout(function () { // 做了个延时重试一次，作为保底。
+          wx.hideTabBar();
+        }, 500)
+      }
+    });
+  },
+
   globalData: {
     tim: null,
     TIM: null,
-    isInitInfo: false,
+    isInitInfo: 0,
     isHaveOptions: false, // 进入小程序是否携带参数
     isStartLogin: false, // 是否尝试了自动登录
     userInfo: {},
@@ -180,7 +191,37 @@ App({
     menuButtonBoundingClientRect: {}, //右上角胶囊的信息
     systemInfo: {}, //小程序系统信息
     navBarHeight: '', //导航栏高度
-    imagePlaceholder: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png"// 图片占位
+    imagePlaceholder: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",// 图片占位
+    tabbar: {
+      color: "#86888B",
+      selectedColor: "#438BEF",
+      backgroundColor: "#ffffff",
+      borderStyle: "#d7d7d7",
+      list: [
+        {
+          pagePath: "/pages/index/service-index/service-index",
+          text: "首页",
+          iconPath: "/images/tabbar/tabbar-home-normal.png",
+          selectedIconPath: "/images/tabbar/tabbar-home-selected.png",
+          selected: true
+        },
+        {
+          pagePath: "/pages/inquiry-index/inquiry-index",
+          text: "问诊",
+          iconPath: "/images/tabbar/inqueryNew.png",
+          selectedIconPath: "/images/tabbar/inqueryNew.png",
+          selected: false
+        },
+        {
+          pagePath: "/pages/personal-center/personal-center",
+          text: "我的",
+          iconPath: "/images/tabbar/tabbar-mine-normal.png",
+          selectedIconPath: "/images/tabbar/tabbar-mine-selected.png",
+          selected: false
+        }
+      ],
+      position: "bottom"
+    } // 自定义导航栏数据
   },
 
 })

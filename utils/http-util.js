@@ -1,4 +1,5 @@
 const version = 0; //0开发、1测试 2发布  
+const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
 //     return "1400200900"
@@ -26,13 +27,19 @@ var request = function request(url, needDomain, method, data) {
   // console.log("------------------------");
 
   return new Promise(function(resolve, reject) {
-
+    let date = Date.parse(new Date());
+    let clientType = "wxpro";
+    let dataValues = md5.objKeySort(data);
+    let signed = md5.md5(encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH"));
     wx.request({
       method: method,
       url: _url,
       header: {
         'content-type': 'application/json',
-        'token': 'aaaa'
+        'token': 'aaaa',
+        'clientType': clientType,
+        'timestamp': date,
+        'sign': signed
       },
       data: data,
       success: function success(request) {

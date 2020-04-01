@@ -25,6 +25,7 @@ Page({
   },
 
   onLoad: function(e) {
+    app.hideTabBarFun();
     let that = this;
     if (app.globalData.isInitInfo) {
       that.getUserInfoByStorge(); // 获取用户授权信息
@@ -42,6 +43,7 @@ Page({
   },
 
   onShow: function(e) {
+    app.hideTabBarFun();
     let that = this;
     if (that.data.isSearchState) {
       that.setData({
