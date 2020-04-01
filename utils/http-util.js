@@ -28,16 +28,16 @@ var request = function request(url, needDomain, method, data) {
 
   return new Promise(function(resolve, reject) {
     let date = Date.parse(new Date());
-    data = md5.objKeySort(data);
-    console.log(data);
-    let signed = md5.md5(data + "wxpro" + date + "秘钥");
+    let clientType = "wxpro";
+    let dataValues = md5.objKeySort(data);
+    let signed = md5.md5(encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH"));
     wx.request({
       method: method,
       url: _url,
       header: {
         'content-type': 'application/json',
         'token': 'aaaa',
-        'clientType': "wxpro",
+        'clientType': clientType,
         'timestamp': date,
         'sign': signed
       },
