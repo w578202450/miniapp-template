@@ -288,7 +288,7 @@ page {
 .share-box-button {
   width: 400rpx;
   height: 70rpx;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   margin-bottom: 30rpx;
   display: flex;
   flex-direction: row;
