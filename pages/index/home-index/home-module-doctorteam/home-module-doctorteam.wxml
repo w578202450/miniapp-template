@@ -29,9 +29,9 @@
        <!-- 医生头像 -->
       <image mode="aspectFill" class="image-photo" src="{{pageItem.doctorDTOForTMC.photoUrl || defaultPhotoUrl}}"></image>
        <!-- 医生名称 -->
-      <view class="name-text">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.doctorName,6)}}</view>
+      <view class="name-text">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.doctorName,8)}}</view>
       <!-- 医生职称 -->
-      <text class="other-text">{{pageItem.doctorDTOForTMC.duty}}</text>
+      <text class="other-text">{{comTools.subStrTxt(pageItem.doctorDTOForTMC.duty,8)}}</text>
       </view>
     </block>
   </scroll-view>

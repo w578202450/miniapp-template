@@ -83,7 +83,7 @@
 }
 
 .other-text {
-  font-size: 24rpx;
+  font-size: 26rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.65);
@@ -91,7 +91,7 @@
 }
 
 .nodata-text {
-  height: 500rpx;
+  height: 250rpx;
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;

@@ -25,7 +25,7 @@
   <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
     <view class="specialist-box">
       <view class="specialist-header-box">
-        <image mode="widthFix" style="width:180rpx;height:180rpx;" src="{{deanInfo.deanPhotoUrl}}"></image>
+        <image mode="widthFix" style="width:180rpx;height:180rpx;margin-top:2rpx;" src="{{deanInfo.deanPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
           <view>
             <text class="title-name-houshi" style="font-size:32rpx;margin-right:10rpx;">{{deanInfo.deanName}}</text>
@@ -49,12 +49,12 @@
   <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
     <view class="module-item-box">
       <view class="specialist-header-box">
-        <image style="width:160rpx;height:120rpx;mode:widthFix;flex-shrink: 0" src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
+        <image style="width:180rpx;height:130rpx;mode:widthFix;flex-shrink: 0" src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
         <view class="specialist-header-middle-box">
           <text class="title-name-houshi" style="font-size:32rpx">{{hospitalInfo.hospitalName}}</text>
           <!-- 医院详情简介 -->
           <view class="dean-introduce-box">
-            <view class="detailIntroduction" style="margin-top:40rpx;">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : hospitalInfo.hospitalDetailContent}}</view>
+            <view class="detailIntroduction" style="margin-top:60rpx;">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : hospitalInfo.hospitalDetailContent}}</view>
             <image mode="widthFix" style="width:76rpx;height:28rpx;margin-right:0rpx;;margin-top:12rpx;position: absolute;right: 0;bottom: 0;" src="../../../images/home/home_detail.png" bindtap="toHospitalDetail"></image>
           </view>
         </view>
@@ -96,12 +96,6 @@
         </view>
         <!-- 灰色间隔区 -->
         <view class="share-intervalView"></view>
-        <!-- <view class="share-box" bindtap="shareMore">
-          <view class="share-box-view">
-            <image src="../../../images/home/home_share.png"></image>
-            <text>分享给更多需要的人</text>
-          </view>
-        </view> -->
       </view>
     </view>
 
