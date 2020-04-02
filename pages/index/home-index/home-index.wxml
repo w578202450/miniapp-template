@@ -22,7 +22,7 @@
     </view>
   </view>
   <!-- 院长简介 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
+  <view wx:if="{{isAboveHouShiID == -1}}" class="hospital-dean">
     <view class="specialist-box">
       <view class="specialist-header-box">
         <image mode="widthFix" style="width:180rpx;height:180rpx;margin-top:2rpx;" src="{{deanInfo.deanPhotoUrl}}"></image>
@@ -44,9 +44,9 @@
     </view>
   </view>
   <!-- 灰色间隔区 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
+  <view wx:if="{{isAboveHouShiID == -1}}" class="intervalView"></view>
   <!-- 医院介绍 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
+  <view wx:if="{{isAboveHouShiID == -1}}" class="hospital-dean">
     <view class="module-item-box">
       <view class="specialist-header-box">
         <image style="width:180rpx;height:130rpx;mode:widthFix;flex-shrink: 0" src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
@@ -62,7 +62,7 @@
     </view>
   </view>
   <!-- 灰色间隔区 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
+  <view wx:if="{{isAboveHouShiID == -1}}" class="intervalView"></view>
   <!-- 医师团队 -->
   <view class="physician-team">
     <module-title title="医师团队展示" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
