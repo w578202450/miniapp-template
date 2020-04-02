@@ -171,6 +171,7 @@ Page({
               doctorInfo: res.data,
               isSearchState: true
             });
+            // console.log("获取主治医师信息:" + JSON.stringify(res.data));
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);
             that.getHospitalInfo(res.data.orgID); //查询医院详情信息
