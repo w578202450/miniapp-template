@@ -4,12 +4,12 @@
   <!-- banner -->
   <block wx:if="{{ isInquiryNav }}">
     <view class="banner-box" style="padding-top: {{ statusBarHeight + navBarHeight + 34 }}px">
-      <image style="width: 100%" hidden="{{ !sectionBanner }}" src="{{ sectionBanner }}" mode="top" />
+      <!-- <image style="width: 100%" hidden="{{ !sectionBanner }}" src="{{ sectionBanner }}" mode="top" /> -->
     </view>
   </block>
   <block wx:else>
     <view class="banner-box" style="padding-top: {{ statusBarHeight + navBarHeight }}px">
-      <image style="width: 100%" hidden="{{ !sectionBanner }}" src="{{ sectionBanner }}" mode="widthFix" />
+      <!-- <image style="width: 100%" hidden="{{ !sectionBanner }}" src="{{ sectionBanner }}" mode="widthFix" /> -->
     </view>
   </block>
   <!-- 医生卡片 -->
@@ -21,7 +21,7 @@
         <view class="docFlexRowBetween">
           <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
           <view class="docFlexRowStart">
-            <view class="title-other specialist-header-right-box" style="line-height: 28rpx" bindtap="previewDoctorInfo">查看介绍</view>
+            <view class="title-other specialist-header-right-box" style="line-height: 28rpx" bindtap="previewDoctorInfo">详情</view>
             <image style="width:28rpx;height:28rpx;" src="/images/home/youBlue.png"></image>
           </view>
         </view>
