@@ -30,23 +30,29 @@
       </view>
     </view>
     <!-- 擅长标签  -->
-    <!-- <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs> -->
-    <view class="{{ cutting-line1 }}"></view>
-    <!-- 好评率 服务人数 -->
+    <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs>
+    <view class="cutting-line1"></view>
+    <!-- 医助 -->
+    <view class="physicianAssistant-box">
+     <image mode="aspectFill" class="physicianAssistant-photo" src="{{ doctorInfo.faceImage }}"></image>
+      <text class="physicianAssistant-name physicianAssistant-title physicianAssistant-title">{{ doctorInfo.titleName }} {{ doctorInfo.sectionName }} {{ doctorInfo.sectionName }}</text>
+     </view>
+  </view>
+      <!-- 好评率 服务人数 -->
     <view class="specialist-bottom-box">
       <view class="specialist-bottom-left">
         <image src="{{ comment_icon }}"></image>
         <text>好评率：</text>
         <text style="color: rgba(0,0,0,0.85)">100%</text>
       </view>
-      <view class="{{ cutting-line2 }}"></view>
+      <view class="cutting-line2"></view>
       <view class="specialist-bottom-left">
         <image src="{{ sever_icon }}"></image>
         <text>服务人数：</text>
         <text style="color: rgba(0,0,0,0.85)">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
       </view>
     </view>
-  </view>
+     <view class="cutting-line3"></view>
   <!-- 执业许可信息 -->
   <view class="licensed-box" hidden="{{ !certifyInfo.certifyNo }}">
     <text>医师执业许可证：</text>
