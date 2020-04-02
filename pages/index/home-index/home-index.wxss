@@ -175,15 +175,14 @@ page {
 }
 
 .home-bottom {
+  margin-top: 5rpx;
+  height: 400rpx;
   width: 100%;
-  margin-bottom: 100rpx;
 }
 
 .physician-team {
   width: 100%;
-  height: 700rpx;
   margin-top: 10rpx;
-  background: ：rgb(255, 0, 0);
 }
 
 .module-item-box {
@@ -236,7 +235,7 @@ page {
 
 .enter-box {
   width: 100%;
-  height: 110rpx;
+  height: 120rpx;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -280,7 +279,6 @@ page {
 
 .share-box {
   margin-top: 40rpx;
-  margin-bottom: 70rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -290,7 +288,7 @@ page {
 .share-box-button {
   width: 400rpx;
   height: 70rpx;
-  margin-top: 20rpx;
+  margin-top: 30rpx;
   margin-bottom: 30rpx;
   display: flex;
   flex-direction: row;
@@ -305,8 +303,9 @@ page {
 
 .share-intervalView {
   width: 100%;
-  height: 32rpx;
-  background-color: rgba(246, 246, 246, 1);
+  height: 30rpx;
+  margin-bottom:110rpx;
+  background-color: rgba(246, 246, 45, 1); /*rgba(246, 246, 246, 1)*/
 }
 
 .share-button::after {

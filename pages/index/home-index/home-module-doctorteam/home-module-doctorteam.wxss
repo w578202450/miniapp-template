@@ -59,9 +59,9 @@
 }
 
 .team-box {
-  width: 200rpx;
+  width: 160rpx;
   height:250rpx;
-  margin-right: 30rpx;
+  margin-right: 20rpx;
   display:inline-block;
   justify-content: center;
   text-align:center;
@@ -77,12 +77,13 @@
 .name-text {
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: bold;
+  font-weight: 550;
   color: rgba(0,0,0,0.85);
   line-height: 40rpx;
 }
 
 .other-text {
+  margin-top: 16rpx;
   font-size: 26rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;

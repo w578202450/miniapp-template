@@ -95,7 +95,7 @@
           <button class="share-box-button" open-type="share" bindtap="shareMore">分享给更多需要的人</button>
         </view>
         <!-- 灰色间隔区 -->
-        <view class="share-intervalView"></view>
+        <!-- <view class="share-intervalView"></view> -->
       </view>
     </view>
 
