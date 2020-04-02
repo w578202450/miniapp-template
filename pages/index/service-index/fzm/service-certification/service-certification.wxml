@@ -1,0 +1,14 @@
+<view class="main" style="{{ pageStyle }}">
+  <view class="specialist-bottom-box">
+    <view class="specialist-bottom-left">
+      <image src="{{ license_icon }}"></image>
+      <text>互联网医院执业许可</text>
+      <text style="color: rgba(0,0,0,0.25);width:6rpx;height:6rpx;">.</text>
+    </view>
+    <view class="specialist-bottom-left">
+      <image src="{{ attestation_icon }}"></image>
+      <text>网信认证</text>
+      <text style="color: rgba(0,0,0,0.25);width:6rpx;height:6rpx;">.</text>
+    </view>
+  </view>
+</view>

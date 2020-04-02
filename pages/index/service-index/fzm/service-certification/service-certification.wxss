@@ -1,0 +1,39 @@
+.main {
+  height: 80rpx;
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+  flex-direction: row;
+  align-items: center;
+  background: rgba(255,255,255,1);
+}
+.specialist-bottom-box {
+  height: 60rpx;
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.specialist-bottom-left image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}
+
+.specialist-bottom-left text {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 28rpx;
+}
+
+.specialist-bottom-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
