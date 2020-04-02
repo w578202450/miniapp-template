@@ -67,7 +67,7 @@ Page({
         orgID: "",
         doctorStaffID: ""
       }
-    },
+    }
   },
 
   /**
@@ -171,6 +171,7 @@ Page({
               doctorInfo: res.data,
               isSearchState: true
             });
+            // console.log("获取主治医师信息:" + JSON.stringify(res.data));
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);
             that.getHospitalInfo(res.data.orgID); //查询医院详情信息
@@ -415,7 +416,7 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo) {
+    if (app.globalData.isInitInfo == "ready") {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });

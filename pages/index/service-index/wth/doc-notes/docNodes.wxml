@@ -21,11 +21,11 @@
       </view>
       <view class="bottom">
           <view class="bottom-item">
-            <view class="details" style="color: rgba(67, 139, 239, 1)">196人</view>
+            <view class="details" style="color: rgba(67, 139, 239, 1)">{{paersonInfo.useful || 0}}人</view>
             <view class="details">觉得有用</view>
           </view>
           <view class="bottom-item" style="margin-left: 32rpx">
-            <text class="details">326人</text>
+            <text class="details">{{paersonInfo.viewCount || 0}}人</text>
             <text class="details">已观看</text>
           </view>
         </view>

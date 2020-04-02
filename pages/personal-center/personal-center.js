@@ -27,7 +27,7 @@ Page({
   onLoad: function(e) {
     app.hideTabBarFun();
     let that = this;
-    if (app.globalData.isInitInfo) {
+    if (app.globalData.isInitInfo == "ready") {
       that.getUserInfoByStorge(); // 获取用户授权信息
     } else {
       // 监听isInitInfo值的变化
@@ -50,6 +50,8 @@ Page({
         userInfo: app.globalData.userInfo ? app.globalData.userInfo : {}
       });
       console.log("获取用户缓存授权信息成功：" + JSON.stringify(that.data.userInfo));
+    } else {
+      console.log(app.globalData.isInitInfo);
     }
   },
 

@@ -44,9 +44,11 @@ Component({
   data: {
     inquiryBoxHeight: 34,
     // 好评率图标
-    comment_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_commentNums.png",
+    // comment_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_commentNums.png",
+    comment_icon: "/images/home/home_service_love.png",
     // 服务人数图标
-    sever_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_serverNums.png"
+    // sever_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_serverNums.png"
+    sever_icon: "/images/home/home_service_num.png"
   },
 
   /**

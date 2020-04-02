@@ -517,5 +517,19 @@ module.exports = {
    */
   articleCommentPublish: function articleCommentPublish(parmas) {
     return request('api/tmc/articleComment/publish', true, 'post', parmas);
+  },
+
+  /**
+   * 根据talkID查询历史问诊ID
+   * */
+  getInquiryIDByTalk: function addGroupMember(parmas) {
+    return request('api/tmc/history/getInquiryIDByTalk', true, 'get', parmas);
+  },
+
+  /**
+   * 根据问诊ID获取聊天记录
+   * */
+  findHistoryMsgByInquiryID: function addGroupMember(parmas) {
+    return request('api/tmc/history/findHistoryMsgByInquiryID', true, 'get', parmas);
   }
 }

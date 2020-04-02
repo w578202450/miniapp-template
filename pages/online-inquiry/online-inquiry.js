@@ -211,7 +211,7 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo) {
+    if (app.globalData.isInitInfo == "ready") {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });
