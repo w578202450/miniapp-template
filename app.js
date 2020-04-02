@@ -63,6 +63,7 @@ App({
    * IM配置
    */
   imSetting() {
+    let that = this;
     // 创建 TIM SDK 实例
     let tim = TIM.create({
       SDKAppID: SDKAPPID
@@ -78,6 +79,7 @@ App({
     // 监听事件
     tim.on(TIM.EVENT.SDK_READY, function(event) {
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
+      that.globalData.isInitInfo = "ready";
       console.log("============TIM SDK已处于READY状态==================");
     });
 
@@ -174,7 +176,7 @@ App({
   globalData: {
     tim: null,
     TIM: null,
-    isInitInfo: 0,
+    isInitInfo: 0, // 0：未登录  ready：已登录
     isHaveOptions: false, // 进入小程序是否携带参数
     isStartLogin: false, // 是否尝试了自动登录
     userInfo: {},

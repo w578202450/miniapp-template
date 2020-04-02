@@ -141,7 +141,7 @@ Page({
       if (value) {
         if (!that.data.isHaveWatched) {
           that.data.isHaveWatched = true;
-          if (app.globalData.isInitInfo) {
+          if (app.globalData.isInitInfo == "ready") {
             console.log("尝试了且成功了");
             that.initHomeData(); // 初始化参数
           } else {

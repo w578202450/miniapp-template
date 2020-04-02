@@ -33,7 +33,7 @@ Component({
       });
       console.log(app.globalData.isInitInfo);
       if (index == 1) {
-        if (app.globalData.isInitInfo) {
+        if (app.globalData.isInitInfo == "ready") {
           wx.navigateTo({
             url: '/pages/online-inquiry/inquiry/chat/chat'
           });

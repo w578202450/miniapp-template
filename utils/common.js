@@ -178,7 +178,7 @@ function loginIM(userId) {
     console.log("===IM登录成功==="); // 登录成功
     wx.setStorageSync('myUsername', userId);
     if (nextPageName == "chat") {
-      app.globalData.isInitInfo = 1; // 是否登录成功
+      // app.globalData.isInitInfo = "ready"; // 是否登录成功
       app.globalData.isStartLogin = true; // 是否开始了自动登录
       setTimeout(() => {
         wx.hideLoading();
@@ -188,7 +188,7 @@ function loginIM(userId) {
       }, 2000);
     } else {
       wx.hideLoading();
-      app.globalData.isInitInfo = 1; // 是否登录成功
+      // app.globalData.isInitInfo = "ready"; // 是否登录成功
       app.globalData.isStartLogin = true; // 是否开始了自动登录
     }
   }).catch(function(imError) {
