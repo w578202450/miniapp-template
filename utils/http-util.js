@@ -22,7 +22,7 @@ var request = function request(url, needDomain, method, data) {
   var _url = needDomain ? (API_BASE_URL + url) : url;
   // console.log("------------------------");
   // console.log("请求地址:" + _url);
-  // console.log("请求入参:" + JSON.stringify(data));
+  console.log("请求地址:" + _url + "请求入参:" + JSON.stringify(data));
   // console.log("请求方式:" + method);
   // console.log("------------------------");
 
@@ -240,6 +240,10 @@ module.exports = {
    */
   checkOrderPrePay: function checkOrderPrePay(params) {
     return request('api/payment/transPayment/checkOrderPrePay', true, 'get', params);
+  },
+  // 订单结果查询
+  queryOrderByTransID: function addGroupMember(parmas) {
+    return request('api/payment/transPayment/queryOrderByTransID', true, 'post', parmas);
   },
   /*
    *订单校验
@@ -488,6 +492,5 @@ module.exports = {
    */
   addGroupMember: function addGroupMember(parmas) {
     return request('api/tmc/multiTalk/addGroupMember', true, 'post', parmas);
-  },
-
+  }
 }

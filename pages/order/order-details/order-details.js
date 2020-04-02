@@ -170,8 +170,8 @@ Page({
         if (res.code == 0) {
           if (res.data.payResult == 1) { //已支付成功
             this.orderPaySuccess()
-          } else if (res.data.payResult == 0) { //未支付成功
-            this.tradeOrder(paymentID);
+          } else if (res.data.payResult == 0) { //未支付成功 但腾讯那边可能支付成功 还需要进一步对订单结果查询
+            this.checkOrderResult(paymentID);
           }
         } else {
           wx.showToast({
@@ -185,6 +185,40 @@ Page({
         wx.showToast({
           title: '连接失败',
           icon: 'none'
+        })
+      })
+  },
+  /**
+   * 支付结果查询 腾讯
+   */
+  checkOrderResult(paymentID) {
+    if (!paymentID) {
+      wx.showToast({
+        title: '参数paymentID为nil',
+        icon: 'none'
+      })
+      return;
+    }
+    var that = this;
+    wx.showLoading({
+      title: '支付中...'
+    });
+    HTTP.queryOrderByTransID({
+        transID: paymentID
+      })
+      .then(res => {
+        wx.hideLoading();
+        if (res.code == 0) {
+          that.orderPaySuccess()
+        } else {
+          that.tradeOrder(paymentID);
+        }
+      }).catch(e => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '连接失败',
+          icon: 'none',
+          duration: 2000
         })
       })
   },
@@ -399,7 +433,7 @@ Page({
       }
     })
   },
-  
+
   //右上角分享功能
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
