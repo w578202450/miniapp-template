@@ -76,8 +76,10 @@ Page({
     navBarHeight: app.globalData.navBarHeight,
     isInGroup: false, // 是否已入群
     getGroupListSum: 5, // 检验是否入群循环的最大次数
-    sendType: "" // 消息发送类型
-    // systemInfo: {} // 当前手机类型相关信息
+    sendType: "", // 消息发送类型
+    // systemInfo: {}, // 当前手机类型相关信息
+    historyInquiryList: [], // 历史问诊ID列表
+    historyInquiryIndex: 0 // 查询到的历史问诊ID下标
   },
 
   /**
@@ -579,6 +581,7 @@ Page({
               that.getHistoryMessage(); // 获取历史消息
             }
           }
+          that.getHistoryInquiryID(); // 查询历史问诊记录ID列表
         } else {
           console.log("检验入群结果：入群失败");
           let params = {
@@ -690,16 +693,15 @@ Page({
   getFetchAssistantDoctorInfo(staffID) {
     let that = this;
     HTTP.getDoctorInfo({
-        staffID: staffID
-      })
-      .then(res => {
-        if (res.code == 0 && res.data) {
-          that.setData({
-            ["talkInfo.assistTitleName"]: res.data.titleName
-          });
-          // console.log(res.data);
-        }
-      })
+      staffID: staffID
+    }).then(res => {
+      if (res.code == 0 && res.data) {
+        that.setData({
+          ["talkInfo.assistTitleName"]: res.data.titleName
+        });
+        // console.log(res.data);
+      }
+    })
   },
 
   /*操作： 点击医生查看详情 */
@@ -1244,6 +1246,77 @@ Page({
         url: "/pages/online-inquiry/inquiry/videoPlay/videoPlay?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要在赋值处转换为字符窜
       });
     }
+  },
+
+  /**获取历史问诊记录 */
+  getHistoryInquiryID: function() {
+    let that = this;
+    HTTP.getInquiryIDByTalk({
+      orgID: that.data.userInfo.orgID,
+      talkID: that.data.talkInfo.multiTalkInfo.keyID
+    }).then(res => {
+      console.log(res.data);
+      if (res.code == 0 && res.data) {
+        that.setData({
+          historyInquiryList: res.data
+        });
+      }
+    });
+  },
+
+  /**获取历史问诊的消息记录 */
+  dealHistoryMsg() {
+    let that = this;
+    HTTP.findHistoryMsgByInquiryID({
+      pageIndex: 0,
+      inquiryID: that.data.historyInquiryList[historyInquiryIndex].keyID
+    }).then(res => {
+      console.log(res.data);
+      if (res.code == 0 && res.data) {
+        if (res && res.data) {
+          let msgList = [];
+          res.data.forEach(element => {
+            let type = element.msgBody[0].msgType;
+            let msgContent = element.msgBody[0].msgContent;
+            let from = element.from_Account;
+            let time = element.msgTime;
+            let temp = element;
+            temp.type = type;
+            temp.from = from;
+            temp.time = time;
+            temp.payload = {};
+            if (type === "TIMTextElem") { // 文本消息
+              temp.payload.text = msgContent.Text;
+            } else if (type == "TIMSoundElem") { // 语音消息
+              // temp.recordStatus = false; // 播放状态
+              // if (Number(temp.payload.second) <= 15) {
+              //   temp.recordViewWidth = temp.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+              // } else {
+              //   temp.recordViewWidth = (Number(temp.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
+              // }
+            } else if (type === "TIMCustomElem") { // 自定义消息
+              temp.payload.data = msgContent.Data;
+              temp.payload.description = msgContent.Desc;
+              temp.payload.extension = msgContent.Ext;
+            } else if (type === "TIMImageElem") { // 图片消息
+              temp.payload.imageInfoArray = [];
+              let msgImgObj = msgContent.ImageInfoArray[0];
+              let tempImgObj = {};
+              tempImgObj.sizeType = msgImgObj.Type;
+              tempImgObj.size = msgImgObj.Size;
+              tempImgObj.height = msgImgObj.Height;
+              tempImgObj.width = msgImgObj.Width;
+              tempImgObj.imageUrl = msgImgObj.URL;
+              temp.payload.imageInfoArray.push(tempImgObj);
+            }
+            msgList.push(temp);
+          });
+          that.setData({
+            currentMessageList: [...msgList, ...that.data.currentMessageList],
+          });
+        }
+      }
+    });
   }
 
   /**模拟跳转到素材 */
