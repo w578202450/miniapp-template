@@ -1,4 +1,4 @@
-text {
+/* text {
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
@@ -31,8 +31,63 @@ text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* 设置要显示省略号的行数 */
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
+}
+
+.nodata-text {
+  height: 500rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ */
+
+.container {
+  border-radius: 20rpx;
+  white-space: nowrap; 
+}
+
+.scroll-view-x {
+  width: 100%;
+  white-space: nowrap; /*不让它换行*/
+}
+
+.team-box {
+  width: 200rpx;
+  height:250rpx;
+  margin-right: 30rpx;
+  display:inline-block;
+  justify-content: center;
+  text-align:center;
+  align-items: center;
+}
+
+.image-photo {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.name-text {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: bold;
+  color: rgba(0,0,0,0.85);
+  line-height: 40rpx;
+}
+
+.other-text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 40rpx;
 }
 
 .nodata-text {
