@@ -1,6 +1,7 @@
 // pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.js
 const HTTP = require('../../../../../utils/http-util');
 const commonFun = require('../../../../../utils/common.js');
+const app = getApp()
 Page({
 
   /**
@@ -181,5 +182,17 @@ Page({
     this.setData({
       illnessSumList: illList
     });
+  },
+
+  goInquiry(){
+    if (app.globalData.isInitInfo) {
+      wx.navigateTo({
+        url: '/pages/online-inquiry/inquiry/chat/chat'
+      });
+    } else {
+      wx.showToast({
+        title: '请先登录',
+      })
+    }
   }
 })

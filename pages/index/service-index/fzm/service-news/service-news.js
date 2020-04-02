@@ -341,19 +341,21 @@ Component({
      * 详情查看
      */
     itemDetails(e) {
-      let title = e.currentTarget.dataset.navtitle
-      let item = e.currentTarget.dataset.item
-      let materialData = {
-        materialType: item.articleType, // （必传）要查看的素材类型 0图文 1视频
-        title: title, // 待确认，可先不传
-        url: encodeURIComponent(item.articleUrl), // （必传）图文、视频 的网络地址链接
-        logoUrl: encodeURIComponent(item.logoUrl) // 视频的封面图片(没有就传空字符窜)
-      };
+      // let title = e.currentTarget.dataset.navtitle
+      // let item = e.currentTarget.dataset.item
+      // let materialData = {
+      //   materialType: item.articleType, // （必传）要查看的素材类型 0图文 1视频
+      //   title: title, // 待确认，可先不传
+      //   url: encodeURIComponent(item.articleUrl), // （必传）图文、视频 的网络地址链接
+      //   logoUrl: encodeURIComponent(item.logoUrl) // 视频的封面图片(没有就传空字符窜)
+      // };
       // wx.navigateTo({
       //   url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
       // });
+      let item = e.currentTarget.dataset.item
+      item.content = encodeURIComponent(item.content)
       wx.navigateTo({
-        url: '/pages/index/service-index/fzm/service-news-details/service-news-details',
+        url: "/pages/index/service-index/fzm/service-news-details/service-news-details?materialData=" + JSON.stringify(item),
       })
 
     },

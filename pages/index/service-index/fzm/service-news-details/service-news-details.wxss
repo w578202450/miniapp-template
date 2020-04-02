@@ -54,6 +54,7 @@
 .comment-item image {
   width: 48rpx;
   height: 48rpx;
+  border-radius: 24rpx;
 }
 
 .comment_text {
@@ -106,6 +107,7 @@
   color: rgba(67, 139, 239, 1);
   margin-left: 32rpx;
   margin-right: 32rpx;
+  flex-shrink: 0;
 }
 
 .input-placeholder {
@@ -113,5 +115,39 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.65);
+  margin-left: 32rpx;
+}
+
+.textarea-view {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  z-index: 11;
+  height: 240rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.textarea {
+  margin-top: 20rpx;
+  height: 160rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.max-box {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-items: center;
+}
+
+.max-text {
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 20rpx;
   margin-left: 32rpx;
 }

@@ -492,5 +492,30 @@ module.exports = {
    */
   addGroupMember: function addGroupMember(parmas) {
     return request('api/tmc/multiTalk/addGroupMember', true, 'post', parmas);
+  },
+  /**
+   * 文章详情觉得有用请求
+   */
+  useful: function useful(parmas){
+    return request('api/tmc/article/useful', true, 'post', parmas);
+  },
+  /**
+   * 查询文章详情觉得有用按钮状态
+   */
+  usefulStatus: function usefulStatus(parmas) {
+    return request('api/tmc/article/usefulStatus', true, 'get', parmas);
+  },
+  /**
+   * 查询文章详情的文章评论
+   */
+  listComment: function listComment(parmas) {
+    return request('api/tmc/articleComment/listComment', true, 'get', parmas);
+  },
+
+  /**
+   * 发布评论
+   */
+  articleCommentPublish: function articleCommentPublish(parmas) {
+    return request('api/tmc/articleComment/publish', true, 'post', parmas);
   }
 }

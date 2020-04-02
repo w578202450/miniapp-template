@@ -1,5 +1,6 @@
 // pages/index/service-index/wth/notes-list/notes-list.js
 const HTTP = require('../../../../../utils/http-util');
+const app = getApp()
 Page({
 
   /**
@@ -106,5 +107,17 @@ Page({
         // console.log(this.data.patientShareGetData);
       }
     });
+  },
+
+  goInquiry() {
+    if (app.globalData.isInitInfo) {
+      wx.navigateTo({
+        url: '/pages/online-inquiry/inquiry/chat/chat'
+      });
+    } else {
+      wx.showToast({
+        title: '请先登录',
+      })
+    }
   }
 })
