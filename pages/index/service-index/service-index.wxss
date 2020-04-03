@@ -186,3 +186,112 @@
   color: rgba(42, 44, 48, 1);
   line-height: 16px;
 }
+
+.certification-box {
+  margin-top: 50rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.certification-box-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.certification-box-left image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 15rpx;
+}
+
+.certification-box-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 15rpx;
+}
+
+.certification-box-right image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 15rpx;
+}
+
+.certification-box-text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(221, 172, 70, 1);
+  line-height: 16px;
+  justify-content: center;
+}
+
+.cutting-line1 {
+  width: 100%;
+  height: 2rpx;
+  background: rgba(0,0,0,0.1);
+  margin-top: 20rpx;
+}
+
+.address-tel {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.tel-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.email-box {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.address-tel-header-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.address-tel-header-box image {
+  margin-left: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.emai-left {
+  height: 50rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 20rpx;
+}
+
+.emai-right {
+  height: 50rpx;
+  margin-left: 10rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title-text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0,0,0,0.45);
+  line-height: 28px;
+  justify-content: center;
+
+}

@@ -70,6 +70,14 @@ Page({
     },
     hideModal: true, //模态框的状态  true-隐藏  false-显示
     animationData: {},
+    // 互联网医院执业许可
+    license_icon: "/images/home/practice_license.png",
+    // 网信认证
+    attestation_icon: "/images/home/net_letter_attestation.png",
+    // 咨询电话
+    expert_clinic_tel: "/images/home/expert_clinic_tel.png",
+    // 联系邮箱
+    expert_clinic_email: "/images/home/expert_clinic_email.png",
   },
 
   /**
