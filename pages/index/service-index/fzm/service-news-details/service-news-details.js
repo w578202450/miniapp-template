@@ -7,11 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    commentContent: "",
-    commentDatas: [],
-    isInput: false,
-    disable: true, // 觉得有用按钮是否可以点击
-    articleDatas: {},
+    newComment: "", // 评论输入框内容
+    isInput: false, // 输入框是否处于输入状态
+    usefulBtnDisable: true, // 觉得有用按钮是否可以点击
+    articleDatas: {}, // 文章详情
     inquiryIcon: "/images/inquiry/inquiry_article_add.png",
     likeIcon: "/images/inquiry/inquiry_article_like.png",
   },
@@ -35,7 +34,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    //获得popup组件：登录确认框
+    this.popup = this.selectComponent("#loginDialog");
   },
 
   /**
@@ -90,7 +90,7 @@ Page({
     }).then(res => {
       if (res.code === 0) {
         this.setData({
-          commentDatas: res.data.datas
+          commentList: res.data.datas
         })
       }
     })
@@ -104,7 +104,7 @@ Page({
       "patientID": app.globalData.patientID
     }).then(res => {
       if (res.code === 0) {
-        this.disable = res.data;
+        this.usefulBtnDisable = res.data;
       }
     })
   },
@@ -112,36 +112,44 @@ Page({
    * 觉得有用
    */
   likeOption() {
-    if (this.disable) {
+    if (this.usefulBtnDisable) {
       wx.showToast({
         title: '已经点赞过',
+        icon: "none"
       })
       return;
     }
-    wx.showLoading({
-      title: '等待...',
-    })
-    HTTP.useful({
-      "articleID": this.articleDatas.keyID,
-      "patientID": app.globalData.patientID
-    }).then(res => {
-      wx.hideLoading();
-      if (res.code === 0) {
-        this.disable = true;
-        wx.showToast({
-          title: '点赞成功',
-        })
-      } else {
-        wx.showToast({
-          title: res.message,
-        })
-      }
-    }).catch(error => {
-      wx.hideLoading();
-      wx.showToast({
-        title: '网络连接失败',
+    if (app.globalData.isInitInfo) {
+      wx.showLoading({
+        title: '等待...',
       })
-    });
+      HTTP.useful({
+        "articleID": this.articleDatas.keyID,
+        "patientID": app.globalData.patientID
+      }).then(res => {
+        wx.hideLoading();
+        if (res.code === 0) {
+          this.usefulBtnDisable = true;
+          wx.showToast({
+            title: '点赞成功',
+          })
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: "none"
+          })
+        }
+      }).catch(error => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '网络连接失败',
+          icon: "none"
+        })
+      });
+    } else {
+      let nextPageName = "chat";
+      this.popup.showPopup(nextPageName); // 显示登录确认框
+    }
   },
   /**
    * 操作：开始问诊
@@ -154,9 +162,8 @@ Page({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });
     } else {
-      wx.showToast({
-        title: '请先登录',
-      })
+      let nextPageName = "chat";
+      this.popup.showPopup(nextPageName); // 显示登录确认框
     }
   },
   /**
@@ -181,35 +188,34 @@ Page({
     })
   },
 
-  focusButn: function(event) {
-  },
+  focusButn: function(event) {},
 
   publishAction() {
-    if (this.data.commentContent.length === 0) {
+    if (this.data.newComment.length === 0) {
       wx.showToast({
         title: '内容为空',
+        icon: 'none'
       })
       return;
-    } 
+    }
     if (app.globalData.isInitInfo) {
-      this.articleCommentPublishRequest(this.data.commentContent);
+      this.articleCommentPublishRequest(this.data.newComment);
     } else {
-      wx.showToast({
-        title: '请先登录',
-      })
+      let nextPageName = "chat";
+      this.popup.showPopup(nextPageName); // 显示登录确认框
     }
   },
 
   bindinput(event) {
     this.setData({
       cursor: event.detail.cursor,
-      commentContent: event.detail.value
+      newComment: event.detail.value
     })
   },
   /**
    * 发表评论请求
    */
-  articleCommentPublishRequest(commentContent) {
+  articleCommentPublishRequest(newComment) {
     wx.showLoading({
       title: '发布中...',
     })
@@ -219,7 +225,7 @@ Page({
       "patientID": app.globalData.patientID,
       "patientName": app.globalData.userInfo.nickName,
       "patientFaceUrl": app.globalData.userInfo.avatarUrl,
-      "commentContent": commentContent
+      "commentContent": newComment
     }).then(res => {
       wx.hideLoading();
       if (res.code === 0) {
@@ -228,10 +234,10 @@ Page({
         })
         this.setData({
           isInput: false,
-          commentContent: ""
+          newComment: ""
         })
         this.listCommentRequest();
-        
+
       } else {
         wx.showToast({
           title: res.message,
@@ -243,5 +249,14 @@ Page({
         title: '网络连接失败',
       })
     });
+  },
+  /**取消事件 */
+  _error() {
+    this.popup.hidePopup();
+  },
+
+  /**确认事件 */
+  _success() {
+    this.popup.hidePopup();
   }
 })

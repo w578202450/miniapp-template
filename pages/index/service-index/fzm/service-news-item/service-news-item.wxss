@@ -1,4 +1,3 @@
-
 .content-box {
   background-color: white;
   padding: 32rpx 20rpx 32rpx 20rpx;
@@ -44,4 +43,10 @@
 .cutting-line {
   height: 1px;
   background: rgba(0, 0, 0, 0.1);
+}
+
+image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 14rpx;
 }

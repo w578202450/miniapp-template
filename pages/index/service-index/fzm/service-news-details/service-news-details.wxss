@@ -1,6 +1,10 @@
 /* pages/index/service-index/fzm/service-news-details/service-news-details.wxss */
 @import "../../../../../components/wxParse/wxParse.wxss";
 
+page{
+  background-color: white;
+}
+
 .button-view-box {
   padding: 32rpx;
   display: flex;
@@ -49,6 +53,7 @@
 
 .comment-left {
   flex-shrink: 0;
+  align-items: center;
 }
 
 .comment-item image {

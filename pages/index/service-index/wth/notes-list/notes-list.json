@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "navigation-bar": "/components/navigation-bar/navigation-bar",
-    "tmc-button": "/components/tmc-button/tmc-button"
+    "tmc-button": "/components/tmc-button/tmc-button",
+    "login-dialog": "/components/loginDialog/loginDialog"
   },
   "navigationBarTitleText": "",
   "navigationStyle": "custom"

@@ -22,7 +22,7 @@ var request = function request(url, needDomain, method, data) {
   var _url = needDomain ? (API_BASE_URL + url) : url;
   // console.log("------------------------");
   // console.log("请求地址:" + _url);
-  console.log("请求地址:" + _url + "请求入参:" + JSON.stringify(data));
+  // console.log("请求地址:" + _url + "请求入参:" + JSON.stringify(data));
   // console.log("请求方式:" + method);
   // console.log("------------------------");
 
@@ -45,9 +45,9 @@ var request = function request(url, needDomain, method, data) {
       success: function success(request) {
         resolve(request.data);
         if (request.statusCode == 200) {
-          console.log("数据请求成功:", url, request.data);
+          // console.log("数据请求成功:", url, request.data);
         } else {
-          console.log("数据请求失败:", url, request);
+          // console.log("数据请求失败:", url, request);
         }
       },
       fail: function fail(error) {

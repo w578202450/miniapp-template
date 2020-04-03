@@ -1,53 +1,54 @@
 <!--pages/index/service-index/fzm/service-news-details/service-news-details.wxml-->
 <import src="../../../../../components/wxParse/wxParse.wxml" />
-<!-- html -->
-<view class="wxParse">
-  <template is="wxParse" data="{{wxParseData:article.nodes}}" />
-</view>
-<!-- button-view -->
-<view class="button-view-box">
-  <view class="button-box" style="background:rgba(67,139,239,0.1)" bindtap="likeOption">
-    <image src="{{likeIcon}}"></image>
-    <text style="color:rgba(67,139,239,1); margin-left: 8rpx">觉得有用</text>
+<!-- 登录弹框 -->
+<login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
+<view>
+  <!-- html -->
+  <view class="wxParse">
+    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   </view>
-  <view class="button-box" style="background:rgba(67,139,239,1)" bindtap="toOnlineInqueryFun">
-    <image src="{{inquiryIcon}}"></image>
-    <text style="color:rgba(255,255,255,1); margin-left: 8rpx">立即问诊</text>
-  </view>
-</view>
-<!-- comment -->
-<view class="comment-box">
-  <text class="comment-title">留言评论</text>
-  <view style="height: 20rpx"></view>
-  <view class="comment-item flex_row" wx:for="{{commentDatas}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
-    <view class="comment-left flex_row">
-      <image src="{{comment.patientFaceUrl}}"></image>
-      <text class="comment_text" style="margin-left: 16rpx">{{comment.patientName}}</text>
+  <!-- button-view -->
+  <view class="button-view-box">
+    <view class="button-box" style="{{usefulBtnDisable ? 'background:#F6F6F6' : 'background:rgba(67,139,239,0.1)'}}" bindtap="likeOption">
+      <image src="{{likeIcon}}"></image>
+      <text style="color:rgba(67,139,239,1); margin-left: 8rpx">觉得有用</text>
     </view>
-    <view class="comment-right">
-      <text class="comment_text">{{comment.commentContent}}</text>
-      <view wx:if="{{comment.isReply === 1}}" class="comment_text" style="margin-top: 16rpx">
-        <text style="color:rgba(67,139,239,1)">{{comment.replyStaffID}}回复:</text>
-        <text>{{comment.commentReply}}</text>
+    <view class="button-box" style="background:rgba(67,139,239,1)" bindtap="toOnlineInqueryFun">
+      <image src="{{inquiryIcon}}"></image>
+      <text style="color:rgba(255,255,255,1); margin-left: 8rpx">立即问诊</text>
+    </view>
+  </view>
+  <!-- comment -->
+  <view class="comment-box">
+    <text class="comment-title">留言评论</text>
+    <view style="height: 20rpx"></view>
+    <view class="comment-item flex_row" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
+      <view class="comment-left flex_row">
+        <image src="{{comment.patientFaceUrl}}"></image>
+        <text class="comment_text" style="margin-left: 16rpx">{{comment.patientName}}</text>
+      </view>
+      <view class="comment-right">
+        <text class="comment_text">{{comment.commentContent}}</text>
+        <view wx:if="{{comment.isReply === 1}}" class="comment_text" style="margin-top: 16rpx">
+          <text style="color:rgba(67,139,239,1)">{{comment.replyStaffID}}回复:</text>
+          <text>{{comment.commentReply}}</text>
+        </view>
       </view>
     </view>
   </view>
-</view>
-<!-- 输入框占位 -->
-<view wx:if="{{!isInput}}" class="bottom-view" bindtap="inputoption">
-  <view class="input-view">
-    <text class="input-placeholder">{{commentContent ? commentContent : "写评论"}}</text>
+  <!-- 输入框占位 -->
+  <view wx:if="{{!isInput}}" class="bottom-view" bindtap="inputoption">
+    <view class="input-view">
+      <text class="input-placeholder">{{newComment ? newComment : "写评论"}}</text>
+    </view>
+    <view class="input-button" catchtap="publishAction">发布</view>
   </view>
-  <view class="input-button" catchtap="publishAction">发布</view>
-</view>
-<view wx:else class="textarea-view">
-  <textarea value="{{commentContent}}" class="textarea" focus="{{true}}" placeholder="写评论" maxlength="200"  fixed="{{true}}" adjust-position="{{true}}" show-confirm-bar="{{true}}" cursor-spacing="80" bindblur="inputBlur" bindfocus="inputFocus" bindconfirm="focusButn" bindinput="bindinput"></textarea>
-  <view class="max-box">
-   <text class="max-text">{{cursor ? cursor : '0'}}/200</text>
-   <view class="input-button" catchtap="publishAction">发布</view>
+  <view wx:else class="textarea-view">
+    <textarea value="{{newComment}}" class="textarea" focus="{{true}}" placeholder="写评论" maxlength="200" fixed="{{true}}" adjust-position="{{true}}" show-confirm-bar="{{false}}" cursor-spacing="80" bindblur="inputBlur" bindfocus="inputFocus" bindconfirm="focusButn"
+      bindinput="bindinput"></textarea>
+    <view class="max-box">
+      <text class="max-text">{{cursor ? cursor : '0'}}/200</text>
+      <view class="input-button" catchtap="publishAction">发布</view>
+    </view>
   </view>
 </view>
-
-<!-- <view class="textarea-view">
-  <textarea class='textarea' placeholder='请输入备注' maxlength="100" cursor-spacing="90"> </textarea>
-</view> -->
