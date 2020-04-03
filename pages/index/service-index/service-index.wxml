@@ -63,7 +63,9 @@
     <view class="modals-cancel" bindtap="hideModal"></view>
     <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
       <view class="bottom-content">
-        <text class="text-service">服务</text>
+        <view class="parent-text">
+          <text class="text-service">服务</text>
+        </view>
         <!-- 执业许可 -->
         <view class="certification-box">
           <view class="certification-box-left">
@@ -82,25 +84,26 @@
         <view class="cutting-line1"></view>
         <!-- 咨询电话 -->
         <view class="tel-box">
-          <view class="address-tel-header-box">
-            <image style="margin-top:20rpx" src="{{ expert_clinic_tel }}"></image>
-            <view class="address-tel-left">
+          <view class="tel-email-header-box">
+            <image mode="widthFix" style="margin-top:20rpx" src="{{ expert_clinic_tel }}"></image>
+            <view class="tel-email-left">
               <text class="title-text" style="margin-top:20rpx">咨询电话：</text>
             </view>
-            <view class="address-tel-right">
+            <view class="tel-email-right">
               <text class="title-text" style="margin-top:20rpx">028-6455 3998</text>
             </view>
           </view>
+          <button class="call-phone-button" bindtap="callPhone">一键拨打</button>
         </view>
         <!-- 联系邮箱 -->
-        <view >
-          <view class="email-box">
-            <image src="{{ expert_clinic_email }}"></image>
-            <view class="address-tel-left">
+        <view>
+          <view class="tel-email-header-box">
+            <image mode="widthFix" style="margin-top:20rpx" src="{{ expert_clinic_email }}"></image>
+            <view class="tel-email-left">
               <text class="title-text" style="margin-top:20rpx">联系邮箱：</text>
             </view>
-            <view class="address-tel-right">
-              <text class="title-text">shuibei@100cbc.com</text>
+            <view class="tel-email-right">
+              <text class="title-text" style="margin-top:20rpx">shuibei@100cbc.com</text>
             </view>
           </view>
         </view>

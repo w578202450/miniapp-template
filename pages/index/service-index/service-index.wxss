@@ -172,8 +172,14 @@
 .bottom-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+}
+
+.parent-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
 }
 
 .text-service {
@@ -189,12 +195,11 @@
 
 .certification-box {
   margin-top: 50rpx;
-  margin-left: 20rpx;
-  margin-right: 20rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
   display: flex;
   flex-direction: row;
   justify-content: start;
-  align-items: center;
 }
 
 .certification-box-left {
@@ -251,26 +256,57 @@
   align-items: center;
 }
 
-.email-box {
+.call-phone-button {
+  width: 200rpx;
+  height: 60rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  border-radius: 32rpx;
+  border:2rpx solid rgba(67,139,239,1);
+  color: rgba(67,139,239,1);
+  background:rgba(255,255,255,1);
+}
+
+/* .email-box {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-}
+} */
 
-.address-tel-header-box {
+.tel-email-header-box {
+  margin-top:20rpx;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
-.address-tel-header-box image {
-  margin-left: 20rpx;
+.tel-email-left {
+  height: 50rpx;
+  margin-left: 10rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+ .tel-email-right {
+  height: 50rpx;
+  margin-left: 10rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tel-email-header-box image {
   width: 40rpx;
   height: 40rpx;
 }
 
-.emai-left {
+/*.emai-left {
   height: 50rpx;
   display: flex;
   justify-content: flex-start;
@@ -284,7 +320,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-}
+} */
 
 .title-text {
   font-size: 24rpx;
