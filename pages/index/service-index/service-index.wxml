@@ -26,7 +26,9 @@
   <service-specialistInfo pageStyle="margin-bottom:20rpx" sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"
   />
   <!-- 医生团队 -->
-  <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" />
+  <!-- <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" /> -->
+  <!-- 资格证书 -->
+  <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx"></service-certification>
   <!-- 患者评价 -->
   <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
