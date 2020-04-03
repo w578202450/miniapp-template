@@ -26,6 +26,9 @@ Page({
       WxParse.wxParse('article', 'html', decodeURIComponent(this.articleDatas.content), this, 5);
       this.usefulStatusRequest();
       this.listCommentRequest();
+      wx.setNavigationBarTitle({
+        title: this.articleDatas.title
+      })
     }
 
   },
