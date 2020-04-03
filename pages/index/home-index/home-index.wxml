@@ -39,7 +39,7 @@
       <!-- 院长详情简介 -->
       <view class="dean-introduce-box" style="margin-top: 20rpx;">
         <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : deanInfo.deanDetailContent}}</view>
-        <image mode="widthFix" style="width:76rpx;height:28rpx;margin-right:0rpx;margin-top:12rpx;position: absolute;right: 0;bottom: 0;" src="../../../images/home/home_detail.png" bindtap="toDeanDetail"></image>
+        <image mode="widthFix" style="width:76rpx;height:30rpx;margin-top:2rpx;margin-right:14rpx;position: absolute;right:0;" src="../../../images/home/home_detail.png" bindtap="toDeanDetail"></image>
       </view>
     </view>
   </view>
@@ -55,7 +55,7 @@
           <!-- 医院详情简介 -->
           <view class="dean-introduce-box">
             <view class="detailIntroduction">{{hospitalInfo.hospitalDetailContent}}</view>
-            <image mode="widthFix" style="width:76rpx;height:28rpx;margin-right:0rpx;;margin-top:12rpx;position: absolute;right: 0;bottom: 0;" src="../../../images/home/home_detail.png" bindtap="toHospitalDetail"></image>
+            <image mode="widthFix" style="width:76rpx;height:30rpx;margin-top:2rpx;margin-right:14rpx;position: absolute;right: 0" src="../../../images/home/home_detail.png" bindtap="toHospitalDetail"></image>
           </view>
         </view>
       </view>
