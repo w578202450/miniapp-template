@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class="right-icon" bindtap="showCertificationDialog">
-    <image style="width:28rpx;height:28rpx;" src="/images/home/youBlue.png"></image>
+    <image style="width:30rpx;height:30rpx;" src="/images/home/show_right.png"></image>
      </view>
   </view>
 </view>

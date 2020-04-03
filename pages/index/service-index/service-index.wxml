@@ -28,7 +28,7 @@
   <!-- 医生团队 -->
   <!-- <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" /> -->
   <!-- 资格证书 -->
-  <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx"></service-certification>
+  <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx" bind:showBottomDialog="showBottomDialog"></service-certification>
   <!-- 患者评价 -->
   <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
@@ -57,5 +57,14 @@
   <!-- 底部tab菜单 -->
   <view style="height: 145rpx;">
     <tab-bar secIndex="{{0}}" />
+  </view>
+  <!-- 底部弹出框 -->
+  <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
+    <view class="modals-cancel" bindtap="hideModal"></view>
+    <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
+      <view class="bottom-content">
+        <text class="text-service">服务</text>
+      </view>
+    </view>
   </view>
 </view>

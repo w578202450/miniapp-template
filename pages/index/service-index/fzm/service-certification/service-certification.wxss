@@ -61,6 +61,7 @@
 
 .right-icon {
   width:80rpx;
+  margin-right: 10rpx;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
