@@ -23,7 +23,7 @@
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../wxs/wxsCommon.wxs" module="comTools" />
   <text class="nodata-text" wx:for-item="pageItem" wx:if="{{doctorTeamList.length === 0}}">没有更多数据了~</text>
-  <scroll-view class="scroll-view-x" scroll-x="true"  scroll-with-animation="true">
+  <scroll-view class="scroll-view-x" scroll-x="true"  scroll-with-animation="true" style="padding-left: 20rpx;">
     <block wx:for="{{doctorTeamList}}" wx:for-item="pageItem" wx:for-index="sortNo" wx:key="keyID">
     <view class="team-box">
        <!-- 医生头像 -->

@@ -31,13 +31,13 @@
             <text class="title-name-houshi" style="font-size:32rpx;margin-right:10rpx;">{{deanInfo.deanName}}</text>
             <text class="title-name-houshi" style="font-size:28rpx;color:#555658;">{{deanInfo.titleName}}</text>
           </view>
-          <text class="title-other" style="margin-top:10rpx">{{deanInfo.deanDuty}}</text>
-          <text class="title-other" style="margin-top:10rpx">{{deanInfo.deanFamous}}</text>
-          <service-tabs list="{{deanInfo.goodAts}}" pageStyle="margin-top: 24rpx;" tabStyle="background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
+          <text class="title-other">{{deanInfo.deanDuty}}</text>
+          <text class="title-other">{{deanInfo.deanFamous}}</text>
+          <service-tabs list="{{deanInfo.goodAts}}" tabStyle="margin-bottom:0;background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
         </view>
       </view>
       <!-- 院长详情简介 -->
-      <view class="dean-introduce-box">
+      <view class="dean-introduce-box" style="margin-top: 20rpx;">
         <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : deanInfo.deanDetailContent}}</view>
         <image mode="widthFix" style="width:76rpx;height:28rpx;margin-right:0rpx;margin-top:12rpx;position: absolute;right: 0;bottom: 0;" src="../../../images/home/home_detail.png" bindtap="toDeanDetail"></image>
       </view>
@@ -54,7 +54,7 @@
           <text class="title-name-houshi" style="font-size:32rpx">{{hospitalInfo.hospitalName}}</text>
           <!-- 医院详情简介 -->
           <view class="dean-introduce-box">
-            <view class="detailIntroduction" style="margin-top:60rpx;">{{isShowAllContent ? hospitalInfo.hospitalDetailContent : hospitalInfo.hospitalDetailContent}}</view>
+            <view class="detailIntroduction">{{hospitalInfo.hospitalDetailContent}}</view>
             <image mode="widthFix" style="width:76rpx;height:28rpx;margin-right:0rpx;;margin-top:12rpx;position: absolute;right: 0;bottom: 0;" src="../../../images/home/home_detail.png" bindtap="toHospitalDetail"></image>
           </view>
         </view>

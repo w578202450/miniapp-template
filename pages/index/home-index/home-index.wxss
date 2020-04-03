@@ -118,16 +118,15 @@ page {
 .specialist-header-middle-box {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   margin-left: 30rpx;
 }
 
 .title-name {
-  margin-top: 15rpx;
   font-size: 36rpx;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
-  /* line-height: 36rpx; */
 }
 
 .title-name-houshi {
@@ -135,7 +134,6 @@ page {
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 550;
   color: rgba(0,0,0,0.85);
-  line-height: 32rpx;
 }
 
 .title-other {
@@ -147,8 +145,6 @@ page {
 }
 
 .dean-introduce-box {
-  /* display: flex;
-  flex-direction: column; */
   position: relative;
 }
 
