@@ -19,4 +19,6 @@
       </view>
     </block>
   </view>
+    <!-- 登录弹框 -->
+  <login-dialog id="loginDialogCom" bind:error="_error" bind:success="_success" />
 </view>

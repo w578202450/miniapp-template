@@ -49,35 +49,51 @@
 
 .wx-popup-image {
   margin: 20rpx 0 40rpx 0;
-  width: 380rpx;
-  height: 380rpx;
+  width: 300rpx;
+  height: 300rpx;
 }
 
 .wx-popup-btn {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-bottom: 40rpx;
-  margin-top: 40rpx;
+  width: 85%;
+  margin: auto;
 }
 
 .wx-popup-btn button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 250rpx;
+  width: 220rpx;
   border-radius: 88rpx;
   font-weight: normal;
 }
 
 .wx-popup-btn .btn-no {
-  border: 1rpx solid #438bef;
-  color: #438bef;
+  border: 1rpx solid #dbdee3;
+  color: #86888b;
   background-color: white;
+  height: 80rpx;
+  font-size: 32rpx;
 }
 
 .wx-popup-btn .btn-ok {
-  width: 250rpx;
+  width: 220rpx;
   background-color: #438bef;
   color: white;
+  height: 80rpx;
+  font-size: 32rpx;
+}
+
+.tip-box {
+  border-top: 1px solid #DBDEE3;
+  margin-top: 50rpx;
+  padding: 20rpx 20rpx;
+  text-align: center;
+}
+
+.tip-box .tip-txt {
+  font-size: 24rpx;
+  color: #86888B;
 }
