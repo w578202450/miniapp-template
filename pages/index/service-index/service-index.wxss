@@ -157,7 +157,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 30rpx;
+  padding: 20rpx;
   height: 500rpx;
   background-color: #fff;
 }
@@ -172,20 +172,29 @@
 .bottom-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  vertical-align: center;
+}
+
+.title-dialog {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: center;
 }
 
 .parent-text {
+  width: 700rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center; 
+  vertical-align: center;
 }
 
-.text-service {
+.parent-text.text {
   width: 64rpx;
   height: 32rpx;
-  margin-top:20rpx;
   font-size: 32rpx;
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
@@ -195,8 +204,6 @@
 
 .certification-box {
   margin-top: 50rpx;
-  margin-left: 10rpx;
-  margin-right: 10rpx;
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -232,7 +239,7 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(221, 172, 70, 1);
-  line-height: 16px;
+  line-height: 32px;
   justify-content: center;
 }
 
@@ -250,16 +257,19 @@
 }
 
 .tel-box {
+  margin-top: 10rpx;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  vertical-align: center;
 }
 
 .call-phone-button {
   width: 200rpx;
   height: 60rpx;
-  margin-top: 30rpx;
+  margin-right: 20rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -271,18 +281,12 @@
   background:rgba(255,255,255,1);
 }
 
-/* .email-box {
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-} */
-
 .tel-email-header-box {
-  margin-top:20rpx;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  align-content: center;
 }
 
 .tel-email-left {
@@ -302,28 +306,13 @@
 }
 
 .tel-email-header-box image {
-  width: 40rpx;
-  height: 40rpx;
-}
-
-/*.emai-left {
-  height: 50rpx;
-  display: flex;
+  flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-  margin-left: 20rpx;
+  align-content: center;
 }
-
-.emai-right {
-  height: 50rpx;
-  margin-left: 10rpx;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-} */
 
 .title-text {
-  font-size: 24rpx;
+  font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0,0,0,0.45);
