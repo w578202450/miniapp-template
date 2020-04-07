@@ -23,12 +23,12 @@
     </view>
   </view>
   <!-- 专家门诊专家信息 -->
-  <service-specialistInfo pageStyle="margin-bottom:20rpx" sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"
+  <service-specialistInfo pageStyle="margin-bottom:20rpx" sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}" assistantDoctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"
   />
   <!-- 医生团队 -->
   <!-- <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" /> -->
   <!-- 资格证书 -->
-  <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx"></service-certification>
+  <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx" bind:showBottomDialog="showBottomDialog"></service-certification>
   <!-- 患者评价 -->
   <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
@@ -57,5 +57,60 @@
   <!-- 底部tab菜单 -->
   <view style="height: 145rpx;">
     <tab-bar secIndex="{{0}}" />
+  </view>
+  <!-- 底部弹出框 -->
+  <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
+    <view class="modals-cancel" bindtap="hideModal"></view>
+    <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
+      <view class="bottom-content">
+        <view class="title-dialog">
+        <view class="parent-text">
+          <text>服务</text>
+        </view>
+         <image style="margin-right:10rpx;" src="{{ dialog_close }}" bindtap="hideModal"></image>
+          </view>
+        <!-- 执业许可 -->
+        <view class="certification-box">
+          <view class="certification-box-left">
+            <image src="{{ license_icon }}"></image>
+            <text class="certification-box-text">互联网医院执业许可</text>
+            <view style="border-radius:50%;background:rgba(0,0,0,0.25);width:8rpx;height:8rpx;margin-left:15rpx;"></view>
+          </view>
+          <view class="certification-box-right">
+            <image src="{{ attestation_icon }}"></image>
+            <text class="certification-box-text">网信认证</text>
+            <view style="border-radius:50%;background:rgba(0,0,0,0.25);width:8rpx;height:8rpx;margin-left:15rpx;"></view>
+            <text class="certification-box-text" style="margin-left:15rpx;">就医权益保障</text>
+          </view>
+        </view>
+        <!-- 分割线 -->
+        <view class="cutting-line1"></view>
+        <!-- 咨询电话 -->
+        <view class="tel-box">
+          <view class="tel-email-header-box">
+            <image mode="widthFix" src="{{ expert_clinic_tel }}"></image>
+            <view class="tel-email-left">
+              <text class="title-text">咨询电话：</text>
+            </view>
+            <view class="tel-email-right">
+              <text class="title-text">{{ consulting_tel }}</text>
+            </view>
+          </view>
+          <button class="call-phone-button" bindtap="callPhone">一键拨打</button>
+        </view>
+        <!-- 联系邮箱 -->
+        <view class="tel-box">
+          <view class="tel-email-header-box">
+            <image mode="widthFix" src="{{ expert_clinic_email }}"></image>
+            <view class="tel-email-left">
+              <text class="title-text">联系邮箱：</text>
+            </view>
+            <view class="tel-email-right">
+              <text class="title-text">{{ contact_email }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

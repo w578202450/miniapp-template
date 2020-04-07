@@ -69,8 +69,8 @@
 }
 
 .image-photo {
-  width: 130rpx;
-  height: 130rpx;
+  width: 110rpx;
+  height: 110rpx;
   border-radius: 50%;
   flex-shrink: 0;
 }
