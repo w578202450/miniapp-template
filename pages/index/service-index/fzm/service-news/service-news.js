@@ -353,9 +353,13 @@ Component({
       //   url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
       // });
       let item = e.currentTarget.dataset.item
-      item.content = encodeURIComponent(item.content)
+      // item.content = encodeURIComponent(item.content)
+      let params = {
+        title: item.title,
+        keyID: item.keyID
+      }
       wx.navigateTo({
-        url: "/pages/index/service-index/fzm/service-news-details/service-news-details?materialData=" + JSON.stringify(item),
+        url: "/pages/index/service-index/fzm/service-news-details/service-news-details?materialData=" + JSON.stringify(params),
       })
 
     },

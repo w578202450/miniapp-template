@@ -21,16 +21,10 @@ Page({
   onLoad: function(options) {
     let that = this;
     console.log("进入H5展示的参数：" + JSON.stringify(options));
-    if (options.materialData) {
-      this.articleDatas = JSON.parse(options.materialData);
-      WxParse.wxParse('article', 'html', decodeURIComponent(this.articleDatas.content), this, 5);
-      this.usefulStatusRequest();
-      this.listCommentRequest();
-      wx.setNavigationBarTitle({
-        title: this.articleDatas.title
-      })
-    }
-
+    this.articleDatas = JSON.parse(options.materialData);
+    this.getArticleByKeyID();
+    this.usefulStatusRequest();
+    this.listCommentRequest();
   },
 
   /**
@@ -81,6 +75,18 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  getArticleByKeyID() {
+    HTTP.getArticleByKeyID({
+      "keyID": this.articleDatas.keyID,
+    }).then(res => {
+      if (res.code == 0 && res.data) {
+        wx.setNavigationBarTitle({
+          title: res.data.title
+        })
+        WxParse.wxParse('article', 'html', res.data.content, this, 5);
+      }
+    })
   },
   /**
    * 文章评论列表

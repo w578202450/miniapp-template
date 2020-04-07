@@ -531,5 +531,11 @@ module.exports = {
    * */
   findHistoryMsgByInquiryID: function addGroupMember(parmas) {
     return request('api/tmc/history/findHistoryMsgByInquiryID', true, 'get', parmas);
+  },
+  /**
+   * 根据文章详情
+   * */
+  getArticleByKeyID: function getArticleByKeyID(parmas) {
+    return request('api/tmc/article/getArticleByKeyID', true, 'get', parmas);
   }
 }
