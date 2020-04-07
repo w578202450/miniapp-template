@@ -162,3 +162,8 @@ page{
   font-size: 20rpx;
   margin-left: 32rpx;
 }
+
+.video {
+  width: 100%;
+  height: 400rpx;
+}

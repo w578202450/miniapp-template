@@ -4,14 +4,21 @@
 <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
 <view>
   <!-- html -->
-  <view class="wxParse">
+  <video wx:if="{{articleData.articleType === 1}}" class="video" src="{{articleData.articleUrl}}" controls></video>
+  <view wx:else class="wxParse">
     <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   </view>
   <!-- button-view -->
   <view class="button-view-box">
     <view class="button-box" style="{{usefulBtnDisable ? 'background:#F6F6F6' : 'background:rgba(67,139,239,0.1)'}}" bindtap="likeOption">
-      <image src="{{likeIcon}}"></image>
-      <text style="color:rgba(67,139,239,1); margin-left: 8rpx">觉得有用</text>
+      <block wx:if="{{usefulBtnDisable}}">
+        <image src="{{likeIcon}}"></image>
+        <text style="color: white; margin-left: 8rpx">觉得有用</text>
+      </block>
+      <block wx:else>
+        <image src="{{likeIcon}}"></image>
+        <text style="color:rgba(67,139,239,1); margin-left: 8rpx">觉得有用</text>
+      </block>
     </view>
     <view class="button-box" style="background:rgba(67,139,239,1)" bindtap="toOnlineInqueryFun">
       <image src="{{inquiryIcon}}"></image>
@@ -23,7 +30,7 @@
     <text class="comment-title">留言评论</text>
     <view style="height: 20rpx"></view>
     <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
-      <view class="comment-left"> 
+      <view class="comment-left">
         <image src="{{comment.patientFaceUrl}}"></image>
         <text class="comment_text" style="margin-left: 16rpx">{{comment.patientName}}</text>
       </view>
