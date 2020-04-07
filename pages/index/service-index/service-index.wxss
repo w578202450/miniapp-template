@@ -159,6 +159,8 @@
   right: 0;
   padding: 20rpx;
   height: 500rpx;
+  border-top-left-radius: 40rpx;
+  border-top-right-radius: 40rpx;
   background-color: #fff;
 }
 
