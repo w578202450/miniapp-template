@@ -84,6 +84,7 @@
 .home-icon-box image {
   width: 30rpx;
   height: 30rpx;
+  margin: 0;
 }
 
 .bottom-box {

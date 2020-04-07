@@ -257,7 +257,9 @@ function objKeySort(obj) {
   }
   let objValuesString = "";
   Object.values(newObj).forEach(item => {
-    objValuesString = objValuesString + item;
+    if (!Array.isArray(item)) {
+      objValuesString = objValuesString + item;
+    }
   });
   return objValuesString; // 返回排好序的新对象的值拼接起来的字符窜
 }

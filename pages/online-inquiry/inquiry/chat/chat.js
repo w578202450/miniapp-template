@@ -312,41 +312,43 @@ Page({
     } else {
       if (that.data.isCompleted) {
         // 没有更多数据了
-        wx.stopPullDownRefresh();
-        wx.showToast({
-          title: "没有更多历史消息了~",
-          icon: "none",
-          duration: 2000
-        });
-        return;
-      }
-      wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
-      tim.getMessageList({
-        conversationID: "GROUP" + that.data.inquiryInfo.keyID,
-        nextReqMessageID: that.data.nextReqMessageID,
-        count: 15
-      }).then(function(imResponse) {
-        imResponse.data.messageList.forEach(item => {
-          if (item.type == "TIMSoundElem") {
-            item.recordStatus = false; // 播放状态
-            if (Number(item.payload.second) <= 15) {
-              item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-            } else {
-              item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+        // wx.stopPullDownRefresh();
+        // wx.showToast({
+        //   title: "没有更多历史消息了~",
+        //   icon: "none",
+        //   duration: 2000
+        // });
+        // return;
+        that.dealHistoryMsg(); // 查询历史问诊的消息记录
+      } else {
+        wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
+        tim.getMessageList({
+          conversationID: "GROUP" + that.data.inquiryInfo.keyID,
+          nextReqMessageID: that.data.nextReqMessageID,
+          count: 15
+        }).then(function (imResponse) {
+          imResponse.data.messageList.forEach(item => {
+            if (item.type == "TIMSoundElem") {
+              item.recordStatus = false; // 播放状态
+              if (Number(item.payload.second) <= 15) {
+                item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+              } else {
+                item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+              }
             }
-          }
-        })
-        setTimeout(function() {
-          that.setData({
-            currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
-            nextReqMessageID: imResponse.data.nextReqMessageID,
-            isCompleted: imResponse.data.isCompleted
-          });
-          console.log(that.data.currentMessageList);
-          wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
-          wx.stopPullDownRefresh(); // 停止下拉刷新过程
-        }, 1000);
-      });
+          })
+          setTimeout(function () {
+            that.setData({
+              currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
+              nextReqMessageID: imResponse.data.nextReqMessageID,
+              isCompleted: imResponse.data.isCompleted
+            });
+            console.log(that.data.currentMessageList);
+            wx.hideNavigationBarLoading(); // 完成数据操作后停止标题栏中的加载中的效果
+            wx.stopPullDownRefresh(); // 停止下拉刷新过程
+          }, 1000);
+        });
+      }
     }
   },
 
@@ -1267,56 +1269,63 @@ Page({
   /**获取历史问诊的消息记录 */
   dealHistoryMsg() {
     let that = this;
-    HTTP.findHistoryMsgByInquiryID({
-      pageIndex: 0,
-      inquiryID: that.data.historyInquiryList[historyInquiryIndex].keyID
-    }).then(res => {
-      console.log(res.data);
-      if (res.code == 0 && res.data) {
-        if (res && res.data) {
-          let msgList = [];
-          res.data.forEach(element => {
-            let type = element.msgBody[0].msgType;
-            let msgContent = element.msgBody[0].msgContent;
-            let from = element.from_Account;
-            let time = element.msgTime;
-            let temp = element;
-            temp.type = type;
-            temp.from = from;
-            temp.time = time;
-            temp.payload = {};
-            if (type === "TIMTextElem") { // 文本消息
-              temp.payload.text = msgContent.Text;
-            } else if (type == "TIMSoundElem") { // 语音消息
-              // temp.recordStatus = false; // 播放状态
-              // if (Number(temp.payload.second) <= 15) {
-              //   temp.recordViewWidth = temp.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-              // } else {
-              //   temp.recordViewWidth = (Number(temp.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
-              // }
-            } else if (type === "TIMCustomElem") { // 自定义消息
-              temp.payload.data = msgContent.Data;
-              temp.payload.description = msgContent.Desc;
-              temp.payload.extension = msgContent.Ext;
-            } else if (type === "TIMImageElem") { // 图片消息
-              temp.payload.imageInfoArray = [];
-              let msgImgObj = msgContent.ImageInfoArray[0];
-              let tempImgObj = {};
-              tempImgObj.sizeType = msgImgObj.Type;
-              tempImgObj.size = msgImgObj.Size;
-              tempImgObj.height = msgImgObj.Height;
-              tempImgObj.width = msgImgObj.Width;
-              tempImgObj.imageUrl = msgImgObj.URL;
-              temp.payload.imageInfoArray.push(tempImgObj);
-            }
-            msgList.push(temp);
-          });
-          that.setData({
-            currentMessageList: [...msgList, ...that.data.currentMessageList],
-          });
+    if (that.data.historyInquiryIndex < that.data.historyInquiryList.length) {
+      HTTP.findHistoryMsgByInquiryID({
+        pageIndex: 0,
+        inquiryID: that.data.historyInquiryList[that.data.historyInquiryIndex].keyID
+      }).then(res => {
+        console.log(res.data);
+        if (res.code == 0 && res.data) {
+          if (res && res.data) {
+            let msgList = [];
+            res.data.forEach(element => {
+              let type = element.msgBody[0].msgType;
+              let msgContent = element.msgBody[0].msgContent;
+              let from = element.from_Account;
+              let time = element.msgTime;
+              let temp = element;
+              temp.type = type;
+              temp.from = from;
+              temp.time = time;
+              temp.payload = {};
+              if (type === "TIMTextElem") { // 文本消息
+                temp.payload.text = msgContent.Text;
+              } else if (type == "TIMSoundElem") { // 语音消息
+                // temp.recordStatus = false; // 播放状态
+                // if (Number(temp.payload.second) <= 15) {
+                //   temp.recordViewWidth = temp.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+                // } else {
+                //   temp.recordViewWidth = (Number(temp.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
+                // }
+              } else if (type === "TIMCustomElem") { // 自定义消息
+                temp.payload.data = msgContent.Data;
+                temp.payload.description = msgContent.Desc;
+                temp.payload.extension = msgContent.Ext;
+              } else if (type === "TIMImageElem") { // 图片消息
+                temp.payload.imageInfoArray = [];
+                let msgImgObj = msgContent.ImageInfoArray[0];
+                let tempImgObj = {};
+                tempImgObj.sizeType = msgImgObj.Type;
+                tempImgObj.size = msgImgObj.Size;
+                tempImgObj.height = msgImgObj.Height;
+                tempImgObj.width = msgImgObj.Width;
+                tempImgObj.imageUrl = msgImgObj.URL;
+                temp.payload.imageInfoArray.push(tempImgObj);
+              }
+              msgList.push(temp);
+            });
+            that.setData({
+              currentMessageList: [...msgList, ...that.data.currentMessageList],
+              historyInquiryIndex: that.data.historyInquiryIndex + 1
+            });
+          }
         }
-      }
-    });
+        wx.stopPullDownRefresh();
+      }).catch(err => {
+        console.log(err);
+        wx.stopPullDownRefresh();
+      });
+    }
   }
 
   /**模拟跳转到素材 */
