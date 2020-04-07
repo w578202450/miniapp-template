@@ -222,6 +222,7 @@ Page({
             });
             wx.setStorageSync('assistantInfo', res.data);
             app.globalData.assistantInfo = res.data;
+            // console.log("-------助理医生信息------" + JSON.stringify(res.data));
             // 获取助理医生的专治疾病
             that.getDoctorDiseaseByDoctorID(res.data.doctorID).then(function(res) {
               that.setData({

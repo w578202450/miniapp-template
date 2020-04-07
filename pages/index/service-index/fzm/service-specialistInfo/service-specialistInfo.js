@@ -21,6 +21,11 @@ Component({
       type: Object,
       value: null
     },
+    // 医助信息
+    assistantDoctorInfo: {
+      type: Object,
+      value: null
+    },
     // 执业许可证信息
     certifyInfo: {
       type: Object,
