@@ -84,7 +84,7 @@ Page({
         wx.setNavigationBarTitle({
           title: res.data.title
         })
-        WxParse.wxParse('article', 'html', res.data.content, this, 5);
+        WxParse.wxParse('article', 'html', res.data.content, this, 20);
       }
     })
   },

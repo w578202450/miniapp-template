@@ -22,15 +22,15 @@
   <view class="comment-box">
     <text class="comment-title">留言评论</text>
     <view style="height: 20rpx"></view>
-    <view class="comment-item flex_row" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
-      <view class="comment-left flex_row">
+    <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
+      <view class="comment-left"> 
         <image src="{{comment.patientFaceUrl}}"></image>
         <text class="comment_text" style="margin-left: 16rpx">{{comment.patientName}}</text>
       </view>
       <view class="comment-right">
-        <text class="comment_text">{{comment.commentContent}}</text>
+        <text class="comment_text" style="align-items: center">{{comment.commentContent}}</text>
         <view wx:if="{{comment.isReply === 1}}" class="comment_text" style="margin-top: 16rpx">
-          <text style="color:rgba(67,139,239,1)">{{comment.replyStaffID}}回复:</text>
+          <text style="color:rgba(67,139,239,1)">侯医师回复:</text>
           <text>{{comment.commentReply}}</text>
         </view>
       </view>

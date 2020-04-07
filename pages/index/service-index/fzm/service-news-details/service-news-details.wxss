@@ -52,6 +52,8 @@ page{
 }
 
 .comment-left {
+  display: flex;
+  flex-direction: row;
   flex-shrink: 0;
   align-items: center;
 }
@@ -73,12 +75,16 @@ page{
 .flex_row {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .comment-right {
   display: flex;
   flex-direction: column;
-  margin-left: 32rpx;
+  margin-left: 64rpx;
+  line-height: 36rpx;
+  font-size: 24rpx;
+  margin-top: 20rpx;
 }
 
 .bottom-view {
