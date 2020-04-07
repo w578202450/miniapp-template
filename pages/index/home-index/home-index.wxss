@@ -145,20 +145,25 @@ page {
 }
 
 .dean-introduce-box {
-  position: relative;
+  display: flex;
+  align-items: center;
+  vertical-align: center;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 .detailIntroduction {
-  margin-right: 65rpx;
+  margin-right: 55rpx;
+  height: 30rpx;
   word-break:  break-all; /* 强制换行 */
   color: rgba(0, 0, 0, 0.65);
   font-size: 24rpx;
-  line-height: 48rpx;
   text-overflow:ellipsis;
   overflow:hidden;
   display:-webkit-box;
   -webkit-line-clamp:1;   /* 设置要显示省略号的行数 */
   -webkit-box-orient:vertical;
+  
 }
 
 .introduce-box-image {

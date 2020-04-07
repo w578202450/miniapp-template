@@ -74,10 +74,16 @@ Page({
     license_icon: "/images/home/practice_license.png",
     // 网信认证
     attestation_icon: "/images/home/net_letter_attestation.png",
-    // 咨询电话
+    // 咨询电话图标
     expert_clinic_tel: "/images/home/expert_clinic_tel.png",
-    // 联系邮箱
+    // 联系邮箱图标
     expert_clinic_email: "/images/home/expert_clinic_email.png",
+    // dialog关闭按钮图标
+    dialog_close: "/images/home/dialog_close.png",
+    // 咨询电话
+    consulting_tel: "028-6455 3998",
+    // 联系邮箱
+    contact_email: "shuibei@100cbc.com"
   },
 
   /**
@@ -479,10 +485,24 @@ Page({
       animationData: this.animation.export() //动画实例的export方法导出动画数据传递给组件的animation属性
     })
   },
+
   fadeDown: function() {
     this.animation.translateY(500).step()
     this.setData({
       animationData: this.animation.export(),
+    })
+  },
+
+  // 一键拨打
+  callPhone: function() {
+    wx.makePhoneCall({
+      phoneNumber: '02864553998',
+      success: function() {
+        console.log("拨打电话成功！");
+      },
+      fail: function() {
+        console.log("拨打电话失败！");
+      } 
     })
   },
 
