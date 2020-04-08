@@ -9,10 +9,11 @@ Page({
   data: {
     newComment: "", // 评论输入框内容
     isInput: false, // 输入框是否处于输入状态
-    usefulBtnDisable: true, // 觉得有用按钮是否可以点击
+    usefulBtnDisable: false, // 觉得有用按钮是否可以点击
     articleDatas: {}, // 文章详情
     inquiryIcon: "/images/inquiry/inquiry_article_add.png",
     likeIcon: "/images/inquiry/inquiry_article_like.png",
+    likeIcon_disable: "/images/inquiry/inquiry_article_like_disable.png"
   },
 
   /**
@@ -122,6 +123,9 @@ Page({
     }).then(res => {
       if (res.code === 0) {
         this.usefulBtnDisable = res.data;
+        this.setData({
+          usefulBtnDisable: res.data
+        })
       }
     })
   },
@@ -148,7 +152,9 @@ Page({
           if (res.code === 0) {
             this.usefulBtnDisable = true;
             wx.showToast({
-              title: '点赞成功',
+              title: '点赞成功'
+            })
+            this.setData({
               usefulBtnDisable: true
             })
           } else {

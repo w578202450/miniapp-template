@@ -10,15 +10,17 @@
   </view>
   <!-- button-view -->
   <view class="button-view-box">
-    <view class="button-box" style="{{usefulBtnDisable ? 'background:#F6F6F6' : 'background:rgba(67,139,239,0.1)'}}" bindtap="likeOption">
-      <block wx:if="{{usefulBtnDisable}}">
+    <view class="button-box" style="{{usefulBtnDisable ? 'background:rgba(217,217,217,1)' : 'background:rgba(67,139,239,0.1)'}}" bindtap="likeOption">
+    <image src="{{usefulBtnDisable ? likeIcon_disable : likeIcon}}"></image>
+    <text style="{{usefulBtnDisable ? 'color: #FFFFFF' : 'color:rgba(67,139,239,1)'}};  margin-left: 8rpx">觉得有用</text>
+      <!-- <block wx:if="{{usefulBtnDisable}}">
         <image src="{{likeIcon}}"></image>
-        <text style="color: white; margin-left: 8rpx">觉得有用</text>
+        <text style="color: #FFFFFF; margin-left: 8rpx">觉得有用</text>
       </block>
       <block wx:else>
         <image src="{{likeIcon}}"></image>
-        <text style="color:rgba(67,139,239,1); margin-left: 8rpx">觉得有用</text>
-      </block>
+        <text style="color:rgba(67,139,239,1); margin-left: 8rpx">觉得有用</text> -->
+      <!-- </block> -->
     </view>
     <view class="button-box" style="background:rgba(67,139,239,1)" bindtap="toOnlineInqueryFun">
       <image src="{{inquiryIcon}}"></image>
