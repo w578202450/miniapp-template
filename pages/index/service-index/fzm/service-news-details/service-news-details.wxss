@@ -112,13 +112,20 @@ page {
 }
 
 .input-button {
+  width: 80rpx;
+  height: 48rpx;
+  background: rgba(217, 217, 217, 1);
+  border-radius: 10rpx;
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
-  color: rgba(67, 139, 239, 1);
   margin-left: 32rpx;
   margin-right: 32rpx;
   flex-shrink: 0;
+  color: rgba(255, 255, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-placeholder {
@@ -179,7 +186,7 @@ page {
   margin-top: 32rpx;
 }
 
-.details-box{
+.details-box {
   display: flex;
   flex-direction: row;
   margin-left: 32rpx;
@@ -201,4 +208,3 @@ page {
 .like-num {
   color: rgba(67, 139, 239, 1);
 }
-

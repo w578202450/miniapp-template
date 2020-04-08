@@ -71,7 +71,9 @@
       bindinput="bindinput"></textarea>
     <view class="max-box">
       <text class="max-text">{{cursor ? cursor : '0'}}/200</text>
-      <view class="input-button" catchtap="publishAction">发布</view>
+      <view class="input-button" style="{{newComment.length === 0 ? 'background:rgba(217,217,217,1)' : 'background:rgba(67,139,239,1)'}}" catchtap="publishAction">
+      <text>发布</text>
+      </view>
     </view>
   </view>
 </view>
