@@ -1,7 +1,7 @@
 /* pages/index/service-index/fzm/service-news-details/service-news-details.wxss */
 @import "../../../../../components/wxParse/wxParse.wxss";
 
-page{
+page {
   background-color: white;
 }
 
@@ -166,4 +166,39 @@ page{
 .video {
   width: 100%;
   height: 400rpx;
+  margin-top: 32rpx;
 }
+
+.title {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  margin-top: 32rpx;
+}
+
+.details-box{
+  display: flex;
+  flex-direction: row;
+  margin-left: 32rpx;
+  margin-top: 16rpx;
+}
+
+.details {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.details-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.like-num {
+  color: rgba(67, 139, 239, 1);
+}
+

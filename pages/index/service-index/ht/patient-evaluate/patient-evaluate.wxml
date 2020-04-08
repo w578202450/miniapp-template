@@ -2,10 +2,10 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
-  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="{{(evaluateData.length > 0 && evaluateData[0].keyID) ? '' : ''}}" isHaveMoreBtn="{{evaluateData.length > 0 && evaluateData[0].keyID}}" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}" serve="99%" effect="99%">
+  <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="{{(evaluateData.length > 0 && evaluateData[0].keyID) ? '' : ''}}" isHaveMoreBtn="{{evaluateData.length > 0 && evaluateData[0].keyID}}" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}" serve="{{evaluateData.length > 0 ? '99%' : ''}}" effect="{{evaluateData.length > 0 ? '99%' : ''}}">
     <view slot="content-body" class="evaluateContentBox">
     <!-- 擅长列表 -->
-      <view class="levelBox">
+      <view wx:if="{{evaluateData.length > 0}}" class="levelBox">
         <view class="illnessList">
           <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}} {{item.num}}</view>
         </view>

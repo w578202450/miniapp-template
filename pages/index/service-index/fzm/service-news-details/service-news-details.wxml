@@ -4,7 +4,22 @@
 <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
 <view>
   <!-- html -->
-  <video wx:if="{{articleData.articleType === 1}}" class="video" src="{{articleData.articleUrl}}" controls></video>
+  <block wx:if="{{articleData.articleType === 1}}">
+    <text class="title">{{articleData.title}}</text>
+    <view class="details-box">
+      <view class="details-item">
+        <view class="like-num details">{{articleData.useful || 0}}人</view>
+        <view class="details">觉得有用</view>
+      </view>
+      <view class="details-item" style="margin-left: 32rpx">
+        <text class="details">{{articleData.viewCount || 0}}人</text>
+        <text class="details">已观看</text>
+      </view>
+    </view>
+
+    <video class="video" src="{{articleData.articleUrl}}" controls></video>
+  </block>
+
   <view wx:else class="wxParse">
     <template is="wxParse" data="{{wxParseData:article.nodes}}" />
   </view>
@@ -13,14 +28,6 @@
     <view class="button-box" style="{{usefulBtnDisable ? 'background:rgba(217,217,217,1)' : 'background:rgba(67,139,239,0.1)'}}" bindtap="likeOption">
       <image src="{{usefulBtnDisable ? likeIcon_disable : likeIcon}}"></image>
       <text style="{{usefulBtnDisable ? 'color: #FFFFFF' : 'color:rgba(67,139,239,1)'}};  margin-left: 8rpx">觉得有用</text>
-      <!-- <block wx:if="{{usefulBtnDisable}}">
-        <image src="{{likeIcon}}"></image>
-        <text style="color: #FFFFFF; margin-left: 8rpx">觉得有用</text>
-      </block>
-      <block wx:else>
-        <image src="{{likeIcon}}"></image>
-        <text style="color:rgba(67,139,239,1); margin-left: 8rpx">觉得有用</text> -->
-      <!-- </block> -->
     </view>
     <view class="button-box" style="background:rgba(67,139,239,1)" bindtap="toOnlineInqueryFun">
       <image src="{{inquiryIcon}}"></image>
@@ -31,19 +38,26 @@
   <view class="comment-box">
     <text class="comment-title">留言评论</text>
     <view style="height: 20rpx"></view>
-    <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
-      <view class="comment-left">
-        <image src="{{comment.patientFaceUrl}}"></image>
-        <text class="comment_text" style="margin-left: 16rpx">{{comment.patientName}}</text>
-      </view>
-      <view class="comment-right">
-        <text class="comment_text" style="align-items: center">{{comment.commentContent}}</text>
-        <view wx:if="{{comment.isReply === 1}}" class="comment_text" style="margin-top: 16rpx">
-          <text style="color:rgba(67,139,239,1)">侯医师回复:</text>
-          <text>{{comment.commentReply}}</text>
+    <block wx:if="{{commentList.length > 0}}">
+      <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
+        <view class="comment-left">
+          <image src="{{comment.patientFaceUrl}}"></image>
+          <text class="comment_text" style="margin-left: 16rpx">{{comment.patientName}}</text>
+        </view>
+        <view class="comment-right">
+          <text class="comment_text" style="align-items: center">{{comment.commentContent}}</text>
+          <view wx:if="{{comment.isReply === 1}}" class="comment_text" style="margin-top: 16rpx">
+            <text style="color:rgba(67,139,239,1)">侯医师回复:</text>
+            <text>{{comment.commentReply}}</text>
+          </view>
         </view>
       </view>
-    </view>
+    </block>
+    <block wx:else>
+      <view style="display: flex;justify-content: center;align-items: center">
+        <text class="details" style="font-size: 32rpx;color: rgba(217,217,217,1)">暂无评论</text>
+      </view>
+    </block>
   </view>
   <!-- 输入框占位 -->
   <view wx:if="{{!isInput}}" class="bottom-view" bindtap="inputoption">

@@ -26,7 +26,9 @@ Page({
     this.getArticleByKeyID();
     this.usefulStatusRequest();
     this.listCommentRequest();
-    // articleType
+    wx.setNavigationBarTitle({
+      title: this.articleDatas.title
+    })
   },
 
   /**
@@ -83,9 +85,6 @@ Page({
       "keyID": this.articleDatas.keyID,
     }).then(res => {
       if (res.code == 0 && res.data) {
-        wx.setNavigationBarTitle({
-          title: res.data.title
-        })
         if (res.data.articleType === 0) {
           WxParse.wxParse('article', 'html', res.data.content, this, 20);
         }

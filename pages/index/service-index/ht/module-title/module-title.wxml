@@ -9,11 +9,11 @@
         <text wx:if="{{isHaveRemark}}" class="module-title-num">{{remarkInfo}}</text>
       </view>
       <view class="module-title-view">
-        <view class="module-title-view" hidden="{{!effect}}">
+        <view class="module-title-view" hidden="{{effect.length === 0}}">
           <text class="effectTitle">疗效:</text>
           <text class="effectValue">99%</text>
         </view>
-        <view class="module-title-view" hidden="{{!serve}}" style="margin-left: 32rpx">
+        <view class="module-title-view" hidden="{{serve.length === 0}}" style="margin-left: 32rpx">
           <text class="effectTitle">服务: </text>
           <text class="effectValue">99%</text>
         </view>

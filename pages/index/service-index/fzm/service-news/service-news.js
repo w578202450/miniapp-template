@@ -357,8 +357,10 @@ Component({
       let item = e.currentTarget.dataset.item
       // item.content = encodeURIComponent(item.content)
       let params = {
-        title: item.title,
-        keyID: item.keyID
+        title: this.data.articleTitles[this.data.currentIndex].classifyName,
+        keyID: item.keyID,
+        useful: item.useful,
+        viewCount: item.viewCount
       }
       wx.navigateTo({
         url: "/pages/index/service-index/fzm/service-news-details/service-news-details?materialData=" + JSON.stringify(params),
