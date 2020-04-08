@@ -9,6 +9,7 @@
         </view>
       </view>
       <view wx:elif="{{index == 1}}" style="width:{{1/tabbar.list.length*100}}%;">
+      <!-- <view wx:elif="{{index == 1}}" style="width:33.33%;"> -->
         <view class="tabbar_nav" bindtap="selectedTabFun" data-index="{{index}}">
           <view class="tabbar_icon_box">
             <image class="tabbar_icon_img" src="{{index == secIndex ? item.selectedIconPath : item.iconPath}}"></image>

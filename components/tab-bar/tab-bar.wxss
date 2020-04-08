@@ -1,4 +1,8 @@
 /* components/tab-bar/tab-bar.wxss */
+page{
+  margin: 0;
+  padding: 0;
+}
 
 .tabbar_box {
   display: flex;
@@ -26,6 +30,7 @@
 .tabbar_icon {
   width: 50rpx;
   height: 50rpx;
+  margin-right: 0;
 }
 
 .tabbar_icon_box {
@@ -43,4 +48,5 @@
 .tabbar_icon_img {
   width: 80rpx;
   height: 80rpx;
+  margin-right: 0;
 }
