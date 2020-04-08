@@ -74,7 +74,7 @@
         <view class="address-tel-header-box">
           <image style="margin-top:20rpx" src="../../../images/home/home_phone.png"></image>
           <view class="address-tel-left">
-            <text class="title-other" style="margin-top:20rpx">健康热线：</text>
+            <text class="title-other" style="margin-top:20rpx">客服电话：</text>
           </view>
           <view class="address-tel-right">
             <text class="title-other" style="margin-top:20rpx">{{hospitalDetail.servicePhone}}</text>
