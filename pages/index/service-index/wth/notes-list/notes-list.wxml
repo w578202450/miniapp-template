@@ -1,6 +1,6 @@
 <!--pages/index/service-index/wth/notes-list/notes-list.wxml-->
 <!-- 引入wxs脚本 -->
-<navigation-bar navbarTitle="医生手记" />
+<navigation-bar navbarTitle="康复案例" />
 <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
 <!-- 登录弹框 -->
 <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />

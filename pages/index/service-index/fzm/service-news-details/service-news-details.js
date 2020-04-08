@@ -267,6 +267,7 @@ Page({
       } else {
         wx.showToast({
           title: res.message,
+          icon: none
         })
       }
     }).catch(error => {

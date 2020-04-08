@@ -250,7 +250,8 @@ Component({
           "orgID": orgID,
           "pageSize": currentCategoryData.pageSize,
           "pageIndex": currentCategoryData.pageIndex,
-          "classifyID": currentClassifyID
+          "classifyID": currentClassifyID,
+          "isPublish" : 1
         }).then(res => {
           currentCategoryData["loading"] = false
           let list = res.data
@@ -302,7 +303,8 @@ Component({
           "orgID": orgID,
           "pageSize": currentCategoryData.pageSize,
           "pageIndex": currentCategoryData.pageIndex,
-          "classifyID": currentClassifyID
+          "classifyID": currentClassifyID,
+          "isPublish": 1
         }).then(res => {
           currentCategoryData["loading"] = false
           let list = res.data

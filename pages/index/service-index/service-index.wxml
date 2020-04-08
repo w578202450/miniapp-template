@@ -41,9 +41,9 @@
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   <view class="bottom-box">
     <view class="bottom-item-one">
-      <image style="width: 24rpx;height: 24rpx" src="{{copyrightInfo.copyrightIcon}}"></image>
+      <image style="width: 32rpx;height: 32rpx" src="{{copyrightInfo.copyrightIcon}}"></image>
       <text>{{copyrightInfo.details_one}}</text>
-      <image style="width: 24rpx;height: 24rpx;margin-left: 16rpx" src="{{copyrightInfo.nationalEmblemIcon}}"></image>
+      <image style="width: 32rpx;height: 32rpx;margin-left: 16rpx" src="{{copyrightInfo.nationalEmblemIcon}}"></image>
       <text>{{copyrightInfo.details_two}}</text>
     </view>
     <text style="margin-top:20rpx">{{copyrightInfo.details_three}}</text>
