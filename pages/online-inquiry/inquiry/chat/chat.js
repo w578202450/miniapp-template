@@ -659,6 +659,20 @@ Page({
     });
   },
 
+   /*获取群未读消息数 */
+  getUnreadMessageCount: function() {
+    let that = this;
+    // 拉取会话列表
+    let promise = tim.getConversationList();
+    promise.then(function (imResponse) {
+      let conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
+      let unreadCount = conversationList[0].unreadCount;
+      console.log("获取群未读消息数:" + unreadCount);
+    }).catch(function (imError) {
+      console.warn('getConversationList error:', imError); // 获取会话列表失败的相关信息
+    });
+  },
+
   /*自动：滚动到消息底部 */
   toViewBottomFun: function() {
     // 设置屏幕自动滚动到最后一条消息处

@@ -352,9 +352,9 @@ Page({
                   }
                 }
                 doctorTeamList.unshift(this.data.signedDoctor);
-                if (doctorTeamList.length == 1) {
-                  doctorTeamList.push({});
-                }
+                // if (doctorTeamList.length == 1) {
+                //   doctorTeamList.push({});
+                // }
                 that.setData({
                   newArrayDoctorList: doctorTeamList
                 });
