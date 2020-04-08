@@ -1,4 +1,4 @@
 <!--pages/index/service-index/wth/notes/notes.wxml-->
 <view>
-  <doc-notes title="医生手记" httpParams="{{httpParams}}" moreBtnName="查看更多案例" paersonInfo="{{paersonInfo}}" contentText="{{contentText}}" bind:toDetail="toDetail" type="医生"></doc-notes>
+  <doc-notes title="康复案例" httpParams="{{httpParams}}" moreBtnName="查看更多案例" paersonInfo="{{paersonInfo}}" contentText="{{contentText}}" bind:toDetail="toDetail" type="医生"></doc-notes>
 </view>

@@ -18,7 +18,7 @@ Page({
    */
   onLoad: function(options) {
     wx.setNavigationBarTitle({
-      title: "医生手记"
+      title: "康复案例"
     });
     let that = this;
     that.data.httpParams = JSON.parse(options.httpParams);

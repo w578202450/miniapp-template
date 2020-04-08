@@ -361,7 +361,8 @@ Page({
       "orgID": orgID,
       "pageSize": currentCategoryData.pageSize,
       "pageIndex": currentCategoryData.pageIndex,
-      "classifyID": classifyID
+      "classifyID": classifyID,
+      "isPublish": 1
     }).then(res => {
       currentCategoryData["loading"] = false;
       if (res.code == 0 && res.data) {
@@ -602,7 +603,7 @@ Page({
           ["inquiryCaseData.publishDate"]: res.data.publishDate,
           ["inquiryCaseData.httpParams.doctorStaffID"]: doctorStaffID
         });
-        // console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
+        console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
       }
     });
   }
