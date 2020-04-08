@@ -32,8 +32,8 @@
             <text class="title-name-houshi" style="font-size:28rpx;color:#555658;">{{deanInfo.titleName}}</text>
           </view>
           <text class="title-other">{{deanInfo.deanDuty}}</text>
-          <text class="title-other">{{deanInfo.deanFamous}}</text>
-          <service-tabs list="{{deanInfo.goodAts}}" tabStyle="margin-bottom:0;background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
+          <text class="title-other" style="margin-top:10rpx;">{{deanInfo.deanFamous}}</text>
+          <service-tabs list="{{deanInfo.goodAts}}" tabStyle="margin-top:10rpx;margin-bottom:0;background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
         </view>
       </view>
       <!-- 院长详情简介 -->
@@ -74,7 +74,7 @@
         <view class="address-tel-header-box">
           <image style="margin-top:20rpx" src="../../../images/home/home_phone.png"></image>
           <view class="address-tel-left">
-            <text class="title-other" style="margin-top:20rpx">健康热线：</text>
+            <text class="title-other" style="margin-top:20rpx">客服电话：</text>
           </view>
           <view class="address-tel-right">
             <text class="title-other" style="margin-top:20rpx">{{hospitalDetail.servicePhone}}</text>

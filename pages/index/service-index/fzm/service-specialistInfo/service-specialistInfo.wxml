@@ -36,7 +36,7 @@
     <view class="physicianAssistant-box">
       <image mode="aspectFill" class="physicianAssistant-photo" src="{{ assistantDoctorInfo.faceImage }}"></image>
       <text class="physicianAssistant-name">{{ assistantDoctorInfo.doctorName }}</text>
-      <text class="physicianAssistant-title">{{ assistantDoctorInfo.titleName }}</text>
+      <text class="physicianAssistant-title">{{ "医生助理" }}</text>
       <text class="physicianAssistant-title">{{ assistantDoctorInfo.sectionName }}</text>
     </view>
   </view>

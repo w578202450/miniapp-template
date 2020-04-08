@@ -152,7 +152,9 @@ Page({
           if (res.code === 0) {
             this.usefulBtnDisable = true;
             wx.showToast({
-              title: '点赞成功'
+              icon: "none",
+              title: '您的一分肯定，是我们前进的动力',
+              duration: 3000
             })
             this.setData({
               usefulBtnDisable: true
@@ -171,8 +173,7 @@ Page({
           })
         });
       } else {
-        let nextPageName = "chat";
-        this.popup.showPopup(nextPageName); // 显示登录确认框
+        this.popup.showPopup(""); // 显示登录确认框
       }
     }
 

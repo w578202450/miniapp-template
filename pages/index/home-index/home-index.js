@@ -76,10 +76,10 @@ Page({
     // }
     // 测试
     // 包正一
-    // options ={
-    //   orgID: "19121923373037086560511253",
-    //   assistantStaffID: "20011320532175746910514253"
-    // }
+    options ={
+      orgID: "19121923373037086560511253",
+      assistantStaffID: "20011320532175746910514253"
+    }
     // 徐
     // options = {
     //   assistantStaffID: "20011514000045118050514253",
@@ -352,9 +352,9 @@ Page({
                   }
                 }
                 doctorTeamList.unshift(this.data.signedDoctor);
-                if (doctorTeamList.length == 1) {
-                  doctorTeamList.push({});
-                }
+                // if (doctorTeamList.length == 1) {
+                //   doctorTeamList.push({});
+                // }
                 that.setData({
                   newArrayDoctorList: doctorTeamList
                 });
