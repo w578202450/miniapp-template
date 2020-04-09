@@ -1,14 +1,9 @@
-.cutting-line {
-  margin-top: 24rpx;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.1);
-}
-
 .contain-box {
-  padding: 24rpx 32rpx 0 32rpx;
+  padding: 24rpx 32rpx 24rpx 32rpx;
   display: flex;
   flex-direction: column;
   background-color: white;
+  border-bottom: 1px solid #ededed;
 }
 
 .title {

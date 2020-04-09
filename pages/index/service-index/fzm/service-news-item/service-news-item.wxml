@@ -2,5 +2,4 @@
 <view class="contain-box">
   <text class="title">{{itemData.title}}</text>
   <tmc-likeWatchComponent isImageText="{{itemData.articleType==0}}" likeNum="{{itemData.useful}}" watchNum="{{itemData.viewCount}}"></tmc-likeWatchComponent>
-  <view class="cutting-line"></view>
 </view>
