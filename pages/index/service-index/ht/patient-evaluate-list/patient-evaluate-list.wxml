@@ -18,17 +18,17 @@
         <view class="flexRowStartCenter">
           <view class="flexRowStartCenter" style="margin-right: 10rpx;">
             <text class="effect">疗效：</text>
-            <text class="generalCommentTxt">99%</text>
+            <text class="generalCommentTxt">100%</text>
           </view>
           <!-- <view class="verticalLine"></view> -->
           <view class="flexRowStartCenter">
             <text class="effect" style="margin-left: 32rpx">服务：</text>
-            <text class="generalCommentTxt">99%</text>
+            <text class="generalCommentTxt">100%</text>
           </view>
         </view>
       </view>
       <view class="illnessList">
-        <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}} {{item.num}}</view>
+        <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}}</view>
       </view>
     </view>
     <view wx:if="{{evaluateListData.length > 0}}">
