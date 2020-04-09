@@ -82,7 +82,7 @@ Component({
       if (app.globalData.isInitInfo) {
         if (this.data.comment.length === 0) {
           wx.showToast({
-            title: '内容为空',
+            title: '请填写评论内容',
             icon: 'none'
           })
           return;
