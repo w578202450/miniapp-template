@@ -36,14 +36,14 @@
   <!-- 患者分享 -->
   <!-- <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" /> -->
   <!-- 文章模块 -->
-  <service-news pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
+  <service-news id="article" pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   <view class="bottom-box">
     <view class="bottom-item-one">
-      <image style="width: 32rpx;height: 32rpx" src="{{copyrightInfo.copyrightIcon}}"></image>
+      <image style="width: 24rpx;height: 24rpx" src="{{copyrightInfo.copyrightIcon}}"></image>
       <text>{{copyrightInfo.details_one}}</text>
-      <image style="width: 32rpx;height: 32rpx;margin-left: 16rpx" src="{{copyrightInfo.nationalEmblemIcon}}"></image>
+      <image style="width: 24rpx;height: 24rpx;margin-left: 16rpx" src="{{copyrightInfo.nationalEmblemIcon}}"></image>
       <text>{{copyrightInfo.details_two}}</text>
     </view>
     <text style="margin-top:20rpx">{{copyrightInfo.details_three}}</text>

@@ -1,16 +1,6 @@
 
-<view class="content-box">
+<view class="contain-box">
   <text class="title">{{itemData.title}}</text>
-  <view class="bottom">
-    <image hidden="{{itemData.articleType==0}}" src="{{videoIconSrc}}"></image>
-    <view class="bottom-item">
-      <view class="like-num details">{{itemData.useful || 0}}人</view>
-      <view class="details">觉得有用</view>
-    </view>
-    <view class="bottom-item" style="margin-left: 32rpx">
-      <text class="details">{{itemData.viewCount || 0}}人</text>
-      <text class="details">已观看</text>
-    </view>
-  </view>
+  <tmc-likeWatchComponent isImageText="{{itemData.articleType==0}}" likeNum="{{itemData.useful}}" watchNum="{{itemData.viewCount}}"></tmc-likeWatchComponent>
+  <view class="cutting-line"></view>
 </view>
-<view class="cutting-line"></view>

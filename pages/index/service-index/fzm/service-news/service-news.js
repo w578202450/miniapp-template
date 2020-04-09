@@ -251,7 +251,7 @@ Component({
           "pageSize": currentCategoryData.pageSize,
           "pageIndex": currentCategoryData.pageIndex,
           "classifyID": currentClassifyID,
-          "isPublish" : 1
+          "isPublish": 1
         }).then(res => {
           currentCategoryData["loading"] = false
           let list = res.data
@@ -370,6 +370,13 @@ Component({
 
     forbidMove() {
       return;
+    },
+    refreshCurrentArticleData: function() {
+      var index = this.data.currentIndex;
+      let navitem = this.data.articleTitles[index];
+      let currentClassifyID = navitem.keyID;
+      let currentCategoryData = this.data.articleDatas[currentClassifyID];
+      this.loadDatas(currentClassifyID, currentCategoryData, navitem.orgID)
     }
 
   }

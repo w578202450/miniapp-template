@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "service-tabs": "/pages/index/service-index/fzm/service-tabs/service-tabs"
+    "service-tabs": "/pages/index/service-index/fzm/service-tabs/service-tabs",
+    "tmc-likeWatchComponent": "/components/tmc-likeWatchComponent/tmc-likeWatchComponent"
   }
 }

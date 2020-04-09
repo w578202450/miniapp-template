@@ -1,6 +1,14 @@
-.content-box {
+.cutting-line {
+  margin-top: 24rpx;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.contain-box {
+  padding: 24rpx 32rpx 0 32rpx;
+  display: flex;
+  flex-direction: column;
   background-color: white;
-  padding: 32rpx 20rpx 32rpx 20rpx;
 }
 
 .title {
@@ -13,40 +21,5 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-}
-
-.details {
-  font-size: 24rpx;
-  font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.65);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-}
-
-.bottom {
-  margin-top: 24rpx;
-  display: flex;
-  flex-direction: row;
-}
-
-.bottom-item {
-  display: flex;
-  flex-direction: row;
-}
-
-.like-num {
-  color: rgba(67, 139, 239, 1);
-}
-
-.cutting-line {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.1);
-}
-
-image {
-  width: 40rpx;
-  height: 40rpx;
-  margin-right: 14rpx;
+  margin-bottom: 10rpx;
 }

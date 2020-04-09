@@ -1,0 +1,21 @@
+<view class="flex-row">
+  <!-- 图文 -->
+  <block wx:if="{{isImageText}}">
+    <view class="flex-row like-box">
+      <text class="like-num">{{likeNum}}人</text>
+      <text>觉得有用</text>
+    </view>
+  </block>
+  <!-- 视频 -->
+  <block wx:else>
+    <image src="{{videoIconSrc}}"></image>
+    <view class="flex-row like-box" style="margin-left: 14rpx">
+      <text class="like-num">{{likeNum}}人</text>
+      <text>觉得有用</text>
+    </view>
+  </block>
+  <view class="flex-row watch-box">
+    <text>{{watchNum}}人</text>
+    <text>已观看</text>
+  </view>
+</view>

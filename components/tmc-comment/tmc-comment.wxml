@@ -1,0 +1,44 @@
+<!-- 评论列表区 -->
+<view class="comment-list-box">
+  <text class="comment-title">留言评论</text>
+  <view style="height: 20rpx"></view>
+  <block wx:if="{{commentList.length > 0}}">
+    <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
+      <image class="avatar" src="{{comment.patientFaceUrl}}"></image>
+      <view class="comment-content-box">
+        <text class="commtent-name">{{comment.patientName}}</text>
+        <view>
+          <text class="commtent-content">{{comment.commentContent}}</text>
+          <view wx:if="{{comment.isReply === 1}}" style="margin-top: 16rpx">
+            <text class="reply" style="color:rgba(67,139,239,1)">侯医师回复:  </text>
+            <text class="reply">{{comment.commentReply}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view style="display: flex;justify-content: center;align-items: center">
+      <text class="details" style="font-size: 32rpx;color: rgba(217,217,217,1)">暂无评论</text>
+    </view>
+  </block>
+</view>
+<!-- 评论输入框 -->
+<view wx:if="{{!isInputting}}" class="bottom-view" bindtap="inputoption">
+  <view class="input-view">
+    <text class="input-placeholder">{{comment ? comment : "写评论"}}</text>
+  </view>
+  <view class="input-button" style="{{comment.length === 0 ? 'background:rgba(217,217,217,1)' : 'background:rgba(67,139,239,1)'}}" catchtap="publishAction">
+    <text style="color:rgba(255,255,255,1)">发布</text>
+  </view>
+</view>
+<view wx:else class="textarea-view" style="bottom: {{textareaHeight}}px">
+  <textarea value="{{comment}}" class="textarea" focus="{{true}}" placeholder="写评论" maxlength="200" fixed="{{true}}" adjust-position="{{true}}" show-confirm-bar="{{false}}" cursor-spacing="80" bindblur="inputBlur" bindfocus="inputFocus" adjust-position="{{false}}"
+    bindinput="bindinput"></textarea>
+  <view class="max-box">
+    <text class="max-text">{{cursor ? cursor : '0'}}/200</text>
+    <view class="input-button" style="{{comment.length === 0 ? 'background:rgba(217,217,217,1)' : 'background:rgba(67,139,239,1)'}}" catchtap="publishAction">
+      <text style="color:rgba(255,255,255,1)">发布</text>
+    </view>
+  </view>
+</view>

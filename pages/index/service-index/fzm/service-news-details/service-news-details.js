@@ -7,13 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    newComment: "", // 评论输入框内容
-    isInput: false, // 输入框是否处于输入状态
-    usefulBtnDisable: false, // 觉得有用按钮是否可以点击
     articleDatas: {}, // 文章详情
-    inquiryIcon: "/images/inquiry/inquiry_article_add.png",
-    likeIcon: "/images/inquiry/inquiry_article_like.png",
-    likeIcon_disable: "/images/inquiry/inquiry_article_like_disable.png"
+    inquiryIcon: "/images/inquiry/inquiry_article_add.png"
   },
 
   /**
@@ -21,13 +16,15 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    console.log("进入H5展示的参数：" + JSON.stringify(options));
     this.articleDatas = JSON.parse(options.materialData);
     this.getArticleByKeyID();
     this.usefulStatusRequest();
     this.listCommentRequest();
     wx.setNavigationBarTitle({
       title: this.articleDatas.title
+    })
+    this.setData({
+      keyID: this.articleDatas.keyID
     })
   },
 
@@ -80,6 +77,9 @@ Page({
   onShareAppMessage: function() {
 
   },
+  /**
+   * 获取文章类容
+   */
   getArticleByKeyID() {
     HTTP.getArticleByKeyID({
       "keyID": this.articleDatas.keyID,
@@ -97,7 +97,7 @@ Page({
     })
   },
   /**
-   * 文章评论列表
+   * 获取文章评论列表
    */
   listCommentRequest() {
     HTTP.listComment({
@@ -113,7 +113,7 @@ Page({
     })
   },
   /**
-   * 觉得有用按钮状态
+   * 获取文章觉得有用状态
    */
   usefulStatusRequest() {
     HTTP.usefulStatus({
@@ -121,61 +121,11 @@ Page({
       "patientID": app.globalData.patientID
     }).then(res => {
       if (res.code === 0) {
-        this.usefulBtnDisable = res.data;
         this.setData({
-          usefulBtnDisable: res.data
+          likeDisable: res.data
         })
       }
     })
-  },
-  /**
-   * 觉得有用
-   */
-  likeOption() {
-    if (this.usefulBtnDisable) {
-      wx.showToast({
-        title: '已经点赞过',
-        icon: "none"
-      })
-      return;
-    } else {
-      if (app.globalData.isInitInfo) {
-        wx.showLoading({
-          title: '等待...',
-        })
-        HTTP.useful({
-          "articleID": this.articleDatas.keyID,
-          "patientID": app.globalData.patientID
-        }).then(res => {
-          wx.hideLoading();
-          if (res.code === 0) {
-            this.usefulBtnDisable = true;
-            wx.showToast({
-              icon: "none",
-              title: '您的一分肯定，是我们前进的动力',
-              duration: 3000
-            })
-            this.setData({
-              usefulBtnDisable: true
-            })
-          } else {
-            wx.showToast({
-              title: res.message,
-              icon: "none"
-            })
-          }
-        }).catch(error => {
-          wx.hideLoading();
-          wx.showToast({
-            title: '网络连接失败',
-            icon: "none"
-          })
-        });
-      } else {
-        this.popup.showPopup(""); // 显示登录确认框
-      }
-    }
-
   },
   /**
    * 操作：开始问诊
@@ -192,91 +142,6 @@ Page({
       this.popup.showPopup(nextPageName); // 显示登录确认框
     }
   },
-  /**
-   * 发表评论
-   */
-  inputoption() {
-    this.setData({
-      isInput: true
-    })
-  },
-
-  inputFocus(e) {
-    console.log(e, '键盘弹起')
-    this.setData({
-      isInput: true
-    })
-  },
-  inputBlur() {
-    console.log('键盘收起')
-    this.setData({
-      isInput: false
-    })
-  },
-
-  focusButn: function(event) {},
-
-  publishAction() {
-    if (this.data.newComment.length === 0) {
-      wx.showToast({
-        title: '内容为空',
-        icon: 'none'
-      })
-      return;
-    }
-    if (app.globalData.isInitInfo) {
-      this.articleCommentPublishRequest(this.data.newComment);
-    } else {
-      let nextPageName = "chat";
-      this.popup.showPopup(nextPageName); // 显示登录确认框
-    }
-  },
-
-  bindinput(event) {
-    this.setData({
-      cursor: event.detail.cursor,
-      newComment: event.detail.value
-    })
-  },
-  /**
-   * 发表评论请求
-   */
-  articleCommentPublishRequest(newComment) {
-    wx.showLoading({
-      title: '发布中...',
-    })
-    HTTP.articleCommentPublish({
-      "orgID": app.globalData.orgID,
-      "articleID": this.articleDatas.keyID,
-      "patientID": app.globalData.patientID,
-      "patientName": app.globalData.userInfo.nickName,
-      "patientFaceUrl": app.globalData.userInfo.avatarUrl,
-      "commentContent": newComment
-    }).then(res => {
-      wx.hideLoading();
-      if (res.code === 0) {
-        wx.showToast({
-          title: '发表评论成功'
-        })
-        this.setData({
-          isInput: false,
-          newComment: ""
-        })
-        this.listCommentRequest();
-
-      } else {
-        wx.showToast({
-          title: res.message,
-          icon: none
-        })
-      }
-    }).catch(error => {
-      wx.hideLoading();
-      wx.showToast({
-        title: '网络连接失败',
-      })
-    });
-  },
   /**取消事件 */
   _error() {
     this.popup.hidePopup();
@@ -285,5 +150,24 @@ Page({
   /**确认事件 */
   _success() {
     this.popup.hidePopup();
+  },
+  /**
+   * 组件登录操作
+   */
+  login(){
+    this.popup.showPopup(""); // 显示登录确认框
+  },
+  /**
+   * 觉得有用组件点赞成功
+   * 1.刷新当前界面觉得有用状态和点赞数据
+   * 2.刷新上一个界面的数据
+   */
+  likeSucess(){
+    // 刷新当前界面觉得有用状态和点赞数据
+    this.getArticleByKeyID();
+    // 刷新上一个界面
+    const pages = getCurrentPages();
+    const perpage = pages[pages.length - 2]
+    perpage.refreshArticleData(); 
   }
 })

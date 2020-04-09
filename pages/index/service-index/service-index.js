@@ -606,5 +606,11 @@ Page({
         console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
       }
     });
+  },
+  // 刷新文章模块列表
+  refreshArticleData: function (){
+    console.log('点击成功------refreshCurrentArticleData');
+    let component = this.selectComponent("#article");
+    component.refreshCurrentArticleData();
   }
 })

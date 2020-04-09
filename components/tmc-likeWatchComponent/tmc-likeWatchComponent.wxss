@@ -1,0 +1,34 @@
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.watch-box {
+  margin-left: 32rpx
+}
+
+.like-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.like-num{
+  color: rgba(67, 139, 239, 1);
+}
+
+text {
+  height: 36rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 36rpx;
+}
+
+image{
+  width: 40rpx;
+  height: 40rpx;
+}
