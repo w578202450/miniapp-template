@@ -65,7 +65,7 @@
       <view class="bottom-content">
         <view class="title-dialog">
         <view class="parent-text">
-          <text>服务</text>
+          <text class="service-text">服务</text>
         </view>
          <image style="margin-right:10rpx;" src="{{ dialog_close }}" bindtap="hideModal"></image>
           </view>
