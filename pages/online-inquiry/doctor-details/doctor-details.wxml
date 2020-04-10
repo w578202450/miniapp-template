@@ -1,4 +1,6 @@
 <view class="page">
+<!-- 登录弹框 -->
+<login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   <view>
     <!-- wxs引入 -->
     <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
