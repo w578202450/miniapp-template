@@ -67,7 +67,10 @@
       <text>援助药品：佰达图®舒稳乐®盐酸丙卡特罗粉雾剂</text>
     </view>
     <text class="bottom-description">日本大冢制药株式会社（四川），致力于开发支气管哮喘、COPD(慢性阻塞性肺病)、急慢性支气管炎等系列呼吸系统疾病治疗药品</text>
-    <text class="bottom-remark">（注）：是否符合援助标准最终由大爱清尘决定。</text>
+    <view class="bottom-remark-box">
+    <image mode="aspectFill" class="bottom-remark-image" src="{{bottomIcon}}"></image>
+    <text class="bottom-remark">是否符合援助标准最终由大爱清尘决定。</text>
+    </view>
     <!-- 灰色间隔区 -->
     <view class="intervalView" style="margin-top:40rpx;"></view>
   </view>
