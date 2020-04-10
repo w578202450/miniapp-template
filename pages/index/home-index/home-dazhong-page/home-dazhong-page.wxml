@@ -32,15 +32,18 @@
     </view>
     <!-- 纵向滚动的跑马灯 -->
     <!-- <view class="vertical-roll-marquee">
-
     </view> -->
     <view class='vertical assistance'>
       <view class='item roll_marquee'>
         <swiper display-multiple-items="3" vertical autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular>
-          <block wx:for="{{news}}">
+          <block wx:for="{{patientList}}" wx:key="keyID" wx:for-item="item">
             <swiper-item>
               <view class='show-text'>
-                <text class='marquee_item'>{{item}}</text>
+               <view class="content-item">
+                <text class='marquee_item_id'>{{item.patientName}}</text>
+                <text class='marquee_item_content'>{{item.content}}</text>
+                </view>
+                <text class='marquee_item_time'>{{item.time}}</text>
               </view>
             </swiper-item>
           </block>
