@@ -19,7 +19,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    homeBannerDefaultUrl: "/images/home/home_banner_default.png",
+    homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
     middleOnefei1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei1.png",
     middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei2.png",
     middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei3.png",

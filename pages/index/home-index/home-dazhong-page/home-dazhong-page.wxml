@@ -1,7 +1,7 @@
 <view class="page">
   <!-- 大冢制药banner -->
   <view class="banner-header" style="width: 100%;">
-    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl1 }}"></image>
+    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
   </view>
   <!-- 4个item -->
   <view class="middle-one-box">
@@ -25,7 +25,7 @@
   <!-- 获得援助box -->
   <view class="middle-two-box">
     <!-- 背景图 -->
-    <view class="rectangle-background" style="background:url('/images/home/home_rectangle_background1.png');">
+    <view class="rectangle-background" style="background:url('/images/home/home_rectangle_background.png');">
       <text class="middle-two-box-row-text">全国已有</text>
       <text class="middle-two-box-row-number">12324</text>
       <text class="middle-two-box-row-text">名尘肺农民获得援助</text>
