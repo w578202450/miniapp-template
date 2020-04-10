@@ -1,0 +1,67 @@
+<view class="page">
+  <!-- 大冢制药banner -->
+  <view class="banner-header" style="width: 100%;">
+    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl1 }}"></image>
+  </view>
+  <!-- 4个item -->
+  <view class="middle-one-box">
+    <view class="middle-one-item">
+      <image mode="widthFix" src="{{middleOnefei1}}"></image>
+      <text>尘肺病</text>
+    </view>
+    <view class="middle-one-item">
+      <image mode="widthFix" src="{{middleOnefei2}}"></image>
+      <text style="width:168rpx;height:32rpx;">尘肺样改变合并</text>
+    </view>
+    <view class="middle-one-item">
+      <image mode="widthFix" src="{{middleOnefei3}}"></image>
+      <text>COPD</text>
+    </view>
+    <view class="middle-one-item">
+      <image mode="widthFix" src="{{middleOnefei4}}"></image>
+      <text style="width:144rpx;height:32rpx;">慢性支气管炎</text>
+    </view>
+  </view>
+  <!-- 获得援助box -->
+  <view class="middle-two-box">
+    <!-- 背景图 -->
+    <view class="rectangle-background" style="background:url('/images/home/home_rectangle_background1.png');">
+      <text class="middle-two-box-row-text">全国已有</text>
+      <text class="middle-two-box-row-number">12324</text>
+      <text class="middle-two-box-row-text">名尘肺农民获得援助</text>
+    </view>
+    <!-- 纵向滚动的跑马灯 -->
+    <!-- <view class="vertical-roll-marquee">
+
+    </view> -->
+    <view class='vertical assistance'>
+      <view class='item roll_marquee'>
+        <swiper display-multiple-items="3" vertical autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular>
+          <block wx:for="{{news}}">
+            <swiper-item>
+              <view class='show-text'>
+                <text class='marquee_item'>{{item}}</text>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+    <text class="text-remark">*该药品由大冢制药有限公司无偿捐赠</text>
+  </view>
+  <!-- 援助说明box -->
+  <view class="bottom-box">
+    <view class="bottom-box-one-item">
+      <image mode="aspectFill" src="{{medicineIcon}}"></image>
+      <text>援助药品：佰达图®舒稳乐®盐酸丙卡特罗粉雾剂</text>
+    </view>
+    <text class="bottom-description">日本大冢制药株式会社（四川），致力于开发支气管哮喘、COPD(慢性阻塞性肺病)、急慢性支气管炎等系列呼吸系统疾病治疗药品</text>
+    <text class="bottom-remark">（注）：是否符合援助标准最终由大爱清尘决定。</text>
+    <!-- 灰色间隔区 -->
+    <view class="intervalView" style="margin-top:40rpx;"></view>
+  </view>
+  <!-- 立即进入专家门诊 -->
+  <view class="enter-box" bindtap="toServiceIndexFun">
+    <text class="enter-name">立即进入专家门诊</text>
+  </view>
+</view>

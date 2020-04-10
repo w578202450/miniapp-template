@@ -1,0 +1,253 @@
+/* pages/index/home-index/home-dazhong-page/hom-dazhong-page.wxss */
+
+page {
+  background: white;
+}
+
+.banner-header {
+  position: relative;
+  background: white;
+  z-index: -1;
+}
+
+.middle-one-box {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+}
+
+.middle-one-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle-one-item image {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.middle-one-item text {
+  margin-top: 18rpx;
+  width: 72rpx;
+  height: 32rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 32rpx;
+}
+
+.middle-two-box {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 30rpx;
+  width: 686rpx;
+  height: 340rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 4rpx 32rpx 0rpx rgba(0, 0, 0, 0.1), 0rpx 2rpx 12rpx 0rpx rgba(0, 0, 0, 0.1);
+  border-radius: 20rpx;
+}
+
+.rectangle-background {
+  width: 686rpx;
+  height: 72rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+}
+
+.middle-two-box-row-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 40rpx;
+}
+
+.middle-two-box-row-number {
+  margin-left: 8rpx;
+  margin-right: 8rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  font-size: 30rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 600;
+  color: rgba(177, 115, 36, 1);
+  line-height: 40rpx;
+}
+
+.vertical-roll-marquee {
+  margin-top: 26rpx;
+  height: 220rpx;
+}
+
+.text-remark {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 32rpx;
+  height: 26rpx;
+  font-size: 22rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.25);
+  line-height: 24rpx;
+}
+
+.vertical {
+  margin-top: 30rpx;
+  height: 200rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.item {
+  flex: 1;
+}
+
+.roll_marquee {
+  padding: 0 8rpx;
+}
+
+.roll_marquee > swiper {
+  height: 200rpx;
+  line-height: 60rpx;
+}
+
+.show-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.marquee_item {
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  color: #000;
+  vertical-align: center;
+}
+
+.assistance {
+  margin-top: 10rpx;
+  padding: 10rpx 10rpx;
+  background: white;
+}
+
+.bottom-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin-top: 50rpx;
+  margin-bottom: 120rpx;
+}
+
+.bottom-box-one-item {
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  vertical-align: center;
+}
+
+.bottom-box-one-item image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.bottom-box-one-item text {
+  height: 28rpx;
+  margin-left: 8rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 28rpx;
+  /* text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+   */
+}
+
+.bottom-description {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 36rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 设置要显示省略号的行数 */
+  -webkit-box-orient: vertical;
+}
+
+.bottom-remark {
+  margin-top: 34rpx;
+  font-size: 22rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.25);
+  line-height: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.enter-box {
+  width: 100%;
+  height: 120rpx;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(238, 215, 185, 1);
+  text-align: center;
+}
+
+.enter-name {
+  display: flex;
+  justify-content: center;
+  font-size: 36rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 600;
+  color: rgba(177, 115, 36, 1);
+  line-height: 36rpx;
+}
+
+.intervalView {
+  width: 100%;
+  height: 25rpx;
+  background-color: rgba(246, 246, 246, 1);
+}

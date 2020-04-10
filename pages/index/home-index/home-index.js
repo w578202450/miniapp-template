@@ -44,7 +44,10 @@ Page({
     newArrayDoctorList: [], // 组合的新数组
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
-    isHaveWatched: false // 是否监听到变化了一次
+    isHaveWatched: false, // 是否监听到变化了一次
+    isShowDazhong: false, // 是否显示大冢制药
+    // dazhongOrgID: 20040909515893667880511240, // 大冢制药orgID(生产环境)
+    dazhongOrgID: 20040910375869839140511253, // 大冢制药orgID(测试环境)
   },
 
   /**
@@ -76,7 +79,7 @@ Page({
     // }
     // 测试
     // 包正一
-    options ={
+    options = {
       orgID: "19121923373037086560511253",
       assistantStaffID: "20011320532175746910514253"
     }
@@ -167,6 +170,7 @@ Page({
   onShow: function() {
     let that = this;
     if (that.data.isSearchState) {
+      console.log("----------------------------进来了-----------------------------------");
       that.initHomeData(); // 初始化参数
     }
   },
@@ -219,12 +223,19 @@ Page({
 
   /** 初始化参数 */
   initHomeData: function() {
+    console.log("=====初始化参数=======");
     let that = this;
     that.setData({
       shareOrgID: wx.getStorageSync("shareOrgID"),
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
-    that.initFunctionFun();
+    console.log("shareOrgID=======" + that.data.shareOrgID);
+    if (that.data.shareOrgID == that.data.dazhongOrgID) { // 大冢制药OrgID
+      that.initDefaultFun();
+      this.isShowDazhong = true;
+    } else {
+      that.initFunctionFun();
+    }
   },
 
   /**初始化调用请求方法 */
@@ -247,6 +258,26 @@ Page({
     }, 2000)
   },
 
+  /**初始化默认加载数据 */
+  initDefaultFun: function() {
+    let that = this;
+    wx.showLoading({
+      title: '拼命加载中...',
+    });
+    that.setData({
+      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
+    });
+    that.getBanner(); // 获取首页banner
+    // that.getTeamIntroduce(); // 获取医师团队介绍
+    // that.getBrowseCount(); // 获取用户浏览数
+    // that.getShareCount(); // 获取用户分享数
+    that.getSignedDoctor(); // 通过医助查询到的签约医生
+    that.getHospitalInfo(); //查询医院详情信息
+    setTimeout(() => {
+      wx.hideLoading();
+    }, 2000)
+  },
+
   /** 获取首页banner */
   getBanner() {
     let that = this;
@@ -256,7 +287,7 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        // console.log("===首页banner===" + JSON.stringify(res));
+        console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             homeBannerDefaultUrl: res.data.paraValue
