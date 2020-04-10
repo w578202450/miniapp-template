@@ -12,7 +12,6 @@ Component({
       type: String,
       value: ""
     },
-
   },
 
   /**
@@ -24,6 +23,7 @@ Component({
     middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei2.png",
     middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei3.png",
     middleOnefei4: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei4.png",
+    helpfulNum: 12324,
     medicineIcon: "/images/home/home_dazhong_medicine.png",
     rectangleBackgroundImg: "/images/home/home_rectangle_background.png",
     news: [

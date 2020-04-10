@@ -102,6 +102,17 @@ module.exports = {
     }
   },
 
+  /**大冢医药机构ID */
+  dazhongOrgIDFun: function() {
+    if (version == 0) {
+      return ['']
+    } else if (version == 1) {
+      return ['20040910375869839140511253']
+    } else if (version == 2) {
+      return ['20040909515893667880511240']
+    }
+  },
+
   /*
    *获取测试数据
    */

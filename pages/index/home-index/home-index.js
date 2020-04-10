@@ -16,7 +16,9 @@ Page({
      * 默认医院  19101017081245502880511001
      */
     isAboveHouShiID: -1, // 是否显示侯氏信息，默认-1显示
+    isShowDazhongID: -1, // 是否显示大冢医药，默认-1显示
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
+    dazhongOrgID: [], // 大冢医药机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
@@ -47,7 +49,7 @@ Page({
     isHaveWatched: false, // 是否监听到变化了一次
     isShowDazhong: false, // 是否显示大冢制药
     // dazhongOrgID: 20040909515893667880511240, // 大冢制药orgID(生产环境)
-    dazhongOrgID: 20040910375869839140511253, // 大冢制药orgID(测试环境)
+    // dazhongOrgID: 20040910375869839140511253, // 大冢制药orgID(测试环境)
   },
 
   /**
@@ -99,6 +101,7 @@ Page({
     // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
+    that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options.q) { // 通过扫码进入时：q的值为url带参
       app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -170,7 +173,6 @@ Page({
   onShow: function() {
     let that = this;
     if (that.data.isSearchState) {
-      console.log("----------------------------进来了-----------------------------------");
       that.initHomeData(); // 初始化参数
     }
   },
@@ -230,9 +232,13 @@ Page({
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
     console.log("shareOrgID=======" + that.data.shareOrgID);
-    if (that.data.shareOrgID == that.data.dazhongOrgID) { // 大冢制药OrgID
+    // 判断是否是大冢医药
+    if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 是否是大冢医药 true:是
+      that.setData({
+        isShowDazhong: true
+      })
       that.initDefaultFun();
-      this.isShowDazhong = true;
     } else {
       that.initFunctionFun();
     }
@@ -430,6 +436,13 @@ Page({
   /** 获取默认进小程序显示信息  */
   getDefaulShowInfo() {
     let that = this;
+    // 判断是否是大冢医药
+    if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 是否是大冢医药 true:是
+      that.setData({
+        isShowDazhong: true
+      })
+    }
     let params = {
       orgID: that.data.shareOrgID,
       assistantStaffID: that.data.shareAssistantStaffID,

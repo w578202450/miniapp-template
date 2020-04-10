@@ -27,7 +27,7 @@
     <!-- 背景图 -->
     <view class="rectangle-background" style="background:url('/images/home/home_rectangle_background.png');">
       <text class="middle-two-box-row-text">全国已有</text>
-      <text class="middle-two-box-row-number">12324</text>
+      <text class="middle-two-box-row-number">{{helpfulNum}}</text>
       <text class="middle-two-box-row-text">名尘肺农民获得援助</text>
     </view>
     <!-- 纵向滚动的跑马灯 -->
