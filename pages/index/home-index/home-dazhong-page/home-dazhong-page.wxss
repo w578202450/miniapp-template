@@ -10,14 +10,34 @@ page {
   z-index: -1;
 }
 
-.middle-one-box {
+.middle-one-title {
+  margin-top:32rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle-one-title-text {
+  height: 36rpx;
   margin-left: 10rpx;
   margin-right: 10rpx;
+  font-size: 30rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
+.middle-one-box {
+  margin-top:30rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 30rpx;
+  padding: 10rpx;
 }
 
 .middle-one-item {
