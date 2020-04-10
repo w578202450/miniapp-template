@@ -1,6 +1,6 @@
 <view class="page">
   <!-- isShowDazhong 是否显示大冢制药页面 -->
-  <view wx:if="{{ isShowDazhong }}">
+  <view wx:if="{{ !isShowDazhong }}">
   <home-dazhong-page homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
   </home-dazhong-page>
   </view>

@@ -3,6 +3,14 @@
   <view class="banner-header" style="width: 100%;">
     <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
   </view>
+  <!-- 需满足 -->
+  <view class="middle-one-title">
+   <view style="border-radius:50%;background:rgba(144,117,87,1);width:8rpx;height:8rpx;opacity:0.3;"></view>
+    <view style="border-radius:10rpx;background:rgba(144,117,87,1);width:12rpx;height:12rpx;opacity:0.5;margin-left:10rpx;"></view>
+    <text class="middle-one-title-text">需满足的医学条件</text>
+     <view style="border-radius:10rpx;background:rgba(144,117,87,1);width:12rpx;height:12rpx;opacity:0.5;margin-left:10rpx;"></view>
+    <view style="border-radius:50%;background:rgba(144,117,87,1);width:8rpx;height:8rpx;opacity:0.3;margin-left:10rpx;"></view>
+  </view>
   <!-- 4个item -->
   <view class="middle-one-box">
     <view class="middle-one-item">
