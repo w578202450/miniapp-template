@@ -74,10 +74,6 @@ Component({
             disable: true
           })
           this.triggerEvent('success')
-          // 刷新上一个界面
-          const pages = getCurrentPages();
-          const perpage = pages[pages.length - 2]
-          perpage.refreshArticleData();
         } else {
           wx.showToast({
             title: res.message,

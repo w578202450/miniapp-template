@@ -34,6 +34,21 @@ Component({
         'hasData': false
       }
     },
+
+    itemIndex: {
+      type: Number,
+      value: 0
+    },
+
+    doctorStaffID: {
+      type: String,
+      value: ""
+    },
+
+    departmentCanSee: {
+      type: String,
+      value: ""
+    }
   },
 
   /**
@@ -94,7 +109,9 @@ Component({
           "pageSize": currentCategoryData.pageSize,
           "pageIndex": currentCategoryData.pageIndex,
           "classifyID": currentClassifyID,
-          "isPublish": 1
+          "isPublish": 1,
+          "doctorCanSee": this.data.doctorStaffID,
+          "departmentCanSee": this.data.departmentCanSee
         }).then(res => {
           currentCategoryData["loading"] = false
           let list = res.data
@@ -147,7 +164,9 @@ Component({
           "pageSize": currentCategoryData.pageSize,
           "pageIndex": currentCategoryData.pageIndex,
           "classifyID": currentClassifyID,
-          "isPublish": 1
+          "isPublish": 1,
+          "doctorCanSee": this.data.doctorStaffID,
+          "departmentCanSee": this.data.departmentCanSee
         }).then(res => {
           currentCategoryData["loading"] = false
           let list = res.data
@@ -187,6 +206,7 @@ Component({
      */
     itemDetails(e) {
       let item = e.currentTarget.dataset.item;
+      this.data.itemIndex = e.currentTarget.dataset.index;
       let params = {
         title: this.data.articleTitles[this.data.currentIndex].classifyName,
         keyID: item.keyID,
@@ -206,7 +226,16 @@ Component({
       let navitem = this.data.articleTitles[index];
       let currentClassifyID = navitem.keyID;
       let currentCategoryData = this.data.articleDatas[currentClassifyID];
-      this.loadDatas(currentClassifyID, currentCategoryData, navitem.orgID)
+      // this.loadDatas(currentClassifyID, currentCategoryData, navitem.orgID)
+      let item = currentCategoryData.datas[this.data.itemIndex];
+
+      if (!item.useful) {
+        item.useful = 0;
+      }
+      item.useful += 1;
+      this.setData({
+        currentCategoryData: currentCategoryData
+      })
     }
 
   }

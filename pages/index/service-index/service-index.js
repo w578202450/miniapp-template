@@ -187,12 +187,12 @@ Page({
               doctorInfo: res.data,
               isSearchState: true
             });
-            // console.log("获取主治医师信息:" + JSON.stringify(res.data));
+            console.log("获取主治医师信息:" + JSON.stringify(res.data));
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);
             that.getHospitalInfo(res.data.orgID); //查询医院详情信息
             that.getOrderCommentData(res.data.orgID, staffID); // 获取患者评价信息
-            that.getToolClassifyById(res.data.orgID); // 文章模块分类获取
+            that.getToolClassifyById(res.data.orgID, staffID, res.data.sectionID); // 文章模块分类获取
             that.fetchDoctorQualification(res.data.doctorID); // 获取医生资质编号
             that.getDoctorDiseaseByDoctorID(res.data.doctorID).then(function(res) {
               that.setData({
@@ -310,7 +310,7 @@ Page({
   /**
    * 获取文章模块的分类
    */
-  getToolClassifyById(defaultOrgID) {
+  getToolClassifyById(defaultOrgID, doctorStaffID, departmentCanSee) {
 
     let orgID = wx.getStorageSync("shareOrgID") || defaultOrgID;
     console.log('getToolClassifyById----------newOrgID----' + orgID + "oldOrgID----" + this.data.articleCurrentOrgID)
@@ -343,7 +343,7 @@ Page({
         });
         // 初始化文章模块第一栏的数据
         if (tempTitles.length > 0) {
-          this.articleByClassifyId(tempTitles, articleDatas);
+          this.articleByClassifyId(tempTitles, articleDatas, doctorStaffID, departmentCanSee);
         }
       }
     });
@@ -351,7 +351,7 @@ Page({
   /**
    * 根据分类id获取文章列表
    */
-  articleByClassifyId(tempTitles, articleDatas) {
+  articleByClassifyId(tempTitles, articleDatas, doctorStaffID, departmentCanSee) {
     // 初始化第一条数据
     let classifyID = tempTitles[0].keyID;
     let orgID = tempTitles[0].orgID;
@@ -362,7 +362,9 @@ Page({
       "pageSize": currentCategoryData.pageSize,
       "pageIndex": currentCategoryData.pageIndex,
       "classifyID": classifyID,
-      "isPublish": 1
+      "isPublish": 1,
+      "doctorCanSee": doctorStaffID,
+      "departmentCanSee": departmentCanSee
     }).then(res => {
       currentCategoryData["loading"] = false;
       if (res.code == 0 && res.data) {
@@ -378,7 +380,9 @@ Page({
           articleDatas[classifyID] = currentCategoryData;
           this.setData({
             currentCategoryData: currentCategoryData,
-            articleDatas: articleDatas
+            articleDatas: articleDatas,
+            doctorStaffID: doctorStaffID,
+            departmentCanSee: departmentCanSee
           });
         }
       }
@@ -451,7 +455,7 @@ Page({
     that.setData({
       hideModal: false
     });
-     // 显示遮罩层
+    // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 100, //动画的持续时间 默认600ms   数值越大，动画越慢   数值越小，动画越快
       timingFunction: 'ease', //动画的效果 默认值是linear
@@ -463,7 +467,7 @@ Page({
     }, 200)
   },
 
- // 隐藏对话框
+  // 隐藏对话框
   hideModal: function() {
     var that = this;
     // 隐藏遮罩层
@@ -504,7 +508,7 @@ Page({
       },
       fail: function() {
         console.log("拨打电话失败！");
-      } 
+      }
     })
   },
 
@@ -608,7 +612,7 @@ Page({
     });
   },
   // 刷新文章模块列表
-  refreshArticleData: function (){
+  refreshArticleData: function() {
     console.log('点击成功------refreshCurrentArticleData');
     let component = this.selectComponent("#article");
     component.refreshCurrentArticleData();

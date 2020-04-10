@@ -36,7 +36,7 @@
   <!-- 患者分享 -->
   <!-- <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" /> -->
   <!-- 文章模块 -->
-  <service-news id="article" pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" />
+  <service-news id="article" pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" articleDatas="{{articleDatas}}" currentCategoryData="{{currentCategoryData}}" doctorStaffID="{{doctorStaffID}}" departmentCanSee="{{departmentCanSee}}"/>
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   <view class="bottom-box">
