@@ -37,8 +37,7 @@ Component({
     ],
     autoplay: true,
     interval: 1000,
-    duration: 2000,
-
+    duration: 1500,
   },
 
   /**
@@ -48,6 +47,13 @@ Component({
     /** 立即进入专家门诊 */
     toServiceIndexFun() {
       this.triggerEvent('toServiceIndexFun');
-    }
+    },
+    createHelpfulNumFun() {
+      let date1 = "1970-01-01 00:00:00"; // 开始时间
+      let date2 = new Date(); // 结束时间
+      let date3 = date2.getTime() - new Date(date1).getTime(); // 时间差的毫秒数
+      this.helpfulNum = Math.round((date3 / 1000 - (3600 * 24 * 365 * 49.6)) / 1800); },
+
+
   }
 })
