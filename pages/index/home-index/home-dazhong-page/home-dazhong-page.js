@@ -25,6 +25,8 @@ Component({
    * 组件的初始数据
    */
   data: {
+    homeDazhongLeft: "/images/home/home_dazhong_left.png",
+    homeDazhongRight: "/images/home/home_dazhong_right.png",
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
     middleOnefei1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei1.png",
     middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei2.png",
@@ -145,7 +147,7 @@ Component({
     createHelpfulNumFun: function() {
       let that = this;
       var data = "1970-01-01 00:00:00";
-      let date1 = new Date(date.replace(/-/g, '/')); // 开始时间
+      let date1 = new Date(data.replace(/-/g, '/')); // 开始时间
       let date2 = new Date(); // 结束时间
       // console.log(date1.getTime());
       // console.log(date2.getTime());

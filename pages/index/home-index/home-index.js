@@ -231,6 +231,7 @@ Page({
       shareOrgID: wx.getStorageSync("shareOrgID"),
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
+    console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
     console.log("shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是大冢医药
     if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
@@ -436,6 +437,8 @@ Page({
   /** 获取默认进小程序显示信息  */
   getDefaulShowInfo() {
     let that = this;
+    console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
+    console.log("shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是大冢医药
     if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 是否是大冢医药 true:是

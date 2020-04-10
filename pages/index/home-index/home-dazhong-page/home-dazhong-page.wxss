@@ -83,13 +83,34 @@ page {
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.85);
   line-height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: center;
+  background-color: rgba(241, 231, 218, 1);
+  border-radius: 20rpx 20rpx 0rpx 0rpx;
+}
+
+.rectangle-background-middle {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   vertical-align: center;
+}
+
+.rectangle-background-left {
+  justify-content: flex-start;
+  width: 80rpx;
+  height: 60rpx;
+}
+
+.rectangle-background-right {
+  justify-content: flex-end;
+  width: 80rpx;
+  height: 60rpx;
 }
 
 .middle-two-box-row-text {
@@ -222,7 +243,7 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin-top: 50rpx;
+  margin-top: 40rpx;
   margin-bottom: 120rpx;
 }
 
@@ -296,7 +317,7 @@ page {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  background-color: rgba(246,246,246,1);
+  background-color: rgba(246, 246, 246, 1);
 }
 
 .enter-box {
