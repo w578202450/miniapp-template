@@ -144,10 +144,11 @@ Component({
     },
     createHelpfulNumFun: function() {
       let that = this;
-      let date1 = new Date("1970-01-01 00:00:00"); // 开始时间
+      var data = "1970-01-01 00:00:00";
+      let date1 = new Date(date.replace(/-/g, '/')); // 开始时间
       let date2 = new Date(); // 结束时间
-      console.log(date1.getTime());
-      console.log(date2.getTime());
+      // console.log(date1.getTime());
+      // console.log(date2.getTime());
       let date3 = date2.getTime() - date1.getTime(); // 时间差的毫秒数
       let randomNum = Math.round((date3 / 1000 - (3600 * 24 * 365 * 49.6)) / 1800); /** 一小时加两个 */
       that.setData({
