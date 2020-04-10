@@ -29,7 +29,7 @@
 .physicianAssistant-box {
   width: 100%;
   height: 80rpx;
-  margin-top:5rpx;
+  margin-top: 5rpx;
   display: flex;
   flex-direction: row; /* row 横向  column 纵向 */
   justify-content: flex-start;
@@ -46,16 +46,18 @@
 }
 
 .physicianAssistant-name {
-  margin-left: 20rpx;
+  margin-left: 24rpx;
+  height:28rpx;
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 500;
+  font-weight: 400;
   color: rgba(0, 0, 0, 0.85);
   line-height: 28rpx;
 }
 
 .physicianAssistant-title {
   margin-left: 20rpx;
+  height:24rpx;
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
@@ -119,7 +121,7 @@
 
 .specialist-bottom-box {
   height: 48rpx;
-  margin-top:20rpx;
+  margin-top: 25rpx;
   margin-left: 20rpx;
   margin-right: 20rpx;
   display: flex;
@@ -129,12 +131,13 @@
 }
 
 .specialist-bottom-left image {
-  width: 32rpx;
-  height: 32rpx;
+  width: 40rpx;
+  height: 40rpx;
   margin-right: 16rpx;
 }
 
 .specialist-bottom-left text {
+  height: 28rpx;
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
@@ -159,6 +162,12 @@
 }
 
 .doctor-title {
+  height: 24rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
   margin-top: 20rpx;
 }
 
@@ -175,21 +184,21 @@
 }
 
 .cutting-line1 {
-  height: 2rpx;
-  background: rgba(0, 0, 0, 0.1);
+  height: 3rpx;
+  background: #f1f1f1;
   margin-top: 16rpx;
 }
 
 .cutting-line2 {
-  width: 2rpx;
+  width: 3rpx;
   height: 48rpx;
-  background: rgba(0, 0, 0, 0.1);
+  background: #f1f1f1;
 }
 
 .cutting-line3 {
-  height: 2rpx;
+  height: 3rpx;
   margin-left: 20rpx;
   margin-right: 20rpx;
-  background: rgba(0,0,0,0.1);
+  background: #f1f1f1;
   margin-top: 20rpx;
 }
