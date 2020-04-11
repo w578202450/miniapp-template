@@ -1,4 +1,4 @@
-const version = 0; //0开发、1测试 2发布  
+const version = 1; //0开发、1测试 2发布  
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -99,6 +99,17 @@ module.exports = {
       return ['19121923373037086560511253']
     } else if (version == 2) {
       return ['20012118570385423810511240', '20031709473895879610511240']
+    }
+  },
+
+  /**大冢医药机构ID */
+  dazhongOrgIDFun: function() {
+    if (version == 0) {
+      return ['']
+    } else if (version == 1) {
+      return ['20040910375869839140511253']
+    } else if (version == 2) {
+      return ['20040909515893667880511240']
     }
   },
 

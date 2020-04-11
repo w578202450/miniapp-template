@@ -1,6 +1,6 @@
 const HTTP = require('../../../utils/http-util')
 const commonFun = require('../../../utils/common')
-let app = getApp()
+const app = getApp();
 
 Page({
   data: {
@@ -15,6 +15,15 @@ Page({
   onLoad: function(e) {
     let doctorStaffID = e.staffID;
     this.fetchDoctorInfo(doctorStaffID)
+  },
+
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+    //获得popup组件：登录确认框
+    this.popup = this.selectComponent("#loginDialog");
   },
 
   /**
@@ -113,6 +122,23 @@ Page({
 
   // 去问诊
   goInquiry: function () {
-    
+    console.log("--------去问诊---------");
+    if (app.globalData.isInitInfo == "ready") {
+      wx.navigateTo({
+        url: '/pages/online-inquiry/inquiry/chat/chat'
+      });
+    } else {
+      let nextPageName = "chat";
+      this.popup.showPopup(nextPageName); // 显示登录确认框
+    }
+  },
+  /**取消事件 */
+  _error() {
+    this.popup.hidePopup();
+  },
+
+  /**确认事件 */
+  _success() {
+    this.popup.hidePopup();
   }
 })

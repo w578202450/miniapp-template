@@ -40,7 +40,8 @@ Component({
    */
   data: {
     comment: "", // 评论内容
-    textareaHeight: 0 // 键盘输入框高度 
+    textareaHeight: 0, // 键盘输入框高度 
+    cursor:0 // 当前输入数
   },
 
   /**
@@ -127,7 +128,8 @@ Component({
           })
           this.setData({
             isInputting: false,
-            comment: ""
+            comment: "",
+            cursor: 0
           })
           this.triggerEvent('publishSuccess')
         } else {

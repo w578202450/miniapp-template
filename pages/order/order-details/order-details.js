@@ -135,44 +135,11 @@ Page({
       })
       .then(res => {
         wx.hideLoading();
-        if (res.code == 0) {
-          that.checkOrderPrePay(res.data.paymentID);
-          // this.tradeOrder(res.data.paymentID);
-        } else {
-          wx.showToast({
-            title: res.message,
-            icon: 'none'
-          })
-        }
-
-      }).catch(e => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '连接失败',
-          icon: 'none'
-        })
-      })
-  },
-  /**
-   * 校验预创单
-   */
-  checkOrderPrePay(paymentID) {
-    var that = this
-    wx.showLoading({
-      title: '支付中',
-    })
-    HTTP.checkOrderPrePay({
-        transID: paymentID,
-        sysCode: 'person-tmc'
-      })
-      .then(res => {
-        wx.hideLoading();
-        if (res.code == 0) {
-          if (res.data.payResult == 1) { //已支付成功
+        if (res.code == 0 && res.data) {
+          if (res.data.payCode === 1) {// 成功
             this.orderPaySuccess()
-          } else if (res.data.payResult == 0) { //未支付成功 但腾讯那边可能支付成功 还需要进一步对订单结果查询
-            // this.checkOrderResult(paymentID);
-            this.tradeOrder(paymentID);
+          } else if (res.data.payCode === 0) {// 失败
+            this.tradeOrder(res.data.paymentID);
           }
         } else {
           wx.showToast({
@@ -190,39 +157,75 @@ Page({
       })
   },
   /**
-   * 支付结果查询 腾讯
-   */
-  checkOrderResult(paymentID) {
-    if (!paymentID) {
-      wx.showToast({
-        title: '参数paymentID为nil',
-        icon: 'none'
-      })
-      return;
-    }
-    var that = this;
-    wx.showLoading({
-      title: '支付中...'
-    });
-    HTTP.queryOrderByTransID({
-        transID: paymentID
-      })
-      .then(res => {
-        wx.hideLoading();
-        if (res.code == 0) {
-          that.orderPaySuccess()
-        } else {
-          that.tradeOrder(paymentID);
-        }
-      }).catch(e => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '连接失败',
-          icon: 'none',
-          duration: 2000
-        })
-      })
-  },
+  //  * 校验预创单
+  //  */
+  // checkOrderPrePay(paymentID) {
+  //   var that = this
+  //   wx.showLoading({
+  //     title: '支付中',
+  //   })
+  //   HTTP.checkOrderPrePay({
+  //       transID: paymentID,
+  //       sysCode: 'person-tmc'
+  //     })
+  //     .then(res => {
+  //       wx.hideLoading();
+  //       if (res.code == 0) {
+  //         if (res.data.payResult == 1) { //已支付成功
+  //           this.orderPaySuccess()
+  //         } else if (res.data.payResult == 0) { //未支付成功 但腾讯那边可能支付成功 还需要进一步对订单结果查询
+  //           this.tradeOrder(paymentID);
+  //           // this.checkOrderResult(paymentID);
+  //         }
+  //       } else {
+  //         wx.showToast({
+  //           title: res.message,
+  //           icon: 'none'
+  //         })
+  //       }
+
+  //     }).catch(e => {
+  //       wx.hideLoading();
+  //       wx.showToast({
+  //         title: '连接失败',
+  //         icon: 'none'
+  //       })
+  //     })
+  // },
+  // /**
+  //  * 支付结果查询 腾讯
+  //  */
+  // checkOrderResult(paymentID) {
+  //   if (!paymentID) {
+  //     wx.showToast({
+  //       title: '参数paymentID为nil',
+  //       icon: 'none'
+  //     })
+  //     return;
+  //   }
+  //   var that = this;
+  //   wx.showLoading({
+  //     title: '支付中...'
+  //   });
+  //   HTTP.queryOrderByTransID({
+  //       transID: paymentID
+  //     })
+  //     .then(res => {
+  //       wx.hideLoading();
+  //       if (res.code == 0) {
+  //         that.orderPaySuccess()
+  //       } else {
+  //         that.tradeOrder(paymentID);
+  //       }
+  //     }).catch(e => {
+  //       wx.hideLoading();
+  //       wx.showToast({
+  //         title: '连接失败',
+  //         icon: 'none',
+  //         duration: 2000
+  //       })
+  //     })
+  // },
   /**
    * 支付验证
    */

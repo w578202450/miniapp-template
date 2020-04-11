@@ -187,12 +187,12 @@ Page({
               doctorInfo: res.data,
               isSearchState: true
             });
-            // console.log("获取主治医师信息:" + JSON.stringify(res.data));
+            console.log("获取主治医师信息:" + JSON.stringify(res.data));
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);
             that.getHospitalInfo(res.data.orgID); //查询医院详情信息
             that.getOrderCommentData(res.data.orgID, staffID); // 获取患者评价信息
-            that.getToolClassifyById(res.data.orgID); // 文章模块分类获取
+            that.getToolClassifyById(res.data.orgID, staffID, res.data.sectionID); // 文章模块分类获取
             that.fetchDoctorQualification(res.data.doctorID); // 获取医生资质编号
             that.getDoctorDiseaseByDoctorID(res.data.doctorID).then(function(res) {
               that.setData({
@@ -310,7 +310,7 @@ Page({
   /**
    * 获取文章模块的分类
    */
-  getToolClassifyById(defaultOrgID) {
+  getToolClassifyById(defaultOrgID, doctorStaffID, departmentCanSee) {
 
     let orgID = wx.getStorageSync("shareOrgID") || defaultOrgID;
     console.log('getToolClassifyById----------newOrgID----' + orgID + "oldOrgID----" + this.data.articleCurrentOrgID)
@@ -327,67 +327,9 @@ Page({
         this.setData({
           articleTitles: res.data
         });
-        // let tempTitles = res.data
-        // // 初始化组件数据源
-        // let articleDatas = {};
-        // tempTitles.forEach((item) => {
-        //   let currentCategoryData = {};
-        //   currentCategoryData["noMore"] = false // 是否显示没有更多数据
-        //   currentCategoryData["noData"] = false // 是否显示空数据占位
-        //   currentCategoryData["loading"] = true // 是否显示正在加载提示
-        //   currentCategoryData["noOnePage"] = true // 是否满一页数据
-        //   currentCategoryData["pageSize"] = 10 //每页显示数据
-        //   currentCategoryData["pageIndex"] = 1 //当前页数
-        //   articleDatas[item.keyID] = currentCategoryData;
-        // })
-        // this.setData({
-        //   articleTitles: tempTitles,
-        //   articleDatas: articleDatas
-        // });
-        // 初始化文章模块第一栏的数据
-        // if (tempTitles.length > 0) {
-        //   this.articleByClassifyId(tempTitles, articleDatas);
-        // }
       }
     });
   },
-  /**
-   * 根据分类id获取文章列表
-   */
-  articleByClassifyId(tempTitles, articleDatas) {
-    // 初始化第一条数据
-    let classifyID = tempTitles[0].keyID;
-    let orgID = tempTitles[0].orgID;
-    let currentCategoryData = articleDatas[classifyID];
-    currentCategoryData["loading"] = true;
-    HTTP.articleByClassifyId({
-      "orgID": orgID,
-      "pageSize": currentCategoryData.pageSize,
-      "pageIndex": currentCategoryData.pageIndex,
-      "classifyID": classifyID,
-      "isPublish": 1
-    }).then(res => {
-      currentCategoryData["loading"] = false;
-      if (res.code == 0 && res.data) {
-        let list = res.data;
-        if (list.datas) {
-          currentCategoryData["noData"] = list.datas.length === 0 ? true : false
-          currentCategoryData["noMore"] = list.pageIndex < list.totalPage ? false : true
-          currentCategoryData["noOnePage"] = list.datas.length < currentCategoryData.pageSize
-          if (list.pageIndex < list.totalPage) {
-            currentCategoryData["pageIndex"] += 1;
-          }
-          currentCategoryData.datas = list.datas;
-          articleDatas[classifyID] = currentCategoryData;
-          this.setData({
-            currentCategoryData: currentCategoryData,
-            articleDatas: articleDatas
-          });
-        }
-      }
-    })
-  },
-
   /**
    * 获取专治病
    */
@@ -454,7 +396,7 @@ Page({
     that.setData({
       hideModal: false
     });
-     // 显示遮罩层
+    // 显示遮罩层
     var animation = wx.createAnimation({
       duration: 100, //动画的持续时间 默认600ms   数值越大，动画越慢   数值越小，动画越快
       timingFunction: 'ease', //动画的效果 默认值是linear
@@ -466,7 +408,7 @@ Page({
     }, 200)
   },
 
- // 隐藏对话框
+  // 隐藏对话框
   hideModal: function() {
     var that = this;
     // 隐藏遮罩层
@@ -507,7 +449,7 @@ Page({
       },
       fail: function() {
         console.log("拨打电话失败！");
-      } 
+      }
     })
   },
 
@@ -611,8 +553,8 @@ Page({
     });
   },
   // 刷新文章模块列表
-  refreshArticleData: function (){
-    console.log('refreshCurrentArticleUsefulNum------1111--')
+  refreshArticleData: function() {
+    console.log('点击成功------refreshCurrentArticleData');
     let component = this.selectComponent("#article");
     component.refreshCurrentArticleUsefulNum();
   }

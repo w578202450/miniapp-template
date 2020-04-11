@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "login-dialog": "/components/loginDialog/loginDialog",
     "tmcnavbar": "/components/tmc-navbar/tmc-navbar",
     "navigation-bar": "/components/navigation-bar/navigation-bar",
     "patient-evaluate": "/pages/index/service-index/ht/patient-evaluate/patient-evaluate",

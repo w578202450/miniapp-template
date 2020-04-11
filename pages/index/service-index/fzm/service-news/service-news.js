@@ -35,17 +35,23 @@ Component({
         'hasData': false
       }
     },
-
-    orgID: {
-      type: String,
-      value: ""
-    },
     // 当前点击列表对象的下标
     itemIndex:{
       type: Number,
       value: 0
+    },
+
+    doctorStaffID: {
+      type: String,
+      value: ""
+    },
+
+    departmentCanSee: {
+      type: String,
+      value: ""
     }
   },
+  
 
   observers: {
     // 发现articleTitles有数据的时候才会触发 并只触发一次 所以这个方法里面可以作为初始化数据
@@ -68,6 +74,7 @@ Component({
       // 初始化文章模块第一栏的数据
       this.articleByClassifyId();
     }
+    
   },
 
   /**
@@ -101,7 +108,9 @@ Component({
         "pageSize": currentCategoryData.pageSize,
         "pageIndex": currentCategoryData.pageIndex,
         "classifyID": classifyID,
-        "isPublish": 1
+        "isPublish": 1,
+        "doctorCanSee": this.data.doctorStaffID,
+        "departmentCanSee": this.data.departmentCanSee
       }).then(res => {
         currentCategoryData["loading"] = false;
         if (res.code == 0 && res.data) {
@@ -227,7 +236,9 @@ Component({
           "pageSize": currentCategoryData.pageSize,
           "pageIndex": currentCategoryData.pageIndex,
           "classifyID": currentClassifyID,
-          "isPublish": 1
+          "isPublish": 1,
+          "doctorCanSee": this.data.doctorStaffID,
+          "departmentCanSee": this.data.departmentCanSee
         }).then(res => {
           currentCategoryData["loading"] = false
           let list = res.data
@@ -281,7 +292,9 @@ Component({
           "pageSize": currentCategoryData.pageSize,
           "pageIndex": currentCategoryData.pageIndex,
           "classifyID": currentClassifyID,
-          "isPublish": 1
+          "isPublish": 1,
+          "doctorCanSee": this.data.doctorStaffID,
+          "departmentCanSee": this.data.departmentCanSee
         }).then(res => {
           currentCategoryData["loading"] = false
           let list = res.data
@@ -350,10 +363,6 @@ Component({
       }
       item.usefulNum += 1;
       console.log('refreshCurrentArticleUsefulNum------222--', item)
-      this.setData({
-        currentCategoryData: currentCategoryData
-      })
     }
-
   }
 })

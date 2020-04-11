@@ -16,7 +16,9 @@ Page({
      * 默认医院  19101017081245502880511001
      */
     isAboveHouShiID: -1, // 是否显示侯氏信息，默认-1显示
+    isShowDazhongID: -1, // 是否显示大冢医药，默认-1显示
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
+    dazhongOrgID: [], // 大冢医药机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
@@ -44,7 +46,10 @@ Page({
     newArrayDoctorList: [], // 组合的新数组
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
-    isHaveWatched: false // 是否监听到变化了一次
+    isHaveWatched: false, // 是否监听到变化了一次
+    isShowDazhong: false, // 是否显示大冢制药
+    // dazhongOrgID: 20040909515893667880511240, // 大冢制药orgID(生产环境)
+    // dazhongOrgID: 20040910375869839140511253, // 大冢制药orgID(测试环境)
   },
 
   /**
@@ -76,7 +81,7 @@ Page({
     // }
     // 测试
     // 包正一
-    // options ={
+    // options = {
     //   orgID: "19121923373037086560511253",
     //   assistantStaffID: "20011320532175746910514253"
     // }
@@ -90,12 +95,13 @@ Page({
     //   orgID: "19121923373037086560511253"
     // }
     // 开发
-    options = {
-      assistantStaffID: "20011109080410712390514001",
-      orgID: "19101017081245502880511001"
-    }
+    // options = {
+    //   assistantStaffID: "20011109080410712390514001",
+    //   orgID: "19101017081245502880511001"
+    // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
+    that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options.q) { // 通过扫码进入时：q的值为url带参
       app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -219,12 +225,24 @@ Page({
 
   /** 初始化参数 */
   initHomeData: function() {
+    console.log("=====初始化参数=======");
     let that = this;
     that.setData({
       shareOrgID: wx.getStorageSync("shareOrgID"),
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
-    that.initFunctionFun();
+    console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
+    console.log("shareOrgID=======" + that.data.shareOrgID);
+    // 判断是否是大冢医药
+    if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 是否是大冢医药 true:是
+      that.setData({
+        isShowDazhong: true
+      })
+      that.initDefaultFun();
+    } else {
+      that.initFunctionFun();
+    }
   },
 
   /**初始化调用请求方法 */
@@ -247,6 +265,26 @@ Page({
     }, 2000)
   },
 
+  /**初始化默认加载数据 */
+  initDefaultFun: function() {
+    let that = this;
+    wx.showLoading({
+      title: '拼命加载中...',
+    });
+    that.setData({
+      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
+    });
+    that.getBanner(); // 获取首页banner
+    // that.getTeamIntroduce(); // 获取医师团队介绍
+    // that.getBrowseCount(); // 获取用户浏览数
+    // that.getShareCount(); // 获取用户分享数
+    that.getSignedDoctor(); // 通过医助查询到的签约医生
+    that.getHospitalInfo(); //查询医院详情信息
+    setTimeout(() => {
+      wx.hideLoading();
+    }, 2000)
+  },
+
   /** 获取首页banner */
   getBanner() {
     let that = this;
@@ -256,7 +294,7 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        // console.log("===首页banner===" + JSON.stringify(res));
+        console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             homeBannerDefaultUrl: res.data.paraValue
@@ -399,6 +437,15 @@ Page({
   /** 获取默认进小程序显示信息  */
   getDefaulShowInfo() {
     let that = this;
+    console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
+    console.log("shareOrgID=======" + that.data.shareOrgID);
+    // 判断是否是大冢医药
+    if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 是否是大冢医药 true:是
+      that.setData({
+        isShowDazhong: true
+      })
+    }
     let params = {
       orgID: that.data.shareOrgID,
       assistantStaffID: that.data.shareAssistantStaffID,

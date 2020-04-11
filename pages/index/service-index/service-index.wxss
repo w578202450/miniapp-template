@@ -204,6 +204,15 @@
   line-height: 16px;
 }
 
+.service-text {
+  height: 32rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 600;
+  color: rgba(42, 44, 48, 1);
+  line-height: 32rpx;
+}
+
 .certification-box {
   margin-top: 50rpx;
   display: flex;
@@ -215,6 +224,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  vertical-align: center;
 }
 
 .certification-box-left image {
@@ -241,7 +251,7 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(221, 172, 70, 1);
-  line-height: 32px;
+  line-height: 32rpx;
   justify-content: center;
 }
 
@@ -291,6 +301,11 @@
   align-content: center;
 }
 
+.tel-email-header-box image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
 .tel-email-left {
   height: 50rpx;
   margin-left: 10rpx;
@@ -318,6 +333,6 @@
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.45);
-  line-height: 28px;
+  line-height: 28rpx;
   justify-content: center;
 }

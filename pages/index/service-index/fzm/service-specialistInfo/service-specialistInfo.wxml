@@ -25,8 +25,8 @@
             <image style="width:28rpx;height:28rpx;" src="/images/home/youBlue.png"></image>
           </view>
         </view>
-        <text class="title-other doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
-        <text class="title-other doctor-title doctor-title-two">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
+        <text class="doctor-title doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
+        <text class="doctor-title doctor-title doctor-title">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
       </view>
     </view>
     <!-- 擅长标签  -->

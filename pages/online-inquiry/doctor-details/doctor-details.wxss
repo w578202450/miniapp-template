@@ -29,17 +29,17 @@
 
 .middle-title {
   margin-left: 6rpx;
-  height: 28rpx;
-  font-size: 28rpx;
+  height: 36rpx;
+  font-size: 32rpx;
   font-family: PingFangSC-Medium, PingFang SC;
-  font-weight: 500;
+  font-weight: 600;
   color: rgba(0, 0, 0, 0.85);
-  line-height: 28rpx;
+  line-height: 36rpx;
   text-align: center;
 }
 
 .middle-cotent-box {
-  margin-top: 32rpx;
+  margin-top: 20rpx;
   margin-right: 32rpx;
 }
 
