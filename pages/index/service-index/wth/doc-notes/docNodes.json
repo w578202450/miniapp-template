@@ -2,6 +2,6 @@
   "component": true,
   "usingComponents": {
     "module-title": "/pages/index/service-index/ht/module-title/module-title",
-    "tmc-likeWatchComponent": "/components/tmc-likeWatchComponent/tmc-likeWatchComponent"
+    "tmc-statistics": "/components/tmc-statistics/tmc-statistics"
   }
 }

@@ -20,7 +20,7 @@
         <text class="content">{{comTools.subStrTxt(paersonInfo.contentSummary,50)}}</text>
       </view>
       <view class="bottom">
-        <tmc-likeWatchComponent isImageText="{{true}}" likeNum="{{paersonInfo.useful}}" watchNum="{{paersonInfo.viewCount}}"></tmc-likeWatchComponent>
+        <tmc-statistics isImageText="{{true}}" likeNum="{{paersonInfo.useful}}" watchNum="{{paersonInfo.viewCount}}"></tmc-statistics>
       </view>
     </view>
   </module-title>

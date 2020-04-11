@@ -4,9 +4,12 @@
 <!-- 标题 点赞、观看数-->
 <view class="header-box">
   <text class="title">{{articleData.title}}</text>
-  <view style="margin-top: 16rpx">
-    <!-- 点赞、观看数组件 -->
-    <tmc-likeWatchComponent isImageText="{{true}}" likeNum="{{articleData.useful}}" watchNum="{{articleData.viewCount}}"></tmc-likeWatchComponent>
+  <!-- 点赞、观看数组件 -->
+  <view class="statistics-box" style="margin-top: 16rpx">
+    <tmc-statistics type="useful" isShowIcon="{{false}}" id="statistics" queryParams="{{queryStatisticsParamsOfUseful}}"></tmc-statistics>
+    <view style="margin-left: 32rpx">
+      <tmc-statistics type="view" isShowIcon="{{false}}" queryParams="{{queryStatisticsParamsOfView}}"></tmc-statistics>
+    </view>
   </view>
 </view>
 <!-- 视频 -->
@@ -18,7 +21,7 @@
 <!-- 觉得有用 立即问诊-->
 <view class="button-view-box">
   <view style="width: 48%">
-    <tmc-like keyID="{{keyID}}" disable="{{likeDisable}}" bind:login="login" bind:success="likeSucess"></tmc-like>
+    <tmc-like queryParams="{{queryStatusParamsOfUseful}}" increaseParams="{{increaseParamsOfUserful}}" type="useful" bind:login="login" bind:success="likeSucess"></tmc-like>
   </view>
 
   <view class="button-box" style="background:rgba(67,139,239,1)" bindtap="toOnlineInqueryFun">

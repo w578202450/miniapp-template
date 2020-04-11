@@ -1,4 +1,4 @@
-<view class="contain-box" style="{{style}}" bindtap="tapAction">
-  <image src="{{disable ? likeIcon_disable : likeIcon}}"></image>
-  <text style="{{disable ? 'color: #FFFFFF' : 'color:rgba(67,139,239,1)'}};  margin-left: 8rpx">觉得有用</text>
+<view class="contain-box" style="{{baseInfo.pageStyle}}" bindtap="tapAction">
+  <image src="{{baseInfo.icon}}"></image>
+  <text style="{{baseInfo.textStyle}}">{{baseInfo.text}}</text>
 </view>

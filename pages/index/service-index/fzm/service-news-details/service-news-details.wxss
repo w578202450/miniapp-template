@@ -58,3 +58,8 @@ page {
   font-weight: 500;
   color: rgba(0, 0, 0, 0.85);
 }
+
+.statistics-box{
+  display: flex;
+  flex-direction: row;
+}

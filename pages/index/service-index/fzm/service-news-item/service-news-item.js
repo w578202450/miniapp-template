@@ -9,6 +9,11 @@ Component({
     itemData: {
       type: Object,
       value: {}
+    },
+
+    statisticsInfo: {
+      type: Object,
+      value: {}
     }
   },
   /**

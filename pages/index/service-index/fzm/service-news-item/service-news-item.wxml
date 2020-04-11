@@ -1,5 +1,10 @@
-
 <view class="contain-box">
   <text class="title">{{itemData.title}}</text>
-  <tmc-likeWatchComponent isImageText="{{itemData.articleType==0}}" likeNum="{{itemData.useful}}" watchNum="{{itemData.viewCount}}"></tmc-likeWatchComponent>
+  <!-- 点赞、观看数组件 -->
+  <view class="statistics-box" style="margin-top: 16rpx">
+    <tmc-statistics type="useful" isShowIcon="{{false}}" count="{{itemData.usefulNum}}"></tmc-statistics>
+    <view style="margin-left: 32rpx">
+      <tmc-statistics type="view" isShowIcon="{{false}}" count="{{itemData.viewNum}}"></tmc-statistics>
+    </view>
+  </view>
 </view>

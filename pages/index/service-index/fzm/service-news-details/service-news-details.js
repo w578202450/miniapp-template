@@ -8,7 +8,12 @@ Page({
    */
   data: {
     articleDatas: {}, // 文章详情
-    inquiryIcon: "/images/inquiry/inquiry_article_add.png"
+    inquiryIcon: "/images/inquiry/inquiry_article_add.png",
+    queryStatusParamsOfUseful: {}, // 查询觉得有用按钮状态参数
+    queryStatisticsParamsOfUseful: {}, // 查询觉得有用统计计数
+    queryStatisticsParamsOfView: {}, // 查询观看统计计数
+    increaseParamsOfView: {}, // 观看统计计数
+    increaseParamsOfUserful: {}, // 觉得有用统计计数
   },
 
   /**
@@ -17,15 +22,7 @@ Page({
   onLoad: function(options) {
     let that = this;
     this.articleDatas = JSON.parse(options.materialData);
-    this.getArticleByKeyID();
-    this.usefulStatusRequest();
-    this.listCommentRequest();
-    wx.setNavigationBarTitle({
-      title: this.articleDatas.title
-    })
-    this.setData({
-      keyID: this.articleDatas.keyID
-    })
+    this.initInfo();
   },
 
   /**
@@ -35,52 +32,67 @@ Page({
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialog");
   },
-
   /**
-   * 生命周期函数--监听页面显示
+   * 数据初始化
    */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+  initInfo() {
+    // 获取文章详情
+    this.getArticleByKeyID();
+    // 观看计数
+    this.viewCountIncrease();
+    // 获取评论数
+    // this.listCommentRequest();
+    // 动态设置标题
+    wx.setNavigationBarTitle({
+      title: this.articleDatas.title
+    })
+    // 组件参数初始化
+    this.data.queryStatusParamsOfUseful = {
+      systemCode: "tmc",
+      bizCode: "article",
+      objectID: this.articleDatas.keyID,
+      operateCode: "useful",
+      operateID: app.globalData.patientID,
+      orgID: "",
+      deptID: ""
+    };
+    this.data.increaseParamsOfUserful = {
+      systemCode: "tmc",
+      bizCode: "article",
+      objectID: this.articleDatas.keyID,
+      statisticsCode: "useful",
+      operatorID: app.globalData.patientID
+    };
+    this.data.queryStatisticsParamsOfUseful = {
+      systemCode: "tmc",
+      bizCode: "article",
+      objectID: this.articleDatas.keyID,
+      statisticsCode: "useful",
+      orgID: "",
+      deptID: "",
+      userID: ''
+    };
+    this.data.queryStatisticsParamsOfView = {
+      systemCode: "tmc",
+      bizCode: "article",
+      objectID: this.articleDatas.keyID,
+      statisticsCode: "view",
+      orgID: "",
+      deptID: "",
+      userID: ''
+    };
+    this.setData({
+      queryStatusParamsOfUseful: this.data.queryStatusParamsOfUseful,
+      increaseParamsOfUserful: this.data.increaseParamsOfUserful,
+      queryStatisticsParamsOfUseful: this.data.queryStatisticsParamsOfUseful, 
+      queryStatisticsParamsOfView:this.data.queryStatisticsParamsOfView
+    })
   },
   /**
    * 获取文章类容
    */
   getArticleByKeyID() {
+
     HTTP.getArticleByKeyID({
       "keyID": this.articleDatas.keyID,
     }).then(res => {
@@ -112,20 +124,35 @@ Page({
       }
     })
   },
+  // /**
+  //  * 获取文章觉得有用状态
+  //  */
+  // usefulStatusRequest() {
+  //   HTTP.usefulStatus({
+  //     "articleID": this.articleDatas.keyID,
+  //     "patientID": app.globalData.patientID
+  //   }).then(res => {
+  //     if (res.code === 0) {
+  //       this.setData({
+  //         likeDisable: res.data
+  //       })
+  //     }
+  //   })
+  // },
   /**
-   * 获取文章觉得有用状态
+   * 观看次数记数
    */
-  usefulStatusRequest() {
-    HTTP.usefulStatus({
-      "articleID": this.articleDatas.keyID,
-      "patientID": app.globalData.patientID
-    }).then(res => {
-      if (res.code === 0) {
-        this.setData({
-          likeDisable: res.data
-        })
-      }
-    })
+  viewCountIncrease() {
+    this.data.increaseParamsOfView = {
+      systemCode: "tmc",
+      bizCode: "article",
+      objectID: this.articleDatas.keyID,
+      statisticsCode: "view",
+      operatorID: app.globalData.patientID
+    };
+    HTTP.statisticsIncrease(this.data.increaseParamsOfView).then(res => {
+
+    });
   },
   /**
    * 操作：开始问诊
@@ -154,7 +181,7 @@ Page({
   /**
    * 组件登录操作
    */
-  login(){
+  login() {
     this.popup.showPopup(""); // 显示登录确认框
   },
   /**
@@ -162,12 +189,14 @@ Page({
    * 1.刷新当前界面觉得有用状态和点赞数据
    * 2.刷新上一个界面的数据
    */
-  likeSucess(){
+  likeSucess() {
+    console.log('觉得有用组件点赞成功--111-------');
     // 刷新当前界面觉得有用状态和点赞数据
-    this.getArticleByKeyID();
+    let statistics = this.selectComponent("#statistics");
+    statistics.queryStatistics(this.data.queryStatisticsParamsOfUseful);
     // 刷新上一个界面
     const pages = getCurrentPages();
     const perpage = pages[pages.length - 2]
-    perpage.refreshArticleData(); 
+    perpage.refreshArticleData();
   }
 })

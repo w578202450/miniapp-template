@@ -324,27 +324,30 @@ Page({
     }).then(res => {
       if (res.code == 0 && res.data) {
         this.data.articleCurrentOrgID = orgID;
-        let tempTitles = res.data
-        // 初始化组件数据源
-        let articleDatas = {};
-        tempTitles.forEach((item) => {
-          let currentCategoryData = {};
-          currentCategoryData["noMore"] = false // 是否显示没有更多数据
-          currentCategoryData["noData"] = false // 是否显示空数据占位
-          currentCategoryData["loading"] = true // 是否显示正在加载提示
-          currentCategoryData["noOnePage"] = true // 是否满一页数据
-          currentCategoryData["pageSize"] = 10 //每页显示数据
-          currentCategoryData["pageIndex"] = 1 //当前页数
-          articleDatas[item.keyID] = currentCategoryData;
-        })
         this.setData({
-          articleTitles: tempTitles,
-          articleDatas: articleDatas
+          articleTitles: res.data
         });
+        // let tempTitles = res.data
+        // // 初始化组件数据源
+        // let articleDatas = {};
+        // tempTitles.forEach((item) => {
+        //   let currentCategoryData = {};
+        //   currentCategoryData["noMore"] = false // 是否显示没有更多数据
+        //   currentCategoryData["noData"] = false // 是否显示空数据占位
+        //   currentCategoryData["loading"] = true // 是否显示正在加载提示
+        //   currentCategoryData["noOnePage"] = true // 是否满一页数据
+        //   currentCategoryData["pageSize"] = 10 //每页显示数据
+        //   currentCategoryData["pageIndex"] = 1 //当前页数
+        //   articleDatas[item.keyID] = currentCategoryData;
+        // })
+        // this.setData({
+        //   articleTitles: tempTitles,
+        //   articleDatas: articleDatas
+        // });
         // 初始化文章模块第一栏的数据
-        if (tempTitles.length > 0) {
-          this.articleByClassifyId(tempTitles, articleDatas);
-        }
+        // if (tempTitles.length > 0) {
+        //   this.articleByClassifyId(tempTitles, articleDatas);
+        // }
       }
     });
   },
@@ -609,8 +612,8 @@ Page({
   },
   // 刷新文章模块列表
   refreshArticleData: function (){
-    console.log('点击成功------refreshCurrentArticleData');
+    console.log('refreshCurrentArticleUsefulNum------1111--')
     let component = this.selectComponent("#article");
-    component.refreshCurrentArticleData();
+    component.refreshCurrentArticleUsefulNum();
   }
 })

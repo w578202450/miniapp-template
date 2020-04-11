@@ -5,6 +5,7 @@
   align-items: center;
   background: rgba(67, 139, 239, 0.1);
   border-radius: 10rpx;
+  height: 56rpx;
 }
 
 image {

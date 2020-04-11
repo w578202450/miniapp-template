@@ -18,3 +18,8 @@
   -webkit-box-orient: vertical;
   margin-bottom: 10rpx;
 }
+
+.statistics-box{
+  display: flex;
+  flex-direction: row;
+}

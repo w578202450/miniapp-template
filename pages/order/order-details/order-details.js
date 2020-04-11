@@ -171,7 +171,8 @@ Page({
           if (res.data.payResult == 1) { //已支付成功
             this.orderPaySuccess()
           } else if (res.data.payResult == 0) { //未支付成功 但腾讯那边可能支付成功 还需要进一步对订单结果查询
-            this.checkOrderResult(paymentID);
+            // this.checkOrderResult(paymentID);
+            this.tradeOrder(paymentID);
           }
         } else {
           wx.showToast({

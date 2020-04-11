@@ -1,7 +1,7 @@
 {
   "usingComponents": {
     "login-dialog": "/components/loginDialog/loginDialog",
-    "tmc-likeWatchComponent": "/components/tmc-likeWatchComponent/tmc-likeWatchComponent",
+    "tmc-statistics": "/components/tmc-statistics/tmc-statistics",
     "tmc-comment": "/components/tmc-comment/tmc-comment",
     "tmc-like": "/components/tmc-like/tmc-like"
   }

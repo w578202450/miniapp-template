@@ -15,7 +15,7 @@
   </view>
   <view>
     <block wx:for="{{currentCategoryData.datas}}" wx:for-item="item" wx:for-index="index" wx:key="id">
-      <service-news-item bindtap="itemDetails" data-item="{{item}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
+      <service-news-item bindtap="itemDetails" data-item="{{item}}" data-index="{{index}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
     </block>
     <!-- 底部状态提示 -->
     <text wx:if="{{currentCategoryData.loading}}" class="loading-box">{{loadingText}}</text>

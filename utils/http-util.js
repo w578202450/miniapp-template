@@ -494,18 +494,6 @@ module.exports = {
     return request('api/tmc/multiTalk/addGroupMember', true, 'post', parmas);
   },
   /**
-   * 文章详情觉得有用请求
-   */
-  useful: function useful(parmas){
-    return request('api/tmc/article/useful', true, 'post', parmas);
-  },
-  /**
-   * 查询文章详情觉得有用按钮状态
-   */
-  usefulStatus: function usefulStatus(parmas) {
-    return request('api/tmc/article/usefulStatus', true, 'get', parmas);
-  },
-  /**
    * 查询文章详情的文章评论
    */
   listComment: function listComment(parmas) {
@@ -533,9 +521,34 @@ module.exports = {
     return request('api/tmc/history/findHistoryMsgByInquiryID', true, 'get', parmas);
   },
   /**
+   * 操作按钮组件点击请求
+   */
+  statisticsIncrease: function statisticsIncrease(parmas) {
+    return request('api/comment/statistics/increase', true, 'post', parmas);
+  },
+  /**
+   * 查询操作按钮组件状态
+   */
+  queryStatus: function queryStatus(parmas) {
+    return request('api/comment/operateUser/clickStatus', true, 'get', parmas);
+  },
+  /**
    * 根据文章详情
    * */
   getArticleByKeyID: function getArticleByKeyID(parmas) {
     return request('api/tmc/article/getArticleByKeyID', true, 'get', parmas);
+  },
+  /**
+   * 查询统计数据
+   */
+  queryStatistics: function queryStatistics(parmas) {
+    return request('api/comment/statistics/get', true, 'get', parmas);
+  },
+  /**
+   * 查询统计数据列表
+   */
+  queryStatisticsList: function queryStatistics(parmas) {
+    return request('api/comment/statistics/getByList', true, 'post', parmas);
   }
+  
 }
