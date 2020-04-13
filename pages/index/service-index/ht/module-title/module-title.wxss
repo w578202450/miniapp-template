@@ -10,11 +10,11 @@
 }
 
 .border-botttom {
-  border-bottom: 1rpx solid #dbdee3;
+  border-bottom: 1rpx solid #f1f1f1;
 }
 
 .border-top {
-  border-top: 1rpx solid #dbdee3;
+  border-top: 1rpx solid #f1f1f1;
   padding: 20rpx 20rpx;
 }
 

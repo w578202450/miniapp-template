@@ -33,10 +33,14 @@
   <!-- 获得援助box -->
   <view class="middle-two-box">
     <!-- 背景图 -->
-    <view class="rectangle-background" style="background:url('/images/home/home_rectangle_background.png');">
+    <view class="rectangle-background">
+       <image class="rectangle-background-left" mode="aspectFill" src="{{homeDazhongLeft}}"></image>
+       <view class="rectangle-background-middle">
       <text class="middle-two-box-row-text">全国已有</text>
       <text class="middle-two-box-row-number">{{helpfulNum}}</text>
       <text class="middle-two-box-row-text">名尘肺农民获得援助</text>
+      </view>
+       <image class="rectangle-background-right" mode="aspectFill" src="{{homeDazhongRight}}"></image>
     </view>
     <!-- 纵向滚动的跑马灯 -->
     <!-- <view class="vertical-roll-marquee">
@@ -67,9 +71,12 @@
       <text>援助药品：佰达图®舒稳乐®盐酸丙卡特罗粉雾剂</text>
     </view>
     <text class="bottom-description">日本大冢制药株式会社（四川），致力于开发支气管哮喘、COPD(慢性阻塞性肺病)、急慢性支气管炎等系列呼吸系统疾病治疗药品</text>
-    <text class="bottom-remark">（注）：是否符合援助标准最终由大爱清尘决定。</text>
+    <view class="bottom-remark-box">
+    <image mode="aspectFill" class="bottom-remark-image" src="{{bottomIcon}}"></image>
+    <text class="bottom-remark">是否符合援助标准最终由大爱清尘决定。</text>
+    </view>
     <!-- 灰色间隔区 -->
-    <view class="intervalView" style="margin-top:40rpx;"></view>
+    <!-- <view class="intervalView" style="margin-top:40rpx;"></view> -->
   </view>
   <!-- 立即进入专家门诊 -->
   <view class="enter-box" bindtap="toServiceIndexFun">

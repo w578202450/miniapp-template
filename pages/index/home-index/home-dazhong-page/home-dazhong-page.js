@@ -12,13 +12,21 @@ Component({
       type: String,
       value: ""
     },
-    onload: Boolean
+    onload:{
+      type: Boolean,
+      value: false,
+      observer: function (newVal, oldVal) {
+        this.createHelpfulNumFun()
+      }
+    } 
   },
 
   /**
    * 组件的初始数据
    */
   data: {
+    homeDazhongLeft: "/images/home/home_dazhong_left.png",
+    homeDazhongRight: "/images/home/home_dazhong_right.png",
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
     middleOnefei1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei1.png",
     middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei2.png",
@@ -26,6 +34,7 @@ Component({
     middleOnefei4: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei4.png",
     helpfulNum: 12324,
     medicineIcon: "/images/home/home_dazhong_medicine.png",
+    bottomIcon: "/images/home/home_dazhong_bottom_icon.png",
     rectangleBackgroundImg: "/images/home/home_rectangle_background.png",
     // news: [
     //   '李**     已获得免费持续治疗援助1支       刚刚',
@@ -137,18 +146,17 @@ Component({
     },
     createHelpfulNumFun: function() {
       let that = this;
-      let date1 = "1970-01-01 00:00:00"; // 开始时间
+      var data = "1970-01-01 00:00:00";
+      let date1 = new Date(data.replace(/-/g, '/')); // 开始时间
       let date2 = new Date(); // 结束时间
-      let date3 = date2.getTime() - new Date(date1).getTime(); // 时间差的毫秒数
+      // console.log(date1.getTime());
+      // console.log(date2.getTime());
+      let date3 = date2.getTime() - date1.getTime(); // 时间差的毫秒数
       let randomNum = Math.round((date3 / 1000 - (3600 * 24 * 365 * 49.6)) / 1800); /** 一小时加两个 */
       that.setData({
-        helpfulNum: (int)(Math.random() * 100)
+        helpfulNum: randomNum
       });
-      console.log("========helpfulNum=======" + that.data.helpfulNum);
     },
   },
 
-  observers: {
-
-  }
 })
