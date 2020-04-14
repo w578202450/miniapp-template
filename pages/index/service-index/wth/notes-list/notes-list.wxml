@@ -4,7 +4,8 @@
 <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
 <!-- 登录弹框 -->
 <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
-<view class="contain-box" bindtap="toDetail" data-detailUrl='{{item.detailUrl}}' wx:for="{{inquiryCaseData}}" wx:key="index">
+<view style="margin-bottom: 128rpx">
+  <view class="contain-box" bindtap="toDetail" data-item='{{item}}' data-index='{{index}}' wx:for="{{inquiryCaseData}}" wx:key="index">
     <view class="contain-header">
       <view class="contain-header-left">
         <image class="avatar" src="{{item.photoUrl}}"></image>
@@ -14,8 +15,21 @@
       <view class="contain-header-right data">{{comTools.dateFormat(item.publishDate, 'yyyy-MM-dd')}}</view>
     </view>
     <text class="contain-content content">{{comTools.subStrTxt(item.contentSummary,50)}}</text>
+    <view class="statistics-box" style="margin-top: 16rpx">
+      <tmc-statistics type="useful" isShowIcon="{{false}}" count="{{item.usefulNum}}"></tmc-statistics>
+      <view style="margin-left: 32rpx">
+        <tmc-statistics type="view" isShowIcon="{{false}}" count="{{item.viewNum}}"></tmc-statistics>
+      </view>
+    </view>
     <view class="contain-line"></view>
   </view>
+  <!-- 分页控件 -->
+  <view style="margin-top: 20rpx">
+    <tmc-pageControls pageInfo="{{pageInfo}}" pageDatas="{{pageDatas}}" bind:loadMoreData="loadMoreData"></tmc-pageControls>
+  </view>
+
+</view>
+
 <!-- 底部问诊按钮 -->
 <view class="button-view">
   <tmc-button pageStyle="height:80rpx;margin-left:30rpx;margin-right:30rpx;margin-top:24rpx;margin-bottom:24rpx" bind:buttonTap="goInquiry" title="立即问诊"></tmc-button>

@@ -2,26 +2,21 @@
 <view class="comment-list-box">
   <text class="comment-title">留言评论</text>
   <view style="height: 20rpx"></view>
-  <block wx:if="{{commentList.length > 0}}">
-    <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
-      <image class="avatar" src="{{comment.patientFaceUrl}}"></image>
-      <view class="comment-content-box">
-        <text class="commtent-name">{{comment.patientName}}</text>
-        <view>
-          <text class="commtent-content">{{comment.commentContent}}</text>
-          <view wx:if="{{comment.isReply === 1}}" style="margin-top: 16rpx">
-            <text class="reply" style="color:rgba(67,139,239,1)">侯医师回复:  </text>
-            <text class="reply">{{comment.commentReply}}</text>
-          </view>
+  <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
+    <image class="avatar" src="{{comment.commentUserFace}}"></image>
+    <view class="comment-content-box">
+      <text class="commtent-name">{{comment.commentUserName}}</text>
+      <view>
+        <text class="commtent-content">{{comment.commentContent}}</text>
+        <view wx:if="{{comment.isReply === 1}}" style="margin-top: 16rpx">
+          <text class="reply" style="color:rgba(67,139,239,1)">{{comment.replyUserName}}回复:  </text>
+          <text class="reply">{{comment.replyContent}}</text>
         </view>
       </view>
     </view>
-  </block>
-  <block wx:else>
-    <view style="display: flex;justify-content: center;align-items: center">
-      <text class="details" style="font-size: 32rpx;color: rgba(217,217,217,1)">暂无评论</text>
-    </view>
-  </block>
+  </view>
+  <!-- 分页控件 -->
+  <tmc-pageControls pageInfo="{{pageInfo}}" pageDatas="{{pageDatas}}" bind:loadMoreData="loadMoreData"></tmc-pageControls>
 </view>
 <!-- 评论输入框 -->
 <view wx:if="{{!isInputting}}" class="bottom-view" bindtap="inputoption">

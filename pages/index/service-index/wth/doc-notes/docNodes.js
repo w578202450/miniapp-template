@@ -31,6 +31,9 @@ Component({
         publishDate: "",
         authorName: "",
         photoUrl: ""
+      },
+      observer: function(value) {
+        this.handlePersonInfo(value);
       }
     },
     // 评价内容
@@ -51,6 +54,28 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    handlePersonInfo(personInfo) {
+      this.setData({
+        queryStatisticsParamsOfUseful: {
+          systemCode: "tmc",
+          bizCode: "inquiryCase",
+          objectID: personInfo.keyID,
+          statisticsCode: "useful",
+          orgID: "",
+          deptID: "",
+          userID: ''
+        },
+        queryStatisticsParamsOfView: {
+          systemCode: "tmc",
+          bizCode: "inquiryCase",
+          objectID: personInfo.keyID,
+          statisticsCode: "view",
+          orgID: "",
+          deptID: "",
+          userID: ''
+        }
+      })
+    },
     toDetail: function() {
       let that = this;
       that.triggerEvent('toDetail');

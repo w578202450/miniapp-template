@@ -1,5 +1,6 @@
-
-
+page{
+  background-color: white
+}
 .button-view {
   background: rgba(255, 255, 255, 1);
   position: fixed;
@@ -79,4 +80,9 @@
   height:2rpx;
   width: 100%;
   margin-top: 32rpx;
+}
+
+.statistics-box{
+  display: flex;
+  flex-direction: row;
 }

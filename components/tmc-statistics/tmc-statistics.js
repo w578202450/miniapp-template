@@ -69,7 +69,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    
+
   },
 
   /**
@@ -120,6 +120,7 @@ Component({
         }
       }).catch(error => {
         wx.hideLoading();
+        console.log(JSON.stringify(params) + "--------" + '网络连接失败')
         wx.showToast({
           title: "网络连接失败",
           icon: "none",

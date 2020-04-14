@@ -512,7 +512,7 @@ Page({
       sectionID: sectionID,
       doctorStaffID: doctorStaffID
     }).then(res => {
-      // console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
+      console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           ["patientShareGetData.keyID"]: res.data.keyID,
@@ -526,7 +526,6 @@ Page({
           ["patientShareGetData.httpParams.orgID"]: orgID,
           ["patientShareGetData.httpParams.doctorStaffID"]: doctorStaffID
         });
-        // console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
       }
     });
   },
@@ -551,16 +550,22 @@ Page({
           ["inquiryCaseData.httpParams.sectionID"]: sectionID,
           ["inquiryCaseData.httpParams.orgID"]: orgID,
           ["inquiryCaseData.publishDate"]: res.data.publishDate,
-          ["inquiryCaseData.httpParams.doctorStaffID"]: doctorStaffID
+          ["inquiryCaseData.httpParams.doctorStaffID"]: doctorStaffID,
+          ["inquiryCaseData.content"]: res.data.content
         });
-        console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
+        // console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
       }
     });
   },
   // 刷新文章模块列表
-  refreshArticleData: function() {
+  refreshArticleData: function (type) {
     console.log('点击成功------refreshCurrentArticleData');
     let component = this.selectComponent("#article");
-    component.refreshCurrentArticleUsefulNum();
+    if (type === 'view') {
+      component.refreshArticleViewNum();
+    } else {
+      component.refreshCurrentArticleUsefulNum();
+    }
+
   }
 })

@@ -344,7 +344,7 @@ Component({
 
     },
     /**
-     * 刷新当前数据 子组件即时刷新
+     * 当前item 更新点赞有用数
      */
     refreshCurrentArticleUsefulNum: function() {
 
@@ -361,6 +361,25 @@ Component({
       this.setData({
         currentCategoryData: currentCategoryData
       })
+    },
+
+    /**
+     * 当前item 更新观看数
+     */
+    refreshArticleViewNum() {
+      var index = this.data.currentIndex;
+      let navitem = this.data.articleTitles[index];
+      let currentClassifyID = navitem.keyID;
+      let currentCategoryData = this.data.articleDatas[currentClassifyID];
+      let item = currentCategoryData.datas[this.data.itemIndex];
+      if (!item.viewNum) {
+        item.viewNum = 0;
+      }
+      item.viewNum += 1;
+      this.setData({
+        currentCategoryData: currentCategoryData
+      })
     }
   }
+
 })

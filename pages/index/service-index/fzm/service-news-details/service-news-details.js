@@ -14,6 +14,19 @@ Page({
     queryStatisticsParamsOfView: {}, // 查询观看统计计数
     increaseParamsOfView: {}, // 观看统计计数
     increaseParamsOfUserful: {}, // 觉得有用统计计数
+    hasView: false //是否记录观看
+  },
+
+  /**
+  * 卸载页面
+  */
+  onUnload: function () {
+    if (this.data.hasView) {
+      const pages = getCurrentPages();
+      const perpage = pages[pages.length - 2]
+      perpage.refreshArticleData('view');
+    }
+
   },
 
   /**
@@ -128,7 +141,9 @@ Page({
       operatorID: app.globalData.patientID
     };
     HTTP.statisticsIncrease(this.data.increaseParamsOfView).then(res => {
-
+      if (res.code === 0) {
+        this.data.hasView = res.data;
+      }
     });
   },
   /**

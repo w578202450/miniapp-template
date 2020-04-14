@@ -67,7 +67,7 @@ Component({
     comment: "", // 评论内容
     textareaHeight: 0, // 键盘输入框高度 
     cursor: 0, // 当前输入数
-    pageParams:{
+    pageInfo:{
       pageSize: 10,
       pageIndex: 1
     }
@@ -142,15 +142,18 @@ Component({
         return;
       }
       let params = {
-        ...this.data.pageParams,
+        ...this.data.pageInfo,
         ...queryParams
       };
 
       HTTP.queryCommentList(params).then(res => {
         if (res.code === 0 && res.data.datas) {
           this.setData({
-            commentList: res.data.datas
+            commentList: this.data.commentList.concat(res.data.datas),
+            pageInfo: res.data.pageInfo,
+            pageDatas: res.data.datas
           })
+          
         }
         console.log('获取评论信息----', res.data);
       });
@@ -182,12 +185,6 @@ Component({
           });
           // 外部方法
           this.triggerEvent('publishSuccess');
-          // 刷新评论列表
-          this.data.pageParams = {
-            pageSize: 10,
-            pageIndex: 1
-          }
-          this.queryCommentList(this.data.queryParams);
         } else {
           wx.showToast({
             title: res.message,
@@ -202,5 +199,13 @@ Component({
         })
       });
     },
-  }
+    // 评论加载更多数据
+    loadMoreData() {
+      this.data.pageInfo.pageIndex += 1;
+      this.queryCommentList(this.data.queryParams);
+    }
+  },
+
+  
+  
 })

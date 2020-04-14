@@ -24,9 +24,9 @@
       </view> -->
       <!-- 点赞、观看数组件 -->
       <view class="statistics-box" style="margin-top: 16rpx">
-        <tmc-statistics type="useful" isShowIcon="{{false}}" count="{{itemData.usefulNum}}"></tmc-statistics>
+        <tmc-statistics type="useful" isShowIcon="{{false}}" id="statistics" queryParams="{{queryStatisticsParamsOfUseful}}"></tmc-statistics>
         <view style="margin-left: 32rpx">
-          <tmc-statistics type="view" isShowIcon="{{false}}" count="{{itemData.viewNum}}"></tmc-statistics>
+          <tmc-statistics type="view" isShowIcon="{{false}}" queryParams="{{queryStatisticsParamsOfView}}"></tmc-statistics>
         </view>
       </view>
     </view>

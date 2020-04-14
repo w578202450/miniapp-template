@@ -572,7 +572,8 @@ module.exports = {
    * 发布评论统一接口
    */
   publishComment: function publishComment(parmas) {
-    return request('api/comment/comment/publish', true, 'post', parmas);
+    // return request('api/comment/comment/publish', true, 'post', parmas);
+    return request('http://10.0.0.37:6112/api/comment/comment/publish', false, 'post', parmas);
   }
   
 }

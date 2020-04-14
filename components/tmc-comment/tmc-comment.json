@@ -1,5 +1,6 @@
 {
   "component": true,
   "usingComponents": {
+    "tmc-pageControls": "/components/tmc-pageControls/tmc-pageControls"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "tmc-comment": "/components/tmc-comment/tmc-comment",
+    "tmc-like": "/components/tmc-like/tmc-like",
+    "login-dialog": "/components/loginDialog/loginDialog"
+  }
+}
