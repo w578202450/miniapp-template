@@ -40,8 +40,6 @@ Page({
     this.getArticleByKeyID();
     // 观看计数
     this.viewCountIncrease();
-    // 获取评论数
-    // this.listCommentRequest();
     // 动态设置标题
     wx.setNavigationBarTitle({
       title: this.articleDatas.title
@@ -101,44 +99,23 @@ Page({
           WxParse.wxParse('article', 'html', res.data.content, this, 20);
         }
         this.setData({
-          articleData: res.data
-        })
-
-
-      }
-    })
-  },
-  /**
-   * 获取文章评论列表
-   */
-  listCommentRequest() {
-    HTTP.listComment({
-      "articleID": this.articleDatas.keyID,
-      "pageSize": 100,
-      "pageIndex": 1
-    }).then(res => {
-      if (res.code === 0) {
-        this.setData({
-          commentList: res.data.datas
+          articleData: res.data,
+          conmmentQueryParams:{
+            systemCode:"tmc",
+            bizCode:"article",
+            objectID: this.articleDatas.keyID
+          },
+          conmmentPublishParams: {
+            systemCode: "tmc",
+            bizCode: "article",
+            deptID: this.articleDatas.departmentId,
+            userID: this.articleDatas.doctorId,
+            objectID: this.articleDatas.keyID
+          }
         })
       }
     })
   },
-  // /**
-  //  * 获取文章觉得有用状态
-  //  */
-  // usefulStatusRequest() {
-  //   HTTP.usefulStatus({
-  //     "articleID": this.articleDatas.keyID,
-  //     "patientID": app.globalData.patientID
-  //   }).then(res => {
-  //     if (res.code === 0) {
-  //       this.setData({
-  //         likeDisable: res.data
-  //       })
-  //     }
-  //   })
-  // },
   /**
    * 观看次数记数
    */

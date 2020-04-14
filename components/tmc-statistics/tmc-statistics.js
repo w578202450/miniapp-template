@@ -105,7 +105,6 @@ Component({
      * 计数查询
      */
     queryStatistics(params) {
-      console.log('觉得有用组件点赞成功--222-------', params);
       HTTP.queryStatistics(params).then(res => {
         wx.hideLoading();
         if (res.code === 0) {

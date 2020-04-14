@@ -18,13 +18,13 @@
       <service-news-item bindtap="itemDetails" data-item="{{item}}" data-index="{{index}}" data-navTitle="{{navItem.classifyName}}" itemData="{{item}}"></service-news-item>
     </block>
     <!-- 底部状态提示 -->
-    <text wx:if="{{currentCategoryData.loading}}" class="loading-box">{{loadingText}}</text>
-    <tmc-noData wx:elif="{{currentCategoryData.noData}}" text="{{noDataText}}"></tmc-noData>
+    <text wx:if="{{currentCategoryData.loading}}" class="loading-box">{{textInfo.loading}}</text>
+    <tmc-noData wx:elif="{{currentCategoryData.noData}}" text="{{textInfo.noData}}"></tmc-noData>
     <block wx:else>
       <block wx:if="{{currentCategoryData.noMore}}">
-        <text wx:if="{{!currentCategoryData.noOnePage}}" class="loading-box">{{noMoreDataText}}</text>
+        <text wx:if="{{!currentCategoryData.noOnePage}}" class="loading-box">{{textInfo.noMoreData}}</text>
       </block>
-      <text wx:else class="loading-box" bindtap="uploadMoreDatas" data-index="{{navIndex}}" data-navitem="{{navItem}}">{{loadMoreDataText}}</text>
+      <text wx:else class="loading-box" bindtap="uploadMoreDatas" data-index="{{navIndex}}" data-navitem="{{navItem}}">{{textInfo.loadMoreData}}</text>
     </block>
   </view>
 </view>

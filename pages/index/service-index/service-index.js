@@ -325,7 +325,12 @@ Page({
       if (res.code == 0 && res.data) {
         this.data.articleCurrentOrgID = orgID;
         this.setData({
-          articleTitles: res.data
+          articleTitles: res.data,
+          baseParams:{
+            "isPublish": 1,
+            "doctorCanSee": doctorStaffID,
+            "departmentCanSee": departmentCanSee
+          }
         });
       }
     });

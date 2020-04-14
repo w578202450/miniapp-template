@@ -1,4 +1,3 @@
-
 const HTTP = require('../../utils/http-util');
 const Common = require('../../common/common')
 const app = getApp()
@@ -13,13 +12,6 @@ Component({
    */
   properties: {
     /**
-     * 评论列表
-     */
-    commentList:{
-      type: Object,
-      value: {}
-    },
-    /**
      * 是否正在输入评论
      */
     isInputting: {
@@ -27,11 +19,40 @@ Component({
       value: false
     },
     /**
-     * 评论对象id
+     * 评论列表 所持有公共参数
+     * systemCode 系统模块tmc
+     * bizCode 类型article
+     * objectID 对像id
      */
-    keyID: {
-      type: String,
-      value: ""
+    queryParams: {
+      type: Object,
+      value: {},
+      observer: function(value) {
+        this.queryCommentList(value);
+      }
+    },
+    /**
+     * 发表 所持有公共参数
+     * systemCode 系统code 如tmc
+     * bizCode 业务code 如article
+     * orgID 机构
+     * deptID 部门 
+     * userID 作者
+     * objectID 评论对象id
+     * commentUserID 评论人id
+     * commentUserName 评论人姓名
+     * commentUserFace 评论人头像
+     * commentContent 评论内容
+     */
+    publishParams: {
+      type: Object,
+      value: {
+        systemCode: "",
+        bizCode:"",
+        deptID:"",
+        userID:"",
+        objectID:""
+      }
     }
   },
 
@@ -39,9 +60,17 @@ Component({
    * 组件的初始数据
    */
   data: {
+    /**
+     * 评论列表
+     */
+    commentList: [],
     comment: "", // 评论内容
     textareaHeight: 0, // 键盘输入框高度 
-    cursor:0 // 当前输入数
+    cursor: 0, // 当前输入数
+    pageParams:{
+      pageSize: 10,
+      pageIndex: 1
+    }
   },
 
   /**
@@ -88,7 +117,7 @@ Component({
           })
           return;
         }
-        this.articleCommentPublishRequest(this.data.comment);
+        this.publishRequest(this.data.comment);
       } else {
         this.triggerEvent('login')
       }
@@ -103,23 +132,43 @@ Component({
       return {
         value: value
       }
-      
     },
 
     /**
-   * 发表评论请求
-   */
-    articleCommentPublishRequest(comment) {
+     * 查询评论列表
+     */
+    queryCommentList(queryParams) {
+      if (!queryParams || Object.keys(queryParams).length === 0) {
+        return;
+      }
+      let params = {
+        ...this.data.pageParams,
+        ...queryParams
+      };
+
+      HTTP.queryCommentList(params).then(res => {
+        if (res.code === 0 && res.data.datas) {
+          this.setData({
+            commentList: res.data.datas
+          })
+        }
+        console.log('获取评论信息----', res.data);
+      });
+    },
+    /**
+     * 发表评论请求
+     */
+    publishRequest(comment) {
       wx.showLoading({
         title: '发布中...',
       })
-      HTTP.articleCommentPublish({
-        "orgID": app.globalData.orgID,
-        "articleID": this.data.keyID,
-        "patientID": app.globalData.patientID,
-        "patientName": app.globalData.userInfo.nickName,
-        "patientFaceUrl": app.globalData.userInfo.avatarUrl,
-        "commentContent": comment
+      HTTP.publishComment({
+        orgID: wx.getStorageSync("shareOrgID"),
+        commentUserID: app.globalData.patientID,
+        commentUserName: app.globalData.userInfo.nickName,
+        commentUserFace: app.globalData.userInfo.avatarUrl,
+        commentContent: comment,
+        ...this.data.publishParams
       }).then(res => {
         wx.hideLoading();
         if (res.code === 0) {
@@ -130,8 +179,15 @@ Component({
             isInputting: false,
             comment: "",
             cursor: 0
-          })
-          this.triggerEvent('publishSuccess')
+          });
+          // 外部方法
+          this.triggerEvent('publishSuccess');
+          // 刷新评论列表
+          this.data.pageParams = {
+            pageSize: 10,
+            pageIndex: 1
+          }
+          this.queryCommentList(this.data.queryParams);
         } else {
           wx.showToast({
             title: res.message,

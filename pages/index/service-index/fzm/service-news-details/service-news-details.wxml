@@ -30,4 +30,4 @@
   </view>
 </view>
 <!-- 评论组件 -->
-<tmc-comment id="tmc-comment" keyID="{{keyID}}" commentList="{{commentList}}" bind:login="login"></tmc-comment>
+<tmc-comment id="tmc-comment" queryParams="{{conmmentQueryParams}}"  publishParams="{{conmmentPublishParams}}" bind:login="login"></tmc-comment>

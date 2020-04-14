@@ -1,4 +1,4 @@
-const version = 1; //0开发、1测试 2发布  
+const version = 0; //0开发、1测试 2发布  
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -532,34 +532,47 @@ module.exports = {
     return request('api/tmc/history/findHistoryMsgByInquiryID', true, 'get', parmas);
   },
   /**
-   * 操作按钮组件点击请求
-   */
-  statisticsIncrease: function statisticsIncrease(parmas) {
-    return request('api/comment/statistics/increase', true, 'post', parmas);
-  },
-  /**
-   * 查询操作按钮组件状态
-   */
-  queryStatus: function queryStatus(parmas) {
-    return request('api/comment/operateUser/clickStatus', true, 'get', parmas);
-  },
-  /**
    * 根据文章详情
    * */
   getArticleByKeyID: function getArticleByKeyID(parmas) {
     return request('api/tmc/article/getArticleByKeyID', true, 'get', parmas);
   },
+  //---------------------评论统计点赞系统
   /**
-   * 查询统计数据
+   * 统计计数接统一口
+   */
+  statisticsIncrease: function statisticsIncrease(parmas) {
+    return request('api/comment/statistics/increase', true, 'post', parmas);
+  },
+  /**
+   * 操作点赞统一接口
+   */
+  queryStatus: function queryStatus(parmas) {
+    return request('api/comment/operateUser/clickStatus', true, 'get', parmas);
+  },
+  /**
+   * 查询统计数据统一接口
    */
   queryStatistics: function queryStatistics(parmas) {
     return request('api/comment/statistics/get', true, 'get', parmas);
   },
   /**
-   * 查询统计数据列表
+   * 查询统计数据列表统一接口
    */
   queryStatisticsList: function queryStatistics(parmas) {
     return request('api/comment/statistics/getByList', true, 'post', parmas);
+  },
+  /**
+   * 查询评论列表统一接口
+   */
+  queryCommentList: function queryCommentList(parmas) {
+    return request('api/comment/comment/listByID', true, 'get', parmas);
+  },
+  /**
+   * 发布评论统一接口
+   */
+  publishComment: function publishComment(parmas) {
+    return request('api/comment/comment/publish', true, 'post', parmas);
   }
   
 }

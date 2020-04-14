@@ -46,12 +46,6 @@
   color: rgba(0, 0, 0, 0.85);
 }
 
-.bottom {
-  margin-top: 24rpx;
-  display: flex;
-  flex-direction: row;
-}
-
 .bottom-item {
   display: flex;
   flex-direction: row;
@@ -71,4 +65,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+}
+
+.statistics-box{
+  display: flex;
+  flex-direction: row;
 }
