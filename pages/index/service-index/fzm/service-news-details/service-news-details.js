@@ -25,6 +25,7 @@ Page({
       const pages = getCurrentPages();
       const perpage = pages[pages.length - 2]
       perpage.refreshArticleData('view');
+      
     }
 
   },
@@ -182,7 +183,6 @@ Page({
    * 2.刷新上一个界面的数据
    */
   likeSucess() {
-    console.log('觉得有用组件点赞成功--111-------');
     // 刷新当前界面觉得有用状态和点赞数据
     let statistics = this.selectComponent("#statistics");
     statistics.queryStatistics(this.data.queryStatisticsParamsOfUseful);

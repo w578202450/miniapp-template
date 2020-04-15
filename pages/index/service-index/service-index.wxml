@@ -32,7 +32,7 @@
   <!-- 患者评价 -->
   <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
-  <notes paersonInfo="{{inquiryCaseData}}" wx:if="{{inquiryCaseData.keyID}}" httpParams="{{inquiryCaseData.httpParams}}" />
+  <notes paersonInfo="{{inquiryCaseData}}" httpParams="{{inquiryCaseData.httpParams}}" />
   <!-- 患者分享 -->
   <!-- <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" /> -->
   <!-- 文章模块 -->

@@ -66,7 +66,6 @@ Component({
      */
     goToInquiryOption() {
       this.triggerEvent('toOnlineInqueryFun')
-      console.log("this.data.doctorInfo-------", this.data.doctorInfo);
     },
 
     /**

@@ -2,6 +2,7 @@
   "component": true,
   "usingComponents": {
     "module-title": "/pages/index/service-index/ht/module-title/module-title",
-    "tmc-statistics": "/components/tmc-statistics/tmc-statistics"
+    "tmc-statistics": "/components/tmc-statistics/tmc-statistics",
+    "tmc-noData": "/components/tmc-noData/tmc-noData"
   }
 }

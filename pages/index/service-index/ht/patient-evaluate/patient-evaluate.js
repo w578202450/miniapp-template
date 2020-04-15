@@ -47,7 +47,6 @@ Component({
         illnessSumList: that.data.evaluateAllData.illnessSumList ? that.data.evaluateAllData.illnessSumList : [],
         httpParams: httpParamsData
       });
-      console.log(that.data.evaluateData)
     }
 
     let illList = [{

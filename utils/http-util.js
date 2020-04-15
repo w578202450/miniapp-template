@@ -574,5 +574,4 @@ module.exports = {
   publishComment: function publishComment(parmas) {
     return request('api/comment/comment/publish', true, 'post', parmas);
   }
-  
 }

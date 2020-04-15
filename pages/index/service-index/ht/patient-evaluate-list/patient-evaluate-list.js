@@ -30,7 +30,7 @@ Page({
     let that = this;
     if (options.httpParams) {
       that.data.httpParams = JSON.parse(options.httpParams);
-      console.log("进入患者评价列表页拿到的参数：" + JSON.stringify(that.data.httpParams));
+      // console.log("进入患者评价列表页拿到的参数：" + JSON.stringify(that.data.httpParams));
       that.getPatientEvaluateListFun(); // 查询：患者评价列表数据
       that.initNoRealyData(); // 拟定假数据
     } else {

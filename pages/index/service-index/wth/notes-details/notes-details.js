@@ -31,7 +31,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('options' + JSON.stringify(options))
     this.setData({
       personInfo: JSON.parse(options.personData)
     })
@@ -139,7 +138,6 @@ Page({
    * 2.刷新上一个界面的数据
    */
   likeSucess() {
-    console.log('点赞成功');
     // 刷新上一个界面
     const pages = getCurrentPages();
     const perpage = pages[pages.length - 2]

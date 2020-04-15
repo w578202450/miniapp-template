@@ -13,8 +13,6 @@ Component({
       type: Array,
       value: [],
       observer: function(newValue, oldValue) {
-        console.log('observeArticleTitles----', newValue)
-        console.log('observeArticleTitlesOldValue----', oldValue)
         this.observeArticleTitles(newValue);
       }
     },
@@ -357,7 +355,6 @@ Component({
         item.usefulNum = 0;
       }
       item.usefulNum += 1;
-      console.log('refreshCurrentArticleUsefulNum------222--', item)
       this.setData({
         currentCategoryData: currentCategoryData
       })

@@ -8,7 +8,7 @@
         <text class="module-title-txt" style="font-size:{{fontSize}};color:{{color}};font-weight:{{fontWeight}}">{{title}}</text>
         <text wx:if="{{isHaveRemark}}" class="module-title-num">{{remarkInfo}}</text>
       </view>
-      <view class="module-title-view">
+      <view class="module-title-view" hidden="{{!isHaveMoreBtn}}">
         <view class="module-title-view" hidden="{{effect.length === 0}}">
           <text class="effectTitle">疗效:</text>
           <text class="effectValue">100%</text>

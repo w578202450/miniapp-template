@@ -3,8 +3,8 @@
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <view style="margin-bottom:20rpx;"></view>
-  <module-title title="{{title}}" moreBtnName="{{moreBtnName}}" httpParams="{{httpParams}}">
-    <view slot="content-body" class="box" bindtap="toDetail">
+  <module-title title="{{title}}" isHaveMoreBtn="{{paersonInfo.keyID}}" moreBtnName="{{moreBtnName}}" httpParams="{{httpParams}}">
+    <view wx:if="{{paersonInfo.keyID}}" slot="content-body" class="box" bindtap="toDetail">
       <view class="contain">
         <view class="personInfo">
           <image class="img" src="{{paersonInfo.patientFace?paersonInfo.patientFace:paersonInfo.photoUrl}}" style="background: url({{materialImgBac}});background-size: contain;"></image>
@@ -19,9 +19,6 @@
       <view>
         <text class="content">{{comTools.subStrTxt(paersonInfo.contentSummary,50)}}</text>
       </view>
-      <!-- <view class="bottom">
-        <tmc-statistics isImageText="{{true}}" likeNum="{{paersonInfo.useful}}" watchNum="{{paersonInfo.viewCount}}"></tmc-statistics>
-      </view> -->
       <!-- 点赞、观看数组件 -->
       <view class="statistics-box" style="margin-top: 16rpx">
         <tmc-statistics type="useful" isShowIcon="{{false}}" id="statistics" queryParams="{{queryStatisticsParamsOfUseful}}"></tmc-statistics>
@@ -29,6 +26,9 @@
           <tmc-statistics type="view" isShowIcon="{{false}}" queryParams="{{queryStatisticsParamsOfView}}"></tmc-statistics>
         </view>
       </view>
+    </view>
+    <view wx:else slot="content-body">
+      <tmc-noData></tmc-noData>
     </view>
   </module-title>
 </view>

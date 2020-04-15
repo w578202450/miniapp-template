@@ -145,7 +145,7 @@ Component({
           this.setData({
             disable: true
           })
-          this.triggerEvent('success')
+          // this.triggerEvent('success')
         } else {
           wx.showToast({
             title: res.message,

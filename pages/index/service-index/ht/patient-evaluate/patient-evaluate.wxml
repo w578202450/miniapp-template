@@ -3,15 +3,15 @@
   <!-- 引入wxs脚本 -->
   <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
   <module-title title="患者评价：" isHaveRemark="{{true}}" remarkInfo="{{(evaluateData.length > 0 && evaluateData[0].keyID) ? '' : ''}}" isHaveMoreBtn="{{evaluateData.length > 0 && evaluateData[0].keyID}}" moreBtnName="查看更多患者评价" httpParams="{{httpParams}}" serve="{{evaluateData.length > 0 ? '100%' : ''}}" effect="{{evaluateData.length > 0 ? '100%' : ''}}">
-    <view slot="content-body" class="evaluateContentBox">
+    <view wx:if="{{evaluateData.length > 0 && evaluateData[0].keyID}}" slot="content-body" class="evaluateContentBox">
     <!-- 擅长列表 -->
-      <view wx:if="{{evaluateData.length > 0}}" class="levelBox">
+      <view  class="levelBox">
         <view class="illnessList">
           <view class="illnessView" wx:for="{{illnessSumList}}" wx:key="index" data-id="{{item.keyID}}">{{item.illnessName}}</view>
         </view>
       </view>
       <!-- 单条评价区 -->
-      <view wx:if="{{evaluateData.length > 0 && evaluateData[0].keyID}}">
+      <view>
         <!-- 灰色间隔区 -->
         <view class="evaluateBox" wx:for="{{evaluateData}}" wx:key="index" wx:for-index='index' wx:for-item='item' data-id="{{item.keyID}}">
           <view class="flexRowBetweenCenter">
@@ -36,7 +36,9 @@
           <!-- 患者信息条 -->
         </view>
       </view>
-      <view wx:else class="noDataBox">暂无评价</view>
+    </view>
+    <view wx:else slot="content-body">
+      <tmc-noData></tmc-noData>
     </view>
   </module-title>
 </view>
