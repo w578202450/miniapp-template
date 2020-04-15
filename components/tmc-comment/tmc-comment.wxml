@@ -9,7 +9,7 @@
       <view>
         <text class="commtent-content">{{comment.commentContent}}</text>
         <view wx:if="{{comment.isReply === 1}}" style="margin-top: 16rpx">
-          <text class="reply" style="color:rgba(67,139,239,1)">{{comment.replyUserName}}回复:  </text>
+          <text class="reply" style="color:rgba(67,139,239,1)">回复:  </text>
           <text class="reply">{{comment.replyContent}}</text>
         </view>
       </view>

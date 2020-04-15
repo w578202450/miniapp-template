@@ -38,7 +38,7 @@ page {
   background: rgba(67, 139, 239, 0.1);
   border-radius: 10rpx;
   width: 48%;
-  height: 56rpx;
+  height: 60rpx;
 }
 
 .button-box image {
