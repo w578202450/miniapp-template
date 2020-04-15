@@ -81,10 +81,10 @@ Page({
     // }
     // 测试
     // 包正一
-    // options = {
-    //   orgID: "19121923373037086560511253",
-    //   assistantStaffID: "20011320532175746910514253"
-    // }
+    options = {
+      orgID: "19121923373037086560511253",
+      assistantStaffID: "20011320532175746910514253"
+    }
     // 徐
     // options = {
     //   assistantStaffID: "20011514000045118050514253",
@@ -95,12 +95,12 @@ Page({
     //   orgID: "19121923373037086560511253"
     // }
     // 开发
-    options = {
-      assistantStaffID: "20011109080410712390514001",
-      orgID: "19101017081245502880511001"
-    }
+    // options = {
+    //   assistantStaffID: "20011109080410712390514001",
+    //   orgID: "19101017081245502880511001"
+    // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
-    // wx.hideShareMenu(); // 赢藏本页面右上角的分享功能
+    // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
@@ -255,12 +255,12 @@ Page({
     that.setData({
       isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
     });
+    that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
     that.getTeamIntroduce(); // 获取医师团队介绍
     that.getBrowseCount(); // 获取用户浏览数
     that.getShareCount(); // 获取用户分享数
     that.getSignedDoctor(); // 通过医助查询到的签约医生
-    that.getHospitalInfo(); //查询医院详情信息
     setTimeout(() => {
       wx.hideLoading();
       // wx.showShareMenu(); // 显示本页面右上角的分享功能
@@ -276,12 +276,12 @@ Page({
     that.setData({
       isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
     });
+    that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
     // that.getTeamIntroduce(); // 获取医师团队介绍
     // that.getBrowseCount(); // 获取用户浏览数
     // that.getShareCount(); // 获取用户分享数
     that.getSignedDoctor(); // 通过医助查询到的签约医生
-    that.getHospitalInfo(); //查询医院详情信息
     setTimeout(() => {
       wx.hideLoading();
       // wx.showShareMenu(); // 显示本页面右上角的分享功能
