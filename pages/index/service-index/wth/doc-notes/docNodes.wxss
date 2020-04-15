@@ -51,7 +51,6 @@
   flex-direction: row;
 }
 
-
 .cutting-line {
   height: 1px;
   background: rgba(0, 0, 0, 0.1);
@@ -65,9 +64,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
-.statistics-box{
+.statistics-box {
   display: flex;
   flex-direction: row;
 }

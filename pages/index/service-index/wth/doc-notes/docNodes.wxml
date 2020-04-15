@@ -16,9 +16,7 @@
           <text class="date">{{comTools.dateFormat(paersonInfo.publishDate, 'yyyy-MM-dd')}}</text>
         </view>
       </view>
-      <view>
-        <text class="content">{{comTools.subStrTxt(paersonInfo.contentSummary,50)}}</text>
-      </view>
+      <view class="details">{{paersonInfo.contentSummary}}</view>
       <!-- 点赞、观看数组件 -->
       <view class="statistics-box" style="margin-top: 16rpx">
         <tmc-statistics type="useful" isShowIcon="{{false}}" id="statistics" queryParams="{{queryStatisticsParamsOfUseful}}"></tmc-statistics>

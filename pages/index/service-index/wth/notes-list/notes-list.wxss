@@ -67,7 +67,6 @@ page{
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.85);
-  line-height: 44rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
