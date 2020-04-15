@@ -284,6 +284,7 @@ Page({
     that.getHospitalInfo(); //查询医院详情信息
     setTimeout(() => {
       wx.hideLoading();
+      wx.showShareMenu(); // 显示本页面右上角的分享功能
     }, 2000)
   },
 
