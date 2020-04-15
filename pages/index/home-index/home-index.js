@@ -100,7 +100,7 @@ Page({
       orgID: "19101017081245502880511001"
     }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
-    wx.hideShareMenu(); // 赢藏本页面右上角的分享功能
+    // wx.hideShareMenu(); // 赢藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
@@ -263,7 +263,7 @@ Page({
     that.getHospitalInfo(); //查询医院详情信息
     setTimeout(() => {
       wx.hideLoading();
-      wx.showShareMenu(); // 显示本页面右上角的分享功能
+      // wx.showShareMenu(); // 显示本页面右上角的分享功能
     }, 2000)
   },
 
@@ -284,7 +284,7 @@ Page({
     that.getHospitalInfo(); //查询医院详情信息
     setTimeout(() => {
       wx.hideLoading();
-      wx.showShareMenu(); // 显示本页面右上角的分享功能
+      // wx.showShareMenu(); // 显示本页面右上角的分享功能
     }, 2000)
   },
 
