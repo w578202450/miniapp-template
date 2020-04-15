@@ -6,6 +6,8 @@ Component({
   properties: {
     /**
      * 分页控件信息
+     * pageIndex 页数
+     * pageSize 每页显示数量
      */
     pageInfo: {
       type: Object,
@@ -15,7 +17,8 @@ Component({
       }
     },
     /**
-     * 分页数据 
+     * 分页数据  
+     * 当前页加载的数据列表
      */
     pageDatas: {
       type: Array,
