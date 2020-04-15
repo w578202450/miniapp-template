@@ -36,14 +36,6 @@ Component({
     medicineIcon: "/images/home/home_dazhong_medicine.png",
     bottomIcon: "/images/home/home_dazhong_bottom_icon.png",
     rectangleBackgroundImg: "/images/home/home_rectangle_background.png",
-    // news: [
-    //   '李**     已获得免费持续治疗援助1支       刚刚',
-    //   '苏**     已获得免费持续治疗援助2支       1分钟前',
-    //   '张**     已获得免费援助药品一个月用量    3分钟前',
-    //   '王**     已获得免费持续治疗援助2支       6分钟前',
-    //   '程**     已获得免费持续治疗援助3支       8分钟前',
-    //   '吴**     已获得免费援助药品二个月用量    10分钟前',
-    // ],
     patientList: [
       {
         keyID: "1",

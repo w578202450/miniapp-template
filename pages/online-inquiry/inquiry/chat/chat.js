@@ -297,6 +297,7 @@ Page({
             imResponseArr.push(item);
           }
         });
+        // console.log("获取历史消息记录:" + JSON.stringify(imResponseArr));
         that.setData({
           currentMessageList: [...imResponseArr, ...that.data.currentMessageList],
           nextReqMessageID: imResponse.data.nextReqMessageID,
