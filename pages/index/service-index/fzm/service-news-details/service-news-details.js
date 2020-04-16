@@ -24,7 +24,7 @@ Page({
     if (this.data.hasView) {
       const pages = getCurrentPages();
       const perpage = pages[pages.length - 2]
-      perpage.refreshArticleData('view');
+      perpage.refreshStatistics('article','view');
       
     }
 
@@ -189,6 +189,6 @@ Page({
     // 刷新上一个界面
     const pages = getCurrentPages();
     const perpage = pages[pages.length - 2]
-    perpage.refreshArticleData();
+    perpage.refreshStatistics('article', 'useful');
   }
 })

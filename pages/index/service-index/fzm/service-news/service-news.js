@@ -345,7 +345,6 @@ Component({
      * 当前item 更新点赞有用数
      */
     refreshCurrentArticleUsefulNum: function() {
-
       var index = this.data.currentIndex;
       let navitem = this.data.articleTitles[index];
       let currentClassifyID = navitem.keyID;
