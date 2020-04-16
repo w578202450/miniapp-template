@@ -557,15 +557,18 @@ Page({
       }
     });
   },
-  // 刷新文章模块列表
-  refreshArticleData: function (type) {
-    console.log('点击成功------refreshCurrentArticleData');
-    let component = this.selectComponent("#article");
-    if (type === 'view') {
-      component.refreshArticleViewNum();
-    } else {
-      component.refreshCurrentArticleUsefulNum();
+  /**
+   * 统计计数刷新
+   */
+  refreshStatistics(modelName, objectName) {
+    // 文章模块
+    if (modelName === "article") {
+      let component = this.selectComponent("#article");
+      if (objectName === "view") {
+        component.refreshArticleViewNum();
+      } else if (objectName === "useful"){
+        component.refreshCurrentArticleUsefulNum();
+      }
     }
-
   }
 })

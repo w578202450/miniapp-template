@@ -10,6 +10,8 @@ Page({
     personInfo: {},
     inquiryIcon: "/images/inquiry/inquiry_article_add.png",
     queryStatusParamsOfUseful: {}, // 查询觉得有用按钮状态参数
+    queryStatisticsParamsOfUseful: {}, // 查询觉得有用统计计数
+    queryStatisticsParamsOfView: {}, // 查询观看统计计数
     increaseParamsOfView: {}, // 观看统计计数
     increaseParamsOfUserful: {}, // 觉得有用统计计数
     hasView:false //是否记录观看
@@ -67,9 +69,29 @@ Page({
       orgID: "",
       deptID: ""
     };
+    this.data.queryStatisticsParamsOfUseful = {
+      systemCode: "tmc",
+      bizCode: "inquiryCase",
+      objectID: this.data.personInfo.keyID,
+      statisticsCode: "useful",
+      orgID: "",
+      deptID: "",
+      userID: ''
+    };
+    this.data.queryStatisticsParamsOfView = {
+      systemCode: "tmc",
+      bizCode: "inquiryCase",
+      objectID: this.data.personInfo.keyID,
+      statisticsCode: "view",
+      orgID: "",
+      deptID: "",
+      userID: ''
+    };
     this.setData({
       queryStatusParamsOfUseful: this.data.queryStatusParamsOfUseful,
       increaseParamsOfUserful: this.data.increaseParamsOfUserful,
+      queryStatisticsParamsOfUseful: this.data.queryStatisticsParamsOfUseful,
+      queryStatisticsParamsOfView: this.data.queryStatisticsParamsOfView,
       conmmentQueryParams: {
         systemCode: "tmc",
         bizCode: "inquiryCase",
@@ -138,6 +160,9 @@ Page({
    * 2.刷新上一个界面的数据
    */
   likeSucess() {
+    // 刷新当前界面觉得有用状态和点赞数据
+    let statistics = this.selectComponent("#statistics");
+    statistics.queryStatistics(this.data.queryStatisticsParamsOfUseful);
     // 刷新上一个界面
     const pages = getCurrentPages();
     const perpage = pages[pages.length - 2]
