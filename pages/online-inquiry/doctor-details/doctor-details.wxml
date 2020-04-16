@@ -1,6 +1,6 @@
 <view class="page">
-<!-- 登录弹框 -->
-<login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
+  <!-- 登录弹框 -->
+  <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   <view>
     <!-- wxs引入 -->
     <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
@@ -24,8 +24,9 @@
   <!-- 专业擅长 -->
   <view class="middle">
     <view class="middle-header">
-      <view class="middle-lineView"></view>
-      <text class="middle-title">专业擅长</text>
+      <!-- <view class="middle-lineView"></view>
+      <text class="middle-title">专业擅长</text> -->
+      <module-title title="专业擅长" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     </view>
     <view class="middle-cotent-box">
       <text class="middle-cotent">{{doctorInfo.goodAt}}</text>
@@ -35,8 +36,9 @@
   <!-- 医生简介 -->
   <view class="middle">
     <view class="middle-header">
-      <view class="middle-lineView"></view>
-      <text class="middle-title">医生简介</text>
+      <!-- <view class="middle-lineView"></view>
+      <text class="middle-title">医生简介</text> -->
+      <module-title title="医生简介" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     </view>
     <view class="middle-cotent-box">
       <text class="middle-cotent">{{doctorInfo.briefDesc}}</text>
