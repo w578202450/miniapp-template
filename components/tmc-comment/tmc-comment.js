@@ -70,7 +70,8 @@ Component({
     pageInfo:{
       pageSize: 10,
       pageIndex: 1
-    }
+    },
+    defaultPhotoUrl: "/images/chat/personBacImg.png"
   },
 
   /**

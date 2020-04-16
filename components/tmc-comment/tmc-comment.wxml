@@ -3,7 +3,7 @@
   <text class="comment-title">留言评论</text>
   <view style="height: 20rpx"></view>
   <view class="comment-item" wx:for="{{commentList}}" wx:key="id" wx:for-item="comment" wx:for-index="comment_index">
-    <image class="avatar" src="{{comment.commentUserFace}}"></image>
+    <image class="avatar" src="{{comment.commentUserFace || defaultPhotoUrl}}"></image>
     <view class="comment-content-box">
       <text class="commtent-name">{{comment.commentUserName}}</text>
       <view>
