@@ -4,5 +4,6 @@
     "tmc-like": "/components/tmc-like/tmc-like",
     "login-dialog": "/components/loginDialog/loginDialog",
     "tmc-statistics": "/components/tmc-statistics/tmc-statistics"
-  }
+  },
+  "navigationBarTitleText": "康复案例详情"
 }
