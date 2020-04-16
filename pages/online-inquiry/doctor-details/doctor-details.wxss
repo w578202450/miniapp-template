@@ -4,8 +4,7 @@
 }
 
 .middle {
-  margin-top: 50rpx;
-  margin-left: 32rpx;
+  margin-top: 20rpx;
   margin-right: 32rpx;
   display: flex;
   justify-content: flex-start;
@@ -39,7 +38,8 @@
 }
 
 .middle-cotent-box {
-  margin-top: 20rpx;
+  margin-top: 10rpx;
+  margin-left: 25rpx;
   margin-right: 32rpx;
 }
 
