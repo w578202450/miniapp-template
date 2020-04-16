@@ -431,7 +431,11 @@ Page({
           hospitalDetail: res.data
         });
         if (res.data.orgName) {
-          app.globalData.orgName = res.data.orgName; // 医院名称
+          app.globalData.orgName = res.data.orgName; // 机构名称
+          // 动态设置小程序的navigationBarTitleText
+          wx.setNavigationBarTitle({
+            title: app.globalData.orgName
+          })
         }
       }
     });
