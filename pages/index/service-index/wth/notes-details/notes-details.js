@@ -36,6 +36,7 @@ Page({
     this.setData({
       personInfo: JSON.parse(options.personData)
     })
+    console.log('personInfo----', JSON.parse(options.personData))
     WxParse.wxParse('inquiryCase', 'html', decodeURIComponent(this.data.personInfo.content), this, 20);
     this.initInfo();
   },

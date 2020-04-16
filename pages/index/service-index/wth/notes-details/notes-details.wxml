@@ -21,7 +21,7 @@
   </view>
 </view>
 <!-- 图文 html展示-->
-<view class="html-box wxParse">
+<view wx:if="{{personInfo.content}}" class="html-box wxParse">
   <template is="wxParse" data="{{wxParseData:inquiryCase.nodes}}" />
 </view>
 <!-- 觉得有用 立即问诊-->
