@@ -24,8 +24,6 @@
   <!-- 专业擅长 -->
   <view class="middle">
     <view class="middle-header">
-      <!-- <view class="middle-lineView"></view>
-      <text class="middle-title">专业擅长</text> -->
       <module-title title="专业擅长" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     </view>
     <view class="middle-cotent-box">
@@ -36,8 +34,6 @@
   <!-- 医生简介 -->
   <view class="middle">
     <view class="middle-header">
-      <!-- <view class="middle-lineView"></view>
-      <text class="middle-title">医生简介</text> -->
       <module-title title="医生简介" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
     </view>
     <view class="middle-cotent-box">
