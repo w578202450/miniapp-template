@@ -296,7 +296,7 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       // wx.showShareMenu(); // 显示本页面右上角的分享功能
-    }, 2000)
+    }, 1500)
   },
 
   /**初始化默认加载数据 */
@@ -317,7 +317,7 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       // wx.showShareMenu(); // 显示本页面右上角的分享功能
-    }, 2000)
+    }, 1500)
   },
 
   /**初始桃子互联网医院减肥中心默认加载数据 */
