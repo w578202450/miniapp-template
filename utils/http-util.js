@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 const version = 0; //0开发、1测试 2发布  
+=======
+const version = 2; //0开发、1测试 2发布  
+>>>>>>> ec81b514822ec480f5a4b07d31d05d6ae432a92e
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -110,6 +114,17 @@ module.exports = {
       return ['20040910375869839140511253']
     } else if (version == 2) {
       return ['20040909515893667880511240']
+    }
+  },
+
+  /**桃子互联网医院减肥中心机构ID */
+  loseweightOrgIDFun: function() {
+    if (version == 0) {
+      return ['20041517422841582280511240']
+    } else if (version == 1) {
+      return ['20041517422841582280511240']
+    } else if (version == 2) {
+      return ['20041517422841582280511240']
     }
   },
 

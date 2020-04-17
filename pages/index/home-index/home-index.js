@@ -16,9 +16,9 @@ Page({
      * 默认医院  19101017081245502880511001
      */
     isAboveHouShiID: -1, // 是否显示侯氏信息，默认-1显示
-    isShowDazhongID: -1, // 是否显示大冢医药，默认-1显示
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
     dazhongOrgID: [], // 大冢医药机构ID
+    loseweightOrgID: [], // 桃子互联网医院减肥中心机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
@@ -47,9 +47,7 @@ Page({
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     isHaveWatched: false, // 是否监听到变化了一次
-    isShowDazhong: false, // 是否显示大冢制药
-    // dazhongOrgID: 20040909515893667880511240, // 大冢制药orgID(生产环境)
-    // dazhongOrgID: 20040910375869839140511253, // 大冢制药orgID(测试环境)
+    showOrgID: 0, // 区分展示哪家机构(0:成都华府中医远程诊疗中心;1:侯丽萍风湿骨病中医医院;2:大冢医药;3:桃子互联网医院减肥中心)
   },
 
   /**
@@ -64,10 +62,25 @@ Page({
   onLoad: function(options) {
     let that = this;
     // 生产
-    // 侯丽萍
-    // options ={
+    // 华府医院(生产环境)
+    // options = {
+    //   orgID: "19101017081245502880511001", 
+    //   assistantStaffID: "20011514000045118050514253"
+    // }
+    // 侯丽萍医院(生产环境)
+    // options = {
     //   orgID: "20012118570385423810511240",
     //   assistantStaffID: "20020913491781433700514240"
+    // }
+    // 桃子互联网医院减肥中心(生产环境)
+    // options = {
+    //   orgID: "20041517422841582280511240",
+    //   assistantStaffID: "20041522090292997840514240"
+    // }
+    // 大冢医药(生产环境)
+    // options = {
+    //   orgID: "20040909515893667880511240",
+    //   assistantStaffID: "20041020111817571130514240"
     // }
     // 侯=齐晓红
     // options ={
@@ -103,6 +116,7 @@ Page({
     // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
+    that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options.q) { // 通过扫码进入时：q的值为url带参
       app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -232,16 +246,34 @@ Page({
       shareOrgID: wx.getStorageSync("shareOrgID"),
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
-    console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
-    console.log("shareOrgID=======" + that.data.shareOrgID);
-    // 判断是否是大冢医药
-    if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
-      // 是否是大冢医药 true:是
+    // console.log("houShiOrgID=======" + that.data.houShiOrgID);
+    // console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
+    // console.log("shareOrgID=======" + that.data.shareOrgID);
+    // console.log("loseweightOrgID=======" + that.data.loseweightOrgID);
+
+    // 判断是否是侯丽萍中医院远程门诊
+    if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是侯丽萍医院
       that.setData({
-        isShowDazhong: true
+        showOrgID: 1
+      })
+      that.initFunctionFun();
+    } else if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是大冢医药
+      that.setData({
+        showOrgID: 2
       })
       that.initDefaultFun();
-    } else {
+      // 判断是否是桃子互联网医院减肥中心
+    } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
+      that.setData({
+        showOrgID: 3
+      })
+      that.initLoseweightDefaultFun();
+    } else { // 默认显示成都华府中医远程诊疗中心
+      that.setData({
+        showOrgID: 0
+      })
       that.initFunctionFun();
     }
   },
@@ -278,6 +310,27 @@ Page({
     });
     that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
+    // that.getTeamIntroduce(); // 获取医师团队介绍
+    // that.getBrowseCount(); // 获取用户浏览数
+    // that.getShareCount(); // 获取用户分享数
+    that.getSignedDoctor(); // 通过医助查询到的签约医生
+    setTimeout(() => {
+      wx.hideLoading();
+      // wx.showShareMenu(); // 显示本页面右上角的分享功能
+    }, 2000)
+  },
+
+  /**初始桃子互联网医院减肥中心默认加载数据 */
+  initLoseweightDefaultFun: function() {
+    let that = this;
+    wx.showLoading({
+      title: '拼命加载中...',
+    });
+    that.setData({
+      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
+    });
+    that.getHospitalInfo(); //查询医院详情信息
+    // that.getBanner(); // 获取首页banner
     // that.getTeamIntroduce(); // 获取医师团队介绍
     // that.getBrowseCount(); // 获取用户浏览数
     // that.getShareCount(); // 获取用户分享数
@@ -425,7 +478,7 @@ Page({
       orgID: that.data.shareOrgID
     }
     HTTP.getHospitalInfo(params).then(res => {
-      // console.log("===获取医院详情简介信息===" + JSON.stringify(res));
+      console.log("===获取医院详情简介信息===" + "orgID:" + that.data.shareOrgID + " res:" + JSON.stringify(res));
       if (res.code == 0 && res.data) {
         that.setData({
           hospitalDetail: res.data
@@ -444,15 +497,32 @@ Page({
   /** 获取默认进小程序显示信息  */
   getDefaulShowInfo() {
     let that = this;
+    console.log("houShiOrgID=======" + that.data.houShiOrgID);
     console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
+    console.log("loseweightOrgID=======" + that.data.loseweightOrgID);
     console.log("shareOrgID=======" + that.data.shareOrgID);
-    // 判断是否是大冢医药
-    if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
-      // 是否是大冢医药 true:是
+    // 判断是否是侯丽萍中医院远程门诊
+    if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是侯丽萍医院
       that.setData({
-        isShowDazhong: true
+        showOrgID: 1
+      })
+      // 判断是否是大冢医药
+    } else if (that.data.dazhongOrgID.indexOf(that.data.shareOrgID) > -1) {
+      that.setData({
+        showOrgID: 2
+      })
+      // 判断是否是桃子互联网医院减肥中心
+    } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
+      that.setData({
+        showOrgID: 3
+      })
+    } else {
+      that.setData({
+        showOrgID: 0
       })
     }
+    console.log("===showOrgID===" + that.data.showOrgID);
     let params = {
       orgID: that.data.shareOrgID,
       assistantStaffID: that.data.shareAssistantStaffID,

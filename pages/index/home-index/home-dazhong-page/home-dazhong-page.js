@@ -148,7 +148,7 @@ Component({
       that.setData({
         helpfulNum: randomNum
       });
-    },
+    }
   },
 
 })
