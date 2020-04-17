@@ -16,7 +16,7 @@
     </view>
   </view>
   <!-- 分页控件 -->
-  <tmc-pageControls pageInfo="{{pageInfo}}" pageDatas="{{pageDatas}}" bind:loadMoreData="loadMoreData"></tmc-pageControls>
+  <tmc-pageControls tipInfo="{{tipInfo}}" pageInfo="{{pageInfo}}" pageDatas="{{pageDatas}}" bind:loadMoreData="loadMoreData"></tmc-pageControls>
 </view>
 <!-- 评论输入框 -->
 <view wx:if="{{!isInputting}}" class="bottom-view" bindtap="inputoption">

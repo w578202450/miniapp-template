@@ -26,6 +26,14 @@ Component({
       observer: function(value) {
         this.handlePageDatas(value)
       }
+    },
+    tipInfo:{
+      type:Object,
+      value: {
+        noData: "没有数据", // 数据为空的情况
+        moreData: "点击加载更多", // 可以点击 加载更多 进行分页请求
+        noMoreData: "已经到底了" // 没有更多数据 当前页数据不够一页
+      }
     }
   },
 
@@ -33,11 +41,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tipInfo: {
-      noData: "没有数据", // 数据为空的情况
-      moreData: "点击加载更多", // 可以点击 加载更多 进行分页请求
-      noMoreData: "已经到底了" // 没有更多数据 当前页数据不够一页
-    },
     tipText: "已经到底了", // 初始值
     currentState: 0 // 0 noData 1: moreData 2:noMoreData
   },
