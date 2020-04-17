@@ -64,8 +64,8 @@ Page({
     // 生产
     // 华府医院(生产环境)
     // options = {
-    //   orgID: "19101017081245502880511001", 
-    //   assistantStaffID: "20011514000045118050514253"
+    //   orgID: "19101017081245502880511001",
+    //   assistantStaffID: "20012214121981875310514240"
     // }
     // 侯丽萍医院(生产环境)
     // options = {
@@ -422,7 +422,7 @@ Page({
         orgID: that.data.shareOrgID
       })
       .then(res => {
-        // console.log("!!!!!通过医助查询到的签约医生!!!!!" + JSON.stringify(res));
+        console.log("!!!!!通过医助查询到的签约医生!!!!!" + "医助ID-assistantStaffID:" + that.data.shareAssistantStaffID + "," + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             signedDoctor: res.data
