@@ -1,116 +1,122 @@
 <view class="page">
-  <!-- isShowDazhong 是否显示大冢制药页面 -->
-  <view wx:if="{{ isShowDazhong }}">
-  <home-dazhong-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
-  </home-dazhong-page>
+  <!-- isShowDazhong 是否显示大冢医药大爱清尘佰肺待新页面 -->
+  <view wx:if="{{ showOrgID == 2}}">
+    <home-dazhong-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-dazhong-page>
   </view>
-  <view wx:else>
-  <!-- 引入wxs脚本 -->
-  <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
-  <view class="banner-header" style="width: 100%;height: 350rpx;">
-    <image mode="widthFix" style="width: 92%;background-size: contain;" src="{{homeBannerDefaultUrl}}"></image>
+  <!-- isShowLoseweight 是否显示桃子互联网医院减肥中心页面 -->
+  <view wx:if="{{ showOrgID == 3}}">
+    <home-loseweight-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-loseweight-page>
   </view>
-
-  <view class="banner-middle">
-    <text class="banner-middle-titleLabel">医疗机构许可证：</text>
-    <view class="banner-middle-detailLabel">{{certifyNo}}</view>
-  </view>
-
-  <view class="banner-bottom">
-    <view class="bottom-left">
-      <text class="bottom-numberLabel">{{browseCount}}</text>
-      <view class="bottom-titleLabel"> 人次已浏览，</view>
+  <!-- isShowHou 是否显示侯丽萍风湿骨病中医医院页面 -->
+  <view wx:if="{{ showOrgID == 1 || showOrgID == 0}}">
+    <!-- 引入wxs脚本 -->
+    <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
+    <view class="banner-header" style="width: 100%;height: 350rpx;">
+      <image mode="widthFix" style="width: 92%;background-size: contain;" src="{{homeBannerDefaultUrl}}"></image>
     </view>
 
-    <view class="bottom-right">
-      <text class="bottom-numberLabel">{{shareCount}}</text>
-      <view class="bottom-titleLabel"> 人次已转发给有需要的人</view>
+    <view class="banner-middle">
+      <text class="banner-middle-titleLabel">医疗机构许可证：</text>
+      <view class="banner-middle-detailLabel">{{certifyNo}}</view>
     </view>
-  </view>
-  <!-- 院长简介 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
-    <view class="specialist-box">
-      <view class="specialist-header-box">
-        <image mode="widthFix" style="width:180rpx;height:180rpx;margin-top:2rpx;" src="{{deanInfo.deanPhotoUrl}}"></image>
-        <view class="specialist-header-middle-box">
-          <view>
-            <text class="title-name-houshi" style="font-size:32rpx;margin-right:10rpx;">{{deanInfo.deanName}}</text>
-            <text class="title-name-houshi" style="font-size:28rpx;color:#555658;">{{deanInfo.titleName}}</text>
+
+    <view class="banner-bottom">
+      <view class="bottom-left">
+        <text class="bottom-numberLabel">{{browseCount}}</text>
+        <view class="bottom-titleLabel"> 人次已浏览，</view>
+      </view>
+
+      <view class="bottom-right">
+        <text class="bottom-numberLabel">{{shareCount}}</text>
+        <view class="bottom-titleLabel"> 人次已转发给有需要的人</view>
+      </view>
+    </view>
+    <!-- 院长简介 -->
+    <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
+      <view class="specialist-box">
+        <view class="specialist-header-box">
+          <image mode="widthFix" style="width:180rpx;height:180rpx;margin-top:2rpx;" src="{{deanInfo.deanPhotoUrl}}"></image>
+          <view class="specialist-header-middle-box">
+            <view>
+              <text class="title-name-houshi" style="font-size:32rpx;margin-right:10rpx;">{{deanInfo.deanName}}</text>
+              <text class="title-name-houshi" style="font-size:28rpx;color:#555658;">{{deanInfo.titleName}}</text>
+            </view>
+            <text class="title-other">{{deanInfo.deanDuty}}</text>
+            <text class="title-other" style="margin-top:10rpx;">{{deanInfo.deanFamous}}</text>
+            <service-tabs list="{{deanInfo.goodAts}}" tabStyle="margin-top:10rpx;margin-bottom:0;background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
           </view>
-          <text class="title-other">{{deanInfo.deanDuty}}</text>
-          <text class="title-other" style="margin-top:10rpx;">{{deanInfo.deanFamous}}</text>
-          <service-tabs list="{{deanInfo.goodAts}}" tabStyle="margin-top:10rpx;margin-bottom:0;background: rgba(67, 139, 239, 0.15);color:rgba(46,127,241,1);border:0rpx"></service-tabs>
         </view>
-      </view>
-      <!-- 院长详情简介 -->
-      <view class="dean-introduce-box" style="margin-top: 20rpx;">
-        <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : deanInfo.deanDetailContent}}</view>
-        <image mode="widthFix" style="width:76rpx;height:30rpx;margin-top:2rpx;margin-right:14rpx;position: absolute;right:0;" src="../../../images/home/home_detail.png" bindtap="toDeanDetail"></image>
-      </view>
-    </view>
-  </view>
-  <!-- 灰色间隔区 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
-  <!-- 医院介绍 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
-    <view class="module-item-box">
-      <view class="specialist-header-box">
-        <image style="width:180rpx;height:130rpx;mode:widthFix;flex-shrink: 0" src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
-        <view class="specialist-header-middle-box">
-          <text class="title-name-houshi" style="font-size:32rpx">{{hospitalInfo.hospitalName}}</text>
-          <!-- 医院详情简介 -->
-          <view class="dean-introduce-box">
-            <view class="detailIntroduction">{{hospitalInfo.hospitalDetailContent}}</view>
-            <image mode="widthFix" style="width:76rpx;height:30rpx;margin-top:2rpx;margin-right:14rpx;position: absolute;right: 0" src="../../../images/home/home_detail.png" bindtap="toHospitalDetail"></image>
-          </view>
+        <!-- 院长详情简介 -->
+        <view class="dean-introduce-box" style="margin-top: 20rpx;">
+          <view class="detailIntroduction">{{isShowAllContent ? deanInfo.deanDetailContent : deanInfo.deanDetailContent}}</view>
+          <image mode="widthFix" style="width:76rpx;height:30rpx;margin-top:2rpx;margin-right:14rpx;position: absolute;right:0;" src="../../../images/home/home_detail.png" bindtap="toDeanDetail"></image>
         </view>
       </view>
     </view>
-  </view>
-  <!-- 灰色间隔区 -->
-  <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
-  <!-- 医师团队 -->
-  <view class="physician-team">
-    <module-title title="医师团队展示" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
-    <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}" doctorTeamList="{{newArrayDoctorList}}"></home-module-doctorteam>
-    <!-- 底部模块(医师团队，电话和地址，分享 ) -->
-    <view class="home-bottom">
-      <view class="address-tel">
-        <!-- 客服电话 -->
-        <view class="address-tel-header-box">
-          <image style="margin-top:20rpx" src="../../../images/home/home_phone.png"></image>
-          <view class="address-tel-left">
-            <text class="title-other" style="margin-top:20rpx">客服电话：</text>
-          </view>
-          <view class="address-tel-right">
-            <text class="title-other" style="margin-top:20rpx">{{hospitalDetail.servicePhone}}</text>
+    <!-- 灰色间隔区 -->
+    <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
+    <!-- 医院介绍 -->
+    <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
+      <view class="module-item-box">
+        <view class="specialist-header-box">
+          <image style="width:180rpx;height:130rpx;mode:widthFix;flex-shrink: 0" src="{{hospitalInfo.hospitalPhotoUrl}}"></image>
+          <view class="specialist-header-middle-box">
+            <text class="title-name-houshi" style="font-size:32rpx">{{hospitalInfo.hospitalName}}</text>
+            <!-- 医院详情简介 -->
+            <view class="dean-introduce-box">
+              <view class="detailIntroduction">{{hospitalInfo.hospitalDetailContent}}</view>
+              <image mode="widthFix" style="width:76rpx;height:30rpx;margin-top:2rpx;margin-right:14rpx;position: absolute;right: 0" src="../../../images/home/home_detail.png" bindtap="toHospitalDetail"></image>
+            </view>
           </view>
         </view>
-        <!-- 地址 -->
-        <view class="address-tel-header-box">
-          <image style="margin-top:20rpx" src="../../../images/home/home_address.png"></image>
-          <view class="address-tel-left">
-            <text class="title-other" style="margin-top:20rpx">地址：</text>
-          </view>
-          <view class="address-tel-right">
-            <text style="margin-top:20rpx" class="title-other">{{hospitalDetail.province}}{{hospitalDetail.city}}{{hospitalDetail.area}}{{hospitalDetail.address}}</text>
-          </view>
-        </view>
-        <!-- 分享 -->
-        <view class="share-box">
-          <button class="share-box-button" open-type="share" bindtap="shareMore">分享给更多需要的人</button>
-        </view>
-        <!-- 灰色间隔区 -->
-        <!-- <view class="share-intervalView"></view> -->
       </view>
     </view>
+    <!-- 灰色间隔区 -->
+    <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
+    <!-- 医师团队 -->
+    <view class="physician-team">
+      <module-title title="医师团队展示" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>
+      <home-module-doctorteam doctorTeamIntroduce="{{doctorTeamIntroduce}}" doctorTeamList="{{newArrayDoctorList}}"></home-module-doctorteam>
+      <!-- 底部模块(医师团队，电话和地址，分享 ) -->
+      <view class="home-bottom">
+        <view class="address-tel">
+          <!-- 客服电话 -->
+          <view class="address-tel-header-box">
+            <image style="margin-top:20rpx" src="../../../images/home/home_phone.png"></image>
+            <view class="address-tel-left">
+              <text class="title-other" style="margin-top:20rpx">客服电话：</text>
+            </view>
+            <view class="address-tel-right">
+              <text class="title-other" style="margin-top:20rpx">{{hospitalDetail.servicePhone}}</text>
+            </view>
+          </view>
+          <!-- 地址 -->
+          <view class="address-tel-header-box">
+            <image style="margin-top:20rpx" src="../../../images/home/home_address.png"></image>
+            <view class="address-tel-left">
+              <text class="title-other" style="margin-top:20rpx">地址：</text>
+            </view>
+            <view class="address-tel-right">
+              <text style="margin-top:20rpx" class="title-other">{{hospitalDetail.province}}{{hospitalDetail.city}}{{hospitalDetail.area}}{{hospitalDetail.address}}</text>
+            </view>
+          </view>
+          <!-- 分享 -->
+          <view class="share-box">
+            <button class="share-box-button" open-type="share" bindtap="shareMore">分享给更多需要的人</button>
+          </view>
+          <!-- 灰色间隔区 -->
+          <!-- <view class="share-intervalView"></view> -->
+        </view>
+      </view>
 
-    <!-- 立即进入专家门诊 -->
-    <view class="enter-box" bindtap="toServiceIndexFun">
-      <text class="enter-name">立即进入专家门诊</text>
-      <!-- <view class="black-rectangle">
+      <!-- 立即进入专家门诊 -->
+      <view class="enter-box" bindtap="toServiceIndexFun">
+        <text class="enter-name">立即进入专家门诊</text>
+        <!-- <view class="black-rectangle">
       </view> -->
+      </view>
     </view>
   </view>
- </view>
 </view>

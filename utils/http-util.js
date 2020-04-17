@@ -113,6 +113,17 @@ module.exports = {
     }
   },
 
+  /**桃子互联网医院减肥中心机构ID */
+  loseweightOrgIDFun: function() {
+    if (version == 0) {
+      return ['20041517422841582280511240']
+    } else if (version == 1) {
+      return ['20041517422841582280511240']
+    } else if (version == 2) {
+      return ['20041517422841582280511240']
+    }
+  },
+
   /*
    *获取测试数据
    */
