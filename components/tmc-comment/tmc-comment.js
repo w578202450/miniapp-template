@@ -154,7 +154,7 @@ Component({
             pageInfo: res.data.pageInfo,
             pageDatas: res.data.datas,
             tipInfo: {
-              noData: "暂无评价", // 数据为空的情况
+              noData: "暂无评论", // 数据为空的情况
               moreData: "点击加载更多", // 可以点击 加载更多 进行分页请求
               noMoreData: "已经到底了" // 没有更多数据 当前页数据不够一页
             }
