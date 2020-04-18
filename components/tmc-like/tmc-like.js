@@ -145,7 +145,10 @@ Component({
           this.setData({
             disable: true
           })
-          this.triggerEvent('success')
+          setTimeout(() => {
+            this.triggerEvent('success');
+          }, 3000)
+          // this.triggerEvent('success')
         } else {
           wx.showToast({
             title: res.message,
