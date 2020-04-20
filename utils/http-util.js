@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const version = 0; //0开发、1测试 2发布  
-=======
 const version = 2; //0开发、1测试 2发布  
->>>>>>> ec81b514822ec480f5a4b07d31d05d6ae432a92e
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)

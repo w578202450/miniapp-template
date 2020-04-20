@@ -108,10 +108,10 @@ Page({
     //   orgID: "19121923373037086560511253"
     // }
     // 开发
-    options = {
-      assistantStaffID: "20011109080410712390514001",
-      orgID: "19101017081245502880511001"
-    }
+    // options = {
+    //   assistantStaffID: "20011109080410712390514001",
+    //   orgID: "19101017081245502880511001"
+    // }
     console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
