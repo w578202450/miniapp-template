@@ -124,6 +124,17 @@ module.exports = {
     }
   },
 
+  /**桃子互联网医院妇科诊疗中心机构ID */
+  gynecologyOrgIDFun: function () {
+    if (version == 0) {
+      return ['20040111371269634190511240']
+    } else if (version == 1) {
+      return ['20040111371269634190511240']
+    } else if (version == 2) {
+      return ['20040111371269634190511240']
+    }
+  },
+
   /*
    *获取测试数据
    */

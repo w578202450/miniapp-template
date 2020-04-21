@@ -4,7 +4,8 @@
     "service-tabs": "/pages/index/service-index/fzm/service-tabs/service-tabs",
     "home-module-doctorteam":"/pages/index/home-index/home-module-doctorteam/home-module-doctorteam",
     "home-dazhong-page":"/pages/index/home-index/home-dazhong-page/home-dazhong-page",
-    "home-loseweight-page": "/pages/index/home-index/home-loseweight-page/home-loseweight-page"
+    "home-loseweight-page": "/pages/index/home-index/home-loseweight-page/home-loseweight-page",
+    "home-gynecology-page": "/pages/index/home-index/home-gynecology-page/home-gynecology-page"
   },
   "navigationBarTitleText": "远程诊疗中心"
 }

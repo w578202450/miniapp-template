@@ -19,6 +19,7 @@ Page({
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
     dazhongOrgID: [], // 大冢医药机构ID
     loseweightOrgID: [], // 桃子互联网医院减肥中心机构ID
+    gynecologyOrgID: [], // 桃子互联网医院妇科诊疗中心机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
@@ -47,7 +48,7 @@ Page({
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     isHaveWatched: false, // 是否监听到变化了一次
-    showOrgID: 0, // 区分展示哪家机构(0:成都华府中医远程诊疗中心;1:侯丽萍风湿骨病中医医院;2:大冢医药;3:桃子互联网医院减肥中心)
+    showOrgID: 0, // 区分展示哪家机构(0:成都华府中医远程诊疗中心;1:侯丽萍风湿骨病中医医院;2:大冢医药;3:桃子互联网医院减肥中心;4.桃子互联网医院妇科诊疗中心)
   },
 
   /**
@@ -72,15 +73,20 @@ Page({
     //   orgID: "20012118570385423810511240",
     //   assistantStaffID: "20020913491781433700514240"
     // }
+    // 大冢医药(生产环境)
+    // options = {
+    //   orgID: "20040909515893667880511240",
+    //   assistantStaffID: "20041020111817571130514240"
+    // }
     // 桃子互联网医院减肥中心(生产环境)
     // options = {
     //   orgID: "20041517422841582280511240",
     //   assistantStaffID: "20041522090292997840514240"
     // }
-    // 大冢医药(生产环境)
+    // 桃子互联网医院妇科诊疗中心(生产环境)
     // options = {
-    //   orgID: "20040909515893667880511240",
-    //   assistantStaffID: "20041020111817571130514240"
+    //   orgID: "20040111371269634190511240",
+    //   assistantStaffID: "20040111590164711070514240"
     // }
     // 侯=齐晓红
     // options ={
@@ -117,6 +123,7 @@ Page({
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
+    that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options.q) { // 通过扫码进入时：q的值为url带参
       app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -269,7 +276,13 @@ Page({
       that.setData({
         showOrgID: 3
       })
-      that.initLoseweightDefaultFun();
+      that.initCustomDefaultFun();
+    } else if (that.data.gynecologyOrgID.indexOf(that.data.shareOrgID) > -1) {
+     // 判断是否是桃子互联网医院妇科诊疗中心
+      that.setData({
+        showOrgID: 4
+      })
+      that.initCustomDefaultFun();
     } else { // 默认显示成都华府中医远程诊疗中心
       that.setData({
         showOrgID: 0
@@ -321,7 +334,7 @@ Page({
   },
 
   /**初始桃子互联网医院减肥中心默认加载数据 */
-  initLoseweightDefaultFun: function() {
+  initCustomDefaultFun: function() {
     let that = this;
     wx.showLoading({
       title: '拼命加载中...',
@@ -500,6 +513,7 @@ Page({
     console.log("houShiOrgID=======" + that.data.houShiOrgID);
     console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
     console.log("loseweightOrgID=======" + that.data.loseweightOrgID);
+    console.log("gynecologyOrgID=======" + that.data.gynecologyOrgID);
     console.log("shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是侯丽萍中医院远程门诊
     if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
@@ -516,6 +530,11 @@ Page({
     } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
       that.setData({
         showOrgID: 3
+      })
+       // 判断是否是桃子互联网医院妇科诊疗中心
+    } else if (that.data.gynecologyOrgID.indexOf(that.data.shareOrgID) > -1) {
+      that.setData({
+        showOrgID: 4
       })
     } else {
       that.setData({

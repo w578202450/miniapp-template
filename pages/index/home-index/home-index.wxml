@@ -9,6 +9,11 @@
     <home-loseweight-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-loseweight-page>
   </view>
+    <!-- 是否显示桃子互联网医院妇科诊疗中心页面 -->
+  <view wx:if="{{ showOrgID == 4}}">
+    <home-gynecology-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-gynecology-page>
+  </view>
   <!-- isShowHou 是否显示侯丽萍风湿骨病中医医院页面 -->
   <view wx:if="{{ showOrgID == 1 || showOrgID == 0}}">
     <!-- 引入wxs脚本 -->
