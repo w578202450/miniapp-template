@@ -7,11 +7,18 @@ page {
   background-color: rgba(246, 246, 246, 1);
 }
 
+.background-main-top {
+  position: relative;
+  width: 750rpx;
+  height: 1350rpx;
+  background: rgba(246,246,246,1);
+}
+
 .background-main {
   position: relative;
   width: 750rpx;
-  height: 2650rpx;
-  background: linear-gradient(180deg, rgba(246, 246, 246, 1) 0%, rgba(255, 167, 167, 1) 100%);
+  height: 1280rpx;
+  background:linear-gradient(180deg,rgba(246,246,246,1) 0%,rgba(255,167,167,1) 100%);
 }
 
 .rectangle-background {
@@ -33,7 +40,7 @@ page {
 }
 
 .rectangle-background-text {
-  margin-top: 32rpx;
+  margin-top: 60rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -93,6 +100,12 @@ page {
   line-height: 28rpx;
 }
 
+.rectangle-middle-background {
+  width: 100%;
+  height: 1112rpx;
+  background: linear-gradient(180deg, rgba(246, 246, 246, 1) 0%, rgba(255, 167, 167, 1) 100%);
+}
+
 .rectangle-background-image {
   display: flex;
   flex-direction: row;
@@ -112,7 +125,7 @@ page {
   margin-left: 32rpx;
   background: rgba(255, 255, 255, 1);
   border-radius: 20rpx;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .right-rectangle-box {
@@ -122,7 +135,7 @@ page {
   margin-right: 32rpx;
   background: rgba(255, 255, 255, 1);
   border-radius: 20rpx;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 .bottom-item-colum {
@@ -139,8 +152,8 @@ page {
   margin-top: 24rpx;
   font-size: 28rpx;
   font-family: PingFangSC-Regular, PingFang SC;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.85);
+  font-weight: 600;
+  color:rgba(0,0,0,1);
   line-height: 40rpx;
 }
 
@@ -163,7 +176,7 @@ page {
   justify-content: space-between;
 }
 
-.fukeItem {
+.middle-one-box-item {
   width: 32%;
   height: 100rpx;
   line-height: 100rpx;
@@ -184,11 +197,11 @@ page {
   justify-content: space-between;
 }
 
-.middle-background {
+/* .middle-background {
   width: 750rpx;
   height: 1112rpx;
   background: linear-gradient(180deg, rgba(246, 246, 246, 1) 0%, rgba(255, 167, 167, 1) 100%);
-}
+} */
 
 .bottom-one-box {
   margin-top: 10rpx;
@@ -197,6 +210,14 @@ page {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.middle-one-box-text {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 1);
+  line-height: 36rpx;
 }
 
 .bottom-one-item {

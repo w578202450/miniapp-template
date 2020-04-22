@@ -4,8 +4,6 @@
     <!-- 圆角矩形 -->
     <view class="rectangle-background">
       <view class="rectangle-background-box">
-        <view class="rectangle-background-title-top" style="margin-top:48rpx">
-        </view>
         <!-- 服务人次 -->
         <view class="rectangle-background-middle">
           <view class="rectangle-background-text">
@@ -17,31 +15,31 @@
           </view>
         </view>
         <!-- title1 这些都属于妇科疾病 -->
-        <view class="rectangle-background-image" style="margin-top:56rpx;">
+        <view class="rectangle-background-image" style="margin-top:70rpx;">
           <image mode="widthFix" style="width:368rpx;height:78rpx;" src="{{ hometitle1 }}"></image>
         </view>
         <!-- 6个图片和文本（第一行） -->
         <view class="middle-one-box">
-          <view class="fukeItem" style="background-image: url({{homebg1}});">
-            <view>妇科炎症</view>
+          <view class="middle-one-box-item" style="background-image: url({{homebg1}});">
+            <view style="middle-one-box-text">妇科炎症</view>
           </view>
-          <view class="fukeItem" style="background-image: url({{homebg2}});">
-            <view>卵巢早衰</view>
+          <view class="middle-one-box-item" style="background-image: url({{homebg2}});">
+            <view style="middle-one-box-text">卵巢早衰</view>
           </view>
-          <view class="fukeItem" style="background-image: url({{homebg1}});">
-            <view>月经失调</view>
+          <view class="middle-one-box-item" style="background-image: url({{homebg1}});">
+            <view style="middle-one-box-text">月经失调</view>
           </view>
         </view>
         <!-- 6个图片和文本（第二行） -->
         <view class="middle-two-box">
-          <view class="fukeItem" style="background-image: url({{homebg1}});">
-            <view>多年不孕</view>
+          <view class="middle-one-box-item" style="background-image: url({{homebg1}});">
+            <view style="middle-one-box-text">多年不孕</view>
           </view>
-          <view class="fukeItem" style="background-image: url({{homebg2}});">
-            <view>卵巢囊肿</view>
+          <view class="middle-one-box-item" style="background-image: url({{homebg2}});">
+            <view style="middle-one-box-text">卵巢囊肿</view>
           </view>
-          <view class="fukeItem" style="background-image: url({{homebg1}});">
-            <view>子宫肌瘤</view>
+          <view class="middle-one-box-item" style="background-image: url({{homebg1}});">
+            <view style="middle-one-box-text">子宫肌瘤</view>
           </view>
         </view>
         <!-- 圆角矩形 -->
@@ -56,73 +54,72 @@
             <image mode="widthFix" style="width:622rpx;height:148rpx;margin-top:10rpx;margin-left:32rpx;margin-right:32rpx;" src="{{ homemiddlebanner3 }}"></image>
             <image mode="widthFix" style="width:622rpx;height:148rpx;margin-top:10rpx;margin-left:32rpx;margin-right:32rpx;" src="{{ homemiddlebanner4 }}"></image>
           </view>
-          <!-- 你还在忽视自己的健康吗 -->
-          <view class="rectangle-background-image" style="margin-top:80rpx;">
-            <image mode="widthFix" style="width:686rpx;height:236rpx;" src="{{homeads1}}"></image>
-          </view>
-          <!-- title3 健康需要被呵护 -->
-          <view class="rectangle-background-image" style="margin-top:60rpx;">
-            <image mode="widthFix" style="width:346rpx;height:70rpx;" src="{{ hometitle3 }}"></image>
-          </view>
+        </view>
+        <!-- 你还在忽视自己的健康吗 -->
+        <view class="rectangle-background-image" style="margin-top:60rpx;">
+          <image mode="widthFix" style="width:686rpx;height:236rpx;" src="{{homeads1}}"></image>
+        </view>
+        <!-- title3 健康需要被呵护 -->
+        <view class="rectangle-background-image" style="margin-top:50rpx;">
+          <image mode="widthFix" style="width:346rpx;height:70rpx;" src="{{ hometitle3 }}"></image>
+        </view>
 
-          <view class="rectangle-background-image" style="margin-top:50rpx;">
-            <view class="middle-between">
-             <!-- 左 -->
-              <view class="left-rectangle-box">
-                <view class="bottom-item-colum">
-                  <image mode="widthFix" style="width:96rpx;height:96rpx;margin-top:32rpx" src="{{homeico1}}"></image>
-              <text class="bottom-item-colum-text">科学理念+专业医生</text>
-              <text class="bottom-item-colum-text2">滥用民间偏方更伤身</text>
-                </view>
-              </view>
-               <!-- 右 -->
-                <view class="right-rectangle-box">
-                <view class="bottom-item-colum">
-                  <image mode="widthFix" style="width:96rpx;height:96rpx;margin-top:32rpx" src="{{homeico2}}"></image>
-              <text class="bottom-item-colum-text">长期调理是王道</text>
-              <text class="bottom-item-colum-text2">短期治疗难以治本</text>
-                </view>
-              </view>
-
-            </view>
-          </view>
-
-          <!-- 圆角矩形 -->
-          <view class="rectangle-middle2" style="margin-top:60rpx;">
-            <!-- title4 全面呵护女性健康 -->
-            <view class="rectangle-background-image">
-              <image mode="widthFix" style="width:280rpx;height:70rpx;margin-top:30rpx;" src="{{ hometitle4 }}"></image>
-            </view>
-            <view class="bottom-one-box">
-              <view class="bottom-one-item">
-                <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu1}}"></image>
-                <view class="bottom-text-colum">
-                  <text class="bottom-menu-text">更专业</text>
-                  <text class="bottom-menu-text2">专科医生科学治疗</text>
-                </view>
-              </view>
-              <view class="bottom-one-item">
-                <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu2}}"></image>
-                <view class="bottom-text-colum">
-                  <text class="bottom-menu-text">更省钱</text>
-                  <text class="bottom-menu-text2">专业问诊不乱吃药</text>
-                </view>
+        <view class="rectangle-background-image" style="margin-top:30rpx;">
+          <view class="middle-between">
+            <!-- 左 -->
+            <view class="left-rectangle-box">
+              <view class="bottom-item-colum">
+                <image mode="widthFix" style="width:96rpx;height:96rpx;margin-top:32rpx" src="{{homeico1}}"></image>
+                <text class="bottom-item-colum-text">科学理念+专业医生</text>
+                <text class="bottom-item-colum-text2">滥用民间偏方更伤身</text>
               </view>
             </view>
-            <view class="bottom-one-box">
-              <view class="bottom-one-item">
-                <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu3}}"></image>
-                <view class="bottom-text-colum">
-                  <text class="bottom-menu-text">更便捷</text>
-                  <text class="bottom-menu-text2">线上问诊随时沟通</text>
-                </view>
+            <!-- 右 -->
+            <view class="right-rectangle-box">
+              <view class="bottom-item-colum">
+                <image mode="widthFix" style="width:96rpx;height:96rpx;margin-top:32rpx" src="{{homeico2}}"></image>
+                <text class="bottom-item-colum-text">长期调理是王道</text>
+                <text class="bottom-item-colum-text2">短期治疗难以治本</text>
               </view>
-              <view class="bottom-one-item">
-                <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu4}}"></image>
-                <view class="bottom-text-colum">
-                  <text class="bottom-menu-text">更放心</text>
-                  <text class="bottom-menu-text2">私密沟通保护隐私</text>
-                </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 圆角矩形 -->
+        <view class="rectangle-middle2" style="margin-top:60rpx;">
+          <!-- title4 全面呵护女性健康 -->
+          <view class="rectangle-background-image">
+            <image mode="widthFix" style="width:280rpx;height:70rpx;margin-top:30rpx;" src="{{ hometitle4 }}"></image>
+          </view>
+          <view class="bottom-one-box">
+            <view class="bottom-one-item">
+              <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu1}}"></image>
+              <view class="bottom-text-colum">
+                <text class="bottom-menu-text">更专业</text>
+                <text class="bottom-menu-text2">专科医生科学治疗</text>
+              </view>
+            </view>
+            <view class="bottom-one-item">
+              <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu2}}"></image>
+              <view class="bottom-text-colum">
+                <text class="bottom-menu-text">更省钱</text>
+                <text class="bottom-menu-text2">专业问诊不乱吃药</text>
+              </view>
+            </view>
+          </view>
+          <view class="bottom-one-box">
+            <view class="bottom-one-item">
+              <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu3}}"></image>
+              <view class="bottom-text-colum">
+                <text class="bottom-menu-text">更便捷</text>
+                <text class="bottom-menu-text2">线上问诊随时沟通</text>
+              </view>
+            </view>
+            <view class="bottom-one-item">
+              <image mode="widthFix" style="width:104rpx;height:104rpx;margin-top:10rpx;" src="{{homemenu4}}"></image>
+              <view class="bottom-text-colum">
+                <text class="bottom-menu-text">更放心</text>
+                <text class="bottom-menu-text2">私密沟通保护隐私</text>
               </view>
             </view>
           </view>
@@ -130,6 +127,8 @@
       </view>
     </view>
   </view>
+  <!-- 背景颜色上半部分 -->
+  <view class="background-main-top"></view>
   <!-- 背景颜色 -->
   <view class="background-main"></view>
 
