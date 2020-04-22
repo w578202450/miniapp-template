@@ -20,6 +20,7 @@ Page({
     dazhongOrgID: [], // 大冢医药机构ID
     loseweightOrgID: [], // 桃子互联网医院减肥中心机构ID
     gynecologyOrgID: [], // 桃子互联网医院妇科诊疗中心机构ID
+    andrologyOrgID: [], // 桃子互联网医院男科诊疗中心机构ID
     shareOrgID: "", // 进入页面携带的orgID
     shareAssistantStaffID: "", // 进入页面携带的医助ID
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
@@ -88,6 +89,11 @@ Page({
     //   orgID: "20040111371269634190511240",
     //   assistantStaffID: "20040111590164711070514240"
     // }
+     // 桃子互联网医院男科诊疗中心(生产环境)
+    // options = {
+    //   orgID: "20040212494191470440511240",
+    //   assistantStaffID: "20040111590164711070514240"
+    // }
     // 侯=齐晓红
     // options ={
     //   orgID: "20031709473895879610511240",
@@ -124,6 +130,7 @@ Page({
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
+    that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     if (options.q) { // 通过扫码进入时：q的值为url带参
       app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -271,8 +278,9 @@ Page({
         showOrgID: 2
       })
       that.initDefaultFun();
-      // 判断是否是桃子互联网医院减肥中心
+    
     } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是桃子互联网医院减肥中心
       that.setData({
         showOrgID: 3
       })
@@ -281,6 +289,12 @@ Page({
      // 判断是否是桃子互联网医院妇科诊疗中心
       that.setData({
         showOrgID: 4
+      })
+      that.initCustomDefaultFun();
+    } else if (that.data.andrologyOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是桃子互联网医院男科诊疗中心
+      that.setData({
+        showOrgID: 5
       })
       that.initCustomDefaultFun();
     } else { // 默认显示成都华府中医远程诊疗中心
@@ -309,7 +323,7 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       // wx.showShareMenu(); // 显示本页面右上角的分享功能
-    }, 1500)
+    }, 1000)
   },
 
   /**初始化默认加载数据 */
@@ -330,7 +344,7 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       // wx.showShareMenu(); // 显示本页面右上角的分享功能
-    }, 1500)
+    }, 1000)
   },
 
   /**初始桃子互联网医院减肥中心默认加载数据 */
@@ -351,7 +365,7 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       // wx.showShareMenu(); // 显示本页面右上角的分享功能
-    }, 2000)
+    }, 1000)
   },
 
   /** 获取首页banner */
@@ -535,6 +549,11 @@ Page({
     } else if (that.data.gynecologyOrgID.indexOf(that.data.shareOrgID) > -1) {
       that.setData({
         showOrgID: 4
+      })
+    } else if (that.data.andrologyOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是桃子互联网医院男科诊疗中心
+      that.setData({
+        showOrgID: 5
       })
     } else {
       that.setData({

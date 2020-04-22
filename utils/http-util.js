@@ -135,6 +135,17 @@ module.exports = {
     }
   },
 
+  /**桃子互联网医院男科诊疗中心机构ID */
+  andrologyOrgIDFun: function () {
+    if (version == 0) {
+      return ['20040212494191470440511240']
+    } else if (version == 1) {
+      return ['20040212494191470440511240']
+    } else if (version == 2) {
+      return ['20040212494191470440511240']
+    }
+  },
+
   /*
    *获取测试数据
    */

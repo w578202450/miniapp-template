@@ -1,10 +1,10 @@
 <view class="page">
-  <!-- isShowDazhong 是否显示大冢医药大爱清尘佰肺待新页面 -->
+  <!-- 是否显示大冢医药大爱清尘佰肺待新页面 -->
   <view wx:if="{{ showOrgID == 2}}">
     <home-dazhong-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-dazhong-page>
   </view>
-  <!-- isShowLoseweight 是否显示桃子互联网医院减肥中心页面 -->
+  <!-- 是否显示桃子互联网医院减肥中心页面 -->
   <view wx:if="{{ showOrgID == 3}}">
     <home-loseweight-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-loseweight-page>
@@ -14,7 +14,12 @@
     <home-gynecology-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-gynecology-page>
   </view>
-  <!-- isShowHou 是否显示侯丽萍风湿骨病中医医院页面 -->
+   <!-- 是否显示桃子互联网医院男科诊疗中心页面 -->
+  <view wx:if="{{ showOrgID == 5}}">
+    <home-andrology-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-andrology-page>
+  </view>
+  <!-- 是否显示侯丽萍风湿骨病中医医院页面 -->
   <view wx:if="{{ showOrgID == 1 || showOrgID == 0}}">
     <!-- 引入wxs脚本 -->
     <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />

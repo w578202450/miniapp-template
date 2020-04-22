@@ -1,4 +1,3 @@
-// pages/index/home-index/home-gynecology-page/home-gynecology-page.js
 Component({
   /**
    * 组件的属性列表
@@ -35,9 +34,7 @@ Component({
     homemenu2: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/3419/menu2.png",
     homemenu3: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/3419/menu3.png",
     homemenu4: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/3419/menu4.png",
-   
     helpfulNum: 12324
-
   },
 
   /**
@@ -53,14 +50,11 @@ Component({
       var data = "1970-01-01 00:00:00";
       let date1 = new Date(data.replace(/-/g, '/')); // 开始时间
       let date2 = new Date(); // 结束时间
-      // console.log(date1.getTime());
-      // console.log(date2.getTime());
       let date3 = date2.getTime() - date1.getTime(); // 时间差的毫秒数
       let randomNum = Math.round((date3 / 1000 - (3600 * 24 * 365 * 49.6)) / 1800); /** 一小时加两个 */
       that.setData({
         helpfulNum: randomNum
       });
     }
-
   }
 })
