@@ -61,7 +61,7 @@
         <view class="rectangle-bottom" style="margin-top:34rpx;">
           <!-- title3 男性健康专业解决方案 -->
           <view class="rectangle-background-image">
-            <image mode="widthFix" style="width:408rpx;height:48rpx;margin-top:48rpx;" src="{{ hometitle3 }}"></image>
+            <image mode="widthFix" style="width:448rpx;height:48rpx;margin-top:48rpx;" src="{{ hometitle3 }}"></image>
           </view>
           <view class="bottom-one-box">
             <view class="bottom-one-item">
