@@ -503,8 +503,26 @@ Page({
 
   /**操作：立即进入专家门诊 */
   toServiceIndexFun: function() {
-    wx.switchTab({
-      url: '/pages/index/service-index/service-index'
+    // wx.switchTab({
+    //   url: '/pages/index/service-index/service-index'
+    // });
+    wx.requestSubscribeMessage({
+      // tmplIds: ['Bbgs8xD9AhulzEIr1o6XWrWMFJsppTL2CfycqPgqw8o', 'z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', 'ZXN1Mte_jwfsTTwZDFB8ByOMhzeRjf5e6tj3EhokqWg', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0', '3leCGE6lKav48Wg0aZFC1JOpUVSY2RCAro5DpD6Fax8'],
+      tmplIds: ['Bbgs8xD9AhulzEIr1o6XWrWMFJsppTL2CfycqPgqw8o', 'z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', 'ZXN1Mte_jwfsTTwZDFB8ByOMhzeRjf5e6tj3EhokqWg'],
+      success(res) {
+        console.log(res);
+        wx.switchTab({
+          url: '/pages/index/service-index/service-index'
+        });
+      },
+      fail(err) {
+        console.log(err);
+        wx.showToast({
+          title: JSON.stringify(err.errMsg),
+          icon: none,
+          duration: 3000
+        });
+      }
     });
   }
 })
