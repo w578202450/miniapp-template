@@ -1,5 +1,6 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
+const commonFun = require('../../../../../utils/common.js');
 const app = getApp()
 Page({
 
@@ -14,19 +15,19 @@ Page({
     queryStatisticsParamsOfView: {}, // 查询观看统计计数
     increaseParamsOfView: {}, // 观看统计计数
     increaseParamsOfUserful: {}, // 觉得有用统计计数
-    hasView:false //是否记录观看
+    hasView: false //是否记录观看
   },
 
   /**
    * 卸载页面
    */
-  onUnload: function(){
+  onUnload: function() {
     if (this.data.hasView) {
       const pages = getCurrentPages();
-      const perpage = pages[pages.length - 2]
+      const perpage = pages[pages.length - 2];
       perpage.refreshInquiryViewSuccess();
     }
-    
+
   },
 
   /**
@@ -43,9 +44,16 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialog");
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+    return commonFun.onShareAppMessageFun();
   },
   /**
    * 数据初始化
@@ -106,7 +114,7 @@ Page({
         objectID: this.data.personInfo.keyID
       }
     })
-    
+
   },
   /**
    * 观看次数记数
@@ -130,7 +138,7 @@ Page({
    * 1.已登录，直接到问诊页
    * 2.未登录，授权登录
    *  */
-  toOnlineInqueryFun: function () {
+  toOnlineInqueryFun: function() {
     if (app.globalData.isInitInfo) {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
@@ -169,5 +177,5 @@ Page({
     const perpage = pages[pages.length - 2]
     perpage.refreshInquiryLikeSuccess();
   }
-  
+
 })

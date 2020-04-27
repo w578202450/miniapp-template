@@ -9,11 +9,13 @@ Page({
       name: '张**',
       leve: '2',
       content: '医生的回答很好的解决了我的问题，很不错。'
-    }]
+    }],
+    staffID: ""
   },
 
   onLoad: function(e) {
     let doctorStaffID = e.staffID;
+    this.data.staffID = e.staffID;
     this.fetchDoctorInfo(doctorStaffID)
   },
 
@@ -117,7 +119,8 @@ Page({
   },
   //右上角分享功能
   onShareAppMessage: function(res) {
-    return commonFun.onShareAppMessageFun();
+    let staffID = 'staffID=' + this.data.staffID;
+    return commonFun.onShareAppMessageFun('/pages/online-inquiry/doctor-details/doctor-details', staffID);
   },
 
   // 去问诊

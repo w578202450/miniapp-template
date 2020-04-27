@@ -89,7 +89,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return commonFun.onShareAppMessageFun();
+    let obj = {
+      doctorID: this.data.httpParams.doctorID,
+      orgID: this.data.httpParams.orgID,
+      doctorName: this.data.httpParams.doctorName
+    };
+    let httpParams = 'httpParams=' + JSON.stringify(obj);
+    return commonFun.onShareAppMessageFun(this.data.httpParams.nextPage, httpParams);
   },
 
   /**取消事件 */

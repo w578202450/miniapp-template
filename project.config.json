@@ -69,51 +69,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/index/service-index/service-index",
-					"pathName": "pages/index/service-index/service-index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
+					"id": 1,
 					"name": "首页",
 					"pathName": "pages/index/home-index/home-index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 4,
-					"name": "service-physicianTeam",
-					"pathName": "pages/index/service-index/fzm/service-physicianTeam/service-physicianTeam",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "service-specialistInfo",
-					"pathName": "pages/index/service-index/fzm/service-specialistInfo/service-specialistInfo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "患者评价",
-					"pathName": "pages/order/order-evaluate/order-evaluate",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/inquiry-index/inquiry-index",
-					"pathName": "pages/inquiry-index/inquiry-index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 7,
-					"name": "pages/order/order-evaluate-success/order-evaluate-success",
-					"pathName": "pages/order/order-evaluate-success/order-evaluate-success",
 					"query": "",
 					"scene": null
 				},
@@ -125,35 +83,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "个人中心",
-					"pathName": "pages/personal-center/personal-center",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "药品订单列表",
-					"pathName": "pages/order/drug-orders/drug-orders",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "我的处方",
-					"pathName": "pages/personal-center/prescription/prescription",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "医生主页",
-					"pathName": "pages/online-inquiry/doctor-details/doctor-details",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
+					"id": 3,
 					"name": "专家门诊",
 					"pathName": "pages/index/service-index/service-index",
 					"query": "",

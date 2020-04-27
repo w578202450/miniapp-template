@@ -1,5 +1,5 @@
-const HTTP = require('../../../utils/http-util')
-const commonFun = require('../../../utils/common')
+const HTTP = require('../../../utils/http-util');
+const commonFun = require('../../../utils/common.js');
 
 let app = getApp()
 
@@ -177,8 +177,10 @@ Page({
     this.loadDatas()
   },
 
-  //右上角分享功能
-  onShareAppMessage: function(res) {
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
     return commonFun.onShareAppMessageFun();
   },
 
@@ -218,4 +220,5 @@ Page({
       url: '/pages/order/order-evaluate/order-evaluate?paramsData=' + JSON.stringify(paramsData)
     });
   }
+
 })

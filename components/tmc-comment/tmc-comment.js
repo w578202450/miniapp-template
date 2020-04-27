@@ -71,6 +71,7 @@ Component({
       pageSize: 10,
       pageIndex: 1
     },
+    tipInfo: {},
     defaultPhotoUrl: "/images/chat/personBacImg.png"
   },
 

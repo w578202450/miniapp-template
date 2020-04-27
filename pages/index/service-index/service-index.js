@@ -36,7 +36,7 @@ Page({
       // orgID: ""
     },
     scrollTop: 0,
-    // 患者分享相关数据
+    // 患友分享相关数据
     patientShareGetData: {
       keyID: "",
       patientName: "",
@@ -147,7 +147,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return commonFun.onShareAppMessageFun();
+    return commonFun.onShareAppMessageFun("/pages/index/service-index/service-index");
   },
 
   /**转换传递的url参数 q */
@@ -199,8 +199,8 @@ Page({
                 doctorDisease: res
               });
             }); // 获取主治医生的专治疾病
-            that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 患者分享
-            that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 医生手记
+            // that.patientShareGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 患友分享
+            that.inquiryCaseGet(that.data.doctorInfo.sectionID, that.data.doctorInfo.orgID, staffID); // 康复案例
             that.getSectionByKeyID();
             wx.hideLoading();
           }
@@ -291,7 +291,7 @@ Page({
     });
   },
 
-  //------------------------------fzm-------------------------------
+  //------------------------------fzm-------------------------------开始
   /**
    * 查看门诊医生介绍
    */
@@ -326,7 +326,7 @@ Page({
         this.data.articleCurrentOrgID = orgID;
         this.setData({
           articleTitles: res.data,
-          baseParams:{
+          baseParams: {
             "isPublish": 1,
             "doctorCanSee": doctorStaffID,
             "departmentCanSee": departmentCanSee
@@ -491,19 +491,19 @@ Page({
 
   //回主页
   goToBackHome: function() {
-    let orgID = wx.getStorageSync("shareOrgID");
-    let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
-    wx.reLaunch({
-      url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
-    });
+    // let orgID = wx.getStorageSync("shareOrgID");
+    // let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     // wx.reLaunch({
-    //   url: '/pages/index/home-index/home-index'
+    //   url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
     // });
+    wx.reLaunch({
+      url: '/pages/index/home-index/home-index'
+    });
   },
+  //------------------------------fzm-------------------------------结束
 
-  //------------------------------fzm-------------------------------
   /**
-   * 查询：患者分享信息
+   * 查询：患友分享信息
    */
   patientShareGet: function(sectionID, orgID, doctorStaffID) {
     let that = this;
@@ -512,7 +512,6 @@ Page({
       sectionID: sectionID,
       doctorStaffID: doctorStaffID
     }).then(res => {
-      console.log("获取的患者ASDASD：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           ["patientShareGetData.keyID"]: res.data.keyID,
@@ -530,7 +529,7 @@ Page({
     });
   },
   /**
-   * 查询：患者手记信息
+   * 查询：康复案例信息
    */
   inquiryCaseGet: function(sectionID, orgID, doctorStaffID) {
     let that = this;
@@ -553,7 +552,6 @@ Page({
           ["inquiryCaseData.httpParams.doctorStaffID"]: doctorStaffID,
           ["inquiryCaseData.content"]: res.data.content
         });
-        // console.log("患者手记信息:" + JSON.stringify(this.data.patientShareGetData));
       }
     });
   },
@@ -566,7 +564,7 @@ Page({
       let component = this.selectComponent("#article");
       if (objectName === "view") {
         component.refreshArticleViewNum();
-      } else if (objectName === "useful"){
+      } else if (objectName === "useful") {
         component.refreshCurrentArticleUsefulNum();
       }
     }

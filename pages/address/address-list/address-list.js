@@ -1,5 +1,5 @@
-const HTTP = require('../../../utils/http-util')
-const commonFun = require('../../../utils/common')
+const HTTP = require('../../../utils/http-util');
+const commonFun = require('../../../utils/common');
 
 let app = getApp()
 /**

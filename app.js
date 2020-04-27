@@ -1,11 +1,13 @@
 // 引入腾讯云IM
-import TIM from './miniprogram_npm/tim-wx-sdk/index.js'
-import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js'
-const AUTH = require('utils/auth')
-let msgStorage = require("utils/msgstorage")
+import TIM from './miniprogram_npm/tim-wx-sdk/index.js';
+import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js';
+const AUTH = require('utils/auth');
+let msgStorage = require("utils/msgstorage");
 import {
-  SDKAPPID
-} from './utils/GenerateTestUserSig'
+  SDKAPPID,
+  genTestUserSig
+} from './utils/GenerateTestUserSig';
+let HTTP = require('utils/http-util');
 
 let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null;
 //胶囊按钮位置信息
@@ -14,18 +16,116 @@ let navBarHeight = (function() { //导航栏高度
   let gap = rect.top - systemInfo.statusBarHeight; //动态计算每台手机状态栏到胶囊按钮间距
   return 2 * gap + rect.height;
 })();
+// 变量
+let userSig = ""; // [必选]身份签名，需要从自行搭建的签名服务获取
+// let selctedIndex = 0; //公众号跳转带参数  0在线问诊 1个人中心
+let logined = false; //是否处于登录状态
+let nextPageName = ""; // 下一页的名字
+let tim = null;
+let that = null;
 
 App({
-  onLaunch: function() {
-    this.hideTabBarFun;
-    this.globalData.systemInfo = systemInfo;
-    this.globalData.navBarHeight = navBarHeight;
-    this.globalData.menuButtonBoundingClientRect = rect;
+  onLaunch: function(option) {
+    that = this;
+    that.globalData.systemInfo = systemInfo;
+    that.globalData.navBarHeight = navBarHeight;
+    that.globalData.menuButtonBoundingClientRect = rect;
     // AUTH.getSetting()
     AUTH.upDataApp();
     AUTH.getNetworkType();
     AUTH.onNetworkStatusChange();
-    this.imSetting();
+    // 处理来源的参数
+    wx.showModal({
+      title: '进入小程序携带的参数',
+      content: JSON.stringify(option),
+    });
+    that.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
+    let options = option.query;
+    // 生产
+    // 华府医院(生产环境)
+    // options = {
+    //   orgID: "19101017081245502880511001",
+    //   assistantStaffID: "20012214121981875310514240"
+    // }
+    // 侯丽萍医院(生产环境)
+    // options = {
+    //   orgID: "20012118570385423810511240",
+    //   assistantStaffID: "20020913491781433700514240"
+    // }
+    // 大冢医药(生产环境)
+    // options = {
+    //   orgID: "20040909515893667880511240",
+    //   assistantStaffID: "20041020111817571130514240"
+    // }
+    // 桃子互联网医院减肥中心(生产环境)
+    // options = {
+    //   orgID: "20041517422841582280511240",
+    //   assistantStaffID: "20041522090292997840514240"
+    // }
+    // 桃子互联网医院妇科诊疗中心(生产环境)
+    // options = {
+    //   orgID: "20040111371269634190511240",
+    //   assistantStaffID: "20040111590164711070514240"
+    // }
+    // 桃子互联网医院男科诊疗中心(生产环境)
+    // options = {
+    //   orgID: "20040212494191470440511240",
+    //   assistantStaffID: "20040111590164711070514240"
+    // }
+    // 侯=齐晓红
+    // options ={
+    //   orgID: "20031709473895879610511240",
+    //   assistantStaffID: "20020913491781433700514240"
+    // }
+    // 李大山
+    // options = {
+    //   "orgID": "19101017081245502880511001",
+    //   "assistantStaffID": "20012214121981875310514240"
+    // }
+    // 测试
+    // 包正一
+    // options = {
+    //   orgID: "19121923373037086560511253",
+    //   assistantStaffID: "20011320532175746910514253"
+    // }
+    // 徐
+    // options = {
+    //   assistantStaffID: "20011514000045118050514253",
+    //   orgID: "19101017081245502880511001"
+    // }
+    // 包医生
+    // options = {
+    //   assistantStaffID: "20011909362464071890514253",
+    //   orgID: "19121923373037086560511253"
+    // }
+    // 开发
+    // options = {
+    //   assistantStaffID: "20011109080410712390514001",
+    //   orgID: "19101017081245502880511001"
+    // }
+    console.log("进入小程序携带的参数：" + JSON.stringify(options));
+    if (options.q) { // 通过扫码进入时：q的值为url带参
+      that.globalData.isHaveOptions = true; // 进入小程序携带有参数
+      var scan_url = decodeURIComponent(options.q);
+      let shareOrgID = that.initOptionsFun(scan_url, "orgID");
+      let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
+      if (shareOrgID && shareOrgID.length > 0) {
+        wx.setStorageSync("shareOrgID", shareOrgID);
+      }
+      if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
+        wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
+      }
+    } else if (options.assistantStaffID && options.orgID) { // 通过分享的小程序进入时：直接带参
+      if (options.orgID && options.orgID.length > 0) {
+        that.globalData.isHaveOptions = true; // 进入小程序携带有参数
+        wx.setStorageSync("shareOrgID", options.orgID);
+      }
+      if (options.assistantStaffID && options.assistantStaffID.length > 0) {
+        that.globalData.isHaveOptions = true; // 进入小程序携带有参数
+        wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
+      }
+    }
+    that.imSetting(); // IM功能配置
   },
 
   onUnload: function() {
@@ -34,24 +134,22 @@ App({
     });
   },
 
-  onShow: function() {
-
-  },
+  onShow: function() {},
 
   watch: function(method, globalDataName) {
-    var obj = this.globalData;
+    var obj = that.globalData;
     Object.defineProperty(obj, globalDataName, {
       configurable: true,
       enumerable: true,
       set: function(value) {
-        this._name = value;
+        that._name = value;
         method(value); // 传递值，执行传入的方法
-        // console.log("set:" + this._name);
+        // console.log("set:" + that._name);
       },
       get: function() {
         // 可以在这里打印一些东西，然后在其他界面调用getApp().globalData.globalDataName的时候，这里就会执行。
-        // console.log("get:" + this._name);
-        return this._name
+        // console.log("get:" + that._name);
+        return that._name
       }
     })
   },
@@ -63,9 +161,8 @@ App({
    * IM配置
    */
   imSetting() {
-    let that = this;
     // 创建 TIM SDK 实例
-    let tim = TIM.create({
+    tim = TIM.create({
       SDKAppID: SDKAPPID
     });
     // 设置日志级别
@@ -86,26 +183,7 @@ App({
     tim.on(TIM.EVENT.MESSAGE_RECEIVED, function(event) {
       // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
       // event.data - 存储 Message 对象的数组 - [Message]
-      console.log("===全局收消息===" + JSON.stringify(event));
-      // if (event.data && event.data[0].type == "TIMCustomElem") {
-      //   let jsonData = JSON.parse(event.data[0].payload.data);
-      //   if (jsonData.customType === "sys" && jsonData.childType == "video") {
-      //     if (jsonData.data.type == "inquiry" && jsonData.data.inquiryId) { // 视频请求进来了
-      //       console.log("视频请求进来了");
-      //       let inquiryID = jsonData.data.inquiryId;
-      //       let isCall = 2;
-      //       wx.navigateTo({
-      //         url: '/pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
-      //         success: function (res) { },
-      //         fail: function (res) { },
-      //         complete: function (res) { },
-      //       });
-      //       console.log("视频跳转");
-      //     } else if (jsonData.data.type == "hangUp" || jsonData.data.type == "cancel") { // 视频请求取消了
-      //       console.log("视频请求取消了");
-      //     }
-      //   }
-      // }
+      // console.log("===全局收消息===" + JSON.stringify(event));
       // 全局收消息分发
       msgStorage.saveReceiveMsg(event.data);
     });
@@ -159,18 +237,192 @@ App({
       //    - TIM.TYPES.KICKED_OUT_USERSIG_EXPIRED 签名过期被踢
       // console.log("===收到被踢下线通知===" + event.name + ",被踢下线的原因:" + event.data.type);
     });
-    this.globalData.tim = tim
-    this.globalData.TIM = TIM
+    that.globalData.tim = tim;
+    that.globalData.TIM = TIM;
+    wx.showLoading({
+      title: '拼命加载中...',
+    });
+    that.startLoginFun();
   },
 
   hideTabBarFun: function() {
     wx.hideTabBar({
-      fail: function () {
-        setTimeout(function () { // 做了个延时重试一次，作为保底。
+      fail: function() {
+        setTimeout(function() { // 做了个延时重试一次，作为保底。
           wx.hideTabBar();
         }, 500)
       }
     });
+  },
+
+  /**转换传递的url参数 q */
+  initOptionsFun: function(scan_url, name) {
+    var reg = new RegExp("[^\?&]?" + encodeURI(name) + "=[^&]+");
+    var arr = scan_url.match(reg);
+    if (arr != null) {
+      return decodeURI(arr[0].substring(arr[0].search("=") + 1));
+    } else {
+      return "";
+    }
+  },
+
+  /**开始登录 */
+  startLoginFun: function() {
+    tim.logout(); // 登录前先清除（可能在线）登陆的账号
+    userSig = "";
+    logined = false;
+    nextPageName = "";
+    console.log("开始IM登录");
+    that.globalData.unionid = wx.getStorageSync('unionid');
+    that.globalData.openid = wx.getStorageSync('openID');
+    logined = that.globalData.unionid && that.globalData.openid;
+    if (logined) {
+      that.globalData.userInfo = wx.getStorageSync('userInfo');
+      that.getPatientInfo(that.globalData.unionid);
+    } else {
+      console.log("IM登录失败：logined不存在");
+      that.globalData.isStartLogin = true; // 是否开始了自动登录
+      that.globalData.isInitInfo = 0; // 登录初始化用户数据失败
+      that.fetchTempCode();
+    }
+  },
+
+  /** 获取基础数据*/
+  getPatientInfo: function(unionID) {
+    let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+    let orgID = wx.getStorageSync("shareOrgID");
+    let prams = {
+      unionID: unionID,
+      nickName: that.globalData.userInfo.nickName ? that.globalData.userInfo.nickName : '',
+      avatarUrl: that.globalData.userInfo.avatarUrl ? that.globalData.userInfo.avatarUrl : '',
+      sex: that.globalData.userInfo.sex ? that.globalData.userInfo.sex : '',
+      city: that.globalData.userInfo.city ? that.globalData.userInfo.city : '',
+      province: that.globalData.userInfo.province ? that.globalData.userInfo.province : '',
+      assistantStaffID: (assistantStaffID && that.globalData.isHaveOptions) ? assistantStaffID : "",
+      orgID: (orgID && that.globalData.isHaveOptions) ? orgID : ""
+    }
+    HTTP.getPatientInfo(prams).then(res => {
+      if (res.code == 0) {
+        console.log("登录后拿到的患者对话信息：" + JSON.stringify(res.data));
+        that.globalData.personID = res.data.personID;
+        that.globalData.patientID = res.data.keyID;
+        that.globalData.orgID = res.data.orgID;
+        that.globalData.personInfo = res.data;
+        wx.setStorageSync('personInfo', res.data);
+        wx.setStorage({
+          key: 'orgID',
+          data: res.data.orgID,
+        });
+        wx.setStorage({
+          key: 'unionID',
+          data: unionID
+        });
+        wx.setStorage({
+          key: 'personID',
+          data: res.data.personID
+        });
+        wx.setStorage({
+          key: 'patientID',
+          data: res.data.keyID
+        });
+        wx.setStorage({
+          key: 'shareDoctorStaffID',
+          data: res.data.doctorStaffID
+        });
+        wx.setStorage({
+          key: 'shareOrgID',
+          data: res.data.orgID
+        });
+        wx.setStorage({
+          key: 'shareAssistantStaffID',
+          data: res.data.assistantStaffID
+        });
+        that.getUserSig(res.data.keyID); // 获取userSig
+      } else {
+        that.globalData.isStartLogin = true; // 是否开始了自动登录
+        wx.hideLoading();
+        wx.showToast({
+          title: res.message,
+          icon: 'none'
+        });
+      }
+    }).catch(e => {
+      that.globalData.isStartLogin = true; // 是否开始了自动登录
+      wx.hideLoading();
+      wx.showToast({
+        title: '网络异常'
+      });
+    })
+  },
+
+  /**
+   * 获取userSig
+   */
+  getUserSig: function(userId) {
+    wx.showLoading({
+      title: '登录中...',
+    });
+    let prams = {
+      userId: userId
+    };
+    HTTP.getUserSig(prams).then(res => {
+      if (res.code == 0) {
+        userSig = res.data.userSig;
+        wx.setStorage({
+          key: 'userSig',
+          data: res.data.userSig
+        });
+        if (userSig) {
+          that.loginIM(userId); // IM登录
+        } else {
+          that.globalData.isStartLogin = true; // 是否开始了自动登录
+          wx.hideLoading();
+          wx.showToast({
+            title: '获取userSig失败'
+          });
+        }
+      } else {
+        that.globalData.isStartLogin = true; // 是否开始了自动登录
+        wx.hideLoading();
+        wx.showToast({
+          title: '获取userSig失败'
+        });
+      }
+    })
+  },
+
+  /** IM登录 */
+  loginIM: function(userId) {
+    tim.login({
+      userID: userId,
+      userSig: genTestUserSig(userId).userSig
+    }).then(function(imResponse) {
+      console.log("===IM登录成功==="); // 登录成功
+      wx.setStorageSync('myUsername', userId);
+      wx.hideLoading();
+      that.globalData.isInitInfo = "ready"; // 是否登录成功
+      that.globalData.isStartLogin = true; // 是否开始了自动登录
+    }).catch(function(imError) {
+      console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
+      wx.hideLoading();
+      wx.showToast({
+        title: 'IM登录失败'
+      })
+    });
+  },
+
+  /** 
+   * 微信登录
+   * 1.登录成功缓存当前临时code 判断登录态用 
+   */
+  fetchTempCode: function() {
+    AUTH.fetchTempCode().then(function(res) {
+      console.log(res);
+      wx.hideLoading();
+      if (res.code) {
+        wx.setStorageSync('code', res.code);
+      }
+    })
   },
 
   globalData: {
@@ -193,14 +445,13 @@ App({
     menuButtonBoundingClientRect: {}, //右上角胶囊的信息
     systemInfo: {}, //小程序系统信息
     navBarHeight: '', //导航栏高度
-    imagePlaceholder: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png",// 图片占位
+    imagePlaceholder: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png", // 图片占位
     tabbar: {
       color: "#86888B",
       selectedColor: "#438BEF",
       backgroundColor: "#ffffff",
       borderStyle: "#d7d7d7",
-      list: [
-        {
+      list: [{
           pagePath: "/pages/index/service-index/service-index",
           text: "首页",
           iconPath: "/images/tabbar/tabbar-home-normal.png",

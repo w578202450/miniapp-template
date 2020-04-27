@@ -363,7 +363,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function() {
     return commonFun.onShareAppMessageFun();
   },
 
@@ -437,7 +437,7 @@ Page({
       if (res.code == 0 && res.data) {
         that.setData({
           inquiryInfo: res.data,
-          getGroupListSum: 2, // 检验入群否的最大循环次数
+          getGroupListSum: 5, // 检验入群否的最大循环次数
           sendType: ""
         });
         that.isInGroupFun(); // 检验是否成功入群

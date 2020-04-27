@@ -4,7 +4,7 @@
 </block>
 <block wx:else>
   <view style="margin-bottom:144rpx">
-    <view wx:for="{{list}}" wx:for-item="item" wx:key="{{keyID}}">
+    <view wx:for="{{list}}" wx:for-item="item" wx:key="index">
       <view class="cell" bindtap="selectedAddress" data-index="{{index}}">
         <view class="info-box">
           <text class="name">{{item.receiverName}}</text>

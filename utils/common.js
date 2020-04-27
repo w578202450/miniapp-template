@@ -36,18 +36,12 @@ let nextPageName = ""; // 下一页的名字
  * 1.false 重新获取临时code
  * 2.succes 直接获取用户信息 getPatientInfo
  */
-function startLoginFun(options) {
-  console.log("尝试自动登录前传递的参数" + JSON.stringify(options));
+function startLoginFun() {
   tim.logout(); // 登录前先清除（可能在线）登陆的账号
   userSig = "";
   // selctedIndex = 0;
   logined = false;
   nextPageName = "";
-  // if (options) {
-  //   if (options.selctedIndex == 0 || options.selctedIndex) {
-  //     selctedIndex = options.selctedIndex;
-  //   }
-  // }
   console.log("开始IM登录");
   app.globalData.unionid = wx.getStorageSync('unionid');
   app.globalData.openid = wx.getStorageSync('openID');
@@ -275,7 +269,7 @@ function getUserInfo(e) {
     fail(err) {
       wx.removeStorageSync("sessionKey");
       wx.removeStorageSync("code");
-      AUTH.fetchTempCode().then(function (res) {
+      AUTH.fetchTempCode().then(function(res) {
         console.log(res);
         if (res.code) {
           wx.setStorageSync('code', res.code);
@@ -291,15 +285,23 @@ function getUserInfo(e) {
 /**
  * 右上角的分享功能
  */
-function onShareAppMessageFun() {
+function onShareAppMessageFun(sharePath, moreData) {
+  console.log(sharePath);
+  console.log(moreData);
+  let sharePaths = sharePath ? sharePath : "/pages/index/home-index/home-index";
   let shaOrgId = wx.getStorageSync("shareOrgID");
   let shaAssId = wx.getStorageSync("shareAssistantStaffID");
   let orgID = shaOrgId ? shaOrgId : "";
   let assistantStaffID = shaAssId ? shaAssId : "";
   let orgName = (app.globalData.orgName && app.globalData.orgName.length > 0) ? app.globalData.orgName : wx.getStorageSync("doctorInfo").workPlace;
+  let pathAll = sharePaths + '?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID;
+  if (moreData) {
+    pathAll = pathAll + '&' + moreData;
+  }
   return {
     title: orgName, // 转发的标题，默认是小程序的名称(可以写slogan等)
-    path: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID // 默认是当前页面，必须是以‘/'开头的完整路径
+    // path: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID // 默认是当前页面，必须是以‘/'开头的完整路径
+    path: pathAll
     // imageUrl: '',   //自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5:4
     // -------------基础库 2.0.8版本起，不在获取分享结果的回调了-----------
     // success: function (res) {},

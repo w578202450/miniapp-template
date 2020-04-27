@@ -63,130 +63,12 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    // 生产
-    // 华府医院(生产环境)
-    // options = {
-    //   orgID: "19101017081245502880511001",
-    //   assistantStaffID: "20012214121981875310514240"
-    // }
-    // 侯丽萍医院(生产环境)
-    // options = {
-    //   orgID: "20012118570385423810511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
-    // 大冢医药(生产环境)
-    // options = {
-    //   orgID: "20040909515893667880511240",
-    //   assistantStaffID: "20041020111817571130514240"
-    // }
-    // 桃子互联网医院减肥中心(生产环境)
-    // options = {
-    //   orgID: "20041517422841582280511240",
-    //   assistantStaffID: "20041522090292997840514240"
-    // }
-    // 桃子互联网医院妇科诊疗中心(生产环境)
-    // options = {
-    //   orgID: "20040111371269634190511240",
-    //   assistantStaffID: "20040111590164711070514240"
-    // }
-     // 桃子互联网医院男科诊疗中心(生产环境)
-    // options = {
-    //   orgID: "20040212494191470440511240",
-    //   assistantStaffID: "20040111590164711070514240"
-    // }
-    // 侯=齐晓红
-    // options ={
-    //   orgID: "20031709473895879610511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
-    // 李大山
-    // options = {
-    //   "orgID": "19101017081245502880511001",
-    //   "assistantStaffID": "20012214121981875310514240"
-    // }
-    // 测试
-    // 包正一
-    // options = {
-    //   orgID: "19121923373037086560511253",
-    //   assistantStaffID: "20011320532175746910514253"
-    // }
-    // 徐
-    // options = {
-    //   assistantStaffID: "20011514000045118050514253",
-    //   orgID: "19101017081245502880511001"
-    // }
-    // options = {
-    //   assistantStaffID: "20011909362464071890514253",
-    //   orgID: "19121923373037086560511253"
-    // }
-    // 开发
-    // options = {
-    //   assistantStaffID: "20011109080410712390514001",
-    //   orgID: "19101017081245502880511001"
-    // }
-    console.log("进入医院首页携带的参数：" + JSON.stringify(options));
-    // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
-    app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
-    if (options.q) { // 通过扫码进入时：q的值为url带参
-      app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-      var scan_url = decodeURIComponent(options.q);
-      let shareOrgID = that.initOptionsFun(scan_url, "orgID");
-      let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-      if (shareOrgID && shareOrgID.length > 0) {
-        that.setData({
-          shareOrgID: shareOrgID
-        });
-        wx.setStorageSync("shareOrgID", shareOrgID);
-      }
-      if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
-        that.setData({
-          shareAssistantStaffID: shareAssistantStaffID
-        });
-        wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
-      }
-    } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
-      if (options.orgID && options.orgID.length > 0) {
-        app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-        that.setData({
-          shareOrgID: options.orgID
-        });
-        wx.setStorageSync("shareOrgID", options.orgID);
-      }
-      if (options.assistantStaffID && options.assistantStaffID.length > 0) {
-        app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-        that.setData({
-          shareAssistantStaffID: options.assistantStaffID
-        });
-        wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
-      }
-    }
-    wx.showLoading({
-      title: '拼命加载中...',
-    });
-    // 先监听是否尝试了登录：isStartLogin
-    app.watch((value) => {
-      // value为app.js中传入的值
-      console.log("是否尝试自动登录了：", value);
-      console.log("是否带参进入小程序：", app.globalData.isHaveOptions);
-      if (value) {
-        if (!that.data.isHaveWatched) {
-          that.data.isHaveWatched = true;
-          if (app.globalData.isInitInfo == "ready") {
-            console.log("尝试了且成功了");
-            that.initHomeData(); // 初始化参数
-          } else {
-            console.log("尝试了没成功");
-            that.getDefaulShowInfo(); // 初始化调用请求方法
-          }
-        }
-      }
-    }, "isStartLogin");
-    commonFun.startLoginFun(options); // 尝试自动登录
+    console.log("初始判断机构ID完毕");
   },
 
   /**
@@ -201,8 +83,12 @@ Page({
    */
   onShow: function() {
     let that = this;
-    if (that.data.isSearchState) {
+    if (app.globalData.isInitInfo == "ready") {
+      console.log("尝试过登录，成功了");
       that.initHomeData(); // 初始化参数
+    } else {
+      console.log("尝试过登录，失败了");
+      that.getDefaulShowInfo(); // 初始化调用请求方法
     }
   },
 
@@ -278,7 +164,7 @@ Page({
         showOrgID: 2
       })
       that.initDefaultFun();
-    
+
     } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是桃子互联网医院减肥中心
       that.setData({
@@ -286,7 +172,7 @@ Page({
       })
       that.initCustomDefaultFun();
     } else if (that.data.gynecologyOrgID.indexOf(that.data.shareOrgID) > -1) {
-     // 判断是否是桃子互联网医院妇科诊疗中心
+      // 判断是否是桃子互联网医院妇科诊疗中心
       that.setData({
         showOrgID: 4
       })
@@ -322,7 +208,7 @@ Page({
     that.getSignedDoctor(); // 通过医助查询到的签约医生
     setTimeout(() => {
       wx.hideLoading();
-      // wx.showShareMenu(); // 显示本页面右上角的分享功能
+      that.data.isSearchState = true;
     }, 1000)
   },
 
@@ -343,7 +229,6 @@ Page({
     that.getSignedDoctor(); // 通过医助查询到的签约医生
     setTimeout(() => {
       wx.hideLoading();
-      // wx.showShareMenu(); // 显示本页面右上角的分享功能
     }, 1000)
   },
 
@@ -364,7 +249,6 @@ Page({
     that.getSignedDoctor(); // 通过医助查询到的签约医生
     setTimeout(() => {
       wx.hideLoading();
-      // wx.showShareMenu(); // 显示本页面右上角的分享功能
     }, 1000)
   },
 
@@ -524,11 +408,10 @@ Page({
   /** 获取默认进小程序显示信息  */
   getDefaulShowInfo() {
     let that = this;
-    console.log("houShiOrgID=======" + that.data.houShiOrgID);
-    console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
-    console.log("loseweightOrgID=======" + that.data.loseweightOrgID);
-    console.log("gynecologyOrgID=======" + that.data.gynecologyOrgID);
-    console.log("shareOrgID=======" + that.data.shareOrgID);
+    that.setData({
+      shareOrgID: wx.getStorageSync("shareOrgID"),
+      shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
+    });
     // 判断是否是侯丽萍中医院远程门诊
     if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是侯丽萍医院
@@ -545,7 +428,7 @@ Page({
       that.setData({
         showOrgID: 3
       })
-       // 判断是否是桃子互联网医院妇科诊疗中心
+      // 判断是否是桃子互联网医院妇科诊疗中心
     } else if (that.data.gynecologyOrgID.indexOf(that.data.shareOrgID) > -1) {
       that.setData({
         showOrgID: 4
