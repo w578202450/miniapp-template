@@ -446,6 +446,13 @@ module.exports = {
   },
 
   /**
+   * 获取医生手记详情
+   */
+  inquiryCaseDetail: function inquiryCaseDetail(params) {
+    return request('api/tmc/inquiryCase/detail', true, 'get', params);
+  },
+
+  /**
    * 文章
    */
   /**

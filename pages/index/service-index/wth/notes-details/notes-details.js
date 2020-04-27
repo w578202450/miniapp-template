@@ -9,6 +9,7 @@ Page({
    */
   data: {
     personInfo: {},
+    keyID: "",
     inquiryIcon: "/images/inquiry/inquiry_article_add.png",
     queryStatusParamsOfUseful: {}, // 查询觉得有用按钮状态参数
     queryStatisticsParamsOfUseful: {}, // 查询觉得有用统计计数
@@ -34,11 +35,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      personInfo: JSON.parse(options.personData)
-    })
-    console.log('personInfo----', JSON.parse(options.personData))
-    WxParse.wxParse('inquiryCase', 'html', decodeURIComponent(this.data.personInfo.content), this, 20);
+    this.keyID = options.keyID;
+    console.log('this.keyID---------', this.keyID)
     this.initInfo();
   },
   /**
@@ -53,26 +51,30 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return commonFun.onShareAppMessageFun();
+    let pagePath = "/pages/index/service-index/wth/notes-details/notes-details";
+    let httpParams = 'keyID=' + this.keyID;
+    return commonFun.onShareAppMessageFun(pagePath, httpParams);
   },
   /**
    * 数据初始化
    */
   initInfo() {
+    //获取手记详情
+    this.getNoteDetailByKeyID();
     // 观看计数
     this.viewCountIncrease();
     // 组件参数初始化
     this.data.increaseParamsOfUserful = {
       systemCode: "tmc",
       bizCode: "inquiryCase",
-      objectID: this.data.personInfo.keyID,
+      objectID: this.keyID,
       statisticsCode: "useful",
       operatorID: app.globalData.patientID
     };
     this.data.queryStatusParamsOfUseful = {
       systemCode: "tmc",
       bizCode: "inquiryCase",
-      objectID: this.data.personInfo.keyID,
+      objectID: this.keyID,
       operateCode: "useful",
       operateID: app.globalData.patientID,
       orgID: "",
@@ -81,7 +83,7 @@ Page({
     this.data.queryStatisticsParamsOfUseful = {
       systemCode: "tmc",
       bizCode: "inquiryCase",
-      objectID: this.data.personInfo.keyID,
+      objectID: this.keyID,
       statisticsCode: "useful",
       orgID: "",
       deptID: "",
@@ -90,7 +92,7 @@ Page({
     this.data.queryStatisticsParamsOfView = {
       systemCode: "tmc",
       bizCode: "inquiryCase",
-      objectID: this.data.personInfo.keyID,
+      objectID: this.keyID,
       statisticsCode: "view",
       orgID: "",
       deptID: "",
@@ -104,18 +106,37 @@ Page({
       conmmentQueryParams: {
         systemCode: "tmc",
         bizCode: "inquiryCase",
-        objectID: this.data.personInfo.keyID
+        objectID: this.keyID
       },
       conmmentPublishParams: {
         systemCode: "tmc",
         bizCode: "inquiryCase",
         deptID: "",
         userID: "",
-        objectID: this.data.personInfo.keyID
+        objectID: this.keyID
       }
     })
 
   },
+  /**
+   * 获取手记类容
+   */
+  getNoteDetailByKeyID() {
+
+    HTTP.inquiryCaseDetail({
+      "keyID": this.keyID,
+    }).then(res => {
+      console.log('getNoteDetailByKeyID--------', res)
+      if (res.code == 0 && res.data) {
+        this.data.personInfo = res.data;
+        WxParse.wxParse('inquiryCase', 'html', decodeURIComponent(res.data.content), this, 20);
+        this.setData({
+          personInfo: res.data
+        })
+      }
+    })
+  },
+
   /**
    * 观看次数记数
    */
@@ -123,7 +144,7 @@ Page({
     this.data.increaseParamsOfView = {
       systemCode: "tmc",
       bizCode: "inquiryCase",
-      objectID: this.data.personInfo.keyID,
+      objectID: this.keyID,
       statisticsCode: "view",
       operatorID: app.globalData.patientID
     };

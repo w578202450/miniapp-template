@@ -43,7 +43,7 @@ Component({
     toDetail: function() {
       this.data.paersonInfo.content = encodeURIComponent(this.data.paersonInfo.content);
       wx.navigateTo({
-        url: "/pages/index/service-index/wth/notes-details/notes-details?personData=" + JSON.stringify(this.data.paersonInfo) // 传输对象、数组时，需要转换为字符窜
+        url: "/pages/index/service-index/wth/notes-details/notes-details?keyID=" + this.data.paersonInfo.keyID // 传输对象、数组时，需要转换为字符窜
       });
     }
   }

@@ -1,5 +1,6 @@
 // pages/index/service-index/wth/notes-list/notes-list.js
 const HTTP = require('../../../../../utils/http-util');
+const commonFun = require('../../../../../utils/common.js');
 const app = getApp()
 Page({
 
@@ -29,6 +30,18 @@ Page({
     this.data.httpParams = JSON.parse(options.httpParams);
     this.inquiryCaseList();
   },
+  /**
+   * 分享
+   */
+  onShareAppMessage: function() {
+    let pagePath = "/pages/index/service-index/wth/notes-list/notes-list";
+    let tempHttpParams = 'httpParams=' + JSON.stringify({
+      sectionID: this.data.httpParams.sectionID,
+      orgID: this.data.httpParams.orgID,
+      doctorStaffID: this.data.httpParams.doctorStaffID,
+    });
+    return commonFun.onShareAppMessageFun(pagePath, tempHttpParams);
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -46,7 +59,7 @@ Page({
     let item = e.currentTarget.dataset.item;
     item.content = encodeURIComponent(item.content);
     wx.navigateTo({
-      url: "/pages/index/service-index/wth/notes-details/notes-details?personData=" + JSON.stringify(item) // 传输对象、数组时，需要转换为字符窜
+      url: "/pages/index/service-index/wth/notes-details/notes-details?keyID=" + item.keyID // 传输对象、数组时，需要转换为字符窜
     });
   },
   /**

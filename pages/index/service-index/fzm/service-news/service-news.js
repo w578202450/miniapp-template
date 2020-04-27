@@ -331,13 +331,11 @@ Component({
       let params = {
         title: this.data.articleTitles[this.data.currentIndex].classifyName,
         keyID: item.keyID,
-        useful: item.useful,
-        viewCount: item.viewCount,
         departmentId: this.data.baseParams.departmentCanSee,
         doctorId: this.data.baseParams.doctorCanSee
       }
       wx.navigateTo({
-        url: "/pages/index/service-index/fzm/service-news-details/service-news-details?materialData=" + JSON.stringify(params),
+        url: "/pages/index/service-index/fzm/service-news-details/service-news-details?httpParams=" + JSON.stringify(params),
       })
 
     },

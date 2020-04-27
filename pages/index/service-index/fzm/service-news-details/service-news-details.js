@@ -1,5 +1,6 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
+const commonFun = require('../../../../../utils/common.js');
 const app = getApp()
 Page({
 
@@ -18,14 +19,14 @@ Page({
   },
 
   /**
-  * 卸载页面
-  */
-  onUnload: function () {
+   * 卸载页面
+   */
+  onUnload: function() {
     if (this.data.hasView) {
       const pages = getCurrentPages();
       const perpage = pages[pages.length - 2]
-      perpage.refreshStatistics('article','view');
-      
+      perpage.refreshStatistics('article', 'view');
+
     }
 
   },
@@ -35,7 +36,7 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    this.articleDatas = JSON.parse(options.materialData);
+    this.articleDatas = JSON.parse(options.httpParams);
     this.initInfo();
   },
 
@@ -45,6 +46,13 @@ Page({
   onReady: function() {
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialog");
+  },
+  /**
+   * 分享
+   */
+  onShareAppMessage: function() {
+    let httpParams = 'httpParams=' + JSON.stringify(this.articleDatas);
+    return commonFun.onShareAppMessageFun("/pages/index/service-index/fzm/service-news-details/service-news-details", httpParams);
   },
   /**
    * 数据初始化
@@ -96,8 +104,8 @@ Page({
     this.setData({
       queryStatusParamsOfUseful: this.data.queryStatusParamsOfUseful,
       increaseParamsOfUserful: this.data.increaseParamsOfUserful,
-      queryStatisticsParamsOfUseful: this.data.queryStatisticsParamsOfUseful, 
-      queryStatisticsParamsOfView:this.data.queryStatisticsParamsOfView
+      queryStatisticsParamsOfUseful: this.data.queryStatisticsParamsOfUseful,
+      queryStatisticsParamsOfView: this.data.queryStatisticsParamsOfView
     })
   },
   /**
@@ -108,15 +116,16 @@ Page({
     HTTP.getArticleByKeyID({
       "keyID": this.articleDatas.keyID,
     }).then(res => {
+      console.log('getArticleByKeyID--------', res)
       if (res.code == 0 && res.data) {
         if (res.data.articleType === 0) {
           WxParse.wxParse('article', 'html', res.data.content, this, 20);
         }
         this.setData({
           articleData: res.data,
-          conmmentQueryParams:{
-            systemCode:"tmc",
-            bizCode:"article",
+          conmmentQueryParams: {
+            systemCode: "tmc",
+            bizCode: "article",
             objectID: this.articleDatas.keyID
           },
           conmmentPublishParams: {
