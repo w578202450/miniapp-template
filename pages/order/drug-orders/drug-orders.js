@@ -94,7 +94,6 @@ Page({
         this.setData({
           list: this.data.list
         });
-        console.log(this.data.list);
       }).catch(e => {
         wx.hideNavigationBarLoading()
       })

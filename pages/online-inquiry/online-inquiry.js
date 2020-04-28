@@ -44,9 +44,9 @@ Page({
         var scan_url = decodeURIComponent(options.q);
         let shareOrgID = that.initOptionsFun(scan_url, "orgID");
         let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-        that.data.shareOrgID = shareOrgID ? shareOrgID: "";
+        that.data.shareOrgID = shareOrgID ? shareOrgID : "";
         wx.setStorageSync("shareOrgID", shareOrgID);
-        that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID: "";
+        that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID : "";
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
       } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -61,7 +61,8 @@ Page({
       }
     }
     orgName: app.globalData.orgName;
-    let sendOptions = { ...options };
+    let sendOptions = { ...options
+    };
     commonFun.startLoginFun(sendOptions);
     // console.log('---用户端系统信息---', app.globalData.systemInfo);
     that.initDocInfoFun();
@@ -86,7 +87,7 @@ Page({
   },
 
   /**转换传递的url参数 q */
-  initOptionsFun: function (scan_url, name) {
+  initOptionsFun: function(scan_url, name) {
     var reg = new RegExp("[^\?&]?" + encodeURI(name) + "=[^&]+");
     var arr = scan_url.match(reg);
     if (arr != null) {
@@ -104,16 +105,16 @@ Page({
     } else {
       wx.getStorage({
         key: 'personInfo',
-        success: function (res) {
+        success: function(res) {
           // console.log("获取用户缓存问诊信息成功：" + JSON.stringify(res));
           that.fetchDoctorInfo(res.data.doctorStaffID); // 获取主治医师信息
           that.fetchAssistantDoctorInfo(res.data.assistantStaffID); // 获取助理医生信息
         },
-        fail: function (err) {
+        fail: function(err) {
           // console.log("获取用户缓存问诊信息失败：" + JSON.stringify(err));
           that.getDefaultDocInfoFun();
         },
-        complete: function (e) {
+        complete: function(e) {
           that.setData({
             isSearchState: true
           });
@@ -212,9 +213,7 @@ Page({
    *  */
   toOnlineInqueryFun: function() {
     if (app.globalData.isInitInfo == "ready") {
-      wx.navigateTo({
-        url: '/pages/online-inquiry/inquiry/chat/chat'
-      });
+      commonFun.requestMsgFun();
     } else {
       let nextPageName = "chat";
       this.popup.showPopup(nextPageName); // 显示登录确认框

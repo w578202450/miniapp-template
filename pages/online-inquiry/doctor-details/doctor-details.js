@@ -1,5 +1,5 @@
-const HTTP = require('../../../utils/http-util')
-const commonFun = require('../../../utils/common')
+const HTTP = require('../../../utils/http-util');
+import { onShareAppMessageFun } from '../../../utils/common.js';
 const app = getApp();
 
 Page({
@@ -119,8 +119,9 @@ Page({
   },
   //右上角分享功能
   onShareAppMessage: function(res) {
-    let staffID = 'staffID=' + this.data.staffID;
-    return commonFun.onShareAppMessageFun('/pages/online-inquiry/doctor-details/doctor-details', staffID);
+    // let staffID = 'staffID=' + this.data.staffID;
+    // return onShareAppMessageFun('/pages/online-inquiry/doctor-details/doctor-details', staffID);
+    return onShareAppMessageFun();
   },
 
   // 去问诊

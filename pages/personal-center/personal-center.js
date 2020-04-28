@@ -1,5 +1,5 @@
 const app = getApp();
-const commonFun = require('../../utils/common');
+import { onShareAppMessageFun } from '../../utils/common.js';
 
 Page({
   data: {
@@ -64,7 +64,7 @@ Page({
    * 右上角分享功能
    */
   onShareAppMessage: function(res) {
-    return commonFun.onShareAppMessageFun();
+    return onShareAppMessageFun();
   },
 
   /**显示登录确认框 */

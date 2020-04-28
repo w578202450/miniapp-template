@@ -99,9 +99,7 @@ Page({
    *  */
   toOnlineInqueryFun: function() {
     if (app.globalData.isInitInfo == "ready") {
-      wx.navigateTo({
-        url: '/pages/online-inquiry/inquiry/chat/chat'
-      });
+      commonFun.requestMsgFun();
     } else {
       let nextPageName = "chat";
       this.popup.showPopup(nextPageName); // 显示登录确认框

@@ -105,7 +105,6 @@ Component({
         });
         return
       }
-      console.log("传递的参数：" + JSON.stringify(that.data.httpParams));
       let params = JSON.stringify(that.data.httpParams);
       wx.navigateTo({
         url: that.data.httpParams.nextPage + "?httpParams=" + params

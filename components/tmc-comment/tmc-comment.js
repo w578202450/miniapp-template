@@ -85,26 +85,24 @@ Component({
     inputoption() {
       this.setData({
         isInputting: true
-      })
+      });
     },
     /**
      * 键盘弹起
      */
     inputFocus(e) {
-      console.log(e, '键盘弹起', e.detail.height)
       this.setData({
         isInputting: true,
         textareaHeight: e.detail.height
-      })
+      });
     },
     /**
      * 键盘收起
      */
     inputBlur() {
-      console.log('键盘收起')
       this.setData({
         isInputting: false
-      })
+      });
     },
     /**
      * 点击发布按钮
@@ -160,9 +158,7 @@ Component({
               noMoreData: "已经到底了" // 没有更多数据 当前页数据不够一页
             }
           })
-          
         }
-        console.log('获取评论信息----', res.data);
       });
     },
     /**

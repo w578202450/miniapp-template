@@ -56,14 +56,12 @@ Component({
       if (this.data.currentState != 1) {
         return false;
       }
-      console.log('加载更多。。')
-      this.triggerEvent("loadMoreData")
+      this.triggerEvent("loadMoreData");
     },
     /**
      * 通过分页数据的数量与pageSize比对
      */
     handlePageDatas(dataList) {
-      console.log('dataList------', dataList)
       // 没有数据 或者 已经到底了
       if (dataList.length === 0) {
         if (this.data.pageInfo.pageIndex > 1) {

@@ -2,6 +2,8 @@
 <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
 <!-- 登录弹框 -->
 <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
+<!-- 导航栏 -->
+<navigation-bar navbarTitle="{{pageTitle}}" />
 <!-- 点赞、观看数组件 -->
 <view class="statistics-box" style="margin-top: 16rpx;margin-left: 32rpx">
   <tmc-statistics type="useful" isShowIcon="{{false}}" id="statistics" queryParams="{{queryStatisticsParamsOfUseful}}"></tmc-statistics>

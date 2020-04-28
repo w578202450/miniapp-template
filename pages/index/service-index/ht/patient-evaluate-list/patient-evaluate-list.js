@@ -1,6 +1,6 @@
 // pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.js
 const HTTP = require('../../../../../utils/http-util');
-const commonFun = require('../../../../../utils/common.js');
+import { onShareAppMessageFun } from '../../../../../utils/common.js';
 const app = getApp()
 Page({
 
@@ -89,13 +89,14 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    let obj = {
-      doctorID: this.data.httpParams.doctorID,
-      orgID: this.data.httpParams.orgID,
-      doctorName: this.data.httpParams.doctorName
-    };
-    let httpParams = 'httpParams=' + JSON.stringify(obj);
-    return commonFun.onShareAppMessageFun(this.data.httpParams.nextPage, httpParams);
+    // let obj = {
+    //   doctorID: this.data.httpParams.doctorID,
+    //   orgID: this.data.httpParams.orgID,
+    //   doctorName: this.data.httpParams.doctorName
+    // };
+    // let httpParams = 'httpParams=' + JSON.stringify(obj);
+    // return onShareAppMessageFun(this.data.httpParams.nextPage, httpParams);
+    return onShareAppMessageFun();
   },
 
   /**取消事件 */

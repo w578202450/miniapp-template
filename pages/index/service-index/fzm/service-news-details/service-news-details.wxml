@@ -1,6 +1,8 @@
 <import src="../../../../../components/wxParse/wxParse.wxml" />
 <!-- 登录弹框 -->
 <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
+<!-- 导航栏 -->
+<navigation-bar navbarTitle="{{pageTitle}}" />
 <!-- 标题 点赞、观看数-->
 <view class="header-box">
   <text class="title">{{articleData.title}}</text>

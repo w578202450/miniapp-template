@@ -1,8 +1,8 @@
 /*引入本地定义的json数据的js*/
 var addressData = require("../address.js");
-const HTTP = require('../../../utils/http-util')
-const Common = require('../../../common/common')
-const commonFun = require('../../../utils/common')
+const HTTP = require('../../../utils/http-util');
+const Common = require('../../../common/common');
+import { onShareAppMessageFun } from '../../../utils/common.js';
 
 /**
  * count=0表示当前创建地址为默认地址 
@@ -90,10 +90,6 @@ Page({
         noSelected: this.data.noSelected
       })
     }
-
-    console.log('--------', e);
-    console.log('--------', this.data.isFirstAddress);
-
   },
 
   /**
@@ -111,7 +107,6 @@ Page({
    * 地址选择器滚动列表
    */
   bindMultiPickerColumnChange(e) {
-    console.log('列', e.detail.column, '，行', e.detail.value);
     var data = {
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
@@ -371,6 +366,6 @@ Page({
   },
   //右上角分享功能
   onShareAppMessage: function(res) {
-    return commonFun.onShareAppMessageFun();
+    return onShareAppMessageFun();
   }
 })

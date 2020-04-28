@@ -1,5 +1,5 @@
 const HTTP = require('../../../utils/http-util');
-const commonFun = require('../../../utils/common');
+import { onShareAppMessageFun } from '../../../utils/common.js';
 
 let app = getApp()
 /**
@@ -215,6 +215,6 @@ Page({
   },
   //右上角分享功能
   onShareAppMessage: function(res) {
-    return commonFun.onShareAppMessageFun();
+    return onShareAppMessageFun();
   }
 })

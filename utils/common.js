@@ -172,17 +172,17 @@ function loginIM(userId) {
     console.log("===IM登录成功==="); // 登录成功
     wx.setStorageSync('myUsername', userId);
     if (nextPageName == "chat") {
-      // app.globalData.isInitInfo = "ready"; // 是否登录成功
+      app.globalData.isInitInfo = "ready"; // 是否登录成功
       app.globalData.isStartLogin = true; // 是否开始了自动登录
       setTimeout(() => {
         wx.hideLoading();
         wx.navigateTo({
           url: '/pages/online-inquiry/inquiry/chat/chat',
         });
-      }, 2000);
+      }, 1500);
     } else {
       wx.hideLoading();
-      // app.globalData.isInitInfo = "ready"; // 是否登录成功
+      app.globalData.isInitInfo = "ready"; // 是否登录成功
       app.globalData.isStartLogin = true; // 是否开始了自动登录
     }
   }).catch(function(imError) {
@@ -190,7 +190,7 @@ function loginIM(userId) {
     wx.hideLoading();
     wx.showToast({
       title: 'IM登录失败'
-    })
+    });
   });
 }
 
@@ -217,7 +217,6 @@ function getounionid(isLoginStatus) {
  */
 function fetchTempCode() {
   AUTH.fetchTempCode().then(function(res) {
-    console.log(res);
     wx.hideLoading();
     if (res.code) {
       wx.setStorageSync('code', res.code);
@@ -270,7 +269,6 @@ function getUserInfo(e) {
       wx.removeStorageSync("sessionKey");
       wx.removeStorageSync("code");
       AUTH.fetchTempCode().then(function(res) {
-        console.log(res);
         if (res.code) {
           wx.setStorageSync('code', res.code);
           getounionid();
@@ -286,8 +284,8 @@ function getUserInfo(e) {
  * 右上角的分享功能
  */
 function onShareAppMessageFun(sharePath, moreData) {
-  console.log(sharePath);
-  console.log(moreData);
+  console.log('sharePath:' + sharePath);
+  console.log('moreData:' + moreData);
   let sharePaths = sharePath ? sharePath : "/pages/index/home-index/home-index";
   let shaOrgId = wx.getStorageSync("shareOrgID");
   let shaAssId = wx.getStorageSync("shareAssistantStaffID");
@@ -310,10 +308,33 @@ function onShareAppMessageFun(sharePath, moreData) {
   }
 }
 
+/**立即问诊（已登录），获取服务通知授权 */
+function requestMsgFun() {
+  wx.requestSubscribeMessage({
+    tmplIds: ['Bbgs8xD9AhulzEIr1o6XWrWMFJsppTL2CfycqPgqw8o', 'ZXN1Mte_jwfsTTwZDFB8ByOMhzeRjf5e6tj3EhokqWg', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0'],
+    success(res) {
+    },
+    fail(err) {
+      wx.showToast({
+        title: JSON.stringify(err.errMsg),
+        icon: "none",
+        duration: 3000
+      });
+    },
+    complete(msg) {
+      console.log(msg);
+      wx.navigateTo({
+        url: '/pages/online-inquiry/inquiry/chat/chat'
+      });
+    }
+  });
+}
+
 module.exports = {
   startLoginFun: startLoginFun,
   getUserInfo: getUserInfo,
   getPatientInfo: getPatientInfo,
   getounionid: getounionid,
-  onShareAppMessageFun: onShareAppMessageFun
+  onShareAppMessageFun: onShareAppMessageFun,
+  requestMsgFun: requestMsgFun
 }

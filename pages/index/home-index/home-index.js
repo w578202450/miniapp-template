@@ -1,6 +1,6 @@
 // pages/index/home-index/home-index.js
 const app = getApp();
-const commonFun = require('../../../utils/common.js');
+import { onShareAppMessageFun } from '../../../utils/common.js';
 const HTTP = require('../../../utils/http-util');
 Page({
 
@@ -68,7 +68,34 @@ Page({
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
-    console.log("初始判断机构ID完毕");
+    // 先监听是否尝试了登录：isStartLogin
+    if (app.globalData.isStartLogin) {
+      if (app.globalData.isInitInfo == "ready") {
+        console.log("尝试登录，成功了");
+        that.initHomeData(); // 初始化参数
+      } else {
+        console.log("尝试登录，失败了");
+        that.getDefaulShowInfo(); // 初始化调用请求方法
+      }
+    } else {
+      app.watch((value) => {
+        // value为app.js中传入的值
+        console.log("是否尝试自动登录了：", value);
+        console.log("是否带参进入小程序：", app.globalData.isHaveOptions);
+        if (value) {
+          if (!that.data.isHaveWatched) {
+            that.data.isHaveWatched = true;
+            if (app.globalData.isInitInfo == "ready") {
+              console.log("尝试登录，成功了");
+              that.initHomeData(); // 初始化参数
+            } else {
+              console.log("尝试登录，失败了");
+              that.getDefaulShowInfo(); // 初始化调用请求方法
+            }
+          }
+        }
+      }, "isStartLogin");
+    }
   },
 
   /**
@@ -83,12 +110,8 @@ Page({
    */
   onShow: function() {
     let that = this;
-    if (app.globalData.isInitInfo == "ready") {
-      console.log("尝试过登录，成功了");
+    if (that.data.isSearchState) {
       that.initHomeData(); // 初始化参数
-    } else {
-      console.log("尝试过登录，失败了");
-      that.getDefaulShowInfo(); // 初始化调用请求方法
     }
   },
 
@@ -124,7 +147,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return commonFun.onShareAppMessageFun();
+    return onShareAppMessageFun();
   },
 
   /**转换传递的url参数 q */
@@ -146,10 +169,6 @@ Page({
       shareOrgID: wx.getStorageSync("shareOrgID"),
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
-    // console.log("houShiOrgID=======" + that.data.houShiOrgID);
-    // console.log("dazhongOrgID=======" + that.data.dazhongOrgID);
-    // console.log("shareOrgID=======" + that.data.shareOrgID);
-    // console.log("loseweightOrgID=======" + that.data.loseweightOrgID);
 
     // 判断是否是侯丽萍中医院远程门诊
     if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
@@ -209,10 +228,10 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       that.data.isSearchState = true;
-    }, 1000)
+    }, 1500)
   },
 
-  /**初始化默认加载数据 */
+  /**初始化 大冢医院 默认加载数据 */
   initDefaultFun: function() {
     let that = this;
     wx.showLoading({
@@ -223,9 +242,6 @@ Page({
     });
     that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
-    // that.getTeamIntroduce(); // 获取医师团队介绍
-    // that.getBrowseCount(); // 获取用户浏览数
-    // that.getShareCount(); // 获取用户分享数
     that.getSignedDoctor(); // 通过医助查询到的签约医生
     setTimeout(() => {
       wx.hideLoading();
@@ -242,10 +258,6 @@ Page({
       isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
     });
     that.getHospitalInfo(); //查询医院详情信息
-    // that.getBanner(); // 获取首页banner
-    // that.getTeamIntroduce(); // 获取医师团队介绍
-    // that.getBrowseCount(); // 获取用户浏览数
-    // that.getShareCount(); // 获取用户分享数
     that.getSignedDoctor(); // 通过医助查询到的签约医生
     setTimeout(() => {
       wx.hideLoading();
@@ -261,7 +273,6 @@ Page({
         paraCode: "OP_TMC_ORG_BANNER"
       })
       .then(res => {
-        console.log("===首页banner===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             homeBannerDefaultUrl: res.data.paraValue
@@ -279,7 +290,6 @@ Page({
         paraCode: "OP_TMC_ORG_GROUPDESC"
       })
       .then(res => {
-        // console.log("===获取医师团队介绍===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             doctorTeamIntroduce: res.data.paraValue
@@ -297,7 +307,6 @@ Page({
         paraCode: "OV_TMC_USER_VIEWS"
       })
       .then(res => {
-        // console.log("===获取用户浏览数===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             browseCount: res.data.paraValue
@@ -315,7 +324,6 @@ Page({
         paraCode: "OV_TMC_USER_SHARES"
       })
       .then(res => {
-        // console.log("===获取用户分享数===" + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             shareCount: res.data.paraValue
@@ -333,7 +341,6 @@ Page({
         orgID: that.data.shareOrgID
       })
       .then(res => {
-        console.log("!!!!!通过医助查询到的签约医生!!!!!" + "医助ID-assistantStaffID:" + that.data.shareAssistantStaffID + "," + JSON.stringify(res));
         if (res.code == 0 && res.data) {
           that.setData({
             signedDoctor: res.data
@@ -342,13 +349,8 @@ Page({
               orgId: that.data.shareOrgID
             })
             .then(res => {
-              // console.log("!!!!!获取医师团队列表!!!!!" + JSON.stringify(res));
               if (res.code == 0 && res.data) {
                 doctorTeamList = res.data;
-                // 医师团队列表里是否存在签约那个医生
-                // const physicianTeam = that.data.doctorTeamList.find(
-                //   it => it.doctorDTOForTMC.staffId === this.data.signedDoctor.doctorDTOForTMC.staffId
-                // );
                 for (let i = 0; i < doctorTeamList.length; i++) {
                   let temp = doctorTeamList[i];
                   if (temp.doctorStaffID === this.data.signedDoctor.doctorStaffID) {
@@ -357,9 +359,6 @@ Page({
                   }
                 }
                 doctorTeamList.unshift(this.data.signedDoctor);
-                // if (doctorTeamList.length == 1) {
-                //   doctorTeamList.push({});
-                // }
                 that.setData({
                   newArrayDoctorList: doctorTeamList
                 });
@@ -371,7 +370,6 @@ Page({
               orgId: that.data.shareOrgID
             })
             .then(res => {
-              // console.log("!!!!!无签约医生获取医师团队列表!!!!!" + JSON.stringify(res));
               if (res.code == 0 && res.data) {
                 that.setData({
                   newArrayDoctorList: res.data
@@ -389,7 +387,6 @@ Page({
       orgID: that.data.shareOrgID
     }
     HTTP.getHospitalInfo(params).then(res => {
-      console.log("===获取医院详情简介信息===" + "orgID:" + that.data.shareOrgID + " res:" + JSON.stringify(res));
       if (res.code == 0 && res.data) {
         that.setData({
           hospitalDetail: res.data
@@ -399,7 +396,7 @@ Page({
           // 动态设置小程序的navigationBarTitleText
           wx.setNavigationBarTitle({
             title: app.globalData.orgName
-          })
+          });
         }
       }
     });
@@ -450,7 +447,6 @@ Page({
       entryType: ""
     }
     HTTP.getDefaultDocInfo(params).then(res => {
-      console.log("获取默认的首页信息：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           shareOrgID: res.data.orgID,
@@ -498,31 +494,13 @@ Page({
 
   // 分享给更多需要的人
   shareMore() {
-    commonFun.onShareAppMessageFun();
+    onShareAppMessageFun();
   },
 
   /**操作：立即进入专家门诊 */
   toServiceIndexFun: function() {
-    // wx.switchTab({
-    //   url: '/pages/index/service-index/service-index'
-    // });
-    wx.requestSubscribeMessage({
-      // tmplIds: ['Bbgs8xD9AhulzEIr1o6XWrWMFJsppTL2CfycqPgqw8o', 'z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', 'ZXN1Mte_jwfsTTwZDFB8ByOMhzeRjf5e6tj3EhokqWg', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0', '3leCGE6lKav48Wg0aZFC1JOpUVSY2RCAro5DpD6Fax8'],
-      tmplIds: ['Bbgs8xD9AhulzEIr1o6XWrWMFJsppTL2CfycqPgqw8o', 'z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', 'ZXN1Mte_jwfsTTwZDFB8ByOMhzeRjf5e6tj3EhokqWg'],
-      success(res) {
-        console.log(res);
-        wx.switchTab({
-          url: '/pages/index/service-index/service-index'
-        });
-      },
-      fail(err) {
-        console.log(err);
-        wx.showToast({
-          title: JSON.stringify(err.errMsg),
-          icon: none,
-          duration: 3000
-        });
-      }
+    wx.switchTab({
+      url: '/pages/index/service-index/service-index'
     });
   }
 })

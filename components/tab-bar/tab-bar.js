@@ -1,5 +1,6 @@
 // components/tab-bar/tab-bar.js
 const app = getApp();
+import { requestMsgFun } from '../../utils/common.js';
 Component({
   /**
    * 组件的属性列表
@@ -40,9 +41,7 @@ Component({
       console.log(app.globalData.isInitInfo);
       if (index == 1) {
         if (app.globalData.isInitInfo == "ready") {
-          wx.navigateTo({
-            url: '/pages/online-inquiry/inquiry/chat/chat'
-          });
+          requestMsgFun(); // 获取服务通知授权，跳转问诊聊天
         } else {
           // wx.switchTab({
           //   url: that.data.tabbar.list[index].pagePath

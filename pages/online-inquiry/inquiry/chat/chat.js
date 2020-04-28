@@ -1,7 +1,7 @@
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
 var HTTP = require('../../../../utils/http-util');
-const commonFun = require('../../../../utils/common.js');
+import { onShareAppMessageFun } from '../../../../utils/common.js';
 var msgStorage = require("../../../../utils/msgstorage");
 var tim = app.globalData.tim;
 var TIM = app.globalData.TIM;
@@ -364,7 +364,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return commonFun.onShareAppMessageFun();
+    return onShareAppMessageFun();
   },
 
   /*从storage中获取患者信息 */

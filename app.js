@@ -35,10 +35,10 @@ App({
     AUTH.getNetworkType();
     AUTH.onNetworkStatusChange();
     // 处理来源的参数
-    wx.showModal({
-      title: '进入小程序携带的参数',
-      content: JSON.stringify(option),
-    });
+    // wx.showModal({
+    //   title: '进入小程序携带的参数',
+    //   content: JSON.stringify(option),
+    // });
     that.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     let options = option.query;
     // 生产
@@ -134,7 +134,53 @@ App({
     });
   },
 
-  onShow: function() {},
+  onShow: function(option) {
+    if (that.globalData.isStartLogin && that.globalData.loginNum > 0) {
+      // 处理来源的参数
+      // wx.showModal({
+      //   title: '进入小程序携带的参数2',
+      //   content: JSON.stringify(option),
+      // });
+      that.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
+      let options = option.query;
+      let isHaveOrgID = false;
+      let isHaveAssiID = false;
+      let shareOrgID = "";
+      let shareAssistantStaffID = "";
+      if (options.q) { // 通过扫码进入时：q的值为url带参
+        var scan_url = decodeURIComponent(options.q);
+        shareOrgID = that.initOptionsFun(scan_url, "orgID");
+        shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
+        if (shareOrgID && shareOrgID.length > 0) {
+          isHaveOrgID = true;
+        }
+        if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
+          isHaveAssiID = true;
+        }
+      } else if (options.assistantStaffID && options.orgID) { // 通过分享的小程序进入时：直接带参
+        if (options.orgID && options.orgID.length > 0) {
+          shareOrgID = options.orgID;
+          isHaveOrgID = true;
+        }
+        if (options.assistantStaffID && options.assistantStaffID.length > 0) {
+          shareAssistantStaffID = options.assistantStaffID;
+          isHaveAssiID = true;
+        }
+      }
+      if (isHaveOrgID && isHaveAssiID) {
+        that.globalData.isHaveOptions = true; // 进入小程序携带有参数
+        if (shareOrgID != wx.getStorageSync("shareOrgID") || shareAssistantStaffID != wx.getStorageSync("shareAssistantStaffID")) {
+          console.log("切换医生医助");
+          wx.setStorageSync("shareOrgID", shareOrgID);
+          wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
+          wx.showLoading({
+            title: '拼命加载中...',
+          });
+          that.startLoginFun();
+        }
+      }
+    }
+  },
 
   watch: function(method, globalDataName) {
     var obj = that.globalData;
@@ -285,6 +331,7 @@ App({
       that.globalData.isInitInfo = 0; // 登录初始化用户数据失败
       that.fetchTempCode();
     }
+    that.globalData.loginNum = that.globalData.loginNum + 1;
   },
 
   /** 获取基础数据*/
@@ -417,7 +464,6 @@ App({
    */
   fetchTempCode: function() {
     AUTH.fetchTempCode().then(function(res) {
-      console.log(res);
       wx.hideLoading();
       if (res.code) {
         wx.setStorageSync('code', res.code);
@@ -429,6 +475,7 @@ App({
     tim: null,
     TIM: null,
     isInitInfo: 0, // 0：未登录  ready：已登录
+    loginNum: 0, // 登录次数
     isHaveOptions: false, // 进入小程序是否携带参数
     isStartLogin: false, // 是否尝试了自动登录
     userInfo: {},

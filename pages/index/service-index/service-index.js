@@ -1,6 +1,6 @@
 // pages/index/service-index/service-index.js
 const app = getApp();
-const commonFun = require('../../../utils/common.js');
+import { onShareAppMessageFun, requestMsgFun } from '../../../utils/common.js';
 const HTTP = require('../../../utils/http-util');
 Page({
   /**
@@ -147,7 +147,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return commonFun.onShareAppMessageFun("/pages/index/service-index/service-index");
+    return onShareAppMessageFun("/pages/index/service-index/service-index");
   },
 
   /**转换传递的url参数 q */
@@ -167,9 +167,6 @@ Page({
     that.data.shareOrgID = wx.getStorageSync("shareOrgID");
     that.data.shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
     that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
-    console.log("-------专家门诊参数-------");
-    console.log(that.data);
-    console.log("-------------------------");
     that.fetchDoctorInfo(that.data.shareDoctorStaffID); // 获取主治医师信息
     that.fetchAssistantDoctorInfo(that.data.shareAssistantStaffID); // 获取助理医生信息
   },
@@ -187,7 +184,6 @@ Page({
               doctorInfo: res.data,
               isSearchState: true
             });
-            console.log("获取主治医师信息:" + JSON.stringify(res.data));
             app.globalData.doctorInfo = res.data;
             wx.setStorageSync('doctorInfo', res.data);
             that.getHospitalInfo(res.data.orgID); //查询医院详情信息
@@ -222,7 +218,6 @@ Page({
             });
             wx.setStorageSync('assistantInfo', res.data);
             app.globalData.assistantInfo = res.data;
-            // console.log("-------助理医生信息------" + JSON.stringify(res.data));
             // 获取助理医生的专治疾病
             that.getDoctorDiseaseByDoctorID(res.data.doctorID).then(function(res) {
               that.setData({
@@ -274,7 +269,6 @@ Page({
       doctorStaffID: doctorStaffID
     };
     HTTP.orderCommentGet(params).then(res => {
-      // console.log("获取的患者评价信息：" + JSON.stringify(res.data));
       if (res.code == 0 && res.data) {
         that.setData({
           ["evaluateAllData.evaluateData"]: res.data,
@@ -311,9 +305,7 @@ Page({
    * 获取文章模块的分类
    */
   getToolClassifyById(defaultOrgID, doctorStaffID, departmentCanSee) {
-
     let orgID = wx.getStorageSync("shareOrgID") || defaultOrgID;
-    console.log('getToolClassifyById----------newOrgID----' + orgID + "oldOrgID----" + this.data.articleCurrentOrgID)
     // 限制onShow频繁刷新 只有orgID变化的情况下 才进行刷新
     if (orgID === this.data.articleCurrentOrgID) {
       return;
@@ -385,9 +377,7 @@ Page({
    *  */
   toOnlineInqueryFun: function() {
     if (app.globalData.isInitInfo == "ready") {
-      wx.navigateTo({
-        url: '/pages/online-inquiry/inquiry/chat/chat'
-      });
+      requestMsgFun();
     } else {
       let nextPageName = "chat";
       this.popup.showPopup(nextPageName); // 显示登录确认框
@@ -450,10 +440,8 @@ Page({
     wx.makePhoneCall({
       phoneNumber: '02864553998',
       success: function() {
-        console.log("拨打电话成功！");
       },
       fail: function() {
-        console.log("拨打电话失败！");
       }
     })
   },
@@ -475,7 +463,6 @@ Page({
       orgID: orgID
     }
     HTTP.getHospitalInfo(params).then(res => {
-      // console.log("===获取医院信息===" + JSON.stringify(res));
       if (res.code == 0) {
         if (res.data) {
           that.setData({

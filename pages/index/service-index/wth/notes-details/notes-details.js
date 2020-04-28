@@ -1,6 +1,9 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
-const commonFun = require('../../../../../utils/common.js');
+import {
+  onShareAppMessageFun,
+  requestMsgFun
+} from '../../../../../utils/common.js';
 const app = getApp()
 Page({
 
@@ -8,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageTitle: "康复案例详情", // 页面标题
     personInfo: {},
     keyID: "",
     inquiryIcon: "/images/inquiry/inquiry_article_add.png",
@@ -36,7 +40,6 @@ Page({
    */
   onLoad: function(options) {
     this.keyID = options.keyID;
-    console.log('this.keyID---------', this.keyID)
     this.initInfo();
   },
   /**
@@ -53,7 +56,7 @@ Page({
   onShareAppMessage: function() {
     let pagePath = "/pages/index/service-index/wth/notes-details/notes-details";
     let httpParams = 'keyID=' + this.keyID;
-    return commonFun.onShareAppMessageFun(pagePath, httpParams);
+    return onShareAppMessageFun(pagePath, httpParams);
   },
   /**
    * 数据初始化
@@ -122,17 +125,15 @@ Page({
    * 获取手记类容
    */
   getNoteDetailByKeyID() {
-
     HTTP.inquiryCaseDetail({
       "keyID": this.keyID,
     }).then(res => {
-      console.log('getNoteDetailByKeyID--------', res)
       if (res.code == 0 && res.data) {
         this.data.personInfo = res.data;
         WxParse.wxParse('inquiryCase', 'html', decodeURIComponent(res.data.content), this, 20);
         this.setData({
           personInfo: res.data
-        })
+        });
       }
     })
   },
@@ -160,10 +161,8 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo) {
-      wx.navigateTo({
-        url: '/pages/online-inquiry/inquiry/chat/chat'
-      });
+    if (app.globalData.isInitInfo == "ready") {
+      requestMsgFun();
     } else {
       let nextPageName = "chat";
       this.popup.showPopup(nextPageName); // 显示登录确认框

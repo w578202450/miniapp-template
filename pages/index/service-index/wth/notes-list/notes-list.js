@@ -1,7 +1,7 @@
 // pages/index/service-index/wth/notes-list/notes-list.js
 const HTTP = require('../../../../../utils/http-util');
-const commonFun = require('../../../../../utils/common.js');
-const app = getApp()
+import { onShareAppMessageFun } from '../../../../../utils/common.js';
+const app = getApp();
 Page({
 
   /**
@@ -34,13 +34,14 @@ Page({
    * 分享
    */
   onShareAppMessage: function() {
-    let pagePath = "/pages/index/service-index/wth/notes-list/notes-list";
-    let tempHttpParams = 'httpParams=' + JSON.stringify({
-      sectionID: this.data.httpParams.sectionID,
-      orgID: this.data.httpParams.orgID,
-      doctorStaffID: this.data.httpParams.doctorStaffID,
-    });
-    return commonFun.onShareAppMessageFun(pagePath, tempHttpParams);
+    // let pagePath = "/pages/index/service-index/wth/notes-list/notes-list";
+    // let tempHttpParams = 'httpParams=' + JSON.stringify({
+    //   sectionID: this.data.httpParams.sectionID,
+    //   orgID: this.data.httpParams.orgID,
+    //   doctorStaffID: this.data.httpParams.doctorStaffID,
+    // });
+    // return onShareAppMessageFun(pagePath, tempHttpParams);
+    return onShareAppMessageFun();
   },
 
   /**

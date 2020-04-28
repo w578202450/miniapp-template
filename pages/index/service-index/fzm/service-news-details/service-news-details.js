@@ -1,6 +1,6 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
-const commonFun = require('../../../../../utils/common.js');
+import { onShareAppMessageFun, requestMsgFun } from '../../../../../utils/common.js';
 const app = getApp()
 Page({
 
@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageTitle: "", // 页面标题
     articleDatas: {}, // 文章详情
     inquiryIcon: "/images/inquiry/inquiry_article_add.png",
     queryStatusParamsOfUseful: {}, // 查询觉得有用按钮状态参数
@@ -26,9 +27,7 @@ Page({
       const pages = getCurrentPages();
       const perpage = pages[pages.length - 2]
       perpage.refreshStatistics('article', 'view');
-
     }
-
   },
 
   /**
@@ -52,7 +51,7 @@ Page({
    */
   onShareAppMessage: function() {
     let httpParams = 'httpParams=' + JSON.stringify(this.articleDatas);
-    return commonFun.onShareAppMessageFun("/pages/index/service-index/fzm/service-news-details/service-news-details", httpParams);
+    return onShareAppMessageFun("/pages/index/service-index/fzm/service-news-details/service-news-details", httpParams);
   },
   /**
    * 数据初始化
@@ -62,10 +61,9 @@ Page({
     this.getArticleByKeyID();
     // 观看计数
     this.viewCountIncrease();
-    // 动态设置标题
-    wx.setNavigationBarTitle({
-      title: this.articleDatas.title
-    })
+    this.setData({
+      pageTitle: this.articleDatas.title
+    });
     // 组件参数初始化
     this.data.queryStatusParamsOfUseful = {
       systemCode: "tmc",
@@ -116,7 +114,6 @@ Page({
     HTTP.getArticleByKeyID({
       "keyID": this.articleDatas.keyID,
     }).then(res => {
-      console.log('getArticleByKeyID--------', res)
       if (res.code == 0 && res.data) {
         if (res.data.articleType === 0) {
           WxParse.wxParse('article', 'html', res.data.content, this, 20);
@@ -162,10 +159,8 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo) {
-      wx.navigateTo({
-        url: '/pages/online-inquiry/inquiry/chat/chat'
-      });
+    if (app.globalData.isInitInfo == "ready") {
+      requestMsgFun();
     } else {
       let nextPageName = "chat";
       this.popup.showPopup(nextPageName); // 显示登录确认框
