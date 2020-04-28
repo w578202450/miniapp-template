@@ -311,7 +311,7 @@ function onShareAppMessageFun(sharePath, moreData) {
 /**立即问诊（已登录），获取服务通知授权 */
 function inquiryRequestMsgFun() {
   wx.requestSubscribeMessage({
-    tmplIds: ['Bbgs8xD9AhulzEIr1o6XWrWMFJsppTL2CfycqPgqw8o', 'ZXN1Mte_jwfsTTwZDFB8ByOMhzeRjf5e6tj3EhokqWg', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0'],
+    tmplIds: ['Bbgs8xD9AhulzEIr1o6XWmFQT-X6FchA5DrsC03Na-I', 'ZXN1Mte_jwfsTTwZDFB8B2O1lcIVX6-LXab-SX78QvQ', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0'],
     success(res) {
     },
     fail(err) {
