@@ -157,12 +157,10 @@ Page({
       })
       return;
     }
-    wx.navigateTo({
-      url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
-    })
+    // wx.navigateTo({
+    //   url: "/pages/order/order-details/order-details?orderID=" + this.data.list[index].keyID
+    // });
+    commonFun.payRequestMsgFun(this.data.list[index].keyID);
   },
 
   // 无数据,去咨询

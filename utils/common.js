@@ -309,7 +309,7 @@ function onShareAppMessageFun(sharePath, moreData) {
 }
 
 /**立即问诊（已登录），获取服务通知授权 */
-function requestMsgFun() {
+function inquiryRequestMsgFun() {
   wx.requestSubscribeMessage({
     tmplIds: ['Bbgs8xD9AhulzEIr1o6XWrWMFJsppTL2CfycqPgqw8o', 'ZXN1Mte_jwfsTTwZDFB8ByOMhzeRjf5e6tj3EhokqWg', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0'],
     success(res) {
@@ -330,11 +330,34 @@ function requestMsgFun() {
   });
 }
 
+/**立即支付（处方预览页、订单列表页） */
+function payRequestMsgFun(keyID) {
+  wx.requestSubscribeMessage({
+    tmplIds: ['z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', '3leCGE6lKav48Wg0aZFC1JOpUVSY2RCAro5DpD6Fax8'],
+    success(res) {
+    },
+    fail(err) {
+      wx.showToast({
+        title: JSON.stringify(err.errMsg),
+        icon: none,
+        duration: 3000
+      });
+    },
+    complete(msg) {
+      console.log(msg);
+      wx.navigateTo({
+        url: "/pages/order/order-details/order-details?orderID=" + keyID
+      });
+    }
+  });
+}
+
 module.exports = {
   startLoginFun: startLoginFun,
   getUserInfo: getUserInfo,
   getPatientInfo: getPatientInfo,
   getounionid: getounionid,
   onShareAppMessageFun: onShareAppMessageFun,
-  requestMsgFun: requestMsgFun
+  requestMsgFun: inquiryRequestMsgFun,
+  payRequestMsgFun: payRequestMsgFun
 }

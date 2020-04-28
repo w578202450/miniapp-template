@@ -118,12 +118,10 @@ Page({
    */
   payAction: function() {
     if (this.data.orderID){
-      wx.navigateTo({
-        url: "/pages/order/order-details/order-details?orderID=" + this.data.orderID,
-        success: function (res) { },
-        fail: function (res) { },
-        complete: function (res) { },
-      })
+      // wx.navigateTo({
+      //   url: "/pages/order/order-details/order-details?orderID=" + this.data.orderID
+      // });
+      commonFun.payRequestMsgFun(this.data.orderID);
     } else {
       wx.showToast({
         title: '缺少订单id',
