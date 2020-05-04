@@ -119,9 +119,9 @@ Page({
   },
   //右上角分享功能
   onShareAppMessage: function(res) {
-    // let staffID = 'staffID=' + this.data.staffID;
-    // return onShareAppMessageFun('/pages/online-inquiry/doctor-details/doctor-details', staffID);
-    return onShareAppMessageFun();
+    let staffID = 'staffID=' + this.data.staffID;
+    return onShareAppMessageFun('/pages/online-inquiry/doctor-details/doctor-details', staffID);
+    // return onShareAppMessageFun();
   },
 
   // 去问诊

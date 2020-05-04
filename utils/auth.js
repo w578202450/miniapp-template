@@ -132,25 +132,22 @@ function fetchTempCode() {
    */
 function getounionid(isLoginStatus) {
   wx.showLoading({
-    title: '加载中...',
+    title: '加载中...'
   });
   let params = {
     code: wx.getStorageSync('code') ? wx.getStorageSync('code') : '',
     encryptedData: wx.getStorageSync('encryptedData') ? wx.getStorageSync('encryptedData') : '',
-    iv: wx.getStorageSync('iv') ? wx.getStorageSync('iv') : '',
-    // sessionKey: isLoginStatus ? '' : (wx.getStorageSync('sessionKey') ? wx.getStorageSync('sessionKey') : '')
+    iv: wx.getStorageSync('iv') ? wx.getStorageSync('iv') : ''
   }
   return new Promise((resolve,reject)=>{
     HTTP.getWXAuth(params).then(res => {
       wx.hideLoading()
       if (res.code == 0) {
-        // unionid
-        wx.setStorageSync('sessionKey', res.data.session_key)
-        wx.setStorageSync('unionid', res.data.unionid)
-        wx.setStorageSync('openID', res.data.openid)
-        sessionKey = res.data.session_key
-        console.log('sessionKey----',sessionKey)
-        resolve(res.data.unionid)
+        wx.setStorageSync('sessionKey', res.data.session_key);
+        wx.setStorageSync('unionid', res.data.unionid);
+        wx.setStorageSync('openID', res.data.openid);
+        sessionKey = res.data.session_key;
+        resolve(res.data.unionid, res.data.openid);
       } else {
         reject()
         wx.showToast({

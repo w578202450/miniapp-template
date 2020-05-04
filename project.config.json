@@ -88,6 +88,13 @@
 					"pathName": "pages/index/service-index/service-index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/online-inquiry/inquiry/chat/chat",
+					"pathName": "pages/online-inquiry/inquiry/chat/chat",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

@@ -47,9 +47,16 @@ Component({
   methods: {
     //回退
     navBack: function() {
-      wx.navigateBack({
-        delta: 1
-      });
+      let page = getCurrentPages();
+      if (page.length > 1) {
+        wx.navigateBack({
+          delta: 1
+        });
+      } else {
+        wx.reLaunch({
+          url: '/pages/index/home-index/home-index'
+        });
+      }
     },
     //回主页
     toIndex: function() {

@@ -45,12 +45,11 @@ function startLoginFun() {
   console.log("开始IM登录");
   app.globalData.unionid = wx.getStorageSync('unionid');
   app.globalData.openid = wx.getStorageSync('openID');
-  logined = app.globalData.unionid && app.globalData.openid;
-  if (logined) {
+  if (app.globalData.unionid && app.globalData.openid) {
     app.globalData.userInfo = wx.getStorageSync('userInfo');
-    getPatientInfo(app.globalData.unionid);
+    getPatientInfo();
   } else {
-    console.log("IM登录失败：logined不存在");
+    console.log("IM登录失败：unionid或openID不存在");
     app.globalData.isStartLogin = 1; // 是否开始了自动登录
     app.globalData.isInitInfo = 0; // 登录初始化用户数据失败
     fetchTempCode();
@@ -60,11 +59,12 @@ function startLoginFun() {
 /**
  * 获取基础数据
  */
-function getPatientInfo(unionID) {
+function getPatientInfo() {
   let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
   let orgID = wx.getStorageSync("shareOrgID");
   let prams = {
-    unionID: unionID,
+    unionID: app.globalData.unionid,
+    openID: app.globalData.openid,
     nickName: app.globalData.userInfo.nickName ? app.globalData.userInfo.nickName : '',
     avatarUrl: app.globalData.userInfo.avatarUrl ? app.globalData.userInfo.avatarUrl : '',
     sex: app.globalData.userInfo.sex ? app.globalData.userInfo.sex : '',
@@ -72,8 +72,6 @@ function getPatientInfo(unionID) {
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
     assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID : "",
     orgID: (orgID && app.globalData.isHaveOptions) ? orgID : ""
-    // assistantStaffID: assistantStaffID ? assistantStaffID : "",
-    // orgID: orgID ? orgID : ""
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {
@@ -86,10 +84,6 @@ function getPatientInfo(unionID) {
       wx.setStorage({
         key: 'orgID',
         data: res.data.orgID,
-      });
-      wx.setStorage({
-        key: 'unionID',
-        data: unionID
       });
       wx.setStorage({
         key: 'personID',
@@ -121,13 +115,14 @@ function getPatientInfo(unionID) {
         icon: 'none'
       });
     }
-  }).catch(e => {
-    app.globalData.isStartLogin = true; // 是否开始了自动登录
-    wx.hideLoading();
-    wx.showToast({
-      title: '网络异常'
-    });
   })
+  // .catch(e => {
+  //   app.globalData.isStartLogin = true; // 是否开始了自动登录
+  //   wx.hideLoading();
+  //   wx.showToast({
+  //     title: '网络异常'
+  //   });
+  // })
 }
 
 /**
@@ -202,10 +197,12 @@ function loginIM(userId) {
  */
 function getounionid(isLoginStatus) {
   AUTH.getounionid(isLoginStatus).then(function(res) {
+    app.globalData.unionid = wx.getStorageSync('unionid');
+    app.globalData.openid = wx.getStorageSync('openID');
     wx.showLoading({
       title: '登录中...',
     });
-    getPatientInfo(res);
+    getPatientInfo();
   }, function(err) {
     console.log(err);
   })
@@ -228,7 +225,7 @@ function fetchTempCode() {
  * 点击按钮进行授权
  */
 function getUserInfo(e) {
-  console.log("手动授权信息：" + JSON.stringify(e));
+  // console.log("手动授权信息：" + JSON.stringify(e));
   nextPageName = "";
   if (!e.detail.encryptedData) {
     return
@@ -245,24 +242,13 @@ function getUserInfo(e) {
   // 检查登录态是否过期
   wx.checkSession({
     success(res) {
-      // getounionid(true);
-      logined = app.globalData.unionid && app.globalData.openid;
-      if (logined) {
+      if (app.globalData.unionid && app.globalData.openid) {
         wx.showLoading({
           title: '登录中...',
         });
-        getPatientInfo(app.globalData.unionid);
+        getPatientInfo();
       } else {
         getounionid();
-        // // 检查登录态是否过期
-        // wx.checkSession({
-        //   success(res) {
-        //     getounionid(true);
-        //   },
-        //   fail(err) {
-        //     getounionid(false);
-        //   }
-        // })
       }
     },
     fail(err) {
@@ -273,9 +259,7 @@ function getUserInfo(e) {
           wx.setStorageSync('code', res.code);
           getounionid();
         }
-      })
-      // getounionid(false);
-      // 重新获取code
+      });
     }
   });
 }
@@ -311,7 +295,7 @@ function onShareAppMessageFun(sharePath, moreData) {
 /**立即问诊（已登录），获取服务通知授权 */
 function inquiryRequestMsgFun() {
   wx.requestSubscribeMessage({
-    tmplIds: ['Bbgs8xD9AhulzEIr1o6XWmFQT-X6FchA5DrsC03Na-I', 'ZXN1Mte_jwfsTTwZDFB8B2O1lcIVX6-LXab-SX78QvQ', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0'],
+    tmplIds: ['Bbgs8xD9AhulzEIr1o6XWmFQT-X6FchA5DrsC03Na-I', 'ZXN1Mte_jwfsTTwZDFB8B2O1lcIVX6-LXab-SX78QvQ', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0'], // 1-订单待支付、 2-咨询回复、 3-处方过期
     success(res) {
     },
     fail(err) {
@@ -322,7 +306,6 @@ function inquiryRequestMsgFun() {
       });
     },
     complete(msg) {
-      console.log(msg);
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });
@@ -333,7 +316,7 @@ function inquiryRequestMsgFun() {
 /**立即支付（处方预览页、订单列表页） */
 function payRequestMsgFun(keyID) {
   wx.requestSubscribeMessage({
-    tmplIds: ['z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', '3leCGE6lKav48Wg0aZFC1JOpUVSY2RCAro5DpD6Fax8'],
+    tmplIds: ['z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', '3leCGE6lKav48Wg0aZFC1FoR_LHX96zPpEngnYtpb-8'], // 1-药品发货、 2-退费成功
     success(res) {
     },
     fail(err) {
@@ -344,7 +327,6 @@ function payRequestMsgFun(keyID) {
       });
     },
     complete(msg) {
-      console.log(msg);
       wx.navigateTo({
         url: "/pages/order/order-details/order-details?orderID=" + keyID
       });

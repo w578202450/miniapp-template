@@ -72,6 +72,11 @@ App({
     //   orgID: "20040212494191470440511240",
     //   assistantStaffID: "20040111590164711070514240"
     // }
+    // 桃子互联网医院男科诊疗中心(生产环境)
+    // options = {
+    //   orgID: "20040212494191470440511240",
+    //   assistantStaffID: "20042911054239310400514233"
+    // }
     // 侯=齐晓红
     // options ={
     //   orgID: "20031709473895879610511240",
@@ -128,11 +133,11 @@ App({
     that.imSetting(); // IM功能配置
   },
 
-  onUnload: function() {
-    tim.logout().then(function(imResponse) {}).catch(function(imError) {
-      console.warn('logout error:', imError);
-    });
-  },
+  // onUnload: function() {
+  //   tim.logout().then(function(imResponse) {}).catch(function(imError) {
+  //     console.warn('logout error:', imError);
+  //   });
+  // },
 
   onShow: function(option) {
     if (that.globalData.isStartLogin && that.globalData.loginNum > 0) {
@@ -322,11 +327,11 @@ App({
     that.globalData.unionid = wx.getStorageSync('unionid');
     that.globalData.openid = wx.getStorageSync('openID');
     logined = that.globalData.unionid && that.globalData.openid;
-    if (logined) {
+    if (that.globalData.unionid && that.globalData.openid) {
       that.globalData.userInfo = wx.getStorageSync('userInfo');
-      that.getPatientInfo(that.globalData.unionid);
+      that.getPatientInfo();
     } else {
-      console.log("IM登录失败：logined不存在");
+      console.log("IM登录失败：unionid或openID不存在");
       that.globalData.isStartLogin = true; // 是否开始了自动登录
       that.globalData.isInitInfo = 0; // 登录初始化用户数据失败
       that.fetchTempCode();
@@ -335,11 +340,12 @@ App({
   },
 
   /** 获取基础数据*/
-  getPatientInfo: function(unionID) {
+  getPatientInfo: function () {
     let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     let orgID = wx.getStorageSync("shareOrgID");
     let prams = {
-      unionID: unionID,
+      unionID: that.globalData.unionid,
+      openID: that.globalData.openid,
       nickName: that.globalData.userInfo.nickName ? that.globalData.userInfo.nickName : '',
       avatarUrl: that.globalData.userInfo.avatarUrl ? that.globalData.userInfo.avatarUrl : '',
       sex: that.globalData.userInfo.sex ? that.globalData.userInfo.sex : '',
@@ -359,10 +365,6 @@ App({
         wx.setStorage({
           key: 'orgID',
           data: res.data.orgID,
-        });
-        wx.setStorage({
-          key: 'unionID',
-          data: unionID
         });
         wx.setStorage({
           key: 'personID',

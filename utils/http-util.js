@@ -1,4 +1,4 @@
-const version = 1; //0开发、1测试 2发布  
+const version = 0; //0开发、1测试 2发布  
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -125,7 +125,7 @@ module.exports = {
   },
 
   /**桃子互联网医院妇科诊疗中心机构ID */
-  gynecologyOrgIDFun: function () {
+  gynecologyOrgIDFun: function() {
     if (version == 0) {
       return ['20040111371269634190511240']
     } else if (version == 1) {
@@ -136,7 +136,7 @@ module.exports = {
   },
 
   /**桃子互联网医院男科诊疗中心机构ID */
-  andrologyOrgIDFun: function () {
+  andrologyOrgIDFun: function() {
     if (version == 0) {
       return ['20040212494191470440511240']
     } else if (version == 1) {
@@ -613,5 +613,9 @@ module.exports = {
    */
   publishComment: function publishComment(parmas) {
     return request('api/comment/comment/publish', true, 'post', parmas);
+  },
+  /**用户是否还再小程序中 */
+  isInWXSystem: function isInWXSystem(parmas) {
+    return request('api/tmc/wxservice/testTao', true, 'get', parmas);
   }
 }
