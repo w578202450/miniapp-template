@@ -147,7 +147,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    return onShareAppMessageFun("/pages/index/service-index/service-index");
+    // return onShareAppMessageFun("/pages/index/service-index/service-index");
+    return onShareAppMessageFun();
   },
 
   /**转换传递的url参数 q */
@@ -201,6 +202,10 @@ Page({
             wx.hideLoading();
           }
         }
+      }).catch(() => {
+        that.setData({
+          isSearchState: true
+        });
       });
   },
 
