@@ -83,18 +83,46 @@ Page({
     // 咨询电话
     consulting_tel: "028-6455 3998",
     // 联系邮箱
-    contact_email: "shuibei@100cbc.com"
+    contact_email: "shuibei@100cbc.com",
+    isHaveWatched: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    let that = this;
     // app.hideTabBarFun();
     wx.showLoading({
       title: '加载中...'
     });
-    this.initDocInfoFun();
+    if (app.globalData.isStartLogin) {
+      if (app.globalData.isInitInfo == "ready") {
+        console.log("尝试登录，成功了");
+        that.initDocInfoFun(); // 初始化参数
+      } else {
+        console.log("尝试登录，失败了");
+        that.getDefaulShowInfo(); // 初始化调用请求方法
+      }
+    } else {
+      app.watch((value) => {
+        // value为app.js中传入的值
+        console.log("是否尝试自动登录了：", value);
+        console.log("是否带参进入小程序：", app.globalData.isHaveOptions);
+        if (value) {
+          if (!that.data.isHaveWatched) {
+            that.data.isHaveWatched = true;
+            if (app.globalData.isInitInfo == "ready") {
+              console.log("尝试登录，成功了");
+              that.initDocInfoFun(); // 初始化参数
+            } else {
+              console.log("尝试登录，失败了");
+              that.getDefaulShowInfo(); // 初始化调用请求方法
+            }
+          }
+        }
+      }, "isStartLogin");
+    }
   },
 
   /**
@@ -147,8 +175,8 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-    // return onShareAppMessageFun("/pages/index/service-index/service-index");
-    return onShareAppMessageFun();
+    return onShareAppMessageFun("/pages/index/service-index/service-index");
+    // return onShareAppMessageFun();
   },
 
   /**转换传递的url参数 q */
@@ -168,8 +196,55 @@ Page({
     that.data.shareOrgID = wx.getStorageSync("shareOrgID");
     that.data.shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
     that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");
-    that.fetchDoctorInfo(that.data.shareDoctorStaffID); // 获取主治医师信息
-    that.fetchAssistantDoctorInfo(that.data.shareAssistantStaffID); // 获取助理医生信息
+    if (!that.data.shareOrgID || !that.data.shareDoctorStaffID || !that.data.shareAssistantStaffID) {
+      setTimeout(() => {
+        that.fetchDoctorInfo(that.data.shareDoctorStaffID); // 获取主治医师信息
+        that.fetchAssistantDoctorInfo(that.data.shareAssistantStaffID); // 获取助理医生信息
+      }, 1500);
+    } else {
+      that.fetchDoctorInfo(that.data.shareDoctorStaffID); // 获取主治医师信息
+      that.fetchAssistantDoctorInfo(that.data.shareAssistantStaffID); // 获取助理医生信息
+    }
+  },
+
+  getDefaulShowInfo() {
+    let that = this;
+    that.setData({
+      shareOrgID: wx.getStorageSync("shareOrgID"),
+      shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
+    });
+    let params = {
+      orgID: that.data.shareOrgID,
+      assistantStaffID: that.data.shareAssistantStaffID,
+      entryType: ""
+    }
+    HTTP.getDefaultDocInfo(params).then(res => {
+      if (res.code == 0 && res.data) {
+        that.setData({
+          shareOrgID: res.data.orgID,
+          shareAssistantStaffID: res.data.assistantStaffID
+        });
+        wx.setStorageSync("shareAssistantStaffID", res.data.assistantStaffID);
+        wx.setStorageSync("shareOrgID", res.data.orgID);
+        wx.setStorageSync("shareDoctorStaffID", res.data.doctorStaffID);
+        that.initDocInfoFun();
+      } else {
+        wx.hideLoading();
+        that.setData({
+          isSearchState: true
+        });
+        wx.showToast({
+          title: '获取默认数据失败',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    }).catch(() => {
+      wx.hideLoading();
+      that.setData({
+        isSearchState: true
+      });
+    });
   },
 
   /**获取主治医师信息*/
@@ -203,6 +278,7 @@ Page({
           }
         }
       }).catch(() => {
+        wx.hideLoading();
         that.setData({
           isSearchState: true
         });
