@@ -4,7 +4,7 @@
   width: 100%;
   overflow: hidden;
   background-color: #fff;
-  margin-bottom: 128rpx
+  padding-bottom: 128rpx
 }
 
 .levelBox {

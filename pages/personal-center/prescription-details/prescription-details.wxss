@@ -224,7 +224,7 @@ page {
 }
 
 .review-box {
-  margin-bottom: 172rpx;
+  padding-bottom: 172rpx;
   padding-left: 32rpx;
   padding-right: 32rpx;
   display: flex;

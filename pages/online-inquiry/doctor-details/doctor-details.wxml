@@ -42,7 +42,7 @@
     <view class="middle-bottomLine"></view>
   </view>
   <!-- 患者评价 -->
-  <view style="margin-bottom:128rpx">
+  <view style="padding-bottom:128rpx">
     <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
   </view>
   <!-- 底部问诊按钮 -->

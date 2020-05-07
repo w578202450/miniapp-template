@@ -3,7 +3,7 @@
 <wxs src="../../../../../wxs/wxsCommon.wxs" module="comTools" />
 <!-- 登录弹框 -->
 <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
-<view style="margin-bottom: 128rpx">
+<view style="padding-bottom: 128rpx;">
   <view class="contain-box" bindtap="toDetail" data-item='{{item}}' data-index='{{index}}' wx:for="{{inquiryCaseData}}" wx:key="index">
     <view class="contain-header">
       <view class="contain-header-left">
