@@ -16,7 +16,9 @@ Page({
      * 默认医院  19101017081245502880511001
      */
     isAboveHouShiID: -1, // 是否显示侯氏信息，默认-1显示
+    isShowHarbinyouhaoID: -1, // 是否显示哈尔滨友好医院
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
+    harbinyouhaoOrgID: [], // 哈尔滨友好医院机构ID
     dazhongOrgID: [], // 大冢医药机构ID
     loseweightOrgID: [], // 桃子互联网医院减肥中心机构ID
     gynecologyOrgID: [], // 桃子互联网医院妇科诊疗中心机构ID
@@ -43,6 +45,11 @@ Page({
       hospitalIntroduce: "中医治风湿骨病",
       hospitalDetailContent: "国家中医药管理局“十五”、“十一五”“十二五”风湿病重点专科医院，山西省二级甲等中医专科医院，山西中医学院教学医院，山西省中医研究院附属医院，国家级重点专科（专病…"
     }, // 医院信息
+    harbinyouhaoInfo: {
+      hospitalPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmccontent/5532/org/5532-hospital.png",
+      hospitalName: "哈尔滨友好风湿病医院",
+      hospitalDetailContent: "哈尔滨友好风湿病医院，创建于2006年，是北京中医药大学博士侯丽萍教授在黑龙江创建的风湿骨病中医专科医院。医院自立业开始，便悉尊古方精细选材，依照古法炮制配伍。通过纯中医药物结合特色体质疗法，辨证施治，一人一方。"
+    },
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     newArrayDoctorList: [], // 组合的新数组
@@ -63,7 +70,81 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    // 生产
+    // 华府医院(生产环境)
+    // options = {
+    //   orgID: "19101017081245502880511001",
+    //   assistantStaffID: "20012214121981875310514240"
+    // }
+    // 侯丽萍医院(生产环境)
+    // options = {
+    //   orgID: "20012118570385423810511240",
+    //   assistantStaffID: "20020913491781433700514240"
+    // }
+    // 大冢医药(生产环境)
+    // options = {
+    //   orgID: "20040909515893667880511240",
+    //   assistantStaffID: "20041020111817571130514240"
+    // }
+    // 桃子互联网医院减肥中心(生产环境)
+    // options = {
+    //   orgID: "20041517422841582280511240",
+    //   assistantStaffID: "20041522090292997840514240"
+    // }
+    // 桃子互联网医院妇科诊疗中心(生产环境)
+    // options = {
+    //   orgID: "20040111371269634190511240",
+    //   assistantStaffID: "20040111590164711070514240"
+    // }
+    // 桃子互联网医院男科诊疗中心(生产环境)
+    // options = {
+    //   orgID: "20040212494191470440511240",
+    //   assistantStaffID: "20040111590164711070514240"
+    // }
+    // 侯=齐晓红
+    // options ={
+    //   orgID: "20031709473895879610511240",
+    //   assistantStaffID: "20020913491781433700514240"
+    // }
+    // 李大山
+    // options = {
+    //   "orgID": "19101017081245502880511001",
+    //   "assistantStaffID": "20012214121981875310514240"
+    // }
+    // 测试
+    // 包正一
+    // options = {
+    //   orgID: "19121923373037086560511253",
+    //   assistantStaffID: "20011320532175746910514253"
+    // }
+    // 哈尔滨友好医院(生产环境)
+    // options = {
+    //   orgID: "20050916495074555320511240",
+    //   assistantStaffID: "20011320532175746910514253"
+    // }
+    // 徐
+    // options = {
+    //   assistantStaffID: "20011514000045118050514253",
+    //   orgID: "19101017081245502880511001"
+    // }
+    // options = {
+    //   assistantStaffID: "20011909362464071890514253",
+    //   orgID: "19121923373037086560511253"
+    // }
+    // 开发
+    // options = {
+    //   assistantStaffID: "20011109080410712390514001",
+    //   orgID: "19101017081245502880511001"
+    // }
+    // 毛医生毛医助
+    // options = {
+    //   assistantStaffID: "20022709575095284800514240",
+    //   orgID: "20012119021236503500511240"
+    // }
+    console.log("进入医院首页携带的参数：" + JSON.stringify(options));
+    // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
+    that.data.harbinyouhaoOrgID = HTTP.harbinyouhaoOrgIDFun(); // 获取哈尔滨友好医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
@@ -167,9 +248,10 @@ Page({
     let that = this;
     that.setData({
       shareOrgID: wx.getStorageSync("shareOrgID"),
+      // shareOrgID: "20050916495074555320511240",
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
-
+    console.log("=====shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是侯丽萍中医院远程门诊
     if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是侯丽萍医院
@@ -183,7 +265,6 @@ Page({
         showOrgID: 2
       })
       that.initDefaultFun();
-
     } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是桃子互联网医院减肥中心
       that.setData({
@@ -202,12 +283,22 @@ Page({
         showOrgID: 5
       })
       that.initCustomDefaultFun();
+    } else if (that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是哈尔滨友好医院
+      that.setData({
+        showOrgID: 6,
+        isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID)
+      })
+      that.initFunctionFun();
     } else { // 默认显示成都华府中医远程诊疗中心
       that.setData({
         showOrgID: 0
       })
       that.initFunctionFun();
     }
+    console.log("----showOrgID----" + that.data.showOrgID);
+    console.log("----shareOrgID----" + that.data.shareOrgID);
+    console.log("----harbinyouhaoOrgID----" + that.data.harbinyouhaoOrgID);
   },
 
   /**初始化调用请求方法 */
@@ -217,8 +308,10 @@ Page({
       title: '拼命加载中...',
     });
     that.setData({
-      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
+      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID),
+      isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID),
     });
+    console.log("^^^^^^isShowHarbinyouhaoID^^^^^" + that.data.isShowHarbinyouhaoID);
     that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
     that.getTeamIntroduce(); // 获取医师团队介绍
@@ -238,7 +331,7 @@ Page({
       title: '拼命加载中...',
     });
     that.setData({
-      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
+      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID),
     });
     that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
@@ -255,7 +348,7 @@ Page({
       title: '拼命加载中...',
     });
     that.setData({
-      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID)
+      isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID),
     });
     that.getHospitalInfo(); //查询医院详情信息
     that.getSignedDoctor(); // 通过医助查询到的签约医生
@@ -407,6 +500,7 @@ Page({
     let that = this;
     that.setData({
       shareOrgID: wx.getStorageSync("shareOrgID"),
+      // shareOrgID: "20050916495074555320511240",
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
     // 判断是否是侯丽萍中医院远程门诊
@@ -434,6 +528,12 @@ Page({
       // 判断是否是桃子互联网医院男科诊疗中心
       that.setData({
         showOrgID: 5
+      })
+    } else if (that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是哈尔滨友好医院
+      that.setData({
+        showOrgID: 6,
+        isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID)
       })
     } else {
       that.setData({
@@ -479,12 +579,25 @@ Page({
     });
   },
 
-  /** 跳转到医院详情 */
+  /** 跳转到侯丽萍医院详情 */
   toHospitalDetail() {
     let materialData = {
       materialType: 0, // （必传）要查看的素材类型 0图文 1视频
       title: "医院主页", // 待确认，可先不传
       url: encodeURIComponent("https://res.100cbc.com/tmc/hospital/2381/hosDetail.html"), // （必传）图文、视频 的网络地址链接,需要加密
+      logoUrl: encodeURIComponent("") // 视频的封面图片(没有就传空字符窜)
+    };
+    wx.navigateTo({
+      url: "/pages/index/service-index/ht/video-and-h5/video-and-h5?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
+    });
+  },
+
+  /** 跳转到哈尔滨友好医院详情 */
+  toharbinHospitalDetail() {
+    let materialData = {
+      materialType: 0, // （必传）要查看的素材类型 0图文 1视频
+      title: "医院主页", // 待确认，可先不传
+      url: encodeURIComponent("https://res.100cbc.com/tmc/hospital/2381/haErBingHosDetail.html"), // （必传）图文、视频 的网络地址链接,需要加密
       logoUrl: encodeURIComponent("") // 视频的封面图片(没有就传空字符窜)
     };
     wx.navigateTo({

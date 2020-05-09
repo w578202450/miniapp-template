@@ -9,18 +9,18 @@
     <home-loseweight-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-loseweight-page>
   </view>
-    <!-- 是否显示桃子互联网医院妇科诊疗中心页面 -->
+  <!-- 是否显示桃子互联网医院妇科诊疗中心页面 -->
   <view wx:if="{{ showOrgID == 4}}">
     <home-gynecology-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-gynecology-page>
   </view>
-   <!-- 是否显示桃子互联网医院男科诊疗中心页面 -->
+  <!-- 是否显示桃子互联网医院男科诊疗中心页面 -->
   <view wx:if="{{ showOrgID == 5}}">
     <home-andrology-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-andrology-page>
   </view>
   <!-- 是否显示侯丽萍风湿骨病中医医院页面 -->
-  <view wx:if="{{ showOrgID == 1 || showOrgID == 0}}">
+  <view wx:if="{{ showOrgID == 1 || showOrgID == 6 || showOrgID == 0}}">
     <!-- 引入wxs脚本 -->
     <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
     <view class="banner-header" style="width: 100%;height: 350rpx;">
@@ -67,7 +67,7 @@
     </view>
     <!-- 灰色间隔区 -->
     <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
-    <!-- 医院介绍 -->
+    <!-- 医院介绍 侯丽萍医院 -->
     <view wx:if="{{isAboveHouShiID > -1}}" class="hospital-dean">
       <view class="module-item-box">
         <view class="specialist-header-box">
@@ -83,8 +83,27 @@
         </view>
       </view>
     </view>
+    <!-- 医院介绍 哈尔滨友好医院 -->
+    <view wx:if="{{isShowHarbinyouhaoID > -1}}" class="hospital-dean">
+      <view class="module-item-box">
+        <view class="specialist-header-box">
+          <image style="width:180rpx;height:130rpx;mode:widthFix;flex-shrink: 0" src="{{harbinyouhaoInfo.hospitalPhotoUrl}}"></image>
+          <view class="specialist-header-middle-box">
+            <view class="title-detail">
+              <text class="title-name-houshi" style="font-size:32rpx">{{harbinyouhaoInfo.hospitalName}}</text>
+              <image mode="widthFix" style="width:76rpx;height:108rpx" src="../../../images/home/home_detail.png" bindtap="toharbinHospitalDetail"></image>
+            </view>
+            <!-- 医院详情简介 -->
+            <view class="dean-introduce-box">
+              <view class="harbindetailIntroduction">{{harbinyouhaoInfo.hospitalDetailContent}}</view>
+              <!-- <image mode="widthFix" style="width:76rpx;height:108rpx;margin-top:2rpx;margin-right:14rpx;position: absolute;right: 0" src="../../../images/home/home_detail.png" bindtap="toHospitalDetail"></image> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
     <!-- 灰色间隔区 -->
-    <view wx:if="{{isAboveHouShiID > -1}}" class="intervalView"></view>
+    <view class="intervalView"></view>
     <!-- 医师团队 -->
     <view class="physician-team">
       <module-title title="医师团队展示" isHaveBorderBottom="{{false}}" isHaveMoreBtn="{{false}}"></module-title>

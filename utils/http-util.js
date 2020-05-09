@@ -102,6 +102,17 @@ module.exports = {
     }
   },
 
+  /**哈尔滨友好医院ID */
+  harbinyouhaoOrgIDFun: function () {
+    if (version == 0) {
+      return ['20050916495074555320511240']
+    } else if (version == 1) {
+      return ['20050916495074555320511240']
+    } else if (version == 2) {
+      return ['20050916495074555320511240']
+    }
+  },
+
   /**大冢医药机构ID */
   dazhongOrgIDFun: function() {
     if (version == 0) {
