@@ -95,6 +95,13 @@
 					"pathName": "pages/online-inquiry/inquiry/chat/chat",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/service-index/wth/notes-list/notes-list",
+					"pathName": "pages/index/service-index/wth/notes-list/notes-list",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

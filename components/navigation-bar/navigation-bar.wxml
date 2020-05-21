@@ -1,15 +1,27 @@
 <!--components/navigation-bar/navigation-bar.wxml-->
-<view style="height:{{statusBarHeight + navBarHeight}}px">
+<!-- <view style="height:{{statusBarHeight + navBarHeight}}px">
   <view class="navbarBox" style="height:{{statusBarHeight + navBarHeight}}px;background: {{bgColor}};">
-    <!-- 标题 -->
     <view class="navbarTitleBox" style="bottom:{{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px;height:{{menuBBCRect.height}}px;line-height:{{menuBBCRect.height}}px;">
       <text class="navbarTitleTxt" style="color: {{navbarTextStyle}}">{{navbarTitle}}</text>
     </view>
-     <!-- 返回、首页 -->
     <view class="navbarBtn {{navbarTextStyle == 'white' ? '': 'navbarBtnBorder'}}" style="bottom: {{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px;background-color: {{navbarTextStyle == 'white' ? 'rgba(255,255,255,.65)' : ''}}">
       <image class="navBackIcon" src="{{navBackIconBlack}}" bindtap="navBack"/>
       <view class="linear" style="background-color: #D6D6D6;"></view>
       <image class="navHomeIcon" src="{{navHomeIconBlack}}" bindtap="toIndex"/>
+    </view>
+  </view>
+</view> -->
+<view style="height:{{navBarHeight + statusBarHeight}}px;">
+  <view class="navbarBox" style="height:{{navBarHeight}}px;padding-top: {{statusBarHeight}}px;background-color: {{bgColor}};">
+    <view class="titleRow" style="height:{{navBarHeight}}px;line-height:{{navBarHeight}}px;">
+      <text class="titleTxt" style="color: {{navbarTextStyle}}">{{navbarTitle}}</text>
+    </view>
+    <view class="btnBoxRow" style="height:{{navBarHeight}}px;">
+      <view class="btnBox {{navbarTextStyle == 'white' ? '': 'navbarBtnBorder'}}" style="height:{{menuBBCRect.height - 1}}px;background-color: {{navbarTextStyle == 'white' ? 'rgba(255,255,255,.65)' : ''}}">
+      <image class="navBackIcon" src="{{navBackIconBlack}}" bindtap="navBack"/>
+      <view class="linear" style="background-color: #D6D6D6;"></view>
+      <image class="navHomeIcon" src="{{navHomeIconBlack}}" bindtap="toIndex"/>
+    </view>
     </view>
   </view>
 </view>
