@@ -1,5 +1,5 @@
 <!--components/navigation-bar/navigation-bar.wxml-->
-<!-- <view style="height:{{statusBarHeight + navBarHeight}}px">
+<view style="height:{{statusBarHeight + navBarHeight}}px">
   <view class="navbarBox" style="height:{{statusBarHeight + navBarHeight}}px;background: {{bgColor}};">
     <view class="navbarTitleBox" style="bottom:{{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px;height:{{menuBBCRect.height}}px;line-height:{{menuBBCRect.height}}px;">
       <text class="navbarTitleTxt" style="color: {{navbarTextStyle}}">{{navbarTitle}}</text>
@@ -10,8 +10,8 @@
       <image class="navHomeIcon" src="{{navHomeIconBlack}}" bindtap="toIndex"/>
     </view>
   </view>
-</view> -->
-<view style="height:{{navBarHeight + statusBarHeight}}px;">
+</view>
+<!-- <view style="height:{{navBarHeight + statusBarHeight}}px;">
   <view class="navbarBox" style="height:{{navBarHeight}}px;padding-top: {{statusBarHeight}}px;background-color: {{bgColor}};">
     <view class="titleRow" style="height:{{navBarHeight}}px;line-height:{{navBarHeight}}px;">
       <text class="titleTxt" style="color: {{navbarTextStyle}}">{{navbarTitle}}</text>
@@ -24,4 +24,4 @@
     </view>
     </view>
   </view>
-</view>
+</view> -->
