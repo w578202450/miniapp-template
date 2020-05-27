@@ -70,78 +70,6 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    // 生产
-    // 华府医院(生产环境)
-    // options = {
-    //   orgID: "19101017081245502880511001",
-    //   assistantStaffID: "20012214121981875310514240"
-    // }
-    // 侯丽萍医院(生产环境)
-    // options = {
-    //   orgID: "20012118570385423810511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
-    // 大冢医药(生产环境)
-    // options = {
-    //   orgID: "20040909515893667880511240",
-    //   assistantStaffID: "20041020111817571130514240"
-    // }
-    // 桃子互联网医院减肥中心(生产环境)
-    // options = {
-    //   orgID: "20041517422841582280511240",
-    //   assistantStaffID: "20041522090292997840514240"
-    // }
-    // 桃子互联网医院妇科诊疗中心(生产环境)
-    // options = {
-    //   orgID: "20040111371269634190511240",
-    //   assistantStaffID: "20040111590164711070514240"
-    // }
-    // 桃子互联网医院男科诊疗中心(生产环境)
-    // options = {
-    //   orgID: "20040212494191470440511240",
-    //   assistantStaffID: "20040111590164711070514240"
-    // }
-    // 侯=齐晓红
-    // options ={
-    //   orgID: "20031709473895879610511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
-    // 李大山
-    // options = {
-    //   "orgID": "19101017081245502880511001",
-    //   "assistantStaffID": "20012214121981875310514240"
-    // }
-    // 测试
-    // 包正一
-    // options = {
-    //   orgID: "19121923373037086560511253",
-    //   assistantStaffID: "20011320532175746910514253"
-    // }
-    // 哈尔滨友好医院(生产环境)
-    // options = {
-    //   orgID: "20050916495074555320511240",
-    //   assistantStaffID: "20011320532175746910514253"
-    // }
-    // 徐
-    // options = {
-    //   assistantStaffID: "20011514000045118050514253",
-    //   orgID: "19101017081245502880511001"
-    // }
-    // options = {
-    //   assistantStaffID: "20011909362464071890514253",
-    //   orgID: "19121923373037086560511253"
-    // }
-    // 开发
-    // options = {
-    //   assistantStaffID: "20011109080410712390514001",
-    //   orgID: "19101017081245502880511001"
-    // }
-    // 毛医生毛医助
-    // options = {
-    //   assistantStaffID: "20022709575095284800514240",
-    //   orgID: "20012119021236503500511240"
-    // }
-    console.log("进入医院首页携带的参数：" + JSON.stringify(options));
     // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.harbinyouhaoOrgID = HTTP.harbinyouhaoOrgIDFun(); // 获取哈尔滨友好医院ID
@@ -321,7 +249,7 @@ Page({
     setTimeout(() => {
       wx.hideLoading();
       that.data.isSearchState = true;
-    }, 1500)
+    }, 1500);
   },
 
   /**初始化 大冢医院 默认加载数据 */
@@ -338,7 +266,7 @@ Page({
     that.getSignedDoctor(); // 通过医助查询到的签约医生
     setTimeout(() => {
       wx.hideLoading();
-    }, 1000)
+    }, 1000);
   },
 
   /**初始桃子互联网医院减肥中心默认加载数据 */
@@ -354,7 +282,7 @@ Page({
     that.getSignedDoctor(); // 通过医助查询到的签约医生
     setTimeout(() => {
       wx.hideLoading();
-    }, 1000)
+    }, 1000);
   },
 
   /** 获取首页banner */
@@ -457,6 +385,7 @@ Page({
                 });
               }
             });
+          that.toDoctorDetailFun(res.data.doctorStaffID); // 是否直接跳往医生详情页
         } else { // 如果通过医助查询到的签约医生没有的话
           // 无签约医生 
           HTTP.getPhysicianTeamList({
@@ -615,5 +544,16 @@ Page({
     wx.switchTab({
       url: '/pages/index/service-index/service-index'
     });
+  },
+  // 判断app.globalData.p是否存在，是否跳往医生详情页
+  toDoctorDetailFun(doctorStaffID) {
+    if (!doctorStaffID) {
+      return;
+    }
+    if (app.globalData.p && app.globalData.p === "doctor") {
+      wx.navigateTo({
+        url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + doctorStaffID
+      });
+    }
   }
 })

@@ -1,4 +1,4 @@
-const version = 2; //0开发、1测试 2发布  
+const version = 1; //0开发、1测试 2发布  
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -10,6 +10,7 @@ const md5 = require('/md5.js');
 let API_BASE_URL = (function() {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
+    // return "http://192.168.1.104:6112/"
   } else if (version == 1) {
     return 'https://tmcpro-cs.jk.100cbc.com/'
   } else {
@@ -628,5 +629,9 @@ module.exports = {
   /**用户是否还再小程序中 */
   isInWXSystem: function isInWXSystem(parmas) {
     return request('api/tmc/wxservice/testTao', true, 'get', parmas);
+  },
+  /**用户进入问诊了，告诉系统给他发个欢迎语 */
+  sendCustomMsgPost: function isInWXSystem(parmas) {
+    return request('api/tmc/msg/sendCustomMsg', true, 'post', parmas);
   }
 }

@@ -584,6 +584,7 @@ Page({
               that.getHistoryMessage(); // 获取历史消息
             }
           }
+          that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
           that.getHistoryInquiryID(); // 查询历史问诊记录ID列表
         } else {
           console.log("检验入群结果：入群失败");
@@ -1263,6 +1264,19 @@ Page({
         url: "/pages/online-inquiry/inquiry/videoPlay/videoPlay?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要在赋值处转换为字符窜
       });
     }
+  },
+
+  /**患者进入问诊了，告知系统发欢迎语 */
+  sendCustomMsgFun() {
+    let that = this;
+    let params = {
+      orgID: that.data.userInfo.orgID,
+      patientID: that.data.userInfo.keyID,
+      receiver: that.data.inquiryInfo.keyID
+    }
+    HTTP.sendCustomMsgPost(params).then(res => {
+      console.log(res);
+    });
   },
 
   /**获取历史问诊记录 */

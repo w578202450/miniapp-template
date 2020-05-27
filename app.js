@@ -120,6 +120,10 @@ App({
       if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
       }
+      let p = that.initOptionsFun(scan_url, "p");
+      if (p && p.length > 0) {
+        that.globalData.p = p;
+      }
     } else if (options.assistantStaffID && options.orgID) { // 通过分享的小程序进入时：直接带参
       if (options.orgID && options.orgID.length > 0) {
         that.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -161,6 +165,10 @@ App({
         }
         if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
           isHaveAssiID = true;
+        }
+        let p = that.initOptionsFun(scan_url, "p");
+        if (p && p.length > 0) {
+          that.globalData.p = p;
         }
       } else if (options.assistantStaffID && options.orgID) { // 通过分享的小程序进入时：直接带参
         if (options.orgID && options.orgID.length > 0) {
@@ -476,6 +484,7 @@ App({
   globalData: {
     tim: null,
     TIM: null,
+    p: "",
     isInitInfo: 0, // 0：未登录  ready：已登录
     loginNum: 0, // 登录次数
     isHaveOptions: false, // 进入小程序是否携带参数
