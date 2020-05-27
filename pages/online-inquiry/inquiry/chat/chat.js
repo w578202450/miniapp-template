@@ -533,75 +533,77 @@ Page({
         isShowLoading: true, // 隐藏发送中
         sendType: ""
       });
+      that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
       wx.showToast({
         title: '进入问诊会话失败，请尝试重新进入当前页面',
         icon: "none",
         duration: 3000
       });
       return
-    }
-    setTimeout(() => {
-      let info = tim.getGroupList(); // 获取所有群ID
-      info.then(imResponse => {
-        that.setData({
-          isInGroup: false,
-          getGroupListSum: that.data.getGroupListSum - 1
-        });
-        imResponse.data.groupList.forEach((item) => {
-          if (item.groupID == that.data.inquiryInfo.keyID) {
-            that.setData({
-              isInGroup: true
-            });
-          }
-        });
-        if (that.data.isInGroup) {
-          console.log("检验入群结果：入群成功");
-          wx.setStorageSync("inquiryInfo", that.data.inquiryInfo);
-          if (that.data.sendType) {
-            that.setData({
-              isOverChat: false
-            });
-            if (that.data.sendType == "normalFun") {
+    } else {
+      setTimeout(() => {
+        let info = tim.getGroupList(); // 获取所有群ID
+        info.then(imResponse => {
+          that.setData({
+            isInGroup: false,
+            getGroupListSum: that.data.getGroupListSum - 1
+          });
+          imResponse.data.groupList.forEach((item) => {
+            if (item.groupID == that.data.inquiryInfo.keyID) {
               that.setData({
-                hidden: true // 隐藏加载中
+                isInGroup: true
               });
-            } else if (that.data.sendType == "contentMSg") {
-              that.sendMessageFun(); // 发送文本消息
-            } else if (that.data.sendType == "imageFun") {
-              that.sendImageMsgFun(); // 发送图片消息
-            } else if (that.data.sendType == "videoFun") {
-              that.videoWxFun(); // 拨打视频
             }
-            that.setData({
-              sendType: ""
-            });
-          } else {
-            if (that.data.isOverChat) {
+          });
+          if (that.data.isInGroup) {
+            console.log("检验入群结果：入群成功");
+            wx.setStorageSync("inquiryInfo", that.data.inquiryInfo);
+            if (that.data.sendType) {
               that.setData({
                 isOverChat: false
               });
+              if (that.data.sendType == "normalFun") {
+                that.setData({
+                  hidden: true // 隐藏加载中
+                });
+              } else if (that.data.sendType == "contentMSg") {
+                that.sendMessageFun(); // 发送文本消息
+              } else if (that.data.sendType == "imageFun") {
+                that.sendImageMsgFun(); // 发送图片消息
+              } else if (that.data.sendType == "videoFun") {
+                that.videoWxFun(); // 拨打视频
+              }
+              that.setData({
+                sendType: ""
+              });
             } else {
-              that.getHistoryMessage(); // 获取历史消息
+              if (that.data.isOverChat) {
+                that.setData({
+                  isOverChat: false
+                });
+              } else {
+                that.getHistoryMessage(); // 获取历史消息
+              }
             }
+            that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
+            that.getHistoryInquiryID(); // 查询历史问诊记录ID列表
+          } else {
+            console.log("检验入群结果：入群失败");
+            let params = {
+              groupID: that.data.inquiryInfo.keyID,
+              doctorStaffID: that.data.userInfo.doctorStaffID,
+              assistantStaffID: that.data.userInfo.assistantStaffID,
+              patientID: that.data.userInfo.keyID
+            }
+            HTTP.addGroupMember(params).then(res => {
+              that.isInGroupFun(); // 检验是否成功入群
+            });
           }
-          that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
-          that.getHistoryInquiryID(); // 查询历史问诊记录ID列表
-        } else {
-          console.log("检验入群结果：入群失败");
-          let params = {
-            groupID: that.data.inquiryInfo.keyID,
-            doctorStaffID: that.data.userInfo.doctorStaffID,
-            assistantStaffID: that.data.userInfo.assistantStaffID,
-            patientID: that.data.userInfo.keyID
-          }
-          HTTP.addGroupMember(params).then(res => {
-            that.isInGroupFun(); // 检验是否成功入群
-          });
-        }
-      }).catch(err => {
-        console.warn('getGroupList error:', err); // 获取群组列表失败的相关信息
-      })
-    }, 300);
+        }).catch(err => {
+          console.warn('getGroupList error:', err); // 获取群组列表失败的相关信息
+        })
+      }, 300);
+    }
   },
 
   /*打开会话时,获取最近消息列表 */
