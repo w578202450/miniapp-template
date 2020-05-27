@@ -133,6 +133,9 @@ App({
         that.globalData.isHaveOptions = true; // 进入小程序携带有参数
         wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);
       }
+      if (options.p && options.p.length > 0) {
+        that.globalData.p = options.p;
+      }
     }
     that.imSetting(); // IM功能配置
   },
@@ -178,6 +181,9 @@ App({
         if (options.assistantStaffID && options.assistantStaffID.length > 0) {
           shareAssistantStaffID = options.assistantStaffID;
           isHaveAssiID = true;
+        }
+        if (options.p && options.p.length > 0) {
+          that.globalData.p = options.p;
         }
       }
       if (isHaveOrgID && isHaveAssiID) {
