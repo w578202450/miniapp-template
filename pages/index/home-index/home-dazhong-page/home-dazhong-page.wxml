@@ -83,7 +83,7 @@
         </view>
       </view>
       <text class="bottom-description">日本大冢制药株式会社（四川），致力于开发支气管哮喘、COPD(慢性阻塞性肺病)、急慢性支气管炎等系列呼吸系统疾病治疗药品。</text>
-         <text class="bottom-description">大爱清尘基金会是专门救助尘肺患者的公益机</text>
+         <text class="bottom-description-two">大爱清尘基金会是专门救助尘肺患者的公益机构</text>
       <view class="bottom-remark-box">
         <image mode="aspectFill" class="bottom-remark-image" src="{{bottomIcon}}"></image>
         <text class="bottom-remark">是否符合援助标准最终由大爱清尘决定。</text>

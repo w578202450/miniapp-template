@@ -6,7 +6,7 @@ page {
 
 .home {
   background: rgba(140, 111, 79, 1);
-  height: 1850rpx;
+  height: 1880rpx;
 }
 
 .banner-header {
@@ -29,7 +29,7 @@ page {
   margin-top: -30rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
-  height: 800rpx;
+  height: 840rpx;
   border-radius: 20rpx;
   display: flex;
   flex-direction: column;
@@ -39,8 +39,8 @@ page {
 }
 
 .image-box1 {
-  margin-left: 40rpx;
-  margin-right: 40rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -49,8 +49,8 @@ page {
 
 .image-box2 {
   margin-top: 40rpx;
-  margin-left: 40rpx;
-  margin-right: 40rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -115,7 +115,7 @@ page {
   margin-right: 30rpx;
   margin-top: 60rpx;
   width: 686rpx;
-  height: 800rpx;
+  height: 820rpx;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -316,10 +316,11 @@ page {
 }
 
 .bottom-box {
+  margin-top: 10rpx;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin-bottom: 120rpx;
+  /* margin-bottom: 120rpx; */
 }
 
 .bottom-box-one-item {
@@ -347,9 +348,10 @@ page {
 } */
 
 .bottom-description {
+  height: 108rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
-  margin-top: 30rpx;
+  margin-top: 40rpx;
   font-size: 24rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
@@ -360,6 +362,18 @@ page {
   display: -webkit-box;
   -webkit-line-clamp: 3; /* 设置要显示省略号的行数 */
   -webkit-box-orient: vertical;
+}
+
+.bottom-description-two {
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 24rpx;
+  height: 32rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 32px;
 }
 
 .bottom-remark-box {
