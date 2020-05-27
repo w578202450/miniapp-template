@@ -3,16 +3,24 @@
   <view class="banner-header" style="width: 100%;">
     <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
   </view>
-  <!-- 需满足 -->
-  <view class="middle-one-title">
+  <!-- <view style="background:rgba(140,111,79,1);"> -->
+  <!-- 需满足的医学条件 -->
+  <!-- <view class="one-box-bg"> -->
+    <view class="satisfy-box">
+      <image class="image-box1" style="height:30rpx" mode="widthFix" src="{{satisfybgtitle}}"></image>
+      <image class="image-box2" style="height:142rpx" mode="widthFix" src="{{satisfybg1}}"></image>
+      <image class="image-box2" style="height:142rpx" mode="widthFix" src="{{satisfybg2}}"></image>
+    </view>
+  <!-- </view> -->
+  <!-- <view class="middle-one-title">
    <view style="border-radius:50%;background:rgba(144,117,87,1);width:8rpx;height:8rpx;opacity:0.3;"></view>
     <view style="border-radius:10rpx;background:rgba(144,117,87,1);width:12rpx;height:12rpx;opacity:0.5;margin-left:10rpx;"></view>
     <text class="middle-one-title-text">需满足的医学条件</text>
      <view style="border-radius:10rpx;background:rgba(144,117,87,1);width:12rpx;height:12rpx;opacity:0.5;margin-left:10rpx;"></view>
     <view style="border-radius:50%;background:rgba(144,117,87,1);width:8rpx;height:8rpx;opacity:0.3;margin-left:10rpx;"></view>
-  </view>
+  </view> -->
   <!-- 4个item -->
-  <view class="middle-one-box">
+  <!-- <view class="middle-one-box">
     <view class="middle-one-item">
       <image mode="widthFix" src="{{middleOnefei1}}"></image>
       <text>尘肺病</text>
@@ -29,18 +37,18 @@
       <image mode="widthFix" src="{{middleOnefei4}}"></image>
       <text style="width:144rpx;height:32rpx;">慢性支气管炎</text>
     </view>
-  </view>
+  </view> -->
   <!-- 获得援助box -->
   <view class="middle-two-box">
     <!-- 背景图 -->
     <view class="rectangle-background">
-       <image class="rectangle-background-left" mode="aspectFill" src="{{homeDazhongLeft}}"></image>
-       <view class="rectangle-background-middle">
-      <text class="middle-two-box-row-text">全国已有</text>
-      <text class="middle-two-box-row-number">{{helpfulNum}}</text>
-      <text class="middle-two-box-row-text">名尘肺农民获得援助</text>
+      <image class="rectangle-background-left" mode="aspectFill" src="{{homeDazhongLeft}}"></image>
+      <view class="rectangle-background-middle">
+        <text class="middle-two-box-row-text">全国已有</text>
+        <text class="middle-two-box-row-number">{{helpfulNum}}</text>
+        <text class="middle-two-box-row-text">名尘肺农民获得援助</text>
       </view>
-       <image class="rectangle-background-right" mode="aspectFill" src="{{homeDazhongRight}}"></image>
+      <image class="rectangle-background-right" mode="aspectFill" src="{{homeDazhongRight}}"></image>
     </view>
     <!-- 纵向滚动的跑马灯 -->
     <!-- <view class="vertical-roll-marquee">
@@ -51,9 +59,9 @@
           <block wx:for="{{patientList}}" wx:key="keyID" wx:for-item="item">
             <swiper-item>
               <view class='show-text'>
-               <view class="content-item">
-                <text class='marquee_item_id'>{{item.patientName}}</text>
-                <text class='marquee_item_content'>{{item.content}}</text>
+                <view class="content-item">
+                  <text class='marquee_item_id'>{{item.patientName}}</text>
+                  <text class='marquee_item_content'>{{item.content}}</text>
                 </view>
                 <text class='marquee_item_time'>{{item.time}}</text>
               </view>
@@ -62,22 +70,29 @@
         </swiper>
       </view>
     </view>
-    <text class="text-remark">*该药品由大冢制药有限公司无偿捐赠</text>
-  </view>
-  <!-- 援助说明box -->
-  <view class="bottom-box">
-    <view class="bottom-box-one-item">
-      <image mode="aspectFill" src="{{medicineIcon}}"></image>
-      <text>援助药品：佰达图®舒稳乐®盐酸丙卡特罗粉雾剂</text>
+    <!-- <text class="text-remark">*该药品由大冢制药有限公司无偿捐赠</text> -->
+    <!-- 援助说明box -->
+    <view class="bottom-box">
+     <view class="line-horizontal" style="margin-top:40rpx;"></view>
+      <view class="bottom-box-one-item">
+        <image style="width:100rpx;height:100rpx;" mode="aspectFill" src="{{helpmedicineIcon}}"></image>
+        <view class="text-colum">
+        <text class="text-desc">佰达图®舒稳乐®盐酸丙卡特罗粉雾剂</text>
+        <text class="text-remark">*该药品由大冢制药有限公司无偿捐赠</text>
+        </view>
+      </view>
+      <text class="bottom-description">日本大冢制药株式会社（四川），致力于开发支气管哮喘、COPD(慢性阻塞性肺病)、急慢性支气管炎等系列呼吸系统疾病治疗药品。</text>
+         <text class="bottom-description">大爱清尘基金会是专门救助尘肺患者的公益机</text>
+      <view class="bottom-remark-box">
+        <image mode="aspectFill" class="bottom-remark-image" src="{{bottomIcon}}"></image>
+        <text class="bottom-remark">是否符合援助标准最终由大爱清尘决定。</text>
+      </view>
+      <!-- 灰色间隔区 -->
+      <!-- <view class="intervalView" style="margin-top:40rpx;"></view> -->
     </view>
-    <text class="bottom-description">日本大冢制药株式会社（四川），致力于开发支气管哮喘、COPD(慢性阻塞性肺病)、急慢性支气管炎等系列呼吸系统疾病治疗药品</text>
-    <view class="bottom-remark-box">
-    <image mode="aspectFill" class="bottom-remark-image" src="{{bottomIcon}}"></image>
-    <text class="bottom-remark">是否符合援助标准最终由大爱清尘决定。</text>
-    </view>
-    <!-- 灰色间隔区 -->
-    <!-- <view class="intervalView" style="margin-top:40rpx;"></view> -->
   </view>
+
+  <!-- </view> -->
   <!-- 立即进入专家门诊 -->
   <view class="enter-box" bindtap="toServiceIndexFun">
     <text class="enter-name">立即进入专家门诊</text>

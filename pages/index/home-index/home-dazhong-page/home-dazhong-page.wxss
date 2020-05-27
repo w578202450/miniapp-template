@@ -1,17 +1,60 @@
 /* pages/index/home-index/home-dazhong-page/hom-dazhong-page.wxss */
 
 page {
-  background: white;
+  background: rgba(140, 111, 79, 1);
+  height: 2500rpx;
 }
 
 .banner-header {
   position: relative;
-  background: white;
+  background: rgba(140, 111, 79, 1);
   z-index: -1;
 }
 
+/* .one-box-bg {
+  margin-top: -20rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+} */
+
+.satisfy-box {
+  margin-top: -30rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  height: 800rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+
+.image-box1 {
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-box2 {
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .middle-one-title {
-  margin-top: 32rpx;
+  /* margin-top: 32rpx; */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -66,9 +109,9 @@ page {
 .middle-two-box {
   margin-left: 30rpx;
   margin-right: 30rpx;
-  margin-top: 30rpx;
+  margin-top: 60rpx;
   width: 686rpx;
-  height: 340rpx;
+  height: 800rpx;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -142,12 +185,29 @@ page {
   height: 220rpx;
 }
 
-.text-remark {
+.text-medicine {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-bottom: 32rpx;
-  height: 26rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
+.text-desc {
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 36rpx;
+}
+
+.text-remark {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
   font-size: 22rpx;
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
@@ -239,15 +299,27 @@ page {
   background: white;
 }
 
+.text-colum {
+  margin-left: 20rpx;
+  height: 100rpx;
+  flex-direction: column;
+}
+
+.line-horizontal {
+  width: 100%;
+  height: 2rpx;
+  background-color: rgba(231, 207, 176, 1);
+}
+
 .bottom-box {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  margin-top: 40rpx;
   margin-bottom: 120rpx;
 }
 
 .bottom-box-one-item {
+  margin-top: 30rpx;
   margin-left: 30rpx;
   display: flex;
   flex-direction: row;
@@ -260,7 +332,7 @@ page {
   height: 32rpx;
 }
 
-.bottom-box-one-item text {
+/* .bottom-box-one-item text {
   height: 28rpx;
   margin-left: 8rpx;
   font-size: 28rpx;
@@ -268,13 +340,7 @@ page {
   font-weight: 600;
   color: rgba(0, 0, 0, 0.85);
   line-height: 28rpx;
-  /* text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 1; 
-  -webkit-box-orient: vertical;
-   */
-}
+} */
 
 .bottom-description {
   margin-left: 30rpx;
@@ -294,16 +360,16 @@ page {
 
 .bottom-remark-box {
   margin-top: 20rpx;
-  margin-left: 52rpx;
+  margin-left: 20rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .bottom-remark-image {
-  width: 140rpx;
-  height: 140rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .bottom-remark {

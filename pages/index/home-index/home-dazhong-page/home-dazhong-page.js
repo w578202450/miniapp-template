@@ -25,6 +25,9 @@ Component({
    * 组件的初始数据
    */
   data: {
+    satisfybgtitle: "/images/home/title_bg.png",
+    satisfybg1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/feichange01.png",
+    satisfybg2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/feichange02.png",
     homeDazhongLeft: "/images/home/home_dazhong_left.png",
     homeDazhongRight: "/images/home/home_dazhong_right.png",
     homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
@@ -33,6 +36,7 @@ Component({
     middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei3.png",
     middleOnefei4: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei4.png",
     helpfulNum: 12324,
+    helpmedicineIcon: "/images/home/help_medicine.png",
     medicineIcon: "/images/home/home_dazhong_medicine.png",
     bottomIcon: "/images/home/home_dazhong_bottom_icon.png",
     rectangleBackgroundImg: "/images/home/home_rectangle_background.png",
