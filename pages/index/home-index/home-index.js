@@ -551,7 +551,7 @@ Page({
     if (!doctorStaffID) {
       return;
     }
-    if (app.globalData.p && app.globalData.p === "doctor") {
+    if (app.globalData.p && app.globalData.p === "d") {
       app.globalData.p = "";
       that.toServiceIndexFun();
     }
