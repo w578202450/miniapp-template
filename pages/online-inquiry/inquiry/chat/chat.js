@@ -582,10 +582,10 @@ Page({
                   isOverChat: false
                 });
               } else {
+                that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
                 that.getHistoryMessage(); // 获取历史消息
               }
             }
-            that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
             that.getHistoryInquiryID(); // 查询历史问诊记录ID列表
           } else {
             console.log("检验入群结果：入群失败");
