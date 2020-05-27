@@ -631,7 +631,7 @@ module.exports = {
     return request('api/tmc/wxservice/testTao', true, 'get', parmas);
   },
   /**用户进入问诊了，告诉系统给他发个欢迎语 */
-  sendCustomMsgPost: function isInWXSystem(parmas) {
+  sendCustomMsgPost: function sendCustomMsgPost(parmas) {
     return request('api/tmc/msg/sendCustomMsg', true, 'post', parmas);
   }
 }
