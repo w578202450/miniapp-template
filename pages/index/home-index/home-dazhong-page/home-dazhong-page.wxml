@@ -3,6 +3,7 @@
   <view class="banner-header" style="width: 100%;">
     <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
   </view>
+  <view class="home">
   <!-- <view style="background:rgba(140,111,79,1);"> -->
   <!-- 需满足的医学条件 -->
   <!-- <view class="one-box-bg"> -->
@@ -96,5 +97,6 @@
   <!-- 立即进入专家门诊 -->
   <view class="enter-box" bindtap="toServiceIndexFun">
     <text class="enter-name">立即进入专家门诊</text>
+  </view>
   </view>
 </view>

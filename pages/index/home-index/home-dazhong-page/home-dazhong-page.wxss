@@ -1,8 +1,12 @@
 /* pages/index/home-index/home-dazhong-page/hom-dazhong-page.wxss */
 
 page {
+  background-color: rgba(246, 246, 246, 1);
+}
+
+.home {
   background: rgba(140, 111, 79, 1);
-  height: 2500rpx;
+  height: 1850rpx;
 }
 
 .banner-header {
