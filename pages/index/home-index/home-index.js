@@ -547,13 +547,13 @@ Page({
   },
   // 判断app.globalData.p是否存在，是否跳往医生详情页
   toDoctorDetailFun(doctorStaffID) {
+    let that = this;
     if (!doctorStaffID) {
       return;
     }
     if (app.globalData.p && app.globalData.p === "doctor") {
-      wx.navigateTo({
-        url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + doctorStaffID
-      });
+      app.globalData.p = "";
+      that.toServiceIndexFun();
     }
   }
 })
