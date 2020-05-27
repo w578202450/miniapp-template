@@ -70,19 +70,19 @@
 }
 
 .navBackIcon {
-  width: 31rpx;
-  height: 31rpx;
+  width: 34rpx;
+  height: 34rpx;
   padding: 12rpx 15rpx;
 }
 
 .linear {
-  height: 31rpx;
+  height: 34rpx;
   width: 2rpx;
   margin: 0 5rpx;
 }
 
 .navHomeIcon {
-  width: 31rpx;
-  height: 31rpx;
+  width: 34rpx;
+  height: 34rpx;
   padding: 12rpx 15rpx;
 }
