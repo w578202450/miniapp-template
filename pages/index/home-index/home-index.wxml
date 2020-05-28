@@ -1,4 +1,4 @@
-<view class="page">
+<view class="page-home">
   <!-- 是否显示大冢医药大爱清尘佰肺待新页面 -->
   <view wx:if="{{ showOrgID == 2}}">
     <home-dazhong-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">

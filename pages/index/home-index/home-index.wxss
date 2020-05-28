@@ -1,6 +1,6 @@
 /* pages/index/home-index/home-index.wxss */
 
-page {
+page-home {
   background-color: white;
 }
 
@@ -200,6 +200,7 @@ page {
   margin-top: 5rpx;
   height: 400rpx;
   width: 100%;
+  background: white;
 }
 
 .physician-team {

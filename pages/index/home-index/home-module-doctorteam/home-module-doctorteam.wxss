@@ -51,6 +51,7 @@
 .container {
   border-radius: 20rpx;
   white-space: nowrap; 
+  background: white;
 }
 
 .scroll-view-x {
