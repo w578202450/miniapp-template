@@ -22,7 +22,7 @@ Page({
       assistantInfo: {}, // 医助信息详情
       patientInfo: {}, // 患者信息详情
       multiTalkInfo: {} // 三者ID信息
-    },
+    }, 
     inquiryInfo: {}, // 问诊信息 
     username: {
       type: Object,
@@ -320,6 +320,7 @@ Page({
         //   duration: 2000
         // });
         // return;
+        console.log("当前的没了，加载历史的了");
         that.dealHistoryMsg(); // 查询历史问诊的消息记录
       } else {
         wx.showNavigationBarLoading(); //在标题栏中显示加载中的转圈效果
@@ -618,6 +619,7 @@ Page({
       imResponse.data.messageList.forEach(item => {
         let isAddToArr = true;
         if (item.type == "TIMSoundElem") {
+          // console.log(JSON.stringify(item));
           item.recordStatus = false; // 播放状态
           if (Number(item.payload.second) <= 15) {
             item.recordViewWidth = item.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
@@ -630,6 +632,8 @@ Page({
             isAddToArr = false
             spliceNum = spliceNum + 1;
           }
+        } else if (item.type == "TIMImageElem") {
+          console.log(JSON.stringify(item));
         }
         if (isAddToArr) {
           imResponseArr.push(item);
@@ -640,6 +644,7 @@ Page({
         nextReqMessageID: imResponse.data.nextReqMessageID,
         isCompleted: imResponse.data.isCompleted
       });
+      console.log("当前问诊的部分消息如下：");
       console.log(that.data.currentMessageList);
       if (spliceNum && !that.data.isCompleted) {
         that.onPullDownRefresh(spliceNum);
@@ -702,9 +707,9 @@ Page({
       .then(res => {
         if (res.code == 0 && res.data) {
           that.setData({
-            ["talkInfo.doctorTitleName"]: res.data.titleName
+            ["talkInfo.doctorTitleName"]: res.data.titleName,
+            doctorInfo: res.data
           });
-          // console.log(res.data);
         }
       });
   },
@@ -719,7 +724,6 @@ Page({
         that.setData({
           ["talkInfo.assistTitleName"]: res.data.titleName
         });
-        // console.log(res.data);
       }
     })
   },
@@ -1274,10 +1278,13 @@ Page({
     let params = {
       orgID: that.data.userInfo.orgID,
       patientID: that.data.userInfo.keyID,
-      receiver: that.data.inquiryInfo.keyID
+      receiver: that.data.inquiryInfo.keyID,
+      orgName: that.data.doctorInfo.workPlace,
+      assistantStaffID: that.data.talkInfo.multiTalkInfo.assistantStaffID,
+      doctorName: that.data.doctorInfo.doctorName
     }
     HTTP.sendCustomMsgPost(params).then(res => {
-      console.log(res);
+      console.log("请求欢迎语成功");
     });
   },
 
@@ -1288,7 +1295,6 @@ Page({
       orgID: that.data.userInfo.orgID,
       talkID: that.data.talkInfo.multiTalkInfo.keyID
     }).then(res => {
-      console.log(res.data);
       if (res.code == 0 && res.data) {
         that.setData({
           historyInquiryList: res.data
@@ -1300,51 +1306,70 @@ Page({
   /**获取历史问诊的消息记录 */
   dealHistoryMsg() {
     let that = this;
+    console.log(that.data.currentMessageList);
     if (that.data.historyInquiryIndex < that.data.historyInquiryList.length) {
       HTTP.findHistoryMsgByInquiryID({
         pageIndex: 0,
         inquiryID: that.data.historyInquiryList[that.data.historyInquiryIndex].keyID
       }).then(res => {
+        console.log(JSON.stringify(res.data));
         console.log(res.data);
         if (res.code == 0 && res.data) {
           if (res && res.data) {
+            // let msgList = [];
+            // res.data.forEach(element => {
+            //   let type = element.msgBody[0].msgType;
+            //   let msgContent = element.msgBody[0].msgContent;
+            //   let from = element.from_Account;
+            //   let time = element.msgTime;
+            //   let temp = element;
+            //   temp.type = type;
+            //   temp.from = from;
+            //   temp.time = time;
+            //   temp.payload = {};
+            //   if (type === "TIMTextElem") { // 文本消息
+            //     temp.payload.text = msgContent.Text;
+            //   } else if (type == "TIMSoundElem") { // 语音消息
+            //     // temp.recordStatus = false; // 播放状态
+            //     // if (Number(temp.payload.second) <= 15) {
+            //     //   temp.recordViewWidth = temp.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+            //     // } else {
+            //     //   temp.recordViewWidth = (Number(temp.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
+            //     // }
+            //   } else if (type === "TIMCustomElem") { // 自定义消息
+            //     temp.payload.data = msgContent.Data;
+            //     temp.payload.description = msgContent.Desc;
+            //     temp.payload.extension = msgContent.Ext;
+            //   } else if (type === "TIMImageElem") { // 图片消息
+            //     temp.payload.imageInfoArray = [];
+            //     let msgImgObj = msgContent.ImageInfoArray[0];
+            //     let tempImgObj = {};
+            //     tempImgObj.sizeType = msgImgObj.Type;
+            //     tempImgObj.size = msgImgObj.Size;
+            //     tempImgObj.height = msgImgObj.Height;
+            //     tempImgObj.width = msgImgObj.Width;
+            //     tempImgObj.imageUrl = msgImgObj.URL;
+            //     temp.payload.imageInfoArray.push(tempImgObj);
+            //   }
+            //   msgList.push(temp);
+            // });
             let msgList = [];
-            res.data.forEach(element => {
-              let type = element.msgBody[0].msgType;
-              let msgContent = element.msgBody[0].msgContent;
-              let from = element.from_Account;
-              let time = element.msgTime;
-              let temp = element;
-              temp.type = type;
-              temp.from = from;
-              temp.time = time;
-              temp.payload = {};
-              if (type === "TIMTextElem") { // 文本消息
-                temp.payload.text = msgContent.Text;
-              } else if (type == "TIMSoundElem") { // 语音消息
-                // temp.recordStatus = false; // 播放状态
-                // if (Number(temp.payload.second) <= 15) {
-                //   temp.recordViewWidth = temp.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-                // } else {
-                //   temp.recordViewWidth = (Number(temp.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
-                // }
-              } else if (type === "TIMCustomElem") { // 自定义消息
-                temp.payload.data = msgContent.Data;
-                temp.payload.description = msgContent.Desc;
-                temp.payload.extension = msgContent.Ext;
-              } else if (type === "TIMImageElem") { // 图片消息
-                temp.payload.imageInfoArray = [];
-                let msgImgObj = msgContent.ImageInfoArray[0];
-                let tempImgObj = {};
-                tempImgObj.sizeType = msgImgObj.Type;
-                tempImgObj.size = msgImgObj.Size;
-                tempImgObj.height = msgImgObj.Height;
-                tempImgObj.width = msgImgObj.Width;
-                tempImgObj.imageUrl = msgImgObj.URL;
-                temp.payload.imageInfoArray.push(tempImgObj);
+            res.data.forEach(item => {
+              if (item.from) {
+                if (item.from === "administrator" && item.type === "TIMTextElem") {
+                  item.from = that.data.talkInfo.multiTalkInfo.assistantStaffID;
+                }
+                if (item.type == "TIMSoundElem") {
+                  item.recordStatus = false; // 播放状态
+                  if (Number(item.payload.second) <= 15) {
+                    item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+                  } else {
+                    item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+                  }
+                }
+                msgList.push(item);
               }
-              msgList.push(temp);
-            });
+            })
             that.setData({
               currentMessageList: [...msgList, ...that.data.currentMessageList],
               historyInquiryIndex: that.data.historyInquiryIndex + 1
@@ -1356,6 +1381,13 @@ Page({
         console.log(err);
         wx.stopPullDownRefresh();
       });
+    } else {
+      wx.showToast({
+        title: '没有更多了~',
+        icon: "none",
+        duration: "2000"
+      });
+      wx.stopPullDownRefresh();
     }
   }
 
