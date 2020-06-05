@@ -1,9 +1,9 @@
 /*eslint-disable*/
 import LibGenerateTestUserSig from './lib-generate-test-usersig-es.min.js'
 
-const version = 1 //0发布、1测试 开发
+const version = 0 //0发布、1测试 开发
 
- const _SDKAPPID = version == 0 ? 1400200900 : 1400283798;
+ const _SDKAPPID = version == 0 ? 1400200900 : 1400351839;
 //const _SDKAPPID = version == 0 ? 1400200900 : 1400351839;
 
 const _SECRETKEY = version == 0 ?
@@ -11,6 +11,15 @@ const _SECRETKEY = version == 0 ?
   '29b62ca1b5103159121707fc789cea5f3280a72906524c0cdb944cdc7b9e4088' :
 
   'b4a75b7f429c2ccf7b3923a91007594c1bd3241bdb9d176461da2db33b9fac8e';
+
+// const _SECRETKEY = version == 0 ?
+
+//   '29b62ca1b5103159121707fc789cea5f3280a72906524c0cdb944cdc7b9e4088' :
+
+//   '69bbdbe0ce9ed0e489ab8ad6b432aa72592c2898916e4c2b972f32f96e8c2fb4';
+
+
+  
 
 /*
  * Module:   GenerateTestUserSig

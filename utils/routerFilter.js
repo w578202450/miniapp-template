@@ -9,17 +9,25 @@ const HTTP = require('./http-util')
 exports.routerFillter = function (pageObj, flag = false) {
   if (flag) {
     let _onShow = pageObj.onShow
+    let time=null
     pageObj.onShow = function () {
       let currentInstance = getPageInstance();
       let that = this
-      setInterval(() => {
+      time=setInterval(() => {
+        let pageName=pageObj.data.pageName
+        if(pageName==='院长详情页'){
+          let data=currentInstance.data
+          if(data.materialInfo.videoMaterialSrc==='https://res.100cbc.com/tmc/hospital/2381/hosDetail.html'){
+            pageName='医院详情页'
+          }
+        }
         if (wx.getStorageSync('personInfo').keyID) {
           HTTP.heart({
               patientID: wx.getStorageSync('personInfo').keyID,
               path: currentInstance.route,
               channelCode: "tmcpro",
               channelName: "小程序",
-              pathName: pageObj.data.pageName || ''
+              pathName: pageName || ''
             })
             .then(res => {
 
@@ -28,16 +36,13 @@ exports.routerFillter = function (pageObj, flag = false) {
             })
         }
       }, 2000);
-      // 这一步是自己定义获取登录状态的,只是个判断权限的
-      // appGlobalData.getSignPrms.then((res) => {
-      //   // 改回this指针
-      //   res.status && _onShow.call(that)
-      // }, (err) => {
-      //   // 用户未登录，重定向个人页
-      //   wx.switchTab({
-      //     url: '/pages/manage/manage'
-      //   })
-      // })
+    }
+    pageObj.onHide=function(){
+      clearInterval(time)
+    }
+
+    pageObj.onUnload=function(){
+      clearInterval(time)
     }
   }
   return Page(pageObj)
