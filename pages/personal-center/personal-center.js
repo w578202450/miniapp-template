@@ -1,8 +1,9 @@
 const app = getApp();
 import { onShareAppMessageFun } from '../../utils/common.js';
-
-Page({
+import { routerFillter } from '../../utils/routerFilter.js';
+routerFillter({
   data: {
+    pageName:'我的页',
     list: [{
         url: 'health-information/health-information',
         title: '我的健康信息'
@@ -133,4 +134,4 @@ Page({
       });
     }
   }
-})
+},true)
