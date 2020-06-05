@@ -1,12 +1,13 @@
 const HTTP = require('../../../utils/http-util');
 const commonFun = require('../../../utils/common.js');
-
+import { routerFillter } from '../../../utils/routerFilter.js';
 let app = getApp()
 
-Page({
+routerFillter({
   addressInfo: null,
   noData: false,
   data: {
+    pageName:'药品订单页',
     list: []
   },
   currentIndex: 0,
@@ -218,4 +219,4 @@ Page({
     });
   }
 
-})
+},true)

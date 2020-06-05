@@ -1,10 +1,12 @@
 const HTTP = require('../../../utils/http-util')
 const Common = require('../../../common/common')
 const commonFun = require('../../../utils/common')
+import { routerFillter } from '../../../utils/routerFilter.js';
 let app = getApp()
 
-Page({
+routerFillter({
   data: {
+    pageName:'我的健康信息页',
     //是否吸烟
     smokingItems: [{
         name: '不吸烟',
@@ -819,4 +821,4 @@ Page({
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
   }
-})
+},true)

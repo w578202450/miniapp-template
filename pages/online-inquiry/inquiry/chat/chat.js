@@ -3,15 +3,17 @@ const recorderManager = wx.getRecorderManager();
 var HTTP = require('../../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../../utils/common.js';
 var msgStorage = require("../../../../utils/msgstorage");
+import { routerFillter } from '../../../../utils/routerFilter.js';
 var tim = app.globalData.tim;
 var TIM = app.globalData.TIM;
 
-Page({
+routerFillter({
 
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:'问诊页',
     toView: "", // 手机屏幕自动滚动到达的位置
     userInfo: {}, // 当前用户信息
     wexinInfo: {}, // 当前用户微信信息
@@ -1404,4 +1406,4 @@ Page({
   //     url: "/pages/online-inquiry/inquiry/videoPlay/videoPlay?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
   //   });
   // }
-})
+},true)

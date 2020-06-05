@@ -1,11 +1,12 @@
 // pages/index/service-index/ht/video-and-h5/video-and-h5.js
 const commonFun = require('../../../../../utils/common.js');
-Page({
-
+import { routerFillter } from '../../../../../utils/routerFilter.js';
+routerFillter({
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:'院长详情页',
     materialInfo: {
       materialType: -1, // 0:图文 1:视频
       title: "", // 标题
@@ -23,7 +24,6 @@ Page({
     console.log("进入H5展示的参数：" + JSON.stringify(options));
     if (options.materialData) {
       let acceptOptions = JSON.parse(options.materialData); // 接收数组、对象转换的字符窜时，需要把格式转换回来
-      console.log(acceptOptions);
       if (acceptOptions.materialType || acceptOptions.materialType == 0) {
         let newUrl = decodeURIComponent(acceptOptions.url);
         let newLogoUrl = decodeURIComponent(acceptOptions.logoUrl);
@@ -35,7 +35,6 @@ Page({
             materialType: acceptOptions.materialType
           }
         });
-        console.log(that.data.materialInfo);
       } else {
         wx.showToast({
           title: '素材数据异常，无法正常展示',
@@ -109,4 +108,4 @@ Page({
       duration: 3000
     });
   }
-})
+},true)

@@ -1,9 +1,10 @@
 /*eslint-disable*/
 import LibGenerateTestUserSig from './lib-generate-test-usersig-es.min.js'
 
-const version = 0 //0发布、1测试 开发
+const version = 1 //0发布、1测试 开发
 
-const _SDKAPPID = version == 0 ? 1400200900 : 1400283798;
+ const _SDKAPPID = version == 0 ? 1400200900 : 1400283798;
+//const _SDKAPPID = version == 0 ? 1400200900 : 1400351839;
 
 const _SECRETKEY = version == 0 ?
 

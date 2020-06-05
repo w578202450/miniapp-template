@@ -1,12 +1,14 @@
 // pages/index/service-index/service-index.js
 const app = getApp();
 import { onShareAppMessageFun, requestMsgFun } from '../../../utils/common.js';
+import { routerFillter } from '../../../utils/routerFilter.js';
 const HTTP = require('../../../utils/http-util');
-Page({
+routerFillter({
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:'专家门诊页',
     copyrightInfo: {
       copyrightIcon: "/images/inquiry/inquiry_copyright.png",
       nationalEmblemIcon: "/images/inquiry/inquiry_nationalEmblem.png",
@@ -637,4 +639,4 @@ Page({
       }
     }
   }
-})
+},true)

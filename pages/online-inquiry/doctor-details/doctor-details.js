@@ -1,9 +1,11 @@
 const HTTP = require('../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../utils/common.js';
+import { routerFillter } from '../../../utils/routerFilter.js';
 const app = getApp();
 
-Page({
+routerFillter({
   data: {
+    pageName:'医生详情页',
     screenWidth: app.globalData.systemInfo.screenWidth,
     list: [{
       name: '张**',
@@ -145,4 +147,4 @@ Page({
   _success() {
     this.popup.hidePopup();
   }
-})
+},true)

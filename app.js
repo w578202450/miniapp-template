@@ -1,6 +1,7 @@
 // 引入腾讯云IM
 import TIM from './miniprogram_npm/tim-wx-sdk/index.js';
 import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js';
+
 const AUTH = require('utils/auth');
 let msgStorage = require("utils/msgstorage");
 import {
@@ -23,6 +24,8 @@ let logined = false; //是否处于登录状态
 let nextPageName = ""; // 下一页的名字
 let tim = null;
 let that = null;
+
+
 
 App({
   onLaunch: function(option) {
@@ -48,10 +51,10 @@ App({
     //   assistantStaffID: "20012214121981875310514240"
     // }
     // 侯丽萍医院(生产环境)
-    // options = {
-    //   orgID: "20012118570385423810511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
+    options = {
+      orgID: "20012118570385423810511240",
+      assistantStaffID: "20020913491781433700514240"
+    }
     // 大冢医药(生产环境)
     // options = {
     //   orgID: "20040909515893667880511240",
@@ -144,7 +147,7 @@ App({
   //   tim.logout().then(function(imResponse) {}).catch(function(imError) {
   //     console.warn('logout error:', imError);
   //   });
-  // },
+  // }, 
 
   onShow: function(option) {
     if (that.globalData.isStartLogin && that.globalData.loginNum > 0) {
@@ -542,3 +545,4 @@ App({
   },
 
 })
+

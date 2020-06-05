@@ -1,13 +1,15 @@
 // pages/index/home-index/home-index.js
 const app = getApp();
 import { onShareAppMessageFun } from '../../../utils/common.js';
+import { routerFillter } from '../../../utils/routerFilter.js';
 const HTTP = require('../../../utils/http-util');
-Page({
+routerFillter({
 
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:'首页',
     isSearchState: false, // 是否进行了一次加载
     /**
      * 侯丽萍开发环境ID： 19101017081245518100511003
@@ -556,4 +558,5 @@ Page({
       that.toServiceIndexFun();
     }
   }
-})
+},true)
+

@@ -1,13 +1,14 @@
 const HTTP = require('../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../utils/common.js';
-
+import { routerFillter } from '../../../utils/routerFilter.js';
 let app = getApp()
 /**
  * optionType为0 表示从个人中心进入地址列表界面
  * optionType为1 表示从其他界面进入地址列表界面
  */
-Page({
+routerFillter({
   data: {
+    pageName:'收货地址页',
     list: [],
     optionType: 0
   },
@@ -217,4 +218,4 @@ Page({
   onShareAppMessage: function(res) {
     return onShareAppMessageFun();
   }
-})
+},true)

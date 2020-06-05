@@ -1,13 +1,15 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
 import { onShareAppMessageFun, requestMsgFun } from '../../../../../utils/common.js';
+import { routerFillter } from '../../../../../utils/routerFilter.js';
 const app = getApp()
-Page({
+routerFillter({
 
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:"文章详情页",
     pageTitle: "", // 页面标题
     articleDatas: {}, // 文章详情
     inquiryIcon: "/images/inquiry/inquiry_article_add.png",
@@ -195,4 +197,4 @@ Page({
     const perpage = pages[pages.length - 2]
     perpage.refreshStatistics('article', 'useful');
   }
-})
+},true)

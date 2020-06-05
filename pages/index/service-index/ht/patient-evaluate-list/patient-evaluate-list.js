@@ -1,13 +1,16 @@
 // pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.js
 const HTTP = require('../../../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../../../utils/common.js';
+import { routerFillter } from '../../../../../utils/routerFilter.js';
+
 const app = getApp()
-Page({
+routerFillter({
 
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:'患者评价页',
     materialImgBac: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png", // 评论内容中的背景图片
     videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
     illnessSumList: [], // 患者评价的统计数据
@@ -212,4 +215,4 @@ Page({
       this.popup.showPopup(nextPageName); // 显示登录确认框
     }
   }
-})
+},true)

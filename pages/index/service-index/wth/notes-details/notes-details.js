@@ -1,16 +1,18 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
+import { routerFillter } from '../../../../../utils/routerFilter.js';
 import {
   onShareAppMessageFun,
   requestMsgFun
 } from '../../../../../utils/common.js';
 const app = getApp()
-Page({
+routerFillter({
 
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:'康复案例详情页',
     pageTitle: "康复案例详情", // 页面标题
     personInfo: {},
     keyID: "",
@@ -198,4 +200,4 @@ Page({
     perpage.refreshInquiryLikeSuccess();
   }
 
-})
+},true)

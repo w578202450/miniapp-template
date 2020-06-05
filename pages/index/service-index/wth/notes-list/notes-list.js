@@ -1,13 +1,15 @@
 // pages/index/service-index/wth/notes-list/notes-list.js
 const HTTP = require('../../../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../../../utils/common.js';
+import { routerFillter } from '../../../../../utils/routerFilter.js';
 const app = getApp();
-Page({
+routerFillter({
 
   /**
    * 页面的初始数据
    */
   data: {
+    pageName:'康复案例页',
     moreBtnUrl: "",
     contentText: "",
     inquiryCaseData: [],
@@ -225,4 +227,4 @@ Page({
       inquiryCaseData: this.data.inquiryCaseData
     });
   },
-})
+},true)
