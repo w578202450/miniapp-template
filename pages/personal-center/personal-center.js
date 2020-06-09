@@ -1,8 +1,9 @@
 const app = getApp();
 import { onShareAppMessageFun } from '../../utils/common.js';
-import { routerFillter } from '../../utils/routerFilter.js';
-routerFillter({
+import { heartFun,intervalTime } from '../../utils/heart.js';
+Page({
   data: {
+    timer:null,
     pageName:'我的页',
     list: [{
         url: 'health-information/health-information',
@@ -54,6 +55,9 @@ routerFillter({
     } else {
       console.log(app.globalData.isInitInfo);
     }
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
   },
 
   onReady: function() {
@@ -61,6 +65,21 @@ routerFillter({
     this.popup = this.selectComponent("#loginDialog");
   },
 
+   /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+    clearInterval(this.timer)
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+    clearInterval(this.timer)
+  },
+
+  
   /**
    * 右上角分享功能
    */
@@ -134,4 +153,4 @@ routerFillter({
       });
     }
   }
-},true)
+})

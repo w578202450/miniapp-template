@@ -3,16 +3,17 @@ const recorderManager = wx.getRecorderManager();
 var HTTP = require('../../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../../utils/common.js';
 var msgStorage = require("../../../../utils/msgstorage");
-import { routerFillter } from '../../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../../utils/heart.js';
 var tim = app.globalData.tim;
 var TIM = app.globalData.TIM;
 
-routerFillter({
+Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    timer:null,
     pageName:'问诊页',
     toView: "", // 手机屏幕自动滚动到达的位置
     userInfo: {}, // 当前用户信息
@@ -213,14 +214,16 @@ routerFillter({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
@@ -228,6 +231,7 @@ routerFillter({
    */
   onUnload: function() {
     this.data.innerAudioContext.stop();
+    clearInterval(this.timer)
     msgStorage.off('newChatMsg')
   },
 
@@ -1406,4 +1410,4 @@ routerFillter({
   //     url: "/pages/online-inquiry/inquiry/videoPlay/videoPlay?materialData=" + JSON.stringify(materialData) // 传输对象、数组时，需要转换为字符窜
   //   });
   // }
-},true)
+})

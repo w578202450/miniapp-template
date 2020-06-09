@@ -1,14 +1,15 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
 import { onShareAppMessageFun, requestMsgFun } from '../../../../../utils/common.js';
-import { routerFillter } from '../../../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../../../utils/heart.js';
 const app = getApp()
-routerFillter({
+Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    timer:null,
     pageName:"文章详情页",
     pageTitle: "", // 页面标题
     articleDatas: {}, // 文章详情
@@ -30,6 +31,22 @@ routerFillter({
       const perpage = pages[pages.length - 2]
       perpage.refreshStatistics('article', 'view');
     }
+    clearInterval(this.timer)
+  },
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+    clearInterval(this.timer)
+  },
+
+   /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
   },
 
   /**
@@ -197,4 +214,4 @@ routerFillter({
     const perpage = pages[pages.length - 2]
     perpage.refreshStatistics('article', 'useful');
   }
-},true)
+})

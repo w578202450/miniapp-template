@@ -1,14 +1,15 @@
 // pages/index/home-index/home-index.js
 const app = getApp();
 import { onShareAppMessageFun } from '../../../utils/common.js';
-import { routerFillter } from '../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../utils/heart.js';
 const HTTP = require('../../../utils/http-util');
-routerFillter({
+Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    timer:null,
     pageName:'首页',
     isSearchState: false, // 是否进行了一次加载
     /**
@@ -121,6 +122,9 @@ routerFillter({
    */
   onShow: function() {
     let that = this;
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
     if (that.data.isSearchState) {
       that.initHomeData(); // 初始化参数
     }
@@ -130,14 +134,14 @@ routerFillter({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
@@ -558,5 +562,5 @@ routerFillter({
       that.toServiceIndexFun();
     }
   }
-},true)
+})
 

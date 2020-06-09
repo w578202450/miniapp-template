@@ -1,13 +1,14 @@
 // pages/index/service-index/service-index.js
 const app = getApp();
 import { onShareAppMessageFun, requestMsgFun } from '../../../utils/common.js';
-import { routerFillter } from '../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../utils/heart.js';
 const HTTP = require('../../../utils/http-util');
-routerFillter({
+Page({
   /**
    * 页面的初始数据
    */
   data: {
+    timer:null,
     pageName:'专家门诊页',
     copyrightInfo: {
       copyrightIcon: "/images/inquiry/inquiry_copyright.png",
@@ -143,20 +144,23 @@ routerFillter({
     if (this.data.isSearchState) {
       this.initDocInfoFun();
     }
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
@@ -639,4 +643,4 @@ routerFillter({
       }
     }
   }
-},true)
+})

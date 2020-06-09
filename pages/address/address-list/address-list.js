@@ -1,13 +1,14 @@
 const HTTP = require('../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../utils/common.js';
-import { routerFillter } from '../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../utils/heart.js';
 let app = getApp()
 /**
  * optionType为0 表示从个人中心进入地址列表界面
  * optionType为1 表示从其他界面进入地址列表界面
  */
-routerFillter({
+Page({
   data: {
+    timer:null,
     pageName:'收货地址页',
     list: [],
     optionType: 0
@@ -21,6 +22,30 @@ routerFillter({
   onPullDownRefresh() {
     this.loadDatas()
   },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+    clearInterval(this.timer)
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+    clearInterval(this.timer)
+  },
+
   /**
    * 获取地址列表
    */
@@ -218,4 +243,4 @@ routerFillter({
   onShareAppMessage: function(res) {
     return onShareAppMessageFun();
   }
-},true)
+})

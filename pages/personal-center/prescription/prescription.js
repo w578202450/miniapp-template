@@ -1,10 +1,11 @@
 const HTTP = require('../../../utils/http-util')
 const commonFun = require('../../../utils/common')
-import { routerFillter } from '../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../utils/heart.js';
 let app = getApp()
 
-routerFillter({
+Page({
   data: {
+    timer:null,
     pageName:'我的处方页',
     params: {},
     noData: false,
@@ -15,6 +16,30 @@ routerFillter({
     this.loadDatas()
   },
 
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+    clearInterval(this.timer)
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+    clearInterval(this.timer)
+  },
+
+  
   onPullDownRefresh() {
     this.loadDatas()
   },
@@ -82,4 +107,4 @@ routerFillter({
   onShareAppMessage: function(res) {
     return commonFun.onShareAppMessageFun();
   }
-},true)
+})

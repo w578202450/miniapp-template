@@ -1,10 +1,11 @@
 const HTTP = require('../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../utils/common.js';
-import { routerFillter } from '../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../utils/heart.js';
 const app = getApp();
 
-routerFillter({
+Page({
   data: {
+    timer:null,
     pageName:'医生详情页',
     screenWidth: app.globalData.systemInfo.screenWidth,
     list: [{
@@ -30,6 +31,24 @@ routerFillter({
     this.popup = this.selectComponent("#loginDialog");
   },
 
+  onShow:function(){
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
+  },
+   /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+    clearInterval(this.timer)
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+    clearInterval(this.timer)
+  },
   /**
    * 医师信息
    */
@@ -147,4 +166,4 @@ routerFillter({
   _success() {
     this.popup.hidePopup();
   }
-},true)
+})

@@ -1,15 +1,16 @@
 // pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list.js
 const HTTP = require('../../../../../utils/http-util');
 import { onShareAppMessageFun } from '../../../../../utils/common.js';
-import { routerFillter } from '../../../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../../../utils/heart.js';
 
 const app = getApp()
-routerFillter({
+Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    timer:null,
     pageName:'患者评价页',
     materialImgBac: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/imgNone.png", // 评论内容中的背景图片
     videoIconSrc: "/images/chat/videoPlayIcon.png", // 视频播放按钮的图标
@@ -57,21 +58,23 @@ routerFillter({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
@@ -215,4 +218,4 @@ routerFillter({
       this.popup.showPopup(nextPageName); // 显示登录确认框
     }
   }
-},true)
+})

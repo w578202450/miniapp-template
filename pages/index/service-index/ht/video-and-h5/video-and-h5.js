@@ -1,11 +1,12 @@
 // pages/index/service-index/ht/video-and-h5/video-and-h5.js
 const commonFun = require('../../../../../utils/common.js');
-import { routerFillter } from '../../../../../utils/routerFilter.js';
-routerFillter({
+import { heartFun,intervalTime } from '../../../../../utils/heart.js';
+Page({
   /**
    * 页面的初始数据
    */
   data: {
+    timer:null,
     pageName:'院长详情页',
     materialInfo: {
       materialType: -1, // 0:图文 1:视频
@@ -35,7 +36,6 @@ routerFillter({
             materialType: acceptOptions.materialType
           }
         });
-        console.log(that.data.materialInfo);
       } else {
         wx.showToast({
           title: '素材数据异常，无法正常展示',
@@ -63,21 +63,24 @@ routerFillter({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+    console.log(this.data)
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__,this.data.materialInfo.videoMaterialSrc)
+    }, intervalTime);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    clearInterval(this.timer)
   },
 
   /**
@@ -109,4 +112,4 @@ routerFillter({
       duration: 3000
     });
   }
-},true)
+})

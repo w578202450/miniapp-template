@@ -1,17 +1,18 @@
 var WxParse = require('../../../../../components/wxParse/wxParse.js');
 const HTTP = require('../../../../../utils/http-util');
-import { routerFillter } from '../../../../../utils/routerFilter.js';
+import { heartFun,intervalTime } from '../../../../../utils/heart.js';
 import {
   onShareAppMessageFun,
   requestMsgFun
 } from '../../../../../utils/common.js';
 const app = getApp()
-routerFillter({
+Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    timer:null,
     pageName:'康复案例详情页',
     pageTitle: "康复案例详情", // 页面标题
     personInfo: {},
@@ -25,6 +26,23 @@ routerFillter({
     hasView: false //是否记录观看
   },
 
+
+   /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.timer=setInterval(() => {
+      heartFun(this.data.pageName,this.__route__)
+    }, intervalTime);
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+    clearInterval(this.timer)
+  },
+
   /**
    * 卸载页面
    */
@@ -34,7 +52,7 @@ routerFillter({
       const perpage = pages[pages.length - 2];
       perpage.refreshInquiryViewSuccess();
     }
-
+    clearInterval(this.timer)
   },
 
   /**
@@ -200,4 +218,4 @@ routerFillter({
     perpage.refreshInquiryLikeSuccess();
   }
 
-},true)
+})
