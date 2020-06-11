@@ -1,9 +1,14 @@
 const app = getApp();
 const recorderManager = wx.getRecorderManager();
 var HTTP = require('../../../../utils/http-util');
-import { onShareAppMessageFun } from '../../../../utils/common.js';
+import {
+  onShareAppMessageFun
+} from '../../../../utils/common.js';
 var msgStorage = require("../../../../utils/msgstorage");
-import { heartFun,intervalTime } from '../../../../utils/heart.js';
+import {
+  heartFun,
+  intervalTime
+} from '../../../../utils/heart.js';
 var tim = app.globalData.tim;
 var TIM = app.globalData.TIM;
 
@@ -13,8 +18,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    timer:null,
-    pageName:'问诊页',
+    timer: null,
+    pageName: '问诊页',
     toView: "", // 手机屏幕自动滚动到达的位置
     userInfo: {}, // 当前用户信息
     wexinInfo: {}, // 当前用户微信信息
@@ -25,7 +30,7 @@ Page({
       assistantInfo: {}, // 医助信息详情
       patientInfo: {}, // 患者信息详情
       multiTalkInfo: {} // 三者ID信息
-    }, 
+    },
     inquiryInfo: {}, // 问诊信息 
     username: {
       type: Object,
@@ -40,22 +45,22 @@ Page({
     isOpenBottomBoolbar: false, // 是否打开工具栏
     // 底部菜单栏 
     toolbarMenus: [{
-        title: "图片",
-        iconUrl: "/images/chat/m-image.png",
-        clickFun: "chooseWxImage",
-        isFifth: false
-      },
-      {
-        title: "拍照",
-        iconUrl: "/images/chat/m-camera.png",
-        clickFun: "cameraWxFun",
-        isFifth: false
-      }, {
-        title: "视频问诊",
-        iconUrl: "/images/chat/m-video.png",
-        clickFun: "videoWxFun",
-        isFifth: false
-      }
+      title: "图片",
+      iconUrl: "/images/chat/m-image.png",
+      clickFun: "chooseWxImage",
+      isFifth: false
+    },
+    {
+      title: "拍照",
+      iconUrl: "/images/chat/m-camera.png",
+      clickFun: "cameraWxFun",
+      isFifth: false
+    }, {
+      title: "视频问诊",
+      iconUrl: "/images/chat/m-video.png",
+      clickFun: "videoWxFun",
+      isFifth: false
+    }
     ],
     aimgurl: {}, //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
@@ -214,8 +219,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.timer=setInterval(() => {
-      heartFun(this.data.pageName,this.__route__)
+    this.timer = setInterval(() => {
+      heartFun(this.data.pageName, this.__route__)
     }, intervalTime);
   },
 
@@ -334,7 +339,7 @@ Page({
           conversationID: "GROUP" + that.data.inquiryInfo.keyID,
           nextReqMessageID: that.data.nextReqMessageID,
           count: 15
-        }).then(function (imResponse) {
+        }).then(function(imResponse) {
           imResponse.data.messageList.forEach(item => {
             if (item.type == "TIMSoundElem") {
               item.recordStatus = false; // 播放状态
@@ -345,7 +350,7 @@ Page({
               }
             }
           })
-          setTimeout(function () {
+          setTimeout(function() {
             that.setData({
               currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
               nextReqMessageID: imResponse.data.nextReqMessageID,
@@ -449,17 +454,6 @@ Page({
         });
         that.isInGroupFun(); // 检验是否成功入群
       }
-      // wx.setStorage({
-      //   key: 'inquiryInfo',
-      //   data: res.data
-      // });
-      // if (that.data.isOverChat) {
-      //   that.setData({
-      //     isOverChat: false
-      //   });
-      // } else {
-      //   that.getHistoryMessage(); // 获取历史消息
-      // }
     }).catch(err => {
       console.log("创建问诊失败：" + JSON.stringify(err));
       that.setData({
@@ -495,25 +489,6 @@ Page({
         getGroupListSum: 5, // 检验入群否的最大循环次数
         sendType: type
       });
-      that.isInGroupFun(type);
-      // wx.setStorage({
-      //   key: 'inquiryInfo',
-      //   data: res.data
-      // });
-      // that.setData({
-      //   isOverChat: false
-      // });
-      // if (type == "normalFun") {
-      //   that.setData({
-      //     hidden: true // 隐藏加载中
-      //   });
-      // } else if (type == "contentMSg") {
-      //   that.sendMessageFun(); // 发送文本消息
-      // } else if (type == "imageFun") {
-      //   that.sendImageMsgFun(); // 发送图片消息
-      // } else if (type == "videoFun") {
-      //   that.videoWxFun(); // 拨打视频
-      // }
     }).catch(() => {
       that.setData({
         hidden: true,
@@ -533,28 +508,17 @@ Page({
   isInGroupFun: function(type) {
     let that = this;
     if (that.data.getGroupListSum < 1) {
-      console.log("重复检验是否入群次数已用完");
-      that.setData({
-        hidden: true, // 隐藏加载中
-        httpLoading: false, // 关闭隐性加载过程
-        isShowLoading: true, // 隐藏发送中
-        sendType: ""
-      });
-      that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
-      wx.showToast({
-        title: '进入问诊会话失败，请尝试重新进入当前页面',
-        icon: "none",
-        duration: 3000
-      });
+      // 校验入群次数使用完，默认入群成功
+      that.dealInGroupSuccess();
       return
     } else {
+      that.setData({
+        isInGroup: false,
+        getGroupListSum: that.data.getGroupListSum - 1
+      });
       setTimeout(() => {
         let info = tim.getGroupList(); // 获取所有群ID
         info.then(imResponse => {
-          that.setData({
-            isInGroup: false,
-            getGroupListSum: that.data.getGroupListSum - 1
-          });
           imResponse.data.groupList.forEach((item) => {
             if (item.groupID == that.data.inquiryInfo.keyID) {
               that.setData({
@@ -563,37 +527,7 @@ Page({
             }
           });
           if (that.data.isInGroup) {
-            console.log("检验入群结果：入群成功");
-            wx.setStorageSync("inquiryInfo", that.data.inquiryInfo);
-            if (that.data.sendType) {
-              that.setData({
-                isOverChat: false
-              });
-              if (that.data.sendType == "normalFun") {
-                that.setData({
-                  hidden: true // 隐藏加载中
-                });
-              } else if (that.data.sendType == "contentMSg") {
-                that.sendMessageFun(); // 发送文本消息
-              } else if (that.data.sendType == "imageFun") {
-                that.sendImageMsgFun(); // 发送图片消息
-              } else if (that.data.sendType == "videoFun") {
-                that.videoWxFun(); // 拨打视频
-              }
-              that.setData({
-                sendType: ""
-              });
-            } else {
-              if (that.data.isOverChat) {
-                that.setData({
-                  isOverChat: false
-                });
-              } else {
-                that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
-                that.getHistoryMessage(); // 获取历史消息
-              }
-            }
-            that.getHistoryInquiryID(); // 查询历史问诊记录ID列表
+            that.dealInGroupSuccess();
           } else {
             console.log("检验入群结果：入群失败");
             let params = {
@@ -611,6 +545,44 @@ Page({
         })
       }, 300);
     }
+  },
+  dealInGroupSuccess() {
+    let that = this;
+    console.log("入群成功---入群剩余次数---" + that.data.getGroupListSum)
+    wx.setStorageSync("inquiryInfo", that.data.inquiryInfo);
+    if (that.data.sendType) {
+      that.setData({
+        isOverChat: false,
+        httpLoading: false, // 关闭隐性加载过程
+        isShowLoading: true // 隐藏发送中
+      });
+      if (that.data.sendType == "normalFun") {
+        that.setData({
+          hidden: true // 隐藏加载中
+        });
+      } else if (that.data.sendType == "contentMSg") {
+        that.sendMessageFun(); // 发送文本消息
+      } else if (that.data.sendType == "imageFun") {
+        that.sendImageMsgFun(); // 发送图片消息
+      } else if (that.data.sendType == "videoFun") {
+        that.videoWxFun(); // 拨打视频
+      }
+      that.setData({
+        sendType: ""
+      });
+    } else {
+      if (that.data.isOverChat) {
+        that.setData({
+          isOverChat: false,
+          httpLoading: false, // 关闭隐性加载过程
+          isShowLoading: true // 隐藏发送中
+        });
+      } else {
+        that.sendCustomMsgFun(); // 告知系统，患者进入问诊了
+        that.getHistoryMessage(); // 获取历史消息
+      }
+    }
+    that.getHistoryInquiryID(); // 查询历史问诊记录ID列表
   },
 
   /*打开会话时,获取最近消息列表 */
@@ -674,16 +646,16 @@ Page({
     });
   },
 
-   /*获取群未读消息数 */
+  /*获取群未读消息数 */
   getUnreadMessageCount: function() {
     let that = this;
     // 拉取会话列表
     let promise = tim.getConversationList();
-    promise.then(function (imResponse) {
+    promise.then(function(imResponse) {
       let conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
       let unreadCount = conversationList[0].unreadCount;
       console.log("获取群未读消息数:" + unreadCount);
-    }).catch(function (imError) {
+    }).catch(function(imError) {
       console.warn('getConversationList error:', imError); // 获取会话列表失败的相关信息
     });
   },
@@ -708,8 +680,8 @@ Page({
   getFetchDoctorInfo(staffID) {
     let that = this;
     HTTP.getDoctorInfo({
-        staffID: staffID
-      })
+      staffID: staffID
+    })
       .then(res => {
         if (res.code == 0 && res.data) {
           that.setData({
@@ -740,9 +712,9 @@ Page({
     var doctorStaffID = index == '0' ? wx.getStorageSync('personInfo').doctorStaffID : wx.getStorageSync('personInfo').assistantStaffID
     wx.navigateTo({
       url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + doctorStaffID,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function(res) { },
+      fail: function(res) { },
+      complete: function(res) { },
     })
   },
 
@@ -1056,7 +1028,7 @@ Page({
         if (!res.authSetting['scope.record']) {
           wx.hideToast(); // 结束录音、隐藏Toast提示框
           recorderManager.stop();
-          recorderManager.onStop(function(res) {});
+          recorderManager.onStop(function(res) { });
           wx.showToast({
             title: "您未允许本小程序语音授权，无法发送语音",
             icon: "none",
@@ -1088,7 +1060,7 @@ Page({
   },
 
   /*操作：长按录音按钮过程中 */
-  handleLongPress: function(e) {},
+  handleLongPress: function(e) { },
   /*操作：滑动取消 */
   handleMove: function(e) {
     let that = this;
@@ -1134,7 +1106,7 @@ Page({
     });
     // 2.开始录音
     recorderManager.start(recordOptions);
-    recorderManager.onStart(() => {});
+    recorderManager.onStart(() => { });
     // 3.监听录音错误事件
     recorderManager.onError(function(errMsg) {
       console.warn(errMsg);
@@ -1243,9 +1215,9 @@ Page({
     };
     wx.navigateTo({
       url: '/pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
-      success: function(res) {},
-      fail: function(res) {},
-      complete: function(res) {},
+      success: function(res) { },
+      fail: function(res) { },
+      complete: function(res) { },
     })
     console.log("--------跳转到视频-----------" + inquiryID);
   },
