@@ -1,7 +1,7 @@
 // 引入腾讯云IM
 import TIM from './miniprogram_npm/tim-wx-sdk/index.js';
 import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js';
-
+const {Event} = require('utils/event')
 const AUTH = require('utils/auth');
 let msgStorage = require("utils/msgstorage");
 import {
@@ -26,12 +26,14 @@ let tim = null;
 let that = null;
 
 
-
+console.log(Event)
 App({
+  event: new Event(),
   onLaunch: function(option) {
     that = this;
     that.globalData.systemInfo = systemInfo;
     that.globalData.navBarHeight = navBarHeight;
+    that.globalData.isShowPhoneDialog = false
     that.globalData.menuButtonBoundingClientRect = rect;
     // AUTH.getSetting()
     AUTH.upDataApp();

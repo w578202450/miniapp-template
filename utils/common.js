@@ -145,6 +145,7 @@ function getUserSig(userId) {
       if (userSig) {
         loginIM(userId); // IM登录
       }
+      
     } else {
       app.globalData.isStartLogin = true; // 是否开始了自动登录
       wx.hideLoading();
@@ -180,6 +181,9 @@ function loginIM(userId) {
       app.globalData.isInitInfo = "ready"; // 是否登录成功
       app.globalData.isStartLogin = true; // 是否开始了自动登录
     }
+    setTimeout(()=>{
+      app.globalData.isShowPhoneDialog = true
+    },2000)
   }).catch(function(imError) {
     console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
     wx.hideLoading();

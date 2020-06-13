@@ -26,6 +26,7 @@
     "pages/order/order-evaluate/order-evaluate",
     "pages/order/order-evaluate-success/order-evaluate-success",
     "components/loginDialog/loginDialog",
+    "components/phoneDialog/phoneDialog",
     "pages/index/service-index/fzm/service-news-details/service-news-details",
     "pages/index/service-index/wth/notes-details/notes-details"
   ],

@@ -79,13 +79,6 @@
 					"scene": null
 				},
 				{
-					"id": 9,
-					"name": "登录",
-					"pathName": "components/loginDialog/loginDialog",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": 3,
 					"name": "专家门诊",
 					"pathName": "pages/index/service-index/service-index",
@@ -93,16 +86,9 @@
 					"scene": null
 				},
 				{
-					"id": 4,
-					"name": "pages/online-inquiry/inquiry/chat/chat",
-					"pathName": "pages/online-inquiry/inquiry/chat/chat",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/service-index/wth/notes-list/notes-list",
-					"pathName": "pages/index/service-index/wth/notes-list/notes-list",
+					"id": 3,
+					"name": "我的页",
+					"pathName": "pages/personal-center/personal-center",
 					"query": "",
 					"scene": null
 				}

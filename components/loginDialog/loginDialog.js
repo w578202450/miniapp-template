@@ -1,6 +1,7 @@
 // components/loginDialog/loginDialog.js
 const app = getApp();
 const commonFun = require('../../utils/common');
+
 Component({
   /**
    * 组件的属性列表
@@ -40,11 +41,23 @@ Component({
     content_image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/loginImg.png", // 宣传图片
     nextPageName: "" // 登录后需要跳转的上一级页面的名字
   },
-
+  attached:function(options){
+    app.watch((value) => {
+        // value为app.js中传入的值
+        this.getPhone()
+    }, "isShowPhoneDialog");
+  },
   /**
    * 组件的方法列表
    */
   methods: {
+    getPhone: function() {
+      console.log('====++++')
+      //获得popup组件：登录确认框
+      let popup = this.selectComponent("#phoneDialog");
+      popup.showPopup();
+      // console.log(this.selectComponent("#phoneDialog"))
+    },
     //隐藏弹框
     hidePopup: function() {
       this.setData({

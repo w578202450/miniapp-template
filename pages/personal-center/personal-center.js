@@ -118,7 +118,7 @@ Page({
           wx.showToast({
             title: '登陆成功',
             icon: "none",
-            duration: 2000
+            // duration: 2000
           });
         }
       },
