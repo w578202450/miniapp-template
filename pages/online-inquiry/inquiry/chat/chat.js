@@ -31,6 +31,8 @@ Page({
       patientInfo: {}, // 患者信息详情
       multiTalkInfo: {} // 三者ID信息
     },
+    // 对话成员信息
+    multiTalkMemberInfo: {},
     inquiryInfo: {}, // 问诊信息 
     username: {
       type: Object,
@@ -323,14 +325,6 @@ Page({
       });
     } else {
       if (that.data.isCompleted) {
-        // 没有更多数据了
-        // wx.stopPullDownRefresh();
-        // wx.showToast({
-        //   title: "没有更多历史消息了~",
-        //   icon: "none",
-        //   duration: 2000
-        // });
-        // return;
         console.log("当前的没了，加载历史的了");
         that.dealHistoryMsg(); // 查询历史问诊的消息记录
       } else {
@@ -422,6 +416,13 @@ Page({
           multiTalkInfo: resData.multiTalk
         }
       });
+      that.setData({
+        multiTalkMemberInfo: {
+          [that.data.userInfo.doctorStaffID]: resData.doctor,
+          [that.data.userInfo.assistantStaffID]: resData.assistant,
+          [that.data.userInfo.keyID]: resData.patient
+        }
+      })
       that.getFetchDoctorInfo(that.data.userInfo.doctorStaffID); // 查询医生详情
       that.getFetchAssistantDoctorInfo(that.data.userInfo.assistantStaffID); // 查询医助详情
       wx.setStorageSync('doctorInfo', resData.doctor);
@@ -1284,74 +1285,54 @@ Page({
   /**获取历史问诊的消息记录 */
   dealHistoryMsg() {
     let that = this;
-    console.log(that.data.currentMessageList);
     if (that.data.historyInquiryIndex < that.data.historyInquiryList.length) {
       HTTP.findHistoryMsgByInquiryID({
         pageIndex: 0,
         inquiryID: that.data.historyInquiryList[that.data.historyInquiryIndex].keyID
       }).then(res => {
-        console.log(JSON.stringify(res.data));
-        console.log(res.data);
         if (res.code == 0 && res.data) {
           if (res && res.data) {
-            // let msgList = [];
-            // res.data.forEach(element => {
-            //   let type = element.msgBody[0].msgType;
-            //   let msgContent = element.msgBody[0].msgContent;
-            //   let from = element.from_Account;
-            //   let time = element.msgTime;
-            //   let temp = element;
-            //   temp.type = type;
-            //   temp.from = from;
-            //   temp.time = time;
-            //   temp.payload = {};
-            //   if (type === "TIMTextElem") { // 文本消息
-            //     temp.payload.text = msgContent.Text;
-            //   } else if (type == "TIMSoundElem") { // 语音消息
-            //     // temp.recordStatus = false; // 播放状态
-            //     // if (Number(temp.payload.second) <= 15) {
-            //     //   temp.recordViewWidth = temp.payload.second * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-            //     // } else {
-            //     //   temp.recordViewWidth = (Number(temp.payload.second) - 15) * 2 + 280; // 最大宽度不超过420,最小宽度要大于100
-            //     // }
-            //   } else if (type === "TIMCustomElem") { // 自定义消息
-            //     temp.payload.data = msgContent.Data;
-            //     temp.payload.description = msgContent.Desc;
-            //     temp.payload.extension = msgContent.Ext;
-            //   } else if (type === "TIMImageElem") { // 图片消息
-            //     temp.payload.imageInfoArray = [];
-            //     let msgImgObj = msgContent.ImageInfoArray[0];
-            //     let tempImgObj = {};
-            //     tempImgObj.sizeType = msgImgObj.Type;
-            //     tempImgObj.size = msgImgObj.Size;
-            //     tempImgObj.height = msgImgObj.Height;
-            //     tempImgObj.width = msgImgObj.Width;
-            //     tempImgObj.imageUrl = msgImgObj.URL;
-            //     temp.payload.imageInfoArray.push(tempImgObj);
-            //   }
-            //   msgList.push(temp);
-            // });
-            let msgList = [];
-            res.data.forEach(item => {
-              if (item.from) {
-                if (item.from === "administrator" && item.type === "TIMTextElem") {
-                  item.from = that.data.talkInfo.multiTalkInfo.assistantStaffID;
-                }
-                if (item.type == "TIMSoundElem") {
-                  item.recordStatus = false; // 播放状态
-                  if (Number(item.payload.second) <= 15) {
-                    item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
-                  } else {
-                    item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+            // 当前问诊也需要从mongo中获取历史记录
+            if (that.data.historyInquiryIndex === 0 && that.data.currentMessageList.length !== 0) {
+              that.curMsgNoRepeat(res.data);
+            } else {
+              let msgList = [];
+              let staffObj = {};
+              res.data.forEach(item => {
+                if (item.from) {
+                  if (item.from === "administrator" && item.type === "TIMTextElem") {
+                    item.from = that.data.talkInfo.multiTalkInfo.assistantStaffID;
                   }
+                  if (item.type == "TIMSoundElem") {
+                    item.recordStatus = false; // 播放状态
+                    if (Number(item.payload.second) <= 15) {
+                      item.recordViewWidth = Number(item.payload.second) * 12 + 100; // 最大宽度不超过370,最小宽度要大于100
+                    } else {
+                      item.recordViewWidth = (Number(item.payload.second) - 15) * 2 + 280; // 最大宽度不超过370,最小宽度要大于100
+                    }
+                  }
+                  let patientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
+                  let finalPatientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
+                  // 合并患者转换ID
+                  if (item.from === patientID) {
+                    item.from = finalPatientID;
+                  }
+                  // 查询医生医助信息（切换医生医助的情况）
+                  if (item.from !== "administrator" && item.from !== patientID && item.from !== finalPatientID) {
+                    staffObj[item.from] = "1";
+                  }
+                  msgList.push(item);
                 }
-                msgList.push(item);
+              })
+              let staffList = Object.keys(staffObj);
+              if (staffList.length !== 0) {
+                this.getDoctorInfoByStaffList(staffList);
               }
-            })
-            that.setData({
-              currentMessageList: [...msgList, ...that.data.currentMessageList],
-              historyInquiryIndex: that.data.historyInquiryIndex + 1
-            });
+              that.setData({
+                currentMessageList: [...msgList, ...that.data.currentMessageList],
+                historyInquiryIndex: that.data.historyInquiryIndex + 1
+              });
+            }
           }
         }
         wx.stopPullDownRefresh();
@@ -1367,8 +1348,88 @@ Page({
       });
       wx.stopPullDownRefresh();
     }
-  }
+  },
+  curMsgNoRepeat(data) {
+    let that = this;
+    let msgList = [];
+    let staffObj = {};
+    // 从mongo中获取当前问诊的历史记录，并去重
+    let curMsgObj = {};
+    that.data.currentMessageList.forEach(curMsgItem => {
+      let curMsgRandom = curMsgItem.random;
+      curMsgObj[curMsgRandom] = "1";
+    });
+    // 去重mongo 和 tencent IM 消息
+    data.forEach(mongoMsgItem => {
+      let mongoMsgRandom = mongoMsgItem.random;
+      if (!curMsgObj[mongoMsgRandom]) {
+        if (mongoMsgItem.from) {
+          if (
+            mongoMsgItem.from === "administrator" &&
+            mongoMsgItem.type === "TIMTextElem"
+          ) {
+            mongoMsgItem.from = that.data.talkInfo.multiTalkInfo.assistantStaffID;
+          }
 
+          let patientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
+          let finalPatientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
+          // 合并患者转换ID
+          if (mongoMsgItem.from === patientID) {
+            mongoMsgItem.from = finalPatientID;
+          }
+          // 查询医生医助信息（切换医生医助的情况）
+          if (mongoMsgItem.from !== "administrator" && mongoMsgItem.from !== patientID && mongoMsgItem.from !== finalPatientID) {
+            staffObj[mongoMsgItem.from] = "1";
+          }
+          msgList.push(mongoMsgItem);
+        }
+      }
+    });
+    let staffList = Object.keys(staffObj);
+    console.log("staffList-------" + JSON.stringify(staffObj));
+    console.log("staffList-------" + JSON.stringify(staffList));
+    if (staffList.length !== 0) {
+      this.getDoctorInfoByStaffList(staffList);
+    }
+    that.setData({
+      currentMessageList: [...msgList, ...that.data.currentMessageList],
+      historyInquiryIndex: that.data.historyInquiryIndex + 1
+    });
+    // 如果没有获取到不同的记录，就获取下一次记录                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    if (msgList.length === 0) {
+      that.dealHistoryMsg();
+    }
+  },
+  getDoctorInfoByStaffList(staffList) {
+    let that = this;
+    let paramList = [];
+    staffList.forEach(staffID => {
+      if (!that.data.multiTalkMemberInfo[staffID]) {
+        paramList.push(staffID);
+      }
+    })
+    if (paramList.length === 0) return;
+    let params = {
+      orgID: that.data.userInfo.orgID,
+      staffIDs: paramList
+    }
+    HTTP.getDoctorInfoByStaffIDs(params).then(res => {
+      if (res.code == 0 && res.data) {
+        if (res && res.data && res.data.length !== 0) {
+          res.data.forEach(item => {
+            let keyID = item.keyID;
+            if (!that.data.multiTalkMemberInfo[keyID]) {
+              let memberInfo = that.data.multiTalkMemberInfo;
+              memberInfo[keyID] = item;
+              that.setData({
+                multiTalkMemberInfo: memberInfo
+              })
+            }
+          })
+        }
+      }
+    })
+  }
   /**模拟跳转到素材 */
   // simulationToMatFun: function() {
   //   let materialData = {

@@ -63,24 +63,9 @@
       <!-- 用户发送的消息：头像与内容文本 -->
       <view wx:else class="body" style="flex-flow: {{item.from == talkInfo.multiTalkInfo.patientID ? 'row-reverse': 'row'}}">
         <view class="avatar-container">
-          <!-- 患者头像 -->
-          <view wx:if="{{item.from == talkInfo.multiTalkInfo.patientID}}" class="personHeadImgDiv">
-            <image wx:if="{{!wexinInfo.avatarUrl}}" class="personHeadImgBac" src="../../../../images/chat/personBacImg.png" mode="aspectFill" />
-            <image wx:else src="{{wexinInfo.avatarUrl}}" class="avatarTwo" mode="aspectFill" />
-          </view>
-          <!-- 医生头像 -->
-          <view wx:elif="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.doctorInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" mode="aspectFill" />
-            <image wx:else src="{{talkInfo.doctorInfo.faceImage}}" class="avatarOne" mode="aspectFill" />
-          </view>
-          <!-- 医助头像 -->
-          <view wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}" class="personHeadImgDiv">
-            <image wx:if="{{!talkInfo.assistantInfo.faceImage}}" class="personHeadImgBacTwo" src="../../../../images/chat/personBacImg.png" mode="aspectFill" />
-            <image wx:else src="{{talkInfo.assistantInfo.faceImage}}" class="avatarOne" mode="aspectFill" />
-          </view>
-          <!-- 本次问诊历史的医生医助发送的消息显示的头像 -->
-          <view wx:elif="{{item.from.length > 13}}" class="personHeadImgDiv">
-            <image class="avatarOne" src="../../../../images/chat/personBacImg.png" mode="aspectFill"/>
+           <!-- 头像 -->
+          <view class="personHeadImgDiv">
+            <image src="{{multiTalkMemberInfo[item.from].faceImage || '../../../../images/chat/personBacImg.png'}}" class="avatarOne" mode="aspectFill" />
           </view>
         </view>
         <!-- 画对话框 -->
