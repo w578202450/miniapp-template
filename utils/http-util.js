@@ -428,7 +428,7 @@ module.exports = {
    *手机号
    */
   decryptionPhone: function heart(params) {
-    return request('api/peachUser/personUser/savePersonPhone', true, 'post', params);
+    return request('api/peachUser/personUser/getPersonPhone', true, 'post', params);
   },
   /*
    *自动合并
