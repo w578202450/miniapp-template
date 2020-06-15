@@ -1,4 +1,4 @@
-const version = 0; //0开发、1测试 2生产
+const version = 1; //0开发、1测试 2生产
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -424,7 +424,18 @@ module.exports = {
   doctorShowList: function doctorShowList(params) {
     return request('api/tmc/doctorShow/list', true, 'get', params);
   },
-
+    /*
+   *手机号
+   */
+  decryptionPhone: function heart(params) {
+    return request('api/peachUser/personUser/savePersonPhone', true, 'post', params);
+  },
+  /*
+   *自动合并
+   */
+  autoMerge: function heart(params) {
+    return request('api/tmc/merge/autoMerge', true, 'post', params);
+  },
   /**
    * 获取患者评价
    */
