@@ -1312,7 +1312,7 @@ Page({
                     }
                   }
                   let patientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
-                  let finalPatientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
+                  let finalPatientID = that.data.historyInquiryList[that.data.historyInquiryIndex].finalPatientID;
                   // 合并患者转换ID
                   if (item.from === patientID) {
                     item.from = finalPatientID;
@@ -1372,7 +1372,7 @@ Page({
           }
 
           let patientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
-          let finalPatientID = that.data.historyInquiryList[that.data.historyInquiryIndex].patientID;
+          let finalPatientID = that.data.historyInquiryList[that.data.historyInquiryIndex].finalPatientID;
           // 合并患者转换ID
           if (mongoMsgItem.from === patientID) {
             mongoMsgItem.from = finalPatientID;
