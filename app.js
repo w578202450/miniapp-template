@@ -34,6 +34,7 @@ App({
     that.globalData.systemInfo = systemInfo;
     that.globalData.navBarHeight = navBarHeight;
     that.globalData.isShowPhoneDialog = false
+    that.globalData.phoneDialogNextPage = ''
     that.globalData.menuButtonBoundingClientRect = rect;
     // AUTH.getSetting()
     AUTH.upDataApp();
@@ -98,16 +99,21 @@ App({
     //   orgID: "19121923373037086560511253",
     //   assistantStaffID: "20011320532175746910514253"
     // }
+    // 包医助
+    // options = {
+    //   orgID: "19121923373037086560511253",
+    //   assistantStaffID: "20011909362464071890514253"
+    // }
     // 徐
     // options = {
     //   assistantStaffID: "20011514000045118050514253",
     //   orgID: "19101017081245502880511001"
     // }
     // 包医生
-    // options = {
-    //   assistantStaffID: "20011909362464071890514253",
-    //   orgID: "19121923373037086560511253"
-    // }
+    options = {
+      assistantStaffID: "20011909362464071890514253",
+      orgID: "19121923373037086560511253"
+    }
     // 开发
     // options = {
     //   assistantStaffID: "20011109080410712390514001",
@@ -338,7 +344,7 @@ App({
 
   /**开始登录 */
   startLoginFun: function() {
-    tim.logout(); // 登录前先清除（可能在线）登陆的账号
+    tim.logout(); // 登录前先清除（可能在线）登录的账号
     userSig = "";
     logined = false;
     nextPageName = "";

@@ -47,6 +47,7 @@ Component({
           //   url: that.data.tabbar.list[index].pagePath
           // });
           let nextPageName = "chat";
+          console.log(nextPageName)
           this.popup.showPopup(nextPageName); // 显示登录确认框
         }
       } else {
@@ -62,6 +63,7 @@ Component({
 
     /**确认事件 */
     _success() {
+      console.log('123123123')
       this.popup.hidePopup();
     }
   }

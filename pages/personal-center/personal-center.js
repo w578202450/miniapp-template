@@ -116,7 +116,7 @@ Page({
         });
         if (that.data.isSelfLogin) {
           wx.showToast({
-            title: '登陆成功',
+            title: '登录成功',
             icon: "none",
             // duration: 2000
           });

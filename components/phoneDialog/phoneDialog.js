@@ -73,22 +73,20 @@ Component({
     _error() {
       this.hidePopup();
       this.triggerEvent("error");
-      console.log("点击取消");
     },
 
     _success() {
       this.hidePopup();
       this.triggerEvent("success");
-      console.log("点击确定");
     },
 
     /** 
      * 操作：微信自带弹窗授权获取手机号(拒绝和允许) 
      */
     getPhoneNumber(e) {
-      console.log("e:" + JSON.stringify(e));
+      console.log('====')
+      console.log(app.globalData.phoneDialogNextPage)
       let sessionKey = wx.getStorageSync("sessionKey");
-      console.log(app.globalData)
       let prams = {
         personID: app.globalData.patientID,
         encryptedData: e.detail.encryptedData,
@@ -100,11 +98,8 @@ Component({
       // 检查登录态
        wx.checkSession({
          success: () => {
-           console.log("checkSession有效");
            HTTP.decryptionPhone(prams).then(res => {
-             console.log("------授权获取手机号-------" + "传参：" + JSON.stringify(prams) + "    返回结果:" + JSON.stringify(res));
              if (res) {
-               console.log("解密成功");
                app.globalData.userInfo.phone = res.data || '';
                wx.setStorageSync('userInfo', app.globalData.userInfo);
                let mergeParam={
@@ -113,17 +108,18 @@ Component({
                 orgID:app.globalData.orgID,
                 assistantStaffID:wx.getStorageSync('shareAssistantStaffID')
                }
-               HTTP.autoMerge(mergeParam).then(res => {}).catch(res=>{
-
-               })
+               HTTP.autoMerge(mergeParam).then(res => {}).catch(res=>{})
              }
              // 获取手机号允许回调
              this.triggerEvent("success");
-
+             if(app.globalData.phoneDialogNextPage=='chat'){
+               wx.navigateTo({
+                  url: '/pages/online-inquiry/inquiry/chat/chat',
+                });
+             }
            }).catch(res => {
-             console.log("解密失败");
              wx.showToast({
-               title: "授权失败，请重新登陆",
+               title: "授权失败，请重新登录",
                icon: 'none',
                duration: 2000
              })
@@ -131,10 +127,9 @@ Component({
            })
          },
          fail: () => {
-           console.log("checkSession无效");
            //app.globalData.hasLogin = false;
            wx.showToast({
-             title: "授权失败，请重新登陆",
+             title: "授权失败，请重新登录",
              icon: 'none',
              duration: 2000
            })

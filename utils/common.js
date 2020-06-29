@@ -37,7 +37,7 @@ let nextPageName = ""; // 下一页的名字
  * 2.succes 直接获取用户信息 getPatientInfo
  */
 function startLoginFun() {
-  tim.logout(); // 登录前先清除（可能在线）登陆的账号
+  tim.logout(); // 登录前先清除（可能在线）登录的账号
   userSig = "";
   // selctedIndex = 0;
   logined = false;
@@ -172,9 +172,9 @@ function loginIM(userId) {
       app.globalData.isStartLogin = true; // 是否开始了自动登录
       setTimeout(() => {
         wx.hideLoading();
-        wx.navigateTo({
-          url: '/pages/online-inquiry/inquiry/chat/chat',
-        });
+        // wx.navigateTo({
+        //   url: '/pages/online-inquiry/inquiry/chat/chat',
+        // });
       }, 1500);
     } else {
       wx.hideLoading();
@@ -183,7 +183,12 @@ function loginIM(userId) {
     }
     setTimeout(()=>{
       app.globalData.isShowPhoneDialog = true
-    },2000)
+      if(nextPageName=='chat'){
+        app.globalData.phoneDialogNextPage='chat'
+      }else{
+        app.globalData.phoneDialogNextPage=''
+      }
+    },1500)
   }).catch(function(imError) {
     console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
     wx.hideLoading();
