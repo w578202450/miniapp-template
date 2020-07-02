@@ -242,8 +242,8 @@ Page({
       title: '支付中...'
     });
     HTTP.tradeOrder({
-        body: '医护上门',
-        detail: '医护上门PICC换药',
+        body: '远程诊疗',
+        detail: '远程诊疗中心',
         transID: paymentID,
         sysCode: 'person-tmc',
         openID: wx.getStorageSync('openID')
