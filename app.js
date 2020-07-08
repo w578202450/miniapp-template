@@ -386,6 +386,7 @@ App({
       assistantStaffID: (assistantStaffID && that.globalData.isHaveOptions) ? assistantStaffID : "",
       orgID: (orgID && that.globalData.isHaveOptions) ? orgID : ""
     }
+    console.log("微信登录参数--" + JSON.stringify(prams));
     HTTP.getPatientInfo(prams).then(res => {
       if (res.code == 0) {
         console.log("登录后拿到的患者对话信息：" + JSON.stringify(res.data));

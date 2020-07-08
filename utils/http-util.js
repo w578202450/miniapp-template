@@ -30,8 +30,14 @@ var request = function request(url, needDomain, method, data) {
   return new Promise(function(resolve, reject) {
     let date = Date.parse(new Date());
     let clientType = "wxpro";
+
     let dataValues = md5.objKeySort(data);
-    let signed = md5.md5(encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH"));
+    let encodeURI = encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH");
+    // 替换encodeURIComponent方法不处理的特殊字符
+    let encodeURIReplace = encodeURI.replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
+      replace(/\)/g, '%29').replace(/\~/g, '%7E');
+    let signed = md5.md5(encodeURIReplace);
+
     wx.request({
       method: method,
       url: _url,
