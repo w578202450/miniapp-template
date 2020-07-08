@@ -1,4 +1,4 @@
-const version = 1; //0开发、1测试 2生产
+const version = 2; //0开发、1测试 2生产
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -111,6 +111,17 @@ module.exports = {
       return ['20050916495074555320511240']
     } else if (version == 2) {
       return ['20050916495074555320511240']
+    }
+  },
+
+  /**tmc 内科 */
+  tmcneikeFun: function() {
+    if (version == 0) {
+      return ['20052710323479595590511233']
+    } else if (version == 1) {
+      return ['20052710323479595590511233']
+    } else if (version == 2) {
+      return ['20052710323479595590511233']
     }
   },
 

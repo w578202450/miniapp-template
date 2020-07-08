@@ -1,6 +1,7 @@
 // 引入腾讯云IM
 import TIM from './miniprogram_npm/tim-wx-sdk/index.js';
 import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js';
+
 const {Event} = require('utils/event')
 const AUTH = require('utils/auth');
 let msgStorage = require("utils/msgstorage");
@@ -35,6 +36,7 @@ App({
     that.globalData.navBarHeight = navBarHeight;
     that.globalData.isShowPhoneDialog = false
     that.globalData.phoneDialogNextPage = ''
+    that.globalData.isClickChat=false
     that.globalData.menuButtonBoundingClientRect = rect;
     // AUTH.getSetting()
     AUTH.upDataApp();
@@ -63,6 +65,11 @@ App({
     //   orgID: "20040909515893667880511240",
     //   assistantStaffID: "20041020111817571130514240"
     // }
+    // tmc内科
+    options = {
+      orgID: "20052710323479595590511233",
+      assistantStaffID: "20052716343567800020514240"
+    }
     // 桃子互联网医院减肥中心(生产环境)
     // options = {
     //   orgID: "20041517422841582280511240",
@@ -110,10 +117,10 @@ App({
     //   orgID: "19101017081245502880511001"
     // }
     // 包医生
-    options = {
-      assistantStaffID: "20011909362464071890514253",
-      orgID: "19121923373037086560511253"
-    }
+    // options = {
+    //   assistantStaffID: "20011909362464071890514253",
+    //   orgID: "19121923373037086560511253"
+    // }
     // 开发
     // options = {
     //   assistantStaffID: "20011109080410712390514001",

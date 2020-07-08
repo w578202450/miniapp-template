@@ -41,6 +41,7 @@ Component({
     content_image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/loginImg.png", // 宣传图片
     nextPageName: "" // 登录后需要跳转的上一级页面的名字
   },
+  
   attached:function(options){
     app.watch((value) => {
         // value为app.js中传入的值
@@ -67,6 +68,7 @@ Component({
 
     //展示弹框
     showPopup(nextPageName) {
+      this.hidePopup()
       this.setData({
         isHiddenDialog: false,
         nextPageName: ""
