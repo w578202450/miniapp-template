@@ -497,6 +497,7 @@ Page({
       entryType: ""
     }
     HTTP.getDefaultDocInfo(params).then(res => {
+      console.log("获取默认数据结果1---"+JSON.stringify(res));
       if (res.code == 0 && res.data) {
         that.setData({
           shareOrgID: res.data.orgID,
