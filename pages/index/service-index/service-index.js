@@ -134,6 +134,14 @@ Page({
   onReady: function() {
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialog");
+    app.watch((value) => {
+      // value为app.js中传入的值
+      if(value){
+        this.popup.hidePopup()
+      }else{
+        app.globalData.isClickChat=false    
+      }
+  }, "isClickChat");
   },
 
   /**
@@ -153,6 +161,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
+    console.log('---onHide')
     clearInterval(this.timer)
   },
 
@@ -160,6 +169,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
+    console.log('---onUnload')
     clearInterval(this.timer)
   },
 
