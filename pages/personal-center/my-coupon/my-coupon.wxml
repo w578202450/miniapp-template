@@ -1,0 +1,25 @@
+<import src="../../../template/template.wxml" />
+
+<navigation-bar navbarTitle="我的优惠券" />
+<view class="my-coupon">
+	 <view class="cell"  wx:for="{{couponListL}}" wx:for-item="item" wx:key="index">
+	 	  <view class="cell-lf">
+			 <block>
+			 	 <view class="coupon-title">
+					<view class="name">{{item.couponName}}</view>
+					<view class="effect">{{item.isOver>0?'':'不'}}可叠加</view>
+				</view>
+				<view class="coupon-detail">{{item.rule.medicineName}}：满{{item.rule.full}}减{{item.rule.reduce}}</view>
+				<view class="coupon-time" wx:if="{{item.useIndex}}">仅限第{{item.useIndex}}次购药使用</view>
+				<view class="coupon-time">有效时间：{{item.startTime}}至{{item.endTime}}</view>
+			 </block>
+			 </view>
+			<view class="cell-rg" bindtap="use">
+				<view>立</view>
+				<view>即</view>
+				<view>使</view>
+				<view>用</view>
+			</view>
+	 </view>
+	 
+</view>

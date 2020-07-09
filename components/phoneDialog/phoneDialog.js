@@ -73,6 +73,7 @@ Component({
     _error() {
       this.hidePopup();
       this.triggerEvent("error");
+      app.globalData.isShowCoupon = true
     },
 
     _success() {
@@ -86,6 +87,10 @@ Component({
     getPhoneNumber(e) {
       console.log('====')
       console.log(app.globalData.phoneDialogNextPage)
+      setTimeout(()=>{
+        app.globalData.isShowCoupon = true
+      },500)
+      
       let sessionKey = wx.getStorageSync("sessionKey");
       let prams = {
         personID: app.globalData.patientID,

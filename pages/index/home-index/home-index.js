@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    couponData:{},
+    isHideCoupon:true,
     timer:null,
     pageName:'首页',
     isSearchState: false, // 是否进行了一次加载
@@ -73,6 +75,7 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
+    this.couponRefs = this.selectComponent("#couponDialog");
     // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.harbinyouhaoOrgID = HTTP.harbinyouhaoOrgIDFun(); // 获取哈尔滨友好医院ID
@@ -109,7 +112,22 @@ Page({
       }, "isStartLogin");
     }
   },
-
+  /** 发放优惠券 */
+  sendCoupon: function(){
+    let params = {
+      orgID: app.globalData.orgID,
+      patientID: app.globalData.patientID
+    }
+    HTTP.queryPatientCouponList(params).then(res=>{
+      if(res.data&&res.data.length){
+        // res.data[0].rule =JSON.parse(res.data[0].rule)
+        this.setData({
+          couponData:res.data[0]
+        })
+        this.couponRefs.showCouponDialog()
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -178,6 +196,8 @@ Page({
 
   /** 初始化参数 */
   initHomeData: function() {
+    //后面移动
+    this.sendCoupon();
     console.log("=====初始化参数=======");
     let that = this;
     that.setData({

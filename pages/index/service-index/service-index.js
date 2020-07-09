@@ -199,6 +199,7 @@ Page({
   /**初始化数据 */
   initDocInfoFun: function() {
     let that = this;
+    app.globalData.isShowCoupon = true;
     that.data.shareOrgID = wx.getStorageSync("shareOrgID");
     that.data.shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
     that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");

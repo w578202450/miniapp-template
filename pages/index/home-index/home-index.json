@@ -6,7 +6,8 @@
     "home-dazhong-page":"/pages/index/home-index/home-dazhong-page/home-dazhong-page",
     "home-loseweight-page": "/pages/index/home-index/home-loseweight-page/home-loseweight-page",
     "home-gynecology-page": "/pages/index/home-index/home-gynecology-page/home-gynecology-page",
-    "home-andrology-page": "/pages/index/home-index/home-andrology-page/home-andrology-page" 
+    "home-andrology-page": "/pages/index/home-index/home-andrology-page/home-andrology-page",
+    "coupon-dialog": "/components/couponDialog/couponDialog"
   },
   "navigationBarTitleText": "远程诊疗中心"
 }

@@ -1,0 +1,14 @@
+<view class="coupon-dialog" hidden="{{isHideCoupon}}">
+	 	  <view class="content">
+			  <view class="title">
+				  恭喜您获得了：{{couponData.couponName}}优惠券可享受{{couponData.description}}，您可以现在进入我们的专家问诊使用您的福利。
+				</view> 
+				<view class="coupon-img">
+				   <image src="/images/coupon/coupon.png"></image>
+				</view>
+				<view class="coupon-btn">
+				   <button bindtap="hideCouponDialog">暂不</button>
+					 <button bindtap="confirm">立即使用</button>
+				</view>
+			</view>
+	 </view>

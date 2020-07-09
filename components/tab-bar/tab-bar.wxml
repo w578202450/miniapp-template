@@ -22,4 +22,5 @@
   </view>
     <!-- 登录弹框 -->
   <login-dialog id="loginDialogCom" bind:error="_error" bind:success="_success" />
+  <coupon-dialog id="coupon"></coupon-dialog>
 </view>

@@ -20,6 +20,10 @@ Page({
       {
         url: "/pages/address/address-list/address-list?optionType=0",
         title: '收货地址'
+      },
+      {
+        url: "/pages/personal-center/my-coupon/my-coupon",
+        title: '我的优惠券'
       }
     ],
     isSearchState: false, // 是否查询了一次

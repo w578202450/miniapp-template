@@ -144,4 +144,5 @@
       </view>
     </view>
   </view>
+  <coupon-dialog id='couponDialog' couponData="{{couponData}}"></coupon-dialog>
 </view>
