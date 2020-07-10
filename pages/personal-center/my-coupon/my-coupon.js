@@ -22,11 +22,17 @@ Page({
     requestMsgFun()
   },
   initData(){
+    wx.showLoading({
+      title: '拼命加载中...',
+    })
     let params = {
       orgID: app.globalData.orgID,
       patientID: app.globalData.patientID
     }
     HTTP.queryPatientCouponList(params).then(res=>{
+        setTimeout(()=>{
+          wx.hideLoading()
+        },1000)
        if(res.data&&res.data.length){
           res.data.forEach(item=>{
             item.rule = JSON.parse(item.rule)
