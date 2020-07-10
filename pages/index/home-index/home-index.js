@@ -203,7 +203,7 @@ Page({
         showOrgID: 2
       })
       that.initDefaultFun();
-    }else if(that.data.tmcneikeOrgID.index(that.data.shareOrgID) > -1) {
+    }else if(that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是tmc内科
       that.setData({
         showOrgID: 7
