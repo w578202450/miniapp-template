@@ -52,7 +52,7 @@ function startLoginFun() {
     console.log("IM登录失败：unionid或openID不存在");
     app.globalData.isStartLogin = 1; // 是否开始了自动登录
     app.globalData.isInitInfo = false; // 登录初始化用户数据失败
-    fetchTempCode();
+    // fetchTempCode();
   }
 }
 
@@ -222,6 +222,10 @@ function getounionid(isLoginStatus) {
  * 1.登录成功缓存当前临时code 判断登录态用 
  */
 function fetchTempCode() {
+  wx.removeStorageSync("sessionKey");
+  wx.removeStorageSync("code");
+  wx.removeStorageSync('openID');
+  wx.removeStorageSync('unionid')
   AUTH.fetchTempCode().then(function(res) {
     wx.hideLoading();
     if (res.code) {
@@ -257,12 +261,23 @@ function getUserInfo(e) {
         });
         getPatientInfo();
       } else {
-        getounionid();
+        wx.removeStorageSync("sessionKey");
+        wx.removeStorageSync("code");
+        wx.removeStorageSync('openID');
+        wx.removeStorageSync('unionid')
+        AUTH.fetchTempCode().then(function(res) {
+          if (res.code) {
+            wx.setStorageSync('code', res.code);
+            getounionid();
+          }
+        });
       }
     },
     fail(err) {
       wx.removeStorageSync("sessionKey");
       wx.removeStorageSync("code");
+      wx.removeStorageSync('openID');
+      wx.removeStorageSync('unionid')
       AUTH.fetchTempCode().then(function(res) {
         if (res.code) {
           wx.setStorageSync('code', res.code);

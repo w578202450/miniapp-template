@@ -61,15 +61,15 @@ App({
     //   assistantStaffID: "20020913491781433700514240"
     // }
     // 大冢医药(生产环境)
-    options = {
-      orgID: "20040909515893667880511240",
-      assistantStaffID: "20041020111817571130514240"
-    }
-    // tmc内科
     // options = {
-    //   orgID: "20052710323479595590511233",
-    //   assistantStaffID: "20052716343567800020514240"
+    //   orgID: "20040909515893667880511240",
+    //   assistantStaffID: "20041020111817571130514240"
     // }
+    // tmc内科
+    options = {
+      orgID: "20052710323479595590511233",
+      assistantStaffID: "20052716343567800020514240"
+    }
     // 桃子互联网医院减肥中心(生产环境)
     // options = {
     //   orgID: "20041517422841582280511240",
@@ -498,6 +498,10 @@ App({
    * 1.登录成功缓存当前临时code 判断登录态用 
    */
   fetchTempCode: function() {
+    wx.removeStorageSync("sessionKey");
+    wx.removeStorageSync("code");
+    wx.removeStorageSync('openID');
+    wx.removeStorageSync('unionid')
     AUTH.fetchTempCode().then(function(res) {
       wx.hideLoading();
       if (res.code) {
