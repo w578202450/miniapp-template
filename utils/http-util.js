@@ -1,4 +1,4 @@
-const version = 1; //0开发、1测试 2生产
+const version = 2; //0开发、1测试 2生产
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -30,8 +30,14 @@ var request = function request(url, needDomain, method, data) {
   return new Promise(function(resolve, reject) {
     let date = Date.parse(new Date());
     let clientType = "wxpro";
+
     let dataValues = md5.objKeySort(data);
-    let signed = md5.md5(encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH"));
+    let encodeURI = encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH");
+    // 替换encodeURIComponent方法不处理的特殊字符
+    let encodeURIReplace = encodeURI.replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
+      replace(/\)/g, '%29').replace(/\~/g, '%7E');
+    let signed = md5.md5(encodeURIReplace);
+
     wx.request({
       method: method,
       url: _url,
@@ -111,6 +117,17 @@ module.exports = {
       return ['20050916495074555320511240']
     } else if (version == 2) {
       return ['20050916495074555320511240']
+    }
+  },
+
+  /**tmc 内科 */
+  tmcneikeFun: function() {
+    if (version == 0) {
+      return ['20052710323479595590511233']
+    } else if (version == 1) {
+      return ['20052710323479595590511233']
+    } else if (version == 2) {
+      return ['20052710323479595590511233']
     }
   },
 

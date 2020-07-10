@@ -4,6 +4,11 @@
     <home-dazhong-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-dazhong-page>
   </view>
+  <!-- 是否显示tmc内科页面 -->
+  <view wx:if="{{ showOrgID == 7}}">
+    <home-neike-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-neike-page>
+  </view>
   <!-- 是否显示桃子互联网医院减肥中心页面 -->
   <view wx:if="{{ showOrgID == 3}}">
     <home-loseweight-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">

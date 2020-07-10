@@ -253,11 +253,15 @@ function objKeySort(obj) {
   // var newkey = Object.keys(obj).sort().reverse();
   let newObj = {}; // 创建一个新的对象，用于存放排好序的键值对
   for (let i = 0; i < newkey.length; i++) { // 遍历newkey数组
+    // if (typeof obj[newkey[i]] === 'object') {  // 排除包含value为对象的        
+    //   newkey.splice(i, 1)      
+    // }
     newObj[newkey[i]] = obj[newkey[i]]; // 向新创建的对象中按照排好的顺序依次增加键值对
   }
+  // console.warn("-----newkey------" + newkey);
   let objValuesString = "";
   Object.values(newObj).forEach(item => {
-    if (!Array.isArray(item)) {
+    if (!Array.isArray(item) && typeof item != 'object') {
       objValuesString = objValuesString + item;
     }
   });

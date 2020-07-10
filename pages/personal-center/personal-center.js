@@ -33,7 +33,7 @@ Page({
   onLoad: function(e) {
     app.hideTabBarFun();
     let that = this;
-    if (app.globalData.isInitInfo == "ready") {
+    if (app.globalData.isInitInfo) {
       that.getUserInfoByStorge(); // 获取用户授权信息
     } else {
       // 监听isInitInfo值的变化

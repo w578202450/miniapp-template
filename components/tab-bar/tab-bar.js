@@ -49,6 +49,7 @@ Component({
       })
     },
     selectedTabFun: function(e) {
+      
       let that = this;
       let index = e.currentTarget.dataset.index;
       app.globalData.tabbar.list.forEach((item, ind) => {
@@ -57,16 +58,15 @@ Component({
           item.selected = true;
         }
       });
-      console.log(app.globalData.isInitInfo);
       if (index == 1) {
-        if (app.globalData.isInitInfo == "ready") {
+        if (app.globalData.isInitInfo) {
           requestMsgFun(); // 获取服务通知授权，跳转问诊聊天
         } else {
           // wx.switchTab({
           //   url: that.data.tabbar.list[index].pagePath
           // });
+          app.globalData.isClickChat=true    
           let nextPageName = "chat";
-          console.log(nextPageName)
           this.popup.showPopup(nextPageName); // 显示登录确认框
         }
       } else {

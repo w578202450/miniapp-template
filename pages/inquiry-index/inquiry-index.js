@@ -10,7 +10,7 @@ Page({
     content_image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/loginImg.png", // 宣传图片
     titleTxt: "", // 小标题文字
     btnTxt: "", // 按钮文字
-    isInitInfo: 0
+    isInitInfo: false
   },
 
   /**
@@ -74,11 +74,11 @@ Page({
 
   initFun: function() {
     console.log(app.globalData.isInitInfo);
-    if (app.globalData.isInitInfo == "ready") {
+    if (app.globalData.isInitInfo) {
       this.setData({
         titleTxt: "点击去问诊，立即开始在线问诊～",
         btnTxt: "立即问诊",
-        isInitInfo: "ready"
+        isInitInfo: true
       });
       // wx.navigateTo({
       //   url: '/pages/online-inquiry/inquiry/chat/chat'
@@ -87,7 +87,7 @@ Page({
       this.setData({
         titleTxt: "请先登录后使用相应的小程序功能～",
         btnTxt: "立即登录",
-        isInitInfo: 0
+        isInitInfo: false
       });
     }
   },
@@ -98,7 +98,7 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo == "ready") {
+    if (app.globalData.isInitInfo) {
       commonFun.requestMsgFun();
     } else {
       let nextPageName = "chat";

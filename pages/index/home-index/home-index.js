@@ -25,6 +25,7 @@ Page({
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
     harbinyouhaoOrgID: [], // 哈尔滨友好医院机构ID
     dazhongOrgID: [], // 大冢医药机构ID
+    tmcneikeOrgID: [], // tmc内科
     loseweightOrgID: [], // 桃子互联网医院减肥中心机构ID
     gynecologyOrgID: [], // 桃子互联网医院妇科诊疗中心机构ID
     andrologyOrgID: [], // 桃子互联网医院男科诊疗中心机构ID
@@ -80,12 +81,13 @@ Page({
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.harbinyouhaoOrgID = HTTP.harbinyouhaoOrgIDFun(); // 获取哈尔滨友好医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
+    that.data.tmcneikeOrgID = HTTP.tmcneikeFun(); // 获取tmc内科
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
     // 先监听是否尝试了登录：isStartLogin
     if (app.globalData.isStartLogin) {
-      if (app.globalData.isInitInfo == "ready") {
+      if (app.globalData.isInitInfo) {
         console.log("尝试登录，成功了");
         that.initHomeData(); // 初始化参数
       } else {
@@ -100,7 +102,7 @@ Page({
         if (value) {
           if (!that.data.isHaveWatched) {
             that.data.isHaveWatched = true;
-            if (app.globalData.isInitInfo == "ready") {
+            if (app.globalData.isInitInfo) {
               console.log("尝试登录，成功了");
               that.initHomeData(); // 初始化参数
             } else {
@@ -207,6 +209,8 @@ Page({
       // shareOrgID: "20050916495074555320511240",
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
+
+    // console.error(that.data.tmcneikeOrgID,that.data.shareOrgID)
     console.log("=====shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是侯丽萍中医院远程门诊
     if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
@@ -219,6 +223,12 @@ Page({
       // 判断是否是大冢医药
       that.setData({
         showOrgID: 2
+      })
+      that.initDefaultFun();
+    }else if(that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是tmc内科
+      that.setData({
+        showOrgID: 7
       })
       that.initDefaultFun();
     } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
@@ -246,7 +256,7 @@ Page({
         isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID)
       })
       that.initFunctionFun();
-    } else { // 默认显示成都华府中医远程诊疗中心
+    }else { // 默认显示成都华府中医远程诊疗中心
       that.setData({
         showOrgID: 0
       })
@@ -492,6 +502,11 @@ Page({
         showOrgID: 6,
         isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID)
       })
+    } else if (that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
+      that.setData({
+        showOrgID: 7
+      })
+      // 判断是否是桃子互联网医院减肥中心
     } else {
       that.setData({
         showOrgID: 0
@@ -504,6 +519,7 @@ Page({
       entryType: ""
     }
     HTTP.getDefaultDocInfo(params).then(res => {
+      console.log("获取默认数据结果1---"+JSON.stringify(res));
       if (res.code == 0 && res.data) {
         that.setData({
           shareOrgID: res.data.orgID,

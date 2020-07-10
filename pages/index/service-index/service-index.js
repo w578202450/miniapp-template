@@ -100,7 +100,7 @@ Page({
       title: '加载中...'
     });
     if (app.globalData.isStartLogin) {
-      if (app.globalData.isInitInfo == "ready") {
+      if (app.globalData.isInitInfo) {
         console.log("尝试登录，成功了");
         that.initDocInfoFun(); // 初始化参数
       } else {
@@ -115,7 +115,7 @@ Page({
         if (value) {
           if (!that.data.isHaveWatched) {
             that.data.isHaveWatched = true;
-            if (app.globalData.isInitInfo == "ready") {
+            if (app.globalData.isInitInfo) {
               console.log("尝试登录，成功了");
               that.initDocInfoFun(); // 初始化参数
             } else {
@@ -134,6 +134,14 @@ Page({
   onReady: function() {
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialog");
+    app.watch((value) => {
+      // value为app.js中传入的值
+      if(value){
+        this.popup.hidePopup()
+      }else{
+        app.globalData.isClickChat=false    
+      }
+  }, "isClickChat");
   },
 
   /**
@@ -153,6 +161,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
+    console.log('---onHide')
     clearInterval(this.timer)
   },
 
@@ -160,6 +169,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
+    console.log('---onUnload')
     clearInterval(this.timer)
   },
 
@@ -228,6 +238,7 @@ Page({
       entryType: ""
     }
     HTTP.getDefaultDocInfo(params).then(res => {
+      console.log("获取默认数据结果2---"+JSON.stringify(res));
       if (res.code == 0 && res.data) {
         that.setData({
           shareOrgID: res.data.orgID,
@@ -466,7 +477,7 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo == "ready") {
+    if (app.globalData.isInitInfo) {
       requestMsgFun();
     } else {
       let nextPageName = "chat";
