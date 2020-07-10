@@ -111,15 +111,15 @@ App({
     //   orgID: "19101017081245502880511001"
     // }
     // 包医生
-    // options = {
-    //   assistantStaffID: "20011909362464071890514253",
-    //   orgID: "19121923373037086560511253"
-    // }
-    // 开发
     options = {
-      assistantStaffID: "20011109080410712390514001",
-      orgID: "19101017081245502880511001"
+      assistantStaffID: "20011909362464071890514253",
+      orgID: "19121923373037086560511253"
     }
+    // 开发
+    // options = {
+    //   assistantStaffID: "20011109080410712390514001",
+    //   orgID: "19101017081245502880511001"
+    // }
     console.log("进入小程序携带的参数：" + JSON.stringify(options));
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -156,7 +156,7 @@ App({
   //   tim.logout().then(function(imResponse) {}).catch(function(imError) {
   //     console.warn('logout error:', imError);
   //   });
-  // }, 
+  // },
 
   onShow: function(option) {
     if (that.globalData.isStartLogin && that.globalData.loginNum > 0) {
@@ -244,7 +244,7 @@ App({
     });
     // 设置日志级别
     // tim.setLogLevel(0); // 普通级别，日志量较多，接入时建议使用
-    tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用 
+    tim.setLogLevel(1); // release 级别，SDK 输出关键信息，生产环境时建议使用
     // 将腾讯云对象存储服务 SDK （以下简称 COS SDK）注册为插件，IM SDK 发送文件、图片等消息时，需要用到腾讯云的 COS 服务
     // 注册 COS SDK 插件
     tim.registerPlugin({
@@ -485,9 +485,9 @@ App({
       })
     });
   },
-  /** 
+  /**
    * 微信登录
-   * 1.登录成功缓存当前临时code 判断登录态用 
+   * 1.登录成功缓存当前临时code 判断登录态用
    */
   fetchTempCode: function() {
     AUTH.fetchTempCode().then(function(res) {
