@@ -114,11 +114,12 @@ Page({
   },
   /** 发放优惠券 */
   sendCoupon: function(){
+   
     let params = {
       orgID: app.globalData.orgID,
       patientID: app.globalData.patientID
     }
-    HTTP.queryPatientCouponList(params).then(res=>{
+    HTTP.sendCoupon(params).then(res=>{
       if(res.data&&res.data.length){
         // res.data[0].rule =JSON.parse(res.data[0].rule)
         this.setData({
@@ -198,6 +199,7 @@ Page({
   initHomeData: function() {
     //后面移动
     this.sendCoupon();
+    app.globalData.isShowCoupon = true;
     console.log("=====初始化参数=======");
     let that = this;
     that.setData({

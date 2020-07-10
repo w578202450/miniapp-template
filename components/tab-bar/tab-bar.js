@@ -25,6 +25,7 @@ Component({
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialogCom");
     this.couponRefs = this.selectComponent("#coupon");
+    console.log('isShowCoupon:',app.globalData.isShowCoupon)
     app.watch((value) => {
       // value为app.js中传入的值
       this.sendCoupon()
@@ -41,7 +42,7 @@ Component({
         orgID: app.globalData.orgID,
         patientID: app.globalData.patientID
       }
-      HTTP.queryPatientCouponList(params).then(res=>{
+      HTTP.sendCoupon(params).then(res=>{
         if(res.data&&res.data.length){
           this.couponRefs.showCouponDialog()
         }
