@@ -18,6 +18,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    couponData:{},
     timer: null,
     pageName: '问诊页',
     toView: "", // 手机屏幕自动滚动到达的位置
@@ -98,6 +99,8 @@ Page({
   onLoad: function(options) {
     let that = this;
     that.getPersonInfo(); // 从storage中获取患者信息
+    that.couponRefs = that.selectComponent("#chatCouponDialog");
+    that.sendCoupon()
 
     let innerAudioContext = wx.createInnerAudioContext();
     that.setData({
@@ -232,7 +235,21 @@ Page({
   onHide: function() {
     clearInterval(this.timer)
   },
-
+/** 发放优惠券 */
+sendCoupon: function(){
+  let params = {
+    orgID: app.globalData.orgID,
+    patientID: app.globalData.patientID
+  }
+  HTTP.sendCoupon(params).then(res=>{
+    if(res.data&&res.data.length){
+      this.setData({
+        couponData:res.data[0]
+      })
+      this.couponRefs.showCouponDialog()
+    }
+  })
+},
   /**
    * 生命周期函数--监听页面卸载
    */

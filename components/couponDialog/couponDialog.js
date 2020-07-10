@@ -41,7 +41,12 @@ Component({
       this.setData({
         isHideCoupon: true
       });
-      requestMsgFun()
+      let pages = getCurrentPages(); //获取加载的页面
+      let currentPage = pages[pages.length - 1]; //获取当前页面的对象
+      let url = currentPage.route
+      if(url!='pages/online-inquiry/inquiry/chat/chat'){
+        requestMsgFun()
+      }
     },
   }
 })

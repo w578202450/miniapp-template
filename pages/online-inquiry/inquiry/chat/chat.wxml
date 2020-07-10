@@ -195,4 +195,5 @@
       </view>
     </view>
   </view>
+   <coupon-dialog id='chatCouponDialog' couponData="{{couponData}}"></coupon-dialog>
 </view>

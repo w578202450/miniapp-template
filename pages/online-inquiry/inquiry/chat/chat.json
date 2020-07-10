@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "weui-loading": "../loading/loading",
-    "navigation-bar": "/components/navigation-bar/navigation-bar"
+    "navigation-bar": "/components/navigation-bar/navigation-bar",
+    "coupon-dialog": "/components/couponDialog/couponDialog"
   },
   "navigationBarTitleText": "在线问诊",
   "enablePullDownRefresh": true,

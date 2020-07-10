@@ -1,7 +1,7 @@
 /*eslint-disable*/
 import LibGenerateTestUserSig from './lib-generate-test-usersig-es.min.js'
 
-const version = 2 //0开发 1测试 2生产
+const version = 1 //0开发 1测试 2生产
 
 let _SDKAPPID=''
 switch(version){
