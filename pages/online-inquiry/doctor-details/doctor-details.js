@@ -148,7 +148,7 @@ Page({
   // 去问诊
   goInquiry: function () {
     console.log("--------去问诊---------");
-    if (app.globalData.isInitInfo == "ready") {
+    if (app.globalData.isInitInfo) {
       wx.navigateTo({
         url: '/pages/online-inquiry/inquiry/chat/chat'
       });

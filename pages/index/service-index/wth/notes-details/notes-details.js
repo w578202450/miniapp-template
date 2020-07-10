@@ -181,7 +181,7 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo == "ready") {
+    if (app.globalData.isInitInfo) {
       requestMsgFun();
     } else {
       let nextPageName = "chat";

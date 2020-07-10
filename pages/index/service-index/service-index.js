@@ -100,7 +100,7 @@ Page({
       title: '加载中...'
     });
     if (app.globalData.isStartLogin) {
-      if (app.globalData.isInitInfo == "ready") {
+      if (app.globalData.isInitInfo) {
         console.log("尝试登录，成功了");
         that.initDocInfoFun(); // 初始化参数
       } else {
@@ -115,7 +115,7 @@ Page({
         if (value) {
           if (!that.data.isHaveWatched) {
             that.data.isHaveWatched = true;
-            if (app.globalData.isInitInfo == "ready") {
+            if (app.globalData.isInitInfo) {
               console.log("尝试登录，成功了");
               that.initDocInfoFun(); // 初始化参数
             } else {
@@ -474,7 +474,7 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo == "ready") {
+    if (app.globalData.isInitInfo) {
       requestMsgFun();
     } else {
       let nextPageName = "chat";

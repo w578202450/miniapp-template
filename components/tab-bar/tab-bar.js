@@ -40,7 +40,7 @@ Component({
         }
       });
       if (index == 1) {
-        if (app.globalData.isInitInfo == "ready") {
+        if (app.globalData.isInitInfo) {
           requestMsgFun(); // 获取服务通知授权，跳转问诊聊天
         } else {
           // wx.switchTab({

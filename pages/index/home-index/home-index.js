@@ -84,7 +84,7 @@ Page({
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
     // 先监听是否尝试了登录：isStartLogin
     if (app.globalData.isStartLogin) {
-      if (app.globalData.isInitInfo == "ready") {
+      if (app.globalData.isInitInfo) {
         console.log("尝试登录，成功了");
         that.initHomeData(); // 初始化参数
       } else {
@@ -99,7 +99,7 @@ Page({
         if (value) {
           if (!that.data.isHaveWatched) {
             that.data.isHaveWatched = true;
-            if (app.globalData.isInitInfo == "ready") {
+            if (app.globalData.isInitInfo) {
               console.log("尝试登录，成功了");
               that.initHomeData(); // 初始化参数
             } else {
@@ -188,7 +188,7 @@ Page({
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
 
-    console.error(that.data.tmcneikeOrgID,that.data.shareOrgID)
+    // console.error(that.data.tmcneikeOrgID,that.data.shareOrgID)
     console.log("=====shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是侯丽萍中医院远程门诊
     if (that.data.houShiOrgID.indexOf(that.data.shareOrgID) > -1) {
@@ -203,7 +203,7 @@ Page({
         showOrgID: 2
       })
       that.initDefaultFun();
-    }else if(that.data.tmcneikeOrgID.index(that.data.shareOrgID) > -1) {
+    }else if(that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是tmc内科
       that.setData({
         showOrgID: 7

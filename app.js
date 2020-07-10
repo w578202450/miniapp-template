@@ -61,15 +61,15 @@ App({
     //   assistantStaffID: "20020913491781433700514240"
     // }
     // 大冢医药(生产环境)
-    // options = {
-    //   orgID: "20040909515893667880511240",
-    //   assistantStaffID: "20041020111817571130514240"
-    // }
-    // tmc内科
     options = {
-      orgID: "20052710323479595590511233",
-      assistantStaffID: "20052716343567800020514240"
+      orgID: "20040909515893667880511240",
+      assistantStaffID: "20041020111817571130514240"
     }
+    // tmc内科
+    // options = {
+    //   orgID: "20052710323479595590511233",
+    //   assistantStaffID: "20052716343567800020514240"
+    // }
     // 桃子互联网医院减肥中心(生产环境)
     // options = {
     //   orgID: "20041517422841582280511240",
@@ -259,7 +259,7 @@ App({
     // 监听事件
     tim.on(TIM.EVENT.SDK_READY, function(event) {
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
-      that.globalData.isInitInfo = "ready";
+      that.globalData.isInitInfo = true;
       console.log("============TIM SDK已处于READY状态==================");
     });
 
@@ -365,8 +365,8 @@ App({
     } else {
       console.log("IM登录失败：unionid或openID不存在");
       that.globalData.isStartLogin = true; // 是否开始了自动登录
-      that.globalData.isInitInfo = 0; // 登录初始化用户数据失败
-      that.fetchTempCode();
+      that.globalData.isInitInfo = false; // 登录初始化用户数据失败
+      // that.fetchTempCode();
     }
     that.globalData.loginNum = that.globalData.loginNum + 1;
   },
@@ -482,7 +482,7 @@ App({
       console.log("===IM登录成功==="); // 登录成功
       wx.setStorageSync('myUsername', userId);
       wx.hideLoading();
-      that.globalData.isInitInfo = "ready"; // 是否登录成功
+      that.globalData.isInitInfo = true; // 是否登录成功
       that.globalData.isStartLogin = true; // 是否开始了自动登录
     }).catch(function(imError) {
       console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
@@ -510,7 +510,7 @@ App({
     tim: null,
     TIM: null,
     p: "",
-    isInitInfo: 0, // 0：未登录  ready：已登录
+    isInitInfo: false, // false：未登录  ：true已登录
     loginNum: 0, // 登录次数
     isHaveOptions: false, // 进入小程序是否携带参数
     isStartLogin: false, // 是否尝试了自动登录
