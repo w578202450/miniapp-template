@@ -9,7 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-     couponListL:[]
+     couponListL:[],
+     buttonClicked:true
   },
 
   /**
@@ -20,6 +21,15 @@ Page({
   },
   use(){
     requestMsgFun()
+    //防止多次点击
+    this.setData({
+      buttonClicked:false
+    })
+    setTimeout(()=>{
+      this.setData({
+        buttonClicked:true
+      })
+    },1500)
   },
   initData(){
     wx.showLoading({
@@ -36,6 +46,8 @@ Page({
        if(res.data&&res.data.length){
           res.data.forEach(item=>{
             item.rule = JSON.parse(item.rule)
+            item.startTime = item.startTime.slice(0,item.startTime.length-2)
+            item.endTime = item.endTime.slice(0,item.endTime.length-2)
           })
           this.setData({
             couponListL:res.data

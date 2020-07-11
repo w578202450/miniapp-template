@@ -14,7 +14,7 @@
 				<view class="coupon-time">有效时间：{{item.startTime}}至{{item.endTime}}</view>
 			 </block>
 			 </view>
-			<view class="cell-rg" bindtap="use">
+			<view class="cell-rg" bindtap="{{buttonClicked ? 'use' : ''}}">
 				<view>立</view>
 				<view>即</view>
 				<view>使</view>
