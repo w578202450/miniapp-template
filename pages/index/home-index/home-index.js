@@ -595,10 +595,11 @@ Page({
     if (!doctorStaffID) {
       return;
     }
-    if (app.globalData.p && app.globalData.p === "d") {
-      app.globalData.p = "";
-      that.toServiceIndexFun();
-    }
+    // 注释 跳转专家页面
+    // if (app.globalData.p && app.globalData.p === "d") {
+    //   app.globalData.p = "";
+    //   that.toServiceIndexFun();
+    // }
   }
 })
 
