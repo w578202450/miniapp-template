@@ -55,6 +55,9 @@ Page({
         wx.hideNavigationBarLoading()
         if (res.code == 0) {
           this.data.orderID = res.data.rp.orderID
+          if(res.data.rp.addTime){
+            res.data.rp.addTime = res.data.rp.addTime.slice(0,res.data.rp.addTime.length-2)
+          }
           this.setData({
             rpData: res.data.rp,
             payStatus: res.data.rp.payStatus,

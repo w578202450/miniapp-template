@@ -2,6 +2,8 @@
 
 <navigation-bar navbarTitle="我的优惠券" />
 <view class="my-coupon">
+   <view class="empty" wx:if="{{!couponListL ||!couponListL.length}}">暂无优惠券</view>
+	 <block wx:else>
 	 <view class="cell"  wx:for="{{couponListL}}" wx:for-item="item" wx:key="index">
 	 	  <view class="cell-lf">
 			 <block>
@@ -21,5 +23,5 @@
 				<view>用</view>
 			</view>
 	 </view>
-	 
+	 	 </block>
 </view>
