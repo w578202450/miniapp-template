@@ -8,7 +8,8 @@
     "service-news": "/pages/index/service-index/fzm/service-news/service-news",
     "login-dialog": "/components/loginDialog/loginDialog",
     "notes": "/pages/index/service-index/wth/notes/notes",
-    "share": "/pages/index/service-index/wth/share/share"
+    "share": "/pages/index/service-index/wth/share/share",
+    "coupon-dialog": "/components/couponDialog/couponDialog"
   },
   "navigationStyle": "custom"
 }

@@ -1,6 +1,6 @@
 // pages/personal-center/my-coupon/my-coupon.js
 const HTTP = require('../../../utils/http-util')
-import { requestMsgFun } from '../../../utils/common';
+import { requestMsgFun, onShareAppMessageFun } from '../../../utils/common';
 let app = getApp()
 
 Page({
@@ -104,6 +104,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    return  onShareAppMessageFun('/pages/index/home-index/home-index');
   }
 })

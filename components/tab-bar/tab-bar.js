@@ -1,7 +1,6 @@
 // components/tab-bar/tab-bar.js
 const app = getApp();
 import { requestMsgFun } from '../../utils/common.js';
-import HTTP from '../../utils/http-util'
 Component({
   /**
    * 组件的属性列表
@@ -24,30 +23,12 @@ Component({
     // 在组件实例进入页面节点树时执行
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialogCom");
-    this.couponRefs = this.selectComponent("#coupon");
-    console.log('isShowCoupon:',app.globalData.isShowCoupon)
-    app.watch((value) => {
-      // value为app.js中传入的值
-      this.sendCoupon()
-  }, "isShowCoupon"); 
   },
-
+  
   /**
    * 组件的方法列表
    */
   methods: {
-      /** 发放优惠券 */
-    sendCoupon: function(){
-      let params = {
-        orgID: app.globalData.orgID,
-        patientID: app.globalData.patientID
-      }
-      HTTP.sendCoupon(params).then(res=>{
-        if(res.data&&res.data.length){
-          this.couponRefs.showCouponDialog()
-        }
-      })
-    },
     selectedTabFun: function(e) {
       
       let that = this;

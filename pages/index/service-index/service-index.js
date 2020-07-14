@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    couponData:{rule:{}},
     timer:null,
     pageName:'专家门诊页',
     copyrightInfo: {
@@ -126,6 +127,12 @@ Page({
         }
       }, "isStartLogin");
     }
+    this.couponRefs = this.selectComponent("#coupon")
+    app.watch((value) => {
+      // value为app.js中传入的值
+      console.log('isShowCoupon22222:',app.globalData.isShowCoupon)
+      this.sendCoupon()
+     }, "isShowCoupon");
   },
 
   /**
@@ -156,7 +163,22 @@ Page({
       heartFun(this.data.pageName,this.__route__)
     }, intervalTime);
   },
-
+  /** 发放优惠券 */
+  sendCoupon: function(){
+    let params = {
+      orgID: app.globalData.orgID,
+      patientID: app.globalData.patientID
+    }
+  
+    HTTP.sendCoupon(params).then(res=>{
+      if(res.data&&res.data.length){
+          this.couponRefs.showCouponDialog()
+          this.setData({
+            couponData:res.data[0]
+          })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -209,9 +231,7 @@ Page({
   /**初始化数据 */
   initDocInfoFun: function() {
     let that = this;
-    if(!app.globalData.isShowCoupon){
-      app.globalData.isShowCoupon = true;
-    }
+    app.globalData.isShowCoupon = true;
     that.data.shareOrgID = wx.getStorageSync("shareOrgID");
     that.data.shareDoctorStaffID = wx.getStorageSync("shareDoctorStaffID");
     that.data.shareAssistantStaffID = wx.getStorageSync("shareAssistantStaffID");

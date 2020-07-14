@@ -1,8 +1,10 @@
 const app = getApp();
 import { onShareAppMessageFun } from '../../utils/common.js';
 import { heartFun,intervalTime } from '../../utils/heart.js';
+const HTTP = require('../../utils/http-util');
 Page({
   data: {
+    couponData:{rule:{}},
     timer:null,
     pageName:'我的页',
     list: [{
@@ -46,6 +48,12 @@ Page({
         }
       }, "isInitInfo");
     }
+    this.couponRefs = this.selectComponent("#coupon");
+    app.watch((value) => {
+      // value为app.js中传入的值
+      console.log('isShowCoupon22222:',app.globalData.isShowCoupon)
+      this.sendCoupon()
+  }, "isShowCoupon"); 
   },
 
   onShow: function(e) {
@@ -63,7 +71,22 @@ Page({
       heartFun(this.data.pageName,this.__route__)
     }, intervalTime);
   },
-
+    /** 发放优惠券 */
+    sendCoupon: function(){
+      let params = {
+        orgID: app.globalData.orgID,
+        patientID: app.globalData.patientID
+      }
+    
+      HTTP.sendCoupon(params).then(res=>{
+        if(res.data&&res.data.length){
+            this.couponRefs.showCouponDialog()
+            this.setData({
+              couponData:res.data[0]
+            })
+        }
+      })
+    },
   onReady: function() {
     //获得popup组件：登录确认框
     this.popup = this.selectComponent("#loginDialog");

@@ -3,8 +3,7 @@
 @import "../../../template/template.wxss";
 
 .my-coupon{
-  overflow: hidden;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .cell{

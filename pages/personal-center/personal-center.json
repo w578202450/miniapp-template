@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "tab-bar": "/components/tab-bar/tab-bar",
-    "login-dialog": "/components/loginDialog/loginDialog"
+    "login-dialog": "/components/loginDialog/loginDialog",
+    "coupon-dialog": "/components/couponDialog/couponDialog"
   },
   "navigationStyle": "custom"
 }

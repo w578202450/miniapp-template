@@ -201,7 +201,6 @@ Page({
   initHomeData: function() {
     //后面移动
     this.sendCoupon();
-    app.globalData.isShowCoupon = true;
     console.log("=====初始化参数=======");
     let that = this;
     that.setData({
