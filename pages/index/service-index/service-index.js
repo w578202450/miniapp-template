@@ -1,6 +1,6 @@
 // pages/index/service-index/service-index.js
 const app = getApp();
-import { onShareAppMessageFun, requestMsgFun } from '../../../utils/common.js';
+import { onShareAppMessageFun, requestMsgFun} from '../../../utils/common.js';
 import { heartFun,intervalTime } from '../../../utils/heart.js';
 const HTTP = require('../../../utils/http-util');
 Page({
@@ -8,6 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isFirstClick: true,
     couponData:{rule:{}},
     timer:null,
     pageName:'专家门诊页',
@@ -130,7 +131,7 @@ Page({
     }
     app.watch((value) => {
       // value为app.js中传入的值
-      if(app.globalData.currentPage === '我的'){
+      if(app.globalData.currentPage === '首页'){
         this.sendCoupon()
       }
      }, "isShowCoupon");
@@ -498,12 +499,20 @@ Page({
    * 2.未登录，授权登录
    *  */
   toOnlineInqueryFun: function() {
-    if (app.globalData.isInitInfo) {
-      requestMsgFun();
-    } else {
-      let nextPageName = "chat";
-      this.popup.showPopup(nextPageName); // 显示登录确认框
-    }
+      this.setData({
+        isFirstClick: false
+      })
+      if (app.globalData.isInitInfo&&app.globalData.unionid && app.globalData.openid) {
+        requestMsgFun();
+      } else {
+        let nextPageName = "chat";
+        this.popup.showPopup(nextPageName); // 显示登录确认框
+      }
+      setTimeout(()=>{
+        this.setData({
+          isFirstClick: true
+        })
+      },1000)
   },
 
   /** 资格证书底部弹出浪框 */

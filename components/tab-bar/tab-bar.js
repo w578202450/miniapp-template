@@ -40,7 +40,7 @@ Component({
         }
       });
       if (index == 1) {
-        if (app.globalData.isInitInfo) {
+        if (app.globalData.isInitInfo&&app.globalData.unionid && app.globalData.openid) {
           requestMsgFun(); // 获取服务通知授权，跳转问诊聊天
         } else {
           // wx.switchTab({
@@ -51,7 +51,6 @@ Component({
           this.popup.showPopup(nextPageName); // 显示登录确认框
         }
       } else {
-        // app.globalData.isShowCoupon = !app.globalData.isShowCoupon
         app.globalData.currentPage = that.data.tabbar.list[index].text
         wx.switchTab({
           url: that.data.tabbar.list[index].pagePath

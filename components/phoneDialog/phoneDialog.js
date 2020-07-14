@@ -71,11 +71,11 @@ Component({
      * triggerEvent 用于触发事件 
      */
     _error() {
-      this.hidePopup();
-      this.triggerEvent("error");
       setTimeout(()=>{
         app.globalData.isShowCoupon = true
       },500)
+      this.hidePopup();
+      this.triggerEvent("error");
     },
 
     _success() {
@@ -89,10 +89,6 @@ Component({
     getPhoneNumber(e) {
       console.log('====')
       console.log(app.globalData.phoneDialogNextPage)
-      setTimeout(()=>{
-        app.globalData.isShowCoupon = true
-      },500)
-      
       let sessionKey = wx.getStorageSync("sessionKey");
       let prams = {
         personID: app.globalData.patientID,
@@ -120,9 +116,16 @@ Component({
              // 获取手机号允许回调
              this.triggerEvent("success");
              if(app.globalData.phoneDialogNextPage=='chat'){
+               setTimeout(()=>{
+                app.globalData.isShowCoupon = true
+               },1000)
                wx.navigateTo({
                   url: '/pages/online-inquiry/inquiry/chat/chat',
                 });
+             }else{
+              setTimeout(()=>{
+                app.globalData.isShowCoupon = true
+               },500)
              }
            }).catch(res => {
              wx.showToast({
@@ -143,6 +146,9 @@ Component({
          }
        })
       } else { // 点击拒绝 
+        setTimeout(()=>{
+          app.globalData.isShowCoupon = true
+        },500)
         wx.showToast({
           title: "请允许授权使用手机号",
           icon: 'none',

@@ -50,7 +50,7 @@
     <text style="margin-top:20rpx">{{copyrightInfo.details_four}}</text>
   </view>
   <!-- 立即问诊浮窗 -->
-  <view class="topToInquiryFloat" bindtap="toOnlineInqueryFun">
+  <view class="topToInquiryFloat" bindtap="{{isFirstClick?'toOnlineInqueryFun':''}}">
     <view>立即</view>
     <view>问诊</view>
   </view>

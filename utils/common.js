@@ -188,7 +188,7 @@ function loginIM(userId) {
       }else{
         app.globalData.phoneDialogNextPage=''
       }
-    },1500)
+    },500)
   }).catch(function(imError) {
     app.globalData.isInitInfo = false
     console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
@@ -358,7 +358,6 @@ function payRequestMsgFun(keyID) {
     }
   });
 }
-
 module.exports = {
   startLoginFun: startLoginFun,
   getUserInfo: getUserInfo,
