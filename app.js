@@ -36,6 +36,7 @@ App({
     that.globalData.navBarHeight = navBarHeight;
     that.globalData.isShowPhoneDialog = false
     that.globalData.isShowCoupon = false
+    this.globalData.currentPage = '首页'
     that.globalData.phoneDialogNextPage = ''
     that.globalData.isClickChat=false
     that.globalData.menuButtonBoundingClientRect = rect;
@@ -486,6 +487,7 @@ App({
       that.globalData.isInitInfo = true; // 是否登录成功
       that.globalData.isStartLogin = true; // 是否开始了自动登录
     }).catch(function(imError) {
+      that.globalData.isInitInfo = false
       console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
       wx.hideLoading();
       wx.showToast({

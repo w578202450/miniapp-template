@@ -190,6 +190,7 @@ function loginIM(userId) {
       }
     },1500)
   }).catch(function(imError) {
+    app.globalData.isInitInfo = false
     console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
     wx.hideLoading();
     wx.showToast({

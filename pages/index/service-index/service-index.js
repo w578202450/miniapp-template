@@ -95,6 +95,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.couponRefs = this.selectComponent("#coupon")
     let that = this;
     // app.hideTabBarFun();
     wx.showLoading({
@@ -127,11 +128,11 @@ Page({
         }
       }, "isStartLogin");
     }
-    this.couponRefs = this.selectComponent("#coupon")
     app.watch((value) => {
       // value为app.js中传入的值
-      console.log('isShowCoupon22222:',app.globalData.isShowCoupon)
-      this.sendCoupon()
+      if(app.globalData.currentPage === '我的'){
+        this.sendCoupon()
+      }
      }, "isShowCoupon");
   },
 
@@ -169,10 +170,9 @@ Page({
       orgID: app.globalData.orgID,
       patientID: app.globalData.patientID
     }
-  
     HTTP.sendCoupon(params).then(res=>{
       if(res.data&&res.data.length){
-          this.couponRefs.showCouponDialog()
+        this.couponRefs.showCouponDialog()
           this.setData({
             couponData:res.data[0]
           })
@@ -230,6 +230,7 @@ Page({
 
   /**初始化数据 */
   initDocInfoFun: function() {
+    this.sendCoupon()
     let that = this;
     app.globalData.isShowCoupon = true;
     that.data.shareOrgID = wx.getStorageSync("shareOrgID");

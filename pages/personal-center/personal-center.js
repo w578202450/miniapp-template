@@ -48,12 +48,7 @@ Page({
         }
       }, "isInitInfo");
     }
-    this.couponRefs = this.selectComponent("#coupon");
-    app.watch((value) => {
-      // value为app.js中传入的值
-      console.log('isShowCoupon22222:',app.globalData.isShowCoupon)
-      this.sendCoupon()
-  }, "isShowCoupon"); 
+    this.couponRefs = this.selectComponent("#coupon1");
   },
 
   onShow: function(e) {
@@ -70,6 +65,13 @@ Page({
     this.timer=setInterval(() => {
       heartFun(this.data.pageName,this.__route__)
     }, intervalTime);
+      app.watch((value) => {
+        // value为app.js中传入的值
+        console.log('isShowCoupon22222:',app.globalData.isShowCoupon)
+        if(app.globalData.currentPage === '我的'){
+          this.sendCoupon()
+        }
+     }, "isShowCoupon");  
   },
     /** 发放优惠券 */
     sendCoupon: function(){
@@ -77,7 +79,6 @@ Page({
         orgID: app.globalData.orgID,
         patientID: app.globalData.patientID
       }
-    
       HTTP.sendCoupon(params).then(res=>{
         if(res.data&&res.data.length){
             this.couponRefs.showCouponDialog()

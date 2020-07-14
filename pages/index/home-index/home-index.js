@@ -123,7 +123,6 @@ Page({
     }
     HTTP.sendCoupon(params).then(res=>{
       if(res.data&&res.data.length){
-        // res.data[0].rule =JSON.parse(res.data[0].rule)
         this.setData({
           couponData:res.data[0]
         })
@@ -200,6 +199,7 @@ Page({
   /** 初始化参数 */
   initHomeData: function() {
     //后面移动
+    console.log('isShowCoupon222222222222:',app.globalData.isShowCoupon)
     this.sendCoupon();
     console.log("=====初始化参数=======");
     let that = this;

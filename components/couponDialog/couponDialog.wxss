@@ -11,8 +11,8 @@
 }
 .coupon-dialog .content{
   width:592rpx;
-  min-height:644rpx;
-  padding: 64rpx;
+  min-height:600rpx;
+  padding:76rpx 44rpx;
   box-sizing: border-box;
   background:rgba(255,255,255,1);
   border-radius:10rpx;
@@ -22,9 +22,24 @@
   transform: translate(-50%, -50%);
 }
 .coupon-dialog .content .title{
-  font-size:28rpx;
-  color:rgba(0,0,0,0.65);
   line-height:44rpx;
+  color:rgba(63,175,163,1);
+  font-size: 32rpx;
+  text-align: center;
+  padding-bottom: 28rpx;
+}
+.coupon-dialog .content .des{
+  line-height:22rpx;
+  font-size: 26rpx;
+  line-height:44rpx;
+  color:rgba(0,0,0,0.65);
+  padding: 0 20rpx;
+}
+.coupon-dialog .content .rule{
+  font-size: 26rpx;
+  line-height:44rpx;
+  color:rgba(247,167,81,0.65);
+  padding-bottom: 28rpx;
 }
 .coupon-img{
   width:432rpx;
@@ -32,6 +47,15 @@
   border: 2rpx dashed rgba(0,0,0,0.55);
   margin: 32rpx auto 16rpx;
   box-sizing: border-box;
+  position: relative;
+}
+.counpon-text{
+  position: absolute;
+  top: 88rpx;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  color: #fff;
 }
 .coupon-img image{
   width: 416rpx;
@@ -56,11 +80,11 @@
   box-sizing: border-box;
 }
 .coupon-btn button:nth-child(1){
-  border:2rpx solid rgba(67,139,239,1);
+  border:2rpx solid rgba(61,173,161,1);
   background: #fff;
-  color: #438BEF;
+  color:rgba(61,173,161,1);
 }
 .coupon-btn button:nth-child(2){
-  background:rgba(67,139,239,1);
+  background:rgba(61,173,161,1);
   color: #fff;
 }
