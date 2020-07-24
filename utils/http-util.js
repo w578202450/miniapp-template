@@ -1,4 +1,4 @@
-const version = 1; //0开发、1测试 2生产
+const version = 0; //0开发、1测试 2生产
 const md5 = require('/md5.js');
 // const _SDKAPPID = (function() {
 //   if (version == 1) { // 1测试(测试SDKAPPID为1400200900)
@@ -679,5 +679,17 @@ module.exports = {
   /** 发放优惠券 */
   sendCoupon: function sendCoupon(params){
     return request('api/tmc/coupon/sendCoupon',true,'get',params)
-  }
+  },
+  /** 同步地址 */
+  asyncPatientAddress:function asyncPatientAddress(params){
+    return request("api/tmc/patient/addPatientAddress",true,'post',params)
+  },
+  /** 更新收货地址 */
+  updateOrderDelivery: function updateOrderDelivery(params){
+    return request("api/tmc/goodsOrder/updateOrderDelivery",true,'post',params)
+  },
+  /** 地址能否再次修改 */
+  getOrderDeliveryByInquiryID: function getOrderDeliveryByInquiryID(params){
+  return request("api/tmc/goodsOrder/getOrderDeliveryByInquiryID",true,'get',params)
+    } 
 }

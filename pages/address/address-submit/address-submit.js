@@ -139,6 +139,15 @@ Page({
           wx.showToast({
             title: '地址绑定完成',
             success: function() {
+              let _data = {
+                orgID: app.globalData.orgID,
+                keyID: app.globalData.patientID,
+                province: that.data.addressInfo.province,
+                city: that.data.addressInfo.city,
+                area: that.data.addressInfo.area,
+                address: that.data.addressInfo.address,
+              }
+              HTTP.asyncPatientAddress(_data)
               that.navigateBack()
             }
           })

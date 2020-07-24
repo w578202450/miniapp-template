@@ -24,10 +24,20 @@ Page({
     areaCode: "",
     area: '',
     isFirstAddress: false,
-    noSelected: true
+    noSelected: true,
+    orgin: null,
+    orderInfo:{}
   },
 
   onLoad: function(e) {
+  
+    this.setData({
+      orgin: e.orgin,
+      orderInfo:{
+        orderID:e.orderID,
+        orgID:e.orgID
+      }
+    })
     this.data.isFirstAddress = e.count == 0 ? true : false
     if (e.item) {
       let item = JSON.parse(e.item)
@@ -232,7 +242,15 @@ Page({
           wx.showToast({
             title: '保存成功',
             success: function(res) {
-              that.navigateBack()
+              if(that.data.orgin==='chat'){
+                let orderID = that.data.orderInfo.orderID;
+                 let orgID = that.data.orderInfo.orgID;
+                wx.reLaunch({
+                  url: '/pages/online-inquiry/inquiry/chat/chat?orgin=true&orgID=' + orgID + '&orderID=' + orderID
+                })
+              }else{
+                that.navigateBack()
+              }
             }
           })
         } else {

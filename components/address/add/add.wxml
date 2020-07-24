@@ -1,0 +1,33 @@
+<!--components/address/add/add.wxml-->
+<view class="address-add page">
+  <view class="mask"></view>
+	<view class="address">
+	 <view class="title">新增收货地址<view class="close" bindtap="close">+</view></view>
+		<view class="cell">
+			<text class="cell-title">收货人</text>
+			<input class="weui-input cell-detail" placeholder="请填写收货人姓名" bindinput="receiverNameInput" maxlength="20" value="{{receiverName}}" />
+		</view>
+		<view class="cell-separator"></view>
+		<view class="cell">
+			<text class="cell-title">手机号码</text>
+			<input class="weui-input cell-detail" maxlength="11" type="number" placeholder="请填写11位手机号码" bindinput="receiverPhoneInput" value="{{receiverPhone}}" />
+		</view>
+		<view class="cell-separator"></view>
+		<view class="address-seleceted">
+			<picker mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}" range-key="label" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange">
+				<text class="cell-title">所在地区</text>
+				<text class="cell-detail" wx:if='{{noSelected}}' style="font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(0,0,0,0.45);">请填写省市区等
+        </text>
+				<text class="cell-detail" wx:else>{{multiArray[0][multiIndex[0]].label}}，{{multiArray[1][multiIndex[1]].label}}，{{multiArray[2][multiIndex[2]].label}}</text>
+			</picker>
+			<image src="../../../images/public/public_right.png"></image>
+		</view>
+
+		<view class="cell-separator"></view>
+		<view class="address-detail">
+			<textarea placeholder="请填写街道、楼牌号等" style="height: 3.3em" bindinput="addressInput" value="{{address}}" maxlength="60"></textarea>
+		</view>
+
+		<view class="confirm-btn" bindtap="saveOptions">保存</view>
+	</view>
+</view>

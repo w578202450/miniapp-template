@@ -18,6 +18,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isAddAddress:false,
+    isEditAddress:false,
     couponData:{},
     timer: null,
     pageName: '问诊页',
@@ -90,13 +92,25 @@ Page({
     sendType: "", // 消息发送类型
     // systemInfo: {}, // 当前手机类型相关信息
     historyInquiryList: [], // 历史问诊ID列表
-    historyInquiryIndex: 0 // 查询到的历史问诊ID下标
+    historyInquiryIndex: 0, // 查询到的历史问诊ID下标
+    orderInfo: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    setTimeout(()=>{
+      if(options.orgin){
+        this.setData({
+          isEditAddress:true,
+          orderInfo:{
+           orderID:options.orderID,
+           orgID:options.orgID
+          }
+        })
+      }
+    },500)
     let that = this;
     that.getPersonInfo(); // 从storage中获取患者信息
     that.couponRefs = that.selectComponent("#chatCouponDialog");
@@ -234,6 +248,43 @@ Page({
    */
   onHide: function() {
     clearInterval(this.timer)
+  },
+  editAddress(e){
+    let params = {
+      orgID: app.globalData.orgID,
+      inquiryID : this.data.inquiryInfo.keyID
+    }
+    HTTP.getOrderDeliveryByInquiryID(params).then(res=>{
+      if(res.code==0){
+        this.setData({
+          isEditAddress: true,
+          orderInfo: e.currentTarget.dataset.order
+        })
+      }else{
+        wx.showToast({
+          title: '该订单不能修改地址！',
+          icon: 'none'
+        })
+      }
+    })
+  },
+  closeEditAddress(){
+    this.setData({
+      isEditAddress: false,
+      orderInfo:null
+    })
+  },
+  addAddress(){
+    this.setData({
+      isEditAddress: false,
+      isAddAddress: true
+    })
+  },
+  closeAddAddress(){
+    this.setData({
+      isEditAddress: true,
+      isAddAddress: false
+    })
   },
 /** 发放优惠券 */
 sendCoupon: function(){

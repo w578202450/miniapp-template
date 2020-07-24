@@ -87,6 +87,29 @@
                 <image class="toRpDetailIcon" src="../../../../images/chat/you.png" />
               </view>
             </view>
+                   <!-- 自定义的卡片消息 -->
+            <view wx:if="{{filter.formatJSON(item.payload.data).childType == 'address'}}"   data-rpid="{{filter.formatJSON(item.payload.data).data.inquiryID}}">
+              <view class="addressMsg">
+               <view class="title">
+                <image src="../../../../images/chat/dingwei.png"></image>
+                <text>请您确认地址</text>
+               </view>
+               <view class="itemBox">
+                 <view class="cell">姓名：{{filter.formatJSON(item.payload.data).data.receiverName}}</view>
+                  <view class="cell">电话：{{filter.formatJSON(item.payload.data).data.receiverPhone }}</view>
+                  <view class="cell">地址：
+                  {{filter.formatJSON(item.payload.data).data&&filter.formatJSON(item.payload.data).data.province?
+                    filter.formatJSON(item.payload.data).data.province
+                    + filter.formatJSON(item.payload.data).data.city 
+                    + filter.formatJSON(item.payload.data).data.area
+                     + filter.formatJSON(item.payload.data).data.address
+                    : "未填写地址"
+                  }}
+                  </view>
+               </view>
+               <view class="editBtn" bindtap="editAddress" data-order="{{filter.formatJSON(item.payload.data).data}}">修改</view>
+              </view>
+            </view>
             <!-- 自定义的素材消息： materialType 0:图文 1:图片 2:视频-->
             <view wx:elif="{{filter.formatJSON(item.payload.data).childType == 'tmcMaterial'}}">
               <!-- 素材消息：图文素材、视频素材 -->
@@ -196,4 +219,6 @@
     </view>
   </view>
    <coupon-dialog id='chatCouponDialog' couponData="{{couponData}}"></coupon-dialog>
+    <address-edit wx:if="{{isEditAddress}}" bind:addAddress="addAddress" bind:closeEditAddress="closeEditAddress" orderInfo="{{orderInfo}}" inquiryID="{{inquiryInfo.keyID}}"></address-edit>
+    <!-- <address-add wx:if="{{isAddAddress}}" bind:closeAddAddress="closeAddAddress"></address-add> -->
 </view>
