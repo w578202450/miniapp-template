@@ -90,9 +90,6 @@ Component({
       this.triggerEvent("closeEditAddress")
     },
     selectedAddress(event) {
-      wx.showLoading({
-        title: '地址修改中',
-      })
       let index = event.currentTarget.dataset.index
       let arr = []
       this.data.list.forEach((item, i) => {
@@ -119,21 +116,16 @@ Component({
         inquiryID:this.data.inquiryID
       }
       HTTP.updateOrderDelivery(_data).then(res => {
-        setTimeout(()=>{
-          wx.hideLoading()
-        },500)
         if (res.code==0) {
           wx.showToast({
-            title: '地址修改成功'
+            title: '修改成功'
           })
           this.close()
         }else{
           wx.showToast({
-            title: '地址修改失败'
+            title: '修改失败'
           })
         }
-      }).catch(err=>{
-        wx.hideLoading()
       })
     }
   }
