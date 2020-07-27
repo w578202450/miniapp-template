@@ -254,6 +254,9 @@ Page({
       orgID: app.globalData.orgID,
       inquiryID : this.data.inquiryInfo.keyID
     }
+    if(e.currentTarget.dataset.order.inquiryID){
+      params.inquiryID = e.currentTarget.dataset.order.inquiryID
+    }
     HTTP.getOrderDeliveryByInquiryID(params).then(res=>{
       if(res.code==0){
         this.setData({
@@ -262,7 +265,7 @@ Page({
         })
       }else{
         wx.showToast({
-          title: '该订单不能修改地址！',
+          title: res.message,
           icon: 'none'
         })
       }

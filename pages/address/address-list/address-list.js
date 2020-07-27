@@ -124,6 +124,9 @@ Page({
         province: this.data.list[index].province,
         city: this.data.list[index].city,
         area: this.data.list[index].area,
+        provinceCode: this.data.list[index].provinceCode,
+        cityCode: this.data.list[index].cityCode,
+        areaCode: this.data.list[index].areaCode,
         remarks: this.data.list[index].remarks ? this.data.list[index].remarks : '',
         isDefault: this.data.list[index].isDefault
       } //将想要传的信息赋值给上一个页面data中的值

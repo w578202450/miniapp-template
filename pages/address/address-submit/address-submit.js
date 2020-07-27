@@ -60,6 +60,9 @@ Page({
                   province: item.province,
                   city: item.city,
                   area: item.area,
+                  provinceCode: item.provinceCode,
+                  cityCode: item.cityCode,
+                  areaCode: item.areaCode,
                   remarks: item.remarks ? item.remarks : '',
                   isDefault: item.isDefault
                 } //将想要传的信息赋值给上一个页面data中的值
@@ -146,6 +149,9 @@ Page({
                 city: that.data.addressInfo.city,
                 area: that.data.addressInfo.area,
                 address: that.data.addressInfo.address,
+                areaCode:that.data.addressInfo.areaCode,
+                cityCode:that.data.addressInfo.cityCode,
+                provinceCode:that.data.addressInfo.provinceCode,
               }
               HTTP.asyncPatientAddress(_data)
               that.navigateBack()
