@@ -46,7 +46,7 @@
   <!-- 空置盒子1 -->
   <view class="marginBoxOne"></view>
   <view id="viewCommunicationBody" bindtap="clickViewCommunicationFun">
-    <view wx:if="{{filter.formatJSON(item.payload.data).childType != 'video' && filter.formatJSON(item.payload.data).childType != 'tmcChangeDoctor'  && filter.formatJSON(item.payload.data).childType != 'firstCreateTMCInquiry'}}" class="row" wx:for="{{currentMessageList}}" wx:key="index" id="item{{index}}">
+    <view wx:if="{{filter.formatJSON(item.payload.data).customType!=='sys'&&filter.formatJSON(item.payload.data).childType != 'video' && filter.formatJSON(item.payload.data).childType != 'tmcChangeDoctor'  && filter.formatJSON(item.payload.data).childType != 'firstCreateTMCInquiry'}}" class="row" wx:for="{{currentMessageList}}" wx:key="index" id="item{{index}}">
       <!-- 日期 -->
       <view class="datetime" wx:if="{{item.addTime}}">{{item.addTime}}</view>
       <!-- 系统消息：自定义结束问诊的提示 -->
