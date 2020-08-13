@@ -111,6 +111,13 @@ Page({
         })
       }
     },500)
+   if(!app.globalData.isInitInfo || !app.globalData.orgID){
+     wx.reLaunch({
+       url: '/pages/index/home-index/home-index',
+     })
+     return
+   }
+
     let that = this;
     that.getPersonInfo(); // 从storage中获取患者信息
     that.couponRefs = that.selectComponent("#chatCouponDialog");

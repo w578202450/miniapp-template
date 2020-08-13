@@ -14,6 +14,7 @@ Page({
 
   onLoad: function(e) {
     this.data.orderID = e.orderID;
+    this.data.orgID = e.orgID;
     this.loadDatas()
   },
   /**
@@ -24,7 +25,7 @@ Page({
     var that = this;
     HTTP.goodsOrder({
         orderID: this.data.orderID,
-        orgID: app.globalData.orgID
+        orgID: app.globalData.orgID ||  this.data.orgID
       })
       .then(res => {
         wx.hideNavigationBarLoading()
@@ -58,7 +59,7 @@ Page({
     wx.showNavigationBarLoading()
     HTTP.getRp({
         rpID: rpID,
-        orgID: app.globalData.orgID
+        orgID: app.globalData.orgID || this.data.orgID
       })
       .then(res => {
         wx.hideNavigationBarLoading()
