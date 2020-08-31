@@ -16,7 +16,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    tabbar: app.globalData.tabbar
+    tabbar: app.globalData.tabbar,
+     isClick: true
   },
 
   attached: function () {
@@ -30,7 +31,6 @@ Component({
    */
   methods: {
     selectedTabFun: function(e) {
-      
       let that = this;
       let index = e.currentTarget.dataset.index;
       app.globalData.tabbar.list.forEach((item, ind) => {
@@ -40,6 +40,14 @@ Component({
         }
       });
       if (index == 1) {
+        this.setData({
+          isClick: false
+        })
+        setTimeout(()=>{
+          this.setData({
+            isClick: true
+          })
+        },3000)
         if (app.globalData.isInitInfo&&app.globalData.unionid && app.globalData.openid) {
           requestMsgFun(); // 获取服务通知授权，跳转问诊聊天
         } else {
