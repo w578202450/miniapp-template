@@ -141,7 +141,16 @@ module.exports = {
       return ['20040909515893667880511240']
     }
   },
-
+   /**心脑血管机构ID */
+   xinnaoxueguanOrgIDFun: function() {
+    if (version == 0) {
+      return ['20101310392724025690511233']
+    } else if (version == 1) {
+      return ['20101310392724025690511233']
+    } else if (version == 2) {
+      return ['20101310392724025690511233']
+    }
+  },
   /**桃子互联网医院减肥中心机构ID */
   loseweightOrgIDFun: function() {
     if (version == 0) {

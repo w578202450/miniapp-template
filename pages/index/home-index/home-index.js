@@ -1,7 +1,12 @@
 // pages/index/home-index/home-index.js
 const app = getApp();
-import { onShareAppMessageFun } from '../../../utils/common.js';
-import { heartFun,intervalTime } from '../../../utils/heart.js';
+import {
+  onShareAppMessageFun
+} from '../../../utils/common.js';
+import {
+  heartFun,
+  intervalTime
+} from '../../../utils/heart.js';
 const HTTP = require('../../../utils/http-util');
 Page({
 
@@ -9,10 +14,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    couponData:{},
-    isHideCoupon:true,
-    timer:null,
-    pageName:'首页',
+    couponData: {},
+    isHideCoupon: true,
+    timer: null,
+    pageName: '首页',
     isSearchState: false, // 是否进行了一次加载
     /**
      * 侯丽萍开发环境ID： 19101017081245518100511003
@@ -26,6 +31,7 @@ Page({
     harbinyouhaoOrgID: [], // 哈尔滨友好医院机构ID
     dazhongOrgID: [], // 大冢医药机构ID
     tmcneikeOrgID: [], // tmc内科
+    xinnaoxueguanOrgID: [], //新脑血管机构ID
     loseweightOrgID: [], // 桃子互联网医院减肥中心机构ID
     gynecologyOrgID: [], // 桃子互联网医院妇科诊疗中心机构ID
     andrologyOrgID: [], // 桃子互联网医院男科诊疗中心机构ID
@@ -74,13 +80,14 @@ Page({
    *   （1）通过扫码进入时： "q" 的值为url带参 
    *   （2）通过分享的小程序进入时：直接带参
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     let that = this;
     this.couponRefs = this.selectComponent("#couponDialog");
     // wx.hideShareMenu(); // 隐藏本页面右上角的分享功能
     that.data.houShiOrgID = HTTP.houShiOrgIDFun(); // 获取侯氏医院ID
     that.data.harbinyouhaoOrgID = HTTP.harbinyouhaoOrgIDFun(); // 获取哈尔滨友好医院ID
     that.data.dazhongOrgID = HTTP.dazhongOrgIDFun(); // 获取大冢医药ID
+    that.data.xinnaoxueguanOrgID = HTTP.xinnaoxueguanOrgIDFun();
     that.data.tmcneikeOrgID = HTTP.tmcneikeFun(); // 获取tmc内科
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
@@ -115,16 +122,16 @@ Page({
     }
   },
   /** 发放优惠券 */
-  sendCoupon: function(){
-   
+  sendCoupon: function () {
+
     let params = {
       orgID: app.globalData.orgID,
       patientID: app.globalData.patientID
     }
-    HTTP.sendCoupon(params).then(res=>{
-      if(res.data&&res.data.length){
+    HTTP.sendCoupon(params).then(res => {
+      if (res.data && res.data.length) {
         this.setData({
-          couponData:res.data[0]
+          couponData: res.data[0]
         })
         this.couponRefs.showCouponDialog()
       }
@@ -133,17 +140,17 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     let that = this;
-    this.timer=setInterval(() => {
-      heartFun(this.data.pageName,this.__route__)
+    this.timer = setInterval(() => {
+      heartFun(this.data.pageName, this.__route__)
     }, intervalTime);
     if (that.data.isSearchState) {
       that.initHomeData(); // 初始化参数
@@ -153,40 +160,40 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     clearInterval(this.timer)
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     clearInterval(this.timer)
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return onShareAppMessageFun();
   },
 
   /**转换传递的url参数 q */
-  initOptionsFun: function(scan_url, name) {
+  initOptionsFun: function (scan_url, name) {
     var reg = new RegExp("[^\?&]?" + encodeURI(name) + "=[^&]+");
     var arr = scan_url.match(reg);
     if (arr != null) {
@@ -197,9 +204,9 @@ Page({
   },
 
   /** 初始化参数 */
-  initHomeData: function() {
+  initHomeData: function () {
     //后面移动
-    console.log('isShowCoupon222222222222:',app.globalData.isShowCoupon)
+    console.log('isShowCoupon222222222222:', app.globalData.isShowCoupon)
     this.sendCoupon();
     console.log("=====初始化参数=======");
     let that = this;
@@ -222,12 +229,6 @@ Page({
       // 判断是否是大冢医药
       that.setData({
         showOrgID: 2
-      })
-      that.initDefaultFun();
-    }else if(that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
-      // 判断是否是tmc内科
-      that.setData({
-        showOrgID: 7
       })
       that.initDefaultFun();
     } else if (that.data.loseweightOrgID.indexOf(that.data.shareOrgID) > -1) {
@@ -255,7 +256,19 @@ Page({
         isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID)
       })
       that.initFunctionFun();
-    }else { // 默认显示成都华府中医远程诊疗中心
+    } else if (that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是tmc内科
+      that.setData({
+        showOrgID: 7
+      })
+      that.initDefaultFun();
+    }  else if (that.data.xinnaoxueguanOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是tmc内科
+      that.setData({
+        showOrgID: 8
+      })
+      that.initDefaultFun();
+    }  else { // 默认显示成都华府中医远程诊疗中心
       that.setData({
         showOrgID: 0
       })
@@ -267,7 +280,7 @@ Page({
   },
 
   /**初始化调用请求方法 */
-  initFunctionFun: function() {
+  initFunctionFun: function () {
     let that = this;
     wx.showLoading({
       title: '拼命加载中...',
@@ -290,7 +303,7 @@ Page({
   },
 
   /**初始化 大冢医院 默认加载数据 */
-  initDefaultFun: function() {
+  initDefaultFun: function () {
     let that = this;
     wx.showLoading({
       title: '拼命加载中...',
@@ -307,7 +320,7 @@ Page({
   },
 
   /**初始桃子互联网医院减肥中心默认加载数据 */
-  initCustomDefaultFun: function() {
+  initCustomDefaultFun: function () {
     let that = this;
     wx.showLoading({
       title: '拼命加载中...',
@@ -506,7 +519,12 @@ Page({
         showOrgID: 7
       })
       // 判断是否是桃子互联网医院减肥中心
-    } else {
+    } else if (that.data.xinnaoxueguanOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是tmc内科
+      that.setData({
+        showOrgID: 8
+      })
+    }  else {
       that.setData({
         showOrgID: 0
       })
@@ -518,7 +536,7 @@ Page({
       entryType: ""
     }
     HTTP.getDefaultDocInfo(params).then(res => {
-      console.log("获取默认数据结果1---"+JSON.stringify(res));
+      console.log("获取默认数据结果1---" + JSON.stringify(res));
       if (res.code == 0 && res.data) {
         that.setData({
           shareOrgID: res.data.orgID,
@@ -583,7 +601,7 @@ Page({
   },
 
   /**操作：立即进入专家门诊 */
-  toServiceIndexFun: function() {
+  toServiceIndexFun: function () {
     wx.switchTab({
       url: '/pages/index/service-index/service-index'
     });
@@ -601,4 +619,3 @@ Page({
     // }
   }
 })
-

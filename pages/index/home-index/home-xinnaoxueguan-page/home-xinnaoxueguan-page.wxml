@@ -1,0 +1,40 @@
+<view class="page">
+	<view class="home">
+		<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg_1.png" class="xnxg-img1" />
+		<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg_3.png" class="xnxg-img2" />
+		<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg_2.png" class="xnxg-img3" />
+		<view class="kp">
+			<view class="kp-container">
+				<view class="kp-item">
+					<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg-ngs.png" class="kp-item_img"></image>
+					<text class="kp-item_text">脑梗塞</text>
+				</view>
+				<view class="kp-item kp-item_center">
+					<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg-nxs.png" class="kp-item_img"></image>
+					<text class="kp-item_text">脑血栓</text>
+				</view>
+				<view class="kp-item">
+					<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg-nzf.png" class="kp-item_img"></image>
+					<text class="kp-item_text">脑中风后遗症</text>
+				</view>
+			</view>
+			<view class="kp-container">
+				<view class="kp-item">
+					<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg-gxb.png" class="kp-item_img"></image>
+					<text class="kp-item_text">冠心病</text>
+				</view>
+				<view class="kp-item kp-item_center">
+					<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg-xjy.png" class="kp-item_img"></image>
+					<text class="kp-item_text">心肌炎</text>
+				</view>
+				<view class="kp-item">
+					<image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xnxg-jdmyh.png" class="kp-item_img"></image>
+					<text class="kp-item_text">颈动脉硬化</text>
+				</view>
+			</view>
+		</view>
+		<view class="enter-box" bindtap="toServiceIndexFun">
+			<text class="enter-name">立即进入专家门诊</text>
+		</view>
+	</view>
+</view>

@@ -25,18 +25,18 @@ Component({
    */
   data: {
     satisfybgtitle: "/images/home/title_bg.png",
-    satisfybg1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/feichange01.png",
-    satisfybg2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/feichange02.png",
-    homeDazhongLeft: "/images/home/home_dazhong_left.png",
-    homeDazhongRight: "/images/home/home_dazhong_right.png",
-    homeBannerDefaultUrl: "/images/home/home_banner_default.png", // 首页banner
-    middleOnefei1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei1.png",
-    middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei2.png",
-    middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei3.png",
-    middleOnefei4: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/fei4.png",
+    satisfybg1: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan-bg.png",
+    satisfybg2: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_.png",
+    homeDazhongLeft: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_changjian.png",
+    homeDazhongRight: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_gxb.png",
+    homeBannerDefaultUrl: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_jdmyh.png", // 首页banner
+    middleOnefei1: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_kp-bj.png",
+    middleOnefei2: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_nxs.png",
+    middleOnefei3: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_nzf.png",
+    middleOnefei4: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_santong.png",
     helpfulNum: 12324,
-    helpmedicineIcon: "/images/home/help_medicine.png",
-    medicineIcon: "/images/home/home_dazhong_medicine.png",
+    helpmedicineIcon: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguan_xjy.png",
+    medicineIcon: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/5532/org/xinnaoxueguann_ngs.png",
     bottomIcon: "/images/home/home_dazhong_bottom_icon.png",
     rectangleBackgroundImg: "/images/home/home_rectangle_background.png",
     patientList: [
@@ -125,7 +125,6 @@ Component({
         time: "1小时前"
       }
     ],
-
     autoplay: true,
     interval: 1000,
     duration: 1500,

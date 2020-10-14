@@ -1,4 +1,3 @@
-// pages/index/home-index/home-dazhong-page/hom-dazhong-page.js
 Component({
   /**
    * 组件的属性列表

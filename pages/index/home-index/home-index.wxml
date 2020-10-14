@@ -4,7 +4,6 @@
     <home-dazhong-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-dazhong-page>
   </view>
-  <!-- 是否显示tmc内科页面 -->
   <view wx:if="{{ showOrgID == 7}}">
     <home-neike-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-neike-page>
@@ -148,6 +147,11 @@
       </view> -->
       </view>
     </view>
+  </view>
+  <!-- s -->
+  <view wx:if="{{ showOrgID == 8}}">
+    <home-xinnaoxueguan-page onload="{{true}}" homeBannerDefaultUrl="{{homeBannerDefaultUrl}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-xinnaoxueguan-page>
   </view>
   <coupon-dialog id='couponDialog' couponData="{{couponData}}"></coupon-dialog>
 </view>
