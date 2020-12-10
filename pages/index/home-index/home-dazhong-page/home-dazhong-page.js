@@ -149,7 +149,7 @@ Component({
       let date3 = date2.getTime() - date1.getTime(); // 时间差的毫秒数
       let randomNum = Math.round((date3 / 1000 - (3600 * 24 * 365 * 49.6)) / 1800); /** 一小时加两个 */
       that.setData({
-        helpfulNum: randomNum
+        helpfulNum: randomNum + parseInt(wx.getStorageSync("shareOrgID").substring(15,19)) * 10
       });
     }
   },
