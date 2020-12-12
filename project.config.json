@@ -33,7 +33,6 @@
     "useIsolateContext": true,
     "useCompilerModule": false,
     "userConfirmedUseCompilerModuleSwitch": false,
-    "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true
@@ -96,6 +95,11 @@
           "name": "pages/index/home-index/home-index",
           "pathName": "pages/index/home-index/home-index",
           "query": "?orgID=19121923373037086560511253&assistantStaffID=20011320532175746910514253",
+          "scene": null
+        },
+        {
+          "name": "pages/online-inquiry/inquiry/chat/chat",
+          "pathName": "pages/online-inquiry/inquiry/chat/chat",
           "scene": null
         }
       ]
