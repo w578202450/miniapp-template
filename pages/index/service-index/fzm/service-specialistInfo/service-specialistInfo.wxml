@@ -12,14 +12,58 @@
       <!-- <image style="width: 100%" hidden="{{ !sectionBanner }}" src="{{ sectionBanner }}" mode="widthFix" /> -->
     </view>
   </block>
+
   <!-- 医生卡片 -->
-  <view class="specialist-box" hidden="{{ !doctorInfo.doctorName }}">
-    <!-- 基本信息 -->
-    <view class="specialist-header-box">
+  <view class="specialist-box" hidden="{{ !doctorInfo.doctorName }}"></view>
+  <view class="doctor-bg">
+    <text class="physicianAssistant-name">{{ doctorInfo.doctorName }}医生团队</text>
+    <view class="specialist-bottom-box">
+      <view class="specialist-bottom-left">
+        <image src="{{ comment_icon }}"></image>
+        <text>好评率：</text>
+        <text style="color: rgba(0,0,0,0.85)">100%</text>
+      </view>
+      <view class="specialist-bottom-left" style="margin-top: 32rpx;">
+        <image src="{{ sever_icon }}"></image>
+        <text>服务人数：</text>
+        <text style="color: rgba(0,0,0,0.85)">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
+      </view>
+    </view>
+  </view>
+  <view class="doctor-team" hidden="{{ !doctorInfo.doctorName }}">
+    <text class="team-title">医师团队</text>
+    <view>
+      <scroll-view scroll-x="true" style=" white-space: nowrap;">
+        <view style="padding-left:6rpx;padding-top:32rpx;padding-bottom:10rpx;">
+          <view class="doctor-1" style="margin-left:0;">
+            <image src="{{ doctorInfo.faceImage }}" mode="aspectFill" style="width:86rpx;height:86rpx;"></image>
+            <view class="doctor-name">
+              <text class="doctor-name__text">{{ doctorInfo.doctorName }}</text>
+              <text class="doctor-section__text"> {{ doctorInfo.sectionName }} {{ doctorInfo.titleName }}
+                {{ comTools.strReplce(doctorInfo.title) }}
+              </text>
+            </view>
+          </view>
+          <view class="doctor-1">
+            <image src="{{ assistantDoctorInfo.faceImage }}" mode="aspectFill" style="width:86rpx;height:86rpx;">
+            </image>
+            <view class="doctor-name">
+              <text class="doctor-name__text">{{ assistantDoctorInfo.doctorName }}</text>
+              <text class="doctor-section__text"> {{ assistantDoctorInfo.sectionName }} {{ doctorInfo.titleName }}
+                {{ comTools.strReplce(doctorInfo.title) }}
+              </text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 基本信息 -->
+  <!-- <view class="specialist-header-box">
       <image src="{{ doctorInfo.faceImage }}" mode="aspectFill"></image>
       <view class="specialist-header-middle-box">
         <view class="docFlexRowBetween">
-          <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
+          <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}医生团队</text>
           <view class="docFlexRowStart">
             <view class="title-other specialist-header-right-box" style="line-height: 28rpx" bindtap="previewDoctorInfo">详情</view>
             <image style="width:28rpx;height:28rpx;" src="/images/home/youBlue.png"></image>
@@ -28,20 +72,20 @@
         <text class="doctor-title doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
         <text class="doctor-title doctor-title doctor-title">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
       </view>
-    </view>
-    <!-- 擅长标签  -->
-    <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs>
-    <view class="cutting-line1"></view>
-    <!-- 医助 -->
-    <view class="physicianAssistant-box">
+    </view> -->
+
+  <!-- 擅长标签  -->
+  <!-- <service-tabs list="{{ doctorDisease }}" pageStyle="margin-top: 24rpx;margin-left: 154rpx"></service-tabs>
+    <view class="cutting-line1"></view> -->
+  <!-- 医助 -->
+  <!-- <view class="physicianAssistant-box">
       <image mode="aspectFill" class="physicianAssistant-photo" src="{{ assistantDoctorInfo.faceImage }}"></image>
       <text class="physicianAssistant-name">{{ assistantDoctorInfo.doctorName }}</text>
       <text class="physicianAssistant-title">{{ "医生助理" }}</text>
       <text class="physicianAssistant-title">{{ assistantDoctorInfo.sectionName }}</text>
-    </view>
-  </view>
+    </view> -->
   <!-- 好评率 服务人数 -->
-  <view class="specialist-bottom-box">
+  <!-- <view class="specialist-bottom-box">
     <view class="specialist-bottom-left">
       <image src="{{ comment_icon }}"></image>
       <text>好评率：</text>
@@ -53,11 +97,11 @@
       <text>服务人数：</text>
       <text style="color: rgba(0,0,0,0.85)">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
     </view>
-  </view>
-  <view class="cutting-line3"></view>
+  </view> -->
+  <!-- <view class="cutting-line3"></view> -->
   <!-- 执业许可信息 -->
-  <view class="licensed-box" hidden="{{ !certifyInfo.certifyNo }}">
+  <!-- <view class="licensed-box" hidden="{{ !certifyInfo.certifyNo }}">
     <text>医师执业许可证：</text>
     <text style="color: rgba(255, 177, 11, 0.85)">{{certifyInfo.certifyNo}}</text>
-  </view>
+  </view> -->
 </view>

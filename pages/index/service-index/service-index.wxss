@@ -11,6 +11,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background:url('https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home-header.png');
+  background-size: 100% 100%;
+  background-color: #5091ED;
 }
 
 .title-custom-box {

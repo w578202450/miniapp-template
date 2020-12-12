@@ -8,35 +8,43 @@
     <view hidden="{{scrollTop == 0}}" style="height:{{statusBarHeight + navBarHeight + 34}}px">
       <view class="title-custom-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
         <text class="title-name-text">{{doctorInfo.doctorName}}</text>
-        <text class="title-defalut-text" style="margin-right:{{systemInfo.windowWidth - capsuleRect.left + 10}}px">{{doctorInfo.titleName}} {{comTools.strReplce(doctorInfo.title)}}</text>
+        <text class="title-defalut-text"
+          style="margin-right:{{systemInfo.windowWidth - capsuleRect.left + 10}}px">{{doctorInfo.titleName}}
+          {{comTools.strReplce(doctorInfo.title)}}</text>
       </view>
       <view class="button-box" bindtap="toOnlineInqueryFun">
         <text class="button-text">立即问诊</text>
       </view>
       <view class="cutting-line"></view>
     </view>
-    <view hidden="{{scrollTop != 0}}" class="title-default-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
-      <view class="home-icon-box" style="height: {{capsuleRect.height}}px;width: {{capsuleRect.height}}px" bindtap="goToBackHome">
+    <view hidden="{{scrollTop != 0}}" class="title-default-box"
+      style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
+      <view class="home-icon-box" style="height: {{capsuleRect.height}}px;width: {{capsuleRect.height}}px"
+        bindtap="goToBackHome">
         <image src="{{ navHomeIconBlack }}"></image>
       </view>
-      <text class="title-name-text" style="color:rgba(0,0,0,1)">专家门诊</text>
+      <text class="title-name-text" style="color:#ffffff;">专家门诊</text>
     </view>
   </view>
   <!-- 专家门诊专家信息 -->
-  <service-specialistInfo pageStyle="margin-bottom:20rpx" sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}" assistantDoctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}" navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun"
-  />
+  <service-specialistInfo  sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}"
+    assistantDoctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}"
+    navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun" />
   <!-- 医生团队 -->
   <!-- <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" /> -->
   <!-- 资格证书 -->
-  <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx" bind:showBottomDialog="showBottomDialog"></service-certification>
+  <!-- <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx" bind:showBottomDialog="showBottomDialog">
+  </service-certification> -->
   <!-- 患者评价 -->
-  <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}" evaluateAllData="{{evaluateAllData}}" />
+  <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}"
+    evaluateAllData="{{evaluateAllData}}" />
   <!-- 医生手记 -->
   <notes paersonInfo="{{inquiryCaseData}}" httpParams="{{inquiryCaseData.httpParams}}" />
   <!-- 患者分享 -->
   <!-- <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" /> -->
   <!-- 文章模块 -->
-  <service-news id="article" pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}" baseParams="{{baseParams}}"/>
+  <service-news id="article" pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}"
+    baseParams="{{baseParams}}" />
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
   <view class="bottom-box">
@@ -64,22 +72,24 @@
     <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
       <view class="bottom-content">
         <view class="title-dialog">
-        <view class="parent-text">
-          <text class="service-text">服务</text>
-        </view>
-         <image style="margin-right:10rpx;" src="{{ dialog_close }}" bindtap="hideModal"></image>
+          <view class="parent-text">
+            <text class="service-text">服务</text>
           </view>
+          <image style="margin-right:10rpx;" src="{{ dialog_close }}" bindtap="hideModal"></image>
+        </view>
         <!-- 执业许可 -->
         <view class="certification-box">
           <view class="certification-box-left">
             <image src="{{ license_icon }}"></image>
             <text class="certification-box-text">互联网医院执业许可</text>
-            <view style="border-radius:50%;background:rgba(0,0,0,0.25);width:8rpx;height:8rpx;margin-left:15rpx;"></view>
+            <view style="border-radius:50%;background:rgba(0,0,0,0.25);width:8rpx;height:8rpx;margin-left:15rpx;">
+            </view>
           </view>
           <view class="certification-box-right">
             <image src="{{ attestation_icon }}"></image>
             <text class="certification-box-text">网信认证</text>
-            <view style="border-radius:50%;background:rgba(0,0,0,0.25);width:8rpx;height:8rpx;margin-left:15rpx;"></view>
+            <view style="border-radius:50%;background:rgba(0,0,0,0.25);width:8rpx;height:8rpx;margin-left:15rpx;">
+            </view>
             <text class="certification-box-text" style="margin-left:15rpx;">就医权益保障</text>
           </view>
         </view>
@@ -113,5 +123,5 @@
       </view>
     </view>
   </view>
-   <coupon-dialog id="coupon" couponData="{{couponData}}"></coupon-dialog>
+  <coupon-dialog id="coupon" couponData="{{couponData}}"></coupon-dialog>
 </view>

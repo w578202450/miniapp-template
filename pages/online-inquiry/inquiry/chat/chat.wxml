@@ -36,7 +36,7 @@
       <view class="info-box">
         <view class="flexRowStartCenter">
           <view class="info_one">{{talkInfo.assistantInfo.doctorName}}</view>
-          <text class="info_one_one">医助</text>
+          <text class="info_one_one">医生</text>
         </view>
         <text class="info_two">{{talkInfo.assistTitleName}}</text>
       </view>
@@ -72,7 +72,7 @@
         <view>
           <view wx:if="{{item.from != talkInfo.multiTalkInfo.patientID}}" class="personNameTxt">
             <text wx:if="{{item.from == talkInfo.multiTalkInfo.doctorStaffID}}" style="font-size:24rpx;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(0,0,0,0.45)">{{talkInfo.doctorInfo.doctorName}} -医生</text>
-            <text wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}" style="font-size:24rpx;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(0,0,0,0.45)">{{talkInfo.assistantInfo.doctorName}} -医助</text>
+            <text wx:elif="{{item.from == talkInfo.multiTalkInfo.assistantStaffID}}" style="font-size:24rpx;font-family:PingFangSC-Regular,PingFang SC;font-weight:400;color:rgba(0,0,0,0.45)">{{talkInfo.assistantInfo.doctorName}} -医生</text>
           </view>
           <!-- 自定义消息 -->
           <view wx:if="{{item.type == 'TIMCustomElem'}}">

@@ -53,7 +53,13 @@ Component({
     comment_icon: "/images/home/home_service_love.png",
     // 服务人数图标
     // sever_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_serverNums.png"
-    sever_icon: "/images/home/home_service_num.png"
+    sever_icon: "/images/home/home_service_num.png",
+    doctor_bg:'/images/home/doctor-bg.png'
+    //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/doctor-bg.png
+    //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home-header.png
+    //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home_doctor-bg.png
+
+
   },
 
   /**

@@ -109,10 +109,10 @@ App({
     // }
     // 测试
     // 包正一
-    // options = {
-    //   orgID: "19121923373037086560511253",
-    //   assistantStaffID: "20011320532175746910514253"
-    // }
+    options = {
+      orgID: "19121923373037086560511253",
+      assistantStaffID: "20011320532175746910514253"
+    }
     // 包医助
     // options = {
     //   orgID: "19121923373037086560511253",
@@ -133,7 +133,6 @@ App({
     //   assistantStaffID: "20011109080410712390514001",
     //   orgID: "19101017081245502880511001"
     // }
-    console.log("进入小程序携带的参数：" + JSON.stringify(options));
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数
       var scan_url = decodeURIComponent(options.q);
