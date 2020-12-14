@@ -6,7 +6,7 @@
 }
 
 .padd {
-  padding: 20rpx 20rpx;
+  padding: 20rpx 32rpx;
 }
 
 .border-botttom {

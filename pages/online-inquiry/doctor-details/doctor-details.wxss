@@ -18,7 +18,70 @@
   align-items: center;
   text-align: center;
 }
-
+.doctorName .header {
+  height: 216rpx;
+  background: linear-gradient(180deg,#f7fcff, #c5ddff);
+  padding: 34rpx 48rpx 0rpx;
+}
+.top {
+  overflow: hidden;
+}
+.doctorName .header  .left{
+  float: left;
+}
+.doctorName .header  .left .name {
+  font-weight: 600;
+  text-align: left;
+  color: #000000;
+  line-height: 32rpx;
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+}
+.doctorName .header  .left .position {
+  font-weight: 500;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+.doctorName .header  .left .hospital {
+  font-weight: 500;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
+  font-size: 24rpx;
+}
+.doctorName .header  .right{
+  float: right;
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 100rpx;
+}
+.doctorName .header .keshi {
+  overflow: hidden;
+  margin-top: 20rpx;
+}
+.doctorName .header .keshi  text{
+  font-weight: 500;
+  float: left;
+  color: #035fdf;
+  line-height: 24rpx;
+  font-size: 24rpx;
+  border: 1rpx solid #387fe2;
+  border-radius: 4rpx;
+  padding: 8rpx 20rpx;
+  margin-right: 16rpx;
+}
+.doctorName .header .home {
+  font-size: 28rpx;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(255,255,255,.3);
+  line-height: 40rpx;
+  letter-spacing: 24rpx;
+  padding-top: 2rpx;
+}
 .middle-lineView {
   width: 4rpx;
   height: 28rpx;
@@ -39,7 +102,7 @@
 
 .middle-cotent-box {
   margin-top: 10rpx;
-  margin-left: 25rpx;
+  margin-left: 32rpx;
   margin-right: 32rpx;
 }
 
@@ -55,6 +118,7 @@
   height: 2rpx;
   background: rgba(238, 238, 238, 1);
   margin-top: 32rpx;
+  margin-left: 32rpx;
   margin-bottom: 0rpx;
 }
 

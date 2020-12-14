@@ -11,7 +11,18 @@
     </loading>
   </view>
   <!-- 顶部 -->
-  <navigation-bar navbarTitle="在线问诊" />
+  <view class="title-box">
+    <!-- 问诊标题 -->
+    <view class="title-default-box"
+      style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px;background:url({{statusBarHeight > 20 ? 'https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/inquiry_header.png':'https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/inquiry_header1.png'}});background-size: 100% 100%;">
+      <view class="navbarBtn navbarBtnBorder" style="bottom: {{statusBarHeight + navBarHeight - menuBBCRect.bottom}}px">
+        <image class="navBackIcon" src="{{navBackIconBlack}}" bindtap="navBack"/>
+        <view class="linear" style="background-color: #D6D6D6;"></view>
+        <image class="navHomeIcon" src="{{navHomeIconBlack}}" bindtap="toIndex"/>
+      </view>
+      <text class="title-name-text" style="color:#ffffff;">在线问诊</text>
+    </view>
+  </view>
   <!-- 顶部医生医助信息栏 -->
   <!-- <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;"> -->
   <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;">
@@ -44,7 +55,7 @@
   </view>
   <!-- 消息列表 -->
   <!-- 空置盒子1 -->
-  <view class="marginBoxOne"></view>
+  <view class="{{statusBarHeight > 20 ? 'marginBoxOne1': 'marginBoxOne'}}"></view>
   <view id="viewCommunicationBody" bindtap="clickViewCommunicationFun">
     <view wx:if="{{filter.formatJSON(item.payload.data).customType!=='sys'&&filter.formatJSON(item.payload.data).childType != 'video' && filter.formatJSON(item.payload.data).childType != 'tmcChangeDoctor'  && filter.formatJSON(item.payload.data).childType != 'firstCreateTMCInquiry'}}" class="row" wx:for="{{currentMessageList}}" wx:key="index" id="item{{index}}">
       <!-- 日期 -->

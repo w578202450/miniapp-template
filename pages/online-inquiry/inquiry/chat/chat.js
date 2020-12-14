@@ -41,6 +41,12 @@ Page({
       type: Object,
       value: {},
     },
+    navBackIconBlack: "/images/public/public_left_black.png", // 返回按钮：黑色
+    navHomeIconBlack: "/images/public/navHome.png", // 房子按钮：黑色
+    menuBBCRect: app.globalData.menuButtonBoundingClientRect,
+    capsuleRect: app.globalData.menuButtonBoundingClientRect,
+    statusBarHeight: app.globalData.systemInfo.statusBarHeight,
+    navBarHeight: app.globalData.navBarHeight,
     currentMessageList: [], // 聊天列表信息
     nextReqMessageID: "", // 用于续拉，分页续拉时需传入该字段
     isCompleted: false, // 表示是否已经拉完所有消息
@@ -1507,6 +1513,30 @@ sendCoupon: function(){
         }
       }
     })
+  },
+  //回退
+  navBack: function() {
+    let page = getCurrentPages();
+    if (page.length > 1) {
+      wx.navigateBack({
+        delta: 1
+      });
+    } else {
+      wx.reLaunch({
+        url: '/pages/index/home-index/home-index'
+      });
+    }
+  },
+  //回主页
+  toIndex: function() {
+    // let orgID = wx.getStorageSync("orgID");
+    // let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
+    // wx.reLaunch({
+    //   url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
+    // });
+    wx.reLaunch({
+      url: '/pages/index/home-index/home-index'
+    });
   }
   /**模拟跳转到素材 */
   // simulationToMatFun: function() {

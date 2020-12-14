@@ -1,26 +1,28 @@
 <view class="page">
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
-  <view>
+  <view class="doctorName">
     <!-- wxs引入 -->
     <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
     <!-- 导航栏 -->
     <navigation-bar navbarTitle="{{doctorInfo.doctorName}}的医生主页" navbarTextStyle="black" bgColor="rgba(255,255,255,1)" />
     <!-- 医生信息 -->
-    <view class="specialist-header-box" style="margin-top:20rpx">
-      <image src="{{ doctorInfo.faceImage }}" mode="aspectFill"></image>
-      <view class="specialist-header-middle-box">
-        <view class="docFlexRowBetween">
-          <text class="title-name" style="font-size: 32rpx">{{ doctorInfo.doctorName }}</text>
+    <view class="header">
+      <view class="top">
+        <view class="left">
+          <view class="name">{{doctorInfo.doctorName}}</view>
+          <view class="position">{{doctorInfo.titleName}} {{doctorInfo.sectionName}}</view>
+          <view class="hospital">{{doctorInfo.workPlace}}</view>
         </view>
-        <text class="title-other doctor-title">{{ doctorInfo.titleName }} {{ comTools.strReplce(doctorInfo.title) }}</text>
-        <text class="title-other doctor-title doctor-title-two">{{ doctorInfo.workPlace }} {{ doctorInfo.sectionName }}</text>
-        <service-tabs list="{{comTools.strSplit(disease,',')}}" pageStyle="color: rgba(46, 127, 241, 1); border: 0rpx" tabStyle="margin-top: 16rpx"></service-tabs>
+        <image src="{{doctorInfo.faceImage}}" class="right"></image>
       </view>
-
+      <view class="keshi">
+        <text>{{doctorInfo.sectionName}}</text>
+      </view>
+      <view class="home">DOCTOR HOME</view>
     </view>
   </view>
-  <view style="height: 20rpx;background: rgba(238, 238, 238, 1)"></view>
+  <!-- <view style="height: 20rpx;background: rgba(238, 238, 238, 1)"></view> -->
   <!-- 专业擅长 -->
   <view class="middle">
     <view class="middle-header">

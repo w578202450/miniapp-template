@@ -4,7 +4,7 @@
   <view class="padd {{isHaveBorderBottom ? 'border-botttom': ''}}">
     <view class="module-title-view" style="justify-content: space-between">
       <view class="module-title-view">
-        <view class="module-title-icon"></view>
+        <!-- <view class="module-title-icon"></view> -->
         <text class="module-title-txt" style="font-size:{{fontSize}};color:{{color}};font-weight:{{fontWeight}}">{{title}}</text>
         <text wx:if="{{isHaveRemark}}" class="module-title-num">{{remarkInfo}}</text>
       </view>

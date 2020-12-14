@@ -7,7 +7,7 @@
 }
 
 .levelBox {
-  padding: 20rpx 20rpx 10rpx 20rpx;
+  padding: 20rpx 32rpx 10rpx 32rpx;
 }
 
 .flexRowBetweenCenter {
@@ -75,7 +75,7 @@
 }
 
 .evaluateBox {
-  padding: 20rpx 20rpx;
+  padding: 20rpx 32rpx;
 }
 
 .diseaseTitle {
