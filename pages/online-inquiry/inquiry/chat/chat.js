@@ -574,6 +574,11 @@ sendCoupon: function(){
         getGroupListSum: 5, // 检验入群否的最大循环次数
         sendType: type
       });
+      if (type== "contentMSg") {
+        that.sendMessageFun(); // 发送文本消息
+      } else if (type == "imageFun") {
+        that.sendImageMsgFun(); // 发送图片消息
+      }
     }).catch(() => {
       that.setData({
         hidden: true,
