@@ -162,7 +162,7 @@
   padding-top: 40rpx;
   padding-bottom: 34rpx;
   background: #ffffff;
-  margin-top:32rpx;
+  margin-top: 32rpx;
   border-radius: 10rpx;
   box-shadow: 4rpx 4rpx 20rpx 4rpx rgba(2, 46, 106, 0.15);
   display: inline-flex;
@@ -240,7 +240,7 @@
 }
 
 .cutting-line2 {
-  margin-top:32rpx;
+  margin-top: 32rpx;
 }
 
 .cutting-line3 {
@@ -249,4 +249,14 @@
   margin-right: 20rpx;
   background: #f1f1f1;
   margin-top: 20rpx;
+}
+
+.doctor-container {}
+
+.doctor-face {
+  position: absolute;
+  width: 256rpx;
+  height: 256rpx;
+  right: 80rpx;
+  top: 275rpx;
 }
