@@ -1,4 +1,4 @@
-const version = 1; //0开发、1测试 2生产
+const version = 2; //0开发、1测试 2生产
 const md5 = require('/md5.js');
 
 let API_BASE_URL = (function() {
