@@ -22,11 +22,11 @@
     </view>
     <view class="personinfo-other-box" style="display: flex;justify-content: space-between;">
       <text class="personinfo-other" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;align-content: center;line-height:32rpx">过敏史：{{rpData.allergyDetail ? rpData.allergyDetail : rpData.historyOfAllergy}}</text>
-      <text class="personinfo-other" style="flex-shrink: 0;margin-left:32rpx">肝功能：{{rpData.liver}}</text>
+      <text class="personinfo-other" style="flex-shrink: 0;margin-left:32rpx">肝功能异常：{{rpData.liver}}</text>
     </view>
     <view class="personinfo-other-box" style="display: flex;justify-content: space-between;">
       <text class="personinfo-other" style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;align-content: center;line-height:32rpx">既往病史：{{rpData.sicknessDetail ? rpData.sicknessDetail : rpData.historyOfSickness}}</text>
-      <text class="personinfo-other" style="flex-shrink: 0;margin-left:32rpx">肾功能：{{rpData.renal}}</text>
+      <text class="personinfo-other" style="flex-shrink: 0;margin-left:32rpx">肾功能异常：{{rpData.renal}}</text>
     </view>
     <view hidden="{{isHiddenPregnancy}}" class="personinfo-other-box">
       <text class="personinfo-other">妊娠哺乳：{{rpData.pregnancy}}</text>

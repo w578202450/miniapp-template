@@ -26,20 +26,7 @@
   <!-- 顶部医生医助信息栏 -->
   <!-- <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;"> -->
   <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;">
-    <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap" data-index="0">
-      <view class="headDiv">
-        <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" mode="aspectFill" />
-        <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
-      </view>
-      <view class="info-box">
-        <view class="flexRowStartCenter">
-          <view class="info_one">{{talkInfo.doctorInfo.doctorName}}</view>
-          <!-- <text class="info_one_one">医生</text> -->
-        </view>
-        <text class="info_two">{{talkInfo.doctorTitleName}}</text>
-      </view>
-    </view>
-    <view class="middleOne-box" bindtap="doctorDetailTap" data-index="1">
+    <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap" data-index="1">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.assistantInfo.faceImage}}" mode="aspectFill" />
         <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
@@ -50,6 +37,19 @@
           <!-- <text class="info_one_one">医生</text> -->
         </view>
         <text class="info_two">{{talkInfo.assistTitleName}}</text>
+      </view>
+    </view>
+    <view class="middleOne-box" bindtap="doctorDetailTap" data-index="0">
+      <view class="headDiv">
+        <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" mode="aspectFill" />
+        <image class="headImgBac" src="../../../../images/chat/personBacImg.png" />
+      </view>
+      <view class="info-box">
+        <view class="flexRowStartCenter">
+          <view class="info_one">{{talkInfo.doctorInfo.doctorName}}</view>
+          <!-- <text class="info_one_one">医生</text> -->
+        </view>
+        <text class="info_two">{{talkInfo.doctorTitleName}}</text>
       </view>
     </view>
   </view>
