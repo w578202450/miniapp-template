@@ -256,19 +256,21 @@ Page({
         isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID)
       })
       that.initFunctionFun();
-    } else if (that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
-      // 判断是否是tmc内科
-      that.setData({
-        showOrgID: 7
-      })
-      that.initDefaultFun();
-    }  else if (that.data.xinnaoxueguanOrgID.indexOf(that.data.shareOrgID) > -1) {
+    }
+    // else if (that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
+    //   // 判断是否是tmc内科
+    //   that.setData({
+    //     showOrgID: 7
+    //   })
+    //   that.initDefaultFun();
+    // }
+    else if (that.data.xinnaoxueguanOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是tmc内科
       that.setData({
         showOrgID: 8
       })
       that.initDefaultFun();
-    }  else { // 默认显示成都华府中医远程诊疗中心
+    } else { // 默认显示成都华府中医远程诊疗中心
       that.setData({
         showOrgID: 0
       })
@@ -514,17 +516,17 @@ Page({
         showOrgID: 6,
         isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID)
       })
-    } else if (that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
-      that.setData({
-        showOrgID: 7
-      })
-      // 判断是否是桃子互联网医院减肥中心
+      // } else if (that.data.tmcneikeOrgID.indexOf(that.data.shareOrgID) > -1) {
+      //   that.setData({
+      //     showOrgID: 7
+      //   })
+      //   // 判断是否是桃子互联网医院减肥中心
     } else if (that.data.xinnaoxueguanOrgID.indexOf(that.data.shareOrgID) > -1) {
       // 判断是否是tmc内科
       that.setData({
         showOrgID: 8
       })
-    }  else {
+    } else {
       that.setData({
         showOrgID: 0
       })
