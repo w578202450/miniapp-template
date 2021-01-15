@@ -166,6 +166,7 @@ App({
     that.imSetting(); // IM功能配置
   },
 
+
   // onUnload: function() {
   //   tim.logout().then(function(imResponse) {}).catch(function(imError) {
   //     console.warn('logout error:', imError);
@@ -383,6 +384,7 @@ App({
   getPatientInfo: function () {
     let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     let orgID = wx.getStorageSync("shareOrgID");
+    let that = this
     let prams = {
       unionID: that.globalData.unionid,
       openID: that.globalData.openid,
@@ -427,6 +429,19 @@ App({
           key: 'shareAssistantStaffID',
           data: res.data.assistantStaffID
         });
+        HTTP.getAssistantIsShow({
+          doctorStaffID: res.data.doctorStaffID,
+          assistantStaffID: res.data.assistantStaffID
+        }).then((res) => {
+          if (res.code === 0) {
+            if (res.data.isShow === 0) {
+              console.log('123123')
+              console.log(that.globalData)
+              that.globalData.isDoctor = true
+            }
+          }
+        })
+
         that.getUserSig(res.data.keyID); // 获取userSig
       } else {
         that.globalData.isStartLogin = true; // 是否开始了自动登录
@@ -519,7 +534,7 @@ App({
   },
 
   globalData: {
-    isDoctor: true,
+    isDoctor: false,
     tim: null,
     TIM: null,
     p: "",

@@ -24,8 +24,7 @@
     </view>
   </view>
   <!-- 顶部医生医助信息栏 -->
-  <!-- <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;"> -->
-  <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;" wx:if="{{isDoctor}}">
+    <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;" wx:if="{{isDoctor}}">
     <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap" data-index="0">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" mode="aspectFill" />

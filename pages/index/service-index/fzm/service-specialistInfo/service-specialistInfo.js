@@ -60,7 +60,14 @@ Component({
     //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home-header.png
     //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home_doctor-bg.png
   },
-
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  ready: function() {
+      this.setData({
+        isDoctor:app.globalData.isDoctor
+      })
+  },
   /**
    * 组件的方法列表
    */

@@ -1,7 +1,7 @@
-const version = 1; //0开发、1测试 2生产
+const version = 0; //0开发、1测试 2生产
 const md5 = require('/md5.js');
 
-let API_BASE_URL = (function() {
+let API_BASE_URL = (function () {
   if (version == 0) {
     return 'http://10.0.0.210:6112/'
     // return "http://10.0.0.34:6112/"
@@ -21,7 +21,7 @@ var request = function request(url, needDomain, method, data) {
   // console.log("请求方式:" + method);
   // console.log("------------------------");
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     let date = Date.parse(new Date());
     let clientType = "wxpro";
 
@@ -29,7 +29,7 @@ var request = function request(url, needDomain, method, data) {
     let encodeURI = encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH");
     // 替换encodeURIComponent方法不处理的特殊字符
     let encodeURIReplace = encodeURI.replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').
-      replace(/\)/g, '%29').replace(/\~/g, '%7E');
+    replace(/\)/g, '%29').replace(/\~/g, '%7E');
     let signed = md5.md5(encodeURIReplace);
 
     wx.request({
@@ -65,14 +65,14 @@ var request = function request(url, needDomain, method, data) {
 /**
  * 小程序的promise没有finally方法，自己扩展下
  */
-Promise.prototype.finally = function(callback) {
+Promise.prototype.finally = function (callback) {
   var Promise = this.constructor;
-  return this.then(function(value) {
-    Promise.resolve(callback()).then(function() {
+  return this.then(function (value) {
+    Promise.resolve(callback()).then(function () {
       return value;
     });
-  }, function(reason) {
-    Promise.resolve(callback()).then(function() {
+  }, function (reason) {
+    Promise.resolve(callback()).then(function () {
       throw reason;
     });
   });
@@ -93,7 +93,7 @@ module.exports = {
   },
 
   /**侯氏医院ID */
-  houShiOrgIDFun: function() {
+  houShiOrgIDFun: function () {
     if (version == 0) {
       return ['19101017081245518100511003']
     } else if (version == 1) {
@@ -104,7 +104,7 @@ module.exports = {
   },
 
   /**哈尔滨友好医院ID */
-  harbinyouhaoOrgIDFun: function() {
+  harbinyouhaoOrgIDFun: function () {
     if (version == 0) {
       return ['20050916495074555320511240']
     } else if (version == 1) {
@@ -115,7 +115,7 @@ module.exports = {
   },
 
   /**tmc 内科 */
-  tmcneikeFun: function() {
+  tmcneikeFun: function () {
     if (version == 0) {
       return ['20052710323479595590511233']
     } else if (version == 1) {
@@ -126,7 +126,7 @@ module.exports = {
   },
 
   /**大冢医药机构ID */
-  dazhongOrgIDFun: function() {
+  dazhongOrgIDFun: function () {
     if (version == 0) {
       return ['20040910375869839140511253']
     } else if (version == 1) {
@@ -135,8 +135,8 @@ module.exports = {
       return ['20040909515893667880511240']
     }
   },
-   /**心脑血管机构ID */
-   xinnaoxueguanOrgIDFun: function() {
+  /**心脑血管机构ID */
+  xinnaoxueguanOrgIDFun: function () {
     if (version == 0) {
       return ['20101310392724025690511233']
     } else if (version == 1) {
@@ -146,7 +146,7 @@ module.exports = {
     }
   },
   /**桃子互联网医院减肥中心机构ID */
-  loseweightOrgIDFun: function() {
+  loseweightOrgIDFun: function () {
     if (version == 0) {
       return ['20041517422841582280511240']
     } else if (version == 1) {
@@ -157,7 +157,7 @@ module.exports = {
   },
 
   /**桃子互联网医院妇科诊疗中心机构ID */
-  gynecologyOrgIDFun: function() {
+  gynecologyOrgIDFun: function () {
     if (version == 0) {
       return ['20040111371269634190511240']
     } else if (version == 1) {
@@ -168,7 +168,7 @@ module.exports = {
   },
 
   /**桃子互联网医院男科诊疗中心机构ID */
-  andrologyOrgIDFun: function() {
+  andrologyOrgIDFun: function () {
     if (version == 0) {
       return ['20040212494191470440511240']
     } else if (version == 1) {
@@ -444,7 +444,7 @@ module.exports = {
   doctorShowList: function doctorShowList(params) {
     return request('api/tmc/doctorShow/list', true, 'get', params);
   },
-    /*
+  /*
    *手机号
    */
   decryptionPhone: function heart(params) {
@@ -676,23 +676,27 @@ module.exports = {
     return request('api/peachUser/hospitalStaff/getDoctorInfoByStaffIDs', true, 'post', parmas);
   },
   /** 查询我的优惠券列表 */
-  queryPatientCouponList: function queryPatientCouponList(params){
-    return request('api/tmc/coupon/queryPatientCouponList',true,'get',params)
+  queryPatientCouponList: function queryPatientCouponList(params) {
+    return request('api/tmc/coupon/queryPatientCouponList', true, 'get', params)
   },
   /** 发放优惠券 */
-  sendCoupon: function sendCoupon(params){
-    return request('api/tmc/coupon/sendCoupon',true,'get',params)
+  sendCoupon: function sendCoupon(params) {
+    return request('api/tmc/coupon/sendCoupon', true, 'get', params)
   },
   /** 同步地址 */
-  asyncPatientAddress:function asyncPatientAddress(params){
-    return request("api/tmc/patient/addPatientAddress",true,'post',params)
+  asyncPatientAddress: function asyncPatientAddress(params) {
+    return request("api/tmc/patient/addPatientAddress", true, 'post', params)
   },
   /** 更新收货地址 */
-  updateOrderDelivery: function updateOrderDelivery(params){
-    return request("api/tmc/goodsOrder/updateOrderDelivery",true,'post',params)
+  updateOrderDelivery: function updateOrderDelivery(params) {
+    return request("api/tmc/goodsOrder/updateOrderDelivery", true, 'post', params)
   },
   /** 地址能否再次修改 */
-  getOrderDeliveryByInquiryID: function getOrderDeliveryByInquiryID(params){
-  return request("api/tmc/goodsOrder/getOrderDeliveryByInquiryID",true,'get',params)
-    } 
+  getOrderDeliveryByInquiryID: function getOrderDeliveryByInquiryID(params) {
+    return request("api/tmc/goodsOrder/getOrderDeliveryByInquiryID", true, 'get', params)
+  },
+  // 是否显示医助
+  getAssistantIsShow: function getAssistantIsShow(params) {
+    return request("api/peachUser/assistantGroup/getAssistantIsShow", true, 'get', params)
+  }
 }

@@ -12,6 +12,8 @@ import {
 var tim = app.globalData.tim;
 var TIM = app.globalData.TIM;
 
+
+
 Page({
 
   /**
@@ -107,6 +109,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      isDoctor:app.globalData.isDoctor
+    })
     setTimeout(()=>{
       if(options.orgin){
         this.setData({
