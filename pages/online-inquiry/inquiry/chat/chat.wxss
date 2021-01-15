@@ -17,9 +17,9 @@
   left: 0;
   right: 0;
   z-index: 3;
-  background:url('https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/inquiry_bg.png');
+  background: url('https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/inquiry_bg.png');
   background-size: 100% 100%;
-  background-color: rgb(162,170,187);
+  background-color: rgb(162, 170, 187);
 }
 
 .middleOne-box {
@@ -111,10 +111,18 @@
 /*空置盒子1*/
 
 .marginBoxOne {
-  height:260rpx;
+  height: 260rpx;
 }
+
 .marginBoxOne1 {
-  height:310rpx;
+  height: 310rpx;
+}
+
+.marginBoxOne2 {
+  height: 250rpx;
+}
+.marginBoxOne3{
+height:150rpx;
 }
 
 /*空置盒子2*/
@@ -174,8 +182,7 @@
 
 /*头像容器*/
 
-.body.avatar-container {
-}
+.body.avatar-container {}
 
 .body .personHeadImgDiv {
   position: relative;
@@ -497,7 +504,8 @@
 
 .reply .opration-area .msgInput {
   margin: 20rpx 20rpx;
-  /* width: 445rpx; *//* width: 400rpx; */
+  /* width: 445rpx; */
+  /* width: 400rpx; */
   padding: 0rpx 25rpx 0 15rpx !important;
   border: none;
   border-radius: 6px;
@@ -664,33 +672,37 @@
   border-radius: 5px 5px;
   background-color: #fff;
 }
-.addressMsg .itemBox{
+
+.addressMsg .itemBox {
   padding: 0 32rpx;
   box-sizing: border-box;
 }
-.addressMsg .itemBox .cell{
+
+.addressMsg .itemBox .cell {
   min-height: 64rpx;
   border-bottom: 2rpx solid #e8e8e8;
   display: flex;
   align-items: center;
-  color: rgba(0,0,0,0.65);
+  color: rgba(0, 0, 0, 0.65);
   font-size: 24rpx;
   line-height: 40rpx;
 }
-.addressMsg .editBtn{
+
+.addressMsg .editBtn {
   width: 176rpx;
   height: 60rpx;
   background: #ffffff;
-  color: rgba(67,139,239,1);
+  color: rgba(67, 139, 239, 1);
   font-size: 28rpx;
   border: 2rpx solid #438bef;
-  border-radius:40rpx;
+  border-radius: 40rpx;
   text-align: center;
   line-height: 60rpx;
   margin: 0 auto;
   margin-top: 16rpx;
 }
-.addressMsg .title{
+
+.addressMsg .title {
   width: 512rpx;
   height: 88rpx;
   background: #438bef;
@@ -705,11 +717,12 @@
   padding: 0 24rpx;
 }
 
-.addressMsg .title image{
+.addressMsg .title image {
   height: 48rpx;
   width: 48rpx;
   margin-right: 10rpx;
 }
+
 .title-box {
   background: rgba(255, 255, 255, 1);
   position: fixed;
@@ -721,9 +734,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background:url('https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/inquiry_header.png');
+  background: url('https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/inquiry_header.png');
   background-size: 100% 100%;
-  background-color: rgb(162,170,187);
+  background-color: rgb(162, 170, 187);
   position: relative;
 }
 
@@ -778,6 +791,7 @@
   text-overflow: ellipsis;
   margin-left: 16rpx;
 }
+
 .navbarBox {
   position: fixed;
   left: 0;
@@ -812,7 +826,7 @@
 }
 
 .navbarBtnBorder {
-  border:1rpx solid #D6D6D6;
+  border: 1rpx solid #D6D6D6;
 }
 
 .navBackIcon {

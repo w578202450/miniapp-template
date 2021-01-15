@@ -2,7 +2,9 @@
 import TIM from './miniprogram_npm/tim-wx-sdk/index.js';
 import COS from './miniprogram_npm/cos-wx-sdk-v5/index.js';
 
-const {Event} = require('utils/event')
+const {
+  Event
+} = require('utils/event')
 const AUTH = require('utils/auth');
 let msgStorage = require("utils/msgstorage");
 import {
@@ -14,7 +16,7 @@ let HTTP = require('utils/http-util');
 let rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null;
 //胶囊按钮位置信息
 let systemInfo = wx.getSystemInfoSync();
-let navBarHeight = (function() { //导航栏高度
+let navBarHeight = (function () { //导航栏高度
   let gap = rect.top - systemInfo.statusBarHeight; //动态计算每台手机状态栏到胶囊按钮间距
   return 2 * gap + rect.height;
 })();
@@ -30,7 +32,7 @@ let that = null;
 console.log(Event)
 App({
   event: new Event(),
-  onLaunch: function(option) {
+  onLaunch: function (option) {
     that = this;
     that.globalData.systemInfo = systemInfo;
     that.globalData.navBarHeight = navBarHeight;
@@ -38,7 +40,7 @@ App({
     that.globalData.isShowCoupon = false
     this.globalData.currentPage = '首页'
     that.globalData.phoneDialogNextPage = ''
-    that.globalData.isClickChat=false
+    that.globalData.isClickChat = false
     that.globalData.menuButtonBoundingClientRect = rect;
     // AUTH.getSetting()
     AUTH.upDataApp();
@@ -170,7 +172,7 @@ App({
   //   });
   // },
 
-  onShow: function(option) {
+  onShow: function (option) {
     if (that.globalData.isStartLogin && that.globalData.loginNum > 0) {
       // 处理来源的参数
       // wx.showModal({
@@ -225,17 +227,17 @@ App({
     }
   },
 
-  watch: function(method, globalDataName) {
+  watch: function (method, globalDataName) {
     var obj = that.globalData;
     Object.defineProperty(obj, globalDataName, {
       configurable: true,
       enumerable: true,
-      set: function(value) {
+      set: function (value) {
         that._name = value;
         method(value); // 传递值，执行传入的方法
         // console.log("set:" + that._name);
       },
-      get: function() {
+      get: function () {
         // 可以在这里打印一些东西，然后在其他界面调用getApp().globalData.globalDataName的时候，这里就会执行。
         // console.log("get:" + that._name);
         return that._name
@@ -244,7 +246,7 @@ App({
   },
 
   //右上角分享功能
-  onShareAppMessage: function(res) {},
+  onShareAppMessage: function (res) {},
 
   /**
    * IM配置
@@ -263,13 +265,13 @@ App({
       'cos-wx-sdk': COS
     });
     // 监听事件
-    tim.on(TIM.EVENT.SDK_READY, function(event) {
+    tim.on(TIM.EVENT.SDK_READY, function (event) {
       // 收到离线消息和会话列表同步完毕通知，接入侧可以调用 sendMessage 等需要鉴权的接口
       that.globalData.isInitInfo = true;
       console.log("============TIM SDK已处于READY状态==================");
     });
 
-    tim.on(TIM.EVENT.MESSAGE_RECEIVED, function(event) {
+    tim.on(TIM.EVENT.MESSAGE_RECEIVED, function (event) {
       // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
       // event.data - 存储 Message 对象的数组 - [Message]
       // console.log("===全局收消息===" + JSON.stringify(event));
@@ -277,48 +279,48 @@ App({
       msgStorage.saveReceiveMsg(event.data);
     });
 
-    tim.on(TIM.EVENT.MESSAGE_REVOKED, function(event) {
+    tim.on(TIM.EVENT.MESSAGE_REVOKED, function (event) {
       // 收到消息被撤回的通知
       // console.log("===收到消息被撤回===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.CONVERSATION_LIST_UPDATED, function(event) {
+    tim.on(TIM.EVENT.CONVERSATION_LIST_UPDATED, function (event) {
       // 收到会话列表更新通知，可通过遍历 event.data 获取会话列表数据并渲染到页面
       // console.log("===会话列表===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.GROUP_LIST_UPDATED, function(event) {
+    tim.on(TIM.EVENT.GROUP_LIST_UPDATED, function (event) {
       // 收到群组列表更新通知，可通过遍历 event.data 获取群组列表数据并渲染到页面
       // console.log("===群组列表===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.GROUP_SYSTEM_NOTICE_RECEIVED, function(event) {
+    tim.on(TIM.EVENT.GROUP_SYSTEM_NOTICE_RECEIVED, function (event) {
       // 收到新的群系统通知
       // console.log("===收到群系统通知===" + JSON.stringify("群系统通知的类型:" + event.data.type
       //   + ",Message对象:" + event.data.message));
     });
 
-    tim.on(TIM.EVENT.PROFILE_UPDATED, function(event) {
+    tim.on(TIM.EVENT.PROFILE_UPDATED, function (event) {
       // 收到自己或好友的资料变更通知
       // console.log("===存储 Profile 对象的数组===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.BLACKLIST_UPDATED, function(event) {
+    tim.on(TIM.EVENT.BLACKLIST_UPDATED, function (event) {
       // 收到黑名单列表更新通知
       // console.log("===存储 userID 的数组===" + JSON.stringify(event.data));
     });
 
-    tim.on(TIM.EVENT.ERROR, function(event) {
+    tim.on(TIM.EVENT.ERROR, function (event) {
       // 收到 SDK 发生错误通知，可以获取错误码和错误信息
       // console.log("===错误码===" + "错误码:" + event.data.code + ",错误信息:" + event.data.message);
     });
 
-    tim.on(TIM.EVENT.SDK_NOT_READY, function(event) {
+    tim.on(TIM.EVENT.SDK_NOT_READY, function (event) {
       // 收到 SDK 进入 not ready 状态通知，此时 SDK 无法正常工作
       // console.log("===SDK 进入 not ready 状态通知===");
     });
 
-    tim.on(TIM.EVENT.KICKED_OUT, function(event) {
+    tim.on(TIM.EVENT.KICKED_OUT, function (event) {
       // 收到被踢下线通知
       // event.data.type - 被踢下线的原因，例如:
       //    - TIM.TYPES.KICKED_OUT_MULT_ACCOUNT 多实例登录被踢
@@ -334,10 +336,10 @@ App({
     that.startLoginFun();
   },
 
-  hideTabBarFun: function() {
+  hideTabBarFun: function () {
     wx.hideTabBar({
-      fail: function() {
-        setTimeout(function() { // 做了个延时重试一次，作为保底。
+      fail: function () {
+        setTimeout(function () { // 做了个延时重试一次，作为保底。
           wx.hideTabBar();
         }, 500)
       }
@@ -345,7 +347,7 @@ App({
   },
 
   /**转换传递的url参数 q */
-  initOptionsFun: function(scan_url, name) {
+  initOptionsFun: function (scan_url, name) {
     var reg = new RegExp("[^\?&]?" + encodeURI(name) + "=[^&]+");
     var arr = scan_url.match(reg);
     if (arr != null) {
@@ -356,7 +358,7 @@ App({
   },
 
   /**开始登录 */
-  startLoginFun: function() {
+  startLoginFun: function () {
     tim.logout(); // 登录前先清除（可能在线）登录的账号
     userSig = "";
     logined = false;
@@ -446,7 +448,7 @@ App({
   /**
    * 获取userSig
    */
-  getUserSig: function(userId) {
+  getUserSig: function (userId) {
     wx.showLoading({
       title: '登录中...',
     });
@@ -480,17 +482,17 @@ App({
   },
 
   /** IM登录 */
-  loginIM: function(userId) {
+  loginIM: function (userId) {
     tim.login({
       userID: userId,
       userSig: genTestUserSig(userId).userSig
-    }).then(function(imResponse) {
+    }).then(function (imResponse) {
       console.log("===IM登录成功==="); // 登录成功
       wx.setStorageSync('myUsername', userId);
       wx.hideLoading();
       that.globalData.isInitInfo = true; // 是否登录成功
       that.globalData.isStartLogin = true; // 是否开始了自动登录
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       that.globalData.isInitInfo = false
       console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
       wx.hideLoading();
@@ -503,12 +505,12 @@ App({
    * 微信登录
    * 1.登录成功缓存当前临时code 判断登录态用
    */
-  fetchTempCode: function() {
+  fetchTempCode: function () {
     wx.removeStorageSync("sessionKey");
     wx.removeStorageSync("code");
     wx.removeStorageSync('openID');
     wx.removeStorageSync('unionid')
-    AUTH.fetchTempCode().then(function(res) {
+    AUTH.fetchTempCode().then(function (res) {
       wx.hideLoading();
       if (res.code) {
         wx.setStorageSync('code', res.code);
@@ -517,6 +519,7 @@ App({
   },
 
   globalData: {
+    isDoctor: true,
     tim: null,
     TIM: null,
     p: "",
@@ -571,4 +574,3 @@ App({
   },
 
 })
-

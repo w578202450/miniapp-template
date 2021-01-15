@@ -17,7 +17,8 @@
   <view class="specialist-box" hidden="{{ !doctorInfo.doctorName }}"></view>
   <view class="doctor-container">
     <view class="doctor-bg">
-      <text class="physicianAssistant-name">{{ assistantDoctorInfo.doctorName }}医生团队</text>
+      <text
+        class="physicianAssistant-name">{{isDoctor? assistantDoctorInfo.doctorName:doctorInfo.doctorName }}医生团队</text>
       <view class="specialist-bottom-box">
         <view class="specialist-bottom-left">
           <image src="{{ comment_icon }}"></image>
@@ -31,19 +32,22 @@
         </view>
       </view>
     </view>
-    <image src="{{assistantDoctorInfo.faceImage}}" class="doctor-face" mode="aspectFit"></image>
+    <image src="{{isDoctor?assistantDoctorInfo.faceImage:doctorInfo.faceImage}}" class="doctor-face" mode="aspectFit">
+    </image>
   </view>
 
-  <view class="doctor-team" hidden="{{ !doctorInfo.doctorName }}">
+  <view class="doctor-team" hidden="{{ !doctorInfo.doctorName || !isDoctor }}">
     <text class="team-title">医师团队</text>
     <view>
       <scroll-view scroll-x="true" style=" white-space: nowrap;">
         <view style="padding-left:6rpx;padding-top:32rpx;padding-bottom:10rpx;">
           <view class="doctor-1" style="margin-left:0;">
-            <image src="{{ assistantDoctorInfo.faceImage }}" mode="aspectFill" style="width:86rpx;height:86rpx;"></image>
+            <image src="{{ assistantDoctorInfo.faceImage }}" mode="aspectFill" style="width:86rpx;height:86rpx;">
+            </image>
             <view class="doctor-name">
               <text class="doctor-name__text">{{ assistantDoctorInfo.doctorName }}</text>
-              <text class="doctor-section__text"> {{ assistantDoctorInfo.sectionName }} {{ assistantDoctorInfo.titleName }}
+              <text class="doctor-section__text"> {{ assistantDoctorInfo.sectionName }}
+                {{ assistantDoctorInfo.titleName }}
                 {{ comTools.strReplce(assistantDoctorInfo.title) }}
               </text>
             </view>

@@ -1,5 +1,5 @@
 var appBehavior = require('../behaviors/fzm-behaviors')
-
+const app = getApp();
 
 Component({
   behaviors: [appBehavior],
@@ -47,6 +47,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    isDoctor:app.globalData.isDoctor,
     inquiryBoxHeight: 34,
     // 好评率图标
     // comment_icon: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_commentNums.png",
@@ -58,8 +59,6 @@ Component({
     //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/doctor-bg.png
     //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home-header.png
     //https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home_doctor-bg.png
-
-
   },
 
   /**

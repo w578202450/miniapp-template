@@ -25,7 +25,7 @@
   </view>
   <!-- 顶部医生医助信息栏 -->
   <!-- <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;"> -->
-  <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;">
+  <view class="middle-one" style="top: {{statusBarHeight + navBarHeight}}px;" wx:if="{{isDoctor}}">
     <view class="middleOne-box middleOne-box-one" bindtap="doctorDetailTap" data-index="0">
       <view class="headDiv">
         <image class="headImg" src="{{talkInfo.doctorInfo.faceImage}}" mode="aspectFill" />
@@ -55,7 +55,7 @@
   </view>
   <!-- 消息列表 -->
   <!-- 空置盒子1 -->
-  <view class="{{statusBarHeight > 20 ? 'marginBoxOne1': 'marginBoxOne'}}"></view>
+  <view class="{{statusBarHeight > 20 ? isDoctor?'marginBoxOne1':'marginBoxOne2': isDoctor?'marginBoxOne':'marginBoxOne3'}}" ></view>
   <view id="viewCommunicationBody" bindtap="clickViewCommunicationFun">
     <view wx:if="{{filter.formatJSON(item.payload.data).customType!=='sys'&&filter.formatJSON(item.payload.data).childType != 'video' && filter.formatJSON(item.payload.data).childType != 'tmcChangeDoctor'  && filter.formatJSON(item.payload.data).childType != 'firstCreateTMCInquiry'}}" class="row" wx:for="{{currentMessageList}}" wx:key="index" id="item{{index}}">
       <!-- 日期 -->
