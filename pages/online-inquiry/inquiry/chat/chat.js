@@ -20,10 +20,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isDoctor:app.globalData.isDoctor,
-    isAddAddress:false,
-    isEditAddress:false,
-    couponData:{},
+    isDoctor: app.globalData.isDoctor,
+    isAddAddress: false,
+    isEditAddress: false,
+    couponData: {},
     timer: null,
     pageName: '问诊页',
     toView: "", // 手机屏幕自动滚动到达的位置
@@ -59,22 +59,22 @@ Page({
     isOpenBottomBoolbar: false, // 是否打开工具栏
     // 底部菜单栏 
     toolbarMenus: [{
-      title: "图片",
-      iconUrl: "/images/chat/m-image.png",
-      clickFun: "chooseWxImage",
-      isFifth: false
-    },
-    {
-      title: "拍照",
-      iconUrl: "/images/chat/m-camera.png",
-      clickFun: "cameraWxFun",
-      isFifth: false
-    }, {
-      title: "视频问诊",
-      iconUrl: "/images/chat/m-video.png",
-      clickFun: "videoWxFun",
-      isFifth: false
-    }
+        title: "图片",
+        iconUrl: "/images/chat/m-image.png",
+        clickFun: "chooseWxImage",
+        isFifth: false
+      },
+      {
+        title: "拍照",
+        iconUrl: "/images/chat/m-camera.png",
+        clickFun: "cameraWxFun",
+        isFifth: false
+      }, {
+        title: "视频问诊",
+        iconUrl: "/images/chat/m-video.png",
+        clickFun: "videoWxFun",
+        isFifth: false
+      }
     ],
     aimgurl: {}, //临时图片的信息
     countIndex: 1, // 可选图片剩余的数量
@@ -108,27 +108,27 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
-      isDoctor:app.globalData.isDoctor
+      isDoctor: app.globalData.isDoctor
     })
-    setTimeout(()=>{
-      if(options.orgin){
+    setTimeout(() => {
+      if (options.orgin) {
         this.setData({
-          isEditAddress:true,
-          orderInfo:{
-           orderID:options.orderID,
-           orgID:options.orgID
+          isEditAddress: true,
+          orderInfo: {
+            orderID: options.orderID,
+            orgID: options.orgID
           }
         })
       }
-    },500)
-   if(!app.globalData.isInitInfo || !app.globalData.orgID){
-     wx.reLaunch({
-       url: '/pages/index/home-index/home-index',
-     })
-     return
-   }
+    }, 500)
+    if (!app.globalData.isInitInfo || !app.globalData.orgID) {
+      wx.reLaunch({
+        url: '/pages/index/home-index/home-index',
+      })
+      return
+    }
 
     let that = this;
     that.getPersonInfo(); // 从storage中获取患者信息
@@ -156,7 +156,7 @@ Page({
     });
 
     let myUsername = wx.getStorageSync("myUsername");
-    msgStorage.on("newChatMsg", function(renderableMsg, type, curChatMsg, sesskey) {
+    msgStorage.on("newChatMsg", function (renderableMsg, type, curChatMsg, sesskey) {
       console.log("收到新消息：" + JSON.stringify(renderableMsg));
       if (renderableMsg && renderableMsg.type) {
         let msgType = renderableMsg.type;
@@ -249,14 +249,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.timer = setInterval(() => {
       heartFun(this.data.pageName, this.__route__)
     }, intervalTime);
@@ -265,24 +265,24 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
     clearInterval(this.timer)
   },
-  editAddress(e){
+  editAddress(e) {
     let params = {
       orgID: app.globalData.orgID,
-      inquiryID : this.data.inquiryInfo.keyID
+      inquiryID: this.data.inquiryInfo.keyID
     }
-    if(e.currentTarget.dataset.order.inquiryID){
+    if (e.currentTarget.dataset.order.inquiryID) {
       params.inquiryID = e.currentTarget.dataset.order.inquiryID
     }
-    HTTP.getOrderDeliveryByInquiryID(params).then(res=>{
-      if(res.code==0){
+    HTTP.getOrderDeliveryByInquiryID(params).then(res => {
+      if (res.code == 0) {
         this.setData({
           isEditAddress: true,
           orderInfo: e.currentTarget.dataset.order
         })
-      }else{
+      } else {
         wx.showToast({
           title: res.message,
           icon: 'none'
@@ -290,43 +290,43 @@ Page({
       }
     })
   },
-  closeEditAddress(){
+  closeEditAddress() {
     this.setData({
       isEditAddress: false,
-      orderInfo:null
+      orderInfo: null
     })
   },
-  addAddress(){
+  addAddress() {
     this.setData({
       isEditAddress: false,
       isAddAddress: true
     })
   },
-  closeAddAddress(){
+  closeAddAddress() {
     this.setData({
       isEditAddress: true,
       isAddAddress: false
     })
   },
-/** 发放优惠券 */
-sendCoupon: function(){
-  let params = {
-    orgID: app.globalData.orgID,
-    patientID: app.globalData.patientID
-  }
-  HTTP.sendCoupon(params).then(res=>{
-    if(res.data&&res.data.length){
-      this.setData({
-        couponData:res.data[0]
-      })
-      this.couponRefs.showCouponDialog()
+  /** 发放优惠券 */
+  sendCoupon: function () {
+    let params = {
+      orgID: app.globalData.orgID,
+      patientID: app.globalData.patientID
     }
-  })
-},
+    HTTP.sendCoupon(params).then(res => {
+      if (res.data && res.data.length) {
+        this.setData({
+          couponData: res.data[0]
+        })
+        this.couponRefs.showCouponDialog()
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
     this.data.innerAudioContext.stop();
     clearInterval(this.timer)
     msgStorage.off('newChatMsg')
@@ -335,7 +335,7 @@ sendCoupon: function(){
   /**
    * 处理系统消息
    */
-  dealSysMessage: function(data) {
+  dealSysMessage: function (data) {
     let that = this;
     let childType = data.childType;
     switch (childType) {
@@ -348,14 +348,14 @@ sendCoupon: function(){
   /**
    * 处理hint消息
    */
-  dealHintMessage: function(data) {
+  dealHintMessage: function (data) {
 
   },
 
   /**
    * 处理视频问诊消息
    */
-  dealSysVideoMessage: function(data) {
+  dealSysVideoMessage: function (data) {
     let that = this;
     let requestRole = data.requestRole;
   },
@@ -364,7 +364,7 @@ sendCoupon: function(){
    * 页面相关事件处理函数--监听用户下拉动作
    */
   // 操作：下拉加载数据
-  onPullDownRefresh: function(countNum) {
+  onPullDownRefresh: function (countNum) {
     let that = this;
     // countNum 数字存在时，是初始查询历史消息； 不存在时，是下拉加载历史消息 
     if (countNum) {
@@ -377,7 +377,7 @@ sendCoupon: function(){
         conversationID: "GROUP" + that.data.inquiryInfo.keyID,
         nextReqMessageID: that.data.nextReqMessageID,
         count: count
-      }).then(function(imResponse) {
+      }).then(function (imResponse) {
         let spliceNum = 0;
         let imResponseArr = [];
         imResponse.data.messageList.forEach(item => {
@@ -423,7 +423,7 @@ sendCoupon: function(){
           conversationID: "GROUP" + that.data.inquiryInfo.keyID,
           nextReqMessageID: that.data.nextReqMessageID,
           count: 15
-        }).then(function(imResponse) {
+        }).then(function (imResponse) {
           imResponse.data.messageList.forEach(item => {
             if (item.type == "TIMSoundElem") {
               item.recordStatus = false; // 播放状态
@@ -434,7 +434,7 @@ sendCoupon: function(){
               }
             }
           })
-          setTimeout(function() {
+          setTimeout(function () {
             that.setData({
               currentMessageList: [...imResponse.data.messageList, ...that.data.currentMessageList],
               nextReqMessageID: imResponse.data.nextReqMessageID,
@@ -452,23 +452,23 @@ sendCoupon: function(){
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return onShareAppMessageFun();
   },
 
   /*从storage中获取患者信息 */
-  getPersonInfo: function() {
+  getPersonInfo: function () {
     let that = this;
     wx.getStorage({
       key: "personInfo",
-      success: function(res) {
+      success: function (res) {
         that.setData({
           userInfo: res.data
         });
@@ -479,7 +479,7 @@ sendCoupon: function(){
     });
     wx.getStorage({
       key: "userInfo",
-      success: function(res) {
+      success: function (res) {
         that.setData({
           wexinInfo: res.data
         });
@@ -488,7 +488,7 @@ sendCoupon: function(){
   },
 
   /*查询患者的多方对话 */
-  getPatientMultiTalk: function() {
+  getPatientMultiTalk: function () {
     let that = this;
     let params = {
       orgID: that.data.userInfo.orgID,
@@ -525,7 +525,7 @@ sendCoupon: function(){
   },
 
   /*创建问诊 */
-  createInquiry: function() {
+  createInquiry: function () {
     let that = this;
     let params = {
       orgID: that.data.userInfo.orgID,
@@ -563,7 +563,7 @@ sendCoupon: function(){
   },
 
   // 操作：结束问诊后，患者主动发消息时，创建问诊
-  createInquirySelf: function(type) {
+  createInquirySelf: function (type) {
     let that = this;
     let params = {
       orgID: that.data.userInfo.orgID,
@@ -580,7 +580,7 @@ sendCoupon: function(){
         getGroupListSum: 5, // 检验入群否的最大循环次数
         sendType: type
       });
-      if (type== "contentMSg") {
+      if (type == "contentMSg") {
         that.sendMessageFun(); // 发送文本消息
       } else if (type == "imageFun") {
         that.sendImageMsgFun(); // 发送图片消息
@@ -601,7 +601,7 @@ sendCoupon: function(){
   },
 
   /**检查是否已入群 */
-  isInGroupFun: function(type) {
+  isInGroupFun: function (type) {
     let that = this;
     if (that.data.getGroupListSum < 1) {
       // 校验入群次数使用完，默认入群成功
@@ -682,12 +682,12 @@ sendCoupon: function(){
   },
 
   /*打开会话时,获取最近消息列表 */
-  getHistoryMessage: function() {
+  getHistoryMessage: function () {
     let that = this;
     tim.getMessageList({
       conversationID: "GROUP" + that.data.inquiryInfo.keyID,
       count: 15
-    }).then(function(imResponse) {
+    }).then(function (imResponse) {
       let spliceNum = 0;
       let imResponseArr = [];
       imResponse.data.messageList.forEach(item => {
@@ -725,7 +725,7 @@ sendCoupon: function(){
       } else {
         that.toViewBottomFun();
       }
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       that.setData({
         hidden: true
       });
@@ -734,7 +734,7 @@ sendCoupon: function(){
   },
 
   /*打开会话时,消息设置成已读 */
-  setMessageRead: function() {
+  setMessageRead: function () {
     let that = this;
     // 将某会话下所有未读消息已读上报
     tim.setMessageRead({
@@ -743,24 +743,24 @@ sendCoupon: function(){
   },
 
   /*获取群未读消息数 */
-  getUnreadMessageCount: function() {
+  getUnreadMessageCount: function () {
     let that = this;
     // 拉取会话列表
     let promise = tim.getConversationList();
-    promise.then(function(imResponse) {
+    promise.then(function (imResponse) {
       let conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
       let unreadCount = conversationList[0].unreadCount;
       console.log("获取群未读消息数:" + unreadCount);
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       console.warn('getConversationList error:', imError); // 获取会话列表失败的相关信息
     });
   },
 
   /*自动：滚动到消息底部 */
-  toViewBottomFun: function() {
+  toViewBottomFun: function () {
     // 设置屏幕自动滚动到最后一条消息处
     let that = this;
-    wx.createSelectorQuery().select('#viewCommunicationBody').boundingClientRect(function(rect) {
+    wx.createSelectorQuery().select('#viewCommunicationBody').boundingClientRect(function (rect) {
       wx.pageScrollTo({
         scrollTop: rect.height,
         duration: 100
@@ -776,8 +776,8 @@ sendCoupon: function(){
   getFetchDoctorInfo(staffID) {
     let that = this;
     HTTP.getDoctorInfo({
-      staffID: staffID
-    })
+        staffID: staffID
+      })
       .then(res => {
         if (res.code == 0 && res.data) {
           that.setData({
@@ -803,19 +803,19 @@ sendCoupon: function(){
   },
 
   /*操作： 点击医生查看详情 */
-  doctorDetailTap: function(e) {
+  doctorDetailTap: function (e) {
     var index = e.currentTarget.dataset.index
     var doctorStaffID = index == '0' ? wx.getStorageSync('personInfo').doctorStaffID : wx.getStorageSync('personInfo').assistantStaffID
     wx.navigateTo({
       url: '/pages/online-inquiry/doctor-details/doctor-details?staffID=' + doctorStaffID,
-      success: function(res) { },
-      fail: function(res) { },
-      complete: function(res) { },
+      success: function (res) {},
+      fail: function (res) {},
+      complete: function (res) {},
     })
   },
 
   /*操作：点击输入框时，关闭工具栏  */
-  inputClickedFun: function() {
+  inputClickedFun: function () {
     // let that = this;
     // if (that.data.systemInfo.platform == "android" && that.data.isOpenBottomBoolbar) {
     //   this.setData({
@@ -825,12 +825,12 @@ sendCoupon: function(){
   },
 
   /*操作：键盘高度变化时 */
-  menusInputHeightChangeFun: function(e) {
+  menusInputHeightChangeFun: function (e) {
 
   },
 
   /*操作：输入框聚焦*/
-  menusInputFocusFun: function(e) {
+  menusInputFocusFun: function (e) {
     // let that = this;
     // if (that.data.systemInfo.platform == "ios" && that.data.isOpenBottomBoolbar) {
     //   this.setData({
@@ -844,18 +844,19 @@ sendCoupon: function(){
   },
 
   /*操作：消息输入框失去焦点时 */
-  menusInputBlurFun: function(e) {
+  menusInputBlurFun: function (e) {
     // this.setData({
     //   docInfoBoxTop: 0
     // });
   },
 
   /*操作：输入预发送信息 */
-  adInputChange: function(e) {
+  adInputChange: function (e) {
     let that = this;
     that.setData({
       maySendContent: e.detail.value,
     });
+    console.warn('change', that.data.maySendContent)
     let value = that.data.maySendContent; // 先把输入的值复制一份，用于操作
     value = value.replace(/\s+/g, ""); // 用正则表达式去掉所有的空白字符（空格是其中一种）
     //去掉所有空格之后，再对它进行判断，  
@@ -872,25 +873,27 @@ sendCoupon: function(){
   },
 
   /*操作：预发送（文本消息） */
-  sendContentMsg: function(e) {
+  sendContentMsg: function (e) {
     let that = this;
-    if (that.data.httpLoading || !that.data.maySendContent) {
-      return;
-    }
-    that.setData({
-      httpLoading: true, // 开启隐性加载过程
-      isShowLoading: false // 显示发送中
-    });
-    if (that.data.isOverChat) {
-      let type = "contentMSg";
-      that.createInquirySelf(type);
-    } else {
-      that.sendMessageFun();
-    }
+    setTimeout(() => {
+      if (that.data.httpLoading || !that.data.maySendContent) {
+        return;
+      }
+      that.setData({
+        httpLoading: true, // 开启隐性加载过程
+        isShowLoading: false // 显示发送中
+      });
+      if (that.data.isOverChat) {
+        let type = "contentMSg";
+        that.createInquirySelf(type);
+      } else {
+        that.sendMessageFun();
+      }
+    }, 30)
   },
 
   /*操作：发送（文本消息） */
-  sendMessageFun: function() {
+  sendMessageFun: function () {
     let that = this;
     // 1. 创建消息实例，接口返回的实例可以上屏 createInquiry
     let message = tim.createTextMessage({
@@ -912,9 +915,9 @@ sendCoupon: function(){
     });
     that.toViewBottomFun();
     // 2. 发送消息
-    tim.sendMessage(message).then(function(imResponse) {
+    tim.sendMessage(message).then(function (imResponse) {
       console.log("发送文本消息成功");
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       console.log('发送文本消息失败：', imError);
       wx.showToast({
         title: "发送消息： '" + oldmaySendContent + "' 失败",
@@ -933,7 +936,7 @@ sendCoupon: function(){
   },
 
   /*操作：打开、关闭 底部工具栏 */
-  isOpenBottomBoolbarFun: function() {
+  isOpenBottomBoolbarFun: function () {
     let that = this;
     that.setData({
       isOpenBottomBoolbar: !that.data.isOpenBottomBoolbar,
@@ -943,7 +946,7 @@ sendCoupon: function(){
   },
 
   /*操作：点击工具栏某功能 */
-  toolbarMenusFun: function(e) {
+  toolbarMenusFun: function (e) {
     let that = this;
     let fun = e.currentTarget.dataset.clickfun;
     if (fun == "chooseWxImage") {
@@ -974,13 +977,13 @@ sendCoupon: function(){
   },
 
   /*操作：打开相册*/
-  chooseWxImage: function() {
+  chooseWxImage: function () {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["album"],
-      success: function(res) {
+      success: function (res) {
         let tempFilePaths = res.tempFilePaths;
         that.setData({
           aimgurl: res
@@ -991,13 +994,13 @@ sendCoupon: function(){
   },
 
   /*操作：打开相机 */
-  cameraWxFun: function() {
+  cameraWxFun: function () {
     let that = this;
     wx.chooseImage({
       count: that.data.countIndex,
       sizeType: ['original', 'compressed'],
       sourceType: ["camera"],
-      success: function(res) {
+      success: function (res) {
         let tempFilePaths = res.tempFilePaths;
         that.setData({
           aimgurl: res
@@ -1008,7 +1011,7 @@ sendCoupon: function(){
   },
 
   /*操作：预发送（图片消息） */
-  sendImageMsg: function() {
+  sendImageMsg: function () {
     let that = this;
     if (that.data.httpLoading) {
       return;
@@ -1026,7 +1029,7 @@ sendCoupon: function(){
   },
 
   /*操作：发送图片*/
-  sendImageMsgFun: function() {
+  sendImageMsgFun: function () {
     let that = this;
     // 1. 创建消息实例
     const message = tim.createImageMessage({
@@ -1043,7 +1046,7 @@ sendCoupon: function(){
     });
     that.toViewBottomFun();
     // 2. 发送数据
-    tim.sendMessage(message).then(function(imResponse) {
+    tim.sendMessage(message).then(function (imResponse) {
       let nowDatas = [...that.data.currentMessageList];
       nowDatas[nowDatas.length - 1].showLoadingState = false;
       that.setData({
@@ -1053,7 +1056,7 @@ sendCoupon: function(){
         isShowLoading: true // 隐藏发送中
       });
       console.log("发送图片消息成功");
-    }).catch(function(imError) {
+    }).catch(function (imError) {
       console.log("发送图片失败" + JSON.stringify(imError));
       that.setData({
         httpLoading: false, // 关闭隐性加载过程
@@ -1085,7 +1088,7 @@ sendCoupon: function(){
   },
 
   /*操作：切换为键盘 */
-  openKeyboardFun: function() {
+  openKeyboardFun: function () {
     let that = this;
     if (that.data.isOverChat) {
       that.setData({
@@ -1101,7 +1104,7 @@ sendCoupon: function(){
   },
 
   /*操作：切换为语音 */
-  willSendRecordMsg: function() {
+  willSendRecordMsg: function () {
     let that = this;
     that.setData({
       isSendRecord: true,
@@ -1117,14 +1120,14 @@ sendCoupon: function(){
   },
 
   /*操作：开始长按录音按钮 */
-  handleTouchStart: function(e) {
+  handleTouchStart: function (e) {
     let that = this;
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.record']) {
           wx.hideToast(); // 结束录音、隐藏Toast提示框
           recorderManager.stop();
-          recorderManager.onStop(function(res) { });
+          recorderManager.onStop(function (res) {});
           wx.showToast({
             title: "您未允许本小程序语音授权，无法发送语音",
             icon: "none",
@@ -1143,7 +1146,7 @@ sendCoupon: function(){
   },
 
   /*操作：结束长按录音按钮 */
-  handleTouchEnd: function(e) {
+  handleTouchEnd: function (e) {
     this.stopRecordMsg();
     this.setData({
       recordingTxt: "按住 说话"
@@ -1151,14 +1154,14 @@ sendCoupon: function(){
   },
 
   /*操作：点击了长按录音按钮 */
-  handleClick: function(e) {
+  handleClick: function (e) {
 
   },
 
   /*操作：长按录音按钮过程中 */
-  handleLongPress: function(e) { },
+  handleLongPress: function (e) {},
   /*操作：滑动取消 */
-  handleMove: function(e) {
+  handleMove: function (e) {
     let that = this;
     let moveLenght = e.touches[e.touches.length - 1].clientY - that.data.startPoint.clientY; // 手指移动距离
     if (Math.abs(moveLenght) > 50) {
@@ -1184,7 +1187,7 @@ sendCoupon: function(){
     }
   },
   /*操作：长按录制语音消息 */
-  startRecordMsg: function() {
+  startRecordMsg: function () {
     // 示例：使用微信官方的 RecorderManager 进行录音，参考 RecorderManager.start(Object object)
     // 1. 获取全局唯一的录音管理器 RecorderManager
     // 录音部分参数
@@ -1202,19 +1205,19 @@ sendCoupon: function(){
     });
     // 2.开始录音
     recorderManager.start(recordOptions);
-    recorderManager.onStart(() => { });
+    recorderManager.onStart(() => {});
     // 3.监听录音错误事件
-    recorderManager.onError(function(errMsg) {
+    recorderManager.onError(function (errMsg) {
       console.warn(errMsg);
     });
   },
 
   /*操作：停止录音并发送 */
-  stopRecordMsg: function() {
+  stopRecordMsg: function () {
     let that = this;
     wx.hideToast(); // 结束录音、隐藏Toast提示框
     recorderManager.stop();
-    recorderManager.onStop(function(res) {
+    recorderManager.onStop(function (res) {
       if (res.duration < 1000) {
         wx.showToast({
           title: "录音时间太短",
@@ -1243,10 +1246,10 @@ sendCoupon: function(){
         });
         that.toViewBottomFun();
         // 5. 发送消息
-        tim.sendMessage(message).then(function(imResponse) {
+        tim.sendMessage(message).then(function (imResponse) {
           // 发送成功
           console.log("发送语音消息成功");
-        }).catch(function(imError) {
+        }).catch(function (imError) {
           // 发送失败
           console.log("发送语音消息失败" + imError);
           wx.showToast({
@@ -1260,7 +1263,7 @@ sendCoupon: function(){
   },
 
   /*操作：播放语音 */
-  playRecordFun: function(e) {
+  playRecordFun: function (e) {
     let that = this;
     wx.stopVoice(); // 停止播放所有音频
     that.initItemRecordStatusFun();
@@ -1285,7 +1288,7 @@ sendCoupon: function(){
   },
 
   /*操作：初始化音频图标 */
-  initItemRecordStatusFun: function() {
+  initItemRecordStatusFun: function () {
     let that = this;
     if (that.data.recordIndex != "") {
       that.setData({
@@ -1295,7 +1298,7 @@ sendCoupon: function(){
   },
 
   /*操作：视频通话 */
-  videoWxFun: function(inqID) {
+  videoWxFun: function (inqID) {
     /**
      * isCall 1主动发起视频
      * isCall 2接收发起视频
@@ -1311,22 +1314,22 @@ sendCoupon: function(){
     };
     wx.navigateTo({
       url: '/pages/online-inquiry/inquiry/video/room?isCall=' + isCall + '&inquiryID=' + inquiryID,
-      success: function(res) { },
-      fail: function(res) { },
-      complete: function(res) { },
+      success: function (res) {},
+      fail: function (res) {},
+      complete: function (res) {},
     })
     console.log("--------跳转到视频-----------" + inquiryID);
   },
 
   /*操作：点击消息窗口 */
-  clickViewCommunicationFun: function() {
+  clickViewCommunicationFun: function () {
     this.setData({
       isOpenBottomBoolbar: false
     });
   },
 
   /*操作：点击处方卡片消息查看详情 */
-  toRpDetailFun: function(e) {
+  toRpDetailFun: function (e) {
     let inquiryID = e.currentTarget.dataset.rpid;
     if (inquiryID) {
       wx.navigateTo({
@@ -1337,7 +1340,7 @@ sendCoupon: function(){
   },
 
   /*查找：点击素材卡片消息，跳转到对应网址链接*/
-  toMaterialFun: function(e) {
+  toMaterialFun: function (e) {
     let materialData = e.currentTarget.dataset.materialdata;
     if (materialData) {
       wx.navigateTo({
@@ -1363,7 +1366,7 @@ sendCoupon: function(){
   },
 
   /**获取历史问诊记录 */
-  getHistoryInquiryID: function() {
+  getHistoryInquiryID: function () {
     let that = this;
     HTTP.getInquiryIDByTalk({
       orgID: that.data.userInfo.orgID,
@@ -1526,7 +1529,7 @@ sendCoupon: function(){
     })
   },
   //回退
-  navBack: function() {
+  navBack: function () {
     let page = getCurrentPages();
     if (page.length > 1) {
       wx.navigateBack({
@@ -1539,7 +1542,7 @@ sendCoupon: function(){
     }
   },
   //回主页
-  toIndex: function() {
+  toIndex: function () {
     // let orgID = wx.getStorageSync("orgID");
     // let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     // wx.reLaunch({
