@@ -9,6 +9,7 @@
     "home-loseweight-page": "/pages/index/home-index/home-loseweight-page/home-loseweight-page",
     "home-gynecology-page": "/pages/index/home-index/home-gynecology-page/home-gynecology-page",
     "home-andrology-page": "/pages/index/home-index/home-andrology-page/home-andrology-page",
+    "home-glh-page": "/pages/index/home-index/home-glh-page/home-glh-page",
     "coupon-dialog": "/components/couponDialog/couponDialog"
   },
   "navigationBarTitleText": "远程诊疗中心"

@@ -167,6 +167,17 @@ module.exports = {
     }
   },
 
+  /**甘露海 */
+  glhOrgIDFun: function () {
+    if (version == 0) {
+      return ['21022316141979632840511240']
+    } else if (version == 1) {
+      return ['21022316141979632840511240']
+    } else if (version == 2) {
+      return ['21022316141979632840511240']
+    }
+  },
+
   /**桃子互联网医院男科诊疗中心机构ID */
   andrologyOrgIDFun: function () {
     if (version == 0) {

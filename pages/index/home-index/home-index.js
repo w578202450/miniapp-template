@@ -15,8 +15,100 @@ Page({
    */
   data: {
     couponData: {},
+    helpfulNum: 12324,
     isHideCoupon: true,
+    homeDazhongLeft: "/images/home/home_dazhong_left.png",
+    homeDazhongRight: "/images/home/home_dazhong_right.png",
     timer: null,
+    autoplay: true,
+    interval: 1000,
+    patientList: [
+      {
+        keyID: "1",
+        patientName: "李**",
+        content: "已获得免费持续治疗援助1支",
+        time: "刚刚"
+      },
+      {
+        keyID: "2",
+        patientName: "苏**",
+        content: "已获得免费持续治疗援助2支",
+        time: "1分钟前"
+      },
+      {
+        keyID: "3",
+        patientName: "刘**",
+        content: "已获得免费援助药品1个月用量",
+        time: "3分钟前"
+      },
+      {
+        keyID: "4",
+        patientName: "蒋**",
+        content: "已获得免费持续治疗援助1支",
+        time: " 8分钟前"
+      },
+      {
+        keyID: "5",
+        patientName: "王**",
+        content: "已获得免费持续治疗援助2支",
+        time: "15分钟前"
+      },
+      {
+        keyID: "6",
+        patientName: "李**",
+        content: "已获得免费援助药品1个月用量",
+        time: "19分钟前"
+      },
+      {
+        keyID: "7",
+        patientName: "陈**",
+        content: "已获得免费持续治疗援助2支",
+        time: "20分钟前"
+      },
+      {
+        keyID: "8",
+        patientName: "曾**",
+        content: "已获得免费持续治疗援助1支",
+        time: "27分钟前"
+      },
+      {
+        keyID: "9",
+        patientName: "赖**",
+        content: "已获得免费持续治疗援助2支",
+        time: "半小时前"
+      },
+      {
+        keyID: "10",
+        patientName: "邱**",
+        content: "已获得免费持续治疗援助2支",
+        time: "半小时前"
+      },
+      {
+        keyID: "11",
+        patientName: "邢**",
+        content: "已获得免费援助药品1个月用量",
+        time: "半小时前"
+      },
+      {
+        keyID: "12",
+        patientName: "徐**",
+        content: "已获得免费持续治疗援助2支",
+        time: "半小时前"
+      },
+      {
+        keyID: "13",
+        patientName: "贾**",
+        content: "已获得免费持续治疗援助1支",
+        time: "1小时前"
+      },
+      {
+        keyID: "14",
+        patientName: "汪**",
+        content: "已获得免费持续治疗援助2支",
+        time: "1小时前"
+      }
+    ],
+    duration: 1500,
     pageName: '首页',
     isSearchState: false, // 是否进行了一次加载
     /**
@@ -27,7 +119,9 @@ Page({
      */
     isAboveHouShiID: -1, // 是否显示侯氏信息，默认-1显示
     isShowHarbinyouhaoID: -1, // 是否显示哈尔滨友好医院
+    isShowGlhID: -1,
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
+    glhOrgID: [], // 甘露海
     harbinyouhaoOrgID: [], // 哈尔滨友好医院机构ID
     dazhongOrgID: [], // 大冢医药机构ID
     tmcneikeOrgID: [], // tmc内科
@@ -51,6 +145,17 @@ Page({
       // 院长详细介绍
       deanDetailContent: "御医传人名老中医石广济弟子，全国优秀中医人才指导老师，中国风湿病学专家、学科带头人，日本东洋医学研究院名誉教授，莫斯科第十医院名誉院长。",
     }, // 院长信息
+    glhDeanInfo: {
+      deanPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/houliping.png",
+      deanName: "杨宝寿", // 院长名称
+      titleName: "院长", // 职位名称
+      deanDuty: "国务院特殊津贴专家", // 职称
+      deanFamous: "藏医南派重要代表人物", // 专长
+      deanFamous2: "国家级老中医（国医大师）",
+      goodAts: ["风湿骨病", "疑难杂症"], //擅长
+      // 院长详细介绍
+      deanDetailContent: "全国民族医药先进代表，在国家级期刊发布",
+    },
     hospitalInfo: {
       hospitalPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/org/2381/yiyuan.png",
       hospitalName: "侯丽萍风湿骨病中医医院",
@@ -62,9 +167,15 @@ Page({
       hospitalName: "哈尔滨友好风湿病医院",
       hospitalDetailContent: "哈尔滨友好风湿病医院，创建于2006年，是北京中医药大学博士侯丽萍教授在黑龙江创建的风湿骨病中医专科医院。医院自立业开始，便悉尊古方精细选材，依照古法炮制配伍。通过纯中医药物结合特色体质疗法，辨证施治，一人一方。"
     },
+    glhInfo: {
+      hospitalPhotoUrl: "https://com-shuibei-peach-static.100cbc.com/tmccontent/5532/org/5532-hospital.png",
+      hospitalName: "甘露海藏医院",
+      hospitalDetailContent: "从雪域高原出发，"
+    },
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     newArrayDoctorList: [], // 组合的新数组
+    glhDoctorList: [],
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     isHaveWatched: false, // 是否监听到变化了一次
@@ -92,6 +203,8 @@ Page({
     that.data.loseweightOrgID = HTTP.loseweightOrgIDFun(); // 获取桃子互联网医院减肥中心ID
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
+    that.data.glhOrgID = HTTP.glhOrgIDFun()
+    console.log()
     // 先监听是否尝试了登录：isStartLogin
     if (app.globalData.isStartLogin) {
       if (app.globalData.isInitInfo) {
@@ -202,7 +315,19 @@ Page({
       return "";
     }
   },
-
+  createHelpfulNumFun: function () {
+    let that = this;
+    var data = "1970-01-01 00:00:00";
+    let date1 = new Date(data.replace(/-/g, '/')); // 开始时间
+    let date2 = new Date(); // 结束时间
+    // console.log(date1.getTime());
+    // console.log(date2.getTime());
+    let date3 = date2.getTime() - date1.getTime(); // 时间差的毫秒数
+    let randomNum = Math.round((date3 / 1000 - (3600 * 24 * 365 * 49.6)) / 1800); /** 一小时加两个 */
+    that.setData({
+      helpfulNum: randomNum + parseInt(wx.getStorageSync("shareOrgID").substring(15, 19)) * 10
+    });
+  },
   /** 初始化参数 */
   initHomeData: function () {
     //后面移动
@@ -270,12 +395,20 @@ Page({
         showOrgID: 8
       })
       that.initDefaultFun();
+    } else if (that.data.glhOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是甘露海
+      that.setData({
+        showOrgID: 9,
+        isShowGlhID: that.data.glhOrgID.indexOf(that.data.shareOrgID)
+      })
+      that.initDefaultFun();
     } else { // 默认显示成都华府中医远程诊疗中心
       that.setData({
         showOrgID: 0
       })
       that.initFunctionFun();
     }
+
     console.log("----showOrgID----" + that.data.showOrgID);
     console.log("----shareOrgID----" + that.data.shareOrgID);
     console.log("----harbinyouhaoOrgID----" + that.data.harbinyouhaoOrgID);
@@ -290,8 +423,8 @@ Page({
     that.setData({
       isAboveHouShiID: that.data.houShiOrgID.indexOf(that.data.shareOrgID),
       isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID),
+      isShowGlhID: that.data.glhOrgID.indexOf(that.data.shareOrgID),
     });
-    console.log("^^^^^^isShowHarbinyouhaoID^^^^^" + that.data.isShowHarbinyouhaoID);
     that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
     that.getTeamIntroduce(); // 获取医师团队介绍
@@ -525,6 +658,12 @@ Page({
       // 判断是否是tmc内科
       that.setData({
         showOrgID: 8
+      })
+    } else if (that.data.glhOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是甘露海
+      that.setData({
+        showOrgID: 9,
+        isShowGlhID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID),
       })
     } else {
       that.setData({

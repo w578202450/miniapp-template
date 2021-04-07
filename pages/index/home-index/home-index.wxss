@@ -344,3 +344,130 @@ page-home {
   line-height: 28rpx;
   margin-left: 8rpx;
 }
+
+
+
+
+
+.assistance {
+  padding: 10rpx 10rpx;
+  background: white;
+}
+
+
+.vertical {
+  height: 200rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.roll_marquee {
+  padding: 0 8rpx;
+}
+
+.roll_marquee > swiper {
+  height: 200rpx;
+  line-height: 60rpx;
+}
+
+
+
+.item {
+  flex: 1;
+}
+
+.show-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.marquee_item_id {
+  margin-left: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  vertical-align: center;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
+}
+
+.marquee_item_content {
+  margin-left: 30rpx;
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  vertical-align: center;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
+}
+
+.marquee_item_time {
+  margin-right: 40rpx;
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 24rpx;
+  vertical-align: center;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 24rpx;
+}
+
+
+
+.rectangle-background {
+  width: 100%;
+  height: 40rpx;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 500;
+  line-height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: center;
+  background-color: #fff;
+  padding: 20rpx 30rpx 20rpx 30rpx;
+}
+
+.rectangle-background-middle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+}
+
+.rectangle-background-left {
+  justify-content: flex-start;
+  width: 80rpx;
+  height: 60rpx;
+}
+
+.rectangle-background-right {
+  justify-content: flex-end;
+  width: 80rpx;
+  height: 60rpx;
+}

@@ -23,6 +23,7 @@
     "compileHotReLoad": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -36,12 +37,11 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true,
-    "useApiHostProcess": true
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.9.4",
-  "appid": "wx534804f044235de5",
+  "appid": "wxe6297a0bae13b0c4",
   "projectname": "TMC%E5%B0%8F%E7%A8%8B%E5%BA%8F",
   "cloudfunctionTemplateRoot": "",
   "watchOptions": {
@@ -73,7 +73,6 @@
           "scene": null
         },
         {
-          "id": 1,
           "name": "首页",
           "pathName": "pages/index/home-index/home-index",
           "query": "",
@@ -102,6 +101,7 @@
         {
           "name": "pages/online-inquiry/inquiry/chat/chat",
           "pathName": "pages/online-inquiry/inquiry/chat/chat",
+          "query": "",
           "scene": null
         }
       ]

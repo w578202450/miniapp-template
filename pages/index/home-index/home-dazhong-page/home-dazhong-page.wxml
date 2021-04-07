@@ -70,7 +70,7 @@
           </block>
         </swiper>
       </view>
-    </view>
+    </view> 
     <!-- <text class="text-remark">*该药品由大冢制药有限公司无偿捐赠</text> -->
     <!-- 援助说明box -->
     <view class="bottom-box">

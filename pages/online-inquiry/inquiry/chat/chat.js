@@ -889,7 +889,7 @@ Page({
       } else {
         that.sendMessageFun();
       }
-    }, 30)
+    }, 100)
   },
 
   /*操作：发送（文本消息） */
