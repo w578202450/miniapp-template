@@ -40,7 +40,8 @@ var request = function request(url, needDomain, method, data) {
         'token': 'aaaa',
         'clientType': clientType,
         'timestamp': date,
-        'sign': signed
+        'sign': signed,
+        'source':'tmc'
       },
       data: data,
       success: function success(request) {
