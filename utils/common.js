@@ -320,7 +320,7 @@ function onShareAppMessageFun(sharePath, moreData) {
 /**立即问诊（已登录），获取服务通知授权 */
 function inquiryRequestMsgFun() {
   wx.requestSubscribeMessage({
-    tmplIds: ['Bbgs8xD9AhulzEIr1o6XWmFQT-X6FchA5DrsC03Na-I', 'ZXN1Mte_jwfsTTwZDFB8B2O1lcIVX6-LXab-SX78QvQ', 'RV5tD07jpmtvdnJ2XeJrximwAHQPSPykealX2dzEDS0'], // 1-订单待支付、 2-咨询回复、 3-处方过期
+    tmplIds: ['PccW6eUZcux_Vh_Y-sPV1ZN1K5pcuRI02wb423IP3QY', 'a6y5TLFA2TXvHsgjFtA_VPaHmEuZ_KA1pgJd-n3swe0', 'gDZevfQ3xYgat6mQFlrbpyp4IzHgvTw50-10oGKl5f8'], // 1-订单待支付、 2-咨询回复、 3-处方过期
     success(res) {
     },
     fail(err) {
@@ -341,7 +341,7 @@ function inquiryRequestMsgFun() {
 /**立即支付（处方预览页、订单列表页） */
 function payRequestMsgFun(keyID) {
   wx.requestSubscribeMessage({
-    tmplIds: ['z9hTTCAcnmVfFjU_oCUSADRCE5JL_08PsFjGR2vHOMU', '3leCGE6lKav48Wg0aZFC1FoR_LHX96zPpEngnYtpb-8'], // 1-药品发货、 2-退费成功
+    tmplIds: ['g4orOU_bdf_64GXvl0HEqOGBKVefNpEdocPcqxOFwe8', 'rTfdY4W-Pj5UQ0LiWWo-sF_wO3ncM8QRMRy-nXcNr80'], // 1-药品发货、 2-退费成功
     success(res) {
     },
     fail(err) {
