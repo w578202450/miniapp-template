@@ -205,6 +205,7 @@ Page({
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
     that.data.glhOrgID = HTTP.glhOrgIDFun()
     console.log()
+    console.log()
     // 先监听是否尝试了登录：isStartLogin
     if (app.globalData.isStartLogin) {
       if (app.globalData.isInitInfo) {
@@ -340,7 +341,7 @@ Page({
       // shareOrgID: "20050916495074555320511240",
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
-
+    
     // console.error(that.data.tmcneikeOrgID,that.data.shareOrgID)
     console.log("=====shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是侯丽萍中医院远程门诊
@@ -425,6 +426,8 @@ Page({
       isShowHarbinyouhaoID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID),
       isShowGlhID: that.data.glhOrgID.indexOf(that.data.shareOrgID),
     });
+    console.log('=-=-=-=')
+    console.log(this.isShowGlhID)
     that.getHospitalInfo(); //查询医院详情信息
     that.getBanner(); // 获取首页banner
     that.getTeamIntroduce(); // 获取医师团队介绍
@@ -663,7 +666,7 @@ Page({
       // 判断是否是甘露海
       that.setData({
         showOrgID: 9,
-        isShowGlhID: that.data.harbinyouhaoOrgID.indexOf(that.data.shareOrgID),
+        isShowGlhID: 9,
       })
     } else {
       that.setData({
@@ -671,6 +674,7 @@ Page({
       })
     }
     console.log("===showOrgID===" + that.data.showOrgID);
+    console.log(that.data.isShowGlhID)
     let params = {
       orgID: that.data.shareOrgID,
       assistantStaffID: that.data.shareAssistantStaffID,

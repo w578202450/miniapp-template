@@ -1,39 +1,16 @@
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
-    // homeBannerDefaultUrl: {
-    //   type: String,
-    //   value: ""
-    // },
-    rectangleBackgroundImg: {
-      type: String,
-      value: ""
-    },
-    onload:{
-      type: Boolean,
-      value: false,
-      observer: function (newVal, oldVal) {
-        this.createHelpfulNumFun()
-      }
-    } 
-  },
-
-  /**
-   * 组件的初始数据
-   */
+Page({
+   
   data: {
     satisfybgtitle: "/images/home/title_bg.png",
     satisfybg1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/org/feichange01.png",
     satisfybg2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/feichange02.png",
     homeDazhongLeft: "/images/home/home_dazhong_left.png",
     homeDazhongRight: "/images/home/home_dazhong_right.png",
-    homeBannerDefaultUrl: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/glh6.png", // 首页banner
+    homeBannerDefaultUrl: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/8788/youshi.png", // 首页banner
     middleOnefei1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/glh1.png",
     middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/glh2.png",
     middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/glh5.png",
-    middleOnefei4: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmccontent/8788/glh-home.png",
+    middleOnefei4: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/org/fei4.png",
     helpfulNum: 12324,
     helpmedicineIcon: "/images/home/help_medicine.png",
     medicineIcon: "/images/home/home_dazhong_medicine.png",
@@ -135,17 +112,6 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    goDetail(){
-      console.log('-----')
-      wx.navigateTo({
-        url: '/pages/index/home-index/home-glh-detail1/home-glh-detail1',
-      })
-    },
-    goDetail2(){
-      wx.navigateTo({
-        url: '/pages/index/home-index/home-glh-detail2/home-glh-detail2',
-      })
-    },
     /** 立即进入专家门诊 */
     toServiceIndexFun() {
       this.triggerEvent('toServiceIndexFun');

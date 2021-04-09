@@ -30,7 +30,9 @@
     "pages/index/service-index/fzm/service-news-details/service-news-details",
     "pages/index/service-index/wth/notes-details/notes-details",
     "pages/personal-center/my-coupon/my-coupon",
-    "components/couponDialog/couponDialog"
+    "components/couponDialog/couponDialog",
+    "pages/index/home-index/home-glh-detail1/home-glh-detail1",
+    "pages/index/home-index/home-glh-detail2/home-glh-detail2"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -50,8 +52,7 @@
     "selectedColor": "#438BEF",
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/service-index/service-index",
         "text": ""
       },

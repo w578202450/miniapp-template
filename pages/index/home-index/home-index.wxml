@@ -25,12 +25,12 @@
     </home-andrology-page>
   </view>
   <!-- 是否显示桃子互联网医院男科诊疗中心页面 -->
-  <!-- <view wx:if="{{ showOrgID == 9}}">
+  <view wx:if="{{ showOrgID == 9}}">
     <home-glh-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-glh-page>
-  </view> -->
+  </view>
   <!-- 是否显示侯丽萍风湿骨病中医医院页面 -->
-  <view wx:if="{{ showOrgID == 1 || showOrgID == 6 || showOrgID == 0 || showOrgID == 9}}">
+  <view wx:if="{{ showOrgID == 1 || showOrgID == 6 || showOrgID == 0}}">
     <!-- 引入wxs脚本 -->
     <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
     <view class="banner-header" style="width: 100%;height: 350rpx;" wx:if="{{isShowGlhID>-1}}">

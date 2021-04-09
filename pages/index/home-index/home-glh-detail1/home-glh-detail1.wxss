@@ -33,19 +33,6 @@ page {
   /* background: white; */
 }
 
-
-.satisfy-box1 {
-  margin-top: -102rpx;
-  height: 1972rpx;
-  border-radius: 20rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* background: white; */
-}
-
-
 .image-box1 {
   /* margin-left: 30rpx;
   margin-right: 30rpx; */
