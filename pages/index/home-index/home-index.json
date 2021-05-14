@@ -10,6 +10,7 @@
     "home-gynecology-page": "/pages/index/home-index/home-gynecology-page/home-gynecology-page",
     "home-andrology-page": "/pages/index/home-index/home-andrology-page/home-andrology-page",
     "home-glh-page": "/pages/index/home-index/home-glh-page/home-glh-page",
+    "home-jkzy-page": "/pages/index/home-index/home-jkzy-page/home-jkzy-page",
     "coupon-dialog": "/components/couponDialog/couponDialog"
   },
   "navigationBarTitleText": "远程诊疗中心"

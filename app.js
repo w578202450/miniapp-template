@@ -135,6 +135,12 @@ App({
     //   assistantStaffID: "20011109080410712390514001",
     //   orgID: "19101017081245502880511001"
     // }
+    // 金科藏药
+     options = {
+      orgID: "21022316141979632840511240",
+      assistantStaffID: "21022410172231681940514233"
+    }
+
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数
       var scan_url = decodeURIComponent(options.q);

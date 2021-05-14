@@ -1,0 +1,23 @@
+<view class="page">
+  <!-- 大冢制药banner -->
+  <view class="banner-header" style="width: 100%;">
+    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
+  </view>
+  <view class="home">
+    <view class="satisfy-box">
+      <image class="image-box1" style="height:30rpx" mode="widthFix" src="{{middleOnefei1}}"></image>
+    </view>
+    <view class="satisfy-box1" style="margin-top:18rpx;">
+      <image class="image-box1" style="height:1972rpx" mode="widthFix" src="{{middleOnefei2}}"></image>
+    </view>
+    <view class="bottom-img_container">
+      <image class="rectangle-background-right1" mode="aspectFill" src="{{middleOnefei3}}" bindtap="goDetail" ></image>
+      <image class="rectangle-background-right2" mode="aspectFill" src="{{middleOnefei4}}" bindtap="goDetail2"></image>
+    </view>
+    <!-- </view> -->
+    <!-- 立即进入专家门诊 -->
+    <view class="enter-container">
+      <view class="enter-box" bindtap="toServiceIndexFun">立即问诊</view>
+  </view>
+  </view>
+</view>

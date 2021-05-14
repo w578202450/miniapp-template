@@ -26,8 +26,15 @@
   </view>
   <!-- 是否显示桃子互联网医院男科诊疗中心页面 -->
   <view wx:if="{{ showOrgID == 9}}">
-    <home-glh-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
-    </home-glh-page>
+    <!-- <home-glh-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-glh-page> -->
+    <home-jkzy-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-jkzy-page>
+  </view>
+    <!-- 是否显示金科藏药页面 -->
+  <view wx:if="{{ showOrgID == 10}}">
+    <home-jkzy-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-jkzy-page>
   </view>
   <!-- 是否显示侯丽萍风湿骨病中医医院页面 -->
   <view wx:if="{{ showOrgID == 1 || showOrgID == 6 || showOrgID == 0}}">

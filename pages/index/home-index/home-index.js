@@ -123,6 +123,7 @@ Page({
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
     glhOrgID: [], // 甘露海
     harbinyouhaoOrgID: [], // 哈尔滨友好医院机构ID
+    jinkezangyaoOrgID:[],  //金科藏药
     dazhongOrgID: [], // 大冢医药机构ID
     tmcneikeOrgID: [], // tmc内科
     xinnaoxueguanOrgID: [], //新脑血管机构ID
@@ -175,7 +176,7 @@ Page({
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     newArrayDoctorList: [], // 组合的新数组
-    glhDoctorList: [],
+    glhDoctorList: [],     
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     isHaveWatched: false, // 是否监听到变化了一次
@@ -204,8 +205,7 @@ Page({
     that.data.gynecologyOrgID = HTTP.gynecologyOrgIDFun(); // 获取桃子互联网医院妇科诊疗中心机构ID
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
     that.data.glhOrgID = HTTP.glhOrgIDFun()
-    console.log()
-    console.log()
+    that.data.jinkezangyaoOrgID = HTTP.jkzyOrgIDFun();
     // 先监听是否尝试了登录：isStartLogin
     if (app.globalData.isStartLogin) {
       if (app.globalData.isInitInfo) {
@@ -401,6 +401,13 @@ Page({
       that.setData({
         showOrgID: 9,
         isShowGlhID: that.data.glhOrgID.indexOf(that.data.shareOrgID)
+      })
+      that.initDefaultFun();
+    } else if (that.data.jinkezangyaoOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是金科藏药
+      that.setData({
+        showOrgID: 10,
+        isShowGlhID: that.data.jinkezangyaoOrgID.indexOf(that.data.shareOrgID)
       })
       that.initDefaultFun();
     } else { // 默认显示成都华府中医远程诊疗中心
@@ -668,11 +675,19 @@ Page({
         showOrgID: 9,
         isShowGlhID: 9,
       })
-    } else {
+    } else if (that.data.jinkezangyaoOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是甘露海
+      that.setData({
+        showOrgID: 10,
+      })
+    }else {
       that.setData({
         showOrgID: 0
       })
     }
+    wx.setNavigationBarTitle({
+      title: '金诃藏药互联网医院',
+    })
     console.log("===showOrgID===" + that.data.showOrgID);
     console.log(that.data.isShowGlhID)
     let params = {
