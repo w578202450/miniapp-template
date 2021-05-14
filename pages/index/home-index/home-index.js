@@ -614,6 +614,11 @@ Page({
           wx.setNavigationBarTitle({
             title: app.globalData.orgName
           });
+          if(this.data.showOrgID === 9 || this.data.showOrgID === 10){
+            wx.setNavigationBarTitle({
+              title: '金诃藏药互联网医院',
+            })
+        }
         }
       }
     });
@@ -676,7 +681,7 @@ Page({
         isShowGlhID: 9,
       })
     } else if (that.data.jinkezangyaoOrgID.indexOf(that.data.shareOrgID) > -1) {
-      // 判断是否是甘露海
+      // 判断是否是金科藏药
       that.setData({
         showOrgID: 10,
       })
@@ -685,9 +690,11 @@ Page({
         showOrgID: 0
       })
     }
-    wx.setNavigationBarTitle({
-      title: '金诃藏药互联网医院',
-    })
+    if(this.data.showOrgID === 9 || this.data.showOrgID === 10){
+        wx.setNavigationBarTitle({
+          title: '金诃藏药互联网医院',
+        })
+    }
     console.log("===showOrgID===" + that.data.showOrgID);
     console.log(that.data.isShowGlhID)
     let params = {
