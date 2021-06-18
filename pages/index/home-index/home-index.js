@@ -22,8 +22,7 @@ Page({
     timer: null,
     autoplay: true,
     interval: 1000,
-    patientList: [
-      {
+    patientList: [{
         keyID: "1",
         patientName: "李**",
         content: "已获得免费持续治疗援助1支",
@@ -123,7 +122,7 @@ Page({
     houShiOrgID: [], // 太原侯丽萍风湿骨病医院的机构ID
     glhOrgID: [], // 甘露海
     harbinyouhaoOrgID: [], // 哈尔滨友好医院机构ID
-    jinkezangyaoOrgID:[],  //金科藏药
+    jinkezangyaoOrgID: [], //金科藏药
     dazhongOrgID: [], // 大冢医药机构ID
     tmcneikeOrgID: [], // tmc内科
     xinnaoxueguanOrgID: [], //新脑血管机构ID
@@ -176,7 +175,7 @@ Page({
     isShowAllContent: false,
     doctorTeamIntroduce: "", // 医师团队介绍
     newArrayDoctorList: [], // 组合的新数组
-    glhDoctorList: [],     
+    glhDoctorList: [],
     signedDoctor: {}, // 患者签约的医生
     hospitalDetail: {}, // 医院信息
     isHaveWatched: false, // 是否监听到变化了一次
@@ -341,7 +340,7 @@ Page({
       // shareOrgID: "20050916495074555320511240",
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
-    
+
     // console.error(that.data.tmcneikeOrgID,that.data.shareOrgID)
     console.log("=====shareOrgID=======" + that.data.shareOrgID);
     // 判断是否是侯丽萍中医院远程门诊
@@ -614,11 +613,11 @@ Page({
           wx.setNavigationBarTitle({
             title: app.globalData.orgName
           });
-          if(this.data.showOrgID === 9 || this.data.showOrgID === 10){
-            wx.setNavigationBarTitle({
-              title: '金诃藏药互联网医院',
-            })
-        }
+          //   if(this.data.showOrgID === 9 || this.data.showOrgID === 10){
+          //     wx.setNavigationBarTitle({
+          //       title: '金诃藏药互联网医院',
+          //     })
+          // }
         }
       }
     });
@@ -685,16 +684,16 @@ Page({
       that.setData({
         showOrgID: 10,
       })
-    }else {
+    } else {
       that.setData({
         showOrgID: 0
       })
     }
-    if(this.data.showOrgID === 9 || this.data.showOrgID === 10){
-        wx.setNavigationBarTitle({
-          title: '金诃藏药互联网医院',
-        })
-    }
+    // if (this.data.showOrgID === 9 || this.data.showOrgID === 10) {
+    //   wx.setNavigationBarTitle({
+    //     title: '金诃藏药互联网医院',
+    //   })
+    // }
     console.log("===showOrgID===" + that.data.showOrgID);
     console.log(that.data.isShowGlhID)
     let params = {

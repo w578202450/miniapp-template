@@ -11,6 +11,15 @@ page {
   /* background: rgba(140, 111, 79, 1); */
   /* z-index: -1; */
   padding:48rpx 30rpx 30rpx 30rpx;
+  position:relative;
+}
+.myVideo{
+  position: absolute;
+  top: 850rpx;
+  left: 50%;
+  margin-left: -345rpx;
+  width: 690rpx;
+  height: 300rpx;
 }
 
 /* .one-box-bg {

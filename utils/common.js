@@ -145,7 +145,7 @@ function getUserSig(userId) {
       if (userSig) {
         loginIM(userId); // IM登录
       }
-      
+
     } else {
       app.globalData.isStartLogin = true; // 是否开始了自动登录
       wx.hideLoading();
@@ -164,7 +164,7 @@ function loginIM(userId) {
   tim.login({
     userID: userId,
     userSig: genTestUserSig(userId).userSig
-  }).then(function(imResponse) {
+  }).then(function (imResponse) {
     console.log("===IM登录成功==="); // 登录成功
     wx.setStorageSync('myUsername', userId);
     if (nextPageName == "chat") {
@@ -181,15 +181,15 @@ function loginIM(userId) {
       app.globalData.isInitInfo = true; // 是否登录成功
       app.globalData.isStartLogin = true; // 是否开始了自动登录
     }
-    setTimeout(()=>{
+    setTimeout(() => {
       app.globalData.isShowPhoneDialog = true
-      if(nextPageName=='chat'){
-        app.globalData.phoneDialogNextPage='chat'
-      }else{
-        app.globalData.phoneDialogNextPage=''
+      if (nextPageName == 'chat') {
+        app.globalData.phoneDialogNextPage = 'chat'
+      } else {
+        app.globalData.phoneDialogNextPage = ''
       }
-    },500)
-  }).catch(function(imError) {
+    }, 500)
+  }).catch(function (imError) {
     app.globalData.isInitInfo = false
     console.log("===IM登录失败===", JSON.stringify(imError)); // 登录失败的相关信息
     wx.hideLoading();
@@ -206,14 +206,14 @@ function loginIM(userId) {
  * 1.2缓存unionid：用于直接登录
  */
 function getounionid(isLoginStatus) {
-  AUTH.getounionid(isLoginStatus).then(function(res) {
+  AUTH.getounionid(isLoginStatus).then(function (res) {
     app.globalData.unionid = wx.getStorageSync('unionid');
     app.globalData.openid = wx.getStorageSync('openID');
     wx.showLoading({
       title: '登录中...',
     });
     getPatientInfo();
-  }, function(err) {
+  }, function (err) {
     console.log(err);
   })
 }
@@ -227,7 +227,7 @@ function fetchTempCode() {
   wx.removeStorageSync("code");
   wx.removeStorageSync('openID');
   wx.removeStorageSync('unionid')
-  AUTH.fetchTempCode().then(function(res) {
+  AUTH.fetchTempCode().then(function (res) {
     wx.hideLoading();
     if (res.code) {
       wx.setStorageSync('code', res.code);
@@ -241,16 +241,16 @@ function fetchTempCode() {
 function getUserInfo(e) {
   // console.log("手动授权信息：" + JSON.stringify(e));
   nextPageName = "";
-  if (!e.detail.encryptedData) {
+  if (!e.encryptedData) {
     return
   };
   if (e.nextPageName) {
     nextPageName = e.nextPageName;
   }
-  wx.setStorageSync('encryptedData', e.detail.encryptedData);
-  wx.setStorageSync('iv', e.detail.iv);
-  wx.setStorageSync('userInfo', e.detail.userInfo);
-  app.globalData.userInfo = e.detail.userInfo;
+  wx.setStorageSync('encryptedData', e.encryptedData);
+  wx.setStorageSync('iv', e.iv);
+  wx.setStorageSync('userInfo', e.userInfo);
+  app.globalData.userInfo = e.userInfo;
   app.globalData.unionid = wx.getStorageSync('unionid');
   app.globalData.openid = wx.getStorageSync('openID');
   // 检查登录态是否过期
@@ -266,7 +266,7 @@ function getUserInfo(e) {
         wx.removeStorageSync("code");
         wx.removeStorageSync('openID');
         wx.removeStorageSync('unionid')
-        AUTH.fetchTempCode().then(function(res) {
+        AUTH.fetchTempCode().then(function (res) {
           if (res.code) {
             wx.setStorageSync('code', res.code);
             getounionid();
@@ -279,7 +279,7 @@ function getUserInfo(e) {
       wx.removeStorageSync("code");
       wx.removeStorageSync('openID');
       wx.removeStorageSync('unionid')
-      AUTH.fetchTempCode().then(function(res) {
+      AUTH.fetchTempCode().then(function (res) {
         if (res.code) {
           wx.setStorageSync('code', res.code);
           getounionid();
@@ -321,8 +321,7 @@ function onShareAppMessageFun(sharePath, moreData) {
 function inquiryRequestMsgFun() {
   wx.requestSubscribeMessage({
     tmplIds: ['PccW6eUZcux_Vh_Y-sPV1ZN1K5pcuRI02wb423IP3QY', 'a6y5TLFA2TXvHsgjFtA_VPaHmEuZ_KA1pgJd-n3swe0', 'gDZevfQ3xYgat6mQFlrbpyp4IzHgvTw50-10oGKl5f8'], // 1-订单待支付、 2-咨询回复、 3-处方过期
-    success(res) {
-    },
+    success(res) {},
     fail(err) {
       wx.showToast({
         title: JSON.stringify(err.errMsg),
@@ -342,8 +341,7 @@ function inquiryRequestMsgFun() {
 function payRequestMsgFun(keyID) {
   wx.requestSubscribeMessage({
     tmplIds: ['g4orOU_bdf_64GXvl0HEqOGBKVefNpEdocPcqxOFwe8', 'rTfdY4W-Pj5UQ0LiWWo-sF_wO3ncM8QRMRy-nXcNr80'], // 1-药品发货、 2-退费成功
-    success(res) {
-    },
+    success(res) {},
     fail(err) {
       wx.showToast({
         title: JSON.stringify(err.errMsg),

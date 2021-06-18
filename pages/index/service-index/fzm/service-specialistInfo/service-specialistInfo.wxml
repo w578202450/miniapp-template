@@ -18,7 +18,7 @@
   <view class="doctor-container">
     <view class="doctor-bg">
       <text
-        class="physicianAssistant-name">{{isDoctor? assistantDoctorInfo.doctorName:doctorInfo.doctorName }}医生团队</text>
+        class="physicianAssistant-name">{{doctorInfo.doctorName}}医生团队</text>
       <view class="specialist-bottom-box">
         <view class="specialist-bottom-left">
           <image src="{{ comment_icon }}"></image>
@@ -28,37 +28,36 @@
         <view class="specialist-bottom-left" style="margin-top: 32rpx;">
           <image src="{{ sever_icon }}"></image>
           <text>服务人数：</text>
-          <text style="color: rgba(0,0,0,0.85)">{{comTools.serviceNum(assistantDoctorInfo.doctorID)}}人</text>
+          <text style="color: rgba(0,0,0,0.85)">{{comTools.serviceNum(doctorInfo.doctorID)}}人</text>
         </view>
       </view>
     </view>
-    <image src="{{isDoctor?assistantDoctorInfo.faceImage:doctorInfo.faceImage}}" class="doctor-face" mode="aspectFit">
+    <image src="{{doctorInfo.faceImage}}" class="doctor-face" mode="aspectFit">
     </image>
   </view>
 
-  <view class="doctor-team" hidden="{{ !doctorInfo.doctorName || !isDoctor }}">
+  <view class="doctor-team" hidden="{{ !doctorInfo.doctorName }}">
     <text class="team-title">医师团队</text>
     <view>
       <scroll-view scroll-x="true" style=" white-space: nowrap;">
         <view style="padding-left:6rpx;padding-top:32rpx;padding-bottom:10rpx;">
           <view class="doctor-1" style="margin-left:0;">
-            <image src="{{ assistantDoctorInfo.faceImage }}" mode="aspectFill" style="width:86rpx;height:86rpx;">
-            </image>
-            <view class="doctor-name">
-              <text class="doctor-name__text">{{ assistantDoctorInfo.doctorName }}</text>
-              <text class="doctor-section__text"> {{ assistantDoctorInfo.sectionName }}
-                {{ assistantDoctorInfo.titleName }}
-                {{ comTools.strReplce(assistantDoctorInfo.title) }}
-              </text>
-            </view>
-          </view>
-          <view class="doctor-1">
             <image src="{{ doctorInfo.faceImage }}" mode="aspectFill" style="width:86rpx;height:86rpx;">
             </image>
             <view class="doctor-name">
               <text class="doctor-name__text">{{ doctorInfo.doctorName }}</text>
               <text class="doctor-section__text"> {{ doctorInfo.sectionName }} {{ doctorInfo.titleName }}
                 {{ comTools.strReplce(doctorInfo.title) }}
+              </text>
+            </view>
+          </view>
+          <view class="doctor-1">
+            <image src="{{ assistantDoctorInfo.faceImage }}" mode="aspectFill" style="width:86rpx;height:86rpx;">
+            </image>
+            <view class="doctor-name">
+              <text class="doctor-name__text">{{ assistantDoctorInfo.doctorName }}</text>
+              <text class="doctor-section__text"> {{ assistantDoctorInfo.sectionName }} {{ assistantDoctorInfo.titleName }} 
+                {{ comTools.strReplce(assistantDoctorInfo.title) }}
               </text>
             </view>
           </view>

@@ -24,12 +24,10 @@
     <home-andrology-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-andrology-page>
   </view>
-  <!-- 是否显示桃子互联网医院男科诊疗中心页面 -->
+  <!-- 甘露海 -->
   <view wx:if="{{ showOrgID == 9}}">
-    <!-- <home-glh-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
-    </home-glh-page> -->
-    <home-jkzy-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
-    </home-jkzy-page>
+    <home-glh-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-glh-page>
   </view>
     <!-- 是否显示金科藏药页面 -->
   <view wx:if="{{ showOrgID == 10}}">

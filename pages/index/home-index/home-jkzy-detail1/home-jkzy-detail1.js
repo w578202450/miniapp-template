@@ -6,7 +6,7 @@ Page({
     satisfybg2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/feichange02.png",
     homeDazhongLeft: "/images/home/home_dazhong_left.png",
     homeDazhongRight: "/images/home/home_dazhong_right.png",
-    homeBannerDefaultUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_detail1.png", // 首页banner
+    homeBannerDefaultUrl: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home_jkzy_detail1.png", // 首页banner
     middleOnefei1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/glh1.png",
     middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/glh2.png",
     middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/glh5.png",

@@ -41,18 +41,18 @@ Component({
     content_image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/loginImg.png", // 宣传图片
     nextPageName: "" // 登录后需要跳转的上一级页面的名字
   },
-  
-  attached:function(options){
+
+  attached: function (options) {
     app.watch((value) => {
-        // value为app.js中传入的值
-        this.getPhone()
+      // value为app.js中传入的值
+      this.getPhone()
     }, "isShowPhoneDialog");
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    getPhone: function() {
+    getPhone: function () {
       console.log('====++++')
       //获得popup组件：登录确认框
       let popup = this.selectComponent("#phoneDialog");
@@ -60,7 +60,7 @@ Component({
       // console.log(this.selectComponent("#phoneDialog"))
     },
     //隐藏弹框
-    hidePopup: function() {
+    hidePopup: function () {
       this.setData({
         isHiddenDialog: true
       });
@@ -96,19 +96,30 @@ Component({
       console.log("立即登录 =》 触发回调");
     },
 
+    getUserProfile() {
+
+    },
     /**
      * 操作：登录
      */
-    getUserInfo: function(e) {
+    getUserInfo: function (e) {
       let that = this;
-      let sendE = {
-        ...e,
-        nextPageName: that.data.nextPageName
-      };
-      commonFun.getUserInfo(sendE);
-      that.setData({
-        isHiddenDialog: true
-      });
+      wx.getUserProfile({
+        desc: '业务需要',
+        success: res => {
+          console.log(res)
+          let sendE = {
+            ...res,
+            nextPageName: that.data.nextPageName
+          };
+          commonFun.getUserInfo(sendE);
+          that.setData({
+            isHiddenDialog: true
+          });
+          this.triggerEvent("success");
+        }
+      })
+
     },
   }
 })

@@ -1,6 +1,7 @@
 <view class="page">
   <!-- <navigation-bar navbarTitle="介绍" /> -->
   <view class="banner-header" >
-    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
+    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{homeBannerDefaultUrl }}"></image>
+    <video class="myVideo" src="http://mpvideo.qpic.cn/0bf2suaa2aaasiap2dxtf5pvbfodbwkqadia.f10002.mp4?dis_k=a7aaa63f0a3c4f98ba77632bc969573e&dis_t=1624002284&spec_id=MzAwMDExNjY3Nw%3D%3D1624002284&vid=wxv_1681579431481442305&format_id=10002" binderror="videoErrorCallback"  enable-danmu danmu-btn controls></video>
   </view>
 </view>

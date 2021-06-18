@@ -182,11 +182,11 @@ module.exports = {
   // 金科藏药
   jkzyOrgIDFun: function(){
     if (version == 0) {
-      return ['21022316141979632840511240']
+      return ['21051717240029338520511240']
     } else if (version == 1) {
-      return ['21022316141979632840511240']
+      return ['21051717240029338520511240']
     } else if (version == 2) {
-      return ['21022316141979632840511240']
+      return ['21051717240029338520511240']
     }
   },
 

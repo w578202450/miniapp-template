@@ -30,7 +30,7 @@ Component({
     homeDazhongLeft: "/images/home/home_dazhong_left.png",
     homeDazhongRight: "/images/home/home_dazhong_right.png",
     homeBannerDefaultUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_1.png", // 首页banner
-    middleOnefei1: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_2.png",
+    middleOnefei1: "https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/home-jk_bg.png",
     middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_3.png",
     middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_4.png",
     middleOnefei4: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_1.png",
@@ -127,8 +127,11 @@ Component({
     ],
 
     autoplay: true,
-    interval: 1000,
-    duration: 1500,
+    interval: 5000,
+    duration: 1000,
+    background: ['https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/banner1.png', 'https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/banner2.png', 'https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/banner3.png','https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/banner4.png'],
+    indicatorDots: true,
+    vertical: false
   },
 
   /**
