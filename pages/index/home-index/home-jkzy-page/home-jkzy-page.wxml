@@ -22,14 +22,14 @@
           bindtap="toServiceIndexFun">
         </image>
       </view>
-     <view class="center-doctor_bt">
+     <!-- <view class="center-doctor_bt">
         <image src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/reg-1.png"
           bindtap="toServiceIndexFun"></image>
-      </view>
+      </view> -->
     </view>
 
     <view class="bottom-img_container">
-      <image class="rectangle-background-right1" mode="aspectFill" src="{{middleOnefei3}}" bindtap="goDetail"></image>
+      <image class="rectangle-background-right1" mode="aspectFill" src="{{middleOnefei3}}" bindtap="goDetail" ></image>
       <image class="rectangle-background-right2" mode="aspectFill" src="{{middleOnefei4}}" bindtap="goDetail2"></image>
     </view>
     <view class="enter-container">

@@ -34,7 +34,7 @@ swiper {
 
 .satisfy-box {
   position: relative;
-  height: 2560rpx;
+  height: 1180rpx;
   border-radius: 20rpx;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ swiper {
 
 .satisfy-box1 {
   margin-top: -152rpx;
-  height: 1972rpx;
+  height: 1180rpx;
   border-radius: 20rpx;
   display: flex;
   flex-direction: column;
@@ -180,14 +180,14 @@ swiper {
 }
 
 .rectangle-background-right1 {
-  width: 618rpx;
-  height: 220rpx;
+  width: 704rpx;
+  height: 400rpx;
 }
 
 .rectangle-background-right2 {
-  width: 618rpx;
-  height: 220rpx;
-  margin-top: 32rpx;
+  width: 704rpx;
+  height: 400rpx;
+  margin-top: 66rpx;
 }
 
 .middle-two-box-row-text {
@@ -487,17 +487,18 @@ swiper {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background:#ffffff;
 }
 
 .center-doctor {
   display: flex;
   justify-content: center;
   position: absolute;
-  top: 880rpx;
+  top: 960rpx;
 }
 
 .center-doctor image {
-  width: 314rpx;
+  width: 352rpx;
   height: 198rpx;
 }
 

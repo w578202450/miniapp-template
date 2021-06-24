@@ -46,7 +46,7 @@
             </image>
             <view class="doctor-name">
               <text class="doctor-name__text">{{ doctorInfo.doctorName }}</text>
-              <text class="doctor-section__text"> {{ doctorInfo.sectionName }} {{ doctorInfo.titleName }}
+              <text class="doctor-section__text">{{ doctorInfo.titleName }}
                 {{ comTools.strReplce(doctorInfo.title) }}
               </text>
             </view>
@@ -56,7 +56,7 @@
             </image>
             <view class="doctor-name">
               <text class="doctor-name__text">{{ assistantDoctorInfo.doctorName }}</text>
-              <text class="doctor-section__text"> {{ assistantDoctorInfo.sectionName }} {{ assistantDoctorInfo.titleName }} 
+              <text class="doctor-section__text">{{ assistantDoctorInfo.titleName }} 
                 {{ comTools.strReplce(assistantDoctorInfo.title) }}
               </text>
             </view>
