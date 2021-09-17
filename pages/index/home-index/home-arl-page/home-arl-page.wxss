@@ -1,0 +1,253 @@
+.page {
+  position: relative;
+  background: #F6F6F6;
+  padding: 0 0 126rpx;
+}
+
+.head-image {
+  width: 100%;
+  height: 316rpx;
+  background-image: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709213177404030201240.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+
+.content {
+  position: relative;
+  margin-top: -24rpx;
+  padding: 0 24rpx;
+}
+
+.card-image {
+  width: 100%;
+  position: relative;
+  background-image: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709234178663140201240.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  height: 270rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card-image>image {
+  width: 100%;
+}
+
+.expert-title {
+  text-align: center;
+  font-size: 48rpx;
+  color: #262626;
+  font-family: 'Noto Serif SC';
+  border-bottom: 1rpx solid #262626;
+}
+
+.expert-click {
+  background: #FA732F;
+  width: 312rpx;
+  height: 50rpx;
+  border-radius: 64rpx;
+  color: #FFFFFF;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  text-align: center;
+}
+
+.expert-click>image {
+  height: 24rpx;
+  width: 24rpx;
+}
+
+.expert-power {
+  height: 48rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.power-item>image {
+  height: 48rpx;
+  width: 48rpx;
+  margin-right: 16rpx;
+}
+
+.power-item {
+  font-size: 20rpx;
+  color: #595959;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-export {
+  background: #FFFFFF;
+  width: 100%;
+  height: 282rpx;
+  margin-top: 24rpx;
+  border-radius: 8rpx;
+  margin-bottom: 28rpx;
+}
+
+.export-head {
+  height: 90rpx;
+  padding-left: 32rpx;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.head-left {
+  height: 62rpx;
+  width: 178rpx;
+  background: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709251765602320201240.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+}
+
+.head-right {
+  height: 90rpx;
+  width: 94rpx;
+  background: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709245848039650201240.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  position: absolute;
+  right: 0;
+}
+
+.export-content {
+  background: #F6F6F6;
+  border-radius: 8rpx;
+  margin: 0 24rpx;
+  /* height: 164rpx; */
+  padding: 18rpx 32rpx;
+  display: flex;
+  align-items: center;
+}
+
+.export-content-left {
+  flex: 1;
+}
+
+.export-name {
+  font-size: 32rpx;
+  color: #262626;
+  font-family: 'PingFang SC';
+}
+
+.export-detail {
+  font-size: 24rpx;
+  color: #595959;
+  font-family: 'PingFang SC';
+}
+
+.export-content-right {
+  height: 128rpx;
+  width: 128rpx;
+}
+
+.export-content-right>image {
+  height: 100%;
+  width: 100%;
+}
+
+.article-card {
+  margin-bottom: 24rpx;
+  background: #FFFFFF;
+  /* width: 100%; */
+  /* height: 186rpx; */
+  padding: 16rpx;
+  display: flex;
+  align-items: center;
+}
+
+.article-card-left {
+  height: 160rpx;
+  width: 214rpx;
+}
+
+.article-card-left>image {
+  height: 160rpx;
+  width: 214rpx;
+}
+
+.article-card-right {
+  flex: 1;
+  margin-left: 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.article-card-right-head {
+  display: flex;
+  align-items: center;
+  height: 40rpx;
+  width: 100%;
+}
+
+.article-card-right-head-name {
+  flex: 1;
+  color: #262626;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.article-card-right-head-image>image {
+  height: 32rpx;
+  width: 32rpx;
+}
+
+.article-card-right-content {
+  color: #595959;
+  font-size: 20rpx;
+  margin-top: 16rpx;
+}
+
+.flex-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 126rpx;
+  opacity: 1;
+  background: #F6F6F6;
+}
+
+.enter-box {
+  margin: 24rpx;
+  width: 100%;
+  height: 86rpx;
+  opacity: 1;
+  background: #FA732F;
+  border-radius: 64rpx;
+  color: #ffffff;
+  font-size: 36rpx;
+  font-family: PingFang SC, PingFang SC-Bold;
+  text-align: center;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.enter-box-triangle {
+  height: 32rpx;
+  width: 32rpx;
+  background: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709232297217160201240.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  margin-left: 12rpx;
+  margin-top: -2px;
+}
+
+.enter-box-text {}

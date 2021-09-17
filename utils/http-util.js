@@ -190,6 +190,17 @@ module.exports = {
     }
   },
 
+  // 阿如拉远程诊疗中心
+  arlOrgIDFun: function(){
+    if (version == 0) {
+      return ['21090717240102293250511143']
+    } else if (version == 1) {
+      return ['21090717240102293250511143']
+    } else if (version == 2) {
+      return ['21090717240102293250511143']
+    }
+  },
+
   /**桃子互联网医院男科诊疗中心机构ID */
   andrologyOrgIDFun: function () {
     if (version == 0) {

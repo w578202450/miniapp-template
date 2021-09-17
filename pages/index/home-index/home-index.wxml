@@ -34,6 +34,11 @@
     <home-jkzy-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
     </home-jkzy-page>
   </view>
+  <!-- 是否显示阿茹拉页面 -->
+  <view wx:if="{{ showOrgID == 11}}">
+    <home-arl-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
+    </home-arl-page>
+  </view>
   <!-- 是否显示侯丽萍风湿骨病中医医院页面 -->
   <view wx:if="{{ showOrgID == 1 || showOrgID == 6 || showOrgID == 0}}">
     <!-- 引入wxs脚本 -->

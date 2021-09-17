@@ -123,6 +123,7 @@ Page({
     glhOrgID: [], // 甘露海
     harbinyouhaoOrgID: [], // 哈尔滨友好医院机构ID
     jinkezangyaoOrgID: [], //金科藏药
+    arulaOrgID: [], //阿茹拉
     dazhongOrgID: [], // 大冢医药机构ID
     tmcneikeOrgID: [], // tmc内科
     xinnaoxueguanOrgID: [], //新脑血管机构ID
@@ -205,6 +206,7 @@ Page({
     that.data.andrologyOrgID = HTTP.andrologyOrgIDFun(); // 获取桃子互联网医院男科诊疗中心机构ID
     that.data.glhOrgID = HTTP.glhOrgIDFun()
     that.data.jinkezangyaoOrgID = HTTP.jkzyOrgIDFun();
+    that.data.arulaOrgID = HTTP.arlOrgIDFun();
     // 先监听是否尝试了登录：isStartLogin
     if (app.globalData.isStartLogin) {
       if (app.globalData.isInitInfo) {
@@ -337,7 +339,7 @@ Page({
     let that = this;
     that.setData({
       shareOrgID: wx.getStorageSync("shareOrgID"),
-      // shareOrgID: "20050916495074555320511240",
+      // shareOrgID: "21051717240029338520511240",
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
 
@@ -407,6 +409,13 @@ Page({
       that.setData({
         showOrgID: 10,
         isShowGlhID: that.data.jinkezangyaoOrgID.indexOf(that.data.shareOrgID)
+      })
+      that.initDefaultFun();
+    } else if (that.data.arulaOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是金科藏药
+      that.setData({
+        showOrgID: 11,
+        isShowGlhID: that.data.arulaOrgID.indexOf(that.data.shareOrgID)
       })
       that.initDefaultFun();
     } else { // 默认显示成都华府中医远程诊疗中心
@@ -601,6 +610,7 @@ Page({
     let that = this;
     let params = {
       orgID: that.data.shareOrgID
+      // orgID: "21090717240102293250511143"
     }
     HTTP.getHospitalInfo(params).then(res => {
       if (res.code == 0 && res.data) {
@@ -628,7 +638,7 @@ Page({
     let that = this;
     that.setData({
       shareOrgID: wx.getStorageSync("shareOrgID"),
-      // shareOrgID: "20050916495074555320511240",
+      // shareOrgID: "21051717240029338520511240",
       shareAssistantStaffID: wx.getStorageSync("shareAssistantStaffID")
     });
     // 判断是否是侯丽萍中医院远程门诊
@@ -683,6 +693,11 @@ Page({
       // 判断是否是金科藏药
       that.setData({
         showOrgID: 10,
+      })
+    } else if (that.data.arulaOrgID.indexOf(that.data.shareOrgID) > -1) {
+      // 判断是否是金科藏药
+      that.setData({
+        showOrgID: 11,
       })
     } else {
       that.setData({

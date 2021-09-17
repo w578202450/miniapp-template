@@ -145,6 +145,11 @@ App({
     //   orgID: "21051717240029338520511240",
     //   assistantStaffID: "21051718313938717280514240"
     // }
+    //  arula
+    // options = {
+    //   orgID: "21090717240102293250511143",
+    //   assistantStaffID: "21090814172199292530514240"
+    // }
 
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数

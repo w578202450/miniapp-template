@@ -1,0 +1,63 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "pages/index/service-index/ht/module-title/module-title",
+          "pathName": "pages/index/service-index/ht/module-title/module-title",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "首页",
+          "pathName": "pages/index/home-index/home-index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "专家门诊",
+          "pathName": "pages/index/service-index/service-index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "我的页",
+          "pathName": "pages/personal-center/personal-center",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/home-index/home-index",
+          "pathName": "pages/index/home-index/home-index",
+          "query": "?orgID=19121923373037086560511253&assistantStaffID=20011320532175746910514253",
+          "scene": null
+        },
+        {
+          "name": "pages/online-inquiry/inquiry/chat/chat",
+          "pathName": "pages/online-inquiry/inquiry/chat/chat",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/home-index/home-index",
+          "pathName": "pages/index/home-index/home-index",
+          "query": "orgID=21090717240102293250511143&assistantStaffID=21090814172199292530514240",
+          "scene": null
+        }
+      ]
+    }
+  }
+}
