@@ -1,107 +1,71 @@
-<view class="page">
-  <!-- <view class="head-image">
-  </view> -->
-  <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
-    style="height: 316rpx; width: 100%">
-    <block wx:for="{{background}}" wx:index="{{index}}" wx:key="bannerList">
-      <swiper-item class="swiper-item">
-        <image src="{{item}}" class="slide-image {{swiperIndex == index ? 'active' : ''}}" style="height: 316rpx; width: 100%"/>
-      </swiper-item>
-    </block>
-  </swiper>
-  <view class="content">
-    <view class="card-image">
-      <view class="expert-title">专业医生在线答疑</view>
-      <view class="expert-click" bindtap="toServiceIndexFun" decode="{{true}}">立即进入\t\t专家门诊\t\t<image
-          src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709232297217160201240.png">
-        </image>
-      </view>
-      <view class="expert-power">
-        <view class="power-item">
-          <image
-            src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709215336192540201240.png">
-          </image>
-          <view>咨询疾病</view>
+<view class="main-container">
+  <view class="banner-container">
+    <view class="banner-list">
+      <image class="banner-image" src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102010521966606780201240.png" />
+    </view>
+  </view>
+  <view class="section-container">
+    <view class="image-container">
+      <view class="arula-styles">
+        <view class="arula-title">
+          <view class="arula-style1">三甲医院知名藏医</view>
+          <view class="arula-style2">资深藏医专家/实名认证/经验丰富</view>
         </view>
-        <view class="power-item">
-          <image
-            src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709244251748960201233.png">
-          </image>
-          <view>了解藏药</view>
-        </view>
-        <view class="power-item">
-          <image
-            src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709242888655600201240.png">
-          </image>
-          <view>了解藏药</view>
+        <view class="arula-button" bindtap="handleClick">
+          GO
         </view>
       </view>
     </view>
-    <view class="card-export" bindtap="toServiceIndexFun">
-      <view class="export-head">
-        <view class="head-left"></view>
-        <view class="head-right"></view>
+    <view class="department-container">
+      <view class="department-title">藏医传统优势科室推荐
+        <image class="small-icon" src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21100917063771520980201233.png" />
       </view>
-      <view class="export-content">
-        <view class="export-content-left">
-          <view class="export-name">才让端智
-          </view>
-          <view class="export-detail">主治医师</view>
-          <view class="export-detail">阿如拉互联网医院</view>
+      <view class="arula-list-box">
+        <view class="arula-box" bindtap="handleClick">
+          <image src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102009482250484020201233.png"></image>
+          <text>心脑血管</text>
         </view>
-        <view class="export-content-right">
-          <image
-            src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709221297365490201233.png">
-          </image>
+        <view class="arula-box" bindtap="handleClick">
+          <image src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102009484161759430201240.png"></image>
+          <text>男科</text>
         </view>
-      </view>
-    </view>
-    <view class="article-card" bindtap="goDetail">
-      <view class="article-card-left">
-        <image
-          src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709224839068720201233.png">
-        </image>
-      </view>
-      <view class="article-card-right">
-        <view class="article-card-right-head">
-          <view class="article-card-right-head-name">探索金诃藏药</view>
-          <view class="article-card-right-head-image">
-            <image
-              src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709235814840790201240.png">
-            </image>
-          </view>
-        </view>
-        <view class="article-card-right-content">
-          藏医历来就非常重视藏药的原材选料，在藏药药材的炮制中，对矿物药材的炮制最为神奇。通过特殊的炮制方法，铁屑在植物药水……
-        </view>
-      </view>
-    </view>
-    <view class="article-card" bindtap="goDetail2">
-      <view class="article-card-left">
-        <image
-          src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709230745904390201233.png">
-        </image>
-      </view>
-      <view class="article-card-right">
-        <view class="article-card-right-head">
-          <view class="article-card-right-head-name">我是金诃藏药，来自世界屋脊</view>
-          <view class="article-card-right-head-image">
-            <image
-              src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709235814840790201240.png">
-            </image>
-          </view>
-        </view>
-        <view class="article-card-right-content">
-          金诃藏药股份有限公司，简称金诃藏药。注册及生产地址位于青海西宁，管理总部、营销中心位于上海浦东，研发中心位于山东济南……
+        <view class="arula-box" bindtap="handleClick">
+          <image src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102009490072829030201233.png"></image>
+          <text>风湿骨病</text>
         </view>
       </view>
     </view>
   </view>
-  <view class="flex-footer">
-    <view class="enter-box" bindtap="toServiceIndexFun">
-      <view class="enter-box-text">立即进入\t\t专家门诊</view>
-      <view class="enter-box-triangle">
+  <view class="doctor-container">
+    <view class="department-title">名医推荐
+      <image class="small-icon" src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21100917063771520980201233.png" />
+    </view>
+    <block wx:for="{{doctorList}}" wx:for-item="item" wx:key="index">
+      <view class="doctor-list" bindtap="handleClick">
+        <view class="container custom-class">
+          <image class="doctor-image" src="{{item.image}}" />
+          <view class="right-box">
+            <view class="right-header">
+              <view style="display: flex;flex-direction: row">
+                <text class="name">{{item.doctorName}}</text>
+                <text class="position">{{item.titleName}}</text>
+              </view>
+              <view wx:if='{{item.online}}' class="show-online">在线</view>
+              <view wx:else='{{item.online}}' class="show-offline">离线</view>	
+            </view>
+            <view class="right-middle">擅长：{{item.goodAt}}</view>
+            <view class="right-bottom">
+              阿如拉互联网医院
+            </view>
+          </view>
+        </view>
       </view>
+    </block>
+  </view>
+  <view class="bottom-box">
+    <view>
+      <image class="qrcode-image" src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21100916174304266900201233.png"></image>
+      <view class="qrcode-title">客服服务</view>
     </view>
   </view>
 </view>

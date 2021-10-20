@@ -3,135 +3,31 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    // homeBannerDefaultUrl: {
-    //   type: String,
-    //   value: ""
-    // },
-    rectangleBackgroundImg: {
-      type: String,
-      value: ""
-    },
-    onload:{
-      type: Boolean,
-      value: false,
-      observer: function (newVal, oldVal) {
-        this.createHelpfulNumFun()
-      }
-    } 
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    satisfybgtitle: "/images/home/title_bg.png",
-    satisfybg1: "https://com-shuibei-peach-static.100cbc.com/tmccontent/8788/org/feichange01.png",
-    satisfybg2: "https://com-shuibei-peach-static.100cbc.com/tmccontent/6788/org/feichange02.png",
-    homeDazhongLeft: "/images/home/home_dazhong_left.png",
-    homeDazhongRight: "/images/home/home_dazhong_right.png",
-    homeBannerDefaultUrl: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_1.png", // 首页banner
-    middleOnefei1: "https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21090815083829252840201233.png",
-    middleOnefei2: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_3.png",
-    middleOnefei3: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_4.png",
-    middleOnefei4: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/home_jkzy_1.png",
-    helpfulNum: 12324,
-    helpmedicineIcon: "/images/home/help_medicine.png",
-    medicineIcon: "/images/home/home_dazhong_medicine.png",
-    bottomIcon: "/images/home/home_dazhong_bottom_icon.png",
-    rectangleBackgroundImg: "/images/home/home_rectangle_background.png",
-    patientList: [
-      {
-        keyID: "1",
-        patientName: "李**",
-        content: "已获得免费持续治疗援助1支",
-        time: "刚刚"
-      },
-      {
-        keyID: "2",
-        patientName: "苏**",
-        content: "已获得免费持续治疗援助2支",
-        time: "1分钟前"
-      },
-      {
-        keyID: "3",
-        patientName: "刘**",
-        content: "已获得免费援助药品1个月用量",
-        time: "3分钟前"
-      },
-      {
-        keyID: "4",
-        patientName: "蒋**",
-        content: "已获得免费持续治疗援助1支",
-        time: " 8分钟前"
-      },
-      {
-        keyID: "5",
-        patientName: "王**",
-        content: "已获得免费持续治疗援助2支",
-        time: "15分钟前"
-      },
-      {
-        keyID: "6",
-        patientName: "李**",
-        content: "已获得免费援助药品1个月用量",
-        time: "19分钟前"
-      },
-      {
-        keyID: "7",
-        patientName: "陈**",
-        content: "已获得免费持续治疗援助2支",
-        time: "20分钟前"
-      },
-      {
-        keyID: "8",
-        patientName: "曾**",
-        content: "已获得免费持续治疗援助1支",
-        time: "27分钟前"
-      },
-      {
-        keyID: "9",
-        patientName: "赖**",
-        content: "已获得免费持续治疗援助2支",
-        time: "半小时前"
-      },
-      {
-        keyID: "10",
-        patientName: "邱**",
-        content: "已获得免费持续治疗援助2支",
-        time: "半小时前"
-      },
-      {
-        keyID: "11",
-        patientName: "邢**",
-        content: "已获得免费援助药品1个月用量",
-        time: "半小时前"
-      },
-      {
-        keyID: "12",
-        patientName: "徐**",
-        content: "已获得免费持续治疗援助2支",
-        time: "半小时前"
-      },
-      {
-        keyID: "13",
-        patientName: "贾**",
-        content: "已获得免费持续治疗援助1支",
-        time: "1小时前"
-      },
-      {
-        keyID: "14",
-        patientName: "汪**",
-        content: "已获得免费持续治疗援助2支",
-        time: "1小时前"
-      }
-    ],
-
-    autoplay: true,
-    interval: 5000,
-    duration: 1000,
-    background: ['https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709213177404030201240.png', 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091711345250786040201240.png'],
-    indicatorDots: true,
-    vertical: false
+    doctorList: [{
+      image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102010260392436390201240.png',
+      doctorName: '才让端智',
+      titleName: '院长',
+      goodAt: '治疗心脑血管疾病、风湿、类风湿性关节炎、消化系统疾病、泌尿、生殖系统疾病、藏医特色养生滋补调理补肾等。',
+      online: true,
+    }, {
+      image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102010263085934490201233.png',
+      doctorName: '胡燕芹',
+      titleName: '副主任医师',
+      goodAt: '治疗各类妇科疑难杂症，对风湿、类风湿性关节炎以及心脑血管、消化系统等疾病有着丰富的临床经验。',
+      online: false,
+    }, {
+      image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102010265805650270201240.png',
+      doctorName: '彭毛东主',
+      titleName: '主任医师',
+      goodAt: '治疗风湿、类风湿性关节炎，银屑病、鱼鳞病、硬皮病、带状疱疹、寻常疣、扁平疣、传染性软疣、荨麻疹、黄褐斑、白癜风等各种皮肤病和尖锐湿疣、生殖器疱疹、梅毒等各种性病。',
+      online: false,
+    }],
   },
 
   /**
@@ -139,34 +35,9 @@ Component({
    */
 
   methods: {
-    goDetail(){
-      console.log('-----')
-      wx.navigateTo({
-        url: '/pages/index/home-index/home-jkzy-detail1/home-jkzy-detail1',
-      })
-    },
-    goDetail2(){
-      wx.navigateTo({
-        url: '/pages/index/home-index/home-jkzy-detail2/home-jkzy-detail2',
-      })
-    },
-    /** 立即进入专家门诊 */
-    toServiceIndexFun() {
+    handleClick() {
       this.triggerEvent('toServiceIndexFun');
     },
-    createHelpfulNumFun: function() {
-      let that = this;
-      var data = "1970-01-01 00:00:00";
-      let date1 = new Date(data.replace(/-/g, '/')); // 开始时间
-      let date2 = new Date(); // 结束时间
-      // console.log(date1.getTime());
-      // console.log(date2.getTime());
-      let date3 = date2.getTime() - date1.getTime(); // 时间差的毫秒数
-      let randomNum = Math.round((date3 / 1000 - (3600 * 24 * 365 * 49.6)) / 1800); /** 一小时加两个 */
-      that.setData({
-        helpfulNum: randomNum + parseInt(wx.getStorageSync("shareOrgID").substring(15,19)) * 10
-      });
-    }
   },
 
 })

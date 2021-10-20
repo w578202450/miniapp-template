@@ -1,253 +1,318 @@
-.page {
+.main-container {
   position: relative;
-  background: #F6F6F6;
-  padding: 0 0 126rpx;
-}
-
-.head-image {
-  width: 100%;
-  height: 316rpx;
-  background-image: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709213177404030201240.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-}
-
-.content {
-  position: relative;
-  margin-top: -24rpx;
-  padding: 0 24rpx;
-}
-
-.card-image {
-  width: 100%;
-  position: relative;
-  background-image: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709234178663140201240.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  height: 270rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.card-image>image {
-  width: 100%;
-}
-
-.expert-title {
-  text-align: center;
-  font-size: 48rpx;
-  color: #262626;
-  font-family: 'Noto Serif SC';
-  border-bottom: 1rpx solid #262626;
-}
-
-.expert-click {
-  background: #FA732F;
-  width: 312rpx;
-  height: 50rpx;
-  border-radius: 64rpx;
-  color: #FFFFFF;
-  font-size: 24rpx;
-  line-height: 50rpx;
-  text-align: center;
-}
-
-.expert-click>image {
-  height: 24rpx;
-  width: 24rpx;
-}
-
-.expert-power {
-  height: 48rpx;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.power-item>image {
-  height: 48rpx;
-  width: 48rpx;
-  margin-right: 16rpx;
-}
-
-.power-item {
-  font-size: 20rpx;
-  color: #595959;
-  height: 48rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-export {
-  background: #FFFFFF;
-  width: 100%;
-  height: 282rpx;
-  margin-top: 24rpx;
-  border-radius: 8rpx;
-  margin-bottom: 28rpx;
-}
-
-.export-head {
-  height: 90rpx;
-  padding-left: 32rpx;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.head-left {
-  height: 62rpx;
-  width: 178rpx;
-  background: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709251765602320201240.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-}
-
-.head-right {
-  height: 90rpx;
-  width: 94rpx;
-  background: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709245848039650201240.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  position: absolute;
-  right: 0;
-}
-
-.export-content {
-  background: #F6F6F6;
-  border-radius: 8rpx;
-  margin: 0 24rpx;
-  /* height: 164rpx; */
-  padding: 18rpx 32rpx;
-  display: flex;
-  align-items: center;
-}
-
-.export-content-left {
-  flex: 1;
-}
-
-.export-name {
-  font-size: 32rpx;
-  color: #262626;
-  font-family: 'PingFang SC';
-}
-
-.export-detail {
-  font-size: 24rpx;
-  color: #595959;
-  font-family: 'PingFang SC';
-}
-
-.export-content-right {
-  height: 128rpx;
-  width: 128rpx;
-}
-
-.export-content-right>image {
+  background: #F6F7F3;
   height: 100%;
+}
+.banner-list{
+  padding: 32rpx;
+}
+.banner-image{
+  height: 300rpx;
   width: 100%;
 }
+.section-container{
+  background: #fff;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+  padding: 32rpx;
+}
 
-.article-card {
-  margin-bottom: 24rpx;
-  background: #FFFFFF;
-  /* width: 100%; */
-  /* height: 186rpx; */
-  padding: 16rpx;
+.arula-styles{
   display: flex;
-  align-items: center;
+  padding-top: 10rpx;
 }
 
-.article-card-left {
-  height: 160rpx;
-  width: 214rpx;
+.arula-style1{
+  color: #FFE4A1;
+  font-family: PingFang SC Bold;
 }
-
-.article-card-left>image {
-  height: 160rpx;
-  width: 214rpx;
+.arula-style2{
+  color: #fff;
+  font-size: 22rpx;
+  font-family: PingFang SC Bold;
 }
-
-.article-card-right {
-  flex: 1;
-  margin-left: 32rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.article-card-right-head {
-  display: flex;
-  align-items: center;
-  height: 40rpx;
-  width: 100%;
-}
-
-.article-card-right-head-name {
-  flex: 1;
-  color: #262626;
-  font-size: 28rpx;
-  font-weight: bold;
-}
-
-.article-card-right-head-image>image {
-  height: 32rpx;
-  width: 32rpx;
-}
-
-.article-card-right-content {
-  color: #595959;
-  font-size: 20rpx;
-  margin-top: 16rpx;
-}
-
-.flex-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 126rpx;
-  opacity: 1;
-  background: #F6F6F6;
-}
-
-.enter-box {
-  margin: 24rpx;
-  width: 100%;
-  height: 86rpx;
-  opacity: 1;
-  background: #FA732F;
-  border-radius: 64rpx;
-  color: #ffffff;
-  font-size: 36rpx;
-  font-family: PingFang SC, PingFang SC-Bold;
+.arula-button{
+  width: 76rpx;
+  height: 76rpx;
+  background: linear-gradient(177deg,#ffe4a1 0%, #d8b04f 100%);
+  box-shadow: 2px 4px 2px 0px #3955d4; 
   text-align: center;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 50%;
+  line-height: 70rpx;
+  margin: 0 50rpx 0 30rpx;
 }
-
-.enter-box-triangle {
-  height: 32rpx;
-  width: 32rpx;
-  background: url(https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21091709232297217160201240.png);
+.image-container{
+  height: 160rpx;
+  display: flex;
+  flex-direction: row;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   -moz-background-size: 100% 100%;
-  margin-left: 12rpx;
-  margin-top: -2px;
+  background-image: url('https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21100916335270284440201240.png');
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.enter-box-text {}
+.arula-list-box{
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.arula-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  border-radius: 20rpx;
+  margin: 0 13rpx;
+}
+.arula-box:nth-of-type(1){
+  background: #F7E8DC;
+}
+.arula-box:nth-of-type(2){
+  background: #EDF1FA;
+}
+.arula-box:nth-of-type(3){
+  background: #F5E2E2;
+}
+
+.arula-box image{
+  width: 148rpx;
+  height: 148rpx;
+}
+.arula-box text{
+  font-family: PingFangSC-Regular, PingFang SC;
+  color: rgba(0,0,0,0.65);
+  padding-bottom: 20rpx;
+}
+
+.department-container{
+  margin-bottom: 32rpx;
+}
+
+.department-title{
+  padding: 35rpx 0 20rpx;
+  display: inline-block;
+  position: relative;
+}
+
+.right-bottom {
+  margin-top: 16rpx;
+  flex-direction: row;
+  font-size: 20rpx;
+  background: rgba(216, 173, 69, 0.2);
+  border-radius: 20rpx;
+  display: inline-block;
+  padding: 5rpx 20rpx;
+  color: #41404B;
+}
+
+.right-bottom-item {
+  background: rgba(241, 247, 250, 1);
+  border-radius: 18rpx;
+  font-size: 24rpx;
+  color: rgba(142, 148, 157, 1);
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin-right: 32rpx;
+}
+
+.divider-class {
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+.container {
+  display: flex;
+  flex-direction: row;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+}
+
+.right-box {
+  flex-direction: column;
+  padding: 32rpx;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.right-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right-middle {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #41404B;
+  line-height: 36rpx;
+  display: -webkit-box;
+}
+
+.right-bottom {
+  margin-top: 16rpx;
+  flex-direction: row;
+}
+
+.right-bottom-item {
+  background: rgba(241, 247, 250, 1);
+  border-radius: 18rpx;
+  font-size: 24rpx;
+  color: rgba(142, 148, 157, 1);
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin-right: 32rpx;
+}
+
+.name {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: rgba(42, 44, 48, 1);
+  line-height: 36rpx;
+}
+
+.position,
+.section {
+  margin-left: 16rpx;
+  font-size: 28rpx;
+  color: #41404B;
+  line-height: 36rpx;
+}
+
+.online-status-box {
+  width: 92rpx;
+  height: 40rpx;
+  border-radius: 40rpx;
+  opacity: 0.6;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.border-selected {
+  border: 1px solid rgba(67, 139, 239, 1);
+}
+
+.border-normal {
+  border: 1px solid rgba(142, 148, 157, 1);
+}
+
+.dot-view-selected {
+  width: 8rpx;
+  height: 8rpx;
+  background: rgba(0, 233, 107, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 233, 107, 0.5);
+}
+
+.dot-view-normal {
+  width: 8rpx;
+  height: 8rpx;
+  background: rgba(142, 148, 157, 1);
+}
+
+.online-status-box text {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: rgba(67, 139, 239, 1);
+}
+
+.online-text-selected {
+  color: rgba(67, 139, 239, 1);
+}
+
+.online-text-normal {
+  color:rgba(142,148,157,1);
+}
+
+.divider {
+  height: 2rpx;
+  background-color: #f6f6ff;
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+}
+/**
+ * @Description: 在线tag样式
+ * @param {*}
+ * @Author: wangwangwang
+ */
+.show-online{
+  border-radius: 30rpx;
+  color: #438BEF;
+  border: 1px solid #438BEF;
+  font-size: 20rpx;
+  padding: 0 15rpx 0 25rpx;
+  position: relative;
+}
+.show-online:before{
+  content:'';
+  display:block;
+  width: 8rpx;
+  height: 8rpx;
+  background: #00e96b;
+  border-radius: 50%;
+  box-shadow: 0px 0px 8px 0px rgba(0,233,107,0.50);
+  position: absolute;
+  top: 12rpx;
+  left: 10rpx;
+}
+.show-offline{
+  border-radius: 30rpx;
+  color: #8E8E93;
+  border: 1px solid #8E8E93;
+  font-size: 20rpx;
+  padding: 0 15rpx 0 25rpx;
+  position: relative;
+}
+.show-offline:before{
+  content:'';
+  display:block;
+  width: 8rpx;
+  height: 8rpx;
+  background: #8E8E93;
+  border-radius: 50%;
+  position: absolute;
+  top: 12rpx;
+  left: 10rpx;
+}
+.doctor-container{
+  background: #fff;
+  padding: 22rpx 32rpx 0;
+  margin-top: 32rpx;
+}
+.doctor-image{
+  padding-top: 32rpx; 
+  padding-bottom: 32rpx;
+  width: 100rpx;
+  height: 100rpx;
+}
+.bottom-box {
+  background-color: #f6f7f3;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 32rpx;
+}
+
+.qrcode-image{
+  width: 131rpx;
+  height: 131rpx;
+}
+.qrcode-title{
+  font-size: 24rpx;
+  color: #B4B7BD;
+  text-align: center;
+  padding-bottom: 30rpx;
+}
+.small-icon{
+  position: absolute;
+  top: 35rpx;
+  right: -10rpx;
+  width: 24rpx;
+  height: 24rpx;
+}
