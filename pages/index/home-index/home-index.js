@@ -256,7 +256,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
@@ -420,7 +419,7 @@ Page({
       that.initDefaultFun();
     } else { // 默认显示成都华府中医远程诊疗中心
       that.setData({
-        showOrgID: 0
+        showOrgID: 11
       })
       that.initFunctionFun();
     }
@@ -701,7 +700,7 @@ Page({
       })
     } else {
       that.setData({
-        showOrgID: 0
+        showOrgID: 11
       })
     }
     // if (this.data.showOrgID === 9 || this.data.showOrgID === 10) {

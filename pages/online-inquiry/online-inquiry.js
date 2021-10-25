@@ -13,7 +13,7 @@ Page({
     screenWidth: app.globalData.systemInfo.screenWidth,
     pixelRatio: app.globalData.systemInfo.pixelRatio,
     isSearchState: false, // 是否第一次加载
-    shareOrgID: "", // 进入页面携带的orgID
+    shareOrgID: "21090717240102293250511143", // 进入页面携带的orgID
     shareAssistantStaffID: "" // 进入页面携带的医助ID
   },
 
@@ -38,22 +38,16 @@ Page({
     // };
     console.log("进入首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
+    wx.setStorageSync("shareOrgID", '21090717240102293250511143');
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
         var scan_url = decodeURIComponent(options.q);
-        let shareOrgID = that.initOptionsFun(scan_url, "orgID");
         let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-        that.data.shareOrgID = shareOrgID ? shareOrgID : "";
-        wx.setStorageSync("shareOrgID", shareOrgID);
         that.data.shareAssistantStaffID = shareAssistantStaffID ? shareAssistantStaffID : "";
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
       } else if (options.assistantStaffID || options.orgID) { // 通过分享的小程序进入时：直接带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数
-        if (options.orgID) {
-          that.data.shareOrgID = options.orgID;
-          wx.setStorageSync("shareOrgID", options.orgID);
-        }
         if (options.assistantStaffID) {
           that.data.shareAssistantStaffID = options.assistantStaffID;
           wx.setStorageSync("shareAssistantStaffID", options.assistantStaffID);

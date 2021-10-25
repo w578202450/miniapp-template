@@ -534,7 +534,10 @@ Page({
       doctorName: that.data.talkInfo.doctorInfo.doctorName,
       assistantStaffID: that.data.userInfo.assistantStaffID,
       assistantName: that.data.talkInfo.assistantInfo.doctorName,
-      talkID: that.data.talkInfo.multiTalkInfo.keyID
+      talkID: that.data.talkInfo.multiTalkInfo.keyID,
+      orgChannelCode: app.globalData.channelData.orgChannelCode,
+      channelStaffID: app.globalData.channelData.channelStaffID,
+      channelStaffName: app.globalData.channelData.channelStaffName,
     };
     HTTP.createInquiry(params).then(res => {
       if (res.code == 0 && res.data) {
@@ -572,7 +575,10 @@ Page({
       doctorName: that.data.talkInfo.doctorInfo.doctorName,
       assistantStaffID: that.data.userInfo.assistantStaffID,
       assistantName: that.data.talkInfo.assistantInfo.doctorName,
-      talkID: that.data.talkInfo.multiTalkInfo.keyID
+      talkID: that.data.talkInfo.multiTalkInfo.keyID,
+      orgChannelCode: app.globalData.channelData.orgChannelCode,
+      channelStaffID: app.globalData.channelData.channelStaffID,
+      channelStaffName: app.globalData.channelData.channelStaffName,
     };
     HTTP.createInquiry(params).then(res => {
       that.setData({

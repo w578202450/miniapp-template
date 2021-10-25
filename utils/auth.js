@@ -138,7 +138,7 @@ function getounionid(isLoginStatus) {
     code: wx.getStorageSync('code') ? wx.getStorageSync('code') : '',
     encryptedData: wx.getStorageSync('encryptedData') ? wx.getStorageSync('encryptedData') : '',
     iv: wx.getStorageSync('iv') ? wx.getStorageSync('iv') : '',
-    source:'tmc'
+    source:'arula'
   }
   return new Promise((resolve,reject)=>{
     HTTP.getWXAuth(params).then(res => {

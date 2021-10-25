@@ -1,3 +1,4 @@
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -36,8 +37,24 @@ Component({
 
   methods: {
     handleClick() {
-      this.triggerEvent('toServiceIndexFun');
+      if (app.globalData.isInitInfo&&app.globalData.unionid && app.globalData.openid) {
+        this.triggerEvent('toServiceIndexFun');
+      } else {
+        let nextPageName = "chat";
+        this.popup.showPopup(nextPageName); // 显示登录确认框
+      }
+    },
+    /**取消事件 */
+    _error() {
+      this.popup.hidePopup();
+    },
+
+    /**确认事件 */
+    _success() {
+      this.popup.hidePopup();
     },
   },
-
+  ready: function() {
+    this.popup = this.selectComponent("#loginDialog");
+  },
 })

@@ -68,4 +68,5 @@
       <view class="qrcode-title">客服服务</view>
     </view>
   </view>
+  <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
 </view>

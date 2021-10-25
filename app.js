@@ -150,15 +150,11 @@ App({
     //   orgID: "21090717240102293250511143",
     //   assistantStaffID: "21090814172199292530514240"
     // }
-
+    wx.setStorageSync("shareOrgID",'21090717240102293250511143');
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数
       var scan_url = decodeURIComponent(options.q);
-      let shareOrgID = that.initOptionsFun(scan_url, "orgID");
       let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-      if (shareOrgID && shareOrgID.length > 0) {
-        wx.setStorageSync("shareOrgID", shareOrgID);
-      }
       if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
         wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
       }
@@ -169,7 +165,6 @@ App({
     } else if (options.assistantStaffID && options.orgID) { // 通过分享的小程序进入时：直接带参
       if (options.orgID && options.orgID.length > 0) {
         that.globalData.isHaveOptions = true; // 进入小程序携带有参数
-        wx.setStorageSync("shareOrgID", options.orgID);
       }
       if (options.assistantStaffID && options.assistantStaffID.length > 0) {
         that.globalData.isHaveOptions = true; // 进入小程序携带有参数
@@ -233,7 +228,6 @@ App({
         that.globalData.isHaveOptions = true; // 进入小程序携带有参数
         if (shareOrgID != wx.getStorageSync("shareOrgID") || shareAssistantStaffID != wx.getStorageSync("shareAssistantStaffID")) {
           console.log("切换医生医助");
-          wx.setStorageSync("shareOrgID", shareOrgID);
           wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
           wx.showLoading({
             title: '拼命加载中...',
@@ -569,6 +563,11 @@ App({
     orgName: '',
     personID: '',
     orgID: '',
+    channelData: {
+      orgChannelCode: '',
+      channelStaffID: '',
+      channelStaffName: '',
+    },
     menuButtonBoundingClientRect: {}, //右上角胶囊的信息
     systemInfo: {}, //小程序系统信息
     navBarHeight: '', //导航栏高度
