@@ -13,7 +13,7 @@ Page({
     screenWidth: app.globalData.systemInfo.screenWidth,
     pixelRatio: app.globalData.systemInfo.pixelRatio,
     isSearchState: false, // 是否第一次加载
-    shareOrgID: "21090717240102293250511143", // 进入页面携带的orgID
+    shareOrgID: HTTP.getOrgId(), // 进入页面携带的orgID
     shareAssistantStaffID: "" // 进入页面携带的医助ID
   },
 
@@ -38,7 +38,7 @@ Page({
     // };
     console.log("进入首页携带的参数：" + JSON.stringify(options));
     app.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
-    wx.setStorageSync("shareOrgID", '21090717240102293250511143');
+    wx.setStorageSync("shareOrgID", HTTP.getOrgId());
     if (options) {
       if (options.q) { // 通过扫码进入时：q的值为url带参
         app.globalData.isHaveOptions = true; // 进入小程序携带有参数

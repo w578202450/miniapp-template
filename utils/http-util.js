@@ -82,6 +82,22 @@ Promise.prototype.finally = function (callback) {
 // 1.通过module.exports方式提供给外部调用
 module.exports = {
 
+  /**
+   * @Description: 获取阿如拉医院的组织Id
+   * @param {*}
+   * @Author: wangwangwang
+   */  
+
+  getOrgId: function getOrgId() {
+    if (version == 0) {
+      return '21090717052104930290511253'
+    } else if (version == 1) {
+      return '21090717052104930290511253'
+    } else if (version == 2) {
+      return '21090717240102293250511143'
+    }
+  },
+
   /**上传文件的路径（图片） */
   uploadFileUrl: function uploadFileUrl() {
     if (version == 0) {
