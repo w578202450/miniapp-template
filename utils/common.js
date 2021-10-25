@@ -71,7 +71,7 @@ function getPatientInfo() {
     city: app.globalData.userInfo.city ? app.globalData.userInfo.city : '',
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
     assistantStaffID: (assistantStaffID && app.globalData.isHaveOptions) ? assistantStaffID : "",
-    orgID: (orgID && app.globalData.isHaveOptions) ? orgID : ""
+    orgID,
   }
   HTTP.getPatientInfo(prams).then(res => {
     if (res.code == 0) {

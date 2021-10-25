@@ -40,7 +40,7 @@
     "minifyWXSS": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.9.4",
+  "libVersion": "2.20.0",
   "appid": "wx5fb22ccad7ed4662",
   "projectname": "TMC%E5%B0%8F%E7%A8%8B%E5%BA%8F",
   "cloudfunctionTemplateRoot": "",
@@ -95,7 +95,7 @@
         {
           "name": "pages/index/home-index/home-index",
           "pathName": "pages/index/home-index/home-index",
-          "query": "?orgID=21090717240102293250511143&assistantStaffID=20011320532175746910514253",
+          "query": "?o=19121923373037086560511253&c=汪汪汪4号1&s=21102217543727958773010060",
           "scene": null
         },
         {

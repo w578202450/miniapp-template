@@ -151,6 +151,24 @@ App({
     //   assistantStaffID: "21090814172199292530514240"
     // }
     wx.setStorageSync("shareOrgID", HTTP.getOrgId());
+    /**
+     * @Description: 扫码进入 设置渠道信息
+     * @param {*} options
+     * @Author: wangwangwang
+     */    
+    if (options.s) {
+      that.globalData.channelData.channelStaffID = options.s;
+      // 同时调接口获取人员名称
+      const params = {
+        orgID: HTTP.getOrgId(),
+        channelCode: options.c,
+        staffID: options.s,
+      }
+      that.initStaff(params);
+    }
+    if (options.c) {
+      that.globalData.channelData.orgChannelCode = options.c;
+    }
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数
       var scan_url = decodeURIComponent(options.q);
@@ -502,6 +520,14 @@ App({
         wx.showToast({
           title: '获取userSig失败'
         });
+      }
+    })
+  },
+
+  initStaff: function (params) {
+    HTTP.getStaffInfo(params).then(res => {
+      if (res.code === 0) {
+        that.globalData.channelData.channelStaffName = res.data.staffName;
       }
     })
   },

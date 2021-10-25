@@ -280,6 +280,9 @@ module.exports = {
   getUserSig: function getUserSig(params) {
     return request('api/rp/initial/getUserSig', true, 'get', params);
   },
+  getStaffInfo: function getStaffInfo(params) {
+    return request('api/tmc/staffUser/getStaffInfo', true, 'get', params);
+  },
   /*
    *获取roomId
    */

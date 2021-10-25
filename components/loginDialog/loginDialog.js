@@ -96,9 +96,9 @@ Component({
       console.log("立即登录 =》 触发回调");
     },
 
-    getUserProfile() {
+    // getUserProfile() {
 
-    },
+    // },
     /**
      * 操作：登录
      */
