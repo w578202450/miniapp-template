@@ -281,7 +281,7 @@ module.exports = {
     return request('api/rp/initial/getUserSig', true, 'get', params);
   },
   getStaffInfo: function getStaffInfo(params) {
-    return request('api/tmc/staffUser/getStaffInfo', true, 'get', params);
+    return request('api/tmc/staffUser/getStaffInfo', true, 'post', params);
   },
   /*
    *获取roomId

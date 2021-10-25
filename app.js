@@ -421,7 +421,7 @@ App({
       sex: that.globalData.userInfo.sex ? that.globalData.userInfo.sex : '',
       city: that.globalData.userInfo.city ? that.globalData.userInfo.city : '',
       province: that.globalData.userInfo.province ? that.globalData.userInfo.province : '',
-      assistantStaffID: (assistantStaffID && that.globalData.isHaveOptions) ? assistantStaffID : "",
+      assistantStaffID:  '21102514370636429400531253' || assistantStaffID,
       orgID: (orgID && that.globalData.isHaveOptions) ? orgID : ""
     }
     console.log("微信登录参数--" + JSON.stringify(prams));
