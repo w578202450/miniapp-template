@@ -62,7 +62,7 @@ App({
      * @Description: 扫码进入 设置渠道信息
      * @param {*} options
      * @Author: wangwangwang
-     */    
+     */   
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数
       let scan_url = decodeURIComponent(options.q);
@@ -104,6 +104,26 @@ App({
   // },
 
   onShow: function (option) {
+    let options = option.query;
+    if (options.q) { // 通过扫码进入时：q的值为url带参
+      that.globalData.isHaveOptions = true; // 进入小程序携带有参数
+      let scan_url = decodeURIComponent(options.q);
+      let s = that.initOptionsFun(scan_url, "s");
+      let c = that.initOptionsFun(scan_url, "c");
+      if (s) {
+        that.globalData.channelData.channelStaffID = s;
+        // 同时调接口获取人员名称
+        const params = {
+          orgID: HTTP.getOrgId(),
+          channelCode: c,
+          staffID: s,
+        }
+        that.initStaff(params);
+      }
+      if (c) {
+        that.globalData.channelData.orgChannelCode = c;
+      }
+    }
     if (that.globalData.isStartLogin && that.globalData.loginNum > 0) {
       // 处理来源的参数
       // wx.showModal({
@@ -111,24 +131,27 @@ App({
       //   content: JSON.stringify(option),
       // });
       that.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
-      let options = option.query;
       let isHaveOrgID = false;
       let isHaveAssiID = false;
       let shareOrgID = "";
       let shareAssistantStaffID = "";
       if (options.q) { // 通过扫码进入时：q的值为url带参
-        var scan_url = decodeURIComponent(options.q);
-        shareOrgID = that.initOptionsFun(scan_url, "orgID");
-        shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-        if (shareOrgID && shareOrgID.length > 0) {
-          isHaveOrgID = true;
+        that.globalData.isHaveOptions = true; // 进入小程序携带有参数
+        let scan_url = decodeURIComponent(options.q);
+        let s = that.initOptionsFun(scan_url, "s");
+        let c = that.initOptionsFun(scan_url, "c");
+        if (s) {
+          that.globalData.channelData.channelStaffID = s;
+          // 同时调接口获取人员名称
+          const params = {
+            orgID: HTTP.getOrgId(),
+            channelCode: c,
+            staffID: s,
+          }
+          that.initStaff(params);
         }
-        if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
-          isHaveAssiID = true;
-        }
-        let p = that.initOptionsFun(scan_url, "p");
-        if (p && p.length > 0) {
-          that.globalData.p = p;
+        if (c) {
+          that.globalData.channelData.orgChannelCode = c;
         }
       } else if (options.assistantStaffID && options.orgID) { // 通过分享的小程序进入时：直接带参
         if (options.orgID && options.orgID.length > 0) {
@@ -322,7 +345,7 @@ App({
       sex: that.globalData.userInfo.sex ? that.globalData.userInfo.sex : '',
       city: that.globalData.userInfo.city ? that.globalData.userInfo.city : '',
       province: that.globalData.userInfo.province ? that.globalData.userInfo.province : '',
-      assistantStaffID,
+      // assistantStaffID,
       orgID,
     }
     console.log("微信登录参数--" + JSON.stringify(prams));

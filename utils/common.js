@@ -70,7 +70,7 @@ function getPatientInfo() {
     sex: app.globalData.userInfo.sex ? app.globalData.userInfo.sex : '',
     city: app.globalData.userInfo.city ? app.globalData.userInfo.city : '',
     province: app.globalData.userInfo.province ? app.globalData.userInfo.province : '',
-    assistantStaffID: assistantStaffID,
+    // assistantStaffID: assistantStaffID,
     orgID,
   }
   HTTP.getPatientInfo(prams).then(res => {
