@@ -53,99 +53,6 @@ App({
     // });
     that.globalData.isHaveOptions = false; // 初始化进入小程序有无携带参数状态
     let options = option.query;
-    // 生产
-    // 华府医院(生产环境)
-    // options = {
-    //   orgID: "19101017081245502880511001",
-    //   assistantStaffID: "20012214121981875310514240"
-    // }
-    // 侯丽萍医院(生产环境)
-    // options = {
-    //   orgID: "20012118570385423810511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
-    // 大冢医药(生产环境)
-    // options = {
-    //   orgID: "20040909515893667880511240",
-    //   assistantStaffID: "20041020111817571130514240"
-    // }
-    // tmc内科
-    // options = {
-    //   orgID: "20052710323479595590511233",
-    //   assistantStaffID: "20052716343567800020514240"
-    // }
-    // 桃子互联网医院减肥中心(生产环境)
-    // options = {
-    //   orgID: "20041517422841582280511240",
-    //   assistantStaffID: "20041522090292997840514240"
-    // }
-    // 心脑血管
-    // options = {
-    //   orgID: "20100909130457178050511001",
-    //   assistantStaffID: "20041522090292997840514240"
-    // }
-    // 桃子互联网医院妇科诊疗中心(生产环境)
-    // options = {
-    //   orgID: "20040111371269634190511240",
-    //   assistantStaffID: "20040111590164711070514240"
-    // }
-    // 桃子互联网医院男科诊疗中心(生产环境)
-    // options = {
-    //   orgID: "20040212494191470440511240",
-    //   assistantStaffID: "20040111590164711070514240"
-    // }
-    // 甘露海
-    // options = {
-    //   orgID: "21022316141979632840511240",
-    //   assistantStaffID: "21022410172231681940514233"
-    // }
-    // 侯=齐晓红
-    // options ={
-    //   orgID: "20031709473895879610511240",
-    //   assistantStaffID: "20020913491781433700514240"
-    // }
-    // 李大山
-    // options = {
-    //   "orgID": "19101017081245502880511001",
-    //   "assistantStaffID": "20012214121981875310514240"
-    // }
-    // 测试
-    // 包正一
-    // options = {
-    //   orgID: "19121923373037086560511253",
-    //   assistantStaffID: "20011320532175746910514253"
-    // }
-    // 包医助
-    // options = {
-    //   orgID: "19121923373037086560511253",
-    //   assistantStaffID: "20011909362464071890514253"
-    // }
-    // 徐
-    // options = {
-    //   assistantStaffID: "20011514000045118050514253",
-    //   orgID: "19101017081245502880511001"
-    // }
-    // 包医生
-    // options = {
-    //   assistantStaffID: "20011909362464071890514253",
-    //   orgID: "19121923373037086560511253"
-    // }
-    // 开发
-    // options = {
-    //   assistantStaffID: "20011109080410712390514001",
-    //   orgID: "19101017081245502880511001"
-    // }
-    //  anluhai 
-    //  options = {
-    //   orgID: "21022316141979632840511240",
-    //   assistantStaffID: "21022410172231681940514233"
-    // }
-    //  jinke
-    // options = {
-    //   orgID: "21051717240029338520511240",
-    //   assistantStaffID: "21051718313938717280514240"
-    // }
-    //  arula
     // options = {
     //   orgID: "21090717240102293250511143",
     //   assistantStaffID: "21090814172199292530514240"
@@ -421,8 +328,8 @@ App({
       sex: that.globalData.userInfo.sex ? that.globalData.userInfo.sex : '',
       city: that.globalData.userInfo.city ? that.globalData.userInfo.city : '',
       province: that.globalData.userInfo.province ? that.globalData.userInfo.province : '',
-      assistantStaffID:  '21102514370636429400531253' || assistantStaffID,
-      orgID: (orgID && that.globalData.isHaveOptions) ? orgID : ""
+      assistantStaffID,
+      orgID,
     }
     console.log("微信登录参数--" + JSON.stringify(prams));
     HTTP.getPatientInfo(prams).then(res => {
@@ -527,7 +434,7 @@ App({
   initStaff: function (params) {
     HTTP.getStaffInfo(params).then(res => {
       if (res.code === 0) {
-        that.globalData.channelData.channelStaffName = res.data.staffName;
+        that.globalData.channelData.channelStaffName = res?.data?.staffName;
       }
     })
   },

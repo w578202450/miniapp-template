@@ -116,11 +116,14 @@ Component({
              // 获取手机号允许回调
              this.triggerEvent("success");
              if(app.globalData.phoneDialogNextPage=='chat'){
-               setTimeout(()=>{
-                app.globalData.isShowCoupon = true
-               },1000)
-               wx.navigateTo({
-                  url: '/pages/online-inquiry/inquiry/chat/chat',
+                setTimeout(()=>{
+                  app.globalData.isShowCoupon = true
+                },1000)
+                // wx.navigateTo({
+                //   url: '/pages/online-inquiry/inquiry/chat/chat',
+                // });
+                wx.switchTab({
+                  url: '/pages/index/service-index/service-index'
                 });
              }else{
               setTimeout(()=>{

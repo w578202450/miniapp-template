@@ -24,7 +24,6 @@ var request = function request(url, needDomain, method, data) {
   return new Promise(function (resolve, reject) {
     let date = Date.parse(new Date());
     let clientType = "wxpro";
-
     let dataValues = md5.objKeySort(data);
     let encodeURI = encodeURIComponent(dataValues + clientType + date + "ka5qEcegfYS3r4dH");
     // 替换encodeURIComponent方法不处理的特殊字符
