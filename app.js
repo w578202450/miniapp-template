@@ -63,29 +63,23 @@ App({
      * @param {*} options
      * @Author: wangwangwang
      */    
-    if (options.s) {
-      that.globalData.channelData.channelStaffID = options.s;
-      // 同时调接口获取人员名称
-      const params = {
-        orgID: HTTP.getOrgId(),
-        channelCode: options.c,
-        staffID: options.s,
-      }
-      that.initStaff(params);
-    }
-    if (options.c) {
-      that.globalData.channelData.orgChannelCode = options.c;
-    }
     if (options.q) { // 通过扫码进入时：q的值为url带参
       that.globalData.isHaveOptions = true; // 进入小程序携带有参数
-      var scan_url = decodeURIComponent(options.q);
-      let shareAssistantStaffID = that.initOptionsFun(scan_url, "assistantStaffID");
-      if (shareAssistantStaffID && shareAssistantStaffID.length > 0) {
-        wx.setStorageSync("shareAssistantStaffID", shareAssistantStaffID);
+      let scan_url = decodeURIComponent(options.q);
+      let s = that.initOptionsFun(scan_url, "s");
+      let c = that.initOptionsFun(scan_url, "c");
+      if (s) {
+        that.globalData.channelData.channelStaffID = s;
+        // 同时调接口获取人员名称
+        const params = {
+          orgID: HTTP.getOrgId(),
+          channelCode: c,
+          staffID: s,
+        }
+        that.initStaff(params);
       }
-      let p = that.initOptionsFun(scan_url, "p");
-      if (p && p.length > 0) {
-        that.globalData.p = p;
+      if (c) {
+        that.globalData.channelData.orgChannelCode = c;
       }
     } else if (options.assistantStaffID && options.orgID) { // 通过分享的小程序进入时：直接带参
       if (options.orgID && options.orgID.length > 0) {
