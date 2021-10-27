@@ -77,6 +77,9 @@ App({
           staffID: s,
         }
         that.initStaff(params);
+      } else {
+        that.globalData.channelData.channelStaffID = '';
+        that.globalData.channelData.channelStaffName = '';
       }
       if (c) {
         that.globalData.channelData.orgChannelCode = c;
@@ -119,6 +122,9 @@ App({
           staffID: s,
         }
         that.initStaff(params);
+      } else {
+        that.globalData.channelData.channelStaffID = '';
+        that.globalData.channelData.channelStaffName = '';
       }
       if (c) {
         that.globalData.channelData.orgChannelCode = c;

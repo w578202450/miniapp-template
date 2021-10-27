@@ -39,7 +39,8 @@ Component({
   data: {
     isHiddenDialog: true, // 是否隐藏
     content_image: "https://com-shuibei-peach-static.100cbc.com/tmcpro/images/home/loginImg.png", // 宣传图片
-    nextPageName: "" // 登录后需要跳转的上一级页面的名字
+    nextPageName: "", // 登录后需要跳转的上一级页面的名字，
+    isClick: false
   },
 
   attached: function (options) {
@@ -104,6 +105,10 @@ Component({
      */
     getUserInfo: function (e) {
       let that = this;
+      if (this.isClick) return;
+      that.setData({
+        isClick: true,
+      })
       wx.getUserProfile({
         desc: '业务需要',
         success: res => {
@@ -114,7 +119,8 @@ Component({
           };
           commonFun.getUserInfo(sendE);
           that.setData({
-            isHiddenDialog: true
+            isHiddenDialog: true,
+            isClick: false,
           });
           this.triggerEvent("success");
         }
