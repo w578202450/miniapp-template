@@ -38,8 +38,9 @@
   box-shadow: 2px 4px 2px 0px #3955d4; 
   text-align: center;
   border-radius: 50%;
-  line-height: 70rpx;
+  line-height: 80rpx;
   margin: 0 50rpx 0 30rpx;
+  font-size: 28rpx;
 }
 .image-container{
   height: 160rpx;

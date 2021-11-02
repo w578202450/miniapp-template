@@ -44,6 +44,18 @@ Component({
         this.popup.showPopup(nextPageName); // 显示登录确认框
       }
     },
+    personClick (e) {
+      let { online } = e.currentTarget.dataset;
+      if (online) {
+        this.handleClick();
+        return
+      }
+      wx.showToast({
+        title: "该医生已离线",
+        icon: 'none',
+        duration: 2000
+      })
+    },
     /**取消事件 */
     _error() {
       this.popup.hidePopup();

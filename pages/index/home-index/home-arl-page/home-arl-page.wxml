@@ -12,12 +12,12 @@
           <view class="arula-style2">资深藏医专家/实名认证/经验丰富</view>
         </view>
         <view class="arula-button" bindtap="handleClick">
-          GO
+          问诊
         </view>
       </view>
     </view>
     <view class="department-container">
-      <view class="department-title">藏医传统优势科室推荐
+      <view class="department-title">藏医传统特色科室推荐
         <image class="small-icon" src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21100917063771520980201233.png" />
       </view>
       <view class="arula-list-box">
@@ -41,7 +41,7 @@
       <image class="small-icon" src="https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21100917063771520980201233.png" />
     </view>
     <block wx:for="{{doctorList}}" wx:for-item="item" wx:key="index">
-      <view class="doctor-list" bindtap="handleClick">
+      <view class="doctor-list" data-online="{{item.online}}" bindtap="personClick">
         <view class="container custom-class">
           <image class="doctor-image" src="{{item.image}}" />
           <view class="right-box">
