@@ -24,8 +24,8 @@ page {
 }
 
 .profile_company_seal {
-  width: 140rpx;
-  height: 140rpx;
+  width: 240rpx;
+  height: 190rpx;
 }
 
 .header-content {
