@@ -122,9 +122,26 @@ Component({
                 // wx.navigateTo({
                 //   url: '/pages/online-inquiry/inquiry/chat/chat',
                 // });
-                wx.switchTab({
-                  url: '/pages/index/service-index/service-index'
-                });
+                const params = {
+                  orgID: HTTP.getOrgId(),
+                  doctorID: HTTP.getDoctorId(app.globalData.doctorType),
+                  personID: app.globalData.personID,
+                }
+                HTTP.repalceAssicDocandassistgroup(params).then(res => {
+                  if (res) {
+                    wx.setStorage({
+                      key: 'shareDoctorStaffID',
+                      data: res.data.doctorStaffID
+                    });
+                    wx.setStorage({
+                      key: 'shareAssistantStaffID',
+                      data: res.data.assistantStaffID
+                    });
+                    wx.switchTab({
+                      url: '/pages/index/service-index/service-index'
+                    });
+                  }
+                })
              }else{
               setTimeout(()=>{
                 app.globalData.isShowCoupon = true

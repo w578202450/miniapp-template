@@ -1,4 +1,5 @@
 const app = getApp();
+const HTTP = require('../../../../utils/http-util');
 Component({
   /**
    * 组件的属性列表
@@ -15,6 +16,12 @@ Component({
       doctorName: '才让端智',
       titleName: '院长',
       goodAt: '治疗心脑血管疾病、风湿、类风湿性关节炎、消化系统疾病、泌尿、生殖系统疾病、藏医特色养生滋补调理补肾等。',
+      online: true,
+    }, {
+      image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21111014131960327170201233.png',
+      doctorName: '匡凤玲',
+      titleName: '主治医师',
+      goodAt: '擅长以中藏药为主的联合用药，治疗各种疼痛，慢性病综合调理，妇科疾病，月经失调，不孕不育，乳腺疾病，更年期综合症等。',
       online: true,
     }, {
       image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102010263085934490201233.png',
@@ -53,9 +60,32 @@ Component({
       }
     },
     personClick (e) {
-      let { online } = e.currentTarget.dataset;
+      let { online, index } = e.currentTarget.dataset;
       if (online) {
-        this.handleClick();
+        if (app.globalData.isInitInfo&&app.globalData.unionid && app.globalData.openid) {
+          const params = {
+            orgID: HTTP.getOrgId(),
+            doctorID: HTTP.getDoctorId(index),
+            personID: app.globalData.personID,
+          }
+          HTTP.repalceAssicDocandassistgroup(params).then(res => {
+            if (res) {
+              wx.setStorage({
+                key: 'shareDoctorStaffID',
+                data: res.data.doctorStaffID
+              });
+              wx.setStorage({
+                key: 'shareAssistantStaffID',
+                data: res.data.assistantStaffID
+              });
+            }
+            this.triggerEvent('toServiceIndexFun');
+          })
+        } else {
+          app.globalData.doctorType = index;
+          let nextPageName = "chat";
+          this.popup.showPopup(nextPageName); // 显示登录确认框
+        }
         return
       }
       wx.showToast({

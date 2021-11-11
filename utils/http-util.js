@@ -97,6 +97,21 @@ module.exports = {
     }
   },
 
+  /**
+   * @Description: 阿如拉医院环境医生对应的DoctorId
+   * @param {*}
+   * @Author: wangwangwang
+   */  
+  getDoctorId: function (type) {
+    if (version == 0) {
+      return ['21092815053202379110514253', '21111116504373522730514253'][type]
+    } else if (version == 1) {
+      return ['21092815053202379110514253', '21111116504373522730514253'][type]
+    } else if (version == 2) {
+      return ['21090717424520257320514240', '21110914581662694060514143'][type]
+    }
+  },
+
   /**上传文件的路径（图片） */
   uploadFileUrl: function uploadFileUrl() {
     if (version == 0) {
@@ -750,5 +765,9 @@ module.exports = {
   // 是否显示医助
   getAssistantIsShow: function getAssistantIsShow(params) {
     return request("api/peachUser/assistantGroup/getAssistantIsShow", true, 'get', params)
+  },
+  // 点击医生后获取医生及医助ID
+  repalceAssicDocandassistgroup: function repalceAssicDocandassistgroup(params) {
+    return request("api/tmc/patient/repalceAssicDocandassistgroup", true, 'post', params)
   }
 }

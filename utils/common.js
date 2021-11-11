@@ -340,7 +340,7 @@ function inquiryRequestMsgFun() {
 /**立即支付（处方预览页、订单列表页） */
 function payRequestMsgFun(keyID) {
   wx.requestSubscribeMessage({
-    tmplIds: ['hBPUgl3RHy-KuVk7eBiMU2stkPDb3um8r82dkiYBnLA', 'WeVLzfJ2VYdZyI9DLGS-QxJllsT7x1YSm-7EGYeGGI8'], // 1-药品发货、 2-退费成功
+    tmplIds: ['hBPUgl3RHy-KuVk7eBiMU2stkPDb3um8r82dkiYBnLA', 'WeVLzfJ2VYdZyI9DLGS-QzXWe09gSgin5uVGaiKmpyM'], // 1-药品发货、 2-退费成功
     success(res) {},
     fail(err) {
       wx.showToast({

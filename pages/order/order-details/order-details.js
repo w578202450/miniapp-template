@@ -247,7 +247,8 @@ Page({
         detail: '远程诊疗中心',
         transID: paymentID,
         sysCode: 'person-tmc',
-        openID: wx.getStorageSync('openID')
+        openID: wx.getStorageSync('openID'),
+        orgID: app.globalData.orgID,
       })
       .then(res => {
         wx.hideLoading();

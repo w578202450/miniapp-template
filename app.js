@@ -504,6 +504,7 @@ App({
     tim: null,
     TIM: null,
     p: "",
+    doctorType: '',
     isInitInfo: false, // false：未登录  ：true已登录
     loginNum: 0, // 登录次数
     isHaveOptions: false, // 进入小程序是否携带参数
