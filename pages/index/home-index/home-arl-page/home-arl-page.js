@@ -78,6 +78,7 @@ Component({
                 key: 'shareAssistantStaffID',
                 data: res.data.assistantStaffID
               });
+              wx.setStorageSync('personInfo', res.data);
             }
             this.triggerEvent('toServiceIndexFun');
           })

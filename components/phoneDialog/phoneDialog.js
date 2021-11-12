@@ -137,6 +137,7 @@ Component({
                       key: 'shareAssistantStaffID',
                       data: res.data.assistantStaffID
                     });
+                    wx.setStorageSync('personInfo', res.data);
                     wx.switchTab({
                       url: '/pages/index/service-index/service-index'
                     });
