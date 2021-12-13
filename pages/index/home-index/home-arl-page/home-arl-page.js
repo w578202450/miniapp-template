@@ -36,13 +36,20 @@ Component({
       goodAt: '治疗风湿、类风湿性关节炎，银屑病、鱼鳞病、硬皮病、带状疱疹、寻常疣、扁平疣、传染性软疣、荨麻疹、黄褐斑、白癜风等各种皮肤病和尖锐湿疣、生殖器疱疹、梅毒等各种性病。',
       online: false,
     }, 
-    // {
-    //   image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21102010265805650270201240.png',
-    //   doctorName: '张健',
-    //   titleName: '主任医师',
-    //   goodAt: '各种类型的急慢性肝炎、肝硬化、脂肪肝、胆囊炎、胆石症及胃肠疾病，特别对肝硬化腹水、肝癌、慢性萎 缩性胃炎的治疗，具有较s深的理论研究和丰富的临床经验。',
-    //   online: false,
-    // }
+    {
+      image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21121309573358125990201233.png',
+      doctorName: '张健',
+      titleName: '主任医师',
+      goodAt: '各种类型的急慢性肝炎、肝硬化、脂肪肝、胆囊炎、胆石症及胃肠疾病，特别对肝硬化腹水、肝癌、慢性萎 缩性胃炎的治疗，具有较深的理论研究和丰富的临床经验。',
+      online: false,
+    },
+    {
+      image: 'https://com-shuibei-peach-pharmacy.100cbc.com/rp/21030410325655262692822001/21121309570309855430201233.png',
+      doctorName: '更登加措',
+      titleName: '主治医师',
+      goodAt: '治疗类风湿性关节炎、心脑血管疾病、肝胆系统疾病等，对慢性疾病的管理治疗有着丰富的临床经验。',
+      online: false,
+    }
   ],
   },
 
