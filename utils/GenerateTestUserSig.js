@@ -3,12 +3,12 @@
  * @Autor: wangwangwang
  * @Date: 2021-10-20 14:46:22
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-11-11 18:56:19
+ * @LastEditTime: 2021-12-16 14:10:05
  */
 /*eslint-disable*/
 import LibGenerateTestUserSig from './lib-generate-test-usersig-es.min.js'
 
-const version = 2//0开发 1测试 2生产
+const version = 1//0开发 1测试 2生产
 
 let _SDKAPPID=''
 switch(version){

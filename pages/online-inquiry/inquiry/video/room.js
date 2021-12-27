@@ -625,7 +625,7 @@ Page({
     };
     HTTP.updateDocInquiryType(params).then(res => {
       // console.log("主动拨打的取消或拒绝接听视频，修改响应状态成功");
-      that.goBack();
+      // that.goBack();
     }).catch((err) => {
       console.log(err)
       that.goBack();
@@ -646,7 +646,7 @@ Page({
     HTTP.endVideoInquiry(params).then(res => {
       console.log(res);
       console.log("挂断视频，结束问诊成功");
-      that.goBack();
+      // that.goBack();
     }).catch((err) => {
       console.log(err);
       that.goBack();

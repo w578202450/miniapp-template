@@ -962,23 +962,17 @@ Page({
     } else if (fun == "videoWxFun") {
       // 处理一
       // 主动发起不需要传inquiryID;
-      // if (that.data.isOverChat) {
-      //   that.setData({
-      //     hidden: false // 显示加载中
-      //   });
-      //   let type = "videoFun";
-      //   that.createInquirySelf(type);
-      // } else {
-      //   that.videoWxFun();
-      // }
-
+      that.setData({
+        maySendContent: "你好，我需要要视频问诊"
+      });
+      that.sendMessageFun();
       // 处理二
       // 提示用户：发消息联系医生医助，想要与医生进行视频问诊。
-      wx.showToast({
-        title: "您可发消息联系医生助理为您预约视频问诊",
-        icon: "none",
-        duration: 2000
-      });
+      // wx.showToast({
+      //   title: "您可发消息联系医生助理为您预约视频问诊",
+      //   icon: "none",
+      //   duration: 2000
+      // });
     }
   },
 
