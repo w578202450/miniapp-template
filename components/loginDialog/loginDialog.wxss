@@ -96,4 +96,8 @@
 .tip-box .tip-txt {
   font-size: 24rpx;
   color: #86888B;
+  padding: 0 20rpx;
+}
+.agree-text{
+  color: #438bef;
 }

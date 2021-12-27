@@ -2,10 +2,15 @@
 <view>
   <!-- 引入wxs脚本 -->
   <wxs src="../../../wxs/wxsCommon.wxs" module="comTools" />
+  <view>
+    <home-arl-page onload="{{true}}" bind:toServiceIndexFun="{{isFirstClick?'toOnlineInqueryFun':''}}">
+    </home-arl-page>
+  </view>
+  <coupon-dialog id='couponDialog' couponData="{{couponData}}"></coupon-dialog>
   <!-- 标题 -->
-  <view class="title-box">
+  <!-- <view class="title-box"> -->
     <!-- 问诊标题 -->
-    <view hidden="{{scrollTop == 0}}" style="height:{{statusBarHeight + navBarHeight + 34}}px">
+    <!-- <view hidden="{{scrollTop == 0}}" style="height:{{statusBarHeight + navBarHeight + 34}}px">
       <view class="title-custom-box" style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
         <text class="title-name-text">{{doctorInfo.doctorName}}</text>
         <text class="title-defalut-text"
@@ -16,38 +21,38 @@
         <text class="button-text">立即问诊</text>
       </view>
       <view class="cutting-line"></view>
-    </view>
-    <view hidden="{{scrollTop != 0}}" class="title-default-box"
+    </view> -->
+    <!-- <view hidden="{{scrollTop != 0}}" class="title-default-box"
       style="padding-top:{{statusBarHeight}}px;height:{{navBarHeight}}px">
       <view class="home-icon-box" style="height: {{capsuleRect.height}}px;width: {{capsuleRect.height}}px"
         bindtap="goToBackHome">
         <image src="{{ navHomeIconBlack }}"></image>
       </view>
       <text class="title-name-text" style="color:#ffffff;">专家门诊</text>
-    </view>
-  </view>
+    </view> -->
+  <!-- </view> -->
   <!-- 专家门诊专家信息 -->
-  <service-specialistInfo  sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}"
+  <!-- <service-specialistInfo  sectionBanner="{{sectionBanner}}" doctorInfo="{{doctorInfo}}"
     assistantDoctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" certifyInfo="{{certifyInfo}}"
-    navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun" />
+    navTitle="专家门诊" bind:previewDoctorInfo="previewDoctorInfo" bind:toOnlineInqueryFun="toOnlineInqueryFun" /> -->
   <!-- 医生团队 -->
   <!-- <service-physicianTeam pageStyle="margin-bottom:20rpx" doctorInfo="{{assistantDoctorInfo}}" doctorDisease="{{doctorDisease}}" /> -->
   <!-- 资格证书 -->
   <!-- <service-certification pageStyle="margin-top:20rpx;margin-bottom:20rpx" bind:showBottomDialog="showBottomDialog">
   </service-certification> -->
   <!-- 患者评价 -->
-  <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}"
-    evaluateAllData="{{evaluateAllData}}" />
+  <!-- <patient-evaluate wx:if="{{evaluateAllData.doctorID && evaluateAllData.doctorID > 0}}"
+    evaluateAllData="{{evaluateAllData}}" /> -->
   <!-- 医生手记 -->
-  <notes paersonInfo="{{inquiryCaseData}}" httpParams="{{inquiryCaseData.httpParams}}" />
+  <!-- <notes paersonInfo="{{inquiryCaseData}}" httpParams="{{inquiryCaseData.httpParams}}" /> -->
   <!-- 患者分享 -->
   <!-- <share paersonInfo="{{patientShareGetData}}" wx:if="{{patientShareGetData.keyID}}" httpParams="{{patientShareGetData.httpParams}}" /> -->
   <!-- 文章模块 -->
-  <service-news id="article" pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}"
-    baseParams="{{baseParams}}" />
+  <!-- <service-news id="article" pageStyle="margin-top:20rpx;margin-bottom:20rpx" articleTitles="{{articleTitles}}"
+    baseParams="{{baseParams}}" /> -->
   <!-- 登录弹框 -->
   <login-dialog id="loginDialog" bind:error="_error" bind:success="_success" />
-  <view class="bottom-box">
+  <!-- <view class="bottom-box">
     <view class="bottom-item-one">
       <image style="width: 24rpx;height: 24rpx" src="{{copyrightInfo.copyrightIcon}}"></image>
       <text>{{copyrightInfo.details_one}}</text>
@@ -56,12 +61,12 @@
     </view>
     <text style="margin-top:20rpx">{{copyrightInfo.details_three}}</text>
     <text style="margin-top:20rpx">{{copyrightInfo.details_four}}</text>
-  </view>
+  </view> -->
   <!-- 立即问诊浮窗 -->
-  <view class="topToInquiryFloat" bindtap="{{isFirstClick?'toOnlineInqueryFun':''}}">
+  <!-- <view class="topToInquiryFloat" bindtap="{{isFirstClick?'toOnlineInqueryFun':''}}">
     <view>立即</view>
     <view>问诊</view>
-  </view>
+  </view> -->
   <!-- 底部tab菜单 -->
   <view style="height: 145rpx;">
     <tab-bar secIndex="{{0}}" />

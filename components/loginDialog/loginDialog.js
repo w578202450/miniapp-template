@@ -53,6 +53,23 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    handleAgree: function (e) {
+      let index = e.currentTarget.dataset['index'];
+      switch (index) {
+        case '1':
+          wx.navigateTo({
+            url: '/pages/agreement/useragreement/useragreementindex',
+          })
+          break;
+        case '2':
+          wx.navigateTo({
+            url: '/pages/agreement/privacyagreement/privacyagreementindex',
+          })
+          break;
+        default:
+          break;
+      }
+    },
     getPhone: function () {
       console.log('====++++')
       //获得popup组件：登录确认框

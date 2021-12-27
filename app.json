@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/home-index/home-index",
     "pages/index/service-index/service-index",
+    "pages/index/home-index/home-index",
     "pages/index/service-index/ht/patient-evaluate-list/patient-evaluate-list",
     "pages/index/service-index/ht/video-and-h5/video-and-h5",
     "pages/index/service-index/wth/notes-list/notes-list",
@@ -32,7 +32,9 @@
     "pages/personal-center/my-coupon/my-coupon",
     "components/couponDialog/couponDialog",
     "pages/index/home-index/home-glh-detail1/home-glh-detail1",
-    "pages/index/home-index/home-glh-detail2/home-glh-detail2"
+    "pages/index/home-index/home-glh-detail2/home-glh-detail2",
+    "pages/agreement/useragreement/useragreementindex",
+    "pages/agreement/privacyagreement/privacyagreementindex"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -646,7 +646,7 @@ Page({
     HTTP.endVideoInquiry(params).then(res => {
       console.log(res);
       console.log("挂断视频，结束问诊成功");
-      // that.goBack();
+      that.goBack();
     }).catch((err) => {
       console.log(err);
       that.goBack();

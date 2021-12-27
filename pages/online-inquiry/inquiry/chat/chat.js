@@ -125,7 +125,7 @@ Page({
     }, 500)
     if (!app.globalData.isInitInfo || !app.globalData.orgID) {
       wx.reLaunch({
-        url: '/pages/index/home-index/home-index',
+        url: '/pages/index/service-index/service-index',
       })
       return
     }
@@ -1537,7 +1537,7 @@ Page({
       });
     } else {
       wx.reLaunch({
-        url: '/pages/index/home-index/home-index'
+        url: '/pages/index/service-index/service-index'
       });
     }
   },
@@ -1546,10 +1546,10 @@ Page({
     // let orgID = wx.getStorageSync("orgID");
     // let assistantStaffID = wx.getStorageSync("shareAssistantStaffID");
     // wx.reLaunch({
-    //   url: '/pages/index/home-index/home-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
+    //   url: '/pages/index/service-index/service-index?orgID=' + orgID + '&assistantStaffID=' + assistantStaffID
     // });
     wx.reLaunch({
-      url: '/pages/index/home-index/home-index'
+      url: '/pages/index/service-index/service-index'
     });
   }
   /**模拟跳转到素材 */
