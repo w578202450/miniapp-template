@@ -1,9 +1,0 @@
-<view class="page">
-  <!-- <navigation-bar navbarTitle="八大优势" /> -->
-  <view class="banner-header">
-    <image class="top-img" src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/jk_gif_top.gif"></image>
-    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
-    <video class="myVideo" src="https://com-shuibei-peach-tmc.100cbc.com/content/21051717240029338520511240/21061911583254501110201240.mp4" binderror="videoErrorCallback"  enable-danmu danmu-btn controls></video>
-    <image class="bottom-img" src="https://com-shuibei-peach-static.oss-cn-shenzhen.aliyuncs.com/tmcpro/images/home/jk_gif_bottom.gif"></image>
-  </view>
-</view>
