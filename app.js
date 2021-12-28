@@ -393,8 +393,6 @@ App({
         }).then((res) => {
           if (res.code === 0) {
             if (res.data.isShow === 0) {
-              console.log('123123')
-              console.log(that.globalData)
               that.globalData.isDoctor = true
             }
           }

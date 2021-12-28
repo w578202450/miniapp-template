@@ -105,6 +105,16 @@ function getPatientInfo() {
         key: 'shareAssistantStaffID',
         data: res.data.assistantStaffID
       });
+      HTTP.getAssistantIsShow({
+        doctorStaffID: res.data.doctorStaffID,
+        assistantStaffID: res.data.assistantStaffID
+      }).then((res) => {
+        if (res.code === 0) {
+          if (res.data.isShow === 0) {
+            app.globalData.isDoctor = true
+          }
+        }
+      })
       // 获取userSig
       getUserSig(res.data.keyID);
     } else {
