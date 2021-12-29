@@ -380,7 +380,7 @@ Page({
           // 被动接收视频，拒绝 =》 修改响应状态
           let type = 3; // 0:待接诊 1:已接诊 2:未响应 3:拒绝 4:取消
           that.updateInqueryStateFun(type);
-          // that.goBack();
+          that.goBack();
         }
         that.exitRoom();
       }

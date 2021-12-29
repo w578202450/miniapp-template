@@ -192,8 +192,8 @@ Page({
                   isSendRecord: false,
                   isOpenBottomBoolbar: false
                 });
-                wx.hideToast(); // 结束录音、隐藏Toast提示框
-                recorderManager.stop();
+                // wx.hideToast(); // 结束录音、隐藏Toast提示框
+                // recorderManager.stop();
               } else if (childType == "createTMCInquiry") {
                 // 创建问诊
                 that.setData({
@@ -963,9 +963,9 @@ Page({
       // 处理一
       // 主动发起不需要传inquiryID;
       that.setData({
-        maySendContent: "你好，我需要要视频问诊"
+        maySendContent: "你好，我需要视频问诊"
       });
-      that.sendMessageFun();
+      that.sendContentMsg();
       // 处理二
       // 提示用户：发消息联系医生医助，想要与医生进行视频问诊。
       // wx.showToast({
