@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "navigation-bar": "/components/navigation-bar/navigation-bar"
-  },
-  "navigationBarTitleText": "发表评价",
-  "navigationStyle": "custom"
-}

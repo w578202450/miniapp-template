@@ -1,9 +1,0 @@
-
-.noDataBox {
-  padding: 20rpx 0;
-  color: #999;
-  text-align: center;
-  font-size: 30rpx;
-  background-color: white;
-  font-family: PingFangSC-Regular, PingFang SC
-}

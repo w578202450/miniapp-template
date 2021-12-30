@@ -1,1 +1,0 @@
-<view class="noDataBox" style="{{hiddenTop ? '' : 'border-top: 1rpx solid #f6f6f6' }}">{{text}}</view>

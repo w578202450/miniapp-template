@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "navigation-bar": "/components/navigation-bar/navigation-bar"
-  },
-  "navigationBarTitleText": "编辑收货地址",
-  "navigationStyle": "custom"
-}

@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "module-title": "/pages/index/service-index/ht/module-title/module-title",
-    "tmc-noData": "/components/tmc-noData/tmc-noData"
-  }
-}

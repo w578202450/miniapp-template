@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "doc-notes": "/pages/index/service-index/wth/doc-notes/docNodes"
-  },
-  "navigationBarTitleText": "手记"
-}

@@ -1,3 +1,0 @@
-<view class="contain" bindtap="loadMoreData">
-  <text class="tip">{{tipText}}</text>
-</view>

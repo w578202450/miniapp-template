@@ -1,6 +1,0 @@
-<view class="page">
-  <navigation-bar navbarTitle="八大优势" />
-  <view class="banner-header">
-    <image mode="widthFix" style="width: 100%;background-size: contain;" src="{{ homeBannerDefaultUrl }}"></image>
-  </view>
-</view>

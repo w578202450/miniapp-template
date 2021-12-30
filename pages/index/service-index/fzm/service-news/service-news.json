@@ -1,7 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "service-news-item": "/pages/index/service-index/fzm/service-news-item/service-news-item",
-    "tmc-noData": "/components/tmc-noData/tmc-noData"
-  }
-}

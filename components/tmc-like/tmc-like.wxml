@@ -1,4 +1,0 @@
-<view class="contain-box" style="{{baseInfo.pageStyle}}" bindtap="tapAction">
-  <image src="{{baseInfo.icon}}"></image>
-  <text style="{{baseInfo.textStyle}}">{{baseInfo.text}}</text>
-</view>

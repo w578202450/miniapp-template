@@ -1,9 +1,0 @@
-{
-  "usingComponents": {
-    "tmcTipsView": "/components/tmc-tips/tmc-tips",
-    "navigation-bar": "/components/navigation-bar/navigation-bar"
-  },
-  "enablePullDownRefresh": true,
-  "navigationBarTitleText": "收货地址",
-  "navigationStyle": "custom"
-}

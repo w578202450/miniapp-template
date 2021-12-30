@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "login-dialog": "/components/loginDialog/loginDialog"
-  }
-}

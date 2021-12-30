@@ -1,8 +1,0 @@
-<view class="page-home">
-  <!-- 是否显示阿茹拉页面 -->
-  <view>
-    <home-arl-page onload="{{true}}" bind:toServiceIndexFun="toServiceIndexFun">
-    </home-arl-page>
-  </view>
-  <coupon-dialog id='couponDialog' couponData="{{couponData}}"></coupon-dialog>
-</view>
