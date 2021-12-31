@@ -75,7 +75,7 @@ function compileStyle() {
    */
   return src(paths.styles.src)
     .pipe(
-      replace(/\@(import\s[^@;]*)+(;import|\bimport|;|\b)?/g, ($1) => {
+      replace(/\\@(import\s[^@;]*)+(;import|\bimport|;|\b)?/g, ($1) => {
         // 与小程序自带的import不同，sass会把@improt的内容打包到当前文件，所以打出来的包会大一点
         // 而小程序限制单包大小不能超过2M，如果由于@import导致包过大，需要注释掉@import(使用自带的import)，等sass编译完后在重新打开
         // 考虑到小程序的样式文件单包应该不会超过2M，而且注释掉@import会导致sass中的变量申明、@mixin功能就不能用了，这里还是选择使用sass的@import功能

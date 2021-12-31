@@ -1,11 +1,11 @@
 /*
- * @Description: 
+ * @Description: 小程序默认首页
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-12-30 17:21:38
+ * @LastEditTime: 2021-12-31 10:51:50
  */
-import StoreManager, { IGlobalData, initGlobalData } from 'store/storeManager'
+import StoreManager, {initGlobalData } from 'store/storeManager'
 
 /**
  * 全局设置默认分享主页
@@ -39,12 +39,14 @@ injectShareForPage()
 App({
   globalData: initGlobalData(),
   onLaunch() {
-    StoreManager.getInstance(this).initLogs()
+    // console.log(StoreManager)
+    console.log(this)
+    // console.log(StoreManager.getInstance(this))
+    // StoreManager.getInstance(this).initLogs()
     // 登录
     wx.login({
       success: (res) => {
         console.log(res.code);
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
       },
       fail: () => {
         wx.showToast({

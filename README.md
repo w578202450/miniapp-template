@@ -1,4 +1,3 @@
-# Introduction
 
 小程序原生开发模板，集成了以下功能：
 
@@ -156,10 +155,10 @@ function compileStyle() {
 
 ### 设置环境变量
 
-1. 在`miniprogram/config`中定义不同环境的 ts 文件
+1. 在`miniprogram/config`中定义不同环境的 js 文件
 2. 使用`cross-env`注入环境变量
 3. gulpfile 中获取环境变量`process.env.NODE_ENV`
-4. 根据`process.env.NODE_ENV`生成 env.ts（从 miniprogram/config 中拷贝）
+4. 根据`process.env.NODE_ENV`生成 env.js（从 miniprogram/config 中拷贝）
 5. 使用如下:
 
 ```
@@ -230,7 +229,6 @@ import { ... } from 'miniprogram_npm/***'
 
 ### 状态管理 - globalData
 
-由于小程序数据不会很复杂，且在小程序中 redux 对 ts 的支持不好，这里直接使用小程序自带的 globalData 来进行状态管理。
 
 1. `使用getApp()` 或者 `在App()函数内使用this` 可获取到小程序全局唯一的 App 实例。
    注意：

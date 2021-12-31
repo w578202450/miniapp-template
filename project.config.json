@@ -6,7 +6,7 @@
   "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
   "libVersion": "2.20.0",
-  "projectname": "wechatMiniprogram",
+  "projectname": "arula-miniapp",
   "scripts": {},
   "setting": {
     "urlCheck": true,

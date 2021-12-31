@@ -10,8 +10,7 @@
   "license": "ISC",
   "scripts": {
     "dev": "cross-env NODE_ENV=development gulp watch",
-    "build:test": "cross-env NODE_ENV=test gulp",
-    "build:prod": "cross-env NODE_ENV=production gulp",
+    "build": "cross-env NODE_ENV=production gulp",
     "clean": "rm -rf dist",
     "lint": "eslint miniprogram/**/*.js",
     "lint:fix": "eslint miniprogram/**/*.js --fix"
@@ -26,7 +25,6 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "gulp": "^4.0.2",
-    "babel-eslint": "^10.0.3",
     "gulp-changed": "^4.0.2",
     "gulp-postcss": "^9.0.0",
     "gulp-rename": "^2.0.0",

@@ -3,7 +3,7 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-12-30 17:18:03
+ * @LastEditTime: 2021-12-30 17:40:20
  */
 
 // 获取应用实例
@@ -11,7 +11,7 @@
 const app = getApp();
 Page({
   data: {
-    showDialog: false,
+    showDialog: true,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),

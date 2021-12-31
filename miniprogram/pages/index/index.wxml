@@ -20,10 +20,9 @@
     </block>
   </view>
   <view class="usermotto">
-    <text class="user-motto">{{ t('helloWorld') }}</text>
-    <button bindtap="changeLanguage">{{ t('toggle') }}</button>
+    <text class="user-motto">你好</text>
   </view>
-  <mp-dialog title="{{t('toggle')}}" show="{{showDialog}}" bindbuttontap="tapDialogButton" buttons="{{[{text: t('english')}, {text: t('chinese')}]}}">
-    <view>{{ t('switchLanguageTip') }}</view>
+  <mp-dialog title="标题" show="{{showDialog}}" bindbuttontap="tapDialogButton" buttons="222">
+    <view>11</view>
   </mp-dialog>
 </view>
