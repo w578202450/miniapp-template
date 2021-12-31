@@ -3,11 +3,12 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-12-30 17:40:20
+ * @LastEditTime: 2021-12-31 14:45:37
  */
 
-// 获取应用实例
+import { getWXAuth } from '../../http/api';
 
+// 获取应用实例
 const app = getApp();
 Page({
   data: {
@@ -27,6 +28,9 @@ Page({
     })
   },
   onLoad() {
+    getWXAuth().then(res => {
+      console.log(res)
+    })
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true,
