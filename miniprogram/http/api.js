@@ -3,10 +3,10 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-12-31 14:44:45
+ * @LastEditTime: 2021-12-31 14:54:56
  */
 
-import request from '../utils/http';
+import request from 'utils/http';
 import ENV from '../env';
 
 // 获取微信openid
@@ -17,3 +17,4 @@ export function getWXAuth(params) {
     params,
   })
 }
+
