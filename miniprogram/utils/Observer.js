@@ -3,7 +3,7 @@
  * @Autor: wangwangwang
  * @Date: 2022-01-04 09:48:33
  * @LastEditors: wangwangwang
- * @LastEditTime: 2022-01-04 09:48:33
+ * @LastEditTime: 2022-01-04 14:22:49
  */
 export default class Observer {
   constructor() {
@@ -15,8 +15,21 @@ export default class Observer {
     this.subscribers[key].push(obj);
   }
 
-  delete () { // 删除依赖
-    this.subscribers = {};
+  /**
+   * @Description: 通过id和keyList进行删除
+   * @param {*} data
+   * @param {*} id
+   * @Author: wangwangwang
+   */  
+  delete (keyList, id) {
+    for (let i in this.subscribers) {
+      const index = keyList.findIndex(item => item === i);
+      if (index !== -1) {
+        const valueData = this.subscribers[keyList[index]];
+        const newValueData = valueData.filter(item => item.id !== id);
+        this.subscribers[keyList[index]] = newValueData;
+      }
+    }
   }
 
   notify(key, value) {

@@ -3,14 +3,16 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2022-01-04 11:15:59
+ * @LastEditTime: 2022-01-04 13:59:17
  */
 
 // 获取应用实例
 const app = getApp();
 Page({
   data: {
-    test: 'test2'
+    test: 'test2',
+    age: '',
+    name: '',
   },
   onLoad() {
   },

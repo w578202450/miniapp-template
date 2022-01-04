@@ -3,7 +3,7 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2022-01-04 11:24:55
+ * @LastEditTime: 2022-01-04 13:54:03
  */
 
 import { getWXAuth } from '../../http/api';
@@ -38,15 +38,12 @@ Page({
         canIUseGetUserProfile: true,
       })
     }
-    console.log(app.globalData.name)
-    console.log(app.globalData.age)
   },
   handleClick () {
-    this.data.test = 'test222'
     this.setData({test: 'test222'})
-    // wx.navigateTo({
-    //   url: '/pages/logs/index',
-    // })
+    wx.navigateTo({
+      url: '/pages/logs/index',
+    })
     
   },
   getUserProfile() {
