@@ -230,69 +230,43 @@ import { ... } from 'miniprogram_npm/***'
 ### 状态管理 - globalData
 
 
+
 1. `使用getApp()` 或者 `在App()函数内使用this` 可获取到小程序全局唯一的 App 实例。
    注意：
 
 -   不要在定义于 [App()](https://developers.weixin.qq.com/miniprogram/dev/reference/api/getApp.html) 内的函数中，或调用 App()函数 前调用 getApp() ，使用 this 就可以拿到 app 实例。
 -   通过 getApp() 获取实例之后，不要私自调用生命周期函数。
 
-2. 直接获取 App 实例的 globalData 属性就可以设置全局属性了， 可以在 App()函数 中初始化 globalData
+2.已通过发布订阅模式实现globalData中的数据双向绑定。globalData中的值将会和Page页面中的data中相同的值进行绑定如：
 
-```
+``` 
 App({
-    globalData: {
-      test: '123'
-    },
-    onLaunch() {
-      this.globalData.test = '456'
-    }
-}
+  onLaunch: function () {
+    this.globalData = reactive(this.globalData); // globalData响应式化
+  },
+  globalData: {
+    name: 11111,
+    age: 22,
+  },
+})
 ```
+globalData中已存在name，任何page页面中的name中的值将会被globalData中的name覆盖，并由globalData值进行单项传递。
 
-为了方便管理整个工程的全局属性，我们定义了一个单例 - StoreManager， 约定所有的 globalData 操作都通过 StoreManager 来执行
-
+``` 
+Page({
+  data: {
+    showDialog: false,
+    userInfo: {},
+    test: 'test1',
+    name: '2222',
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    canIUseGetUserProfile: false,
+    canIUseOpenData:
+      wx.canIUse('open-data.type.userAvatarUrl') &amp;&amp;
+      wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+  },
 ```
-// storeManager.js
-
-export function initGlobalData() {
-	return {
-		logs: [],
-	}
-}
-
-export default class StoreManager {
-	constructor() {
-		this._app = app || getApp()
-		if (!this._app) {
-			throw 'StoreManager Error: 获取app实例失败'
-		}
-	}
-
-	getInstance(app) {
-		if (!this._storeManager) {
-			this._storeManager = new StoreManager(app)
-		}
-		return this._storeManager
-	}
-
-	initLogs() {
-		// 展示本地存储能力
-		const logs = wx.getStorageSync('logs') || []
-		logs.unshift(Date.now().toString())
-		wx.setStorageSync('logs', logs)
-		this.setLogs(logs)
-	}
-
-	setLogs(logs) {
-		this._app.globalData.logs = logs
-	}
-
-	getLogs() {
-		return this._app.globalData.logs
-	}
-}
-
-
 
 ### 路由
 

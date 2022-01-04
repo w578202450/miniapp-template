@@ -1,6 +1,7 @@
 {
 	"pages": [
-		"pages/index/index"
+		"pages/index/index",
+		"pages/logs/index"
 	],
 	"window": {
 		"backgroundTextStyle": "light",
@@ -8,7 +9,6 @@
 		"navigationBarTitleText": "阿如拉互联网医院",
 		"navigationBarTextStyle": "black"
 	},
-	"style": "v2",
 	"sitemapLocation": "sitemap.json",
 	"useExtendedLib": {
 		"weui": true

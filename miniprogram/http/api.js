@@ -3,10 +3,10 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-12-31 14:54:56
+ * @LastEditTime: 2021-12-31 15:16:33
  */
 
-import request from 'utils/http';
+import request from '../utils/http';
 import ENV from '../env';
 
 // 获取微信openid

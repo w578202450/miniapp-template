@@ -3,57 +3,18 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-12-31 10:51:50
+ * @LastEditTime: 2022-01-04 10:30:09
  */
-import StoreManager, {initGlobalData } from 'store/storeManager'
 
-/**
- * 全局设置默认分享主页
- */
-function injectShareForPage() {
-  const _Page = Page
-  Page = function (pageConfig) {
-    // 设置全局默认分享
-    pageConfig = Object.assign(
-      {
-        onShareAppMessage: function () {
-          return {
-            title: 'ideaPod',
-            path: 'pages/index/index',
-          }
-        },
-        onShareTimeline: function () {
-          return {
-            title: 'ideaPod',
-          }
-        },
-      },
-      pageConfig
-    )
-
-    _Page(pageConfig)
-  }
-}
-injectShareForPage()
+require('./utils/patcherWatcher');
+const { reactive } = require('./utils/reactive');
 
 App({
-  globalData: initGlobalData(),
-  onLaunch() {
-    // console.log(StoreManager)
-    console.log(this)
-    // console.log(StoreManager.getInstance(this))
-    // StoreManager.getInstance(this).initLogs()
-    // 登录
-    wx.login({
-      success: (res) => {
-        console.log(res.code);
-      },
-      fail: () => {
-        wx.showToast({
-          title: '111',
-          icon: 'error',
-        })
-      },
-    })
+  onLaunch: function () {
+    this.globalData = reactive(this.globalData); // globalData响应式化
+  },
+  globalData: {
+    name: 11111,
+    age: 22,
   },
 })

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "mp-dialog": "weui-miniprogram/dialog/dialog"
-  }
+  },
+  "navigationBarTitleText": "阿如拉互联网医院"
 }

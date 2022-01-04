@@ -3,7 +3,7 @@
  * @Autor: wangwangwang
  * @Date: 2021-12-30 10:43:30
  * @LastEditors: wangwangwang
- * @LastEditTime: 2021-12-31 14:51:44
+ * @LastEditTime: 2022-01-04 11:24:55
  */
 
 import { getWXAuth } from '../../http/api';
@@ -12,8 +12,10 @@ import { getWXAuth } from '../../http/api';
 const app = getApp();
 Page({
   data: {
-    showDialog: true,
+    showDialog: false,
     userInfo: {},
+    test: 'test1',
+    name: '2222',
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
@@ -28,7 +30,6 @@ Page({
     })
   },
   onLoad() {
-    console.log(11111)
     getWXAuth().then(res => {
       console.log(res)
     })
@@ -37,6 +38,16 @@ Page({
         canIUseGetUserProfile: true,
       })
     }
+    console.log(app.globalData.name)
+    console.log(app.globalData.age)
+  },
+  handleClick () {
+    this.data.test = 'test222'
+    this.setData({test: 'test222'})
+    // wx.navigateTo({
+    //   url: '/pages/logs/index',
+    // })
+    
   },
   getUserProfile() {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗

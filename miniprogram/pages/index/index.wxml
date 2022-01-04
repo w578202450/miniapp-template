@@ -20,7 +20,9 @@
     </block>
   </view>
   <view class="usermotto">
-    <text class="user-motto">你好</text>
+    <text class="user-motto">{{name}}</text>
+    <text class="user-motto">{{test}}</text>
+    <button bindtap="handleClick">点击</button>
   </view>
   <mp-dialog title="标题" show="{{showDialog}}" bindbuttontap="tapDialogButton" buttons="222">
     <view>11</view>
